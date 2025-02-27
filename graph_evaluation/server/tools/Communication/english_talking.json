@@ -1,0 +1,280 @@
+{
+    "tool_name": "English Talking",
+    "tool_description": "This API aims to provide users with the possibility of conducting dialogues in English where the conversations and answers are registered and evaluated by the users themselves.\n\ud83d\udc7d",
+    "title": "English Talking",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 8,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/maatheusb96/api/english-talking2/",
+    "host": "english-talking2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get an answer",
+            "url": "https://english-talking2.p.rapidapi.com/v1/dialog",
+            "description": "Get an answer",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "page",
+                    "type": "STRING",
+                    "description": "Number of page",
+                    "default": "1"
+                },
+                {
+                    "name": "limit",
+                    "type": "STRING",
+                    "description": "Length of page",
+                    "default": "10"
+                },
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "description": "approved or analyzing",
+                    "default": "approved"
+                },
+                {
+                    "name": "answer",
+                    "type": "STRING",
+                    "description": "Response to the initial speech of the dialogue",
+                    "default": "Hi, how are you?"
+                },
+                {
+                    "name": "_id",
+                    "type": "STRING",
+                    "description": "Unique dialog identifier (automatically generated)\n\n",
+                    "default": "5ec47b3d8958430d6a6d5898"
+                },
+                {
+                    "name": "speech",
+                    "type": "STRING",
+                    "description": "Speak in which the usuairio wants to get an answer",
+                    "default": "Hi"
+                },
+                {
+                    "name": "user",
+                    "type": "STRING",
+                    "description": "User who created the dialogue",
+                    "default": "5ec479048958430d6a6d5895"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/dialog\"\nquerystring = {\"page\": page, \"limit\": limit, \"status\": status, \"answer\": answer, \"_id\": id, \"speech\": speech, \"user\": user}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": "success-get/dialog",
+                "data": [
+                    {
+                        "__v": 1,
+                        "_id": "5ec47b3d8958430d6a6d5898",
+                        "answer": "Hi, how are you?",
+                        "approval_rate": 100,
+                        "approvals": [
+                            "5ec479048958430d6a6d5895"
+                        ],
+                        "createdAt": "2020-05-20T00:35:09.530Z",
+                        "disapprovals": [],
+                        "speech": "Hi",
+                        "status": "approved",
+                        "updatedAt": "2020-05-20T00:41:28.188Z",
+                        "user": "5ec479048958430d6a6d5895"
+                    }
+                ],
+                "entity": "dialog",
+                "status": 200
+            },
+            "headers": {
+                "X-Total-Count": "1"
+            },
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "items": {
+                            "properties": {
+                                "__v": {
+                                    "type": "integer"
+                                },
+                                "_id": {
+                                    "type": "string"
+                                },
+                                "answer": {
+                                    "type": "string"
+                                },
+                                "approval_rate": {
+                                    "type": "integer"
+                                },
+                                "approvals": {
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "createdAt": {
+                                    "type": "string"
+                                },
+                                "disapprovals": {
+                                    "type": "array"
+                                },
+                                "speech": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "updatedAt": {
+                                    "type": "string"
+                                },
+                                "user": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "entity": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Approve a dialogue",
+            "url": "https://english-talking2.p.rapidapi.com/v1/dialog/{id}/approval",
+            "description": "Approve a dialogue",
+            "method": "PUT",
+            "required_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "accessToken of a user registered in the application. See Register User",
+                    "default": "Bearer <accessToken>"
+                },
+                {
+                    "name": "_id",
+                    "type": "string",
+                    "description": "",
+                    "default": "5ec47b3d8958430d6a6d5898"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "accessToken of a user registered in the application. See Register User",
+                    "default": "Bearer <accessToken>"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/dialog/{id}/approval\"\nquerystring = {\"Authorization\": authorization}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Rejecting a dialogue",
+            "url": "https://english-talking2.p.rapidapi.com/v1/dialog/{id}/rejection",
+            "description": "Rejecting a dialogue",
+            "method": "PUT",
+            "required_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "accessToken of a user registered in the application. See Register User",
+                    "default": "Bearer <accessToken>"
+                },
+                {
+                    "name": "_id",
+                    "type": "string",
+                    "description": "",
+                    "default": "5ec47b3d8958430d6a6d5898"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/dialog/{id}/rejection\"\nquerystring = {\"Authorization\": authorization}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Register User",
+            "url": "https://english-talking2.p.rapidapi.com/v1/register",
+            "description": "Register User",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/register\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Authenticate User",
+            "url": "https://english-talking2.p.rapidapi.com/v1/authenticate",
+            "description": "Authenticate User",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "AUTHORIZATION\n\nBasic Auth\n\nUsername<username>\nPassword<password>",
+                    "default": "Basic eW91cmVtYWlsQG1haWwuY29tOnlvdXJfcGFzc3dvcmQ="
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/authenticate\"\nquerystring = {\"Authorization\": authorization}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create a dialogue",
+            "url": "https://english-talking2.p.rapidapi.com/v1/dialog",
+            "description": "Create a dialogue",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/dialog\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/dialog\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Register User",
+            "url": "https://english-talking2.p.rapidapi.com/v1/register",
+            "description": "Register User",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/register\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/register\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Authenticate User",
+            "url": "https://english-talking2.p.rapidapi.com/v1/authenticate",
+            "description": "Authenticate User",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/authenticate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://english-talking2.p.rapidapi.com/v1/authenticate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"english-talking2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

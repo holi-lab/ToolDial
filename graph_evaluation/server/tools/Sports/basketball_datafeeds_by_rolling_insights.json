@@ -1,0 +1,414 @@
+{
+    "product_id": "api_a94b7e7c-e06c-456c-879e-e46323dec89e",
+    "tool_description": "Real-time Play by Play, Season Schedule, Weekly Schedules, Daily Schedules, Team Information, Team Stats, Player Information, Player Stats, Injuries and Depth Charts for the NBA.",
+    "home_url": "https://rapidapi.com/rolling-insights-rolling-insights-default/api/basketball-datafeeds-by-rolling-insights/",
+    "name": "Basketball - DataFeeds by Rolling Insights",
+    "title": "Basketball - DataFeeds by Rolling Insights",
+    "pricing": "FREEMIUM",
+    "tool_name": "Basketball - DataFeeds by Rolling Insights",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 720,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.3,
+        "__typename": "Score"
+    },
+    "host": "basketball-datafeeds-by-rolling-insights.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Team Information",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/team-info/NBA",
+            "description": "This endpoint returns team information",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/team-info/NBA\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/team-info/{sport}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Player Injuries",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/injuries/NBA",
+            "description": "Returns a record of each player's injury on a team",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/injuries/NBA\"\nquerystring = {\"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/injuries/{sport}\"\nquerystring = {\"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "NBA": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "team": {
+                                            "type": "string"
+                                        },
+                                        "team_id": {
+                                            "type": "integer"
+                                        },
+                                        "injuries": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "injury": {
+                                                        "type": "string"
+                                                    },
+                                                    "player": {
+                                                        "type": "string"
+                                                    },
+                                                    "returns": {
+                                                        "type": "string"
+                                                    },
+                                                    "player_id": {
+                                                        "type": "string"
+                                                    },
+                                                    "date_injured": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Daily Schedule",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule/now/NBA",
+            "description": "Returns season schedule for the specified date or \"now\" returns current day's schedule. Daily schedule is changed at 10 AM ET.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "string",
+                    "description": "now returns current day's schedule. Daily schedule is changed at 10 AM ET.\n\nFormat: string now or YYYY-MM-DD",
+                    "default": "now"
+                },
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                },
+                {
+                    "name": "game_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule/now/NBA\"\nquerystring = {\"team_id\": \"28\", \"game_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule/{date}/{sport}\"\nquerystring = {\"team_id\": \"28\", \"game_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Player Season Statistics",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/player-stats/{date}/NBA",
+            "description": "Returns Player Season Statistics",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                },
+                {
+                    "name": "player_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "321"
+                },
+                {
+                    "name": "date",
+                    "type": "string",
+                    "description": "Parameter can be omitted and request will return player stats for current season. Specify the beginning of sport season, ie: 2017-2018 season = 2017.\n\nFormat: YYYY",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/player-stats/{date}/NBA\"\nquerystring = {\"team_id\": \"28\", \"player_id\": \"321\", \"date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/player-stats/{date}/{sport}\"\nquerystring = {\"team_id\": \"28\", \"player_id\": \"321\", \"date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Team Season Statistics",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/team-stats/{date}/NBA",
+            "description": "Returns statistics for teams",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "date",
+                    "type": "string",
+                    "description": "Parameter can be omitted and request will return player stats for current season. Specify the beginning of sport season, ie: 2017-2018 season = 2017.\n\nFormat: YYYY",
+                    "default": ""
+                },
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/team-stats/{date}/NBA\"\nquerystring = {\"date\": \"\", \"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/team-stats/{date}/{sport}\"\nquerystring = {\"date\": \"\", \"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Weekly Schedule",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule-week/now/NBA",
+            "description": "Returns all events from the date specified plus 7 days in advance",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "string",
+                    "description": "Returns all events from the date specified plus 7 days in advance.\n\nFormat: now or YYYY-MM-DD",
+                    "default": "now"
+                },
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule-week/now/NBA\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule-week/{date}/{sport}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "NBA": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Team Depth Charts",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/depth-charts/NBA",
+            "description": "Returns player depth charts for a team",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/depth-charts/NBA\"\nquerystring = {\"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/depth-charts/{sport}\"\nquerystring = {\"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Live Game Data",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/live/now/NBA",
+            "description": "This endpoint provides real-time game box scores.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                },
+                {
+                    "name": "date",
+                    "type": "string",
+                    "description": "now returns current day's schedule. Daily schedule is changed at 10 AM ET.\n\nFormat: string now or YYYY-MM-DD",
+                    "default": "now"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "game_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/live/now/NBA\"\nquerystring = {\"game_id\": \"\", \"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/live/{date}/{sport}\"\nquerystring = {\"game_id\": \"\", \"team_id\": \"28\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "NBA": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Player Information",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/player-info/NBA",
+            "description": "This endpoint returns player demographic information",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/player-info/NBA\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/player-info/{sport}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Season Schedule",
+            "url": "https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule-season/{date}/NBA",
+            "description": "Returns season schedule for the specified season. If omitted, returns the schedule for current season.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "sport",
+                    "type": "string",
+                    "description": "",
+                    "default": "NBA"
+                },
+                {
+                    "name": "date",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "team_id",
+                    "type": "STRING",
+                    "description": "Format: One specified team ID\nTeam ID is available in the Team Info endpoint",
+                    "default": "28"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule-season/{date}/NBA\"\nquerystring = {\"team_id\": \"28\", \"date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://basketball-datafeeds-by-rolling-insights.p.rapidapi.com/schedule-season/{date}/{sport}\"\nquerystring = {\"team_id\": \"28\", \"date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"basketball-datafeeds-by-rolling-insights.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "NBA": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "basketball_datafeeds_by_rolling_insights"
+}

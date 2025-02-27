@@ -1,0 +1,404 @@
+{
+    "product_id": "5c19faebe4b09c6b17cfb1e8",
+    "tool_description": "Over 10 million tourist attractions and facilities around the world",
+    "home_url": "https://rapidapi.com/opentripmap/api/places1/",
+    "name": "Places",
+    "title": "Places",
+    "pricing": "FREEMIUM",
+    "tool_name": "Places",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 145,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "host": "opentripmap-places-v1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Geographic coordinates by placename",
+            "url": "https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/geoname",
+            "description": "Returns geographic coordinates for the given placename (city, village, etc.). The method returns the place whose name is most similar to the search string.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Placename",
+                    "default": "London"
+                },
+                {
+                    "name": "lang",
+                    "type": "ENUM",
+                    "description": "Two-letter language code (ISO639-1). The following values are available: en (english), ru (russian)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Two-letter country code, ISO-3166 (optional). Default is all countries.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/geoname\"\nquerystring = {\"name\": \"London\", \"lang\": \"\", \"country\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/geoname\"\nquerystring = {\"name\": \"London\", \"lang\": \"\", \"country\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Not Found (404) - The server has not found anything matching the request URI"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Places list by radius (Nearby Search) ",
+            "url": "https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/radius",
+            "description": "Method returns objects closest to the selected point optionally filtered by parameters. Only basic information is include in response: xid, name, kinds, osm, wikidata of each object. Depending on the chosen format, the response is either a simple array of objects (with a smaller volume) or an object in GeoJSON format.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "lang",
+                    "type": "ENUM",
+                    "description": "Language code (2 characters, ISO639-1). The following values are available: en (english), ru (russian)",
+                    "default": ""
+                },
+                {
+                    "name": "radius",
+                    "type": "NUMBER",
+                    "description": "Maximum distance from selected point in meters",
+                    "default": "500"
+                },
+                {
+                    "name": "lon",
+                    "type": "NUMBER",
+                    "description": "Longitude of selected point",
+                    "default": "38.364285"
+                },
+                {
+                    "name": "lat",
+                    "type": "NUMBER",
+                    "description": "Latitude of selected point",
+                    "default": "59.855685"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "src_attr",
+                    "type": "STRING",
+                    "description": "The source of the object attributes. It is allowed to point multiple sources separated by commas. Objects from all sources are returned by default. Available values : osm, wikidata, snow, cultura.ru, rosnedra, user",
+                    "default": ""
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "The output format (GeoJSON is set by default). Specify \u201ccount\u201d to get the number of obtained objects. Available values : json, geojson, count",
+                    "default": ""
+                },
+                {
+                    "name": "kinds",
+                    "type": "STRING",
+                    "description": "Object category. Several comma-separated categories may be stated with OR logic. Objects from all categories are returned by default. See object category hierarchy at https://dev.opentripmap.com/doc/en/",
+                    "default": ""
+                },
+                {
+                    "name": "src_geom",
+                    "type": "STRING",
+                    "description": "The source of the object geometry. Objects from all sources are returned by default. Available values : osm, wikidata, snow, cultura.ru, rosnedra",
+                    "default": ""
+                },
+                {
+                    "name": "rate",
+                    "type": "STRING",
+                    "description": "Minimum rating of the object popularity, 1 - minimum, 3- maximum, h - object is referred to the cultural heritage. Objects from all categories are returned by default.  Available values : 1, 2, 3, 1h, 2h, 3h",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Maximum number of returned objects. 500 is set by default.",
+                    "default": ""
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "The text string on which to search at the begining of the object name (mimimum 3 characters). All objects are returned by default.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/radius\"\nquerystring = {\"lang\": \"\", \"radius\": \"500\", \"src_attr\": \"\", \"format\": \"\", \"kinds\": \"\", \"src_geom\": \"\", \"rate\": \"\", \"limit\": \"\", \"name\": \"\", \"lon\": \"38.364285\", \"lat\": \"59.855685\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/radius\"\nquerystring = {\"lang\": \"\", \"radius\": \"500\", \"src_attr\": \"\", \"format\": \"\", \"kinds\": \"\", \"src_geom\": \"\", \"rate\": \"\", \"limit\": \"\", \"name\": \"\", \"lon\": \"38.364285\", \"lat\": \"59.855685\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Not Found (404) - The server has not found anything matching the request URI"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Places list by bounding box",
+            "url": "https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/bbox",
+            "description": "Method returns all objects (or number of objects) in the given boundary box optionally filtered by parameters. Only basic information is include in response: xid, name, kinds, osm, wikidata of each object. Depending on the chosen format, the response is either a simple array of objects (with a smaller volume) or an object in GeoJSON format.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "lon_max",
+                    "type": "NUMBER",
+                    "description": "Maximum longitude",
+                    "default": ""
+                },
+                {
+                    "name": "lat_min",
+                    "type": "NUMBER",
+                    "description": "Minimum latitude",
+                    "default": ""
+                },
+                {
+                    "name": "lang",
+                    "type": "ENUM",
+                    "description": "Language code (2 characters, ISO639-1). The following values are available: en (english), ru (russian)",
+                    "default": ""
+                },
+                {
+                    "name": "lon_min",
+                    "type": "NUMBER",
+                    "description": "Minimum longitude",
+                    "default": ""
+                },
+                {
+                    "name": "lat_max",
+                    "type": "NUMBER",
+                    "description": "Maximum latitude",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "The text string on which to search at the begining of the object name (mimimum 3 characters). All objects are returned by default.",
+                    "default": ""
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "The output format (GeoJSON is set by default). Specify \u201ccount\u201d to get the number of obtained objects. Available values : json, geojson, count",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Maximum number of returned objects. 500 is set by default.",
+                    "default": ""
+                },
+                {
+                    "name": "src_geom",
+                    "type": "STRING",
+                    "description": "The source of the object geometry. Objects from all sources are returned by default. Available values : osm, wikidata, snow, cultura.ru, rosnedra",
+                    "default": ""
+                },
+                {
+                    "name": "src_attr",
+                    "type": "STRING",
+                    "description": "The source of the object attributes. It is allowed to point multiple sources separated by commas. Objects from all sources are returned by default. Available values : osm, wikidata, snow, cultura.ru, rosnedra, user",
+                    "default": ""
+                },
+                {
+                    "name": "kinds",
+                    "type": "STRING",
+                    "description": "Object category. Several comma-separated categories may be stated with OR logic. Objects from all categories are returned by default. See object category hierarchy at https://dev.opentripmap.com/doc/en/",
+                    "default": ""
+                },
+                {
+                    "name": "rate",
+                    "type": "STRING",
+                    "description": "Minimum rating of the object popularity, 1 - minimum, 3- maximum, h - object is referred to the cultural heritage. Objects from all categories are returned by default.  Available values : 1, 2, 3, 1h, 2h, 3h",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/bbox\"\nquerystring = {\"name\": \"\", \"lon_max\": \"\", \"lat_min\": \"\", \"format\": \"\", \"limit\": \"\", \"lang\": \"\", \"lon_min\": \"\", \"src_geom\": \"\", \"lat_max\": \"\", \"src_attr\": \"\", \"kinds\": \"\", \"rate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/bbox\"\nquerystring = {\"name\": \"\", \"lon_max\": \"\", \"lat_min\": \"\", \"format\": \"\", \"limit\": \"\", \"lang\": \"\", \"lon_min\": \"\", \"src_geom\": \"\", \"lat_max\": \"\", \"src_attr\": \"\", \"kinds\": \"\", \"rate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Not Found (404) - The server has not found anything matching the request URI"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Place properties",
+            "url": "https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/xid/{xid}",
+            "description": "Returns detailed information about the object. Objects can contain different amount of information.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "xid",
+                    "type": "STRING",
+                    "description": "Unique identifier of the object in OpenTripMap",
+                    "default": ""
+                },
+                {
+                    "name": "lang",
+                    "type": "ENUM",
+                    "description": "Two-letter language code (ISO639-1). The following values are available: en (english), ru (russian)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/xid/{xid}\"\nquerystring = {\"xid\": \"\", \"lang\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/xid/{xid}\"\nquerystring = {\"xid\": \"\", \"lang\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Not Found (404) - The server has not found anything matching the request URI"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Autosuggest",
+            "url": "https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/autosuggest",
+            "description": "Method returns suggestions for search term closest to the selected point optionally filtered by parameters. Only basic information is include in response: xid, name, kinds, osm, wikidata of each object. Depending on the chosen format, the response is either a simple array of objects (with a smaller volume) or an object in GeoJSON format.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "The query term on which to search.",
+                    "default": "don"
+                },
+                {
+                    "name": "lon",
+                    "type": "NUMBER",
+                    "description": "Longitude of selected point",
+                    "default": "-70.65"
+                },
+                {
+                    "name": "radius",
+                    "type": "NUMBER",
+                    "description": "Maximum distance from selected point in meters",
+                    "default": "5000"
+                },
+                {
+                    "name": "lang",
+                    "type": "ENUM",
+                    "description": "Language code (2 characters, ISO639-1). The following values are available: en (english), ru (russian)",
+                    "default": ""
+                },
+                {
+                    "name": "lat",
+                    "type": "NUMBER",
+                    "description": "Latitude of selected point",
+                    "default": "-33.437"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "kinds",
+                    "type": "STRING",
+                    "description": "Object category. Several comma-separated categories may be stated with OR logic. Objects from all categories are returned by default. See object category hierarchy at https://dev.opentripmap.com/doc/en/",
+                    "default": "foods"
+                },
+                {
+                    "name": "rate",
+                    "type": "STRING",
+                    "description": "Minimum rating of the object popularity, 1 - minimum, 3- maximum, h - object is referred to the cultural heritage. Objects from all categories are returned by default.  Available values : 1, 2, 3, 1h, 2h, 3h",
+                    "default": ""
+                },
+                {
+                    "name": "src_attr",
+                    "type": "STRING",
+                    "description": "The source of the object attributes. It is allowed to point multiple sources separated by commas. Objects from all sources are returned by default. Available values : osm, wikidata, snow, cultura.ru, rosnedra, user",
+                    "default": ""
+                },
+                {
+                    "name": "format",
+                    "type": "ENUM",
+                    "description": "The output format (GeoJSON is set by default). Specify \u201ccount\u201d to get the number of obtained objects. Available values : json, geojson",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Maximum number of returned objects. 500 is set by default.",
+                    "default": "10"
+                },
+                {
+                    "name": "src_geom",
+                    "type": "STRING",
+                    "description": "The source of the object geometry. Objects from all sources are returned by default. Available values : osm, wikidata, snow, cultura.ru, rosnedra",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/autosuggest\"\nquerystring = {\"kinds\": \"foods\", \"rate\": \"\", \"src_attr\": \"\", \"name\": \"don\", \"format\": \"\", \"limit\": \"10\", \"lon\": \"-70.65\", \"radius\": \"5000\", \"lang\": \"\", \"lat\": \"-33.437\", \"src_geom\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://opentripmap-places-v1.p.rapidapi.com/{lang}/places/autosuggest\"\nquerystring = {\"kinds\": \"foods\", \"rate\": \"\", \"src_attr\": \"\", \"name\": \"don\", \"format\": \"\", \"limit\": \"10\", \"lon\": \"-70.65\", \"radius\": \"5000\", \"lang\": \"\", \"lat\": \"-33.437\", \"src_geom\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"opentripmap-places-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Not Found (404) - The server has not found anything matching the request URI"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "places"
+}

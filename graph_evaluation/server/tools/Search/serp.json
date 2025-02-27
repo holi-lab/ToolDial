@@ -1,0 +1,424 @@
+{
+    "tool_name":"SERP",
+    "tool_description":"Search Engine data at scale. Uses city-level geo-targeting via residential proxies for targeted queries. Extract data such as organic results, paid results, related questions, top stories, people also ask, pagination, etc. in JSON format",
+    "title":"SERP",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":105,
+        "avgSuccessRate":0,
+        "popularityScore":0,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/microworlds/api/serp5/",
+    "host":"serp5.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Search",
+            "url":"https://serp5.p.rapidapi.com/search",
+            "description":"This endpoint allows you to search Google based on some certain parameters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"This is the search query as you'd have in a regular Google search. Learn more:  [https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters](https://moz.com/blog/the-ultimate-guide-to-the-google-search-parameters).",
+                    "default":"latest news"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"hl",
+                    "type":"STRING",
+                    "description":"Web interface language. Autodetected from the `domain` parameter if not supplied. Supported values are: [https://serptools.cyclic.app/google_languages](https://serptools.cyclic.app/google_languages)",
+                    "default":"en"
+                },
+                {
+                    "name":"num",
+                    "type":"NUMBER",
+                    "description":"Number of search results. Values can be 1 - 100",
+                    "default":"10"
+                },
+                {
+                    "name":"proxy_location",
+                    "type":"STRING",
+                    "description":"These are the supported locations. We offer city-level geotargeting, making it possible to narrow down your queries. See all the supported locations here: [https://serptools.cyclic.app/proxy_locations](https://serptools.cyclic.app/proxy_locations)",
+                    "default":"California, United States"
+                },
+                {
+                    "name":"domain",
+                    "type":"STRING",
+                    "description":"Specify the type of Google domain to be used. This defaults to `google.com`. See all supported domains here: [https://serptools.cyclic.app/domains](https://serptools.cyclic.app/domains)",
+                    "default":"google.com"
+                },
+                {
+                    "name":"device",
+                    "type":"STRING",
+                    "description":"Specify the kind of device to be used for the search. This defaults to `desktop`",
+                    "default":"desktop"
+                },
+                {
+                    "name":"include_html",
+                    "type":"BOOLEAN",
+                    "description":"Include raw html in response. This is good for debugging. It defaults to false",
+                    "default":"false"
+                },
+                {
+                    "name":"gl",
+                    "type":"STRING",
+                    "description":"Country code. Autodetected from the `domain` parameter if not supplied. Supported values are: [https://serptools.cyclic.app/google_countries](https://serptools.cyclic.app/google_countries)",
+                    "default":"us"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://serp5.p.rapidapi.com/search\"\nquerystring = {\"hl\": hl, \"num\": num, \"proxy_location\": proxy_location, \"domain\": domain, \"device\": device, \"include_html\": include_html, \"gl\": gl, \"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"serp5.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "data":{
+                    "search_query":{
+                        "query":"q=latest+news",
+                        "device":"desktop",
+                        "domain":"google.com",
+                        "location":"California, United States",
+                        "engine":"google"
+                    },
+                    "organic_results":[
+                        {
+                            "position":1,
+                            "title":"CNN - Breaking News, Latest News and Videos",
+                            "link":"https://www.cnn.com/",
+                            "domain":"www.cnn.com",
+                            "displayed_link":"https://www.cnn.com",
+                            "description":"View the latest news and breaking news today for U.S., world, weather, entertainment, politics and health at CNN.com.",
+                            "emphasized_keywords":[
+                                "latest news",
+                                "breaking news"
+                            ],
+                            "sitelinks":{
+                                "inline":[
+                                    {
+                                        "title":"US",
+                                        "link":"https://www.cnn.com/us"
+                                    },
+                                    {
+                                        "title":"World",
+                                        "link":"https://www.cnn.com/world"
+                                    },
+                                    {
+                                        "title":"Politics",
+                                        "link":"https://www.cnn.com/politics"
+                                    },
+                                    {
+                                        "title":"More",
+                                        "link":"https://www.cnn.com/more"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "position":2,
+                            "title":"NBC News - Breaking News & Top Stories - Latest World, US ...",
+                            "link":"https://www.nbcnews.com/",
+                            "domain":"www.nbcnews.com",
+                            "displayed_link":"https://www.nbcnews.com",
+                            "description":"41 minutes ago — Go to NBCNews.com for breaking news, videos, and the latest top stories in world news, business, politics, health and pop culture.",
+                            "date":"41 minutes ago",
+                            "emphasized_keywords":[
+                                "breaking news"
+                            ]
+                        },
+                        {
+                            "position":3,
+                            "title":"ABC News – Breaking News, Latest News, Headlines ...",
+                            "link":"https://abcnews.go.com/",
+                            "domain":"abcnews.go.com",
+                            "displayed_link":"https://abcnews.go.com",
+                            "description":"3 hours ago — Your trusted source for breaking news, analysis, exclusive interviews, headlines, and videos at ABCNews.com.",
+                            "date":"3 hours ago",
+                            "emphasized_keywords":[
+                                "breaking news"
+                            ]
+                        },
+                        {
+                            "position":4,
+                            "title":"Los Angeles Times: News from California, the nation and world",
+                            "link":"https://www.latimes.com/",
+                            "domain":"www.latimes.com",
+                            "displayed_link":"https://www.latimes.com",
+                            "description":"3 hours ago — The L.A. Times is a leading source of breaking news, entertainment, sports, politics, and more for Southern California and the world.",
+                            "date":"3 hours ago",
+                            "emphasized_keywords":[
+                                "breaking news"
+                            ]
+                        },
+                        {
+                            "position":5,
+                            "title":"Chargers News | Los Angeles Chargers - chargers.com",
+                            "link":"https://www.chargers.com/news/",
+                            "domain":"www.chargers.com",
+                            "displayed_link":"https://www.chargers.com › news",
+                            "description":"17 hours ago — Los Angeles Chargers News: The official source of the latest Chargers headlines, news, roster transactions, injury updates, key matchups and more.",
+                            "date":"17 hours ago",
+                            "emphasized_keywords":[
+                                "News",
+                                "latest",
+                                "news",
+                                "updates"
+                            ]
+                        },
+                        {
+                            "position":6,
+                            "title":"Fox News - Breaking News Updates | Latest News Headlines ...",
+                            "link":"https://www.foxnews.com/",
+                            "domain":"www.foxnews.com",
+                            "displayed_link":"https://www.foxnews.com",
+                            "description":"4 hours ago — Breaking News, Latest News and Current News from FOXNews.com. Breaking news and video. Latest Current News: U.S., World, Entertainment, Health, Business, ...",
+                            "date":"4 hours ago",
+                            "emphasized_keywords":[
+                                "Breaking News",
+                                "Latest News",
+                                "Current News",
+                                "Breaking news",
+                                "Current News"
+                            ]
+                        },
+                        {
+                            "position":7,
+                            "title":"News Releases - PGE",
+                            "link":"https://www.pge.com/en_US/about-pge/media-newsroom/newsreleases.page",
+                            "domain":"www.pge.com",
+                            "displayed_link":"https://www.pge.com › about-pge › media-newsroom",
+                            "description":"20 hours ago — Pacific Gas and Electric Company (PG&E) expressed support for a new metallic balloon law that will enhance the safety of PG&E employees, customers and hometowns ...",
+                            "date":"20 hours ago"
+                        }
+                    ],
+                    "paid_results":[
+                        {
+                            "position":1,
+                            "title":"Yahoo News - Yahoo Breaking News",
+                            "link":"https://www.yahoo.com/",
+                            "domain":"www.yahoo.com",
+                            "displayed_link":"https://www.yahoo.com/",
+                            "description":"Stay In The Know Of Trending Topics Served To You By Yahoo. Yahoo Has You Covered With Up-To-Date News On A Variety Of Topics. Entertainment. Sports Updates. Mail & News.",
+                            "emphasized_keywords":[
+                                "News",
+                                "News"
+                            ]
+                        },
+                        {
+                            "position":2,
+                            "title":"CBS2 KCAL9 News Los Angeles - CBS Los Angeles Breaking News",
+                            "link":"https://www.cbsnews.com/losangeles/local-news/",
+                            "domain":"www.cbsnews.com",
+                            "displayed_link":"https://www.cbsnews.com/",
+                            "description":"Live, local & streaming: Covering Los Angeles, Orange County & all of Southern California. Get the latest Los Angeles local and breaking news, sports and weather with CBS LA.",
+                            "emphasized_keywords":[
+                                "latest",
+                                "breaking news"
+                            ]
+                        },
+                        {
+                            "position":3,
+                            "title":"FOX 11 Los Angeles - The latest on Los Angeles",
+                            "link":"https://www.foxla.com/",
+                            "domain":"www.foxla.com",
+                            "displayed_link":"https://www.foxla.com/",
+                            "description":"Watch live stream video now including local news, weather and more from across Los Angeles. News, weather, sports, entertainment, business, health, politics, and more.",
+                            "emphasized_keywords":[
+                                "news",
+                                "News"
+                            ]
+                        }
+                    ],
+                    "related_queries":[
+                        {
+                            "position":1,
+                            "link":"/search?q=News+today&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAgnEAE",
+                            "title":"news today"
+                        },
+                        {
+                            "position":2,
+                            "link":"/search?q=Breaking+news+near+me&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAgqEAE",
+                            "title":"breaking news near me"
+                        },
+                        {
+                            "position":3,
+                            "link":"/search?q=Local+news&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAg_EAE",
+                            "title":"local news"
+                        },
+                        {
+                            "position":4,
+                            "link":"/search?q=USA+News+TODAY+headlines&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAg5EAE",
+                            "title":"usa news today headlines"
+                        },
+                        {
+                            "position":5,
+                            "link":"/search?q=World+News+today&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAgzEAE",
+                            "title":"world news today"
+                        },
+                        {
+                            "position":6,
+                            "link":"/search?q=Latest+news+the+sun&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAgwEAE",
+                            "title":"latest news the sun"
+                        },
+                        {
+                            "position":7,
+                            "link":"/search?q=NPR+News&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAguEAE",
+                            "title":"npr news"
+                        },
+                        {
+                            "position":8,
+                            "link":"/search?q=Latest+news+Boris+Johnson&sa=X&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ1QJ6BAgtEAE",
+                            "title":"latest news boris johnson"
+                        }
+                    ],
+                    "people_also_ask":[],
+                    "pagination":{
+                        "current":1,
+                        "next":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=10&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8NMDegQIBBAW",
+                        "pages":[
+                            {
+                                "page":2,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=10&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAE"
+                            },
+                            {
+                                "page":3,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=20&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAG"
+                            },
+                            {
+                                "page":4,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=30&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAI"
+                            },
+                            {
+                                "page":5,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=40&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAK"
+                            },
+                            {
+                                "page":6,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=50&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAM"
+                            },
+                            {
+                                "page":7,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=60&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAO"
+                            },
+                            {
+                                "page":8,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=70&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAQ"
+                            },
+                            {
+                                "page":9,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=80&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAS"
+                            },
+                            {
+                                "page":10,
+                                "link":"/search?q=latest+news&ei=PT5lY4C8JNfNkPIPktS10A0&start=90&sa=N&ved=2ahUKEwjAzt3H-ZT7AhXXJkQIHRJqDdoQ8tMDegQIBBAU"
+                            }
+                        ]
+                    },
+                    "top_stories":[
+                        {
+                            "position":1,
+                            "title":"Trump aides eye third week of November for 2024 announcement",
+                            "link":"https://www.cnn.com/2022/11/04/politics/donald-trump-presidential-announcement/index.html",
+                            "domain":"www.cnn.com",
+                            "date":"2 hours ago",
+                            "utc_date":"2022-11-04T16:30:55.493Z"
+                        },
+                        {
+                            "position":2,
+                            "title":"Paul Pelosi Released From Hospital After Hammer Attack",
+                            "link":"https://www.wsj.com/articles/suspect-in-paul-pelosi-assault-lived-in-u-s-illegally-immigration-officials-say-11667491584",
+                            "domain":"www.wsj.com",
+                            "brand":"Wall Street Journal",
+                            "date":"16 hours ago",
+                            "utc_date":"2022-11-04T16:30:55.494Z"
+                        },
+                        {
+                            "position":3,
+                            "title":"Scholz urges Xi to wield influence to prevent Putin escalation in ...",
+                            "link":"https://www.npr.org/2022/11/04/1134253829/xi-jinping-olaf-scholz-russia-nuclear-weapons",
+                            "domain":"www.npr.org",
+                            "brand":"NPR",
+                            "date":"3 hours ago",
+                            "utc_date":"2022-11-04T16:30:55.494Z"
+                        },
+                        {
+                            "position":4,
+                            "title":"House Republicans release 1000-page report alleging politicization ...",
+                            "link":"https://www.foxnews.com/politics/house-republicans-release-1000-page-report-alleging-politicization-fbi-doj",
+                            "domain":"www.foxnews.com",
+                            "brand":"Fox News",
+                            "date":"4 hours ago",
+                            "utc_date":"2022-11-04T16:30:55.576Z"
+                        },
+                        {
+                            "position":5,
+                            "title":"FBI Locates Suspect After Warning of Security Threat at NJ Synagogues",
+                            "link":"https://www.nytimes.com/2022/11/04/nyregion/new-jersey-synagogue-security-threat-suspect.html",
+                            "domain":"www.nytimes.com",
+                            "date":"1 hour ago",
+                            "utc_date":"2022-11-04T16:30:55.578Z"
+                        },
+                        {
+                            "position":6,
+                            "title":"No jackpot winner, but big Powerball winners in Colorado Springs and Denver",
+                            "link":"https://www.kktv.com/2022/11/04/no-jackpot-winner-big-powerball-winners-colorado-springs-denver/",
+                            "domain":"www.kktv.com",
+                            "brand":"KKTV",
+                            "date":"16 hours ago",
+                            "utc_date":"2022-11-04T16:30:55.579Z"
+                        }
+                    ]
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+                "content-length":"8897",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 04 Nov 2022 16:30:55 GMT",
+                "etag":"W/\"22c1-TlzKlvlPikBavsoAI67WJrwkdiE\"",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-cloud-trace-context":"e80160e944db10a5607798ead7e13029;o=1",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-response-time":"3037.220ms"
+            },
+            "schema":{}
+        },
+        {
+            "name":"Status",
+            "url":"https://serp5.p.rapidapi.com/status",
+            "description":"Check service availability. We offer 99.999% SLA.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://serp5.p.rapidapi.com/status\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"serp5.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "message":"Service is up 🟢"
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+                "content-length":"47",
+                "content-security-policy":"default-src 'self';base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Sat, 05 Nov 2022 08:39:48 GMT",
+                "etag":"W/\"2f-Wcq5XMQ6yRewEXCmjldQjnJxwx4\"",
+                "function-execution-id":"3uh4uqiuiz4u",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-cloud-trace-context":"5e28e7d9b70039610393fb75d6b0d3b0;o=1",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-response-time":"0.954ms"
+            },
+            "schema":{}
+        }
+    ]
+}

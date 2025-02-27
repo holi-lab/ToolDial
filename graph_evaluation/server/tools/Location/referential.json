@@ -1,0 +1,1091 @@
+{
+    "tool_name":"Referential",
+    "tool_description":"The fastest API to access countries, states, cities, continents, dial and zip codes in up to 20 languages. A collection of data APIs to support forms, signups, search and lookup. Our endpoints are optimized for speed and size. Our data is regularly maintained and comes from International Standardization bodies, the United Nations, government surveys and GIS datasets. We do not scrape WikiPedia etc",
+    "title":"Referential",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":41,
+        "avgSuccessRate":99,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/referential/api/referential/",
+    "host":"referential.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"City by IP address (Geo IP)",
+            "url":"https://referential.p.rapidapi.com/v1/city",
+            "description":"Find a city, state, country and continent by IP address. For some results, the closest result within 10 miles will be provided.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ip",
+                    "type":"STRING",
+                    "description":"ip4 pr ip6 formatted IP address",
+                    "default":"128.218.229.26"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [geonameid, timezone,state_code,iso_a2]",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/city\"\nquerystring = {\"ip\": ip}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "value":"São Paulo",
+                "key":"SAO PAULO|BR-SP"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 08 May 2020 16:49:40 GMT",
+                "server":"RapidAPI-1.1.6",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.1.6",
+                "content-length":"48",
+                "connection":"Close"
+            },
+            "schema":{
+                "items":{
+                    "properties":{
+                        "key":{
+                            "type":"string"
+                        },
+                        "value":{
+                            "type":"string"
+                        }
+                    },
+                    "type":"object"
+                },
+                "type":"array"
+            }
+        },
+        {
+            "name":"Countries",
+            "url":"https://referential.p.rapidapi.com/v1/country",
+            "description":"List or search countries of the world in different languages.. Get iso a2, a3 country code and localized country name",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"currency",
+                    "type":"STRING",
+                    "description":"Filter on currency name in chosen lang",
+                    "default":""
+                },
+                {
+                    "name":"dial_code",
+                    "type":"NUMBER",
+                    "description":"Filter on country dial code",
+                    "default":""
+                },
+                {
+                    "name":"currency_code",
+                    "type":"STRING",
+                    "description":"Filter on 3 letter currency code (ISO)",
+                    "default":""
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return for each country [iso_a2, iso_a3, continent_code, dial_code, currency_code, currency_num_code, currency]",
+                    "default":"currency,currency_num_code,currency_code,continent_code,currency,iso_a3,dial_code"
+                },
+                {
+                    "name":"iso_a2",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter iso country code",
+                    "default":""
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Country name search string. Can be partial contains...",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"250"
+                },
+                {
+                    "name":"continent_code",
+                    "type":"STRING",
+                    "description":"Two letter region/continent code (eu, na, sa, as, af, oc, an). Lookup at /v1/continent.",
+                    "default":""
+                },
+                {
+                    "name":"iso_a3",
+                    "type":"STRING",
+                    "description":"Filter on 3 letter iso country code",
+                    "default":""
+                },
+                {
+                    "name":"currency_num_code",
+                    "type":"STRING",
+                    "description":"Filter on 3 digit numeric currency code (ISO)",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/country\"\nquerystring = {\"fields\": fields, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "continent_code":"AF",
+                "iso_a3":"Eri",
+                "value":"Eritrea",
+                "currency_code":"ERN",
+                "key":"ER",
+                "currency_num_code":"232"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:03:13 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"24394",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object"
+                }
+            }
+        },
+        {
+            "name":"Cities",
+            "url":"https://referential.p.rapidapi.com/v1/city",
+            "description":"List and search over 75,000 world cities in 20 languages.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limit results to N results",
+                    "default":"250"
+                },
+                {
+                    "name":"state_hasc",
+                    "type":"STRING",
+                    "description":"Filter on state's HASC code. List at /v1/state.",
+                    "default":""
+                },
+                {
+                    "name":"timezone",
+                    "type":"STRING",
+                    "description":"Filter on timezone name. List at /v1/timezone.",
+                    "default":""
+                },
+                {
+                    "name":"geonameid",
+                    "type":"STRING",
+                    "description":"Filter on geonameid",
+                    "default":""
+                },
+                {
+                    "name":"prefix",
+                    "type":"STRING",
+                    "description":"Search by names starting with prefix. See also limit, order and sort fields.",
+                    "default":"san fr"
+                },
+                {
+                    "name":"timezone_offset",
+                    "type":"NUMBER",
+                    "description":"Filter on timezone offset in hours",
+                    "default":""
+                },
+                {
+                    "name":"sort",
+                    "type":"STRING",
+                    "description":"Sort on field [population, state_code, name, timezone, state_hasc, iso_a2]. Please see limit and order fields.",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":"en"
+                },
+                {
+                    "name":"iso_a2",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter country code",
+                    "default":"us"
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Search as \\\"contains\\\" on city name in chosen lang",
+                    "default":""
+                },
+                {
+                    "name":"state_code",
+                    "type":"STRING",
+                    "description":"Filter on state's ISO-3166-2 letter code. List at /v1/state",
+                    "default":"US-CA"
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [iso_a2,state_code,timezone,timezone_offset,state_hasc,geonameid]",
+                    "default":"iso_a2,state_code,state_hasc,timezone,timezone_offset"
+                },
+                {
+                    "name":"order",
+                    "type":"STRING",
+                    "description":"Sort order [asc | desc]",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/city\"\nquerystring = {\"limit\": limit, \"prefix\": prefix, \"lang\": lang, \"iso_a2\": iso_a2, \"state_code\": state_code, \"fields\": fields}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "timezone":"America/Los_Angeles",
+                "timezone_offset":"-28800000",
+                "state_code":"US-WA",
+                "value":"Tacoma",
+                "iso_a2":"US",
+                "state_hasc":"US.WA",
+                "key":"TACOMA|US-WA"
+            },
+            "headers":{
+                "age":"91",
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:43:45 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "transfer-encoding":"chunked",
+                "connection":"Close"
+            },
+            "schema":{
+                "items":{
+                    "properties":{
+                        "iso_a2":{
+                            "type":"string"
+                        },
+                        "key":{
+                            "type":"string"
+                        },
+                        "state_code":{
+                            "type":"string"
+                        },
+                        "state_hasc":{
+                            "type":"string"
+                        },
+                        "timezone":{
+                            "type":"string"
+                        },
+                        "timezone_offset":{
+                            "type":"string"
+                        },
+                        "value":{
+                            "type":"string"
+                        }
+                    },
+                    "type":"object"
+                },
+                "type":"array"
+            }
+        },
+        {
+            "name":"State",
+            "url":"https://referential.p.rapidapi.com/v1/state",
+            "description":"List the sub-regions/states/provinces/departments of the world's countries",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"250"
+                },
+                {
+                    "name":"iso_a2",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter country code",
+                    "default":"us"
+                },
+                {
+                    "name":"iso_3166_2",
+                    "type":"STRING",
+                    "description":"Filter on Subregion's ISO-3166-2 letter code",
+                    "default":""
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to select in the result [iso_a2]",
+                    "default":"iso_a2"
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Filter as \\\"contains\\\" on the states's name in chosen lang",
+                    "default":"tex"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/state\"\nquerystring = {\"limit\": limit, \"iso_a2\": iso_a2, \"fields\": fields, \"name\": name, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "value":"Entre Ríos Province",
+                "iso_a2":"Ar",
+                "key":"AR-E"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:30:11 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "transfer-encoding":"chunked",
+                "connection":"Close"
+            },
+            "schema":{
+                "items":{
+                    "properties":{
+                        "iso_a2":{
+                            "type":"string"
+                        },
+                        "key":{
+                            "type":"string"
+                        },
+                        "value":{
+                            "type":"string"
+                        }
+                    },
+                    "type":"object"
+                },
+                "type":"array"
+            }
+        },
+        {
+            "name":"Timezones",
+            "url":"https://referential.p.rapidapi.com/v1/timezone",
+            "description":"List the world's time zones in 20 languages",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"offset",
+                    "type":"STRING",
+                    "description":"Filter on non daylights savings offset in hours",
+                    "default":""
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Filter as \"contains\" on timezone name in chosen lang",
+                    "default":""
+                },
+                {
+                    "name":"code",
+                    "type":"STRING",
+                    "description":"Filter on 3 letter non daylight savings timezone code (not unique)",
+                    "default":""
+                },
+                {
+                    "name":"timezone",
+                    "type":"STRING",
+                    "description":"Filter on timezone name in english",
+                    "default":""
+                },
+                {
+                    "name":"daylights_offset",
+                    "type":"STRING",
+                    "description":"Filter on daylights savings offset in hours",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":"de"
+                },
+                {
+                    "name":"daylights_code",
+                    "type":"STRING",
+                    "description":"Filter on daylights savings letter code (not unique)",
+                    "default":""
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [code,timezone,daylights_code,daylights_offset,daylights,hours_offset,offset]",
+                    "default":"offset,daylights_offset,daylights,daylights_code,timezone"
+                },
+                {
+                    "name":"daylights",
+                    "type":"STRING",
+                    "description":"Filter on daylights savings/non daylight savings timezones (true,false)",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/timezone\"\nquerystring = {\"lang\": lang, \"fields\": fields}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "offset":"0",
+                "timezone":"Africa/Abidjan",
+                "daylights_offset":"0",
+                "daylights":"false",
+                "value":"Mittlere Greenwich-Zeit",
+                "key":"Africa/Abidjan"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"de",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 21:09:21 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "transfer-encoding":"chunked",
+                "connection":"Close"
+            },
+            "schema":{
+                "items":{
+                    "properties":{
+                        "daylights":{
+                            "type":"string"
+                        },
+                        "daylights_offset":{
+                            "type":"string"
+                        },
+                        "key":{
+                            "type":"string"
+                        },
+                        "offset":{
+                            "type":"string"
+                        },
+                        "timezone":{
+                            "type":"string"
+                        },
+                        "value":{
+                            "type":"string"
+                        }
+                    },
+                    "type":"object"
+                },
+                "type":"array"
+            }
+        },
+        {
+            "name":"City by id",
+            "url":"https://referential.p.rapidapi.com/v1/city/{id}",
+            "description":"Direct lookup of over 75,000 cities by id. See the v1/city API to search for city ids.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"string",
+                    "description":"Lookup at /v1/city.",
+                    "default":"DULUTH|US-GA"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":"en"
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [iso_a2,state_code,timezone,timezone_offset,state_hasc]",
+                    "default":"iso_a2,state_code,state_hasc,timezone, timezone_offset"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/city/{id}\"\nquerystring = {\"lang\": lang, \"fields\": fields}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "timezone":"America/New_York",
+                "timezone_offset":"-18000000",
+                "state_code":"US-GA",
+                "value":"Duluth",
+                "iso_a2":"US",
+                "state_hasc":"US.GA",
+                "key":"DULUTH|US-GA"
+            },
+            "headers":{
+                "age":"19",
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:49:46 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"155",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Country by iso code",
+            "url":"https://referential.p.rapidapi.com/v1/country/{iso_code}",
+            "description":"Get country by 2 letter iso code localized to a given language",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"iso_code",
+                    "type":"string",
+                    "description":"2 letter iso country code. ",
+                    "default":"US"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Comma deliminated list of fields to return in response",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"2 letter iso language code to localize country name",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/country/{iso_code}\"\nquerystring = {\"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "value":"United States Of America",
+                "key":"US"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 08:25:52 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"47",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"State by id",
+            "url":"https://referential.p.rapidapi.com/v1/state/{code}",
+            "description":"Lookup sub-regions/states/provinces/departments by iso 3166-2 code",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"code",
+                    "type":"string",
+                    "description":"ISO 3166-2 state/province/deparm",
+                    "default":"US-MN"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [iso_a2]",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/state/{code}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "value":"Minnesota",
+                "key":"US-MN"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:34:33 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"35",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Continent by id",
+            "url":"https://referential.p.rapidapi.com/v1/continent/{code}",
+            "description":"Lookup a continent by id",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"code",
+                    "type":"string",
+                    "description":"Two letter iso continent code. Lookup /v1/continent.",
+                    "default":"NA"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Two letter iso 639-2 language code (i.e. en, sv, pl etc). Lookup /v1/lang.",
+                    "default":""
+                },
+                {
+                    "name":"continent_code",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter continent code",
+                    "default":""
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Filter on continent name (value field) as \\\"contains\\\"",
+                    "default":""
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return for each continent [iso_a2, iso_a3, continent_code, dial_code, currency_code, currency_num_code, currency]",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/continent/{code}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "value":"North America",
+                "key":"NA"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:12:33 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"36",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Continents",
+            "url":"https://referential.p.rapidapi.com/v1/continent",
+            "description":"List continents of the world localized to requested language",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return for each continent [iso_a2, iso_a3, continent_code, dial_code, currency_code, currency_num_code, currency]",
+                    "default":""
+                },
+                {
+                    "name":"continent_code",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter continent code",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Two letter iso 639-2 language code (i.e. en, sv, pl etc). Lookup /v1/lang.",
+                    "default":""
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Filter as \"contains\" on continent name in chosen lang",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/continent\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "value":"Africa",
+                "key":"AF"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:08:18 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"228",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Languages",
+            "url":"https://referential.p.rapidapi.com/v1/lang",
+            "description":"List the world's languages translated into 20 languages",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"lang_3",
+                    "type":"STRING",
+                    "description":"Filter by 3 letter ISO language code",
+                    "default":""
+                },
+                {
+                    "name":"iso_a2",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter country code",
+                    "default":""
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [flag,iso_a2,lang_3,lang]",
+                    "default":"iso_a2,lang_3,flag"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Returns a language translated into lang language",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/lang\"\nquerystring = {\"fields\": fields, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "flag":"https://referential.io/img/al.gif",
+                "lang_3":"alb",
+                "value":"Albanian",
+                "iso_a2":"al",
+                "key":"SQ"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"en",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:19:34 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"6518",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Language by id",
+            "url":"https://referential.p.rapidapi.com/v1/lang/{lang}",
+            "description":"Find language by id translated into 20 languages",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"string",
+                    "description":"2 letter iso language code. Lookup at /v1/lang.",
+                    "default":"es"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Returns a language translated into lang language",
+                    "default":"sv"
+                },
+                {
+                    "name":"lang_3",
+                    "type":"STRING",
+                    "description":"Filter by 3 letter ISO language code",
+                    "default":""
+                },
+                {
+                    "name":"iso_a2",
+                    "type":"STRING",
+                    "description":"Filter on 2 letter country code",
+                    "default":""
+                },
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [flag,iso_a2,lang_3,lang]",
+                    "default":"iso_a2,lang_3,flag"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/lang/{lang}\"\nquerystring = {\"fields\": fields}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "flag":"https://referential.io/img/es.gif",
+                "lang_3":"spa",
+                "value":"Spanska",
+                "iso_a2":"es",
+                "key":"ES"
+            },
+            "headers":{
+                "alt-svc":"clear",
+                "cache-control":"max-age=604800, s-maxage=604800, public",
+                "content-encoding":"UTF-8",
+                "content-language":"sv",
+                "content-type":"application/json",
+                "date":"Fri, 21 Feb 2020 20:21:33 GMT",
+                "server":"RapidAPI-1.0.39",
+                "via":"1.1 google",
+                "x-rapidapi-region":"AWS - us-west-2",
+                "x-rapidapi-version":"1.0.39",
+                "content-length":"102",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Timezone by id",
+            "url":"https://referential.p.rapidapi.com/v1/timezone/{timezone}",
+            "description":"Lookup a time zone",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"timezone",
+                    "type":"string",
+                    "description":"Timezone",
+                    "default":"Afrika/Dakar"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"Select fields to return in result [code,timezone,daylights_code,daylights_offset,daylights,hours_offset,offset]",
+                    "default":"offset,daylights_offset,daylights,daylights_code,timezone"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Language selection ISO 639-2 letter code. Overrides Accept-Language header. Defaults to browser value. Default: en",
+                    "default":"de"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://referential.p.rapidapi.com/v1/timezone/{timezone}\"\nquerystring = {\"fields\": fields, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"referential.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

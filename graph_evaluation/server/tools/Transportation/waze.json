@@ -1,0 +1,210 @@
+{
+    "tool_name":"Waze",
+    "tool_description":"Get alerts, traffic jams information and driving directions from Waze/Google in real-time.",
+    "title":"Waze",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":2074,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/letscrape-6bRBa3QguO5/api/waze/",
+    "host":"waze.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Autocomplete",
+            "url":"https://waze.p.rapidapi.com/autocomplete",
+            "description":"Waze/Google autocomplete/type-ahead for places, locations and addresses.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"Free-text geographic query",
+                    "default":"sunn"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"The language of the results. See https://wazeopedia.waze.com/wiki/USA/Countries_and_Languages for a list of supported languages.",
+                    "default":"en"
+                },
+                {
+                    "name":"coordinates",
+                    "type":"STRING",
+                    "description":"Geographic coordinates (latitude, longitude) bias. Highly recommended to use for getting accurate results.",
+                    "default":"37.376754, -122.023350"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://waze.p.rapidapi.com/autocomplete\"\nquerystring = {\"q\": q, \"lang\": lang, \"coordinates\": coordinates}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"waze.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "type":"string"
+                                },
+                                "address":{
+                                    "type":"string"
+                                },
+                                "latitude":{
+                                    "type":"number"
+                                },
+                                "longitude":{
+                                    "type":"number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Driving Directions",
+            "url":"https://waze.p.rapidapi.com/driving-directions",
+            "description":"Get routes and driving directions from Waze/Google.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"source_coordinates",
+                    "type":"STRING",
+                    "description":"Geographic coordinates (latitude, longitude pair) of the starting point",
+                    "default":"32.0852999,34.78176759999999"
+                },
+                {
+                    "name":"destination_coordinates",
+                    "type":"STRING",
+                    "description":"Geographic coordinates (latitude, longitude pair) of the destination",
+                    "default":"32.7940463,34.989571"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"return_route_coordinates",
+                    "type":"BOOLEAN",
+                    "description":"Whether to return route coordinate pairs (`route_coordinates` field)",
+                    "default":""
+                },
+                {
+                    "name":"arrival_timestamp",
+                    "type":"NUMBER",
+                    "description":"Unix-timestamp (seconds since epoch) of the arrival time (in case not specified directions will be returned for current time) ",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://waze.p.rapidapi.com/driving-directions\"\nquerystring = {\"source_coordinates\": source_coordinates, \"destination_coordinates\": destination_coordinates}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"waze.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Alerts and Jams",
+            "url":"https://waze.p.rapidapi.com/alerts-and-jams",
+            "description":"Get real-time alerts and jams from Waze in a geographic rectangular area defined by bottom-left and top-right latitude, longitude pairs.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"top_right",
+                    "type":"STRING",
+                    "description":"Top-right corner of the geographic rectangular area for which to get alerts and traffic jams. Specified as latitude, longitude pair.",
+                    "default":"40.772787404902594,-73.76818084716798"
+                },
+                {
+                    "name":"bottom_left",
+                    "type":"STRING",
+                    "description":"Bottom-left corner of the geographic rectangular area for which to get alerts and traffic jams. Specified as latitude, longitude pair.",
+                    "default":"40.66615391742187,-74.13732147216798"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"max_alerts",
+                    "type":"NUMBER",
+                    "description":"Maximum number of alerts to fetch (to avoid fetching alerts set it to `0`).\nDefault: `20`",
+                    "default":"20"
+                },
+                {
+                    "name":"max_jams",
+                    "type":"NUMBER",
+                    "description":"Maximum number of traffic jams to fetch (to avoid fetching traffic jams, set it to `0`).\nDefault: `20`",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://waze.p.rapidapi.com/alerts-and-jams\"\nquerystring = {\"max_alerts\": max_alerts, \"top_right\": top_right, \"max_jams\": max_jams, \"bottom_left\": bottom_left}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"waze.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "alerts":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            },
+                            "jams":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,1084 @@
+{
+    "product_id": "api_d762d224-2f52-4440-9836-7c931751e30f",
+    "tool_description": "An API for trading on Kalshi, a CFTC regulated exchange.",
+    "home_url": "https://rapidapi.com/kalshi-kalshi-default/api/kalshi-trading-api/",
+    "name": "Kalshi Trading API",
+    "title": "Kalshi Trading API",
+    "pricing": "FREE",
+    "tool_name": "Kalshi Trading API",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 621,
+        "avgSuccessRate": 14,
+        "popularityScore": 2,
+        "__typename": "Score"
+    },
+    "host": "kalshi-trading-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "GetExchangeStatus",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/exchange/status",
+            "description": "Endpoint for getting the exchange status.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/exchange/status\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/exchange/status\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "exchange_active": true,
+                "trading_active": true
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "required": [
+                    "exchange_active",
+                    "trading_active"
+                ],
+                "properties": {
+                    "exchange_active": {
+                        "description": "False if the core Kalshi exchange is no longer taking any state changes at all. This includes but is not limited to trading, new users, and transfers. True unless we are under maintenance.",
+                        "type": "boolean",
+                        "x-go-name": "ExchangeActive"
+                    },
+                    "trading_active": {
+                        "description": "True if we are currently permitting trading on the exchange. This is true during trading hours and false outside exchange hours. Kalshi reserves the right to pause at any time in case issues are detected.",
+                        "type": "boolean",
+                        "x-go-name": "TradingActive"
+                    }
+                },
+                "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+            }
+        },
+        {
+            "name": "GetMarket",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}",
+            "description": "Endpoint for getting data about a specific market.\n\nThe value for the ticker path parameter should match the ticker of the target market.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Market ticker for the market being retrieved.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}\"\nquerystring = {\"ticker\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}\"\nquerystring = {\"ticker\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "code": "not_found",
+                    "message": "not found"
+                }
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetTrades",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/markets/trades",
+            "description": "Endpoint for getting all trades for all markets.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "min_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the response to trades after a timestamp.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Parameter to specify a specific market to get trades from.",
+                    "default": ""
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like ticker, max_ts or min_ts were passed in the original query they must be passed again.",
+                    "default": ""
+                },
+                {
+                    "name": "max_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the response to trades before a timestamp.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/trades\"\nquerystring = {\"min_ts\": \"\", \"limit\": \"\", \"ticker\": \"\", \"cursor\": \"\", \"max_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/trades\"\nquerystring = {\"min_ts\": \"\", \"limit\": \"\", \"ticker\": \"\", \"cursor\": \"\", \"max_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "trades": [],
+                "cursor": ""
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetEvents",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/events",
+            "description": "Endpoint for getting data about all events.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "series_ticker",
+                    "type": "STRING",
+                    "description": "Series ticker to retrieve contracts for.",
+                    "default": ""
+                },
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "description": "Restricts the events to those with certain statuses, as a comma separated list.\nThe following values are accepted: open, closed, settled.",
+                    "default": ""
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like series_ticker was passed in the original query they must be passed again.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/events\"\nquerystring = {\"series_ticker\": \"\", \"status\": \"\", \"cursor\": \"\", \"limit\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/events\"\nquerystring = {\"series_ticker\": \"\", \"status\": \"\", \"cursor\": \"\", \"limit\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "events": [],
+                "cursor": ""
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetMarketOrderbook",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}/orderbook",
+            "description": "Endpoint for getting the orderbook for a market.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Market ticker.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "depth",
+                    "type": "NUMBER",
+                    "description": "Depth specifies the maximum number of orderbook price levels on either side.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}/orderbook\"\nquerystring = {\"ticker\": \"\", \"depth\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}/orderbook\"\nquerystring = {\"ticker\": \"\", \"depth\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetSeries",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/series/{series_ticker}",
+            "description": "Endpoint for getting data about a series by its ticker.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "series_ticker",
+                    "type": "STRING",
+                    "description": "Should be filled with the ticker of the series.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/series/{series_ticker}\"\nquerystring = {\"series_ticker\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/series/{series_ticker}\"\nquerystring = {\"series_ticker\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "code": "not_found",
+                    "message": "not found"
+                }
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetMarkets",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/markets",
+            "description": "Endpoint for listing and discovering markets on Kalshi.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like tickers, max_ts or min_ts were passed in the original query they must be passed again.",
+                    "default": ""
+                },
+                {
+                    "name": "event_ticker",
+                    "type": "STRING",
+                    "description": "Event ticker to retrieve markets for.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "description": "Restricts the markets to those with certain statuses, as a comma separated list.\nThe following values are accepted: open, closed, settled.",
+                    "default": ""
+                },
+                {
+                    "name": "tickers",
+                    "type": "STRING",
+                    "description": "Restricts the markets to those with certain tickers, as a comma separated list.",
+                    "default": ""
+                },
+                {
+                    "name": "min_close_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the markets to those that are closing in or after this timestamp.",
+                    "default": ""
+                },
+                {
+                    "name": "series_ticker",
+                    "type": "STRING",
+                    "description": "Series ticker to retrieve contracts for.",
+                    "default": ""
+                },
+                {
+                    "name": "max_close_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the markets to those that are closing in or before this timestamp.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets\"\nquerystring = {\"cursor\": \"\", \"event_ticker\": \"\", \"limit\": \"\", \"status\": \"\", \"tickers\": \"\", \"min_close_ts\": \"\", \"series_ticker\": \"\", \"max_close_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets\"\nquerystring = {\"cursor\": \"\", \"event_ticker\": \"\", \"limit\": \"\", \"status\": \"\", \"tickers\": \"\", \"min_close_ts\": \"\", \"series_ticker\": \"\", \"max_close_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetEvent",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/events/{event_ticker}",
+            "description": "Endpoint for getting data about an event by its ticker.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "event_ticker",
+                    "type": "STRING",
+                    "description": "Should be filled with the ticker of the event.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/events/{event_ticker}\"\nquerystring = {\"event_ticker\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/events/{event_ticker}\"\nquerystring = {\"event_ticker\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "code": "not_found",
+                    "message": "not found"
+                }
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetMarketHistory",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}/history",
+            "description": "Endpoint for getting the statistics history for a market.\n\nThe value for the ticker path parameter should match the ticker of the target market.\nThe min_ts parameter is optional, and will restrict statistics to those after provided timestamp.\nThe min_ts is inclusive, which means a market history point at min_ts will be returned.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Market ticker",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like max_ts or min_ts were passed in the original query they must be passed again.",
+                    "default": ""
+                },
+                {
+                    "name": "min_ts",
+                    "type": "NUMBER",
+                    "description": "If provided, MinTs restricts history to trades starting from MinTs.  Default value: 1 hour ago.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "max_ts",
+                    "type": "NUMBER",
+                    "description": "If provided, MaxTs restricts history to trades up until MaxTs",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}/history\"\nquerystring = {\"cursor\": \"\", \"min_ts\": \"\", \"limit\": \"\", \"ticker\": \"\", \"max_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/markets/{ticker}/history\"\nquerystring = {\"cursor\": \"\", \"min_ts\": \"\", \"limit\": \"\", \"ticker\": \"\", \"max_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "required": [
+                    "ticker",
+                    "history"
+                ],
+                "properties": {
+                    "cursor": {
+                        "description": "The Cursor represents a pointer to the next page of records in the pagination.\nUse the value returned here in the cursor query parameter for this end-point to get the next page containing limit records.\nAn empty value of this field indicates there is no next page.",
+                        "type": "string",
+                        "x-go-name": "Cursor"
+                    },
+                    "history": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "yes_price",
+                                "yes_bid",
+                                "yes_ask",
+                                "no_bid",
+                                "no_ask",
+                                "volume",
+                                "open_interest",
+                                "ts"
+                            ],
+                            "properties": {
+                                "no_ask": {
+                                    "description": "Price for the lowest NO sell offer on the market by the timestamp in the request (ts).",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "NoAsk",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "no_bid": {
+                                    "description": "Price for the highest NO buy offer on the market by the timestamp in the request (ts).",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "NoBid",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "open_interest": {
+                                    "description": "Number of contracts bought on the market by the timestamp in the request (ts) disconsidering netting.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "DollarOpenInterest",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "ts": {
+                                    "description": "Unix timestamp for the current statistics entry.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "Time",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "volume": {
+                                    "description": "Number of contracts bought on the market by the timestamp in the request (ts).",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "DollarVolume",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "yes_ask": {
+                                    "description": "Price for the lowest YES sell offer on the market by the timestamp in the request (ts).",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "YesAsk",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "yes_bid": {
+                                    "description": "Price for the highest YES buy offer on the market by the timestamp in the request (ts).",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "YesBid",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "yes_price": {
+                                    "description": "Price for the last traded yes contract on the market by the timestamp in the request (ts).",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "Price",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                }
+                            },
+                            "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                        },
+                        "x-go-name": "MarketStatsPoints"
+                    },
+                    "ticker": {
+                        "type": "string",
+                        "x-go-name": "Ticker"
+                    }
+                },
+                "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+            }
+        },
+        {
+            "name": "GetPortfolioSettlements",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/settlements",
+            "description": "Endpoint for getting the logged-in member's settlements historical track.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/settlements\"\nquerystring = {\"limit\": \"\", \"cursor\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/settlements\"\nquerystring = {\"limit\": \"\", \"cursor\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetOrders",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/orders",
+            "description": "Endpoint for getting all orders for the logged-in member.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "max_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the response to orders before a timestamp, formatted as a Unix Timestamp.",
+                    "default": ""
+                },
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Restricts the response to orders in a single market.",
+                    "default": ""
+                },
+                {
+                    "name": "min_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the response to orders after a timestamp, formatted as a Unix Timestamp.",
+                    "default": ""
+                },
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "description": "Restricts the response to orders that have a certain status: resting, canceled, or executed.",
+                    "default": ""
+                },
+                {
+                    "name": "event_ticker",
+                    "type": "STRING",
+                    "description": "Restricts the response to orders in a single event.",
+                    "default": ""
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like ticker, max_ts or min_ts were passed in the original query they must be passed again.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders\"\nquerystring = {\"limit\": \"\", \"max_ts\": \"\", \"ticker\": \"\", \"min_ts\": \"\", \"status\": \"\", \"event_ticker\": \"\", \"cursor\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders\"\nquerystring = {\"limit\": \"\", \"max_ts\": \"\", \"ticker\": \"\", \"min_ts\": \"\", \"status\": \"\", \"event_ticker\": \"\", \"cursor\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "required": [
+                    "orders"
+                ],
+                "properties": {
+                    "cursor": {
+                        "description": "The Cursor represents a pointer to the next page of records in the pagination.\nUse the value returned here in the cursor query parameter for this end-point to get the next page containing limit records.\nAn empty value of this field indicates there is no next page.",
+                        "type": "string",
+                        "x-go-name": "Cursor"
+                    },
+                    "orders": {
+                        "type": "array",
+                        "items": {
+                            "description": "Represents member orders in the API.\n\nWhen an order is matched multiple trades can be created this can be tracked by looking into the trade.orderId field.",
+                            "type": "object",
+                            "title": "Order",
+                            "required": [
+                                "order_id",
+                                "ticker",
+                                "status",
+                                "yes_price",
+                                "no_price",
+                                "action",
+                                "side",
+                                "type",
+                                "client_order_id"
+                            ],
+                            "properties": {
+                                "action": {
+                                    "description": "Representing trade action; currently supports buy and sell.",
+                                    "type": "string",
+                                    "enum": [
+                                        "buy",
+                                        "sell",
+                                        ""
+                                    ],
+                                    "x-go-name": "OrderAction"
+                                },
+                                "client_order_id": {
+                                    "description": "Optional unique identifier for order placement.",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "x-go-name": "ClientOrderId"
+                                },
+                                "close_cancel_count": {
+                                    "description": "The size of resting orders canceled because of market close (contract units).",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "CloseCancelCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "created_time": {
+                                    "description": "Date and time in the ISO 8601 spec. Example: 2022-11-30T15:00:00Z",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                                },
+                                "decrease_count": {
+                                    "description": "The reduction in the size of resting for orders (contract units).",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "DecreaseCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "expiration_time": {
+                                    "description": "Date and time in the ISO 8601 spec. Example: 2022-11-30T15:00:00Z",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                                },
+                                "fcc_cancel_count": {
+                                    "description": "The size of resting contracts canceled because of exchange operations (contract units).",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "FccCancelCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "last_update_time": {
+                                    "description": "Date and time in the ISO 8601 spec. Example: 2022-11-30T15:00:00Z",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                                },
+                                "maker_fill_count": {
+                                    "description": "The size of filled maker orders (contract units).",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "MakerFillCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "no_price": {
+                                    "description": "Submitting price of the No side of the trade, in cents.\nExactly one of yes_price and no_price must be passed. If both prices are passed, return 400.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "NoPrice",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "order_id": {
+                                    "description": "Unique identifier for orders.",
+                                    "type": "string",
+                                    "format": "uuid4",
+                                    "x-go-name": "Id"
+                                },
+                                "place_count": {
+                                    "description": "the size of placed maker orders (contract units).",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "PlaceCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "queue_position": {
+                                    "description": "Position in the priority queue at a given price level",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "QueuePosition",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "remaining_count": {
+                                    "description": "The size of the remaining resting orders (contract units).",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "RemainingCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "side": {
+                                    "description": "Representing direction of the order; currently supports yes and no.",
+                                    "type": "string",
+                                    "enum": [
+                                        "yes",
+                                        "no",
+                                        ""
+                                    ],
+                                    "x-go-name": "OrderSide"
+                                },
+                                "status": {
+                                    "description": "The current status of this order.",
+                                    "type": "string",
+                                    "enum": [
+                                        "resting",
+                                        "canceled",
+                                        "executed",
+                                        "pending"
+                                    ],
+                                    "x-go-name": "Status"
+                                },
+                                "taker_fees": {
+                                    "description": "Fees paid on filled orders, in cents.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "TakerFees",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "taker_fill_cost": {
+                                    "description": "The cost of filled taker orders in cents.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "TakerFillCost",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "taker_fill_count": {
+                                    "description": "The size of filled taker orders (contract units)",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "TakerFillCount",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "ticker": {
+                                    "description": "Unique identifier for markets.",
+                                    "type": "string",
+                                    "x-go-name": "Ticker"
+                                },
+                                "type": {
+                                    "description": "Representing order type; currently supports \"market\" and \"limit\".",
+                                    "type": "string",
+                                    "enum": [
+                                        "",
+                                        "market",
+                                        "limit"
+                                    ],
+                                    "x-go-name": "OrderType"
+                                },
+                                "user_id": {
+                                    "type": "string",
+                                    "format": "uuid4",
+                                    "x-go-name": "UserId"
+                                },
+                                "yes_price": {
+                                    "description": "The yes price for this order in cents.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "YesPrice",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                }
+                            },
+                            "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                        },
+                        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                    }
+                },
+                "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+            }
+        },
+        {
+            "name": "GetPositions",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/positions",
+            "description": "Endpoint for getting all market positions for the logged-in member.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Ticker of desired positions.",
+                    "default": ""
+                },
+                {
+                    "name": "event_ticker",
+                    "type": "STRING",
+                    "description": "Event ticker of desired positions.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "settlement_status",
+                    "type": "STRING",
+                    "description": "Settlement status of the markets to return. Defaults to unsettled.",
+                    "default": "all"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like settlement_status, ticker, or event_ticker were passed in the original query they must be passed again.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/positions\"\nquerystring = {\"ticker\": \"\", \"event_ticker\": \"\", \"limit\": \"\", \"settlement_status\": \"all\", \"cursor\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/positions\"\nquerystring = {\"ticker\": \"\", \"event_ticker\": \"\", \"limit\": \"\", \"settlement_status\": \"all\", \"cursor\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetBalance",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/balance",
+            "description": "Endpoint for getting the balance of the logged-in member.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/balance\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/balance\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetOrder",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/{order_id}",
+            "description": "Endpoint for getting a single order.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "Order_id input for the current order.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/{order_id}\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/{order_id}\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "GetFills",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/fills",
+            "description": "Endpoint for getting all fills for the logged-in member.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The Cursor represents a pointer to the next page of records in the pagination.\nSo this optional parameter, when filled, should be filled with the cursor string returned in a previous request to this end-point.\nFilling this would basically tell the api to get the next page containing the number of records passed on the limit parameter.\nOn the other side not filling it tells the api you want to get the first page for another query.\nThe cursor does not store any filters, so if any filter parameters like ticker, max_ts or min_ts were passed in the original query they must be passed again.",
+                    "default": ""
+                },
+                {
+                    "name": "ticker",
+                    "type": "STRING",
+                    "description": "Restricts the response to trades in a specific market.",
+                    "default": ""
+                },
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "Restricts the response to trades related to a specific order.",
+                    "default": ""
+                },
+                {
+                    "name": "max_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the response to trades before a timestamp.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Parameter to specify the number of results per page. Defaults to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "min_ts",
+                    "type": "NUMBER",
+                    "description": "Restricts the response to trades after a timestamp.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/fills\"\nquerystring = {\"cursor\": \"\", \"ticker\": \"\", \"order_id\": \"\", \"max_ts\": \"\", \"limit\": \"\", \"min_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/fills\"\nquerystring = {\"cursor\": \"\", \"ticker\": \"\", \"order_id\": \"\", \"max_ts\": \"\", \"limit\": \"\", \"min_ts\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "code": "missing_parameters",
+                "message": "missing parameters"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "required": [
+                    "fills"
+                ],
+                "properties": {
+                    "cursor": {
+                        "description": "The Cursor represents a pointer to the next page of records in the pagination.\nUse the value returned here in the cursor query parameter for this end-point to get the next page containing limit records.\nAn empty value of this field indicates there is no next page.",
+                        "type": "string",
+                        "x-go-name": "Cursor"
+                    },
+                    "fills": {
+                        "type": "array",
+                        "items": {
+                            "description": "Represents a trade from the trader's perspective.\n\nA trade is created whenever an order is fully or partially matched,\nso there can be multiple trades with the same order ID.\nIt is guaranteed that the sum of the **count** field for all the trades with the same order ID\nshouldn't exceed the **place_count** on the order.",
+                            "type": "object",
+                            "title": "Fill",
+                            "required": [
+                                "trade_id",
+                                "ticker",
+                                "order_id",
+                                "side",
+                                "action",
+                                "count",
+                                "yes_price",
+                                "no_price",
+                                "is_taker",
+                                "created_time"
+                            ],
+                            "properties": {
+                                "action": {
+                                    "description": "Specifies if this is a buy or sell order.",
+                                    "type": "string",
+                                    "enum": [
+                                        "buy",
+                                        "sell",
+                                        ""
+                                    ],
+                                    "x-go-name": "OrderAction"
+                                },
+                                "count": {
+                                    "description": "Number of contracts to be bought or sold.",
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "x-go-name": "Count",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "created_time": {
+                                    "description": "Date and time in the ISO 8601 spec. Example: 2022-11-30T15:00:00Z",
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                                },
+                                "is_taker": {
+                                    "description": "If true then this fill was a taker.",
+                                    "type": "boolean",
+                                    "x-go-name": "IsTaker"
+                                },
+                                "no_price": {
+                                    "description": "Fill price for the no side in cents.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "NoPrice",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                },
+                                "order_id": {
+                                    "description": "Unique identifier for orders.",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "x-go-name": "OrderId"
+                                },
+                                "side": {
+                                    "description": "Specifies if this is a 'yes' or 'no' fill.",
+                                    "type": "string",
+                                    "enum": [
+                                        "yes",
+                                        "no",
+                                        ""
+                                    ],
+                                    "x-go-name": "OrderSide"
+                                },
+                                "ticker": {
+                                    "description": "Unique identifier for markets.",
+                                    "type": "string",
+                                    "x-go-name": "MarketTicker"
+                                },
+                                "trade_id": {
+                                    "description": "Unique identifier for fills.",
+                                    "type": "string",
+                                    "format": "uuid",
+                                    "x-go-name": "Id"
+                                },
+                                "yes_price": {
+                                    "description": "Fill price for the yes side in cents.",
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "x-go-name": "YesPrice",
+                                    "minimum": -9223372036854776000,
+                                    "maximum": 9223372036854776000
+                                }
+                            },
+                            "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                        },
+                        "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+                    }
+                },
+                "x-go-package": "github.com/Kalshi/exchange-infra/svc-api2/model"
+            }
+        },
+        {
+            "name": "Logout",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/logout",
+            "description": "Terminate your session with Kalshi.\nAfter this endpoint is called, the session token previously returned\nby the `/log_in` endpoint will no longer be valid.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/logout\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/logout\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Login",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/login",
+            "description": "Endpoint to start a REST session with the Kalshi API.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/login\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/login\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "BatchCreateOrders",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/batched",
+            "description": "Endpoint for submitting a batch of orders.\n\nEach order in the batch is counted against the total rate limit for order operations.\nConsequently, the size of the batch is capped by the current per-second rate-limit\nconfiguration applicable to the user.\n\nAt the moment of writing, the limit is 20 orders per batch.\nAvailable to members with advanced access only.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/batched\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/batched\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "DecreaseOrder",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/{order_id}/decrease",
+            "description": "Endpoint for decreasing the number of contracts in an existing order.\nThis is the only kind of edit available on order quantity.\nCancelling an order is equivalent to decreasing an order amount to zero.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "ID of the order to be decreased.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/{order_id}/decrease\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders/{order_id}/decrease\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "CreateOrder",
+            "url": "https://kalshi-trading-api.p.rapidapi.com/portfolio/orders",
+            "description": "Endpoint for submitting orders in a market.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://kalshi-trading-api.p.rapidapi.com/portfolio/orders\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"kalshi-trading-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "kalshi_trading_api"
+}

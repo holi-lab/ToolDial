@@ -1,0 +1,96 @@
+{
+    "product_id": "api_bdca90ea-15e6-4714-9c0c-ed34491126a5",
+    "tool_description": "Generate and validate time-based one-time passwords (TOTP) for your second factor authentication (2FA) scenario using Microsoft Authenticator app",
+    "home_url": "https://rapidapi.com/chdan/api/microsoft-authenticator/",
+    "name": "Microsoft Authenticator",
+    "title": "Microsoft Authenticator",
+    "pricing": "FREEMIUM",
+    "tool_name": "Microsoft Authenticator",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 280,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "microsoft-authenticator.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "enroll",
+            "url": "https://microsoft-authenticator.p.rapidapi.com/enroll/",
+            "description": "Step 2. Generate QR code and enroll using Google Authenticator app",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "secret",
+                    "type": "STRING",
+                    "description": "Secret code that /new/ or /new_v2/ return",
+                    "default": "IH225HMVWDS3XJVY"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "account",
+                    "type": "STRING",
+                    "description": "Account within the company",
+                    "default": "User1"
+                },
+                {
+                    "name": "issuer",
+                    "type": "STRING",
+                    "description": "A company issuing temporary codes",
+                    "default": "HomeCorp"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/enroll/\"\nquerystring = {\"account\": \"User1\", \"secret\": \"IH225HMVWDS3XJVY\", \"issuer\": \"HomeCorp\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/enroll/\"\nquerystring = {\"account\": \"User1\", \"secret\": \"IH225HMVWDS3XJVY\", \"issuer\": \"HomeCorp\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "new_v2",
+            "url": "https://microsoft-authenticator.p.rapidapi.com/new_v2/",
+            "description": "Step 1. Generate new secret \n\nnb! This is the absolutely the same as the /new/, the only difference is that here we omit the return message \"Your new secret: \", which makes it a little easier to parse the results",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/new_v2/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/new_v2/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "new",
+            "url": "https://microsoft-authenticator.p.rapidapi.com/new/",
+            "description": "Step 1. Generate new secret",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/new/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/new/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "validate",
+            "url": "https://microsoft-authenticator.p.rapidapi.com/validate/",
+            "description": "Step 3. Validate TOTP",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "secret",
+                    "type": "STRING",
+                    "description": "Secret code that /new/ or /new_v2/ return",
+                    "default": "IH225HMVWDS3XJVY"
+                },
+                {
+                    "name": "code",
+                    "type": "STRING",
+                    "description": "Temporary code generated by Microsoft Authenticator app",
+                    "default": "425079"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/validate/\"\nquerystring = {\"secret\": \"IH225HMVWDS3XJVY\", \"code\": \"425079\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-authenticator.p.rapidapi.com/validate/\"\nquerystring = {\"secret\": \"IH225HMVWDS3XJVY\", \"code\": \"425079\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-authenticator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

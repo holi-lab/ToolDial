@@ -1,0 +1,2030 @@
+{
+    "tool_name": "Blockmate crypto account connector",
+    "tool_description": "On-board, Connect, Access or Verify your users\u2019 crypto portfolio data. Blockmate API allows you to easily interact with Web3 users in your app.",
+    "title": "Blockmate crypto account connector",
+    "pricing": "FREE",
+    "score": null,
+    "home_url": "https://rapidapi.com/blockmate/api/blockmate-crypto-account-connector/",
+    "host": "blockmate-crypto-account-connector.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "UpdateUser",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "User id",
+                    "default": "4301140e-d639-11ec-9120-00155d03ab64"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "uuid": "4301140e-d639-11ec-9120-00155d03ab64",
+                "name": "some-name"
+            },
+            "headers": {},
+            "schema": {
+                "title": "User",
+                "description": "Represents a user",
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "name"
+                ],
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Balance",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/balance",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "Currency to convert to.\n",
+                    "default": "USD"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/balance\"\nquerystring = {\"currency\": currency}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "balance": {
+                    "balance_sum": [
+                        {
+                            "value": 1.2,
+                            "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                            "currency_name": "Tether USD",
+                            "currency_symbol": "USDT",
+                            "image_name": "Alvibop",
+                            "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                        }
+                    ],
+                    "accounts": [
+                        {
+                            "account_id": "9f0f06ae-08d7-11ed-b3ef-00155d0eaa6e",
+                            "description": "My account",
+                            "type": "crypto_wallet",
+                            "balance": [
+                                {
+                                    "value": 1.2,
+                                    "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                                    "currency_name": "Tether USD",
+                                    "currency_symbol": "USDT",
+                                    "image_name": "Alvibop",
+                                    "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                                }
+                            ],
+                            "state": {
+                                "last_sync": "2022-07-21T09:21:37.384496+00:00"
+                            },
+                            "name": "some-name",
+                            "verified": true,
+                            "url": "some-url"
+                        }
+                    ]
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "balance": {
+                        "title": "Balance response",
+                        "description": "Represents a response from aggregated balance request.",
+                        "type": "object",
+                        "required": [
+                            "balance_sum",
+                            "accounts"
+                        ],
+                        "properties": {
+                            "balance_sum": {
+                                "type": "array",
+                                "items": {
+                                    "title": "Amount",
+                                    "description": "Amount",
+                                    "type": "object",
+                                    "required": [
+                                        "value",
+                                        "currency",
+                                        "currency_name",
+                                        "currency_symbol"
+                                    ],
+                                    "properties": {
+                                        "value": {
+                                            "type": "number"
+                                        },
+                                        "currency": {
+                                            "type": "string"
+                                        },
+                                        "currency_name": {
+                                            "type": "string"
+                                        },
+                                        "currency_symbol": {
+                                            "type": "string"
+                                        },
+                                        "image_name": {
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
+                                        },
+                                        "image_url": {
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
+                                        }
+                                    }
+                                }
+                            },
+                            "accounts": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "account_id",
+                                        "description",
+                                        "type",
+                                        "balance",
+                                        "state",
+                                        "name",
+                                        "verified",
+                                        "url"
+                                    ],
+                                    "properties": {
+                                        "account_id": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "type": {
+                                            "type": "string",
+                                            "enum": [
+                                                "crypto_wallet",
+                                                "crypto_exchange",
+                                                "crypto_nft"
+                                            ]
+                                        },
+                                        "balance": {
+                                            "type": "array",
+                                            "items": {
+                                                "title": "Amount",
+                                                "description": "Amount",
+                                                "type": "object",
+                                                "required": [
+                                                    "value",
+                                                    "currency",
+                                                    "currency_name",
+                                                    "currency_symbol"
+                                                ],
+                                                "properties": {
+                                                    "value": {
+                                                        "type": "number"
+                                                    },
+                                                    "currency": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_name": {
+                                                        "type": "string"
+                                                    },
+                                                    "currency_symbol": {
+                                                        "type": "string"
+                                                    },
+                                                    "image_name": {
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
+                                                    },
+                                                    "image_url": {
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "state": {
+                                            "type": "object",
+                                            "properties": {
+                                                "last_sync": {
+                                                    "type": [
+                                                        "string",
+                                                        "null"
+                                                    ],
+                                                    "description": "null if initial sync was not yet done"
+                                                }
+                                            }
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "verified": {
+                                            "type": "boolean"
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "balance"
+                ]
+            }
+        },
+        {
+            "name": "GetCurrentExchangeRate",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/exchangerate/current",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "pairs",
+                    "type": "STRING",
+                    "description": "Currency pairs for which exchange rate should be returned",
+                    "default": "ETH/USD,BTC/EUR"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/exchangerate/current\"\nquerystring = {\"pairs\": pairs}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "currency_pair": "ETH/USD",
+                    "date": "2022-06-30",
+                    "rate": 1053.9613
+                }
+            ],
+            "headers": {},
+            "schema": {
+                "type": "array",
+                "items": {
+                    "title": "ExchangeRate",
+                    "description": "ExchangeRate",
+                    "type": "object",
+                    "required": [
+                        "currency_pair",
+                        "date",
+                        "rate"
+                    ],
+                    "properties": {
+                        "currency_pair": {
+                            "type": "string"
+                        },
+                        "date": {
+                            "type": "string"
+                        },
+                        "rate": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "DeleteAccount",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/account/{account_id}",
+            "description": " ",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "account_provider",
+                    "type": "STRING",
+                    "description": "URL value from account_providers method",
+                    "default": "onchain/btc"
+                },
+                {
+                    "name": "account_id",
+                    "type": "STRING",
+                    "description": "Account ID",
+                    "default": "163b6df1-dc0b-4086-8922-6068fe1e653d"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/account/{account_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "AuthUser",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}/auth",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "User id",
+                    "default": "4301140e-d639-11ec-9120-00155d03ab64"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}/auth\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "token": "some-token"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "description": "UserJWT",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetHistoricalExchangeRate",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/exchangerate/history",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "days",
+                    "type": "STRING",
+                    "description": "Historical dates for which exchange rates should be returned",
+                    "default": "2022-06-30,2022-06-29"
+                },
+                {
+                    "name": "pair",
+                    "type": "STRING",
+                    "description": "Currency pair for which exchange rates should be returned",
+                    "default": "ETH/USD"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/exchangerate/history\"\nquerystring = {\"days\": days, \"pair\": pair}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "currency_pair": "ETH/USD",
+                    "date": "2022-06-30",
+                    "rate": 1053.9613
+                }
+            ],
+            "headers": {},
+            "schema": {
+                "type": "array",
+                "items": {
+                    "title": "ExchangeRate",
+                    "description": "ExchangeRate",
+                    "type": "object",
+                    "required": [
+                        "currency_pair",
+                        "date",
+                        "rate"
+                    ],
+                    "properties": {
+                        "currency_pair": {
+                            "type": "string"
+                        },
+                        "date": {
+                            "type": "string"
+                        },
+                        "rate": {
+                            "type": "number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "ConnectAccount",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/connect",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "account_provider",
+                    "type": "STRING",
+                    "description": "URL value from account_providers method",
+                    "default": "onchain/btc"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/connect\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "id": "163b6df1-dc0b-4086-8922-6068fe1e653d",
+                "name": "some-name",
+                "description": "some-description",
+                "verified": true
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "description",
+                    "verified"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "verified": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "AccountProvidersList",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/account_providers",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/account_providers\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "name": "btc",
+                "type": "crypto_wallet",
+                "url": "onchain/bitcoin"
+            },
+            "headers": {},
+            "schema": {
+                "title": "Account Provider",
+                "description": "Account provider",
+                "type": "object",
+                "required": [
+                    "name",
+                    "type",
+                    "url"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "crypto_wallet",
+                            "crypto_exchange",
+                            "crypto_nft"
+                        ]
+                    },
+                    "url": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetUser",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "User id",
+                    "default": "4301140e-d639-11ec-9120-00155d03ab64"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "uuid": "4301140e-d639-11ec-9120-00155d03ab64",
+                "name": "some-name"
+            },
+            "headers": {},
+            "schema": {
+                "title": "User",
+                "description": "Represents a user",
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "name"
+                ],
+                "properties": {
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "AccountProviderHintsList",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/account_provider_hints",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/account_provider_hints\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "account_name": "btc",
+                "account_type": "crypto_wallet",
+                "account_url": "onchain/btc",
+                "description": "Bitcoin (BTC)",
+                "url": "https://bitcoin.com",
+                "intro": "Use your address to connect your account.",
+                "fields": {
+                    "api_key": "API Key",
+                    "api_secret": "API Secret",
+                    "api_passphrase": "API Passphrase",
+                    "description": "Account description",
+                    "wallet": "Address"
+                },
+                "oauth": true
+            },
+            "headers": {},
+            "schema": {
+                "title": "Account Provider Hint",
+                "description": "Account provider hint containing info about what is needed to connect such an account",
+                "type": "object",
+                "required": [
+                    "account_name",
+                    "account_type",
+                    "account_url",
+                    "description",
+                    "url",
+                    "fields",
+                    "oauth"
+                ],
+                "properties": {
+                    "account_name": {
+                        "type": "string"
+                    },
+                    "account_type": {
+                        "type": "string",
+                        "enum": [
+                            "crypto_wallet",
+                            "crypto_exchange",
+                            "crypto_nft"
+                        ]
+                    },
+                    "account_url": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "intro": {
+                        "type": "string"
+                    },
+                    "fields": {
+                        "type": "object",
+                        "properties": {
+                            "api_key": {
+                                "type": "string"
+                            },
+                            "api_secret": {
+                                "type": "string"
+                            },
+                            "api_passphrase": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "wallet": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "oauth": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetAccountHint",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/connect",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "account_provider",
+                    "type": "STRING",
+                    "description": "URL value from account_providers method",
+                    "default": "onchain/btc"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/connect\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "description": "Bitcoin (BTC)",
+                "url": "some-url",
+                "intro": "Use your address to connect your account.",
+                "fields": {
+                    "description": "Account description",
+                    "wallet": "Address"
+                },
+                "oauth": true
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "required": [
+                    "description",
+                    "url",
+                    "intro",
+                    "fields",
+                    "oauth"
+                ],
+                "properties": {
+                    "description": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "intro": {
+                        "type": "string"
+                    },
+                    "fields": {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string"
+                            },
+                            "wallet": {
+                                "type": "string"
+                            }
+                        },
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "oauth": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "UserAPI-AuthenticateProject",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/auth",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/auth\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "token": "some-token"
+            },
+            "headers": {},
+            "schema": {
+                "required": [
+                    "token"
+                ],
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetTransactionRiskScoreDetails",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/transaction/score/details",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "transaction",
+                    "type": "STRING",
+                    "description": "Transaction hash for which risk should be returned",
+                    "default": "0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205"
+                },
+                {
+                    "name": "chain",
+                    "type": "STRING",
+                    "description": "Blockchain identifier",
+                    "default": "btc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/transaction/score/details\"\nquerystring = {\"transaction\": transaction, \"chain\": chain}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "case_id": "7149168f-ad69-4fc9-b027-a16b0ca13081",
+                "request_datetime": "2022-10-04T12:32:44Z",
+                "response_datetime": "2022-10-04T12:32:44Z",
+                "transaction": "0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205",
+                "chain": "btc",
+                "risk": 85,
+                "details": {}
+            },
+            "headers": {},
+            "schema": {
+                "title": "TransactionRiskReport",
+                "description": "TransactionRiskReport",
+                "type": "object",
+                "required": [
+                    "chain",
+                    "risk",
+                    "details"
+                ],
+                "properties": {
+                    "case_id": {
+                        "type": "string"
+                    },
+                    "request_datetime": {
+                        "type": "string"
+                    },
+                    "response_datetime": {
+                        "type": "string"
+                    },
+                    "transaction": {
+                        "type": "string"
+                    },
+                    "chain": {
+                        "type": "string"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    },
+                    "details": {
+                        "type": "object",
+                        "description": "Keys are addresses from transaction inputs or outputs",
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "own_categories": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "RiskReportCategory",
+                                        "description": "RiskReportCategory",
+                                        "type": "object",
+                                        "required": [
+                                            "name",
+                                            "category_name",
+                                            "risk"
+                                        ],
+                                        "properties": {
+                                            "adress": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "category_name": {
+                                                "type": "string"
+                                            },
+                                            "risk": {
+                                                "type": "integer",
+                                                "minimum": 0,
+                                                "maximum": 100
+                                            }
+                                        }
+                                    }
+                                },
+                                "source_of_funds_categories": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "RiskReportCategory",
+                                        "description": "RiskReportCategory",
+                                        "type": "object",
+                                        "required": [
+                                            "name",
+                                            "category_name",
+                                            "risk"
+                                        ],
+                                        "properties": {
+                                            "adress": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "category_name": {
+                                                "type": "string"
+                                            },
+                                            "risk": {
+                                                "type": "integer",
+                                                "minimum": 0,
+                                                "maximum": 100
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Accounts",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/accounts",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/accounts\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "id": "4cf7cf36-52a2-11ec-85b8-00155de33000",
+                    "name": "btc",
+                    "description": "My account",
+                    "verified": true,
+                    "type": "crypto_wallet",
+                    "url": "onchain/bitcoin/account/4cf7cf36-52a2-11ec-85b8-00155de33000"
+                }
+            ],
+            "headers": {},
+            "schema": {
+                "type": "array",
+                "items": {
+                    "title": "Account",
+                    "description": "Represents an account.",
+                    "required": [
+                        "id",
+                        "name",
+                        "description",
+                        "verified",
+                        "type",
+                        "url"
+                    ],
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "description": {
+                            "type": "string"
+                        },
+                        "verified": {
+                            "type": "boolean"
+                        },
+                        "type": {
+                            "type": "string",
+                            "enum": [
+                                "crypto_wallet",
+                                "crypto_exchange",
+                                "crypto_nft"
+                            ]
+                        },
+                        "url": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Transactions",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/transactions",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "Currency to convert to.\n",
+                    "default": "USD"
+                },
+                {
+                    "name": "since",
+                    "type": "STRING",
+                    "description": "Set time from which the transactions will be get.\nThe parameter is passed as-is to backend services.\nThe default value is 30 days before the actual date or 30 days before the date specified in \"until\" parameter.\n",
+                    "default": "2020-01-01"
+                },
+                {
+                    "name": "account-filter",
+                    "type": "STRING",
+                    "description": "Filter results to only provided account.\nWhen omitted, it returns all transactions from all accounts.\n",
+                    "default": "497f6eca-6276-4993-bfeb-53cbbbba6f08"
+                },
+                {
+                    "name": "until",
+                    "type": "STRING",
+                    "description": "Set time to which the transactions will be get.\nThe parameter is passed as-is to backend services.\nThe default value is the actual date.\n",
+                    "default": "2020-02-01"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/aggregate/transactions\"\nquerystring = {\"currency\": currency, \"since\": since, \"account-filter\": account_filter, \"until\": until}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "accounts": [
+                    {
+                        "id": "0940bb4a-0940-11ed-9ed1-00155d5116f0",
+                        "description": "My account",
+                        "verified": true,
+                        "type": "crypto_wallet",
+                        "state": {
+                            "last_sync": "2022-07-21T09:21:37.384496+00:00"
+                        }
+                    }
+                ],
+                "transactions": [
+                    {
+                        "account_id": "0940bb4a-0940-11ed-9ed1-00155d5116f0",
+                        "transaction_id": "0xf77c19d9333bb26fd9d6773a18a8b5fd145e2fbb514ff2879cb478e13e2f8c23",
+                        "type": "crypto_wallet",
+                        "side": "some-side",
+                        "amount": [
+                            {
+                                "value": 1.2,
+                                "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                                "currency_name": "Tether USD",
+                                "currency_symbol": "USDT",
+                                "image_name": "Alvibop",
+                                "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                            }
+                        ],
+                        "total": [
+                            {
+                                "value": 1.2,
+                                "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                                "currency_name": "Tether USD",
+                                "currency_symbol": "USDT",
+                                "image_name": "Alvibop",
+                                "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                            }
+                        ],
+                        "fee": [
+                            {
+                                "value": 1.2,
+                                "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                                "currency_name": "Tether USD",
+                                "currency_symbol": "USDT",
+                                "image_name": "Alvibop",
+                                "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                            }
+                        ],
+                        "created_at": "2022-07-21T09:21:37.384496+00:00",
+                        "inputs": [
+                            {
+                                "address": "0xc50e6db1637423819edbccb20b15654338d65501",
+                                "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                                "currency_name": "Tether USD",
+                                "currency_symbol": "USDT",
+                                "value": 1.2,
+                                "owned": true,
+                                "fee": true,
+                                "image_name": "Alvibop",
+                                "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                            }
+                        ],
+                        "outputs": [
+                            {
+                                "address": "0xc50e6db1637423819edbccb20b15654338d65501",
+                                "currency": "ETHEREUM:0xdAC17F958D2ee523a2206206994597C13D831ec7",
+                                "currency_name": "Tether USD",
+                                "currency_symbol": "USDT",
+                                "value": 1.2,
+                                "owned": true,
+                                "fee": true,
+                                "image_name": "Alvibop",
+                                "image_url": "https://storage.googleapis.com/starly-prod.appspot.com/users/07SXODs3nHWOc0udxtCA7hU9KgR2/collections/pSYegq3aubUCodcy1t4u/cards/16/converted_cover1632338824700_600x800.mp4"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "accounts": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "id",
+                                "description",
+                                "verified",
+                                "type",
+                                "state"
+                            ],
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "verified": {
+                                    "type": "boolean"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "crypto_wallet",
+                                        "crypto_exchange",
+                                        "crypto_nft"
+                                    ]
+                                },
+                                "state": {
+                                    "type": "object",
+                                    "properties": {
+                                        "last_sync": {
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ],
+                                            "description": "null if initial sync was not yet done"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "title": "Transaction",
+                            "description": "Represents a transaction.",
+                            "type": "object",
+                            "required": [
+                                "account_id",
+                                "transaction_id",
+                                "type",
+                                "amount",
+                                "total",
+                                "fee",
+                                "created_at",
+                                "inputs",
+                                "outputs"
+                            ],
+                            "properties": {
+                                "account_id": {
+                                    "type": "string"
+                                },
+                                "transaction_id": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "crypto_wallet",
+                                        "crypto_exchange",
+                                        "crypto_nft"
+                                    ]
+                                },
+                                "side": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Amount",
+                                        "description": "Amount",
+                                        "type": "object",
+                                        "required": [
+                                            "value",
+                                            "currency",
+                                            "currency_name",
+                                            "currency_symbol"
+                                        ],
+                                        "properties": {
+                                            "value": {
+                                                "type": "number"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            },
+                                            "currency_name": {
+                                                "type": "string"
+                                            },
+                                            "currency_symbol": {
+                                                "type": "string"
+                                            },
+                                            "image_name": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "image_url": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "total": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Amount",
+                                        "description": "Amount",
+                                        "type": "object",
+                                        "required": [
+                                            "value",
+                                            "currency",
+                                            "currency_name",
+                                            "currency_symbol"
+                                        ],
+                                        "properties": {
+                                            "value": {
+                                                "type": "number"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            },
+                                            "currency_name": {
+                                                "type": "string"
+                                            },
+                                            "currency_symbol": {
+                                                "type": "string"
+                                            },
+                                            "image_name": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "image_url": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "fee": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Amount",
+                                        "description": "Amount",
+                                        "type": "object",
+                                        "required": [
+                                            "value",
+                                            "currency",
+                                            "currency_name",
+                                            "currency_symbol"
+                                        ],
+                                        "properties": {
+                                            "value": {
+                                                "type": "number"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            },
+                                            "currency_name": {
+                                                "type": "string"
+                                            },
+                                            "currency_symbol": {
+                                                "type": "string"
+                                            },
+                                            "image_name": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "image_url": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "inputs": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Movement",
+                                        "description": "Movement",
+                                        "type": "object",
+                                        "required": [
+                                            "address",
+                                            "currency",
+                                            "currency_name",
+                                            "currency_symbol",
+                                            "value",
+                                            "owned",
+                                            "fee"
+                                        ],
+                                        "properties": {
+                                            "address": {
+                                                "type": "string"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            },
+                                            "currency_name": {
+                                                "type": "string"
+                                            },
+                                            "currency_symbol": {
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "number"
+                                            },
+                                            "owned": {
+                                                "type": "boolean"
+                                            },
+                                            "fee": {
+                                                "type": "boolean"
+                                            },
+                                            "image_name": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "image_url": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                },
+                                "outputs": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "Movement",
+                                        "description": "Movement",
+                                        "type": "object",
+                                        "required": [
+                                            "address",
+                                            "currency",
+                                            "currency_name",
+                                            "currency_symbol",
+                                            "value",
+                                            "owned",
+                                            "fee"
+                                        ],
+                                        "properties": {
+                                            "address": {
+                                                "type": "string"
+                                            },
+                                            "currency": {
+                                                "type": "string"
+                                            },
+                                            "currency_name": {
+                                                "type": "string"
+                                            },
+                                            "currency_symbol": {
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "type": "number"
+                                            },
+                                            "owned": {
+                                                "type": "boolean"
+                                            },
+                                            "fee": {
+                                                "type": "boolean"
+                                            },
+                                            "image_name": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "image_url": {
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "transactions"
+                ]
+            }
+        },
+        {
+            "name": "GetAddressNameInfo",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/addressname/simple",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Address for wich name and category should be returned",
+                    "default": "bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq"
+                },
+                {
+                    "name": "chain",
+                    "type": "STRING",
+                    "description": "Blockchain identifier",
+                    "default": "btc"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/addressname/simple\"\nquerystring = {\"address\": address, \"chain\": chain}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "name": "some-name",
+                "category": "some-category"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetTransactionRiskScoreCase",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/transaction/score/details/{case_id}",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "case_id",
+                    "type": "STRING",
+                    "description": "Case identifier",
+                    "default": "7149168f-ad69-4fc9-b027-a16b0ca13081"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/transaction/score/details/{case_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "case_id": "7149168f-ad69-4fc9-b027-a16b0ca13081",
+                "request_datetime": "2022-10-04T12:32:44Z",
+                "response_datetime": "2022-10-04T12:32:44Z",
+                "transaction": "0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205",
+                "chain": "btc",
+                "risk": 85,
+                "details": {}
+            },
+            "headers": {},
+            "schema": {
+                "title": "TransactionRiskReport",
+                "description": "TransactionRiskReport",
+                "type": "object",
+                "required": [
+                    "chain",
+                    "risk",
+                    "details"
+                ],
+                "properties": {
+                    "case_id": {
+                        "type": "string"
+                    },
+                    "request_datetime": {
+                        "type": "string"
+                    },
+                    "response_datetime": {
+                        "type": "string"
+                    },
+                    "transaction": {
+                        "type": "string"
+                    },
+                    "chain": {
+                        "type": "string"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    },
+                    "details": {
+                        "type": "object",
+                        "description": "Keys are addresses from transaction inputs or outputs",
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "own_categories": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "RiskReportCategory",
+                                        "description": "RiskReportCategory",
+                                        "type": "object",
+                                        "required": [
+                                            "name",
+                                            "category_name",
+                                            "risk"
+                                        ],
+                                        "properties": {
+                                            "adress": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "category_name": {
+                                                "type": "string"
+                                            },
+                                            "risk": {
+                                                "type": "integer",
+                                                "minimum": 0,
+                                                "maximum": 100
+                                            }
+                                        }
+                                    }
+                                },
+                                "source_of_funds_categories": {
+                                    "type": "array",
+                                    "items": {
+                                        "title": "RiskReportCategory",
+                                        "description": "RiskReportCategory",
+                                        "type": "object",
+                                        "required": [
+                                            "name",
+                                            "category_name",
+                                            "risk"
+                                        ],
+                                        "properties": {
+                                            "adress": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "category_name": {
+                                                "type": "string"
+                                            },
+                                            "risk": {
+                                                "type": "integer",
+                                                "minimum": 0,
+                                                "maximum": 100
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "UserAPI-AuthenticateDeveloper",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/auth/developer",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/auth/developer\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "token": "some-token"
+            },
+            "headers": {},
+            "schema": {
+                "required": [
+                    "token"
+                ],
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetAddressRiskScoreCase",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/score/details/{case_id}",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "case_id",
+                    "type": "STRING",
+                    "description": "Case identifier",
+                    "default": "7c656013-5e9b-4c71-8322-6562c5a9b34c"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/score/details/{case_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "case_id": "7c656013-5e9b-4c71-8322-6562c5a9b34c",
+                "request_datetime": "2022-10-04T12:32:44Z",
+                "response_datetime": "2022-10-04T12:32:44Z",
+                "address": "0xc50e6db1637423819edbccb20b15654338d65501",
+                "chain": "eth",
+                "risk": 85,
+                "details": {
+                    "own_categories": [
+                        {
+                            "adress": "0xc50e6db1637423819edbccb20b15654338d65501",
+                            "name": "some-name",
+                            "category_name": "some-category-name",
+                            "risk": 85
+                        }
+                    ],
+                    "source_of_funds_categories": [
+                        {
+                            "adress": "0xc50e6db1637423819edbccb20b15654338d65501",
+                            "name": "some-name",
+                            "category_name": "some-category-name",
+                            "risk": 85
+                        }
+                    ]
+                }
+            },
+            "headers": {},
+            "schema": {
+                "title": "AddressRiskReport",
+                "description": "AddressRiskReport",
+                "type": "object",
+                "required": [
+                    "address",
+                    "chain",
+                    "risk",
+                    "details"
+                ],
+                "properties": {
+                    "case_id": {
+                        "type": "string"
+                    },
+                    "request_datetime": {
+                        "type": "string"
+                    },
+                    "response_datetime": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "chain": {
+                        "type": "string"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    },
+                    "details": {
+                        "type": "object",
+                        "properties": {
+                            "own_categories": {
+                                "type": "array",
+                                "items": {
+                                    "title": "RiskReportCategory",
+                                    "description": "RiskReportCategory",
+                                    "type": "object",
+                                    "required": [
+                                        "name",
+                                        "category_name",
+                                        "risk"
+                                    ],
+                                    "properties": {
+                                        "adress": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "category_name": {
+                                            "type": "string"
+                                        },
+                                        "risk": {
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 100
+                                        }
+                                    }
+                                }
+                            },
+                            "source_of_funds_categories": {
+                                "type": "array",
+                                "items": {
+                                    "title": "RiskReportCategory",
+                                    "description": "RiskReportCategory",
+                                    "type": "object",
+                                    "required": [
+                                        "name",
+                                        "category_name",
+                                        "risk"
+                                    ],
+                                    "properties": {
+                                        "adress": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "category_name": {
+                                            "type": "string"
+                                        },
+                                        "risk": {
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "DeleteUser",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}",
+            "description": " ",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "User id",
+                    "default": "4301140e-d639-11ec-9120-00155d03ab64"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "OK"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetAddressRiskScoreDetails",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/score/details",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Address for which risk should be returned",
+                    "default": "bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq"
+                },
+                {
+                    "name": "chain",
+                    "type": "STRING",
+                    "description": "Blockchain identifier",
+                    "default": "btc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/score/details\"\nquerystring = {\"address\": address, \"chain\": chain}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "case_id": "7c656013-5e9b-4c71-8322-6562c5a9b34c",
+                "request_datetime": "2022-10-04T12:32:44Z",
+                "response_datetime": "2022-10-04T12:32:44Z",
+                "address": "0xc50e6db1637423819edbccb20b15654338d65501",
+                "chain": "eth",
+                "risk": 85,
+                "details": {
+                    "own_categories": [
+                        {
+                            "adress": "0xc50e6db1637423819edbccb20b15654338d65501",
+                            "name": "some-name",
+                            "category_name": "some-category-name",
+                            "risk": 85
+                        }
+                    ],
+                    "source_of_funds_categories": [
+                        {
+                            "adress": "0xc50e6db1637423819edbccb20b15654338d65501",
+                            "name": "some-name",
+                            "category_name": "some-category-name",
+                            "risk": 85
+                        }
+                    ]
+                }
+            },
+            "headers": {},
+            "schema": {
+                "title": "AddressRiskReport",
+                "description": "AddressRiskReport",
+                "type": "object",
+                "required": [
+                    "address",
+                    "chain",
+                    "risk",
+                    "details"
+                ],
+                "properties": {
+                    "case_id": {
+                        "type": "string"
+                    },
+                    "request_datetime": {
+                        "type": "string"
+                    },
+                    "response_datetime": {
+                        "type": "string"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "chain": {
+                        "type": "string"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    },
+                    "details": {
+                        "type": "object",
+                        "properties": {
+                            "own_categories": {
+                                "type": "array",
+                                "items": {
+                                    "title": "RiskReportCategory",
+                                    "description": "RiskReportCategory",
+                                    "type": "object",
+                                    "required": [
+                                        "name",
+                                        "category_name",
+                                        "risk"
+                                    ],
+                                    "properties": {
+                                        "adress": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "category_name": {
+                                            "type": "string"
+                                        },
+                                        "risk": {
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 100
+                                        }
+                                    }
+                                }
+                            },
+                            "source_of_funds_categories": {
+                                "type": "array",
+                                "items": {
+                                    "title": "RiskReportCategory",
+                                    "description": "RiskReportCategory",
+                                    "type": "object",
+                                    "required": [
+                                        "name",
+                                        "category_name",
+                                        "risk"
+                                    ],
+                                    "properties": {
+                                        "adress": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "category_name": {
+                                            "type": "string"
+                                        },
+                                        "risk": {
+                                            "type": "integer",
+                                            "minimum": 0,
+                                            "maximum": 100
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetAddressRiskScore",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/score",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Address for which risk should be returned",
+                    "default": "bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq"
+                },
+                {
+                    "name": "chain",
+                    "type": "STRING",
+                    "description": "Blockchain identifier",
+                    "default": "btc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/score\"\nquerystring = {\"address\": address, \"chain\": chain}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "address": "bc1qjl7k0dpcsw3djmzq25qv6peavgxysq95pcduuq",
+                "risk": 85
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    }
+                }
+            }
+        },
+        {
+            "name": "GetTransactionRiskScore",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/transaction/score",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "STRING",
+                    "description": "Blockchain identifier",
+                    "default": "btc"
+                },
+                {
+                    "name": "transaction",
+                    "type": "STRING",
+                    "description": "Transaction hash for which risk should be returned",
+                    "default": "0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/risk/transaction/score\"\nquerystring = {\"chain\": chain, \"transaction\": transaction}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "address": "0638e15482e9d0fdb08920666390a546f32dd6ab15ffc81ed97e67b73b0d7205",
+                "risk": 85
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "risk": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 100
+                    }
+                }
+            }
+        },
+        {
+            "name": "ListUsers",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "uuid": "4301140e-d639-11ec-9120-00155d03ab64",
+                    "name": "some-name"
+                }
+            ],
+            "headers": {},
+            "schema": {
+                "type": "array",
+                "items": {
+                    "title": "User",
+                    "description": "Represents a user",
+                    "type": "object",
+                    "required": [
+                        "uuid",
+                        "name"
+                    ],
+                    "properties": {
+                        "uuid": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "UpdateUser",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/4301140e-d639-11ec-9120-00155d03ab64",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "User id",
+                    "default": "4301140e-d639-11ec-9120-00155d03ab64"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/4301140e-d639-11ec-9120-00155d03ab64\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users/{id}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "ConnectAccount",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/onchain/btc/connect",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "account_provider",
+                    "type": "STRING",
+                    "description": "URL value from account_providers method",
+                    "default": "onchain/btc"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/onchain/btc/connect\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/{account_provider}/connect\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "CreateUser",
+            "url": "https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blockmate-crypto-account-connector.p.rapidapi.com/v1/users\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blockmate-crypto-account-connector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

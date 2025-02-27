@@ -1,0 +1,77 @@
+{
+    "tool_name":"Business  Days / Work Days Calculator ",
+    "tool_description":"Having trouble counting workdays or converting from business days into calendar days?  \nUse our smart calculator API made just for that!  Business Days Calculator | Workdays Calculator | Banking Days | Working Days.",
+    "title":"Business  Days / Work Days Calculator ",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1156,
+        "avgSuccessRate":100,
+        "popularityScore":9.2,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/Morax/api/business-days-work-days-calculator/",
+    "host":"business-days-work-days-calculator.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Business Days / Work Days Calculator API",
+            "url":"https://business-days-work-days-calculator.p.rapidapi.com/api/v1/get_result",
+            "description":"# Workdays Calculation API Documentation\n\nThe Workdays Calculation API allows you to calculate the date after a given number of workdays, taking into account weekends and holidays. By specifying the country code, number of workdays, start date, and options, you can retrieve the ISO date of the day after the workdays have passed.\n\n\n## Request Parameters\n\nThe API expects the following GET parameters:\n\n1. `state` (required): The country code for which the workdays are calculated. Please refer to the [list of country codes](https://www.nationsonline.org/oneworld/international-calling-codes.htm) to find the appropriate code for your country.\n\n2. `work_days` (required): The number of workdays to calculate. This indicates how many workdays should be skipped before determining the result.\n\n3. `start_date` (required): The starting date from which to begin counting the workdays. The format of the start date should be `DD/MM/YYYY`.\n\n4. `options` (optional): The options for skipping specific days. This parameter accepts the following values:\n   - `0`: Skip holidays and weekends.\n   - `1`: Skip only weekends.\n   - `2`: Skip only holidays.\n\n## Response\n\nThe API response will be a string representing the ISO date of the day after the specified workdays have passed.\n\n## Example\n\nGiven `start_date` of 19/05/2023, which is Friday, and `work_days` of 2, \nthe returned result will be 23/05/2023. Here's the breakdown of the calculation:\n\n- 19/5-20/5: Weekend (Saturday and Sunday)\n- 21/5: First workday\n- 22/5: Second workday\n\nTherefore, 23/5 is the day after the specified workdays have passed",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"start_date",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2023-05-19"
+                },
+                {
+                    "name":"work_days",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"2"
+                },
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IL"
+                },
+                {
+                    "name":"options",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"0"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://business-days-work-days-calculator.p.rapidapi.com/api/v1/get_result\"\nquerystring = {\"start_date\": start_date, \"work_days\": work_days, \"state\": state, \"options\": options}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"business-days-work-days-calculator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,154 @@
+{
+    "product_id": "api_28e46c4e-9adf-4226-8d80-132075ddcc6b",
+    "tool_description": "An AI service from Microsoft Azure that turns any app into a video search resource.",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-video-search1/",
+    "name": "Bing Video Search",
+    "title": "Bing Video Search",
+    "pricing": "FREEMIUM",
+    "tool_name": "Bing Video Search",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 416,
+        "avgSuccessRate": 98,
+        "popularityScore": 9.5,
+        "__typename": "Score"
+    },
+    "host": "bing-video-search1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Trending",
+            "url": "https://bing-video-search1.p.rapidapi.com/videos/trending",
+            "description": "Get currently trending videos.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bing-video-search1.p.rapidapi.com/videos/trending\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-video-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bing-video-search1.p.rapidapi.com/videos/trending\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-video-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "_type": "ErrorResponse",
+                "instrumentation": {
+                    "_type": "ResponseInstrumentation"
+                },
+                "errors": [
+                    {
+                        "code": "ServerError",
+                        "subCode": "ResourceError",
+                        "message": "",
+                        "moreDetails": "Please note the Data source and the Data source ErrorCode, then, for more information, refer to the HelpUrl.",
+                        "parameter": "Trending data is not present for your request"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Video Details",
+            "url": "https://bing-video-search1.p.rapidapi.com/videos/details",
+            "description": "Get insights about a video, such as related videos.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "modules",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "A comma-delimited list of one or more insights to request."
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "An ID that uniquely identifies a video. The Video object's videoId field contains the ID that you set this parameter to."
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bing-video-search1.p.rapidapi.com/videos/details\"\nquerystring = {\"modules\": \"A comma-delimited list of one or more insights to request.\", \"id\": \"An ID that uniquely identifies a video. The Video object's videoId field contains the ID that you set this parameter to.\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-video-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bing-video-search1.p.rapidapi.com/videos/details\"\nquerystring = {\"modules\": \"A comma-delimited list of one or more insights to request.\", \"id\": \"An ID that uniquely identifies a video. The Video object's videoId field contains the ID that you set this parameter to.\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-video-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "_type": "ErrorResponse",
+                "instrumentation": {
+                    "_type": "ResponseInstrumentation"
+                },
+                "errors": [
+                    {
+                        "code": "InvalidRequest",
+                        "subCode": "ParameterInvalidValue",
+                        "message": "Parameter has invalid value.",
+                        "moreDetails": "Parameter has invalid value.Unsupported module: A comma-delimited list of one or more insights to request.",
+                        "parameter": "modules",
+                        "value": "A comma-delimited list of one or more insights to request."
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Video Search",
+            "url": "https://bing-video-search1.p.rapidapi.com/videos/search",
+            "description": "Get videos relevant for a given query.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "The user's search query string",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "safeSearch",
+                    "type": "STRING",
+                    "description": "A filter used to filter results for adult content.",
+                    "default": ""
+                },
+                {
+                    "name": "mkt",
+                    "type": "STRING",
+                    "description": "The market where the results come from. Typically, this is the country where the user is making the request from; however, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form -. For example, en-US.\n\nFull list of supported markets:\nes-AR, en-AU, de-AT, nl-BE, fr-BE, pt-BR, en-CA, fr-CA, es-CL, da-DK, fi-FI, fr-FR, de-DE, zh-HK, en-IN, en-ID, en-IE, it-IT, ja-JP, ko-KR, en-MY, es-MX, nl-NL, en-NZ, no-NO, zh-CN, pl-PL, pt-PT, en-PH, ru-RU, ar-SA, en-ZA, es-ES, sv-SE, fr-CH, de-CH, zh-TW, tr-TR, en-GB, en-US, es-US",
+                    "default": ""
+                },
+                {
+                    "name": "count",
+                    "type": "NUMBER",
+                    "description": "The number of video results to return in the response. The actual number delivered may be less than requested.",
+                    "default": ""
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "The zero-based offset that indicates the number of video results to skip before returning results.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://bing-video-search1.p.rapidapi.com/videos/search\"\nquerystring = {\"q\": \"\", \"safeSearch\": \"\", \"mkt\": \"\", \"count\": \"\", \"offset\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-video-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bing-video-search1.p.rapidapi.com/videos/search\"\nquerystring = {\"q\": \"\", \"safeSearch\": \"\", \"mkt\": \"\", \"count\": \"\", \"offset\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-video-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "_type": "ErrorResponse",
+                "errors": [
+                    {
+                        "code": "InvalidRequest",
+                        "subCode": "ParameterInvalidValue",
+                        "message": "Parameter has invalid value.",
+                        "moreDetails": "Parameter has invalid value.",
+                        "parameter": "count",
+                        "value": ""
+                    },
+                    {
+                        "code": "InvalidRequest",
+                        "subCode": "ParameterInvalidValue",
+                        "message": "Parameter has invalid value.",
+                        "moreDetails": "Parameter has invalid value.",
+                        "parameter": "offset",
+                        "value": ""
+                    },
+                    {
+                        "code": "InvalidRequest",
+                        "subCode": "ParameterInvalidValue",
+                        "message": "Parameter has invalid value.",
+                        "moreDetails": "Parameter has invalid value.Invalid value entered for SafeSearch parameter.",
+                        "parameter": "SafeSearch"
+                    }
+                ]
+            }
+        }
+    ],
+    "standardized_name": "bing_video_search"
+}

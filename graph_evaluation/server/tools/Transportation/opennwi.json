@@ -1,0 +1,134 @@
+{
+    "tool_name":"OpenNWI",
+    "tool_description":"Search by address or zipcode access to walkability, cycling and public transit scores for a given area.",
+    "title":"OpenNWI",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":923,
+        "avgSuccessRate":100,
+        "popularityScore":8.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/tmm6907-9UaCoMqGQi/api/opennwi/",
+    "host":"opennwi.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"GetScores",
+            "url":"https://opennwi.p.rapidapi.com/scores/",
+            "description":"Search for scores by address or zip code.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"address",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1600 Pennsylvania Ave. NW Washington, DC 20500"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"zipcode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"json"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://opennwi.p.rapidapi.com/scores/\"\nquerystring = {\"address\": address, \"format\": format}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"opennwi.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "rankID":61619,
+                "geoid":110010062021,
+                "nwi":18,
+                "transitScore":20,
+                "bikeScore":17,
+                "searchedAddress":"1600 Pennsylvania Ave. NW Washington, DC 20500",
+                "format":"json"
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "content-length":"211",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Sat, 01 Jul 2023 19:23:11 GMT",
+                "server":"RapidAPI-1.2.8",
+                "x-cloud-trace-context":"f1bbcc8443422ea7df6777451e9229f6;o=1",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "geoid":{
+                        "type":"integer"
+                    },
+                    "nwi":{
+                        "type":"integer"
+                    },
+                    "regionalTransitUsagePercentage":{
+                        "type":"number"
+                    },
+                    "regionalTransitUsage":{
+                        "type":"integer"
+                    },
+                    "regionalBikeRidership":{
+                        "type":"integer"
+                    },
+                    "searchedAddress":{
+                        "type":"string"
+                    },
+                    "format":{
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        {
+            "name":"GetScoreDetails",
+            "url":"https://opennwi.p.rapidapi.com/details/{id}",
+            "description":"Search score details by rankID.\n**Key**:\n- d2a: The mix of employment types and occupied housing.\n- d2b: The mix of employment types in a block group\n- d3b: Street intersection density\n- d4a: workers who carpool\n- bikeShareRank: Ranking (out of 20) for quality of public bikeshare services in the region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"115880"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"fields",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://opennwi.p.rapidapi.com/details/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"opennwi.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

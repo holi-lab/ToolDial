@@ -1,0 +1,74 @@
+{
+    "product_id": "api_b120fbcd-87cc-4710-9c73-66760281bc0c",
+    "tool_description": "This API allows you to dub audios in another language with the voice you want.",
+    "home_url": "https://rapidapi.com/Thomcle/api/speech-dubbing/",
+    "name": "speech-dubbing",
+    "title": "speech-dubbing",
+    "pricing": "FREEMIUM",
+    "tool_name": "speech-dubbing",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 10977,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.5,
+        "__typename": "Score"
+    },
+    "host": "speech-dubbing.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/get_timestamp",
+            "url": "https://speech-dubbing.p.rapidapi.com/get_timestamp",
+            "description": "This endpoint returns a json file which is required to use the \"/dubbing\" endpoint. The json file contains the timestamp and general information about the video to be dubbed.\nTo do this, you'll need to send an audio file in \".wav\" format, indicate the language in which your audio is spoken (in ISO 639-1 format), and indicate the language into which you'd like the audio to be translated (also in ISO 639-1 format). As the API relies on google text to speech to generate the audio, you should choose the voice with which the original audio will be translated on the site: \"https://cloud.google.com/text-to-speech/docs/voices?hl=en\". Finally, you'll need to indicate the gender of the person speaking (\"MALE\", \"FEMALE\" or \"NEUTRAL\").",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "target_language",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "fr"
+                },
+                {
+                    "name": "voice_name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "fr-FR-Standard-B \t"
+                },
+                {
+                    "name": "spoken_language",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "en"
+                },
+                {
+                    "name": "gender",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "\"MALE\""
+                },
+                {
+                    "name": "audio_file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://speech-dubbing.p.rapidapi.com/get_timestamp\"\nquerystring = {\"target_language\": \"fr\", \"voice_name\": \"fr-FR-Standard-B \\t\", \"spoken_language\": \"en\", \"gender\": \"\\\"MALE\\\"\", \"audio_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"speech-dubbing.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://speech-dubbing.p.rapidapi.com/get_timestamp\"\nquerystring = {\"target_language\": \"fr\", \"voice_name\": \"fr-FR-Standard-B \\t\", \"spoken_language\": \"en\", \"gender\": \"\\\"MALE\\\"\", \"audio_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"speech-dubbing.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "/dubbing",
+            "url": "https://speech-dubbing.p.rapidapi.com/dubbing",
+            "description": "Get the dubbed audio from the timestamp on the \"/dubbing\" endpoint. To do this, simply post the .json file received from the \"/get_timestamp\" endpoint. In return, you'll get audio in the form of binary data.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://speech-dubbing.p.rapidapi.com/dubbing\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"speech-dubbing.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://speech-dubbing.p.rapidapi.com/dubbing\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"speech-dubbing.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

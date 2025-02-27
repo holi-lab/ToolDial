@@ -1,0 +1,133 @@
+{
+    "product_id": "api_af53ae67-cb41-4f1b-a4ab-41674efb8a59",
+    "tool_description": "Return 100s of relevant domain name suggestions + related TLDs, ordered by relevance. Many of them will be available and valuable. You can choose which TLDs to use, promote, or demote. Use our other API suite to \"manage your account\" to configure your site preferences (coming soon). Also see our \"Domain Availability Bulk\" API. Read more at https://besta.domains/api",
+    "home_url": "https://rapidapi.com/techytools/api/domain-suggestions-tlds/",
+    "name": "Domain Suggestions TLDs",
+    "title": "Domain Suggestions TLDs",
+    "pricing": "FREEMIUM",
+    "tool_name": "Domain Suggestions TLDs",
+    "score": {
+        "avgServiceLevel": 0,
+        "avgLatency": 16244,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "domain-suggestions-tlds.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "POST/v1/suggestions",
+            "url": "https://domain-suggestions-tlds.p.rapidapi.com/v1/suggestions",
+            "description": "100s of domain name suggestions + related TLDs. More options (Query Params / POST data) will be added as soon as they are available and tested. Please check back soon. Also see our Availability API. More options and features coming soon. All changes will be backward compatible. Read more about this API and future improvements at https://besta.domains/api",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "str",
+                    "type": "STRING",
+                    "description": "The domain you are searching for, with or without the TLD. Spaces are allowed, and encouraged! Keeping spaces helps us decide where to break the words. But we usually break the word just fine even without spaces. Try it a few times! Please let us know how it goes.\n\nNOTE: When testing on RapidAPI.com, wait a second after typing before hitting \\\"Enter\\\". RapidAPI input fields have a lag, and may cut off your text if submitted too fast.",
+                    "default": "helloworld"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "tld",
+                    "type": "STRING",
+                    "description": "(optional) (default=\\\"com\\\") The TLD you wish to use. No spaces, no quotes, NO dot. Must be a valid TLD. We do not check validity of TLD you send. ",
+                    "default": ""
+                },
+                {
+                    "name": "all_in_one_list",
+                    "type": "BOOLEAN",
+                    "description": "(coming soon) Currently, suggestions are returned in several lists - grouped by type of manipulation. Set this to true, to return all suggestions mixed into one list. We're still deciding the best strategy to mix and sort the different types of suggestions. Please tell us your thoughts: https://besta.domains/contact",
+                    "default": "false"
+                },
+                {
+                    "name": "tlds_use",
+                    "type": "ARRAY",
+                    "description": "(optional) (experimental) (default=[\\\"com\\\"]) Use multiple TLDs, ordered by importance. First TLD will be considered much more important than others. We will also find other relevant TLDs whether you send this value or not, as part of our suggestions. However, this list will be used first. Then, our relevant TLD suggestions will be added after this.\n\nFor your convenience, you may send either: 1) JSON Array 2) or \\\"comma, separated, string\\\" with no quotes. TLD must be included. Spaces are allowed. If you specify a TLD as part of the \\\"domain\\\", or specify a \\\"tld\\\", then this value will be ignored.",
+                    "default": "[]"
+                },
+                {
+                    "name": "num_tlds",
+                    "type": "NUMBER",
+                    "description": "(optional) (default=30) How many related TLDs should we find, including the ones you specified and \\\".com\\\"? We return relevant TLDs in data.tlds. However, we also use them in data.domains. So, if you specify a small number, you will also have fewer name suggestions. However, they may be more relevant, because you'd be using only the most relevant TLDs.",
+                    "default": 30
+                },
+                {
+                    "name": "use_generic_tlds",
+                    "type": "BOOLEAN",
+                    "description": "(coming soon) (optional) (default=true) Besides related relevant TLDs which we find according to similarity to keywords - we also mix in some generic TLDs to create name suggestions. These are \\\"com\\\", \\\"net\\\", \\\"info\\\", \\\"biz\\\", etc. Set this to falce to disable this.",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://domain-suggestions-tlds.p.rapidapi.com/v1/suggestions\"\nquerystring = {\"tld\": \"\", \"all_in_one_list\": \"false\", \"tlds_use\": \"[]\", \"num_tlds\": 30, \"use_generic_tlds\": \"true\", \"str\": \"helloworld\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"domain-suggestions-tlds.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://domain-suggestions-tlds.p.rapidapi.com/v1/suggestions\"\nquerystring = {\"tld\": \"\", \"all_in_one_list\": \"false\", \"tlds_use\": \"[]\", \"num_tlds\": 30, \"use_generic_tlds\": \"true\", \"str\": \"helloworld\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"domain-suggestions-tlds.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "description": "",
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "domains": {
+                                "properties": {
+                                    "name": {
+                                        "items": {},
+                                        "type": "array"
+                                    },
+                                    "phrase hack": {
+                                        "items": {},
+                                        "type": "array"
+                                    },
+                                    "tld": {
+                                        "items": {},
+                                        "type": "array"
+                                    },
+                                    "word hack": {
+                                        "items": {},
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "tld",
+                                    "name",
+                                    "word hack",
+                                    "phrase hack"
+                                ],
+                                "type": "object"
+                            },
+                            "string": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "string_original": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "tld": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "tlds": {
+                                "items": {},
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "string_original",
+                            "tld",
+                            "string",
+                            "tlds",
+                            "domains"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "data"
+                ],
+                "type": "object"
+            }
+        }
+    ]
+}

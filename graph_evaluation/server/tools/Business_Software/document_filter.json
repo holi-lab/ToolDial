@@ -1,0 +1,44 @@
+{
+    "product_id": "api_db97b470-ab3a-4e92-8eb1-76a244e08098",
+    "tool_description": "Document Filter API provides features to replace, redact or mask text strings and also to blur or mask images present in a document without impacting its layout or formatting. API  shall be very useful for protecting PII data, for identity protection, for protecting gender sensitive information, in GDPR compliance, promoting Gender Diversity or  promoting Diversity in general, protecting business intellectual property, protecting trade secrets or for generally protecting sensitive data while ...",
+    "home_url": "https://rapidapi.com/moresensetech-Tx2rlmeP2JC/api/document-filter1/",
+    "name": "Document Filter",
+    "title": "Document Filter",
+    "pricing": "FREE",
+    "tool_name": "Document Filter",
+    "score": null,
+    "host": "document-filter1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "document",
+            "url": "https://document-filter1.p.rapidapi.com/document",
+            "description": "***/document*** is REST based end point which implements ***POST*** HTTP method. It accepts the form data (i.e. media type is ***form-data***) and accepts following 3 parameters as fields in form data\n\n**`file `**:  this is a REQUIRED /Mandatory parameter and a binary file is expected within it. Currently only .docx files are supported\n**`is_img_blurring_needed`** :  is an optional parameter, if its value is \"True\" then all images in the document shall be blurred.\n**`find_repl_strings`** : Optional string data containing JSON Array of format \nAt least one or both of the Optional parameters must be provided in the request.  \n\n**`find_repl_strings`** should have JSON Array of following format\n\n```\n[\n\t\t{'find_string' : 'string find 1'},\n\t\t{'find_string':'string find 2','repl_string': 'string replace 2'},\n\t\t{'find_string':'string find 3','repl_string': 'string replace 3'}\n]\n```\nWhere **`find_string`** represents the text string to be find in the document and **`repl_string`** represents the text string which will replace all the instances of **`find_string`** found. If **`repl_string`** is not provided then all letters of **`find_string`**  will be masked with `*`s wherever the string is found.\n\nAs an example if text string \"alpha\" is to be replaced with \"beta\" and text string \"delta\" is to be masked then value for  **`find_repl_strings`** parameter should be following JSON Array string \n```\n[\n\t\t{'find_string' : 'delta'},\n\t\t{'find_string':'alpha','repl_string': 'beta'}\n]\n```\n\nA successful HTTP call will return the HTTP status code of 200\nAnd following JSON string response will be returned as part of HTTP body\n\n```\n[\n\t{'message': 'Document Processed successfully'}, \n\t{\n\t\t'final_file_URL': '<TEMP-HTTPS-URL-TO-FILE-WITH-EXPIRY-OF-30MINUTES>', \n\t\t'interaction_id': '<Unique-alphanumeric-interaction-id-per-call>', \n\t\t'strings_found_ct': [\n\t\t\t\t\t{'find_String': 'find string 1', 'find_Count': 0}, \n\t\t\t\t\t{'find_String': 'find string 2', 'find_Count': 5}, \n\t\t\t\t\t{'find_String': 'find string 3', 'find_Count': 1}\n\t\t\t\t]\n\t}\n]\n\n```\nIn case of failures HTTP status code and message could be different and other fields will not be there.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "is_img_blurring_needed",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "True"
+                },
+                {
+                    "name": "find_repl_strings",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[{\"find_string\":\"string find 1\"},{\"find_string\":\"string find 2\",\"repl_string\": \"string replace 2\"},{\"find_string\":\"string find 3\",\"repl_string\": \"string replace 3\"}]"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://document-filter1.p.rapidapi.com/document\"\nquerystring = {\"is_img_blurring_needed\": \"True\", \"find_repl_strings\": \"[{\\\"find_string\\\":\\\"string find 1\\\"},{\\\"find_string\\\":\\\"string find 2\\\",\\\"repl_string\\\": \\\"string replace 2\\\"},{\\\"find_string\\\":\\\"string find 3\\\",\\\"repl_string\\\": \\\"string replace 3\\\"}]\", \"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"document-filter1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://document-filter1.p.rapidapi.com/document\"\nquerystring = {\"is_img_blurring_needed\": \"True\", \"find_repl_strings\": \"[{\\\"find_string\\\":\\\"string find 1\\\"},{\\\"find_string\\\":\\\"string find 2\\\",\\\"repl_string\\\": \\\"string replace 2\\\"},{\\\"find_string\\\":\\\"string find 3\\\",\\\"repl_string\\\": \\\"string replace 3\\\"}]\", \"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"document-filter1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

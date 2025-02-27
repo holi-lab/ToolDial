@@ -1,0 +1,148 @@
+{
+    "tool_name":"Medius Disease Medication",
+    "tool_description":"Find medications used to treat a particular disease or condition.",
+    "title":"Medius Disease Medication",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/medius-health-medius-health-default/api/medius-disease-medication/",
+    "host":"medius-disease-medication.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"DiseaseMedications",
+            "url":"https://medius-disease-medication.p.rapidapi.com/api/v2/disease-medications/{medius_id}",
+            "description":"Lookup medications that are used to treat a particular disease or condition.\n\n##Parameters\n| Name      | Type   | Description                                                                                                                                                            | Optional |\n|-----------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|\n| medius_id | string | Identifies the disease in the Medius Health knowledge base.                                                                                                            | N        |\n| country   | string | Currently only supports 'IN' (India) | N        |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IN"
+                },
+                {
+                    "name":"medius_id",
+                    "type":"string",
+                    "description":"",
+                    "default":"E_0000017290"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://medius-disease-medication.p.rapidapi.com/api/v2/disease-medications/{medius_id}\"\nquerystring = {\"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"medius-disease-medication.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "medius_id":{
+                        "type":"string"
+                    },
+                    "snomed_concept_id":{
+                        "type":"string"
+                    },
+                    "medications":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "medius_id":{
+                                    "type":"string"
+                                },
+                                "name":{
+                                    "type":"string"
+                                },
+                                "route":{
+                                    "type":"string"
+                                },
+                                "dosage":{
+                                    "type":"string"
+                                },
+                                "level":{
+                                    "type":"string"
+                                },
+                                "products":{
+                                    "type":"array"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"DiseaseSearch",
+            "url":"https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search",
+            "description":"This endpoint facilitates matching of a free text disease name with diseases in Medius's knowledge base.\n\n##Parameters\n| name           | type    | description                                                                                                                         | Optional |\n|----------------|---------|-------------------------------------------------------------------------------------------------------------------------------------|----------|\n| query          | string  | The free text to be searched                                                                                                        | N        |\n| birth_sex      | string  | The patient’s sex at birth. ‘M' for male, ‘F’ for female and ‘UNK’ for unknown.                                                     | Y        |\n| age            | integer | The patient’s age in years.                                                                                                         | Y        |\n| specialization | string  | A code that uniquely identifies the area of specialization on which the results are to be constrained to (see list of codes below). | Y        |\n\n## Specialization codes\n| Code                                 | Description                                                                                                             |\n|--------------------------------------|-------------------------------------------------------------------------------------------------------------------------|\n| allergy\\_immunology\\_doctor            | Treats allergy and immune system disorders.                                                                             |\n| anaesthesiologist                    | Administers drugs to manage chronic pain or make a patient unaware of pain during a medical procedure.                  |\n| audiologist                          | Treats hearing loss and balance disorders.                                                                              |\n| cardiac_electrophysiologist          | Treats patients with electrical and heart rhythm problems.                                                              |\n| cardiologist                         | Specialises in heart disorders.                                                                                         |\n| cardiothoracic_surgeon               | Surgically treats diseases affecting organs inside the chest.                                                           |\n| chiropodist                          | Treats disorders of the foot.                                                                                           |\n| clinical_psychologist                | Treats mental disorders primarily with talk therapy.                                                                    |\n| colon\\_rectal\\_surgeon                 | Performs surgery on the intestinal tract.                                                                               |\n| critical\\_care\\_doctor                 | Monitors and treats those in intensive care.                                                                            |\n| dentist                              | Specialises in diseases of the oral cavity, especially the teeth.                                                       |\n| dermatologist                        | Focuses on disorders of skin, nails and hair.                                                                           |\n| emergency\\_medicine\\_doctor            | Treats patients in the emergency department.                                                                            |\n| endocrinologist                      | Treats metabolic and hormone disorders.                                                                                 |\n| gastroenterologist                   | Focuses on the digestive system and its disorders.                                                                      |\n| general_practitioner                 | Prevents, diagnoses and treats diseases.                                                                                |\n| general_surgeon                      | Performs a range of surgeries on the abdomen, skin, breast and soft tissue.                                             |\n| geriatrician                         | Focuses on the health care of elderly people.                                                                           |\n| haematologist                        | Focuses on diagnosing and treating blood disorders.                                                                     |\n| hand_surgeon                         | Performs surgery to treat hand conditions.                                                                              |\n| hepatologist                         | Focuses on liver, gallbladder and biliary tree disorders.                                                               |\n| immunologist                         | Diagnoses and treats immune system disorders.                                                                           |\n| infectious\\_disease\\_doctor            | Treats infections, including those that are tropical in nature.                                                         |\n| internal\\_medicine\\_physician          | Provides the diagnosis, treatment, and compassionate care of adults across the spectrum from health to complex illness. |\n| interventional_radiologist           | Uses image-guided procedures to diagnose and treat diseases.                                                            |\n| maternal\\_foetal\\_medicine\\_specialist  | Focuses on the medical management of high-risk pregnancies.                                                             |\n| medical_geneticist                   | Diagnoses and manages hereditary disorders.                                                                             |\n| nephrologist                         | Focuses on kidney disorders.                                                                                            |\n| neurologist                          | Treats nervous system disorders.                                                                                        |\n| neurosurgeon                         | Specialises in nervous system disorders.                                                                                |\n| nutritionist                         | Specialises in food and diet.                                                                                           |\n| obgyn_doctor                         | Focuses on reproductive health in women and childbirth.                                                                 |\n| occupational_therapist               | Improves daily living and work skills of patients.                                                                      |\n| oncologist                           | Specialises in cancer.                                                                                                  |\n| ophthalmologist                      | Specialises in eye diseases.                                                                                            |\n| optometrist                          | Diagnoses and treats vision changes.                                                                                    |\n| orthopaedic_surgeon                  | Performs surgery for conditions affecting bones and muscles.                                                            |\n| otolaryngologist                     | Treats ear, nose and throat disorders.                                                                                  |\n| otorhinolaryngologist                | Treats ear, nose and throat disorders.                                                                                  |\n| paediatric_dermatologist             | Focuses on childhood disorders of skin, nails and hair.                                                                 |\n| paediatric_neurologist               | Treats nervous system disorders in children.                                                                            |\n| paediatric_surgeon                   | Performs surgery in children.                                                                                           |\n| paediatrician                        | Provides medical care for infants, children and teenagers.                                                              |\n| pain_management                      | Eases suffering and improves quality of life for those in pain.                                                         |\n| physical\\_medicine\\_and\\_rehabilitation | Restores function and quality of life to those with physical disabilities.                                              |\n| physiotherapist                      | Restores muscle strength and function through exercise.                                                                 |\n| plastic_surgeon                      | Reconstructs defective, damaged or missing body parts.                                                                  |\n| psychiatrist                         | Treats mental disorders primarily with medications.                                                                     |\n| pulmonologist                        | Treats respiratory tract diseases.                                                                                      |\n| radiation_oncologist                 | Treats and manages cancer by prescribing radiation therapy.                                                             |\n| respiratory_therapist                | Treats and provides emergency care for patients who have trouble breathing.                                             |\n| rheumatologist                       | Specialises in arthritis and other rheumatic diseases.                                                                  |\n| sleep_medicine                       | Treats sleep disturbances and disorders.                                                                                |\n| speech_therapist                     | Treats people with speech and language problems.                                                                        |\n| sports_medicine                      | Treats and prevents sports and exercise injuries.                                                                       |\n| surgeon                              | Performs operations to treat disease.                                                                                   |\n| transplant_surgeon                   | Transfers an organ from one body to another.                                                                            |\n| travel_medicine                      | Manages health concerns for international travellers.                                                                   |\n| urologist                            | Treats urinary tract diseases.                                                                                          |\n| vascular_surgeon                     | Specialises in surgery for vascular system diseases.                                                                    |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"diabetes"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"age",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"27"
+                },
+                {
+                    "name":"birth_sex",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"UNK"
+                },
+                {
+                    "name":"specialization",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"general_practitioner"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://medius-disease-medication.p.rapidapi.com/api/v2/disease-search\"\nquerystring = {\"age\": age, \"birth_sex\": birth_sex, \"query\": query, \"specialization\": specialization}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"medius-disease-medication.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "medius_id":"E_0000144881",
+                    "snomed_concept_id":null,
+                    "name":"Diabetes",
+                    "matched_text":"Diabetes"
+                },
+                {
+                    "medius_id":"E_0000148617",
+                    "snomed_concept_id":"4855003",
+                    "name":"Diabetic retinopathy",
+                    "matched_text":"Retinopathy due to diabetes mellitus"
+                },
+                {
+                    "medius_id":"E_0000240595",
+                    "snomed_concept_id":"420422005",
+                    "name":"Diabetic ketoacidosis",
+                    "matched_text":"Ketoacidosis in diabetes mellitus"
+                },
+                {
+                    "medius_id":"E_0000245235",
+                    "snomed_concept_id":"424736006",
+                    "name":"Diabetic peripheral neuropathy",
+                    "matched_text":"Peripheral neuropathy co-occurrent and due to diabetes mellitus"
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object"
+                }
+            }
+        }
+    ]
+}

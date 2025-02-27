@@ -1,0 +1,133 @@
+{
+    "tool_name":"Blackbox",
+    "tool_description":"Blackbox is a Proxy, Tor, Hosting, Cloud, Bogon detection service for IP addresses. Utilize Blackbox to protect your game-servers, user front-ends, and much more. ",
+    "title":"Blackbox",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":158,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/CMunroe/api/blackbox/",
+    "host":"blackbox.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Legacy | V1",
+            "url":"https://blackbox.p.rapidapi.com/v1/{ips}",
+            "description":"This is a legacy and free IP checked. We provide a simply non-json style response to requests. Responses are cached for 7 days. \n\nCheck out our Documentation for more information.\n\nResponses will be (Y,E,N):\n\n(Y) : Yes, we have determined the IP address to be used by either or multiple of the following: Cloud, Hosting, Tor, Proxy. \n\n(E) : Error, something has gone wrong with the request.\n\n(N) : No, we have determined the IP address to be NOT used by any of the following: Cloud, Hosting, Tor, Proxy.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ips",
+                    "type":"string",
+                    "description":"",
+                    "default":"1.1.1.1"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://blackbox.p.rapidapi.com/v1/{ips}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blackbox.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":"text example!",
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Multiple Array | V2",
+            "url":"https://blackbox.p.rapidapi.com/v2/{ips}",
+            "description":"Using the GET method you can request an IP specific detections, and other IP information.\n\nCheck out our documentation for more info on our different detections.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ips",
+                    "type":"string",
+                    "description":"",
+                    "default":"1.1.1.1,8.8.8.8"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://blackbox.p.rapidapi.com/v2/{ips}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blackbox.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "ip":{
+                            "type":"string"
+                        },
+                        "asn":{
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "type":"string"
+                                },
+                                "number":{
+                                    "type":"integer"
+                                },
+                                "network":{
+                                    "type":"string"
+                                },
+                                "cidr":{
+                                    "type":"integer"
+                                }
+                            }
+                        },
+                        "detection":{
+                            "type":"object",
+                            "properties":{
+                                "bogon":{
+                                    "type":"boolean"
+                                },
+                                "cloud":{
+                                    "type":"boolean"
+                                },
+                                "hosting":{
+                                    "type":"boolean"
+                                },
+                                "proxy":{
+                                    "type":"boolean"
+                                },
+                                "spamhaus":{
+                                    "type":"boolean"
+                                },
+                                "tor":{
+                                    "type":"boolean"
+                                }
+                            }
+                        },
+                        "suggestion":{
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Singular Object | V2",
+            "url":"https://blackbox.p.rapidapi.com/v2/obj/{ip}",
+            "description":"Note: This will work only with singular IP lookups.\n\nIf you are unkeen to lookup multiple IP addresses at the same time, and want a simpler request. This might be for you. \n\nWe will return a singular IP object, that will minimize your request complexity, but with the loss of flexibility.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ip",
+                    "type":"string",
+                    "description":"",
+                    "default":"8.8.8.8"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://blackbox.p.rapidapi.com/v2/obj/{ip}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blackbox.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

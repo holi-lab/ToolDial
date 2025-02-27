@@ -1,0 +1,218 @@
+{
+    "tool_name":"Amazon merchant data",
+    "tool_description":"Real-time price, product, seller, review data from Amazon US, DE, UK, etc. API returns product title, manufacturer, reviews, size selection, retail price and much more.For private plans with higher request amounts and concurrency, custom integration or additional features contact us via support@crawler2api.com.",
+    "title":"Amazon merchant data",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":9292,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/3b-data-3b-data-default/api/amazon-merchant-data/",
+    "host":"amazon-merchant-data.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get ASIN by GTIN",
+            "url":"https://amazon-merchant-data.p.rapidapi.com/get-asin",
+            "description":"Search product by GTIN - Global Trade Item Number (e.g. 0194252099537) and get an ASIN (Amazon Standard Identification Number). Use ASIN for further searches.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"gtin",
+                    "type":"STRING",
+                    "description":"Search GTIN",
+                    "default":"0194252099537"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The marketplace country",
+                    "default":"de"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://amazon-merchant-data.p.rapidapi.com/get-asin\"\nquerystring = {\"gtin\": gtin, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"amazon-merchant-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Search offers by ASIN",
+            "url":"https://amazon-merchant-data.p.rapidapi.com/get-offers",
+            "description":"Search Amazon by ASIN and return offers with prices.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The marketplace country",
+                    "default":"de"
+                },
+                {
+                    "name":"asin",
+                    "type":"STRING",
+                    "description":"ASIN value",
+                    "default":"B08L6ZD883"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"Page number of results",
+                    "default":"1"
+                },
+                {
+                    "name":"condition",
+                    "type":"ENUM",
+                    "description":"Product condition",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://amazon-merchant-data.p.rapidapi.com/get-offers\"\nquerystring = {\"page\": page, \"country\": country, \"asin\": asin}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"amazon-merchant-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Get product reviews",
+            "url":"https://amazon-merchant-data.p.rapidapi.com/get-reviews",
+            "description":"Search reviews by ASIN and country",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The marketplace country",
+                    "default":"de"
+                },
+                {
+                    "name":"asin",
+                    "type":"STRING",
+                    "description":"Search ASIN",
+                    "default":"B08L6ZD883"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"filterByStar",
+                    "type":"ENUM",
+                    "description":"Filter by rating",
+                    "default":""
+                },
+                {
+                    "name":"mediaType",
+                    "type":"ENUM",
+                    "description":"Filter by media type",
+                    "default":""
+                },
+                {
+                    "name":"sortBy",
+                    "type":"ENUM",
+                    "description":"Sorting parameter",
+                    "default":""
+                },
+                {
+                    "name":"filterByLanguage",
+                    "type":"STRING",
+                    "description":"Filter by language",
+                    "default":""
+                },
+                {
+                    "name":"reviewerType",
+                    "type":"ENUM",
+                    "description":"Filter by reviewer type",
+                    "default":""
+                },
+                {
+                    "name":"filterByKeyword",
+                    "type":"STRING",
+                    "description":"Filter by keyword",
+                    "default":""
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"Page number of results",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://amazon-merchant-data.p.rapidapi.com/get-reviews\"\nquerystring = {\"country\": country, \"asin\": asin, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"amazon-merchant-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Search products by term",
+            "url":"https://amazon-merchant-data.p.rapidapi.com/search-products",
+            "description":"Search by term (e.g. iphone 12) and get results",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"term",
+                    "type":"STRING",
+                    "description":"Search term",
+                    "default":"iphone 12"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The marketplace country",
+                    "default":"de"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://amazon-merchant-data.p.rapidapi.com/search-products\"\nquerystring = {\"term\": term, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"amazon-merchant-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Search product by ASIN",
+            "url":"https://amazon-merchant-data.p.rapidapi.com/get-product",
+            "description":"Search product by a marketplace product id (Amazon ASIN, e.g. B09G98X7GV). A successful response returns product details.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"asin",
+                    "type":"STRING",
+                    "description":"Search ASIN",
+                    "default":"B08L6ZD883"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The marketplace country",
+                    "default":"de"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://amazon-merchant-data.p.rapidapi.com/get-product\"\nquerystring = {\"asin\": asin, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"amazon-merchant-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

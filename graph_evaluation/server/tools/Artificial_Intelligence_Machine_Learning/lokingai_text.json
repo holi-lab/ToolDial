@@ -1,0 +1,203 @@
+{
+    "product_id": "api_71cbcc18-2aab-4148-910d-d7f5da2ad81a",
+    "tool_description": "APIs collectively providing functionalities such as classification, sentiment analysis, summarization, question answering, labeling, and mask filling for various text processing tasks. They allow users to extract meaningful information from text data and perform different types of analyses and transformations.",
+    "home_url": "https://rapidapi.com/josuebrunel/api/lokingai-text/",
+    "name": "LokingAI-Text",
+    "title": "LokingAI-Text",
+    "pricing": "FREEMIUM",
+    "tool_name": "LokingAI-Text",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1206,
+        "avgSuccessRate": 50,
+        "popularityScore": 8.3,
+        "__typename": "Score"
+    },
+    "host": "lokingai-text.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "mask_filler_mask_filler_post",
+            "url": "https://lokingai-text.p.rapidapi.com/mask-filler",
+            "description": "Mask filling.\n\nFill in masked values in the input text.\n\nParameters:\n- **payload**: TextRequest object containing the input text with masked values.\n\nReturns:\n- **MaskFillerResponse**: A response containing the filled-in masked values.\n\nExample Request:\n```\nPOST /mask-filler\n{\n    \"text\": \"Please buy [MASK] from the store.\"\n}\n```\n\nExample Response:\n```\n{\n  \"error\": null,\n  \"data\": [\n    {\n      \"score\": 0.17938034236431122,\n      \"token\": 2505,\n      \"token_str\": \"anything\",\n      \"sequence\": \"please buy anything from this store\"\n    },\n    {\n      \"score\": 0.11332187056541443,\n      \"token\": 2242,\n      \"token_str\": \"something\",\n      \"sequence\": \"please buy something from this store\"\n    },\n    {\n      \"score\": 0.05946308374404907,\n      \"token\": 3688,\n      \"token_str\": \"products\",\n      \"sequence\": \"please buy products from this store\"\n    },\n    {\n      \"score\": 0.04591205716133118,\n      \"token\": 5167,\n      \"token_str\": \"items\",\n      \"sequence\": \"please buy items from this store\"\n    },\n    {\n      \"score\": 0.04386703670024872,\n      \"token\": 2009,\n      \"token_str\": \"it\",\n      \"sequence\": \"please buy it from this store\"\n    }\n  ]\n}\n```",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/mask-filler\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/mask-filler\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "question_answering_question_answering_post",
+            "url": "https://lokingai-text.p.rapidapi.com/question-answering",
+            "description": "Question answering.\n\nAnswer a list of questions based on the input text.\n\nParameters:\n- **payload**: QuestionAnswerRequest object containing the input text and list of questions.\n\nReturns:\n- **QuestionAnswerResponse**: A response containing the answers to the questions.\n\nExample Request:\n```\nPOST /question-answering\n{\n    \"text\": \"The capital of France is Paris and that city has a population of 2m people\",\n    \"questions\": [\"What is the capital of France?\", \"What is the population of Paris?\"]\n}\n```\n\nExample Response:\n```\n{\n  \"error\": null,\n  \"data\": [\n    {\n      \"question\": \"What is the capital of France?\",\n      \"answer\": {\n        \"score\": 0.9588838815689087,\n        \"start\": 20,\n        \"end\": 25,\n        \"answer\": \"Paris\"\n      }\n    },\n    {\n      \"question\": \"What is the population of Paris?\",\n      \"answer\": {\n        \"score\": 0.6355919241905212,\n        \"start\": 60,\n        \"end\": 62,\n        \"answer\": \"2m\"\n      }\n    }\n  ]\n}\n```",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/question-answering\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/question-answering\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "classifier_classifier_post",
+            "url": "https://lokingai-text.p.rapidapi.com/classifier",
+            "description": "Text classification.\n\nClassify a list of texts using a text classification model.\n\nParameters:\n- **payload**: List of TextRequest objects containing the input texts.\n\nReturns:\n- **ApiResponseList**: A list of responses containing classification results for each input text.\n\nExample Request:\n```\nPOST /classifier\n[\n    {\n        \"text\": \"This is a positive review.\"\n    },\n    {\n        \"text\": \"This is a negative review.\"\n    }\n]\n```\n\nExample Response:\n```\n{\n    \"data\": [\n        {\"label\": \"positive\", \"score\": 0.85},\n        {\"label\": \"negative\", \"score\": 0.73}\n    ]\n}\n```",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/classifier\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/classifier\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "data": {
+                        "items": {},
+                        "type": "array",
+                        "title": "Data"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "error",
+                    "data"
+                ],
+                "title": "ApiResponseList"
+            }
+        },
+        {
+            "name": "sentiment_analyzer_sentiment_analyzer_post",
+            "url": "https://lokingai-text.p.rapidapi.com/sentiment-analyzer",
+            "description": "Sentiment analysis.\n\nAnalyze sentiment for a list of texts.\n\nParameters:\n- **payload**: List of TextRequest objects containing the input texts.\n\nReturns:\n- **ApiResponseList**: A list of responses containing sentiment analysis results for each input text.\n\nExample Request:\n```\nPOST /sentiment-analyzer\n[\n    {\n        \"text\": \"I love this product!\"\n    },\n    {\n        \"text\": \"I'm not satisfied with the service.\"\n    }\n]\n```\n\nExample Response:\n```\n{\n    \"error\": null,\n    \"data\": [\n        {\n            \"label\": \"love\",\n            \"score\": 0.9471527338027954\n        },\n        {\n            \"label\": \"disapproval\",\n            \"score\": 0.6938314437866211\n        }\n    ]\n}\n```",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/sentiment-analyzer\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/sentiment-analyzer\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "data": {
+                        "items": {},
+                        "type": "array",
+                        "title": "Data"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "error",
+                    "data"
+                ],
+                "title": "ApiResponseList"
+            }
+        },
+        {
+            "name": "summarizer_summarizer_post",
+            "url": "https://lokingai-text.p.rapidapi.com/summarizer",
+            "description": "Text summarization.\n\nSummarize the input text.\n\nParameters:\n- **payload**: TextRequest object containing the input text.\n\nReturns:\n- **ApiResponse**: A response containing the summarized text.\n\nExample Request:\n```\nPOST /summarizer\n{\n    \"text\": \"This is a long piece of text...\"\n}\n```\n\nExample Response:\n```\n{\n    \"data\": {\n        \"summary_text\": \"This is a summarized version of the input text...\"\n    }\n}\n```",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/summarizer\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/summarizer\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "labelizer_labelizer_post",
+            "url": "https://lokingai-text.p.rapidapi.com/labelizer",
+            "description": "Text labeling.\n\nLabel the input text with specified labels.\n\nParameters:\n- **payload**: LabelRequest object containing the input text and list of labels.\n\nReturns:\n- **LabelResponse**: A response containing the labeled text and label scores.\n\nExample Request:\n```\nPOST /labelizer\n{\n    \"text\": \"This is an example sentence.\",\n    \"labels\": [\"positive\", \"negative\"]\n}\n```\n\nExample Response:\n```\n{\n    \"data\": {\n        \"sequence\": \"This is an example sentence.\",\n        \"labels\": [\"positive\", \"neutral\"],\n        \"scores\": [0.75, 0.2]\n    }\n}\n```",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "multi_label",
+                    "type": null,
+                    "description": "",
+                    "default": true
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/labelizer\"\nquerystring = {\"multi_label\": true}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lokingai-text.p.rapidapi.com/labelizer\"\nquerystring = {\"multi_label\": true}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lokingai-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "error": {
+                        "anyOf": [
+                            {
+                                "type": "string"
+                            },
+                            {
+                                "type": "null"
+                            }
+                        ],
+                        "title": "Error"
+                    },
+                    "data": {
+                        "properties": {
+                            "sequence": {
+                                "type": "string",
+                                "title": "Sequence"
+                            },
+                            "labels": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array",
+                                "title": "Labels"
+                            },
+                            "scores": {
+                                "items": {
+                                    "type": "number"
+                                },
+                                "type": "array",
+                                "title": "Scores"
+                            }
+                        },
+                        "type": "object",
+                        "required": [
+                            "sequence",
+                            "labels",
+                            "scores"
+                        ],
+                        "title": "LabelOutput"
+                    }
+                },
+                "type": "object",
+                "required": [
+                    "error",
+                    "data"
+                ],
+                "title": "LabelResponse"
+            }
+        }
+    ]
+}

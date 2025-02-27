@@ -1,0 +1,246 @@
+{
+    "tool_name": "Proxy Checker",
+    "tool_description": "An easy tool to test proxy whether it's online, anonymous, is it HTTP, HTTPS or both, to get proxy performance timings.",
+    "title": "Proxy Checker",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 8,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.1,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/apstudio/api/proxy-checker/",
+    "host": "proxy-checker.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Retrieve Proxy Information",
+            "url": "https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/user-request/{id}",
+            "description": "For retrieving a proxy test result, you should make a request to this endpoint.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "**User Request ID** - received from the response of sending a proxy for checking.",
+                    "default": "6416ab3d3c01efbe45e97675"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/user-request/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"proxy-checker.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "user_request_id": {
+                                "type": "string"
+                            },
+                            "proxy_address": {
+                                "type": "string"
+                            },
+                            "callback_url": {
+                                "type": "string"
+                            },
+                            "callback_state": {
+                                "type": "string",
+                                "enum": [
+                                    "Missing",
+                                    "NotProcessed",
+                                    "Success",
+                                    "Failed"
+                                ]
+                            },
+                            "testing_status": {
+                                "type": "boolean"
+                            },
+                            "test_result": {
+                                "type": "object",
+                                "properties": {
+                                    "is_online": {
+                                        "type": "boolean"
+                                    },
+                                    "is_http_anonymous": {
+                                        "type": "boolean"
+                                    },
+                                    "is_https_anonymous": {
+                                        "type": "boolean"
+                                    },
+                                    "is_http_proxy": {
+                                        "type": "boolean"
+                                    },
+                                    "is_https_proxy": {
+                                        "type": "boolean"
+                                    },
+                                    "is_altering_http": {
+                                        "type": "boolean"
+                                    },
+                                    "is_altering_https": {
+                                        "type": "boolean"
+                                    },
+                                    "recorded_at": {
+                                        "type": "integer"
+                                    },
+                                    "timings_http": {
+                                        "type": "object",
+                                        "properties": {
+                                            "headers": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "Cache-Control": {
+                                                        "type": "string"
+                                                    },
+                                                    "Via": {
+                                                        "type": "string"
+                                                    },
+                                                    "X-Forwarded-For": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "status_code": {
+                                                "type": "integer"
+                                            },
+                                            "dns_lookup": {
+                                                "type": "integer"
+                                            },
+                                            "tcp_connection": {
+                                                "type": "integer"
+                                            },
+                                            "tls_handshake": {
+                                                "type": "integer"
+                                            },
+                                            "server_processing": {
+                                                "type": "integer"
+                                            },
+                                            "content_transfer": {
+                                                "type": "integer"
+                                            },
+                                            "name_lookup": {
+                                                "type": "integer"
+                                            },
+                                            "connect": {
+                                                "type": "integer"
+                                            },
+                                            "pre_transfer": {
+                                                "type": "integer"
+                                            },
+                                            "start_transfer": {
+                                                "type": "integer"
+                                            },
+                                            "total": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    "timings_https": {
+                                        "type": "object",
+                                        "properties": {
+                                            "headers": {
+                                                "type": "object"
+                                            },
+                                            "status_code": {
+                                                "type": "integer"
+                                            },
+                                            "dns_lookup": {
+                                                "type": "integer"
+                                            },
+                                            "tcp_connection": {
+                                                "type": "integer"
+                                            },
+                                            "tls_handshake": {
+                                                "type": "integer"
+                                            },
+                                            "server_processing": {
+                                                "type": "integer"
+                                            },
+                                            "content_transfer": {
+                                                "type": "integer"
+                                            },
+                                            "name_lookup": {
+                                                "type": "integer"
+                                            },
+                                            "connect": {
+                                                "type": "integer"
+                                            },
+                                            "pre_transfer": {
+                                                "type": "integer"
+                                            },
+                                            "start_transfer": {
+                                                "type": "integer"
+                                            },
+                                            "total": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "updated_at": {
+                                "type": "integer"
+                            },
+                            "created_at": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Queue Proxy For Checking",
+            "url": "https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/check",
+            "description": "To check a proxy, first you have to submit it via this endpoint",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/check\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"proxy-checker.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "user_request_id": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Queue Proxy For Checking",
+            "url": "https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/check",
+            "description": "To check a proxy, first you have to submit it via this endpoint",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/check\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"proxy-checker.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://proxy-checker.p.rapidapi.com/api/user-request-management/v1/check\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"proxy-checker.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

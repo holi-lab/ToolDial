@@ -1,0 +1,137 @@
+{
+    "product_id": "api_06669d3b-4353-439d-aae2-a98a91e45849",
+    "tool_description": "A keyword-aware semantic search engine",
+    "home_url": "https://rapidapi.com/hybridsearchio/api/hybridsearch/",
+    "name": "HybridSearch",
+    "title": "HybridSearch",
+    "pricing": "FREE",
+    "tool_name": "HybridSearch",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 389,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "hybridsearch.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "upload text files",
+            "url": "https://hybridsearch.p.rapidapi.com/v1/upload/text-files",
+            "description": "Upload text file(s) (pdf, txt, docx) to the HybridSearch service.  Note: max file size supported is 5 MB and max filename length is 100 characters including file extension",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "The file(s) to upload. If you want to upload multiple files, add different file names to this `file` field.\n For example: `curl -X POST -H 'Authorization: Bearer $AUTH_TOKEN' -F file=@file.txt -F file=@file2.docx -F file=@file3.pdf -F org=YOUR_ORG_NAME`",
+                    "default": "@file.txt"
+                },
+                {
+                    "name": "org",
+                    "type": "STRING",
+                    "description": "The organization name",
+                    "default": "YOUR_ORG_NAME"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "batch",
+                    "type": "NUMBER",
+                    "description": "The number of content chunks per batch to upload to the cloud. min: 1, max: 100",
+                    "default": 100
+                },
+                {
+                    "name": "chunk",
+                    "type": "NUMBER",
+                    "description": "The chunk size in bytes. min: 256 bytes, max: 2kb (2048 bytes)",
+                    "default": 1024
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/upload/text-files\"\nquerystring = {\"batch\": 100, \"chunk\": 1024, \"file\": \"@file.txt\", \"org\": \"YOUR_ORG_NAME\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/upload/text-files\"\nquerystring = {\"batch\": 100, \"chunk\": 1024, \"file\": \"@file.txt\", \"org\": \"YOUR_ORG_NAME\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "delete",
+            "url": "https://hybridsearch.p.rapidapi.com/v1/delete",
+            "description": "Delete file(s), if exists, from the HybridSearch service",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/delete\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/delete\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "get-sources",
+            "url": "https://hybridsearch.p.rapidapi.com/v1/get-sources",
+            "description": "List all data sources (text files, documents) in a given org",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/get-sources\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/get-sources\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "HS-Request-ID": {
+                        "type": "string"
+                    },
+                    "files": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "org": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "query",
+            "url": "https://hybridsearch.p.rapidapi.com/v1/query",
+            "description": "Send a query to the hybridsearch service and retrieve semantic and/or keyword matches",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://hybridsearch.p.rapidapi.com/v1/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hybridsearch.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "HS-Request-ID": {
+                        "type": "string"
+                    },
+                    "matches": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "sample": {
+                                    "type": "string"
+                                },
+                                "source": {
+                                    "type": "string"
+                                },
+                                "score": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

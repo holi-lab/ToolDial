@@ -1,0 +1,149 @@
+{
+    "product_id": "api_dc138f58-410d-492f-92b8-add9782ab97b",
+    "tool_description": "API to generate Swiss QR bills in SVG, PDF or PNG format.",
+    "home_url": "https://rapidapi.com/info-qGn690NaE/api/swiss-qr-bills/",
+    "name": "Swiss QR bills",
+    "title": "Swiss QR bills",
+    "pricing": "FREEMIUM",
+    "tool_name": "Swiss QR bills",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 258,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.4,
+        "__typename": "Score"
+    },
+    "host": "swiss-qr-bills.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/generate",
+            "url": "https://swiss-qr-bills.p.rapidapi.com/bill/generate",
+            "description": "API to generate Swiss QR bills.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "CreditorAddressLine2",
+                    "type": "STRING",
+                    "description": "Address line 2 contains postal code and town.",
+                    "default": "1000 Lausanne"
+                },
+                {
+                    "name": "CreditorAddressLine1",
+                    "type": "STRING",
+                    "description": "Address line 1 contains street name, house number or P.O. box.",
+                    "default": "Rue de l'Etang 65"
+                },
+                {
+                    "name": "CreditorCountryCode",
+                    "type": "STRING",
+                    "description": "The two-letter ISO country code.",
+                    "default": "CH"
+                },
+                {
+                    "name": "CreditorName",
+                    "type": "STRING",
+                    "description": "The name, either the first and last name of a natural person or the company name of a legal person.",
+                    "default": "Paul Dupond"
+                },
+                {
+                    "name": "Currency",
+                    "type": "STRING",
+                    "description": "\"CHF\" or \"EUR\"",
+                    "default": "CHF"
+                },
+                {
+                    "name": "Account",
+                    "type": "STRING",
+                    "description": "IBAN (with or without spaces)",
+                    "default": "CH9300762011623852957"
+                },
+                {
+                    "name": "Amount",
+                    "type": "NUMBER",
+                    "description": "Valid values are between 0.01 and 999'999'999.99",
+                    "default": "125.90"
+                },
+                {
+                    "name": "OutputSize",
+                    "type": "STRING",
+                    "description": "The output size for the generated QR bill. \n\n**- QrBillOnly:** QR bill only (105 by 210 mm). This size is suitable if the QR bill has no horizontal line. If the horizontal line is needed and the A4 sheet size is not suitable, use QrBillExtraSpace instead.\n\n**- A4PortraitSheet:** A4 sheet in portrait orientation. The QR bill is at the bottom.\n\n**- QrCodeOnly:** QR code only (46 by 46 mm).\n\n**- QrBillExtraSpace:** QR bill only with additional space at the top for the horizontal line (about 110 by 210 mm). The extra 5 mm at the top create space for the horizontal line and optionally for the scissors.",
+                    "default": "QrBillOnly"
+                },
+                {
+                    "name": "Language",
+                    "type": "STRING",
+                    "description": "The bill language (DE, FR, IT, EN).",
+                    "default": "EN"
+                },
+                {
+                    "name": "GraphicsFormat",
+                    "type": "STRING",
+                    "description": "The graphics format to be generated (SVG, PNG, PDF).",
+                    "default": "SVG"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "UnstructuredMessage",
+                    "type": "STRING",
+                    "description": "Additional unstructured message",
+                    "default": "Facture #51245"
+                },
+                {
+                    "name": "RawReference",
+                    "type": "STRING",
+                    "description": "Bill reference",
+                    "default": "51245"
+                },
+                {
+                    "name": "DebtorAddressLine1",
+                    "type": "STRING",
+                    "description": "Address line 1 contains street name, house number or P.O. box.",
+                    "default": "Rue de la Gare 3"
+                },
+                {
+                    "name": "BillInformation",
+                    "type": "STRING",
+                    "description": "Additional structured bill information",
+                    "default": ""
+                },
+                {
+                    "name": "DebtorCountryCode",
+                    "type": "STRING",
+                    "description": "The two-letter ISO country code.",
+                    "default": "CH"
+                },
+                {
+                    "name": "DebtorAddressLine2",
+                    "type": "STRING",
+                    "description": "Address line 2 contains postal code and town.",
+                    "default": "1200 Gen\u00e8ve"
+                },
+                {
+                    "name": "DebtorName",
+                    "type": "STRING",
+                    "description": "The name, either the first and last name of a natural person or the company name of a legal person.",
+                    "default": "Pierre M\u00fcller"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://swiss-qr-bills.p.rapidapi.com/bill/generate\"\nquerystring = {\"CreditorAddressLine2\": \"1000 Lausanne\", \"CreditorAddressLine1\": \"Rue de l'Etang 65\", \"UnstructuredMessage\": \"Facture #51245\", \"CreditorCountryCode\": \"CH\", \"RawReference\": \"51245\", \"CreditorName\": \"Paul Dupond\", \"Currency\": \"CHF\", \"DebtorAddressLine1\": \"Rue de la Gare 3\", \"Account\": \"CH9300762011623852957\", \"BillInformation\": \"\", \"DebtorCountryCode\": \"CH\", \"Amount\": \"125.90\", \"OutputSize\": \"QrBillOnly\", \"Language\": \"EN\", \"GraphicsFormat\": \"SVG\", \"DebtorAddressLine2\": \"1200 Gen\u00e8ve\", \"DebtorName\": \"Pierre M\u00fcller\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"swiss-qr-bills.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://swiss-qr-bills.p.rapidapi.com/bill/generate\"\nquerystring = {\"CreditorAddressLine2\": \"1000 Lausanne\", \"CreditorAddressLine1\": \"Rue de l'Etang 65\", \"UnstructuredMessage\": \"Facture #51245\", \"CreditorCountryCode\": \"CH\", \"RawReference\": \"51245\", \"CreditorName\": \"Paul Dupond\", \"Currency\": \"CHF\", \"DebtorAddressLine1\": \"Rue de la Gare 3\", \"Account\": \"CH9300762011623852957\", \"BillInformation\": \"\", \"DebtorCountryCode\": \"CH\", \"Amount\": \"125.90\", \"OutputSize\": \"QrBillOnly\", \"Language\": \"EN\", \"GraphicsFormat\": \"SVG\", \"DebtorAddressLine2\": \"1200 Gen\u00e8ve\", \"DebtorName\": \"Pierre M\u00fcller\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"swiss-qr-bills.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "data": {
+                        "type": "string"
+                    },
+                    "error": {
+                        "type": "string"
+                    },
+                    "ext": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

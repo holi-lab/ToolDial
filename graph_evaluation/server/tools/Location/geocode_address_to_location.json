@@ -1,0 +1,417 @@
+{
+    "tool_name":"Geocode address to location",
+    "tool_description":"Convert any address to a Lat/Lon location - parse, validate and format the address to store it in a database or show on a map.",
+    "title":"Geocode address to location",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":538,
+        "avgSuccessRate":98,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/geoapify-gmbh-geoapify/api/geocode-address-to-location/",
+    "host":"geocode-address-to-location.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Address completion",
+            "url":"https://geocode-address-to-location.p.rapidapi.com/v1/geocode/autocomplete",
+            "description":"Address autocomplete endpoint for address forms. Send a part of an address and get address suggestions + their Latitude/Longitude coordinates.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"text",
+                    "type":"STRING",
+                    "description":"Free-form address, place, region or area name",
+                    "default":"Berl"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Desired result granularity  (country, state, city, postcode, street, or amenity)",
+                    "default":"city"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Location bias latitude (requires \\\"lon\\\")",
+                    "default":"52.51"
+                },
+                {
+                    "name":"countrycodes",
+                    "type":"STRING",
+                    "description":"Limit search to a comma-separated list of countries (ISO country codes)",
+                    "default":"de"
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"Location bias longitude (requires \\\"lat\\\")",
+                    "default":"13.38"
+                },
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"Maximum number of results",
+                    "default":"1"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Preferable results language code (en, de, it, fr)",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://geocode-address-to-location.p.rapidapi.com/v1/geocode/autocomplete\"\nquerystring = {\"type\": type, \"text\": text, \"lat\": lat, \"countrycodes\": countrycodes, \"lon\": lon, \"limit\": limit, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"geocode-address-to-location.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "features":[
+                    {
+                        "geometry":{
+                            "coordinates":[
+                                13.3888599,
+                                52.5170365
+                            ],
+                            "type":"Point"
+                        },
+                        "type":"Feature",
+                        "properties":{
+                            "country":"Germany",
+                            "city":"Berlin",
+                            "postcode":"10117",
+                            "name":"Berlin",
+                            "state":"Berlin",
+                            "datasource":{
+                                "sourcename":"openstreetmap",
+                                "osm_id":240109189,
+                                "osm_type":"N",
+                                "osm_key":"place",
+                                "osm_value":"city"
+                            },
+                            "lon":13.3888599,
+                            "lat":52.5170365,
+                            "distance":0.985724104653994
+                        }
+                    }
+                ],
+                "type":"FeatureCollection"
+            },
+            "headers":{
+                "access-control-allow-headers":"access-control-max-age, access-control-allow-headers, access-control-allow-methods, access-control-allow-origin, allow, api-version, cf-ray, content-encoding, content-type, date, expect-ct, server, status, vary, cache-control, etag, last-modified, expires",
+                "access-control-allow-methods":"GET, POST, DELETE, OPTIONS, PUT",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3-27=\":443\"; ma=86400, h3-25=\":443\"; ma=86400, h3-24=\":443\"; ma=86400, h3-23=\":443\"; ma=86400",
+                "api-version":"1.0",
+                "cache-control":"private, max-age=0, no-cache",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"57268d59afe33bd9-CDG",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Wed, 11 Mar 2020 16:11:35 GMT",
+                "expect-ct":"max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+                "server":"RapidAPI-1.0.42",
+                "set-cookie":[
+                    "__cfduid=dc6f8804e0448d1c9a52bf895156675a21583943095; expires=Fri, 10-Apr-20 16:11:35 GMT; path=/; domain=.geoapify.com; HttpOnly; SameSite=Lax; Secure"
+                ],
+                "vary":"Accept-Encoding",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.0.42",
+                "content-length":"407",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "features":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "geometry":{
+                                    "type":"object",
+                                    "properties":{
+                                        "coordinates":{
+                                            "type":"array",
+                                            "items":{
+                                                "type":"number"
+                                            }
+                                        },
+                                        "type":{
+                                            "type":"string"
+                                        }
+                                    }
+                                },
+                                "type":{
+                                    "type":"string"
+                                },
+                                "properties":{
+                                    "type":"object",
+                                    "properties":{
+                                        "country":{
+                                            "type":"string"
+                                        },
+                                        "city":{
+                                            "type":"string"
+                                        },
+                                        "postcode":{
+                                            "type":"string"
+                                        },
+                                        "name":{
+                                            "type":"string"
+                                        },
+                                        "state":{
+                                            "type":"string"
+                                        },
+                                        "datasource":{
+                                            "type":"object",
+                                            "properties":{
+                                                "sourcename":{
+                                                    "type":"string"
+                                                },
+                                                "osm_id":{
+                                                    "type":"integer"
+                                                },
+                                                "osm_type":{
+                                                    "type":"string"
+                                                },
+                                                "osm_key":{
+                                                    "type":"string"
+                                                },
+                                                "osm_value":{
+                                                    "type":"string"
+                                                }
+                                            }
+                                        },
+                                        "lon":{
+                                            "type":"number"
+                                        },
+                                        "lat":{
+                                            "type":"number"
+                                        },
+                                        "distance":{
+                                            "type":"number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "type":{
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Geocoding",
+            "url":"https://geocode-address-to-location.p.rapidapi.com/v1/geocode/search",
+            "description":"Send a street address and get the corresponding latitude/longitude coordinates, address parts, and the formatted address.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"text",
+                    "type":"STRING",
+                    "description":"Free-form address, place, region or area name",
+                    "default":"Empire State Building in New York"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"Maximum number of results",
+                    "default":"1"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Location bias latitude (requires \\\"lon\\\")",
+                    "default":"40.74"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Desired result granularity  (country, state, city, postcode, street, or amenity)",
+                    "default":""
+                },
+                {
+                    "name":"countrycodes",
+                    "type":"STRING",
+                    "description":"Limit search to a comma-separated list of countries (ISO country codes)",
+                    "default":""
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"Location bias longitude (requires \\\"lat\\\")",
+                    "default":"-73.98"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"Preferable results language code (en, de, it, fr)",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://geocode-address-to-location.p.rapidapi.com/v1/geocode/search\"\nquerystring = {\"text\": text, \"limit\": limit, \"lat\": lat, \"lon\": lon, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"geocode-address-to-location.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "features":[
+                    {
+                        "geometry":{
+                            "coordinates":[
+                                -73.98565461987332,
+                                40.748428399999995
+                            ],
+                            "type":"Point"
+                        },
+                        "type":"Feature",
+                        "properties":{
+                            "country":"United States of America",
+                            "housenumber":"350",
+                            "city":"New York",
+                            "street":"5th Avenue",
+                            "postcode":"10018",
+                            "name":"Empire State Building",
+                            "state":"New York",
+                            "datasource":{
+                                "sourcename":"openstreetmap",
+                                "osm_id":34633854,
+                                "osm_type":"W",
+                                "osm_key":"tourism",
+                                "osm_value":"attraction"
+                            },
+                            "lon":-73.98565461987332,
+                            "lat":40.748428399999995,
+                            "distance":1.0513173796714916
+                        },
+                        "bbox":[
+                            -73.9864855,
+                            40.7489422,
+                            -73.9848259,
+                            40.7479226
+                        ]
+                    }
+                ],
+                "type":"FeatureCollection"
+            },
+            "headers":{
+                "access-control-allow-headers":"access-control-max-age, access-control-allow-headers, access-control-allow-methods, access-control-allow-origin, allow, api-version, cf-ray, content-encoding, content-type, date, expect-ct, server, status, vary, cache-control, etag, last-modified, expires",
+                "access-control-allow-methods":"GET, POST, DELETE, OPTIONS, PUT",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3-27=\":443\"; ma=86400, h3-25=\":443\"; ma=86400, h3-24=\":443\"; ma=86400, h3-23=\":443\"; ma=86400",
+                "api-version":"1.0",
+                "cache-control":"private, max-age=0, no-cache",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"57269354bb68ee75-CDG",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Wed, 11 Mar 2020 16:15:40 GMT",
+                "expect-ct":"max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+                "server":"RapidAPI-1.0.42",
+                "set-cookie":[
+                    "__cfduid=d30b0f6370b7bada20765146a8de25ee01583943340; expires=Fri, 10-Apr-20 16:15:40 GMT; path=/; domain=.geoapify.com; HttpOnly; SameSite=Lax; Secure"
+                ],
+                "vary":"Accept-Encoding",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.0.42",
+                "content-length":"580",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "features":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "geometry":{
+                                    "type":"object",
+                                    "properties":{
+                                        "coordinates":{
+                                            "type":"array",
+                                            "items":{
+                                                "type":"number"
+                                            }
+                                        },
+                                        "type":{
+                                            "type":"string"
+                                        }
+                                    }
+                                },
+                                "type":{
+                                    "type":"string"
+                                },
+                                "properties":{
+                                    "type":"object",
+                                    "properties":{
+                                        "country":{
+                                            "type":"string"
+                                        },
+                                        "housenumber":{
+                                            "type":"string"
+                                        },
+                                        "city":{
+                                            "type":"string"
+                                        },
+                                        "street":{
+                                            "type":"string"
+                                        },
+                                        "postcode":{
+                                            "type":"string"
+                                        },
+                                        "name":{
+                                            "type":"string"
+                                        },
+                                        "state":{
+                                            "type":"string"
+                                        },
+                                        "datasource":{
+                                            "type":"object",
+                                            "properties":{
+                                                "sourcename":{
+                                                    "type":"string"
+                                                },
+                                                "osm_id":{
+                                                    "type":"integer"
+                                                },
+                                                "osm_type":{
+                                                    "type":"string"
+                                                },
+                                                "osm_key":{
+                                                    "type":"string"
+                                                },
+                                                "osm_value":{
+                                                    "type":"string"
+                                                }
+                                            }
+                                        },
+                                        "lon":{
+                                            "type":"number"
+                                        },
+                                        "lat":{
+                                            "type":"number"
+                                        },
+                                        "distance":{
+                                            "type":"number"
+                                        }
+                                    }
+                                },
+                                "bbox":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"number"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "type":{
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    ]
+}

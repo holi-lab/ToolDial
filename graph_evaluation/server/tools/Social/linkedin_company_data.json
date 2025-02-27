@@ -1,0 +1,1070 @@
+{
+    "product_id": "api_8df0990e-e27f-4ac5-aa74-df6001f2f3d1",
+    "tool_description": "Given a company's webpage, or linkedin company url this rest API returns 25+ fields about the company including Crunchbase funding info, three to four employee profiles from the company, and recent company LinkedIn posts. Postman documentation available here: https://documenter.getpostman.com/view/10812513/UVeGpQqo",
+    "home_url": "https://rapidapi.com/williambarberjr/api/linkedin-company-data/",
+    "name": "Linkedin Company Data",
+    "title": "Linkedin Company Data",
+    "pricing": "FREEMIUM",
+    "tool_name": "Linkedin Company Data",
+    "score": {
+        "avgServiceLevel": 94,
+        "avgLatency": 9706,
+        "avgSuccessRate": 94,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "linkedin-company-data.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get LinkedIn Company Data",
+            "url": "https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataJson",
+            "description": "Get all available data from a list of LinkedIn company pages. This endpoint should scale as far as you need it to without a problem",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataJson\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataJson\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get List of Company Employees (alpha)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/companyEmployees",
+            "description": "Returns a list of company employees given a company url provided. This endpoint was updated 6.14.2023 and will likely be updated again very shortly, still working out how to scale a new method.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "A zero based index of the page being requested. Each page contains 100 unique results.",
+                    "default": "0"
+                },
+                {
+                    "name": "companyId",
+                    "type": "NUMBER",
+                    "description": "The numeric, unique id LinkedIn uses to identify the company you are requesting an employee list for. This can be obtained from /linkedInCompanyDataJsonV3Beta or the /linkedInCompanyDataJson endpoint.",
+                    "default": "11130470"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/companyEmployees\"\nquerystring = {\"page\": \"0\", \"companyId\": \"11130470\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/companyEmployees\"\nquerystring = {\"page\": \"0\", \"companyId\": \"11130470\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "people": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "properties": {
+                            "totalDisplayCount": {
+                                "type": "string"
+                            },
+                            "filters": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            },
+                            "tracking": {
+                                "type": "object",
+                                "properties": {
+                                    "requestId": {
+                                        "type": "string"
+                                    },
+                                    "sessionId": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Company Updates (beta)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/getCompanyUpdates",
+            "description": "Returns up to 100 recent company updates from LinkedIn company posts",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "liUrl",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://www.linkedin.com/company/snap-inc-co"
+                },
+                {
+                    "name": "count",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "100"
+                },
+                {
+                    "name": "start",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "acceptLanguage",
+                    "type": "STRING",
+                    "description": "Optional parameter that defaults to en-US if not provided. Will attempt to fetch the updates in a different language. For now, it only seems to affect the timeDescription value in the response at the moment.",
+                    "default": "en-US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/getCompanyUpdates\"\nquerystring = {\"liUrl\": \"https://www.linkedin.com/company/snap-inc-co\", \"acceptLanguage\": \"en-US\", \"count\": \"100\", \"start\": \"0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/getCompanyUpdates\"\nquerystring = {\"liUrl\": \"https://www.linkedin.com/company/snap-inc-co\", \"acceptLanguage\": \"en-US\", \"count\": \"100\", \"start\": \"0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Server Status",
+            "url": "https://linkedin-company-data.p.rapidapi.com/serverAlive",
+            "description": "Checks that the server is alive and working",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/serverAlive\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/serverAlive\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "Message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Company Data by Web Domain",
+            "url": "https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataByDomainJson",
+            "description": "Takes in a company domain (google.com for example) as input, and returns LinkedIn company data in a json format.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataByDomainJson\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataByDomainJson\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "Results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Comments on Company Update Posts (beta)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/companyUpdateComments",
+            "description": "Given the urn id returned from the company updates endpoint in updated in version 3.2 of the api, this endpoint returns data on comments from the requested post",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "comment_count",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "100"
+                },
+                {
+                    "name": "post_urn",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "6980467775693578241"
+                },
+                {
+                    "name": "start",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "0"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/companyUpdateComments\"\nquerystring = {\"comment_count\": \"100\", \"post_urn\": \"6980467775693578241\", \"start\": \"0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/companyUpdateComments\"\nquerystring = {\"comment_count\": \"100\", \"post_urn\": \"6980467775693578241\", \"start\": \"0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "actions": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "canDelete": {
+                                    "type": "boolean"
+                                },
+                                "comment": {
+                                    "type": "object",
+                                    "properties": {
+                                        "values": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                },
+                                "commentV2": {
+                                    "type": "object"
+                                },
+                                "commenter": {
+                                    "type": "object",
+                                    "properties": {
+                                        "com.linkedin.voyager.feed.MemberActor": {
+                                            "type": "object",
+                                            "properties": {
+                                                "distance": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "value": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "followingInfo": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "dashFollowingStateUrn": {
+                                                            "type": "string"
+                                                        },
+                                                        "entityUrn": {
+                                                            "type": "string"
+                                                        },
+                                                        "following": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "followingType": {
+                                                            "type": "string"
+                                                        },
+                                                        "trackingUrn": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "miniProfile": {
+                                                    "type": "object"
+                                                },
+                                                "showFollowAction": {
+                                                    "type": "boolean"
+                                                },
+                                                "skillNames": {
+                                                    "type": "array"
+                                                },
+                                                "urn": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "commenterProfileId": {
+                                    "type": "string"
+                                },
+                                "createdTime": {
+                                    "type": "integer"
+                                },
+                                "dashEntityUrn": {
+                                    "type": "string"
+                                },
+                                "edited": {
+                                    "type": "boolean"
+                                },
+                                "entityUrn": {
+                                    "type": "string"
+                                },
+                                "index": {
+                                    "type": "integer"
+                                },
+                                "originalLanguage": {
+                                    "type": "string"
+                                },
+                                "permalink": {
+                                    "type": "string"
+                                },
+                                "pinned": {
+                                    "type": "boolean"
+                                },
+                                "socialDetail": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowedCommentersScope": {
+                                            "type": "string"
+                                        },
+                                        "comments": {
+                                            "type": "object"
+                                        },
+                                        "dashEntityUrn": {
+                                            "type": "string"
+                                        },
+                                        "entityUrn": {
+                                            "type": "string"
+                                        },
+                                        "hideFirstPrompt": {
+                                            "type": "boolean"
+                                        },
+                                        "liked": {
+                                            "type": "boolean"
+                                        },
+                                        "likes": {
+                                            "type": "object",
+                                            "properties": {
+                                                "elements": {
+                                                    "type": "array"
+                                                },
+                                                "paging": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "count": {
+                                                            "type": "integer"
+                                                        },
+                                                        "links": {
+                                                            "type": "array"
+                                                        },
+                                                        "start": {
+                                                            "type": "integer"
+                                                        },
+                                                        "total": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "showShareButton": {
+                                            "type": "boolean"
+                                        },
+                                        "socialPermissions": {
+                                            "type": "object",
+                                            "properties": {
+                                                "canPostComments": {
+                                                    "type": "boolean"
+                                                },
+                                                "canReact": {
+                                                    "type": "boolean"
+                                                },
+                                                "canShare": {
+                                                    "type": "boolean"
+                                                },
+                                                "dashEntityUrn": {
+                                                    "type": "string"
+                                                },
+                                                "entityUrn": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "threadId": {
+                                            "type": "string"
+                                        },
+                                        "totalSocialActivityCounts": {
+                                            "type": "object",
+                                            "properties": {
+                                                "dashEntityUrn": {
+                                                    "type": "string"
+                                                },
+                                                "entityUrn": {
+                                                    "type": "string"
+                                                },
+                                                "liked": {
+                                                    "type": "boolean"
+                                                },
+                                                "numComments": {
+                                                    "type": "integer"
+                                                },
+                                                "numLikes": {
+                                                    "type": "integer"
+                                                },
+                                                "reactionTypeCounts": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "count": {
+                                                                "type": "integer"
+                                                            },
+                                                            "reactionType": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                "socialDetailEntityUrn": {
+                                                    "type": "string"
+                                                },
+                                                "urn": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "urn": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "threadId": {
+                                    "type": "string"
+                                },
+                                "timeOffset": {
+                                    "type": "integer"
+                                },
+                                "trackingId": {
+                                    "type": "string"
+                                },
+                                "urn": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get LinkedIn Company Data (beta)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataJsonV3Beta",
+            "description": "Returns company data for one company per request (for now). Created to provide clarity in scenarios where LinkedIn displays different industry categories for the same company (they are slowing moving to a new industry taxonomy) - this endpoint pulls both industry categorizations.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataJsonV3Beta\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataJsonV3Beta\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "object",
+                        "properties": {
+                            "active": {
+                                "type": "boolean"
+                            },
+                            "archived": {
+                                "type": "boolean"
+                            },
+                            "claimable": {
+                                "type": "boolean"
+                            },
+                            "coverImageCropInfo": {
+                                "type": "object",
+                                "properties": {
+                                    "height": {
+                                        "type": "integer"
+                                    },
+                                    "width": {
+                                        "type": "integer"
+                                    },
+                                    "x": {
+                                        "type": "integer"
+                                    },
+                                    "y": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "createdAt": {
+                                "type": "integer"
+                            },
+                            "crunchbaseFundingData": {
+                                "type": "object",
+                                "properties": {
+                                    "fundingRoundsUrl": {
+                                        "type": "string"
+                                    },
+                                    "lastFundingRound": {
+                                        "type": "object",
+                                        "properties": {
+                                            "announcedOn": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "day": {
+                                                        "type": "integer"
+                                                    },
+                                                    "month": {
+                                                        "type": "integer"
+                                                    },
+                                                    "year": {
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            },
+                                            "fundingRoundUrl": {
+                                                "type": "string"
+                                            },
+                                            "investorsUrl": {
+                                                "type": "string"
+                                            },
+                                            "leadInvestors": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "image": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "attributes": {
+                                                                    "type": "array",
+                                                                    "items": {
+                                                                        "type": "object",
+                                                                        "properties": {
+                                                                            "detailDataUnion": {
+                                                                                "type": "object",
+                                                                                "properties": {
+                                                                                    "imageUrl": {
+                                                                                        "type": "object",
+                                                                                        "properties": {
+                                                                                            "url": {
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        },
+                                                        "investorUrl": {
+                                                            "type": "string"
+                                                        },
+                                                        "name": {
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "localizedFundingType": {
+                                                "type": "string"
+                                            },
+                                            "moneyRaised": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "amount": {
+                                                        "type": "string"
+                                                    },
+                                                    "currencyCode": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "numberOfOtherInvestors": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    "numberOfFundingRounds": {
+                                        "type": "integer"
+                                    },
+                                    "organizationUrl": {
+                                        "type": "string"
+                                    },
+                                    "updatedAt": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "defaultLocale": {
+                                "type": "object",
+                                "properties": {
+                                    "country": {
+                                        "type": "string"
+                                    },
+                                    "language": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "description": {
+                                "type": "string"
+                            },
+                            "employeeCount": {
+                                "type": "integer"
+                            },
+                            "employeeCountRange": {
+                                "type": "object",
+                                "properties": {
+                                    "end": {
+                                        "type": "integer"
+                                    },
+                                    "start": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "entityUrn": {
+                                "type": "string"
+                            },
+                            "followerCount": {
+                                "type": "integer"
+                            },
+                            "foundedOn": {
+                                "type": "object",
+                                "properties": {
+                                    "year": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "hashtag": {
+                                "type": "object",
+                                "properties": {
+                                    "urn:li:fsd_hashtag:lifeinsidedropbox": {
+                                        "type": "object",
+                                        "properties": {
+                                            "actionTarget": {
+                                                "type": "string"
+                                            },
+                                            "displayName": {
+                                                "type": "string"
+                                            },
+                                            "entityUrn": {
+                                                "type": "string"
+                                            },
+                                            "followerCount": {
+                                                "type": "integer"
+                                            },
+                                            "trackingUrn": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "hashtagUrns": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "headquarter": {
+                                "type": "object",
+                                "properties": {
+                                    "address": {
+                                        "type": "object",
+                                        "properties": {
+                                            "city": {
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "type": "string"
+                                            },
+                                            "geographicArea": {
+                                                "type": "string"
+                                            },
+                                            "line1": {
+                                                "type": "string"
+                                            },
+                                            "postalCode": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "headquarter": {
+                                        "type": "boolean"
+                                    },
+                                    "streetAddressOptOut": {
+                                        "type": "boolean"
+                                    }
+                                }
+                            },
+                            "industries": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "industry_v1": {
+                                "type": "string"
+                            },
+                            "industry_v2": {
+                                "type": "string"
+                            },
+                            "locations": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "address": {
+                                            "type": "object",
+                                            "properties": {
+                                                "city": {
+                                                    "type": "string"
+                                                },
+                                                "country": {
+                                                    "type": "string"
+                                                },
+                                                "geographicArea": {
+                                                    "type": "string"
+                                                },
+                                                "line1": {
+                                                    "type": "string"
+                                                },
+                                                "postalCode": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "headquarter": {
+                                            "type": "boolean"
+                                        },
+                                        "streetAddressOptOut": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            },
+                            "logo": {
+                                "type": "object",
+                                "properties": {
+                                    "vectorImage": {
+                                        "type": "object",
+                                        "properties": {
+                                            "artifacts": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "expiresAt": {
+                                                            "type": "integer"
+                                                        },
+                                                        "fileIdentifyingUrlPathSegment": {
+                                                            "type": "string"
+                                                        },
+                                                        "height": {
+                                                            "type": "integer"
+                                                        },
+                                                        "width": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "digitalmediaAsset": {
+                                                "type": "string"
+                                            },
+                                            "rootUrl": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "memberTabs": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "multiLocaleDescriptions": {
+                                "type": "object",
+                                "properties": {
+                                    "en_US": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "multiLocaleNames": {
+                                "type": "object",
+                                "properties": {
+                                    "en_US": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "multiLocaleTaglines": {
+                                "type": "object",
+                                "properties": {
+                                    "en_US": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "organizationType": {
+                                "type": "string"
+                            },
+                            "originalCoverImageUnion": {
+                                "type": "object",
+                                "properties": {
+                                    "vectorImage": {
+                                        "type": "object",
+                                        "properties": {
+                                            "artifacts": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "expiresAt": {
+                                                            "type": "integer"
+                                                        },
+                                                        "fileIdentifyingUrlPathSegment": {
+                                                            "type": "string"
+                                                        },
+                                                        "height": {
+                                                            "type": "integer"
+                                                        },
+                                                        "width": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "digitalmediaAsset": {
+                                                "type": "string"
+                                            },
+                                            "rootUrl": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "pageType": {
+                                "type": "string"
+                            },
+                            "pinnedPost": {
+                                "type": "string"
+                            },
+                            "productsAccessible": {
+                                "type": "boolean"
+                            },
+                            "specialities": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "stockQuote": {
+                                "type": "object",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string"
+                                    },
+                                    "disclaimerUrl": {
+                                        "type": "string"
+                                    },
+                                    "highestPrice": {
+                                        "type": "number"
+                                    },
+                                    "lastPrice": {
+                                        "type": "number"
+                                    },
+                                    "lowestPrice": {
+                                        "type": "number"
+                                    },
+                                    "openingPrice": {
+                                        "type": "number"
+                                    },
+                                    "priceChange": {
+                                        "type": "number"
+                                    },
+                                    "priceChangePercentage": {
+                                        "type": "number"
+                                    },
+                                    "providerName": {
+                                        "type": "string"
+                                    },
+                                    "stockExchange": {
+                                        "type": "string"
+                                    },
+                                    "stockSymbol": {
+                                        "type": "string"
+                                    },
+                                    "timeOfLastSaleAt": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "tagline": {
+                                "type": "string"
+                            },
+                            "universalName": {
+                                "type": "string"
+                            },
+                            "url": {
+                                "type": "string"
+                            },
+                            "websiteUrl": {
+                                "type": "string"
+                            },
+                            "websiteUrlOptOut": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "DEPRICATED - Get Company Data",
+            "url": "https://linkedin-company-data.p.rapidapi.com/linkedInCompanyData",
+            "description": "A depricated endpoint that returns LinkedIn company data for original subscribers of the API who don't want to adjust their odler code base.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyData\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyData\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "DEPRECATED - Company Data by Domain",
+            "url": "https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataByDomain",
+            "description": "A deprecated endpoint still up for older users of the API",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataByDomain\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyDataByDomain\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "Get Company Data by Keyword (20 results)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/getLICompanyDataByKeyword20Results",
+            "description": "Returns 20 LinkedIn company data urls for each search term provided",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/getLICompanyDataByKeyword20Results\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/getLICompanyDataByKeyword20Results\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "Message": {
+                        "type": "string"
+                    },
+                    "Results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Company Url from Keyword (1 Result)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/linkedInCompanyUrlFromSearchTerm",
+            "description": "Get LinkedIn Company URL from Search Terms",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyUrlFromSearchTerm\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/linkedInCompanyUrlFromSearchTerm\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "Message": {
+                        "type": "string"
+                    },
+                    "Results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Company Data by Keyword (100 Results)",
+            "url": "https://linkedin-company-data.p.rapidapi.com/getLICompanyDataByKeyword100Results",
+            "description": "Given a search keyword phrase, this endpoint returns 100 LinkedIn company data urls that can then be used to pull data about those companies.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/getLICompanyDataByKeyword100Results\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://linkedin-company-data.p.rapidapi.com/getLICompanyDataByKeyword100Results\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"linkedin-company-data.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "Message": {
+                        "type": "string"
+                    },
+                    "Results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

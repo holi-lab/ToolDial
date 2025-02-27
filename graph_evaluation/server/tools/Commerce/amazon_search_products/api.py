@@ -1,0 +1,50 @@
+import requests
+import json
+from datetime import date, datetime, timedelta
+import os
+
+from typing import Optional, Dict, Union, List
+
+
+def get_product_details(productid: str, api_key: str, toolbench_rapidapi_key: str='088440d910mshef857391f2fc461p17ae9ejsnaebc918926ff'):
+    """
+    "Get all the data you can imagine about the product"
+    
+    """
+    url = f"https://amazon-search-products.p.rapidapi.com/products/{productid}"
+    querystring = {'api_key': api_key, }
+    
+    headers = {
+            "X-RapidAPI-Key": toolbench_rapidapi_key,
+            "X-RapidAPI-Host": "amazon-search-products.p.rapidapi.com"
+        }
+
+
+    response = requests.get(url, headers=headers, params=querystring)
+    try:
+        observation = response.json()
+    except:
+        observation = response.text
+    return observation
+
+def search_for_a_product(api_key: str, search: str, toolbench_rapidapi_key: str='088440d910mshef857391f2fc461p17ae9ejsnaebc918926ff'):
+    """
+    "Search for a product in amazon.com"
+    
+    """
+    url = f"https://amazon-search-products.p.rapidapi.com/search/{search}"
+    querystring = {'api_key': api_key, }
+    
+    headers = {
+            "X-RapidAPI-Key": toolbench_rapidapi_key,
+            "X-RapidAPI-Host": "amazon-search-products.p.rapidapi.com"
+        }
+
+
+    response = requests.get(url, headers=headers, params=querystring)
+    try:
+        observation = response.json()
+    except:
+        observation = response.text
+    return observation
+

@@ -1,0 +1,114 @@
+{
+    "product_id": "api_b8b6ca22-4a0e-4c58-aa79-874dbe1adab4",
+    "tool_description": "The \"Smart EMI Calculator\" API is a powerful and easy-to-use tool for calculating the Equated Monthly Installment (EMI) for loans, as well as the breakdown of loan repayment plans on a monthly and yearly basis. It accepts three parameters as input: loan amount, interest rate, and loan term.",
+    "home_url": "https://rapidapi.com/arjansolanki25-xtEh4AYAGOi/api/smart-emi-calculator/",
+    "name": "Smart EMI Calculator",
+    "title": "Smart EMI Calculator",
+    "pricing": "FREEMIUM",
+    "tool_name": "Smart EMI Calculator",
+    "score": null,
+    "host": "smart-emi-calculator.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Calculate EMI",
+            "url": "https://smart-emi-calculator.p.rapidapi.com/",
+            "description": "It takes **loan amount**, **interest rate**, and **loan term** as input, and returns the calculated EMI and a detailed breakdown of the EMI for each year.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "loan_term",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "3"
+                },
+                {
+                    "name": "interest_rate",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "6"
+                },
+                {
+                    "name": "loan_amount",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "50000"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "",
+                    "default": "2023-01-01"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://smart-emi-calculator.p.rapidapi.com/\"\nquerystring = {\"start_date\": \"2023-01-01\", \"loan_term\": \"3\", \"interest_rate\": \"6\", \"loan_amount\": \"50000\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smart-emi-calculator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smart-emi-calculator.p.rapidapi.com/\"\nquerystring = {\"start_date\": \"2023-01-01\", \"loan_term\": \"3\", \"interest_rate\": \"6\", \"loan_amount\": \"50000\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smart-emi-calculator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "emi": {
+                        "type": "integer"
+                    },
+                    "total_interest": {
+                        "type": "integer"
+                    },
+                    "total_payment": {
+                        "type": "integer"
+                    },
+                    "emi_breakdown": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "year": {
+                                    "type": "string"
+                                },
+                                "yearly_emi": {
+                                    "type": "integer"
+                                },
+                                "yearly_principal": {
+                                    "type": "integer"
+                                },
+                                "yearly_interest": {
+                                    "type": "integer"
+                                },
+                                "yearly_remaining_loan_amount": {
+                                    "type": "integer"
+                                },
+                                "monthly_breakdown": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "date": {
+                                                "type": "string"
+                                            },
+                                            "month": {
+                                                "type": "string"
+                                            },
+                                            "monthly_emi": {
+                                                "type": "integer"
+                                            },
+                                            "monthly_principal": {
+                                                "type": "integer"
+                                            },
+                                            "monthly_interest": {
+                                                "type": "integer"
+                                            },
+                                            "remaining_loan_amount": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

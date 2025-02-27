@@ -1,0 +1,137 @@
+{
+    "tool_name":"GeoPop",
+    "tool_description":"Population and Buildings resources with a high level of detail (up to 10mt).",
+    "title":"GeoPop",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/GiovanniBrena/api/geopop/",
+    "host":"geopop.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"get_buildings",
+            "url":"https://geopop.p.rapidapi.com/get_buildings",
+            "description":"Get square meters of built-up area (Europe only) inside the area defined by \n\n- lat : latitude\n- lon : longitude\n- radius : radius (in meters) of the circular area around coordinates\n\nresource parameter allows to define which kind of  building resource is needed:\n- all_buildings : both residential and not residential buildings\n- residential: only residential buildings\n- not_residential: only not residential buildings\n- fileds: not built-up area",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"latitude",
+                    "default":"45.4643037"
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"longitude",
+                    "default":"9.1907491"
+                },
+                {
+                    "name":"radius",
+                    "type":"STRING",
+                    "description":"radius",
+                    "default":"1000"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"resource",
+                    "type":"STRING",
+                    "description":"type of buildings",
+                    "default":"all_buildings"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://geopop.p.rapidapi.com/get_buildings\"\nquerystring = {\"lat\": lat, \"lon\": lon, \"radius\": radius, \"resource\": resource}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"geopop.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "lat":"45.4643037",
+                "lon":"9.1907491",
+                "radius":"1000",
+                "buildings":"1000000",
+                "resource":"all_buildings"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "lat":{
+                        "type":"string",
+                        "description":"The user ID."
+                    },
+                    "lon":{
+                        "type":"string",
+                        "description":"The user name."
+                    },
+                    "radius":{
+                        "type":"string",
+                        "description":"The user ID."
+                    },
+                    "buildings":{
+                        "type":"string",
+                        "description":"The user name."
+                    },
+                    "resource":{
+                        "type":"string",
+                        "description":"The user name."
+                    }
+                }
+            }
+        },
+        {
+            "name":"get_population",
+            "url":"https://geopop.p.rapidapi.com/get_population",
+            "description":"Get number of resident population inside the area defined by \n\n- lat : latitude\n- lon : longitude\n- radius : radius (in meters) of the circular area around coordinates",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":" latitude (eg. 45.4643037)",
+                    "default":"45.4643037"
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"longitude (e.g. 9.1907491)",
+                    "default":"9.1907491"
+                },
+                {
+                    "name":"radius",
+                    "type":"STRING",
+                    "description":"radius in meters of circular area centered in (lat, lon) point",
+                    "default":"300"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://geopop.p.rapidapi.com/get_population\"\nquerystring = {\"lat\": lat, \"lon\": lon, \"radius\": radius}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"geopop.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "lat":"45.4643037",
+                "lon":"9.1907491",
+                "radius":"300",
+                "population":"513.2042"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "lat":{
+                        "type":"string",
+                        "description":"The user ID."
+                    },
+                    "lon":{
+                        "type":"string",
+                        "description":"The user name."
+                    },
+                    "radius":{
+                        "type":"string",
+                        "description":"The user ID."
+                    },
+                    "population":{
+                        "type":"string",
+                        "description":"The user name."
+                    }
+                }
+            }
+        }
+    ]
+}

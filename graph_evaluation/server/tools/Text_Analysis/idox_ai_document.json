@@ -1,0 +1,444 @@
+{
+    "product_id": "api_d61ad898-9aee-4ea8-9edd-2fe9842290fe",
+    "tool_description": "The iDox.ai API provides high-performance document processing tools for anyone. Developers can find APIs for privacy, legal, and document.",
+    "home_url": "https://rapidapi.com/mhuang73/api/idox-ai-document2/",
+    "name": "iDox-ai Document",
+    "title": "iDox-ai Document",
+    "pricing": "FREE",
+    "tool_name": "iDox-ai Document",
+    "score": null,
+    "host": "idox-ai-document2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Redact document",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/document-tool/{document-id}/pdf-redactor",
+            "description": "Redact or highlight a PDF by a configuration of the following information:\n\n*   Keywords\n*   Pages\n*   Areas\n    \n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| redactTexts | false | Words to be redacted. |\n| redactTextPages | false | Pages to be redacted |\n| redactRectArray | false | Coordinates of squares to be masked |\n| highlight | false | Whether to use highlight mode (`true`) or redaction (`false`) mode. |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                },
+                {
+                    "name": "document-id",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/document-tool/{document-id}/pdf-redactor\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/document-tool/{document-id}/pdf-redactor\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Async document PII discovery",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/ner/{document-id}/pii/async",
+            "description": "Discover PII information from a document. This is an async mode API.\n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| confidenceScore | false | Return values that are higher than the designated confidenceScore. |\n| categoriesFilter | false | Return the designated entity categories. The supported categories are listed below this table.  <br>  <br>Empty array \\[\\] to return all categories. |\n| callback | false | Successful callback URL, support HTTP `POST`. |\n\n#### Entity Categories\n\n| **Code Name** | **Country** | **Remark** |\n| --- | --- | --- |\n| Person | All |  |\n| Organization | All |  |\n| PhoneNumber | All |  |\n| PersonType | All |  |\n| Address | All |  |\n| Email | All |  |\n| DateTime | All |  |\n| Temperature | All |  |\n| Currency | All |  |\n| Age | All |  |\n| Percentage | All |  |\n| CreditCardNumber | All |  |\n| InternationalBankingAccountNumber | All |  |\n| SWIFTCode | All |  |\n| ABARoutingNumber | US |  |\n| USIndividualTaxpayerIdentification | US |  |\n| USSocialSecurityNumber | US |  |\n| USDriversLicenseNumber | US |  |\n| USUKPassportNumber | US |  |\n| USBankAccountNumber | US |  |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                },
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/ner/{document-id}/pii/async\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/ner/{document-id}/pii/async\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Asyn ccontent PII discovery",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v1/ner/pii/async",
+            "description": "Discover PII information from text contents. This is an async mode API.\n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| paragraphs | true | Target content for analysis. The format is a JSON array. The maximum number of array values is 5. The maximum length of an array value is 5210 characters. |\n| confidenceScore | false | Return values that are higher than the designated *confidenceScore*. 0.0 if the parameter is not defined. |\n| categoriesFilter | false | Return the designated entity categories. The supported categories are listed below this table.  <br>  <br>Empty array \\[\\] to return all categories. |\n| callback | false | Successful callback URL, support HTTP `POST`. |\n\n#### Entity Categories\n\n| **Code Name** | **Country** | **Remark** |\n| --- | --- | --- |\n| Person | All |  |\n| Organization | All |  |\n| PhoneNumber | All |  |\n| PersonType | All |  |\n| Address | All |  |\n| Email | All |  |\n| DateTime | All |  |\n| Temperature | All |  |\n| Currency | All |  |\n| Age | All |  |\n| Percentage | All |  |\n| CreditCardNumber | All |  |\n| InternationalBankingAccountNumber | All |  |\n| SWIFTCode | All |  |\n| ABARoutingNumber | US |  |\n| USIndividualTaxpayerIdentification | US |  |\n| USSocialSecurityNumber | US |  |\n| USDriversLicenseNumber | US |  |\n| USUKPassportNumber | US |  |\n| USBankAccountNumber | US |  |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV1Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v1/ner/pii/async\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv1version}/ner/pii/async\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Classify document",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/category/{document-id}/document-type",
+            "description": "Classify the type of a given document. 6 types of document classification are supported.\n\n#### Response Body\n\n| **Name** | **Description** |\n| --- | --- |\n| type | The type can be one of below:  <br>* General  <br>* Contract  <br>* Research paper  <br>* Invoice  <br>* Bank statement  <br>* Utility bill |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                },
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/category/{document-id}/document-type\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/category/{document-id}/document-type\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Classify contract clauses",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v1/category/contract-type",
+            "description": "Classify the type of contract clauses. 31 types of contract are supported.\n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| content | true | Paragraph to be analyzed |\n\n#### Response Body\n\n|  | description |\n| --- | --- |\n| type | The type of a contract can be one of the contract types below:  <br>* Underwriting-Agreement  <br>* Security-Agreement  <br>* Supplemental-Indenture  <br>* Amended-and-Restated-Credit-Agreement  <br>* Amendment-to-Employment-Agreement  <br>* Registration-Rights-Agreement  <br>* Stock-Option-Agreement  <br>* Amended-and-Restated-Employment-Agreement  <br>* Services-Agreement  <br>* Investment-Advisory-Agreement  <br>* Loan-Agreement  <br>* Securities-Purchase-Agreement  <br>* Participation-Agreement  <br>* Purchase-Agreement  <br>* Limited-Liability-Company-Agreement  <br>* Indemnification-Agreement  <br>* Subscription-Agreement  <br>* Asset-Purchase-Agreement  <br>* Executive-Employment-Agreement  <br>* Management-Agreement  <br>* Purchase-and-Sale-Agreement  <br>* Consulting-Agreement  <br>* Credit-Agreement  <br>* Distribution-Agreement  <br>* Stock-Purchase-Agreement  <br>* Employment-Agreement  <br>* License-Agreement  <br>* Trust-Agreement  <br>* Administration-Agreement  <br>* Loan-and-Security-Agreement  <br>* Non-Disclosure-Agreement |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV1Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v1/category/contract-type\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv1version}/category/contract-type\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Upload Document",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/document-tool/pre-processing",
+            "description": "Upload a document to iDox.ai. `PDF` and MS Word (`DOC`, `DOCX`) file formats are supported.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "callback",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/document-tool/pre-processing\"\nquerystring = {\"file\": \"\", \"callback\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/document-tool/pre-processing\"\nquerystring = {\"file\": \"\", \"callback\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Async analyze contract layout",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/segmentation/{document-id}/contract-layout/async",
+            "description": "#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| callback | false | Successful callback URL, will be called using http post |\n\n#### Detected Object Items\n\n| **Name** | **Description** |\n| --- | --- |\n| type | Detected object types. The types can be one of these values: `title` |\n| page | The page index of the detected object. `0` is the first page. |\n| boundingBox | Coordinate of the detected object, the order is top, left, bottom, and right. |\n| pdfCoordiante | Coordinate of the detected object, the order is top, left, bottom, and right. |\n| pdfText | The text content of the detected object. |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": ""
+                },
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "apiV2Version"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/segmentation/{document-id}/contract-layout/async\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/segmentation/{document-id}/contract-layout/async\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Review clauses",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v1/contract/review",
+            "description": "Find risky clauses within a contract, such as incomplete clauses, missing clauses, missing contractual elements.\n\n#### Request Body\n\n| **Name** | **Required** | **Description** |\n| --- | --- | --- |\n| data | true | DLA data |\n| contractType | false | Define the contract type-specific checking engine. The value is either of `NDA` | `PA`. `NDA` if the give clause is an NDA clause. `PA` if the given clause is a purchase agreement clause. |\n\n### DLA Data\n\n| **Name** | **Required** | **Description** |\n| --- | --- | --- |\n| type | true | The type of contents. The value is either of `title` | clause. `title` if the give content are a clause title. `clause` if the given content are a clause. |\n| payloads | true | The given content. |\n| method | true | `dla` to use the AI model. |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV1Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v1/contract/review\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv1version}/contract/review\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Classify contents",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/apiV1Version/category/document-type",
+            "description": "Classify the type of given textual contents. 6 types of classification are supported.\n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| content | true | Paragraph to be analyzed |\n\n#### Response Body\n\n|  | description |\n| --- | --- |\n| type | The type can be one of below:  <br>* General  <br>* Contract  <br>* Research paper  <br>* Invoice  <br>* Bank statement  <br>* Utility bill |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV1Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "apiV1Version"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/apiV1Version/category/document-type\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv1version}/category/document-type\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Content PII discovery",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v1/ner/pii",
+            "description": "Discover PII information from textual contents.\n\n#### Request body\n\n| name | required | description |\n| --- | --- | --- |\n| paragraphs | true | Target content for analysis. The format is a JSON array. The maximum number of array values is 5. The maximum length of an array value is 5120 characters. |\n| confidenceScore | false | Return values that are higher than the designated *confidenceScore*. 0.0 if the parameter is not defined. |\n| categoriesFilter | false | Return the designated entity categories. The supported categories are listed below this table.  <br>  <br>Empty array \\[\\] to return all categories. |\n| callback | false | Successful callback URL, support HTTP POST. |\n\n#### Entity Categories\n\n| **Code Name** | **Country** | **Remark** |\n| --- | --- | --- |\n| Person | All |  |\n| Organization | All |  |\n| PhoneNumber | All |  |\n| PersonType | All |  |\n| Address | All |  |\n| Email | All |  |\n| DateTime | All |  |\n| Temperature | All |  |\n| Currency | All |  |\n| Age | All |  |\n| Percentage | All |  |\n| CreditCardNumber | All |  |\n| InternationalBankingAccountNumber | All |  |\n| SWIFTCode | All |  |\n| ABARoutingNumber | US |  |\n| USIndividualTaxpayerIdentification | US |  |\n| USSocialSecurityNumber | US |  |\n| USDriversLicenseNumber | US |  |\n| USUKPassportNumber | US |  |\n| USBankAccountNumber | US |  |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV1Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v1/ner/pii\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv1version}/ner/pii\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Redact document by coordintes",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/document-tool/{document-id}/text-in-rects",
+            "description": "Redact a PDF by a configuration of coordinates of several squares.\n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| rects | true | Coordinates of paragraphs, the order is left, bottom, right, top, and the page number. |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": ""
+                },
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "apiV2Version"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/document-tool/{document-id}/text-in-rects\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/document-tool/{document-id}/text-in-rects\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Tag contents",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v1/category/document-tag",
+            "description": "Return a tag array to indicate the possible topics of given textual contents.\n\n#### Request body\n\n| name | required | description |\n| --- | --- | --- |\n| content | true | Target contents for analysis. |\n\n#### Response\n\n| Parameter | Description |\n| --- | --- |\n| tags | A document might be tagged with multiple values. The possible tags include any of below:  <br>* Nature  <br>* Entertainment  <br>* Food  <br>* Religion  <br>* Biology  <br>* Sport  <br>* Business  <br>* Military  <br>* Legal  <br>* Environment  <br>* Education |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV1Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v1/category/document-tag\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv1version}/category/document-tag\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Classifyc ontract file",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/category/{document-id}/contract-type",
+            "description": "Classify the type of a contract. 31 types of contract are supported.\n\n#### Response Body\n\n|  | description |\n| --- | --- |\n| type | The type of a contract can be one of the contract types below:  <br>* Underwriting-Agreement  <br>* Security-Agreement  <br>* Supplemental-Indenture  <br>* Amended-and-Restated-Credit-Agreement  <br>* Amendment-to-Employment-Agreement  <br>* Registration-Rights-Agreement  <br>* Stock-Option-Agreement  <br>* Amended-and-Restated-Employment-Agreement  <br>* Services-Agreement  <br>* Investment-Advisory-Agreement  <br>* Loan-Agreement  <br>* Securities-Purchase-Agreement  <br>* Participation-Agreement  <br>* Purchase-Agreement  <br>* Limited-Liability-Company-Agreement  <br>* Indemnification-Agreement  <br>* Subscription-Agreement  <br>* Asset-Purchase-Agreement  <br>* Executive-Employment-Agreement  <br>* Management-Agreement  <br>* Purchase-and-Sale-Agreement  <br>* Consulting-Agreement  <br>* Credit-Agreement  <br>* Distribution-Agreement  <br>* Stock-Purchase-Agreement  <br>* Employment-Agreement  <br>* License-Agreement  <br>* Trust-Agreement  <br>* Administration-Agreement  <br>* Loan-and-Security-Agreement  <br>* Non-Disclosure-Agreement |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                },
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/category/{document-id}/contract-type\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/category/{document-id}/contract-type\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Tag document",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/category/{document-id}/document-tag",
+            "description": "Return a tag array to indicate the possible topics of a given document.\n\n#### Response\n\n| Parameter | Description |\n| --- | --- |\n| tags | A document might be tagged with multiple values. The possible tags include any of below:  <br>* Nature  <br>* Entertainment  <br>* Food  <br>* Religion  <br>* Biology  <br>* Sport  <br>* Business  <br>* Military  <br>* Legal  <br>* Environment  <br>* Education |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": ""
+                },
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/category/{document-id}/document-tag\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/category/{document-id}/document-tag\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Document PII discovery",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/v2/ner/{document-id}/pii",
+            "description": "Discover PII information from a document.\n\n#### Request Body\n\n| name | required | description |\n| --- | --- | --- |\n| categoriesFilter | false | Return the designated entity categories. The supported categories are listed below this table.  <br>  <br>Empty array \\[\\] to return all categories. |\n\n#### Entity Categories\n\nThis API supports 31 types of categories.\n\n| **Code Name** | **Country** | **Remark** |\n| --- | --- | --- |\n| Person | All |  |\n| Organization | All |  |\n| PhoneNumber | All |  |\n| PersonType | All |  |\n| Address | All |  |\n| Email | All |  |\n| DateTime | All |  |\n| Temperature | All |  |\n| Currency | All |  |\n| Age | All |  |\n| Percentage | All |  |\n| CreditCardNumber | All |  |\n| InternationalBankingAccountNumber | All |IBAN  |\n| SWIFTCode | All |  |\n| ABARoutingNumber | US |  |\n| USIndividualTaxpayerIdentification | US |  |\n| USSocialSecurityNumber | US |  |\n| USDriversLicenseNumber | US |  |\n| USUKPassportNumber | US and UK |  |\n| USBankAccountNumber | US |  |\n| ACHRoutingNumber | US |Automatic Clearing House number |\n| InsuranceProvider | US |  |\n| MemberID | US |  Insurance member ID number|\n| GroupID | US |  Insurance group number|\n| AUDriversLicense | Australia |  Insurance group number|\n| AUPassportNumber | Australia |  Insurance group number|\n| AUBusinessNumber | Australia |  Australia business number|\n| BSBCode | Australia |  Bank state branch code|\n| UKDriversLicenseNumber | UK |  UK driver license number|\n| UKNationalHealthNumber | UK |  National Health Service (NHS) number|\n| UKNationalInsuranceNumber | UK |  National insurance number|",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v2"
+                },
+                {
+                    "name": "document-id",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/v2/ner/{document-id}/pii\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/ner/{document-id}/pii\"\nquerystring = {\"document-id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "paragraph": {
+                                    "type": "string"
+                                },
+                                "entities": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Analyze contract layout",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/segmentation/document-id/contract-layout",
+            "description": "Extract layout objects from a contract.\n\n#### Response Body\n\n| **Name** | **Description** |\n| --- | --- |\n| items | Detected object items |\n\n#### Detected Object Items\n\n| **Name** | **Description** |\n| --- | --- |\n| type | Detected object types. The types can be one of these values: `title` |\n| page | The page index of the detected object. `0` is the first page. |\n| boundingBox | Coordinate of the detected object, the order is top, left, bottom, and right. |\n| pdfCoordiante | Coordinate of the detected object, the order is top, left, bottom, and right. |\n| pdfText | The text content of the detected object. |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "The document ID (docId) returned by the Find Job Status API.",
+                    "default": "document-id"
+                },
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "apiV2Version"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/segmentation/document-id/contract-layout\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/segmentation/{document_id}/contract-layout\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "AsyncReviewclauses",
+            "url": "https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/contract/620f6eccc29f9857645f7383/review/async",
+            "description": "Find risky clauses within a contract, such as incomplete clauses, missing clauses, missing contractual elements.\n\n#### Request Body\n\n| **Name** | **Required** | **Description** |\n| --- | --- | --- |\n| data | true | DLA data |\n| contractType | false | Define the contract type-specific checking engine. The value is either of `NDA` | `PA`. `NDA` if the give clause is an NDA clause. `PA` if the given clause is a purchase agreement clause. |\n\n### DLA Data\n\n| **Name** | **Required** | **Description** |\n| --- | --- | --- |\n| type | true | The type of contents. The value is either of `title` | clause. `title` if the give content are a clause title. `clause` if the given content are a clause. |\n| payloads | true | The given content. |\n| method | true | `dla` to use the AI model. |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "apiV2Version",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "apiV2Version"
+                },
+                {
+                    "name": "document-id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "620f6eccc29f9857645f7383"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/apiV2Version/contract/620f6eccc29f9857645f7383/review/async\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://idox-ai-document2.p.rapidapi.com/api/{apiv2version}/contract/{document_id}/review/async\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"idox-ai-document2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

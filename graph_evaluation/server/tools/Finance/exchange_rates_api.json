@@ -1,0 +1,134 @@
+{
+    "product_id": "api_b58a6ffe-a333-4bc1-b5e4-802a44363a18",
+    "tool_description": "This API retrieves all exchange rates between all currencies based on BCE.",
+    "home_url": "https://rapidapi.com/piero.porro/api/exchange-rates-api2/",
+    "name": "Exchange Rates API ",
+    "title": "Exchange Rates API ",
+    "pricing": "FREEMIUM",
+    "tool_name": "Exchange Rates API ",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 269,
+        "avgSuccessRate": 64,
+        "popularityScore": 8,
+        "__typename": "Score"
+    },
+    "host": "exchange-rates-api2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "currencies",
+            "url": "https://exchange-rates-api2.p.rapidapi.com/currencies",
+            "description": "This endpoint gets a list of available currency symbols along with their full names.\n\nGET /currencies HTTP/1.1",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://exchange-rates-api2.p.rapidapi.com/currencies\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"exchange-rates-api2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://exchange-rates-api2.p.rapidapi.com/currencies\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"exchange-rates-api2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "AUD": "Australian Dollar",
+                "BGN": "Bulgarian Lev",
+                "BRL": "Brazilian Real",
+                "CAD": "Canadian Dollar",
+                "CHF": "Swiss Franc",
+                "CNY": "Chinese Renminbi Yuan",
+                "CZK": "Czech Koruna",
+                "DKK": "Danish Krone",
+                "EUR": "Euro",
+                "GBP": "British Pound",
+                "HKD": "Hong Kong Dollar",
+                "HUF": "Hungarian Forint",
+                "IDR": "Indonesian Rupiah",
+                "ILS": "Israeli New Sheqel",
+                "INR": "Indian Rupee",
+                "ISK": "Icelandic Kr\u00f3na",
+                "JPY": "Japanese Yen",
+                "KRW": "South Korean Won",
+                "MXN": "Mexican Peso",
+                "MYR": "Malaysian Ringgit",
+                "NOK": "Norwegian Krone",
+                "NZD": "New Zealand Dollar",
+                "PHP": "Philippine Peso",
+                "PLN": "Polish Z\u0142oty",
+                "RON": "Romanian Leu",
+                "SEK": "Swedish Krona",
+                "SGD": "Singapore Dollar",
+                "THB": "Thai Baht",
+                "TRY": "Turkish Lira",
+                "USD": "United States Dollar",
+                "ZAR": "South African Rand"
+            }
+        },
+        {
+            "name": "historical",
+            "url": "https://exchange-rates-api2.p.rapidapi.com/2023-03-24",
+            "description": "This endpoint returns historical rates for any working day since 4 January 1999.\n\nGET /1999-01-04 HTTP/1.1\nYou can again tweak the response using the from and to parameters.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "YYYY-MM-DD",
+                    "type": "string",
+                    "description": "",
+                    "default": "2023-03-24"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "EUR,USD"
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "CHF"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://exchange-rates-api2.p.rapidapi.com/2023-03-24\"\nquerystring = {\"to\": \"EUR,USD\", \"from\": \"CHF\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"exchange-rates-api2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://exchange-rates-api2.p.rapidapi.com/{yyyy_mm_dd}\"\nquerystring = {\"to\": \"EUR,USD\", \"from\": \"CHF\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"exchange-rates-api2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "amount": 1.0,
+                "base": "CHF",
+                "date": "2023-03-24",
+                "rates": {
+                    "EUR": 1.0128,
+                    "USD": 1.0882
+                }
+            }
+        },
+        {
+            "name": "latest",
+            "url": "https://exchange-rates-api2.p.rapidapi.com/latest",
+            "description": "This endpoint returns the latest rates.\n\nGET /latest HTTP/1.1\nRates quote against the Euro by default. You can quote against other currencies using the from parameter.\n\nGET /latest?from=USD HTTP/1.1\nto limits returned rates to specified values.\n\nGET /latest?to=USD,GBP HTTP/1.1",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "USD,AUD"
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "EUR"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://exchange-rates-api2.p.rapidapi.com/latest\"\nquerystring = {\"to\": \"USD,AUD\", \"from\": \"EUR\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"exchange-rates-api2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://exchange-rates-api2.p.rapidapi.com/latest\"\nquerystring = {\"to\": \"USD,AUD\", \"from\": \"EUR\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"exchange-rates-api2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "amount": 1.0,
+                "base": "EUR",
+                "date": "2023-06-16",
+                "rates": {
+                    "AUD": 1.5941,
+                    "USD": 1.0966
+                }
+            }
+        }
+    ],
+    "standardized_name": "exchange_rates_api"
+}

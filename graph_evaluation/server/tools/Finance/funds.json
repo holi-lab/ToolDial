@@ -1,0 +1,117 @@
+{
+    "tool_name":"Funds",
+    "tool_description":"Get daily and historical funds prices by ISIN.",
+    "title":"Funds",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":841,
+        "avgSuccessRate":98,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/rpi4gx/api/funds/",
+    "host":"funds.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"v1GetFundHistoricalPrices",
+            "url":"https://funds.p.rapidapi.com/v1/historicalPrices/{isin}",
+            "description":"Get fund's historical prices",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"isin",
+                    "type":"STRING",
+                    "description":"Fund's ISIN",
+                    "default":"LU0690375182"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"to",
+                    "type":"STRING",
+                    "description":"Finishing date. Format YYYY-MM-DD.",
+                    "default":"2020-12-31"
+                },
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"Starting date. Format YYYY-MM-DD.",
+                    "default":"2015-01-25"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://funds.p.rapidapi.com/v1/historicalPrices/{isin}\"\nquerystring = {\"to\": to, \"from\": is_from}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"funds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "humanDate":"",
+                    "epochSecs":0,
+                    "price":0
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "humanDate":{
+                            "type":"string"
+                        },
+                        "epochSecs":{
+                            "type":"number"
+                        },
+                        "price":{
+                            "type":"number"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"v1GetFundLatestPrice",
+            "url":"https://funds.p.rapidapi.com/v1/fund/{isin}",
+            "description":"Get fund latest price",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"isin",
+                    "type":"STRING",
+                    "description":"Fund's ISIN",
+                    "default":"LU0690375182"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://funds.p.rapidapi.com/v1/fund/{isin}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"funds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "name":"",
+                "market":"",
+                "price":0,
+                "humanDate":"",
+                "epochSecs":0
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "market":{
+                        "type":"string"
+                    },
+                    "price":{
+                        "type":"number"
+                    },
+                    "humanDate":{
+                        "type":"string"
+                    },
+                    "epochSecs":{
+                        "type":"number"
+                    }
+                }
+            }
+        }
+    ]
+}

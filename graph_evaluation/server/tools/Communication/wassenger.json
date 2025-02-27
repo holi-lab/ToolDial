@@ -1,0 +1,1139 @@
+{
+    "product_id": "api_c3b6624c-13de-49a7-bc6c-116d930cf578",
+    "tool_description": "WhatsApp Cloud API",
+    "home_url": "https://rapidapi.com/wassenger/api/wassenger/",
+    "name": "Wassenger",
+    "title": "Wassenger",
+    "pricing": "PAID",
+    "tool_name": "Wassenger",
+    "score": null,
+    "host": "wassenger.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "createWebhook",
+            "url": "https://wassenger.p.rapidapi.com/webhooks",
+            "description": "Register new webhook endpoint URL for callback notifications.\n\nIf you do not know what webhooks are, [read this article](https://markheath.net/post/basic-introduction-webhooks).\n\n**Note**: webhook endpoint URL must be reachable at public Internet level\nand use a valid domain with proper DNS resolution. E.g: https://mycompany.com/webhook\n\nOur server will make an [HTTP request](https://www.tutorialspoint.com/http/http_requests.htm)\nto the remote endpoint URL you provide every time a new message/device event happens.\n\nInformation will be encoded in [JSON](https://www.json.org/) format as part of the HTTP body data.\n\nYour server must accept read the body in the HTTP POST request and process it accodingly.\n\nServer should reply with a 200 HTTP status code. Otherwise, it will be considered as a\nfailed notification and it will be retried.\n\n### Common questions\n\n#### How data will be notified to my server?\n\nWe notify you by making an HTTP POST method request with a JSON encoded body.\n\n#### How to implement a webhooks server?\n\nThis would drastically depend on the technology / programming language you use, but options are multiple here.\n\nBasically, you would simply need an HTTP server running on Internet that can accept HTTP POST requests.\n\nYou can also take a look at this resources for more information:\n\n- [Webhook Tester](https://webhook.site)\n- [What are Webhooks](https://codeburst.io/what-are-webhooks-b04ec2bf9ca2)\n- [Handling Webhook Requests in PHP](https://lornajane.net/posts/2017/handling-incoming-webhooks-in-php)\n- [Webhook server in Go](https://github.com/adnanh/webhook)\n\n#### How to secure a webhook server?\n\nFirstly, we strongly recommend you to use HTTPS (HTTP + TLS encryption) in your server.\n\nSecondly, you can use a custom URL query param with a secret key that only you know.\nExample: https://mycompany.com/webhooks?secret=some-secret-password\n\n#### What webhook events are supported?\n\nWe currently support the following event types:\n\n- **message:in:new**: On every new incoming message sent by users or groups to your device (restricted to I/O plans)\n- **message:out:sent**: On every successfully delivered message\n- **message:out:failed**: On every failed message delivery (max retries exceeded or phone number not found)\n\n#### How webhook events are structured?\n\n##### Inbound message event\n\n**Event**: `message:in:new`\n\nSimple text message event:\n\n```json\n{\n    \"id\": \"3EB03EBAF8863B42C301\",\n    \"object\": \"message\",\n    \"event\": \"message:in:new\",\n    \"created\": 1552751283,\n    \"device\": {\n        \"id\": \"5c8bd1983cf303001b904bbc\",\n        \"phone\": \"1987654321\",\n        \"alias\": \"Chatbot\",\n        \"plan\": \"io-business\",\n        \"version\": 1\n    },\n    \"data\": {\n        \"id\": \"3EB03EBAF8863B42C301\",\n        \"type\": \"text\",\n        \"flow\": \"inbound\",\n        \"from\": \"123456789@c.us\",\n        \"fromNumber\": \"+123456789\",\n        \"to\": \"1987654321@c.us\",\n        \"toNumber\": \"+1987654321\",\n        \"date\": \"2019-03-16T15:48:02.000Z\",\n        \"timestamp\": 1552751282,\n        \"body\": \"Hello! This is an income sample message\",\n        \"chat\": {\n            \"id\": \"123456789@c.us\",\n            \"name\": \"John Wick\",\n            \"date\": \"2019-03-16T15:40:17.000Z\",\n            \"type\": \"chat\",\n            \"stats\": {\n                \"localMessages\": 72,\n                \"inboundMessages\": 0,\n                \"outboundMessages\": 0\n            },\n            \"contact\": {\n                \"id\": \"123456789@c.us\",\n                \"type\": \"user\",\n                \"name\": \"John Wick\",\n                \"shortName\": \"John Wick\",\n                \"displayName\": \"John Wick\",\n                \"formattedName\": \"John Wick\",\n                \"formattedShortName\": \"John Wick\",\n                \"syncedAt\": \"2019-03-16T15:48:03.464Z\",\n                \"phone\": \"123456789\",\n                \"imageUrl\": \"https://pps.whatsapp.net/v/t61.1111-1/1234567_1234567_1234567_n.jpg?oe=1234567&oh=123456712345671234567\"\n            }\n        },\n        \"meta\": {\n            \"containsEmoji\": false,\n            \"isGif\": false,\n            \"isStar\": false,\n            \"isGroup\": false,\n            \"isForwarded\": false,\n            \"isNotification\": false,\n            \"isLive\": false,\n            \"isBroadcast\": false,\n            \"isBizNotification\": false,\n            \"isDoc\": false,\n            \"isLinkPreview\": false,\n            \"isPSA\": false,\n            \"isRevoked\": false,\n            \"isUnreadType\": false,\n            \"rtl\": false,\n            \"isFailed\": false,\n            \"notifyName\": \"\"\n        }\n    }\n}\n```\n\n##### Outbound events\n\nData will be structured as an array of objects, such as the following example:\n\n```json\n[\n  {\n    \"event\": \"<event type>\",\n    \"date\": \"2018-12-08T15:01:48.518Z\",\n    ...\n  },\n  {\n    \"event\": \"<event type>\",\n    \"date\": \"2018-12-08T15:01:48.518Z\",\n    ...\n  },\n  {\n    \"event\": \"<event type>\",\n    \"date\": \"2018-12-08T15:01:48.518Z\",\n    ...\n  },\n  ...\n]\n```\n\nBelow you will find a featured example of how a webhook callback object looks like.\n\n#### How many JSON objects are included per HTTP request body?\n\nA maximum of 25 objects will be included per HTTP POST request.\n\n#### What happens in case of notification failure?\n\nWe will retry the request several times until it succeds.\n\nIn case of multiple failures in a row (> 10), we will notify you about the issue via email.\n\nIn case of persistent failures over several hours (> 60), our system will disable the webhook\nendpoint and will notify you via email about the incident.\n\nYou could later re-enable the webhook once the issue is fixed in your end.\n\n### Security advice\n\nWe strongly recommend you to use HTTPS instead of HTTP since communication would be encrypted and secure.\n\n### Examples\n\nFull example of a JSON POST body for a message sent event:\n```json\n[\n  {\n    \"event\": \"message:out:sent\",\n    \"date\": \"2018-12-08T15:01:48.518Z\",\n    \"message\": \"Message was delivered successfully\",\n    \"entity\": \"message\",\n    \"entityId\": \"5bf612faa893b00016c0f13d\",\n    \"entityUrl\": \"https://api.domain.com/v1/messages/5bf612faa893b00016c0f13d\",\n    \"user\": \"5bd75ab235623e00162a73dc\",\n    \"data\": {\n      \"id\": \"5bf612faa893b00016c0f13d\",\n      \"phone\": \"+6282288354711\",\n      \"status\": \"processed\",\n      \"deliveryStatus\": \"delivered\",\n      \"createdAt\": \"2018-11-22T02:22:50.955Z\",\n      \"sentAt\": \"2018-11-22T02:29:29.254Z\",\n      \"failedAt\": null,\n      \"processedAt\": \"2018-11-22T02:28:54.818Z\",\n      \"webhookStatus\": \"pending\",\n      \"message\": \"This is an automated message sent from waplatform API\",\n      \"priority\": \"normal\",\n      \"schedule\": {\n        \"enabled\": false\n      },\n      \"retry\": {\n        \"count\": 1,\n        \"lastRetryAt\": \"2018-11-22T02:25:58.414Z\"\n      },\n      \"device\": {\n        \"id\": \"3bf5d1ff2ff2bd001696ac42\",\n        \"phone\": \"+1234567890\",\n        \"alias\": \"My WA Delivery Device\",\n        \"description\": \"Device 1 for customer support and product notifications\",\n        \"status\": \"verified\",\n        \"session\": {\n          \"status\": \"online\",\n          \"error\": false,\n          \"lastSyncAt\": \"2018-12-02T10:11:16.008Z\"\n        },\n        \"createdAt\": \"2018-11-20T09:21:03.898Z\",\n        \"queue\": {\n          \"total\": 100,\n          \"size\": 0,\n          \"available\": 100\n        },\n        \"googleAccount\": \"5bd75b6335623e00162a73df\",\n        \"profile\": {\n          \"name\": \"+628995445601\",\n          \"info\": null,\n          \"lastSyncAt\": \"2018-11-22T22:14:33.334Z\",\n          \"imagePath\": \"/v1/devices/3bf5d1ff2ff2bd001696ac42/profile/image\"\n        },\n        \"settings\": {\n          \"autoReply\": {\n            \"enabled\": false\n          },\n          \"autoRemove\": {\n            \"enabled\": false,\n            \"skip\": 100,\n            \"action\": \"remove\",\n            \"hour\": 3,\n            \"utcHour\": 3\n          }\n        },\n        \"metrics\": {\n          \"chats\": {\n            \"open\": 0,\n            \"removed\": 0,\n            \"updatedAt\": \"2018-11-20T09:21:03.893Z\"\n          }\n        },\n        \"bandwidth\": {\n          \"status\": \"pending\",\n          \"downstream\": 1,\n          \"upstream\": 1\n        },\n        \"billing\": {\n          \"subscription\": {\n            \"status\": \"active\",\n            \"plan\": \"basic\",\n            \"price\": 9.5,\n            \"startedAt\": \"2018-11-20T09:21:03.892Z\",\n            \"endsAt\": \"2018-12-20T09:21:01.000Z\",\n            \"changedAt\": \"2018-11-20T09:21:03.892Z\",\n            \"usage\": {\n              \"textMessages\": 565,\n              \"mediaMessages\": 0,\n              \"failedMessages\": 103,\n              \"filesSize\": 0\n            }\n          }\n        },\n        \"links\": {\n          \"device\": {\n            \"method\": \"GET\",\n            \"url\": \"https://api.domain.com/v1/devices/3bf5d1ff2ff2bd001696ac42\"\n          },\n          \"scan\": {\n            \"method\": \"GET\",\n            \"url\": \"https://api.domain.com/v1/devices/3bf5d1ff2ff2bd001696ac42/scan\"\n          },\n          \"sync\": {\n            \"method\": \"GET\",\n            \"url\": \"https://api.domain.com/v1/devices/3bf5d1ff2ff2bd001696ac42/sync\"\n          },\n          \"health\": {\n            \"method\": \"GET\",\n            \"url\": \"https://api.domain.com/v1/devices/3bf5d1ff2ff2bd001696ac42/health\"\n          },\n          \"profileImage\": {\n            \"method\": \"GET\",\n            \"url\": \"https://api.domain.com/v1/devices/3bf5d1ff2ff2bd001696ac42/profile/image\"\n          },\n          \"messages\": {\n            \"method\": \"GET\",\n            \"url\": \"https://api.domain.com/v1/messages?devices=3bf5d1ff2ff2bd001696ac42\"\n          }\n        },\n        \"stats\": {\n          \"total\": {\n            \"sent\": 565,\n            \"failed\": 103,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 13331,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"minutes\": {\n            \"sent\": 4,\n            \"failed\": 0,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 48,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"quarter\": {\n            \"sent\": 4,\n            \"failed\": 0,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 48,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"hour\": {\n            \"sent\": 10,\n            \"failed\": 1,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 114,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"day\": {\n            \"sent\": 10,\n            \"failed\": 1,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 114,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"week\": {\n            \"sent\": 10,\n            \"failed\": 1,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 114,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"month\": {\n            \"sent\": 565,\n            \"failed\": 103,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 13331,\n            \"totalUpstreamSpeed\": 0\n          },\n          \"year\": {\n            \"sent\": 565,\n            \"failed\": 103,\n            \"media\": 0,\n            \"totalUpstreamSize\": 0,\n            \"totalDeliveryTime\": 13331,\n            \"totalUpstreamSpeed\": 0\n          }\n        }\n      }\n    }\n  },\n  ...\n]\n```\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/webhooks\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/webhooks\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "resetDevice",
+            "url": "https://wassenger.p.rapidapi.com/devices/{deviceId}/reset",
+            "description": "Reset device session and delete all data, including chats, contacts and inbound stored messages.\n\nQueued messages will remain in the queue by default, unless the `emptyQueue` query param is set to `true`.\n\n\n\n**Important**:\n\nThis action will make the device unoperative for about 2-3 minutes.\n\nDevice authorization will be required in order to make it operative again.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "wait",
+                    "type": "BOOLEAN",
+                    "description": "Wait the device to be available. This may delay the server response up to 2 minutes. Please, increase the HTTP request response timeout tolerance.",
+                    "default": ""
+                },
+                {
+                    "name": "emptyQueue",
+                    "type": "BOOLEAN",
+                    "description": "Delete all existent queued messages in the current device.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/reset\"\nquerystring = {\"wait\": \"\", \"emptyQueue\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/reset\"\nquerystring = {\"wait\": \"\", \"emptyQueue\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "deviceAutoreply",
+            "url": "https://wassenger.p.rapidapi.com/devices/{deviceId}/autoreply",
+            "description": "Enable/disable messages auto-reply capability in the device.\n\nThis automation allows you to incoming messages from users with a predefined generic message.\n\nArbitrary answers based on user's incoming message is not currently possible.\n\n**NOTE**: this capability is limited to devices with the following plans:\n\n- **Enterprise**",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/autoreply\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/autoreply\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "deviceAutoremoveChats",
+            "url": "https://wassenger.p.rapidapi.com/devices/{deviceId}/removechats",
+            "description": "Configure automatic chats clean up/removal task in your device.\n\n\n\nThis feature is particularly useful for devices sending thousands of messages to different numbers.\n\nIf enabled, our system would take care of automatically removing old chats every few minutes from your device session.\n\n#### Why does this feature exist?\n\nHaving many chats open would decrease the performance or even make your device non-operative. We recommend enabling this feature if you plan to deliver messages to thousands of different users.\n\nWe recommend customers with medium to high delivery volume to enable this feature.\n\n#### How often would the chats be removed?\n\nChats would be removed every 2 minutes.\n\nIf the device session is not online, chats will be removed as long as the session is operative again.\n\n#### What is the default maximum open chats limit?\n\nIf enabled, by default it would allow up to 500 active chats. You can customize the maximum limit from 100 to 1000 chats.\n\n#### How does having hundreds of chat affect performance?\n\nAccording to our tests, having more than 500 open chat can impact the performance of your device and decrease message delivery speed.\n\nUnless strictly necessary, please consider a lower value.\n\n#### I do not want to remove all chats. Can I skip some of them?\n\nYes, you can.\n\nIn case you do not want to remove certain chats, you can add up to 100 phone numbers to the whitelist.\n\n#### What kind of chats would be removed?\n\nOnly user chats are affected by this.\n\nGroup chats, broadcast lists and pinned user chats are ignored and will not be deleted.\n\n#### How does the clean up criteria works?\n\nIt is quite simple: we remove the oldest chats once the maximum allowed chats was exceeded.\n\nWorth noting that we do not count group/broadcast/pinned chats.\n\n#### What device plans support this feature?\n\nThis feature is limited to devices with the following plans:\n\n- **Business**\n\n- **Enterprise**",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/removechats\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/removechats\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "uploadFile",
+            "url": "https://wassenger.p.rapidapi.com/files",
+            "description": "Upload one or multiple files from remote URLs or traditional HTTP POST client upload. It supports raw, multipart bodies and JSON bodies.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "tags",
+                    "type": "STRING",
+                    "description": "Optional file name tags comma separeted.",
+                    "default": ""
+                },
+                {
+                    "name": "filename",
+                    "type": "STRING",
+                    "description": "Optional file name to identify the file. Default to upload inferred file name.",
+                    "default": ""
+                },
+                {
+                    "name": "reference",
+                    "type": "STRING",
+                    "description": "Optional file reference identifier metadata. Useful for searching and filtering files.",
+                    "default": ""
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "File native presentation format. Defaults to native file format inferred based on its MIME type.",
+                    "default": "\"gif\""
+                },
+                {
+                    "name": "deviceId",
+                    "type": "STRING",
+                    "description": "Optional device ID to associate file by using its linked Google Account. Use this parameter if you do not know the Google Account email or ID.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/files\"\nquerystring = {\"tags\": \"\", \"filename\": \"\", \"reference\": \"\", \"format\": \"\\\"gif\\\"\", \"deviceId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/files\"\nquerystring = {\"tags\": \"\", \"filename\": \"\", \"reference\": \"\", \"format\": \"\\\"gif\\\"\", \"deviceId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "createMessage",
+            "url": "https://wassenger.p.rapidapi.com/messages",
+            "description": "Send new text, media or location message to a given phone number or group.\n\nNote that some message features could not be available because of your device's subscription plan.\n\n\n\nOptional features available per subscription plan are:\n\n- **Group messages** - (only professional, business or enterprise plans)\n\n- **Media messages** - Send image, documents or binary archives (only for professional, business or enterprise plans)\n\n- **Priority message** - (only I/O or business/enterprise plans)\n\n- **Scheduled messages** - Send messages in a predefined date/time (only professional (I/O) and business or enterprise (Gateway) plans)\n\n\n\nPlease, see the device subscription plans table in order to get more details about the allowed features per plan.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/messages\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/messages\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "enableWebhook",
+            "url": "https://wassenger.p.rapidapi.com/webhooks/{webhookId}/enable",
+            "description": "Enable or re-enable specific webhook endpoint.\n\nYou would be typically required after too many failures in a row, which would automatically disabled the webhook endpoint and would required manual intervention to re-enable the webhook.\n\nWebhooks are automatically disabled after 20 or more notification failures in a row.\n\nWebhooks are typically called every minute if there are new events to be notified.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/webhooks/{webhookId}/enable\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/webhooks/{webhookId}/enable\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "createDevice",
+            "url": "https://wassenger.p.rapidapi.com/devices",
+            "description": "Create new device with a specific monthly subscription plan (basic, professional, business or enterprise).\n\n\n\nAfter device creation, you would need to authorize it by scanning the QR code the user device.\n\nSee `/devices/{id}/scan` endpoint for more information.\n\n\n\nBilling would start right after the device creation.\n\nBy default, you can create and run up 5 devices, but you can contact us if you need more devices and we will increase the devices quota limit.\n\n\n\n**Note**: experimental endpoint. Contact support if you experience any issues.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "rebootDevice",
+            "url": "https://wassenger.p.rapidapi.com/devices/{deviceId}/reboot",
+            "description": "Reboot device session without deleting data.\n\n**Warning**:\n\nThis action will make the device unavailable during one minute and no messages will be sent or received during that time.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "wait",
+                    "type": "BOOLEAN",
+                    "description": "Wait the device session to be available. This may delay the server response up to 90 seconds. Please, increase the HTTP request response timeout tolerance.",
+                    "default": ""
+                },
+                {
+                    "name": "force",
+                    "type": "BOOLEAN",
+                    "description": "Force device reboot even if it is already stopped.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/reboot\"\nquerystring = {\"wait\": \"\", \"force\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/reboot\"\nquerystring = {\"wait\": \"\", \"force\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "alias": {
+                        "type": "string"
+                    },
+                    "billing": {
+                        "properties": {
+                            "subscription": {
+                                "properties": {
+                                    "cancelledAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "changedAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "createdAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "endsAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "isTrial": {
+                                        "type": "boolean"
+                                    },
+                                    "plan": {
+                                        "enum": [
+                                            "free",
+                                            "basic",
+                                            "business",
+                                            "enterprise",
+                                            "professional",
+                                            "gateway-basic",
+                                            "gateway-business",
+                                            "gateway-enterprise",
+                                            "gateway-professional",
+                                            "io-basic",
+                                            "io-professional",
+                                            "io-business",
+                                            "io-enterprise"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "planCode": {
+                                        "default": "free",
+                                        "type": "string"
+                                    },
+                                    "previousPlan": {
+                                        "enum": [
+                                            "free",
+                                            "basic",
+                                            "business",
+                                            "enterprise",
+                                            "professional",
+                                            "gateway-basic",
+                                            "gateway-business",
+                                            "gateway-enterprise",
+                                            "gateway-professional",
+                                            "io-basic",
+                                            "io-professional",
+                                            "io-business",
+                                            "io-enterprise"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "product": {
+                                        "default": "gateway",
+                                        "enum": [
+                                            "io",
+                                            "gateway",
+                                            "support"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "startedAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "startsAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "status": {
+                                        "default": "active",
+                                        "enum": [
+                                            "active",
+                                            "disabled",
+                                            "cancelled",
+                                            "unpaid",
+                                            "past_due"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "trialEndsAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "updatedAt": {
+                                        "format": "date-time",
+                                        "type": "string"
+                                    },
+                                    "usage": {
+                                        "properties": {
+                                            "failedMessages": {
+                                                "type": "number"
+                                            },
+                                            "filesSize": {
+                                                "type": "number"
+                                            },
+                                            "mediaMessages": {
+                                                "type": "number"
+                                            },
+                                            "textMessages": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "title": "usage",
+                                        "type": "object"
+                                    },
+                                    "users": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "subscriptionHistory": {
+                                "items": {
+                                    "properties": {
+                                        "cancelledAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "changedAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "endsAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "isTrial": {
+                                            "type": "boolean"
+                                        },
+                                        "plan": {
+                                            "enum": [
+                                                "free",
+                                                "basic",
+                                                "business",
+                                                "enterprise",
+                                                "professional",
+                                                "gateway-basic",
+                                                "gateway-business",
+                                                "gateway-enterprise",
+                                                "gateway-professional",
+                                                "io-basic",
+                                                "io-professional",
+                                                "io-business",
+                                                "io-enterprise"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "planCode": {
+                                            "default": "free",
+                                            "type": "string"
+                                        },
+                                        "previousPlan": {
+                                            "enum": [
+                                                "free",
+                                                "basic",
+                                                "business",
+                                                "enterprise",
+                                                "professional",
+                                                "gateway-basic",
+                                                "gateway-business",
+                                                "gateway-enterprise",
+                                                "gateway-professional",
+                                                "io-basic",
+                                                "io-professional",
+                                                "io-business",
+                                                "io-enterprise"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "product": {
+                                            "default": "gateway",
+                                            "enum": [
+                                                "io",
+                                                "gateway",
+                                                "support"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "startedAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "startsAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "default": "active",
+                                            "enum": [
+                                                "active",
+                                                "disabled",
+                                                "cancelled",
+                                                "unpaid",
+                                                "past_due"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "trialEndsAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "usage": {
+                                            "properties": {
+                                                "failedMessages": {
+                                                    "type": "number"
+                                                },
+                                                "filesSize": {
+                                                    "type": "number"
+                                                },
+                                                "mediaMessages": {
+                                                    "type": "number"
+                                                },
+                                                "textMessages": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "title": "usage",
+                                            "type": "object"
+                                        },
+                                        "users": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "title": "Device",
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "cancelAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "deletedAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "disabledAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "groupChats": {
+                        "properties": {
+                            "chats": {
+                                "items": {
+                                    "properties": {
+                                        "isArchive": {
+                                            "type": "boolean"
+                                        },
+                                        "isPinned": {
+                                            "type": "boolean"
+                                        },
+                                        "isReadOnly": {
+                                            "type": "boolean"
+                                        },
+                                        "isSpam": {
+                                            "type": "boolean"
+                                        },
+                                        "kind": {
+                                            "default": "group",
+                                            "enum": [
+                                                "group",
+                                                "contact",
+                                                "broadcast"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "lastMessageAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "unreadCount": {
+                                            "type": "number"
+                                        },
+                                        "updatedAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "wid": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "title": "Device",
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "lastSyncAt": {
+                                "description": "Last group chats synchronization date.",
+                                "format": "date-time",
+                                "type": "string"
+                            }
+                        },
+                        "title": "groupChats",
+                        "type": "object"
+                    },
+                    "id": {
+                        "description": "Device resource ID",
+                        "type": "string"
+                    },
+                    "info": {
+                        "properties": {
+                            "battery": {
+                                "type": "number"
+                            },
+                            "isBatteryPlugged": {
+                                "type": "boolean"
+                            },
+                            "isBusiness": {
+                                "type": "boolean"
+                            },
+                            "language": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "platform": {
+                                "properties": {
+                                    "buildNumber": {
+                                        "type": "string"
+                                    },
+                                    "manufacturer": {
+                                        "type": "string"
+                                    },
+                                    "model": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "version": {
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "platform",
+                                "type": "object"
+                            },
+                            "protocolVersion": {
+                                "type": "string"
+                            },
+                            "updatedAt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "waVersion": {
+                                "type": "string"
+                            }
+                        },
+                        "title": "info",
+                        "type": "object"
+                    },
+                    "lastMessage": {
+                        "type": "string"
+                    },
+                    "lastMessageAt": {
+                        "format": "date-time",
+                        "type": "string"
+                    },
+                    "logs": {
+                        "items": {
+                            "properties": {
+                                "count": {
+                                    "type": "number"
+                                },
+                                "createdAt": {
+                                    "format": "date-time",
+                                    "type": "string"
+                                },
+                                "event": {
+                                    "type": "string"
+                                },
+                                "level": {
+                                    "default": "info",
+                                    "enum": [
+                                        "info",
+                                        "error",
+                                        "alert",
+                                        "warning",
+                                        "debug",
+                                        "notify",
+                                        "internal",
+                                        "standard"
+                                    ],
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "title": "Device",
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "metrics": {
+                        "properties": {
+                            "contacts": {
+                                "type": "number"
+                            },
+                            "openChats": {
+                                "type": "number"
+                            }
+                        },
+                        "title": "metrics",
+                        "type": "object"
+                    },
+                    "notifications": {
+                        "properties": {
+                            "authorize": {
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "error": {
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "online": {
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "trialExpiration": {
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "usageAlert": {
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "usageExceeded": {
+                                "title": "Device",
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "phone": {
+                        "type": "string"
+                    },
+                    "profile": {
+                        "properties": {
+                            "image": {
+                                "type": "string"
+                            },
+                            "info": {
+                                "type": "string"
+                            },
+                            "lastSyncAt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            }
+                        },
+                        "title": "profile",
+                        "type": "object"
+                    },
+                    "queue": {
+                        "properties": {
+                            "messages": {
+                                "type": "number"
+                            }
+                        },
+                        "title": "queue",
+                        "type": "object"
+                    },
+                    "session": {
+                        "properties": {
+                            "appVersion": {
+                                "type": "string"
+                            },
+                            "lastSyncAt": {
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "logs": {
+                                "items": {
+                                    "properties": {
+                                        "count": {
+                                            "type": "number"
+                                        },
+                                        "createdAt": {
+                                            "format": "date-time",
+                                            "type": "string"
+                                        },
+                                        "event": {
+                                            "type": "string"
+                                        },
+                                        "level": {
+                                            "default": "info",
+                                            "enum": [
+                                                "info",
+                                                "error",
+                                                "alert",
+                                                "warning",
+                                                "debug",
+                                                "notify",
+                                                "internal",
+                                                "standard"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "title": "Device",
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "status": {
+                                "default": "new",
+                                "enum": [
+                                    "online",
+                                    "offline",
+                                    "timeout",
+                                    "timeout_sync",
+                                    "conflict",
+                                    "blocked",
+                                    "error",
+                                    "new",
+                                    "loading",
+                                    "authorize",
+                                    "authorizing",
+                                    "offline:panel",
+                                    "offline:modal"
+                                ],
+                                "type": "string"
+                            },
+                            "uptime": {
+                                "type": "number"
+                            }
+                        },
+                        "title": "session",
+                        "type": "object"
+                    },
+                    "settings": {
+                        "properties": {
+                            "autoRemove": {
+                                "properties": {
+                                    "enabled": {
+                                        "default": true,
+                                        "type": "boolean"
+                                    },
+                                    "max": {
+                                        "default": 600,
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "autoRemove",
+                                "type": "object"
+                            },
+                            "autoReply": {
+                                "properties": {
+                                    "enabled": {
+                                        "type": "boolean"
+                                    },
+                                    "message": {
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "autoReply",
+                                "type": "object"
+                            },
+                            "concurrency": {
+                                "description": "Messages delivery speed concurrency. Defaults to subscription plan default concurrency.",
+                                "type": "number"
+                            },
+                            "deliverySpeed": {
+                                "description": "Maximum messages delivery speed per minute for the current device. Maximum plan delivery speed limit applies here. Use \"0\" for default plan delivery speed or define a custom allowed value for custom delivery speed control.",
+                                "enum": [
+                                    250,
+                                    200,
+                                    180,
+                                    160,
+                                    140,
+                                    120,
+                                    100,
+                                    90,
+                                    80,
+                                    70,
+                                    60,
+                                    50,
+                                    40,
+                                    30,
+                                    20,
+                                    15,
+                                    10,
+                                    9,
+                                    8,
+                                    7,
+                                    6,
+                                    5,
+                                    4,
+                                    3,
+                                    2,
+                                    1,
+                                    0.9,
+                                    0.8,
+                                    0.7,
+                                    0.6,
+                                    0.5,
+                                    0.4,
+                                    0.3,
+                                    0.2,
+                                    0.1,
+                                    0
+                                ],
+                                "type": "number"
+                            },
+                            "isNewNumber": {
+                                "description": "If the number was created as a new number, this field will be \"true\".",
+                                "type": "boolean"
+                            },
+                            "newNumberEndsAt": {
+                                "description": "If the number was created as a new number, this field stores the date limit where the new number anti-abuse policy applies, tipically up to 1 month.",
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "rebootPolicy": {
+                                "default": "disabled",
+                                "description": "Optionally enable automatic session reboot policy for the current device in a specific interval. This might help you to avoid performance or memory issues in long running sessions, which is especially helpful in I/O devices where the session is tipically running for long hours or days. The system will automatically reboot your device session without having to re-authorize it every time or requiring any manual intervention. Reboot will cause up to 2 minutes downtime and message processing delay, but no messages will be lost during the process.",
+                                "enum": [
+                                    "disabled",
+                                    "1h",
+                                    "2h",
+                                    "3h",
+                                    "4h",
+                                    "5h",
+                                    "6h",
+                                    "8h",
+                                    "12h",
+                                    "24h"
+                                ],
+                                "type": "string"
+                            },
+                            "retentionPolicy": {
+                                "default": "plan_defaults",
+                                "description": "Data retention policy applied to device's storage in the system, including inbound/outbound messages, chats, contacts and files. A custom data retention policy can be used to automatically delete messages once they are processed or after a specific amount ot time (e.g: 1 hour or 1 day). Once the maximum retention is exceede, message data will not be accessible from the Web Console or API anymore. If you take want to keep track of data, we recommend you to query the messages via API and store them in your own system.",
+                                "type": "string"
+                            }
+                        },
+                        "title": "settings",
+                        "type": "object"
+                    },
+                    "stats": {
+                        "properties": {
+                            "day": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "hour": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "minutes": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "month": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "quarter": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "total": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "week": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            },
+                            "year": {
+                                "properties": {
+                                    "failed": {
+                                        "type": "number"
+                                    },
+                                    "media": {
+                                        "type": "number"
+                                    },
+                                    "sent": {
+                                        "type": "number"
+                                    },
+                                    "totalDeliveryTime": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSize": {
+                                        "type": "number"
+                                    },
+                                    "totalUpstreamSpeed": {
+                                        "type": "number"
+                                    }
+                                },
+                                "title": "Device",
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "status": {
+                        "default": 50,
+                        "enum": [
+                            "invalid",
+                            "banned",
+                            "removed",
+                            "disabled",
+                            "pending",
+                            "authorized",
+                            "verified",
+                            "operative"
+                        ],
+                        "type": "number"
+                    },
+                    "user": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "default": 2,
+                        "type": "number"
+                    },
+                    "wid": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "user",
+                    "alias"
+                ],
+                "title": "Device",
+                "type": "object"
+            }
+        },
+        {
+            "name": "deviceReadChats",
+            "url": "https://wassenger.p.rapidapi.com/devices/{deviceId}/readchats",
+            "description": "Report on-demand unread messages within one or multiple chats as read messages, simulating user-behavior with the blue double-check after reading messages.\n\n\n\nBy calling this endpoint, you can arbitrary report as read messages all unread messages within one or multiple chats.\n\n\n\nAlternatively, you can report read messages per chat everytime you send a message to a user/group target by simply adding the JSON field `sendReadAck: true` in the API request body.\n\nFor more details, see the [Messages > Send message endpoint](#operation/createMessage) documentation.\n\n\n\n**Note**: in case you have disabled read confirmation in WhatsApp Settings > Account > Privacy, this configuration will have no effect.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/readchats\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/devices/{deviceId}/readchats\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "syncDeviceChatMessages",
+            "url": "https://wassenger.p.rapidapi.com/io/{deviceId}/sync",
+            "description": "Synchronizes device messages across chats, default the most recent 50 chats, 50 most recent messages first.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "messages",
+                    "type": "NUMBER",
+                    "description": "Maximum messages to sync per chat",
+                    "default": 50
+                },
+                {
+                    "name": "size",
+                    "type": "NUMBER",
+                    "description": "Maximum most recent chats to sync",
+                    "default": 20
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/io/{deviceId}/sync\"\nquerystring = {\"messages\": 50, \"size\": 20}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://wassenger.p.rapidapi.com/io/{deviceId}/sync\"\nquerystring = {\"messages\": 50, \"size\": 20}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"wassenger.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

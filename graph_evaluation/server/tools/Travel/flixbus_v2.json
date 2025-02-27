@@ -1,0 +1,294 @@
+{
+    "product_id": "api_d59904f6-2420-4eab-bd52-a08e6d3d7359",
+    "tool_description": "New Flixbus API that provides Flixbus travel search, timetables, stops, cities, routes and autocomplete. ",
+    "home_url": "https://rapidapi.com/3b-data-3b-data-default/api/flixbus2/",
+    "name": "Flixbus_v2",
+    "title": "Flixbus",
+    "pricing": "FREEMIUM",
+    "tool_name": "Flixbus_v2",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1395,
+        "avgSuccessRate": 98,
+        "popularityScore": 8.4,
+        "__typename": "Score"
+    },
+    "host": "flixbus2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Search trips",
+            "url": "https://flixbus2.p.rapidapi.com/trips",
+            "description": "Search trips between two cities or stations",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "Travel date in format DD.MM.YYYY",
+                    "default": "16.02.2022"
+                },
+                {
+                    "name": "to_id",
+                    "type": "STRING",
+                    "description": "Flixbus id of the arrival city or station",
+                    "default": "40dea87d-8646-11e6-9066-549f350fcb0c"
+                },
+                {
+                    "name": "adult",
+                    "type": "NUMBER",
+                    "description": "Number of adult travellers (from 15 years)",
+                    "default": "1"
+                },
+                {
+                    "name": "from_id",
+                    "type": "STRING",
+                    "description": "Flixbus id of the departure city or station",
+                    "default": "40de8044-8646-11e6-9066-549f350fcb0c"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "ENUM",
+                    "description": "Locale of returned results",
+                    "default": ""
+                },
+                {
+                    "name": "bikes",
+                    "type": "NUMBER",
+                    "description": "If travelling with bikes",
+                    "default": "0"
+                },
+                {
+                    "name": "children",
+                    "type": "NUMBER",
+                    "description": "Children travelling (0-14 years)",
+                    "default": "0"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "Currency of fares returned",
+                    "default": "EUR"
+                },
+                {
+                    "name": "search_by",
+                    "type": "ENUM",
+                    "description": "Search by city ids or stations ids (default: cities)",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://flixbus2.p.rapidapi.com/trips\"\nquerystring = {\"locale\": \"\", \"bikes\": \"0\", \"date\": \"16.02.2022\", \"to_id\": \"40dea87d-8646-11e6-9066-549f350fcb0c\", \"adult\": \"1\", \"children\": \"0\", \"currency\": \"EUR\", \"from_id\": \"40de8044-8646-11e6-9066-549f350fcb0c\", \"search_by\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"flixbus2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://flixbus2.p.rapidapi.com/trips\"\nquerystring = {\"locale\": \"\", \"bikes\": \"0\", \"date\": \"16.02.2022\", \"to_id\": \"40dea87d-8646-11e6-9066-549f350fcb0c\", \"adult\": \"1\", \"children\": \"0\", \"currency\": \"EUR\", \"from_id\": \"40de8044-8646-11e6-9066-549f350fcb0c\", \"search_by\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"flixbus2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "headers": {
+                        "type": "object",
+                        "properties": {
+                            "response_time": {
+                                "type": "integer"
+                            },
+                            "response_timestamp": {
+                                "type": "string"
+                            },
+                            "response_id": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "journeys": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "dep_offset": {
+                                    "type": "string"
+                                },
+                                "arr_offset": {
+                                    "type": "string"
+                                },
+                                "dep_name": {
+                                    "type": "string"
+                                },
+                                "arr_name": {
+                                    "type": "string"
+                                },
+                                "duration": {
+                                    "type": "string"
+                                },
+                                "changeovers": {
+                                    "type": "integer"
+                                },
+                                "segments": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "dep_offset": {
+                                                "type": "string"
+                                            },
+                                            "dep_name": {
+                                                "type": "string"
+                                            },
+                                            "arr_offset": {
+                                                "type": "string"
+                                            },
+                                            "arr_name": {
+                                                "type": "string"
+                                            },
+                                            "intermediate_stop": {
+                                                "type": "array"
+                                            },
+                                            "product_type": {
+                                                "type": "string"
+                                            },
+                                            "product": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "deeplink": {
+                                    "type": "string"
+                                },
+                                "fares": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get timetable",
+            "url": "https://flixbus2.p.rapidapi.com/schedule",
+            "description": "Returns timetable for a given station id and date",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "station_id",
+                    "type": "STRING",
+                    "description": "Id of flixbus station",
+                    "default": "dcbd21fc-9603-11e6-9066-549f350fcb0c"
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "Date in format DD.MM.YYYY",
+                    "default": "15.05.2022"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://flixbus2.p.rapidapi.com/schedule\"\nquerystring = {\"station_id\": \"dcbd21fc-9603-11e6-9066-549f350fcb0c\", \"date\": \"15.05.2022\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"flixbus2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://flixbus2.p.rapidapi.com/schedule\"\nquerystring = {\"station_id\": \"dcbd21fc-9603-11e6-9066-549f350fcb0c\", \"date\": \"15.05.2022\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"flixbus2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Autocomplete",
+            "url": "https://flixbus2.p.rapidapi.com/autocomplete",
+            "description": "Search for Flixbus stations",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "query string",
+                    "default": "ljubljana"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "ENUM",
+                    "description": "language of query and results",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://flixbus2.p.rapidapi.com/autocomplete\"\nquerystring = {\"query\": \"ljubljana\", \"locale\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"flixbus2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://flixbus2.p.rapidapi.com/autocomplete\"\nquerystring = {\"query\": \"ljubljana\", \"locale\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"flixbus2.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "zipcode": {
+                            "type": "string"
+                        },
+                        "score": {
+                            "type": "number"
+                        },
+                        "country": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "address": {
+                            "type": "string"
+                        },
+                        "city": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "legacy_id": {
+                                    "type": "integer"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "slug": {
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "legacy_id": {
+                            "type": "integer"
+                        },
+                        "location": {
+                            "type": "object",
+                            "properties": {
+                                "lat": {
+                                    "type": "number"
+                                },
+                                "lon": {
+                                    "type": "number"
+                                }
+                            }
+                        },
+                        "id": {
+                            "type": "string"
+                        },
+                        "importance_order": {
+                            "type": "integer"
+                        },
+                        "slug": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "flixbus_v2"
+}

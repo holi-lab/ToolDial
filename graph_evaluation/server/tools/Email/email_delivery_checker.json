@@ -1,0 +1,55 @@
+{
+    "tool_name":"Email Delivery Checker",
+    "tool_description":"Verifies if email address are valid and can be delivered. \nCheck email format, host name exist, catch all emails and if the host can accept the email address.",
+    "title":"Email Delivery Checker",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/orangepeel-orangepeel-default/api/email-delivery-checker/",
+    "host":"email-delivery-checker.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Verify Email",
+            "url":"https://email-delivery-checker.p.rapidapi.com/verify/v1",
+            "description":"Checks if email address exist and can be delivered.\nChecks the following for each email\n\n- email address valid\n- host is valid\n- host can accept the email RCPT\n- Is this CatchAll host",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"email",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"john.appleseed@gmail.com"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"Response in JSON or XML format",
+                    "default":"json"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://email-delivery-checker.p.rapidapi.com/verify/v1\"\nquerystring = {\"email\": email, \"format\": format}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"email-delivery-checker.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "CatchAll":false,
+                "Deliverable":false,
+                "Email":"john.appleseed@gmail.com"
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "CatchAll":{
+                        "type":"boolean"
+                    },
+                    "Deliverable":{
+                        "type":"boolean"
+                    },
+                    "Email":{
+                        "type":"string"
+                    }
+                },
+                "type":"object"
+            }
+        }
+    ]
+}

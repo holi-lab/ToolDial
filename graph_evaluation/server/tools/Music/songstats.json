@@ -1,0 +1,2555 @@
+{
+    "tool_name": "Songstats",
+    "tool_description": "Music Data for Spotify, Apple Music, Amazon, Deezer, YouTube, TikTok, Instagram, Shazam, Beatport, Traxsource, SoundCloud, TIDAL, iTunes, Facebook, Twitter, Bandsintown, Songkick & more...",
+    "title": "Songstats",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 452,
+        "avgSuccessRate": 89,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/songstats-app-songstats-app-default/api/songstats/",
+    "host": "songstats.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Artist Audience Details",
+            "url": "https://songstats.p.rapidapi.com/artists/audience/details",
+            "description": "Returns detailed audience information of an artist for a specific country filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                },
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "A two-letter country code",
+                    "default": "US"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                },
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/audience/details\"\nquerystring = {\"songstats_artist_id\": songstats_artist_id, \"source\": source, \"spotify_artist_id\": spotify_artist_id, \"country_code\": country_code}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "audience": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "artist_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_artist_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search Label",
+            "url": "https://songstats.p.rapidapi.com/labels/search",
+            "description": "Search for a record label.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "Search Query",
+                    "default": "Toolroom"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/search\"\nquerystring = {\"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "songstats_label_id": {
+                                    "type": "string"
+                                },
+                                "avatar": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "site_url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Delete Label Link",
+            "url": "https://songstats.p.rapidapi.com/labels/link_request",
+            "description": "Request for link to be deleted from a record label.",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://soundcloud.com/themythofnyx"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                },
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/link_request\"\nquerystring = {\"link\": link, \"songstats_label_id\": songstats_label_id, \"beatport_label_id\": beatport_label_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Add Label Link",
+            "url": "https://songstats.p.rapidapi.com/labels/link_request",
+            "description": "Request for link to be added to a record label.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://soundcloud.com/themythofnyx"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/link_request\"\nquerystring = {\"beatport_label_id\": beatport_label_id, \"link\": link, \"songstats_label_id\": songstats_label_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Top Playlists",
+            "url": "https://songstats.p.rapidapi.com/labels/top_playlists",
+            "description": "Returns the top playlists of a label.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "rank_type",
+                    "type": "STRING",
+                    "description": "The rank type to sort top tracks by (can be any available_rank_type for a given source).",
+                    "default": "playlists_current"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "current",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": "true"
+                },
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/top_playlists\"\nquerystring = {\"rank_type\": rank_type, \"limit\": limit, \"current\": current, \"beatport_label_id\": beatport_label_id, \"songstats_label_id\": songstats_label_id, \"source\": source}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "top_playlists": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Top Tracks",
+            "url": "https://songstats.p.rapidapi.com/labels/top_tracks",
+            "description": "Returns the top tracks of a label sorted by rank type.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                },
+                {
+                    "name": "rank_type",
+                    "type": "STRING",
+                    "description": "The rank type to sort top tracks by (can be any available_rank_type for a given source).",
+                    "default": "playlists_current"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/top_tracks\"\nquerystring = {\"beatport_label_id\": beatport_label_id, \"songstats_label_id\": songstats_label_id, \"rank_type\": rank_type, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "available_rank_types": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "rank_type": {
+                                                "type": "string"
+                                            },
+                                            "rank_type_def": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "rank_type": {
+                                    "type": "string"
+                                },
+                                "top_tracks": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Current Stats",
+            "url": "https://songstats.p.rapidapi.com/labels/stats",
+            "description": "Returns summary and detailed information of a record label filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/stats\"\nquerystring = {\"beatport_label_id\": beatport_label_id, \"songstats_label_id\": songstats_label_id, \"source\": source}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "label_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_label_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Activities",
+            "url": "https://songstats.p.rapidapi.com/labels/activities",
+            "description": "Returns the latest activities of a label filtered by source.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "74932"
+                },
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for. Can be a comma separated list of individual sources or be set to 'all'.",
+                    "default": "spotify,apple_music,deezer"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "tier",
+                    "type": "NUMBER",
+                    "description": "Filter Activities by importance. Tier 4 is the lowest tier that returns all activities. Tier 1 is the highest tier that returns only the most significant activities.",
+                    "default": "4"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "7gk4yfc9"
+                },
+                {
+                    "name": "recent",
+                    "type": "BOOLEAN",
+                    "description": "Only include Activities for recent tracks (released in past 3 months).",
+                    "default": "false"
+                },
+                {
+                    "name": "milestones",
+                    "type": "BOOLEAN",
+                    "description": "Include Milestone Activities.",
+                    "default": "true"
+                },
+                {
+                    "name": "albums",
+                    "type": "BOOLEAN",
+                    "description": "Include Album Activities.",
+                    "default": "true"
+                },
+                {
+                    "name": "editorial",
+                    "type": "BOOLEAN",
+                    "description": "Only include Editorial Activities.",
+                    "default": "false"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Specifies the offset of the limited results being returned.",
+                    "default": "20"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/activities\"\nquerystring = {\"beatport_label_id\": beatport_label_id, \"source\": source, \"limit\": limit, \"tier\": tier, \"songstats_label_id\": songstats_label_id, \"recent\": recent, \"milestones\": milestones, \"albums\": albums, \"editorial\": editorial, \"offset\": offset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Audience Details",
+            "url": "https://songstats.p.rapidapi.com/labels/audience/details",
+            "description": "Returns detailed audience information of a record label for a specific country filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                },
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "A two-letter country code",
+                    "default": "US"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/audience/details\"\nquerystring = {\"source\": source, \"beatport_label_id\": beatport_label_id, \"songstats_label_id\": songstats_label_id, \"country_code\": country_code}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "audience": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "label_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_label_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Add Artist Link",
+            "url": "https://songstats.p.rapidapi.com/artists/link_request",
+            "description": "Request for link to be added to an artist.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://soundcloud.com/frankocean"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/link_request\"\nquerystring = {\"spotify_artist_id\": spotify_artist_id, \"link\": link, \"songstats_artist_id\": songstats_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Delete Artist Link",
+            "url": "https://songstats.p.rapidapi.com/artists/link_request",
+            "description": "Request for link to be deleted from an artist.",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://soundcloud.com/frankocean"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/link_request\"\nquerystring = {\"spotify_artist_id\": spotify_artist_id, \"link\": link, \"songstats_artist_id\": songstats_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search Artist",
+            "url": "https://songstats.p.rapidapi.com/artists/search",
+            "description": "Search for an artist.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "Search Query",
+                    "default": "Ariana Grande"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/search\"\nquerystring = {\"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "songstats_artist_id": {
+                                    "type": "string"
+                                },
+                                "avatar": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "site_url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Top Playlists",
+            "url": "https://songstats.p.rapidapi.com/artists/top_playlists",
+            "description": "Returns the top playlists of an artist.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "current",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/top_playlists\"\nquerystring = {\"spotify_artist_id\": spotify_artist_id, \"songstats_artist_id\": songstats_artist_id, \"limit\": limit, \"source\": source, \"current\": current}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "top_playlists": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Catalog",
+            "url": "https://songstats.p.rapidapi.com/artists/catalog",
+            "description": "Returns the track catalog of an artist.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Specifies the offset of the limited results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/catalog\"\nquerystring = {\"limit\": limit, \"spotify_artist_id\": spotify_artist_id, \"offset\": offset, \"songstats_artist_id\": songstats_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "artist_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_artist_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Audience",
+            "url": "https://songstats.p.rapidapi.com/artists/audience",
+            "description": "Returns audience information of an artist filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                },
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/audience\"\nquerystring = {\"songstats_artist_id\": songstats_artist_id, \"source\": source, \"spotify_artist_id\": spotify_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "audience": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "artist_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_artist_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Historic Stats",
+            "url": "https://songstats.p.rapidapi.com/artists/historic_stats",
+            "description": "Returns historic information of an artist filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "with_aggregates",
+                    "type": "BOOLEAN",
+                    "description": "Includes data points aggregated by Songstats like playlists_current, playlists_reach_current, charts_current, etc.",
+                    "default": "true"
+                },
+                {
+                    "name": "end_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Specifies the end_date of the historic data that is being requested.",
+                    "default": "2022-01-16"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                },
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "start_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Specifies the start_date of the historic data that is being requested.",
+                    "default": "2021-12-31"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/historic_stats\"\nquerystring = {\"source\": source, \"with_aggregates\": with_aggregates, \"end_date\": end_date, \"songstats_artist_id\": songstats_artist_id, \"spotify_artist_id\": spotify_artist_id, \"start_date\": start_date}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "history": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "artist_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_artist_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Activities",
+            "url": "https://songstats.p.rapidapi.com/artists/activities",
+            "description": "Returns the latest activities of an artist filtered by source.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for. Can be a comma separated list of individual sources or be set to 'all'.",
+                    "default": "spotify,apple_music,deezer"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Specifies the offset of the limited results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "tier",
+                    "type": "NUMBER",
+                    "description": "Filter Activities by importance. Tier 4 is the lowest tier that returns all activities. Tier 1 is the highest tier that returns only the most significant activities.",
+                    "default": "4"
+                },
+                {
+                    "name": "albums",
+                    "type": "BOOLEAN",
+                    "description": "Include Album Activities.",
+                    "default": "true"
+                },
+                {
+                    "name": "milestones",
+                    "type": "BOOLEAN",
+                    "description": "Include Milestone Activities.",
+                    "default": "true"
+                },
+                {
+                    "name": "editorial",
+                    "type": "BOOLEAN",
+                    "description": "Only include Editorial Activities.",
+                    "default": "false"
+                },
+                {
+                    "name": "recent",
+                    "type": "BOOLEAN",
+                    "description": "Only include Activities for recent tracks (released in past 3 months).",
+                    "default": "false"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/activities\"\nquerystring = {\"source\": source, \"songstats_artist_id\": songstats_artist_id, \"offset\": offset, \"limit\": limit, \"spotify_artist_id\": spotify_artist_id, \"tier\": tier, \"albums\": albums, \"milestones\": milestones, \"editorial\": editorial, \"recent\": recent}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Info",
+            "url": "https://songstats.p.rapidapi.com/artists/info",
+            "description": "Returns metadata information of an artist.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/info\"\nquerystring = {\"spotify_artist_id\": spotify_artist_id, \"songstats_artist_id\": songstats_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "artist_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_artist_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "external_id": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Audience",
+            "url": "https://songstats.p.rapidapi.com/labels/audience",
+            "description": "Returns audience information of a record label filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/audience\"\nquerystring = {\"source\": source, \"beatport_label_id\": beatport_label_id, \"songstats_label_id\": songstats_label_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "audience": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "label_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_label_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Catalog",
+            "url": "https://songstats.p.rapidapi.com/labels/catalog",
+            "description": "Returns the track catalog of a record label.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Specifies the offset of the limited results being returned.",
+                    "default": "20"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/catalog\"\nquerystring = {\"beatport_label_id\": beatport_label_id, \"songstats_label_id\": songstats_label_id, \"limit\": limit, \"offset\": offset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "songstats_track_id": {
+                                    "type": "string"
+                                },
+                                "avatar": {
+                                    "type": "string"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "release_date": {
+                                    "type": "string"
+                                },
+                                "site_url": {
+                                    "type": "string"
+                                },
+                                "artists": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "songstats_artist_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "label_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_label_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Historic Label Stats",
+            "url": "https://songstats.p.rapidapi.com/labels/historic_stats",
+            "description": "Returns historic information of a record label filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Specifies the start_date of the historic data that is being requested.",
+                    "default": "2021-12-31"
+                },
+                {
+                    "name": "end_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Specifies the end_date of the historic data that is being requested.",
+                    "default": "2022-01-16"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                },
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "with_aggregates",
+                    "type": "BOOLEAN",
+                    "description": "Includes data points aggregated by Songstats like playlists_current, playlists_reach_current, charts_current, etc.",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/historic_stats\"\nquerystring = {\"start_date\": start_date, \"end_date\": end_date, \"source\": source, \"songstats_label_id\": songstats_label_id, \"beatport_label_id\": beatport_label_id, \"with_aggregates\": with_aggregates}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "history": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "label_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_label_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Label Info",
+            "url": "https://songstats.p.rapidapi.com/labels/info",
+            "description": "Returns metadata information of a record label.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                },
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/info\"\nquerystring = {\"songstats_label_id\": songstats_label_id, \"beatport_label_id\": beatport_label_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "label_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_label_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "external_id": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Top Tracks",
+            "url": "https://songstats.p.rapidapi.com/artists/top_tracks",
+            "description": "Returns the top tracks of an artist sorted rank type.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "rank_type",
+                    "type": "STRING",
+                    "description": "The rank type to sort top tracks by (can be any available_rank_type for a given source).",
+                    "default": "playlists_current"
+                },
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Specifies the limit of results being returned.",
+                    "default": "20"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/top_tracks\"\nquerystring = {\"rank_type\": rank_type, \"spotify_artist_id\": spotify_artist_id, \"limit\": limit, \"songstats_artist_id\": songstats_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "available_rank_types": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "rank_type": {
+                                                "type": "string"
+                                            },
+                                            "rank_type_def": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "rank_type": {
+                                    "type": "string"
+                                },
+                                "top_tracks": {
+                                    "type": "array"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Artist Current Stats",
+            "url": "https://songstats.p.rapidapi.com/artists/stats",
+            "description": "Returns summary and detailed information of an artist filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/stats\"\nquerystring = {\"spotify_artist_id\": spotify_artist_id, \"source\": source, \"songstats_artist_id\": songstats_artist_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "artist_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_artist_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Delete Track Link",
+            "url": "https://songstats.p.rapidapi.com/tracks/link_request",
+            "description": "Request for link to be deleted from track.",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://www.youtube.com/watch?v=YaISwlnmEKQ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_track_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "3VTPi12rK7mioSLL0mmu75"
+                },
+                {
+                    "name": "isrc",
+                    "type": "STRING",
+                    "description": "The ISRC of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "GBKQU2166610"
+                },
+                {
+                    "name": "songstats_track_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "2iye8blt"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/link_request\"\nquerystring = {\"link\": link, \"spotify_track_id\": spotify_track_id, \"isrc\": isrc, \"songstats_track_id\": songstats_track_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Add Track Link",
+            "url": "https://songstats.p.rapidapi.com/tracks/link_request",
+            "description": "Request for link to be added to a track.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://www.youtube.com/watch?v=YaISwlnmEKQ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_track_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "3VTPi12rK7mioSLL0mmu75"
+                },
+                {
+                    "name": "isrc",
+                    "type": "STRING",
+                    "description": "The ISRC of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "GBKQU2166610"
+                },
+                {
+                    "name": "songstats_track_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "2iye8blt"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/link_request\"\nquerystring = {\"spotify_track_id\": spotify_track_id, \"link\": link, \"isrc\": isrc, \"songstats_track_id\": songstats_track_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search Track",
+            "url": "https://songstats.p.rapidapi.com/tracks/search",
+            "description": "Search for a track.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "Boris Brejcha Purple"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/search\"\nquerystring = {\"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "songstats_track_id": {
+                                    "type": "string"
+                                },
+                                "avatar": {
+                                    "type": "string"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "release_date": {
+                                    "type": "string"
+                                },
+                                "site_url": {
+                                    "type": "string"
+                                },
+                                "artists": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "songstats_artist_id": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Track Current Stats",
+            "url": "https://songstats.p.rapidapi.com/tracks/stats",
+            "description": "Returns summary and detailed information of a track filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_track_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "3VTPi12rK7mioSLL0mmu75"
+                },
+                {
+                    "name": "isrc",
+                    "type": "STRING",
+                    "description": "The ISRC of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "GBKQU2166610"
+                },
+                {
+                    "name": "with_playlists",
+                    "type": "BOOLEAN",
+                    "description": "Includes an array of all of the playlists associated to the track.",
+                    "default": "true"
+                },
+                {
+                    "name": "with_charts",
+                    "type": "BOOLEAN",
+                    "description": "Includes an array of all of the charts associated to the track.",
+                    "default": "true"
+                },
+                {
+                    "name": "with_links",
+                    "type": "BOOLEAN",
+                    "description": "Includes an array of all of the source links associated to the track.",
+                    "default": "true"
+                },
+                {
+                    "name": "songstats_track_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "2iye8blt"
+                },
+                {
+                    "name": "with_videos",
+                    "type": "BOOLEAN",
+                    "description": "Includes an array of all of the videos currently associated to the track.",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/stats\"\nquerystring = {\"spotify_track_id\": spotify_track_id, \"source\": source, \"isrc\": isrc, \"with_playlists\": with_playlists, \"with_charts\": with_charts, \"with_links\": with_links, \"songstats_track_id\": songstats_track_id, \"with_videos\": with_videos}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "track_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_track_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "release_date": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            },
+                            "artists": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "songstats_artist_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Track Info",
+            "url": "https://songstats.p.rapidapi.com/tracks/info",
+            "description": "Returns metadata information of a track.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "spotify_track_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "3VTPi12rK7mioSLL0mmu75"
+                },
+                {
+                    "name": "songstats_track_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "2iye8blt"
+                },
+                {
+                    "name": "isrc",
+                    "type": "STRING",
+                    "description": "The ISRC of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "GBKQU2166610"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/info\"\nquerystring = {\"spotify_track_id\": spotify_track_id, \"songstats_track_id\": songstats_track_id, \"isrc\": isrc}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "track_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_track_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "release_date": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            },
+                            "artists": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "songstats_artist_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "audio_analysis": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Sources",
+            "url": "https://songstats.p.rapidapi.com/sources",
+            "description": "Returns currently supported data sources.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/sources\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Track Historic Stats",
+            "url": "https://songstats.p.rapidapi.com/tracks/historic_stats",
+            "description": "Returns historic information of a track filtered by source.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "Specifies the sources that data is being requested for *\n\n*Can be a comma separated list of individual sources like `spotify,apple_music,deezer` or be set to `all`.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Specifies the start_date of the historic data that is being requested.",
+                    "default": "2021-12-31"
+                },
+                {
+                    "name": "songstats_track_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "2iye8blt"
+                },
+                {
+                    "name": "spotify_track_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "3VTPi12rK7mioSLL0mmu75"
+                },
+                {
+                    "name": "with_aggregates",
+                    "type": "BOOLEAN",
+                    "description": "Includes data points aggregated by Songstats like playlists_current, playlists_reach_current, charts_current, etc.",
+                    "default": "true"
+                },
+                {
+                    "name": "end_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Specifies the end_date of the historic data that is being requested.",
+                    "default": "2022-01-16"
+                },
+                {
+                    "name": "isrc",
+                    "type": "STRING",
+                    "description": "The ISRC of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "GBKQU2166610"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/historic_stats\"\nquerystring = {\"start_date\": start_date, \"songstats_track_id\": songstats_track_id, \"spotify_track_id\": spotify_track_id, \"with_aggregates\": with_aggregates, \"source\": source, \"end_date\": end_date, \"isrc\": isrc}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "stats": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "history": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "track_info": {
+                        "type": "object",
+                        "properties": {
+                            "songstats_track_id": {
+                                "type": "string"
+                            },
+                            "avatar": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            },
+                            "release_date": {
+                                "type": "string"
+                            },
+                            "site_url": {
+                                "type": "string"
+                            },
+                            "artists": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "songstats_artist_id": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "source_ids": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Add Label Link",
+            "url": "https://songstats.p.rapidapi.com/labels/link_request",
+            "description": "Request for link to be added to a record label.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://soundcloud.com/themythofnyx"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "beatport_label_id",
+                    "type": "STRING",
+                    "description": "The Beatport ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "71740"
+                },
+                {
+                    "name": "songstats_label_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the label being requested *\n\n*Either `beatport_label_id` or `songstats_label_id` **are required** for this request.",
+                    "default": "q754od0s"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/link_request\"\nquerystring = {\"beatport_label_id\": \"71740\", \"link\": \"https://soundcloud.com/themythofnyx\", \"songstats_label_id\": \"q754od0s\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/labels/link_request\"\nquerystring = {\"beatport_label_id\": \"71740\", \"link\": \"https://soundcloud.com/themythofnyx\", \"songstats_label_id\": \"q754od0s\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Add Artist Link",
+            "url": "https://songstats.p.rapidapi.com/artists/link_request",
+            "description": "Request for link to be added to an artist.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://soundcloud.com/frankocean"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_artist_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "2h93pZq0e7k5yf4dywlkpM"
+                },
+                {
+                    "name": "songstats_artist_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the artist being requested *\n\n*Either `spotify_artist_id` or `songstats_artist_id` **are required** for this request.",
+                    "default": "vxk62ige"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/link_request\"\nquerystring = {\"spotify_artist_id\": \"2h93pZq0e7k5yf4dywlkpM\", \"link\": \"https://soundcloud.com/frankocean\", \"songstats_artist_id\": \"vxk62ige\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/artists/link_request\"\nquerystring = {\"spotify_artist_id\": \"2h93pZq0e7k5yf4dywlkpM\", \"link\": \"https://soundcloud.com/frankocean\", \"songstats_artist_id\": \"vxk62ige\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Add Track Link",
+            "url": "https://songstats.p.rapidapi.com/tracks/link_request",
+            "description": "Request for link to be added to a track.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://www.youtube.com/watch?v=YaISwlnmEKQ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "spotify_track_id",
+                    "type": "STRING",
+                    "description": "The Spotify ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "3VTPi12rK7mioSLL0mmu75"
+                },
+                {
+                    "name": "isrc",
+                    "type": "STRING",
+                    "description": "The ISRC of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "GBKQU2166610"
+                },
+                {
+                    "name": "songstats_track_id",
+                    "type": "STRING",
+                    "description": "The Songstats ID of the track being requested *\n\n*Either `spotify_track_id`,  `songstats_track_id` or `isrc` **are required** for this request.",
+                    "default": "2iye8blt"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/link_request\"\nquerystring = {\"spotify_track_id\": \"3VTPi12rK7mioSLL0mmu75\", \"link\": \"https://www.youtube.com/watch?v=YaISwlnmEKQ\", \"isrc\": \"GBKQU2166610\", \"songstats_track_id\": \"2iye8blt\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://songstats.p.rapidapi.com/tracks/link_request\"\nquerystring = {\"spotify_track_id\": \"3VTPi12rK7mioSLL0mmu75\", \"link\": \"https://www.youtube.com/watch?v=YaISwlnmEKQ\", \"isrc\": \"GBKQU2166610\", \"songstats_track_id\": \"2iye8blt\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"songstats.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

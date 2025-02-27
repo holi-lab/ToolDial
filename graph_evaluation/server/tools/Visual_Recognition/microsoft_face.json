@@ -1,0 +1,950 @@
+{
+    "product_id": "api_706cc213-c375-4c44-9f80-62a3df6f8a35",
+    "tool_description": "An AI service from Microsoft Azure that analyzes faces in images.",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/microsoft-face1/",
+    "name": "Microsoft Face",
+    "title": "Microsoft Face",
+    "pricing": "FREEMIUM",
+    "tool_name": "Microsoft Face",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1369,
+        "avgSuccessRate": 57,
+        "popularityScore": 9.6,
+        "__typename": "Score"
+    },
+    "host": "microsoft-face1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Detect with URL",
+            "url": "https://microsoft-face1.p.rapidapi.com/detect",
+            "description": "Detect human faces in an image, return face rectangles, and optionally with faceIds, landmarks, and attributes.<br />\n* No image will be stored. Only the extracted face feature will be stored on server. The faceId is an identifier of the face feature and will be used in [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239), [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237). The stored face feature(s) will expire and be deleted 24 hours after the original detection call.\n* Optional parameters include faceId, landmarks, and attributes. Attributes include age, gender, headPose, smile, facialHair, glasses, emotion, hair, makeup, occlusion, accessories, blur, exposure and noise. Some of the results returned for specific attributes may not be highly accurate.\n* JPEG, PNG, GIF (the first frame), and BMP format are supported. The allowed image file size is from 1KB to 6MB.\n* Up to 100 faces can be returned for an image. Faces are ranked by face rectangle size from large to small.\n* For optimal results when querying [Face - Identify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395239), [Face - Verify](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f3039523a), and [Face - Find Similar](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395237) ('returnFaceId' is true), please use faces that are: frontal, clear, and with a minimum size of 200x200 pixels (100 pixels between eyes).\n* The minimum detectable face size is 36x36 pixels in an image no larger than 1920x1080 pixels. Images with dimensions higher than 1920x1080 pixels will need a proportionally larger minimum face size.\n* Different 'detectionModel' values can be provided. To use and compare different detection models, please refer to [How to specify a detection model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-detection-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'detection_01': | The default detection model for [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). Recommend for near frontal face detection. For scenarios with exceptionally large angle (head-pose) faces, occluded faces or wrong image orientation, the faces in such cases may not be detected. |\n  | 'detection_02': | Detection model released in 2019 May with improved accuracy especially on small, side and blurry faces. |\n\n* Different 'recognitionModel' values are provided. If follow-up operations like Verify, Identify, Find Similar are needed, please specify the recognition model with 'recognitionModel' parameter. The default value for 'recognitionModel' is 'recognition_01', if latest model needed, please explicitly specify the model you need in this parameter. Once specified, the detected faceIds will be associated with the specified recognition model. More details, please refer to [How to specify a recognition model](https://docs.microsoft.com/en-us/azure/cognitive-services/face/face-api-how-to-topics/specify-recognition-model)\n  | Model | Recommended use-case(s) |\n  | ---------- | -------- |\n  | 'recognition_01': | The default recognition model for [Face - Detect](/docs/services/563879b61984550e40cbbe8d/operations/563879b61984550f30395236). All those faceIds created before 2019 March are bonded with this recognition model. |\n  | 'recognition_02': | Recognition model released in 2019 March. 'recognition_02' is recommended since its overall accuracy is improved compared with 'recognition_01'. |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "detectionModel",
+                    "type": "STRING",
+                    "description": "The 'detectionModel' associated with the detected faceIds. Supported 'detectionModel' values include \\\\\\\\\\\\\\\"detection_01\\\\\\\\\\\\\\\" or \\\\\\\\\\\\\\\"detection_02\\\\\\\\\\\\\\\". The default value is \\\\\\\\\\\\\\\"detection_01\\\\\\\\\\\\\\\".",
+                    "default": "detection_01"
+                },
+                {
+                    "name": "recognitionModel",
+                    "type": "STRING",
+                    "description": "The 'recognitionModel' associated with the detected faceIds. Supported 'recognitionModel' values include \\\\\\\\\\\\\\\"recognition_01\\\\\\\\\\\\\\\" or \\\\\\\\\\\\\\\"recognition_02\\\\\\\\\\\\\\\". The default value is \\\\\\\\\\\\\\\"recognition_01\\\\\\\\\\\\\\\". \\\\\\\\\\\\\\\"recognition_02\\\\\\\\\\\\\\\" is recommended since its overall accuracy is improved compared with \\\\\\\\\\\\\\\"recognition_01\\\\\\\\\\\\\\\".",
+                    "default": "recognition_01"
+                },
+                {
+                    "name": "returnFaceAttributes",
+                    "type": "ARRAY",
+                    "description": "Analyze and return the one or more specified face attributes in the comma-separated string like \\\\\\\\\\\\\\\"returnFaceAttributes=age,gender\\\\\\\\\\\\\\\". Supported face attributes include age, gender, headPose, smile, facialHair, glasses and emotion. Note that each face attribute analysis has additional computational and time cost.",
+                    "default": "[\"age\"]"
+                },
+                {
+                    "name": "returnRecognitionModel",
+                    "type": "BOOLEAN",
+                    "description": "A value indicating whether the operation should return 'recognitionModel' in response.",
+                    "default": "false"
+                },
+                {
+                    "name": "returnFaceId",
+                    "type": "BOOLEAN",
+                    "description": "A value indicating whether the operation should return faceIds of detected faces.",
+                    "default": "true"
+                },
+                {
+                    "name": "returnFaceLandmarks",
+                    "type": "BOOLEAN",
+                    "description": "Return face landmarks of the detected faces or not. The default value is false.",
+                    "default": "false"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-face1.p.rapidapi.com/detect\"\nquerystring = {\"detectionModel\": \"detection_01\", \"recognitionModel\": \"recognition_01\", \"returnFaceAttributes\": \"[\\\"age\\\"]\", \"returnRecognitionModel\": \"false\", \"returnFaceId\": \"true\", \"returnFaceLandmarks\": \"false\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-face1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-face1.p.rapidapi.com/detect\"\nquerystring = {\"detectionModel\": \"detection_01\", \"recognitionModel\": \"recognition_01\", \"returnFaceAttributes\": \"[\\\"age\\\"]\", \"returnRecognitionModel\": \"false\", \"returnFaceId\": \"true\", \"returnFaceLandmarks\": \"false\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-face1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "items": {
+                    "description": "Detected Face object.",
+                    "properties": {
+                        "faceAttributes": {
+                            "description": "Face Attributes",
+                            "properties": {
+                                "accessories": {
+                                    "description": "Properties describing any accessories on a given face.",
+                                    "items": {
+                                        "description": "Accessory item and corresponding confidence level.",
+                                        "properties": {
+                                            "confidence": {
+                                                "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                                "maximum": 1,
+                                                "minimum": 0,
+                                                "type": "number"
+                                            },
+                                            "type": {
+                                                "description": "Type of an accessory",
+                                                "enum": [
+                                                    "headWear",
+                                                    "glasses",
+                                                    "mask"
+                                                ],
+                                                "type": "string",
+                                                "x-ms-enum": {
+                                                    "modelAsString": false,
+                                                    "name": "AccessoryType"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "age": {
+                                    "description": "Age in years",
+                                    "type": "number"
+                                },
+                                "blur": {
+                                    "description": "Properties describing any presence of blur within the image.",
+                                    "properties": {
+                                        "blurLevel": {
+                                            "description": "An enum value indicating level of blurriness.",
+                                            "enum": [
+                                                "Low",
+                                                "Medium",
+                                                "High"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "BlurLevel"
+                                            }
+                                        },
+                                        "value": {
+                                            "description": "A number ranging from 0 to 1 indicating the intensity level associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "emotion": {
+                                    "description": "Properties describing facial emotion in form of confidence ranging from 0 to 1.",
+                                    "properties": {
+                                        "anger": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "contempt": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "disgust": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "fear": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "happiness": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "neutral": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "sadness": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "surprise": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "exposure": {
+                                    "description": "Properties describing exposure level of the image.",
+                                    "properties": {
+                                        "exposureLevel": {
+                                            "description": "An enum value indicating level of exposure.",
+                                            "enum": [
+                                                "UnderExposure",
+                                                "GoodExposure",
+                                                "OverExposure"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ExposureLevel"
+                                            }
+                                        },
+                                        "value": {
+                                            "description": "A number ranging from 0 to 1 indicating the intensity level associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "facialHair": {
+                                    "description": "Properties describing facial hair attributes.",
+                                    "properties": {
+                                        "beard": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "moustache": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "sideburns": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "gender": {
+                                    "description": "Possible gender of the face.",
+                                    "enum": [
+                                        "male",
+                                        "female"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "Gender"
+                                    }
+                                },
+                                "glasses": {
+                                    "description": "Glasses type if any of the face.",
+                                    "enum": [
+                                        "noGlasses",
+                                        "readingGlasses",
+                                        "sunglasses",
+                                        "swimmingGoggles"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "GlassesType"
+                                    }
+                                },
+                                "hair": {
+                                    "description": "Properties describing hair attributes.",
+                                    "properties": {
+                                        "bald": {
+                                            "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        },
+                                        "hairColor": {
+                                            "items": {
+                                                "description": "Hair color and associated confidence",
+                                                "properties": {
+                                                    "color": {
+                                                        "description": "Name of the hair color.",
+                                                        "enum": [
+                                                            "unknown",
+                                                            "white",
+                                                            "gray",
+                                                            "blond",
+                                                            "brown",
+                                                            "red",
+                                                            "black",
+                                                            "other"
+                                                        ],
+                                                        "type": "string",
+                                                        "x-ms-enum": {
+                                                            "modelAsString": false,
+                                                            "name": "HairColorType"
+                                                        }
+                                                    },
+                                                    "confidence": {
+                                                        "description": "A number ranging from 0 to 1 indicating a level of confidence associated with a property.",
+                                                        "maximum": 1,
+                                                        "minimum": 0,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "invisible": {
+                                            "description": "A boolean value describing whether the hair is visible in the image.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "headPose": {
+                                    "description": "Properties indicating head pose of the face.",
+                                    "properties": {
+                                        "pitch": {
+                                            "type": "number"
+                                        },
+                                        "roll": {
+                                            "type": "number"
+                                        },
+                                        "yaw": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "makeup": {
+                                    "description": "Properties describing present makeups on a given face.",
+                                    "properties": {
+                                        "eyeMakeup": {
+                                            "description": "A boolean value describing whether eye makeup is present on a face.",
+                                            "type": "boolean"
+                                        },
+                                        "lipMakeup": {
+                                            "description": "A boolean value describing whether lip makeup is present on a face.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "noise": {
+                                    "description": "Properties describing noise level of the image.",
+                                    "properties": {
+                                        "noiseLevel": {
+                                            "description": "An enum value indicating level of noise.",
+                                            "enum": [
+                                                "Low",
+                                                "Medium",
+                                                "High"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "NoiseLevel"
+                                            }
+                                        },
+                                        "value": {
+                                            "description": "A number ranging from 0 to 1 indicating the intensity level associated with a property.",
+                                            "maximum": 1,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "occlusion": {
+                                    "description": "Properties describing occlusions on a given face.",
+                                    "properties": {
+                                        "eyeOccluded": {
+                                            "description": "A boolean value indicating whether eyes are occluded.",
+                                            "type": "boolean"
+                                        },
+                                        "foreheadOccluded": {
+                                            "description": "A boolean value indicating whether forehead is occluded.",
+                                            "type": "boolean"
+                                        },
+                                        "mouthOccluded": {
+                                            "description": "A boolean value indicating whether the mouth is occluded.",
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "smile": {
+                                    "description": "A number ranging from 0 to 1 indicating the intensity level associated with a property.",
+                                    "maximum": 1,
+                                    "minimum": 0,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "faceId": {
+                            "format": "uuid",
+                            "type": "string"
+                        },
+                        "faceLandmarks": {
+                            "description": "A collection of 27-point face landmarks pointing to the important positions of face components.",
+                            "properties": {
+                                "eyeLeftBottom": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeLeftInner": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeLeftOuter": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeLeftTop": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeRightBottom": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeRightInner": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeRightOuter": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyeRightTop": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyebrowLeftInner": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyebrowLeftOuter": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyebrowRightInner": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "eyebrowRightOuter": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "mouthLeft": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "mouthRight": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseLeftAlarOutTip": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseLeftAlarTop": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseRightAlarOutTip": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseRightAlarTop": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseRootLeft": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseRootRight": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "noseTip": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "pupilLeft": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "pupilRight": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "underLipBottom": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "underLipTop": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "upperLipBottom": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                },
+                                "upperLipTop": {
+                                    "description": "Coordinates within an image",
+                                    "properties": {
+                                        "x": {
+                                            "description": "The horizontal component, in pixels.",
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "description": "The vertical component, in pixels.",
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "x",
+                                        "y"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "faceRectangle": {
+                            "description": "A rectangle within which a face can be found",
+                            "properties": {
+                                "height": {
+                                    "description": "The height of the rectangle, in pixels.",
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "minimum": -2147483648,
+                                    "type": "integer"
+                                },
+                                "left": {
+                                    "description": "The distance from the left edge if the image to the left edge of the rectangle, in pixels.",
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "minimum": -2147483648,
+                                    "type": "integer"
+                                },
+                                "top": {
+                                    "description": "The distance from the top edge if the image to the top edge of the rectangle, in pixels.",
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "minimum": -2147483648,
+                                    "type": "integer"
+                                },
+                                "width": {
+                                    "description": "The width of the rectangle, in pixels.",
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "minimum": -2147483648,
+                                    "type": "integer"
+                                }
+                            },
+                            "required": [
+                                "width",
+                                "height",
+                                "left",
+                                "top"
+                            ],
+                            "type": "object"
+                        },
+                        "recognitionModel": {
+                            "default": "recognition_01",
+                            "description": "Name of recognition model. Recognition model is used when the face features are extracted and associated with detected faceIds, (Large)FaceList or (Large)PersonGroup. A recognition model name can be provided when performing Face - Detect or (Large)FaceList - Create or (Large)PersonGroup - Create. The default value is 'recognition_01', if latest model needed, please explicitly specify the model you need.",
+                            "enum": [
+                                "recognition_01",
+                                "recognition_02"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "RecognitionModel"
+                            }
+                        }
+                    },
+                    "required": [
+                        "faceRectangle"
+                    ],
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        }
+    ]
+}

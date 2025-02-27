@@ -1,0 +1,109 @@
+{
+    "product_id": "5711f91be4b002251bb12522",
+    "tool_description": "An easy, straightforward solution for accepting payments on your website, in your app, or elsewhere on the web. Thanks to the REST setup, your application can immediately start making requests to the API, which validates the Credit Card details and charges your clients for their purchases. All funds will immediately be transferred to your account.\r\n\r\nEssentially, this API replaces your server-side, saving you the time to learn a new server language, test, validate and so on the server-side for your payments. In other words, it's hassle-free payment!",
+    "home_url": "https://rapidapi.com/noodlio/api/noodlio-pay-smooth-payments-with-stripe/",
+    "name": "Noodlio Pay - Smooth Payments with Stripe",
+    "title": "Noodlio Pay - Smooth Payments with Stripe",
+    "pricing": "FREE",
+    "tool_name": "Noodlio Pay - Smooth Payments with Stripe",
+    "score": null,
+    "host": "noodlio-pay.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/tokens/create",
+            "url": "https://noodlio-pay.p.rapidapi.com/tokens/create",
+            "description": "Validates the credit card input of your user. Upon succes, returns a single use token to charge your client. This token is used as the parameter 'source' in the routes starting with /charge. Alternatively, you can use Checkout to retrieve the token.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "cvc",
+                    "type": "NUMBER",
+                    "description": "The security code (CVC) of the credit card (3 digits)",
+                    "default": "123"
+                },
+                {
+                    "name": "exp_month",
+                    "type": "NUMBER",
+                    "description": "The expiration month MM of the credit card (2 digits)",
+                    "default": "08"
+                },
+                {
+                    "name": "exp_year",
+                    "type": "NUMBER",
+                    "description": "The expiration year YYYY of the credit card (4 digits)",
+                    "default": "2020"
+                },
+                {
+                    "name": "number",
+                    "type": "NUMBER",
+                    "description": "The credit card number (16 digits)",
+                    "default": "4242424242424242"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "test",
+                    "type": "STRING",
+                    "description": "Defines whether the application is in development mode (test: true) or production mode (test: false). Assumes by default production mode.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://noodlio-pay.p.rapidapi.com/tokens/create\"\nquerystring = {\"cvc\": \"123\", \"exp_month\": \"08\", \"exp_year\": \"2020\", \"number\": \"4242424242424242\", \"test\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"noodlio-pay.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://noodlio-pay.p.rapidapi.com/tokens/create\"\nquerystring = {\"cvc\": \"123\", \"exp_month\": \"08\", \"exp_year\": \"2020\", \"number\": \"4242424242424242\", \"test\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"noodlio-pay.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/charge/token",
+            "url": "https://noodlio-pay.p.rapidapi.com/charge/token",
+            "description": "Charges the client with the specified amount. The amount is transferred to the seller's stripe_account. Requires a token (source) generated from the route tokens/create.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "amount",
+                    "type": "NUMBER",
+                    "description": "The amount in cents (100 = 1)",
+                    "default": "100"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The currency in which the transaction is being processed. See an overview of all accepted currencies here:  https://support.stripe.com/questions/which-currencies-does-stripe-support",
+                    "default": "usd"
+                },
+                {
+                    "name": "source",
+                    "type": "STRING",
+                    "description": "The token generated from the route /tokens/create of this API",
+                    "default": "tok_181ER0E9p71uHfeG90clN2MH"
+                },
+                {
+                    "name": "stripe_account",
+                    "type": "STRING",
+                    "description": "The stripe account id of the seller. To who should the funds be transferred to? You can retrieve your unique Stripe account ID from https://www.noodl.io/pay/connect",
+                    "default": "acct_12abcDEF34GhIJ5K"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "test",
+                    "type": "STRING",
+                    "description": "Defines whether the application is in development mode (test: true) or production mode (test: false). Assumes by default production mode.",
+                    "default": ""
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Add an optional description for both the seller as the buyer",
+                    "default": "Purchase with Noodlio Pay"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://noodlio-pay.p.rapidapi.com/charge/token\"\nquerystring = {\"amount\": \"100\", \"test\": \"\", \"description\": \"Purchase with Noodlio Pay\", \"currency\": \"usd\", \"source\": \"tok_181ER0E9p71uHfeG90clN2MH\", \"stripe_account\": \"acct_12abcDEF34GhIJ5K\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"noodlio-pay.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://noodlio-pay.p.rapidapi.com/charge/token\"\nquerystring = {\"amount\": \"100\", \"test\": \"\", \"description\": \"Purchase with Noodlio Pay\", \"currency\": \"usd\", \"source\": \"tok_181ER0E9p71uHfeG90clN2MH\", \"stripe_account\": \"acct_12abcDEF34GhIJ5K\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"noodlio-pay.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

@@ -1,0 +1,727 @@
+{
+    "product_id": "api_b6093978-d6cf-4129-b8a0-604e6fd4b6f2",
+    "tool_description": "Unofficial API for blur.io - 1,000+  requests/min\n\nSimple & high performance Blur API, backed by rotating proxies & API keys\n\nCheck out my Opensea / Looksrare / x2y2 API as well\nhttps://rapidapi.com/openseatools/api/opensea15\n\n- Crypto Payments Available\n\n- Lifetime Unlimited Requests Licenses Available\n\n- Private Plans with 16 / 32 / 64 / 128  requests/second Available\n\n- Ready made bots written in node.js already configured to work with RapidApi Available.\n\nJoin our Discord to inquire & fin...",
+    "home_url": "https://rapidapi.com/openseatools/api/blur/",
+    "name": "Blur",
+    "title": "Blur",
+    "pricing": "FREEMIUM",
+    "tool_name": "Blur",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1053,
+        "avgSuccessRate": 84,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "blur.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Retrieve collection activity",
+            "url": "https://blur.p.rapidapi.com/v1/activity",
+            "description": "This endpoint is used to retrieve activity for an individual collection.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{\"count\":25,\"contractAddress\":\"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d\",\"eventTypes\":[\"SALE\",\"ORDER_CREATED\"]}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/activity\"\nquerystring = {\"filters\": \"{\\\"count\\\":25,\\\"contractAddress\\\":\\\"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d\\\",\\\"eventTypes\\\":[\\\"SALE\\\",\\\"ORDER_CREATED\\\"]}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/activity\"\nquerystring = {\"filters\": \"{\\\"count\\\":25,\\\"contractAddress\\\":\\\"0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d\\\",\\\"eventTypes\\\":[\\\"SALE\\\",\\\"ORDER_CREATED\\\"]}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve collection traits",
+            "url": "https://blur.p.rapidapi.com/v1/traits/0x60bb1e2aa1c9acafb4d34f71585d7e959f387769",
+            "description": "This endpoint is used to retrieve trait information about a single collection.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "contract_address",
+                    "type": "string",
+                    "description": "",
+                    "default": "0x60bb1e2aa1c9acafb4d34f71585d7e959f387769"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/traits/0x60bb1e2aa1c9acafb4d34f71585d7e959f387769\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/traits/{contract_address}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retreive portfolio collections",
+            "url": "https://blur.p.rapidapi.com/v1/portfolio/{walletAddress}/collections",
+            "description": "This endpoint is used to retrieve collections owned for a single wallet address.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "walletAddress",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/portfolio/{walletAddress}/collections\"\nquerystring = {\"walletAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/portfolio/{walletAddress}/collections\"\nquerystring = {\"walletAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve blur events",
+            "url": "https://blur.p.rapidapi.com/v1/activity/event-filter",
+            "description": "This endpoint is used to retrieve events, customisable.\n\n**Filter examples:**\n{\"count\":50,\"eventFilter\":{\"mint\":{},\"sale\":{},\"transfer\":{},\"orderCreated\":{}}}\n\n{\"count\":50,\"tokenId\":\"541\",\"contractAddress\":\"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\"eventFilter\":{\"mint\":{},\"sale\":{},\"transfer\":{},\"orderCreated\":{}}}\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{\"count\":50,\"tokenId\":\"541\",\"contractAddress\":\"0x60e4d786628fea6478f785a6d7e704777c86a7c6\",\"eventFilter\":{\"mint\":{},\"sale\":{},\"transfer\":{},\"orderCreated\":{}}}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/activity/event-filter\"\nquerystring = {\"filters\": \"{\\\"count\\\":50,\\\"tokenId\\\":\\\"541\\\",\\\"contractAddress\\\":\\\"0x60e4d786628fea6478f785a6d7e704777c86a7c6\\\",\\\"eventFilter\\\":{\\\"mint\\\":{},\\\"sale\\\":{},\\\"transfer\\\":{},\\\"orderCreated\\\":{}}}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/activity/event-filter\"\nquerystring = {\"filters\": \"{\\\"count\\\":50,\\\"tokenId\\\":\\\"541\\\",\\\"contractAddress\\\":\\\"0x60e4d786628fea6478f785a6d7e704777c86a7c6\\\",\\\"eventFilter\\\":{\\\"mint\\\":{},\\\"sale\\\":{},\\\"transfer\\\":{},\\\"orderCreated\\\":{}}}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retreive portfolio",
+            "url": "https://blur.p.rapidapi.com/v1/portfolio/{walletAddress}/owned",
+            "description": "This endpoint is used to retrieve portfolio details for a single wallet address.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "walletAddress",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/portfolio/{walletAddress}/owned\"\nquerystring = {\"filters\": \"{}\", \"walletAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/portfolio/{walletAddress}/owned\"\nquerystring = {\"filters\": \"{}\", \"walletAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve a collection",
+            "url": "https://blur.p.rapidapi.com/v1/collections/artgobblers",
+            "description": "This endpoint is used to retrieve more in-depth information about an individual collection, including real time statistics such as floor price.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "slug",
+                    "type": "string",
+                    "description": "",
+                    "default": "artgobblers"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/artgobblers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{slug}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve tokens",
+            "url": "https://blur.p.rapidapi.com/v1/collections/artgobblers/tokens",
+            "description": "This endpoint returns a set of NFTs based on the specified filter parameters.\n\nFilter for Listed Tokens: {\"cursor\":null,\"traits\":[],\"hasAsks\":true}\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "slug",
+                    "type": "string",
+                    "description": "",
+                    "default": "artgobblers"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/artgobblers/tokens\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{slug}/tokens\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve fees",
+            "url": "https://blur.p.rapidapi.com/v1/fees",
+            "description": "This endpoint returns the various contract fees\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "feeRequests",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[{\"tokenId\":null,\"contractAddress\":\"0x5d62fb8dcd9b480960f55956fbdd8d9f07f2b402\"}]"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/fees\"\nquerystring = {\"feeRequests\": \"[{\\\"tokenId\\\":null,\\\"contractAddress\\\":\\\"0x5d62fb8dcd9b480960f55956fbdd8d9f07f2b402\\\"}]\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/fees\"\nquerystring = {\"feeRequests\": \"[{\\\"tokenId\\\":null,\\\"contractAddress\\\":\\\"0x5d62fb8dcd9b480960f55956fbdd8d9f07f2b402\\\"}]\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve airdrop leaderboard",
+            "url": "https://blur.p.rapidapi.com/v1/rewards/leaderboard",
+            "description": "Retrieve the current airdrop leaderboard list\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/rewards/leaderboard\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/rewards/leaderboard\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve collection fees",
+            "url": "https://blur.p.rapidapi.com/v1/collections/azuki/fees",
+            "description": "This endpoint returns the various collection fees\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "slug",
+                    "type": "string",
+                    "description": "",
+                    "default": "azuki"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/azuki/fees\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{slug}/fees\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Search",
+            "url": "https://blur.p.rapidapi.com/v1/search",
+            "description": "Blur Search Query\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "doodles"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/search\"\nquerystring = {\"query\": \"doodles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/search\"\nquerystring = {\"query\": \"doodles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve collection pricing chart",
+            "url": "https://blur.p.rapidapi.com/v1/charts/everything",
+            "description": "This endpoint is used to retrieve collection pricing chart data\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "spanMs",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "86400000"
+                },
+                {
+                    "name": "collectionId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "0xed5af388653567af2f388e6224dc7c4b3241c544"
+                },
+                {
+                    "name": "intervalMs",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "300000"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/charts/everything\"\nquerystring = {\"spanMs\": \"86400000\", \"collectionId\": \"0xed5af388653567af2f388e6224dc7c4b3241c544\", \"intervalMs\": \"300000\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/charts/everything\"\nquerystring = {\"spanMs\": \"86400000\", \"collectionId\": \"0xed5af388653567af2f388e6224dc7c4b3241c544\", \"intervalMs\": \"300000\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve asset",
+            "url": "https://blur.p.rapidapi.com/v1/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens/541",
+            "description": "This endpoint is used to retrieve information about a single NFT.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "contractAddress",
+                    "type": "string",
+                    "description": "",
+                    "default": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                },
+                {
+                    "name": "tokenId",
+                    "type": "string",
+                    "description": "",
+                    "default": "541"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens/541\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{contractaddress}/tokens/{tokenid}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retreive collections",
+            "url": "https://blur.p.rapidapi.com/v1/collections/",
+            "description": "This endpoint is used to retrieve information about all collection, including real time statistics such as floor price.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{\"sort\":\"VOLUME_ONE_DAY\",\"order\":\"DESC\"}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/\"\nquerystring = {\"filters\": \"{\\\"sort\\\":\\\"VOLUME_ONE_DAY\\\",\\\"order\\\":\\\"DESC\\\"}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/\"\nquerystring = {\"filters\": \"{\\\"sort\\\":\\\"VOLUME_ONE_DAY\\\",\\\"order\\\":\\\"DESC\\\"}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retreive collection prices",
+            "url": "https://blur.p.rapidapi.com/v1/collections/azuki/prices",
+            "description": "This endpoint is used to retrieve collection prices\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "collection",
+                    "type": "string",
+                    "description": "",
+                    "default": "azuki"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "filters: {\"traits\":[],\"hasAsks\":true}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/azuki/prices\"\nquerystring = {\"filters\": \"filters: {\\\"traits\\\":[],\\\"hasAsks\\\":true}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{collection}/prices\"\nquerystring = {\"filters\": \"filters: {\\\"traits\\\":[],\\\"hasAsks\\\":true}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve active user lend ETH offers",
+            "url": "https://blur.p.rapidapi.com/v1/portfolio/0xe61dcc958fc886924f97a1ba7af2781361f58e7a/loan-offers",
+            "description": "This endpoint is used to retrieve active user lend ETH offers\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "collection",
+                    "type": "string",
+                    "description": "",
+                    "default": "0xe61dcc958fc886924f97a1ba7af2781361f58e7a"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/portfolio/0xe61dcc958fc886924f97a1ba7af2781361f58e7a/loan-offers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/portfolio/{collection}/loan-offers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 401,
+                "message": "Unauthorized"
+            }
+        },
+        {
+            "name": "Retrieve active loans offers",
+            "url": "https://blur.p.rapidapi.com/v1/blend/active-liens/0xed5af388653567af2f388e6224dc7c4b3241c544",
+            "description": "This endpoint is used to retrieve the active loan offer levels for a collection.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "collection",
+                    "type": "string",
+                    "description": "",
+                    "default": "0xed5af388653567af2f388e6224dc7c4b3241c544"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/active-liens/0xed5af388653567af2f388e6224dc7c4b3241c544\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/active-liens/{collection}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Retrieve aggregated loan offers",
+            "url": "https://blur.p.rapidapi.com/v1/blend/aggregated-loan-offers/0x5af0d9827e0c53e4799bb226655a1de152a425a",
+            "description": "This endpoint is used to retrieve the aggregated loan offer levels for a collection.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "collection",
+                    "type": "string",
+                    "description": "",
+                    "default": "0x5af0d9827e0c53e4799bb226655a1de152a425a"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/aggregated-loan-offers/0x5af0d9827e0c53e4799bb226655a1de152a425a\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/aggregated-loan-offers/{collection}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Retrieve rewards",
+            "url": "https://blur.p.rapidapi.com/v1/collections/nakamigos/rewards",
+            "description": "This endpoint is used to retrieve if bid rewards\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "slug",
+                    "type": "string",
+                    "description": "",
+                    "default": "nakamigos"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/nakamigos/rewards\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{slug}/rewards\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Retrieve user airdrop rewards",
+            "url": "https://blur.p.rapidapi.com/v1/user/rewards/wallet-compact",
+            "description": "Retrieve user airdrop rewards\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/user/rewards/wallet-compact\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/user/rewards/wallet-compact\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Retrieve tokens / listings",
+            "url": "https://blur.p.rapidapi.com/v1/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens",
+            "description": "This endpoint returns a set of NFTs based on the specified filter parameters.\n\nFilter for Listed Tokens: {\"cursor\":null,\"traits\":[],\"hasAsks\":true}\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "collection",
+                    "type": "string",
+                    "description": "",
+                    "default": "0x60e4d786628fea6478f785a6d7e704777c86a7c6"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{\"cursor\":null,\"traits\":[],\"hasAsks\":true}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens\"\nquerystring = {\"filters\": \"{\\\"cursor\\\":null,\\\"traits\\\":[],\\\"hasAsks\\\":true}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{collection}/tokens\"\nquerystring = {\"filters\": \"{\\\"cursor\\\":null,\\\"traits\\\":[],\\\"hasAsks\\\":true}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Retrieve user collection bids",
+            "url": "https://blur.p.rapidapi.com/v1/collection-bids/user/{walletAddress}",
+            "description": "This endpoint is used to retrieve the active collection bids to a user wallet address.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "walletAddress",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{}"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/user/{walletAddress}\"\nquerystring = {\"walletAddress\": \"\", \"filters\": \"{}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/user/{walletAddress}\"\nquerystring = {\"walletAddress\": \"\", \"filters\": \"{}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Retreive collection bids",
+            "url": "https://blur.p.rapidapi.com/v1/collections/valhalla/executable-bids",
+            "description": "Retreive collection bids",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "slug",
+                    "type": "string",
+                    "description": "",
+                    "default": "valhalla"
+                },
+                {
+                    "name": "filters",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{}"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/valhalla/executable-bids\"\nquerystring = {\"filters\": \"{}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collections/{slug}/executable-bids\"\nquerystring = {\"filters\": \"{}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per minute for your plan, BASIC, by the API provider"
+            }
+        },
+        {
+            "name": "Create lend ETH order format",
+            "url": "https://blur.p.rapidapi.com/v1/blend/loan-offer/format",
+            "description": "This endpoint is used to create the order format to lend ETH which you need to submit to blockchain.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create borrow ETH order format",
+            "url": "https://blur.p.rapidapi.com/v1/blend/loan-offer/borrow",
+            "description": "This endpoint is used to create the order to borrow ETH and which you need to submit to the blockchain\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/borrow\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/borrow\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Cancel active user lend ETH offer",
+            "url": "https://blur.p.rapidapi.com/v1/blend/loan-offer/cancel/format",
+            "description": "This endpoint is used to cancel a active user lend ETH offer\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/cancel/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/cancel/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Submit loan offer format",
+            "url": "https://blur.p.rapidapi.com/v1/blend/loan-offer/submit",
+            "description": "This endpoint is used to submit the loan order format.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/submit\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/submit\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create borrowed buy order format",
+            "url": "https://blur.p.rapidapi.com/v1/blend/loan-offer/buy-to-borrow",
+            "description": "This endpoint is used to create the buy order format when using borrowed funds.\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/buy-to-borrow\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/loan-offer/buy-to-borrow\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create repay active loan order format",
+            "url": "https://blur.p.rapidapi.com/v1/blend/lien/repay",
+            "description": "This endpoint is used to create order data to repay an active ETH loan\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/lien/repay\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/blend/lien/repay\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Retrieve accesstoken",
+            "url": "https://blur.p.rapidapi.com/auth/login",
+            "description": "To be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/auth/login\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/auth/login\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Accept bids",
+            "url": "https://blur.p.rapidapi.com/v1/bids/accept",
+            "description": "Use this endpoint to accept a collection/trait bid, first you will need to use the quote endpoint to retrieve the quote id\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/bids/accept\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/bids/accept\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Retrieve bid quote id",
+            "url": "https://blur.p.rapidapi.com/v1/bids/quote",
+            "description": "Use this endpoint to retrieve the quote id to be able to accept a bid\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/bids/quote\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/bids/quote\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Submit bids",
+            "url": "https://blur.p.rapidapi.com/v1/collection-bids/submit",
+            "description": "This endpoint submit your collection/trait bid offer, to get the format use the \"Create collection bid format\"\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/submit\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/submit\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Bids cancel",
+            "url": "https://blur.p.rapidapi.com/v1/collection-bids/cancel",
+            "description": "Cancel current collection/trait bid\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/cancel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/cancel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create bids format",
+            "url": "https://blur.p.rapidapi.com/v1/collection-bids/format",
+            "description": "This endpoint returns the collection/trait bids format to submit in the next endpoint called \"Submit bid\"\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/collection-bids/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Submit listing/cancel order",
+            "url": "https://blur.p.rapidapi.com/v1/orders/submit",
+            "description": "To be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/orders/submit\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/orders/submit\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create buy format",
+            "url": "https://blur.p.rapidapi.com/v1/buy/{contract_address}",
+            "description": "To be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "contract_address",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/buy/{contract_address}\"\nquerystring = {\"contract_address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/buy/{contract_address}\"\nquerystring = {\"contract_address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create cancel format",
+            "url": "https://blur.p.rapidapi.com/v1/orders/cancel/format",
+            "description": "Use this endpoint to generate the cancel listing format, submit via the \"Sumbit order\" endpoint\n\nTo be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/orders/cancel/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/orders/cancel/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Create listing format",
+            "url": "https://blur.p.rapidapi.com/v1/orders/format",
+            "description": "To be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/orders/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/v1/orders/format\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Retrieve authchallenge",
+            "url": "https://blur.p.rapidapi.com/auth/challenge",
+            "description": "To be able to use the blur endpoints you need an authToken.\nYou can generate one by using the 'Retrieve authchallenge' endpoint with your wallet address in the body of the request.\nOnce you get the response, sign the 'message' string with ethers.js\nconst signature = await ethersSigner.signMessage(response.data.message);\nThen use the 'Retrieve authtoken' endpoint to get your authToken, by inputting the response parameters from 'Retrieve authchallenge' plus the generated signature.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/auth/challenge\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://blur.p.rapidapi.com/auth/challenge\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"blur.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ],
+    "standardized_name": "blur"
+}

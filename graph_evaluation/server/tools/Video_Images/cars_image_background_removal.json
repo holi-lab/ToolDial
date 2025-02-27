@@ -1,0 +1,101 @@
+{
+    "product_id": "api_8b20c507-4b8d-466c-81b8-8c044c7c3aab",
+    "tool_description": "",
+    "home_url": "https://rapidapi.com/api4ai-api4ai-default/api/cars-image-background-removal/",
+    "name": "Cars image background removal",
+    "title": "Cars image background removal",
+    "pricing": "FREEMIUM",
+    "tool_name": "Cars image background removal",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 2376,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.6,
+        "__typename": "Score"
+    },
+    "host": "cars-image-background-removal.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get version",
+            "url": "https://cars-image-background-removal.p.rapidapi.com/v1/version",
+            "description": "Returns an actual version of the service in format `vX.Y.Z` where X is the version of API.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cars-image-background-removal.p.rapidapi.com/v1/version\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cars-image-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cars-image-background-removal.p.rapidapi.com/v1/version\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cars-image-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get list of available modes",
+            "url": "https://cars-image-background-removal.p.rapidapi.com/v1/modes",
+            "description": "The service provides three options for background removal results:\n* Mask of foreground.\n* Image with foreground object.\n* Image with foreground object with shadow.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cars-image-background-removal.p.rapidapi.com/v1/modes\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cars-image-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cars-image-background-removal.p.rapidapi.com/v1/modes\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cars-image-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": [
+                "fg-image",
+                "fg-image-shadow",
+                "fg-image-hideclp",
+                "fg-image-shadow-hideclp",
+                "fg-mask"
+            ],
+            "statuscode": 200,
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "Remove background from photo of a car and return results",
+            "url": "https://cars-image-background-removal.p.rapidapi.com/v1/results",
+            "description": "Performs actual car image analysis and responds with results.\n\nImage must be a regular JPEG or PNG image (with or without transparency).\nUsually such images have extensions: `.jpg`, `.jpeg`, `.png`.\nThe service checks input file by MIME type and accepts the following types:\n\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Note: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": "https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-cars-1.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Note: Use this form data field if you want to pass image as a binary file. If you want to pass image as a link to a public web resource, please, use another field named `url`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "image-bg",
+                    "type": "BINARY",
+                    "description": "Optional background image.\n\nIf the background image is passed then it's content will be blended below foreground object (aligned by the center). The final output image will have the same size as the main input image (not background image!). Meaningless if the mode is `fg-mask`.\n\nNote: Use this optional form data field if you want to pass background image as a binary file. If you want to pass background image as a link to a public web resource, please, use another field named `url-bg`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "url-bg",
+                    "type": "STRING",
+                    "description": "Optional background image.\n\nIf the background image is passed then it's content will be blended below foreground object (aligned by the center). The final output image will have the same size as the main input image (not background image!). Meaningless if the mode is `fg-mask`.\n\nNote: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image-bg`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "mode",
+                    "type": "STRING",
+                    "description": "Query parameter `mode` is optional and may be used to choose the format of the output image: foreground mask or foreground image. Also the foreground image could be returned with shadow under the object and hidden car license plate (if detected).\nBy default the service uses `fg-image`.\n\nAvailable modes and expected content of the resulting image:\n* `fg-image` (default) \u2013 the image with the foreground object (car). Here the result is a 4-channel (`RGBA`) PNG image where background is transparent. \n    * Areas recognized as car will have the same color values at output image as the original input image.\n    * Areas recognized as background will be transparent at output image.\n    * Pixels of output image near the car borders may be semi transparent.\n* `fg-mask` \u2013 the mask of foreground object (car). In this case the result is a single-channel grayscale PNG image.\n    * Areas recognized as foreground (car) will have white color.\n    * Areas recognized as background will be black at output image.\n    * Pixels of output image near to car borders may have gray values: the closer\n     to black, the more likely the pixel is the background.\n* `fg-image-shadow` \u2013 the image with the foreground object (car) and realistic shadow under the car. Image format is as in case of just the foreground object.\n* `fg-image-hideclp` \u2013 the image with the foreground object (car) with hidden license plate. Image format is as in case of just the foreground object.\n* `fg-image-shadow-hideclp` \u2013 the image with the foreground object (car) with realistic shadow and hidden license plate. Image format is as in case of just the foreground object.",
+                    "default": "fg-image"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://cars-image-background-removal.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": \"https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-cars-1.jpg\", \"image\": \"\", \"image-bg\": \"\", \"url-bg\": \"\", \"mode\": \"fg-image\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cars-image-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cars-image-background-removal.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": \"https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-cars-1.jpg\", \"image\": \"\", \"image-bg\": \"\", \"url-bg\": \"\", \"mode\": \"fg-image\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cars-image-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "cars_image_background_removal"
+}

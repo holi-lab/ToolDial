@@ -1,0 +1,168 @@
+{
+    "tool_name":"Global Bitcoin Price Index - GBX",
+    "tool_description":"BitcoinAverage.com is proud of the fact that we were the first global price index in the cryptocurrency and blockchain industry, and have proven over the years to also be one of the most reliable. It is considered by most as the de facto standard bitcoin price index.It is trusted by thousands of users across hundreds the world’s leading websites, apps, services and businesses. With our historical bitcoin price data stretching back to 2010, this index is perfect for a multitude of uses from reporting, invoicing, payment processing, analysis and accounting, as well as a plethora of integrations with different types of software.Users receive a weighted price calculated by our algorithms that factor in exchange activity, liquidity and different fee methodologies.The GBX data accessed via the BitcoinAverage API features:Up to 1 second refresh rateRates for 165+ currenciesDaily rates at preferred lock in time or live ratesHistoric daily rates dating back to 2010JSON or CSV formats",
+    "title":"Global Bitcoin Price Index - GBX",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":452,
+        "avgSuccessRate":100,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/blockchain-data-ltd-blockchain-data-ltd-default/api/global-bitcoin-price-index-gbx/",
+    "host":"bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Ticker Per Symbol",
+            "url":"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/{symbol}",
+            "description":"Returns ticker data for specified market symbol.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"market",
+                    "type":"STRING",
+                    "description":"Possible values: global, local",
+                    "default":"global"
+                },
+                {
+                    "name":"symbol",
+                    "type":"STRING",
+                    "description":"BTC<fiat>, where <fiat> is valid ISO currency (ex. BTCUSD, BTCEUR)",
+                    "default":"BTCUSD"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/{symbol}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Ticker Data",
+            "url":"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/all",
+            "description":"If no query parameters are sent, then returns ticker data for every supported symbol. If fiat(s) are sent as parameters, then only the ticker for those values is sent.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"market",
+                    "type":"STRING",
+                    "description":"Possible values: global, local",
+                    "default":"local"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"crypto",
+                    "type":"STRING",
+                    "description":"valid value: BTC",
+                    "default":"BTC"
+                },
+                {
+                    "name":"fiat",
+                    "type":"STRING",
+                    "description":"Comma separated list of ISO currency codes (ex. USD,EUR)",
+                    "default":"USD,EUR"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/all\"\nquerystring = {\"crypto\": crypto, \"fiat\": fiat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Ticker Changes",
+            "url":"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/{symbol}/changes",
+            "description":"Returns ticker values and price changes for specified market and symbol.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"market",
+                    "type":"STRING",
+                    "description":"Possible values: global, local",
+                    "default":"local"
+                },
+                {
+                    "name":"symbol",
+                    "type":"STRING",
+                    "description":"Possible values: BTC<fiat> where <fiat> is valid ISO currency (ex. BTCUSD)",
+                    "default":"BTCUSD"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/{symbol}/changes\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Short Ticker",
+            "url":"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/short",
+            "description":"Returns basic ticker denoting last and daily average price for all symbols",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"market",
+                    "type":"STRING",
+                    "description":"Possible values: global, local",
+                    "default":"global"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"crypto",
+                    "type":"STRING",
+                    "description":"Valid value: BTC",
+                    "default":"BTC"
+                },
+                {
+                    "name":"fiats",
+                    "type":"STRING",
+                    "description":"If fiats parameter is included then only the values for those fiats will be returned (BTCUSD and BTCEUR in this example). If it's missing, then the response will contain ticker values of all available fiats for BTC.",
+                    "default":"USD,EUR"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/{market}/ticker/short\"\nquerystring = {\"crypto\": crypto, \"fiats\": fiats}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Custom Ticker",
+            "url":"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/ticker/custom/{inex}/{symbol}",
+            "description":"This endpoint can be used to generate a custom index in a certain currency. The “inex” path parameter represents “include” or “exclude”, you can choose to generate an index removing specified exchanges, or only including the few that you require.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"symbol",
+                    "type":"STRING",
+                    "description":"BTC<fiat> where <fiat> is valid ISO currency (ex. BTCUSD)",
+                    "default":"BTCUSD"
+                },
+                {
+                    "name":"inex",
+                    "type":"STRING",
+                    "description":"include - if you want the ticker to be calculated using only the exchanges sent as query parameter; exclude - if you want the price to be calculated using all exchanges, but the ones sent as query parameter.",
+                    "default":"include"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"exchanges",
+                    "type":"STRING",
+                    "description":"Comma separated list of exchanges.",
+                    "default":"bitfinex,bitstamp"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com/indices/ticker/custom/{inex}/{symbol}\"\nquerystring = {\"exchanges\": exchanges}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"bitcoinaverage-global-bitcoin-index-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

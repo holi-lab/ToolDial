@@ -1,0 +1,136 @@
+{
+    "product_id": "api_643872a6-4af9-4188-8125-fc3713ac81f1",
+    "tool_description": "By using the Google News API, which is a straightforward REST API, you may look through over 1,000,000 news sources, both current and archived. You may also aggregate and arrange today's most talked-about news stories in accordance with Google News's rating with the help of this news API. You can also use filters and a keyword search to sift through all the articles.\n\nWe have compiled tens of millions of articles from over 250,000 sources in ten different languages for inclusion in our databa...",
+    "home_url": "https://rapidapi.com/ctr-ou-ctr-ou-default/api/google-news-api1/",
+    "name": "Google News API",
+    "title": "Google News API",
+    "pricing": "FREEMIUM",
+    "tool_name": "Google News API",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 573,
+        "avgSuccessRate": 88,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "google-news-api1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get articles",
+            "url": "https://google-news-api1.p.rapidapi.com/search",
+            "description": "Get, filter, smart search google news articles.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "Supported by 10 languages. \n\nLanguage request codes:\n\n    TR, EN, FR, DE,  IT, ZH, ES, RU, KO, PT",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "sort",
+                    "type": "STRING",
+                    "description": "You can arrange the articles systematically in groups; separate according to type, class, etc.\n\nSorting refers to ordering articles in an increasing or decreasing manner according to some linear relationship among the article items. You can order the articles and arrange them in a sequence ordered by category with similar properties.\n\nExpected values:\n\ndate:asc\ndate:desc\n\n_score:asc\n_score:desc",
+                    "default": ""
+                },
+                {
+                    "name": "required_props",
+                    "type": "STRING",
+                    "description": "Required props are delimited by commas. Each property must have a name. If one of the property names is missing from the article, that property is excluded.\n\nExample:\n\ntitle, image\n\n",
+                    "default": ""
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "This defines the returned value of the \\\\\\\"next_cursor\\\\\\\". It allows you to navigate to next article list.",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "\\\\\\\"to\\\\\\\" when used defines the date of items published before the specified date.\n\nFormat:\nISO date standart format is used. \nYYYY-MM-DDTHH:mm:ss\n\nExample:\n2022-10-17T18:41:34.306Z",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "With \\\\\\\"limit,\\\\\\\" you can specify the number of articles required per request. Maximum limit is set to 100 articles per request.",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "\\\\\\\"from\\\\\\\" when used defines the date of items published after the specified date.\n\nFormat:\nISO date standart format is used. \nYYYY-MM-DDTHH:mm:ss\n\nExample:\n2022-10-17T18:41:34.306Z\n\n",
+                    "default": ""
+                },
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "The search term or terms used to locate the article.\n\n\\\\\\\"AND\\\\\\\" or \\\\\\\"OR\\\\\\\" may be placed between the keywords.\n\nIf you wish to group the keywords, you may include them in parenthesis.\n\nFor instance: (cats and dogs) OR (fish)\n\nIf you wish to omit articles by term, you can do so by prefixing the keyword with a (-) sign.\n\nExample: cats -dogs\n(This will return articles featuring cats but exclude those with the term \\\\\\\"dog.\\\\\\\"\n\n",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://google-news-api1.p.rapidapi.com/search\"\nquerystring = {\"sort\": \"\", \"required_props\": \"\", \"cursor\": \"\", \"to\": \"\", \"limit\": \"\", \"from\": \"\", \"language\": \"\", \"q\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"google-news-api1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://google-news-api1.p.rapidapi.com/search\"\nquerystring = {\"sort\": \"\", \"required_props\": \"\", \"cursor\": \"\", \"to\": \"\", \"limit\": \"\", \"from\": \"\", \"language\": \"\", \"q\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"google-news-api1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "success": false,
+                "messsage": "ERROR.INVALID_NEXT_CURSOR"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "news": {
+                        "type": "object",
+                        "properties": {
+                            "total": {
+                                "type": "integer"
+                            },
+                            "news": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "link": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "source": {
+                                            "type": "string"
+                                        },
+                                        "date": {
+                                            "type": "string"
+                                        },
+                                        "props": {
+                                            "type": "object"
+                                        },
+                                        "language": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "next_cursor": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "google_news_api"
+}

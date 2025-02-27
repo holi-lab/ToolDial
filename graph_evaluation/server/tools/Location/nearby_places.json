@@ -1,0 +1,677 @@
+{
+    "tool_name":"Nearby Places",
+    "tool_description":"Get nearby establishments.",
+    "title":"Nearby Places",
+    "pricing":"PAID",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":927,
+        "avgSuccessRate":91,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/NovusAPI/api/nearby-places/",
+    "host":"nearby-places.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Nearby - (ArcGIS)",
+            "url":"https://nearby-places.p.rapidapi.com/v2/nearby",
+            "description":"Returns nearby places sorted by distance from the origin coordinates in ascending order.\n\nOnly type values from **/v2/types (ArcGIS)** are valid.\n\nMaximum returned places is 50.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"Longitude",
+                    "default":"-123.0413988"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"Latitude",
+                    "default":"49.2803703"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"**Meters**\nDefault: 200\nMaximum: 50000",
+                    "default":"500"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Default: 'coffee shop'",
+                    "default":"coffee shop"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://nearby-places.p.rapidapi.com/v2/nearby\"\nquerystring = {\"radius\": radius, \"lng\": lng, \"type\": type, \"lat\": lat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nearby-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "results":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "location":{
+                                    "type":"object",
+                                    "properties":{
+                                        "lat":{
+                                            "type":"number"
+                                        },
+                                        "lng":{
+                                            "type":"number"
+                                        }
+                                    }
+                                },
+                                "name":{
+                                    "type":"string"
+                                },
+                                "address":{
+                                    "type":"string"
+                                },
+                                "phone":{
+                                    "type":"string"
+                                },
+                                "distanceMeter":{
+                                    "type":"number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Nearby - (Google)",
+            "url":"https://nearby-places.p.rapidapi.com/nearby",
+            "description":"Returns a **JSON array of nearby places** sorted by distance from the origin coordinates in ascending order.\n\nOnly values from **/types (Google)** are valid types.\n\nMaximum places returned per request is 20.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"Latitude",
+                    "default":"49.283030"
+                },
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"Longitude",
+                    "default":"-123.118990"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Default is **cafe**.",
+                    "default":"cafe"
+                },
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"**Meters**\nDefault: 200\nMax: 50000",
+                    "default":"200"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://nearby-places.p.rapidapi.com/nearby\"\nquerystring = {\"type\": type, \"lat\": lat, \"lng\": lng, \"radius\": radius}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nearby-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "name":"Bel Café Downtown",
+                    "place_id":"ChIJgQmKXX9xhlQRtBNq5dIMxZw",
+                    "location":{
+                        "lat":49.28336249999999,
+                        "lng":-123.1190853
+                    },
+                    "address":"801 West Georgia Street, Vancouver",
+                    "rating":4,
+                    "distanceMeter":37.61
+                },
+                {
+                    "name":"La Prep",
+                    "place_id":"ChIJp--ubH9xhlQRLt8dW6sN_Tk",
+                    "location":{
+                        "lat":49.282808,
+                        "lng":-123.1179211
+                    },
+                    "address":"701 West Georgia Street, Vancouver",
+                    "rating":3.9,
+                    "distanceMeter":81.37
+                },
+                {
+                    "name":"Nordstrom Ebar Artisan Coffee",
+                    "place_id":"ChIJNTXMvH9xhlQRKR_swSS5ZjY",
+                    "location":{
+                        "lat":49.2821588,
+                        "lng":-123.1189227
+                    },
+                    "address":"799 Robson Street, Vancouver",
+                    "rating":4.2,
+                    "distanceMeter":97
+                },
+                {
+                    "name":"Sciué Italian Bakery Caffé",
+                    "place_id":"ChIJq6pa34FxhlQRAXTKpcpBA2A",
+                    "location":{
+                        "lat":49.2838555,
+                        "lng":-123.1197049
+                    },
+                    "address":"885 West Georgia Street, Vancouver",
+                    "rating":3.8,
+                    "distanceMeter":105.43
+                },
+                {
+                    "name":"Starbucks",
+                    "place_id":"ChIJFwL8DX9xhlQRYt1ciIJkOUg",
+                    "location":{
+                        "lat":49.28207450000001,
+                        "lng":-123.1184392
+                    },
+                    "address":"720 Granville Street, Vancouver",
+                    "rating":3.9,
+                    "distanceMeter":113.51
+                },
+                {
+                    "name":"Trees Organic Coffee 738 Granville",
+                    "place_id":"ChIJ-ZMU_A9xhlQRRYUEa_ml-4g",
+                    "location":{
+                        "lat":49.2819205,
+                        "lng":-123.1186515
+                    },
+                    "address":"738 Granville Street, Vancouver",
+                    "rating":4.2,
+                    "distanceMeter":125.79
+                },
+                {
+                    "name":"My Honey's Buns",
+                    "place_id":"ChIJG7Fu3YFxhlQRAbENE7Xs2G4",
+                    "location":{
+                        "lat":49.2839974,
+                        "lng":-123.1199205
+                    },
+                    "address":"Canada",
+                    "rating":4.5,
+                    "distanceMeter":126.99
+                },
+                {
+                    "name":"Bistro Verde",
+                    "place_id":"ChIJLzXMvH9xhlQRBVky_nePa0Q",
+                    "location":{
+                        "lat":49.2821229,
+                        "lng":-123.1203466
+                    },
+                    "address":"799 Robson Street, Vancouver",
+                    "rating":4,
+                    "distanceMeter":140.91
+                },
+                {
+                    "name":"Bread x Butter Cafe",
+                    "place_id":"ChIJCYQyqCtxhlQREqhtqpfP_Y4",
+                    "location":{
+                        "lat":49.2841412,
+                        "lng":-123.1199372
+                    },
+                    "address":"140-925 West Georgia Street, Vancouver",
+                    "rating":4.7,
+                    "distanceMeter":141.38
+                },
+                {
+                    "name":"Take Five Cafe",
+                    "place_id":"ChIJp-ZjgXhxhlQRSDGmDvFqt1U",
+                    "location":{
+                        "lat":49.2834188,
+                        "lng":-123.1171163
+                    },
+                    "address":"CF Pacific Centre, 609 Granville Street, Vancouver",
+                    "rating":3.7,
+                    "distanceMeter":142.62
+                },
+                {
+                    "name":"FortePiano Vancouver Floral Art Gallery",
+                    "place_id":"ChIJyTCq3YFxhlQRPoSSjaxa3no",
+                    "location":{
+                        "lat":49.28418180000001,
+                        "lng":-123.1199872
+                    },
+                    "address":"925 West Georgia Street #120, Vancouver",
+                    "rating":5,
+                    "distanceMeter":147.09
+                },
+                {
+                    "name":"Starbucks",
+                    "place_id":"ChIJazhys3hxhlQRkaSKqLFzyNU",
+                    "location":{
+                        "lat":49.28255069999999,
+                        "lng":-123.1170362
+                    },
+                    "address":"674 Granville Street, Vancouver",
+                    "rating":2.3,
+                    "distanceMeter":151.41
+                },
+                {
+                    "name":"Shinkinedou",
+                    "place_id":"ChIJEXrL3nVxhlQRKvTNQpYFwuY",
+                    "location":{
+                        "lat":49.2821562,
+                        "lng":-123.116988
+                    },
+                    "address":"674 Granville Street, Vancouver",
+                    "distanceMeter":174.72
+                },
+                {
+                    "name":"Xing Fu Tang 幸福堂 80-678 Dunsmuir Street Vancouver",
+                    "place_id":"ChIJUXp5roVxhlQRmzkaFvzHLxg",
+                    "location":{
+                        "lat":49.2831479,
+                        "lng":-123.1165547
+                    },
+                    "address":"80-678 Dunsmuir Street, Vancouver",
+                    "rating":4.6,
+                    "distanceMeter":177.13
+                },
+                {
+                    "name":"Caffe Artigiano",
+                    "place_id":"ChIJpQR3KoBxhlQRQdtpRzxDL8o",
+                    "location":{
+                        "lat":49.28315720000001,
+                        "lng":-123.1214928
+                    },
+                    "address":"763 Hornby Street, Vancouver",
+                    "rating":4,
+                    "distanceMeter":182.09
+                },
+                {
+                    "name":"888 Caffè Express",
+                    "place_id":"ChIJ6WVS-IFxhlQRAY5COFjoYd0",
+                    "location":{
+                        "lat":49.28461799999999,
+                        "lng":-123.118187
+                    },
+                    "address":"888 Dunsmuir Street, Vancouver",
+                    "rating":4.2,
+                    "distanceMeter":185.94
+                },
+                {
+                    "name":"Presotea",
+                    "place_id":"ChIJowr4Un9xhlQRsEiSSJiVDHg",
+                    "location":{
+                        "lat":49.2840479,
+                        "lng":-123.1169431
+                    },
+                    "address":"777 Dunsmuir Street, Vancouver",
+                    "rating":3.6,
+                    "distanceMeter":186.69
+                },
+                {
+                    "name":"Café Crêpe Express",
+                    "place_id":"ChIJJbN3r39xhlQRYR8a21PBf2M",
+                    "location":{
+                        "lat":49.2813598,
+                        "lng":-123.1194749
+                    },
+                    "address":"796 Granville Street, Vancouver",
+                    "rating":3.8,
+                    "distanceMeter":189.02
+                },
+                {
+                    "name":"Crossroads Cafe",
+                    "place_id":"ChIJjfyDh39xhlQRgTqe5Bpi2nQ",
+                    "location":{
+                        "lat":49.28293799999999,
+                        "lng":-123.1216439
+                    },
+                    "address":"777 Hornby Street #160, Vancouver",
+                    "rating":4.4,
+                    "distanceMeter":192.77
+                }
+            ],
+            "headers":{
+                "content-length":"3864",
+                "content-type":"application/json"
+            },
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object"
+                }
+            }
+        },
+        {
+            "name":"Types - (Google)",
+            "url":"https://nearby-places.p.rapidapi.com/types",
+            "description":"Get a list of establishment types.\n\nThese types will only work with **/nearby (Google)**.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://nearby-places.p.rapidapi.com/types\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nearby-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                "accounting",
+                "airport",
+                "amusement_park",
+                "aquarium",
+                "art_gallery",
+                "atm",
+                "bakery",
+                "bank",
+                "bar",
+                "beauty_salon",
+                "bicycle_store",
+                "book_store",
+                "bowling_alley",
+                "bus_station",
+                "cafe",
+                "campground",
+                "car_dealer",
+                "car_rental",
+                "car_repair",
+                "car_wash",
+                "casino",
+                "cemetery",
+                "church",
+                "city_hall",
+                "clothing_store",
+                "convenience_store",
+                "courthouse",
+                "dentist",
+                "department_store",
+                "doctor",
+                "drugstore",
+                "electrician",
+                "electronics_store",
+                "embassy",
+                "fire_station",
+                "florist",
+                "funeral_home",
+                "furniture_store",
+                "gas_station",
+                "gym",
+                "hair_care",
+                "hardware_store",
+                "hindu_temple",
+                "home_goods_store",
+                "hospital",
+                "insurance_agency",
+                "jewelry_store",
+                "laundry",
+                "lawyer",
+                "library",
+                "light_rail_station",
+                "liquor_store",
+                "local_government_office",
+                "locksmith",
+                "lodging",
+                "meal_delivery",
+                "meal_takeaway",
+                "mosque",
+                "movie_rental",
+                "movie_theater",
+                "moving_company",
+                "museum",
+                "night_club",
+                "painter",
+                "park",
+                "parking",
+                "pet_store",
+                "pharmacy",
+                "physiotherapist",
+                "plumber",
+                "police",
+                "post_office",
+                "primary_school",
+                "real_estate_agency",
+                "restaurant",
+                "roofing_contractor",
+                "rv_park",
+                "school",
+                "secondary_school",
+                "shoe_store",
+                "shopping_mall",
+                "spa",
+                "stadium",
+                "storage",
+                "store",
+                "subway_station",
+                "supermarket",
+                "synagogue",
+                "taxi_stand",
+                "tourist_attraction",
+                "train_station",
+                "transit_station",
+                "travel_agency",
+                "university",
+                "veterinary_care",
+                "zoo"
+            ],
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "connection":"keep-alive",
+                "content-length":"1272",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Thu, 25 Nov 2021 08:13:01 GMT",
+                "etag":"W/\"4f8-eBs9MZ9CtZ+4dz6fY9dDE32Mzdw\"",
+                "server":"RapidAPI-1.2.8",
+                "via":"1.1 vegur",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"string"
+                }
+            }
+        },
+        {
+            "name":"Random (Google)",
+            "url":"https://nearby-places.p.rapidapi.com/random",
+            "description":"Return a random place nearby.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"Latitude",
+                    "default":"49.2803703"
+                },
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"Longitude",
+                    "default":"-123.0413988"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Default: 'cafe'",
+                    "default":"cafe"
+                },
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"**Meters**\nDefault: 200\nMax: 50000\n",
+                    "default":"500"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://nearby-places.p.rapidapi.com/random\"\nquerystring = {\"type\": type, \"lat\": lat, \"lng\": lng, \"radius\": radius}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nearby-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "place_id":{
+                        "type":"string"
+                    },
+                    "location":{
+                        "type":"object",
+                        "properties":{
+                            "lat":{
+                                "type":"number"
+                            },
+                            "lng":{
+                                "type":"number"
+                            }
+                        }
+                    },
+                    "address":{
+                        "type":"string"
+                    },
+                    "distanceMeter":{
+                        "type":"number"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Place Details - (Google)",
+            "url":"https://nearby-places.p.rapidapi.com/details",
+            "description":"Get contact and opening hours for a place.\n\nRequires a **place id** provided by **/nearby (Google)**.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"Place ID.\nThis value can be retrieved from */nearby* or */random* endpoints.",
+                    "default":"ChIJCxzX9tpwhlQRIFVwULOI2FM"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://nearby-places.p.rapidapi.com/details\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nearby-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "name":{
+                        "type":"string"
+                    },
+                    "place_id":{
+                        "type":"string"
+                    },
+                    "location":{
+                        "type":"object",
+                        "properties":{
+                            "lat":{
+                                "type":"number"
+                            },
+                            "lng":{
+                                "type":"number"
+                            }
+                        }
+                    },
+                    "address":{
+                        "type":"string"
+                    },
+                    "types":{
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    },
+                    "map_url":{
+                        "type":"string"
+                    },
+                    "phone":{
+                        "type":"string"
+                    },
+                    "opening_hours":{
+                        "type":"object",
+                        "properties":{
+                            "open_now":{
+                                "type":"boolean"
+                            },
+                            "periods":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object",
+                                    "properties":{
+                                        "close":{
+                                            "type":"object",
+                                            "properties":{
+                                                "day":{
+                                                    "type":"integer"
+                                                },
+                                                "time":{
+                                                    "type":"string"
+                                                }
+                                            }
+                                        },
+                                        "open":{
+                                            "type":"object",
+                                            "properties":{
+                                                "day":{
+                                                    "type":"integer"
+                                                },
+                                                "time":{
+                                                    "type":"string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "weekday_text":{
+                                "type":"array",
+                                "items":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "website":{
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Types - (ArcGIS)",
+            "url":"https://nearby-places.p.rapidapi.com/v2/types",
+            "description":"Types (categories) of establishments. These types will only work with **/v2/nearby (ArcGIS)**.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://nearby-places.p.rapidapi.com/v2/types\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nearby-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"string"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,629 @@
+{
+    "tool_name": "MyDeckAPI",
+    "tool_description": null,
+    "title": "MyDeckAPI",
+    "pricing": "FREE",
+    "score": null,
+    "home_url": "https://rapidapi.com/jhayes99823/api/mydeckapi2/",
+    "host": "mydeckapi2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "CreateSession",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/session",
+            "description": "Creates A Session\n\n***Field Required Unless Specified**\n\n#### Information Needed\n- playerNames\n    - name: String\n        - should be unique per session\n    - playerHandCount: Number (Optional)\n- pileNames\n    - name: String\n    - count: String \n        - make \"remaining\" for the pile you want to put the rest of the cards in",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/session\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "pile_ids": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "piles": {
+                                "items": {
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "player_ids": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "players": {
+                                "items": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "DiscardCard",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/player/discard",
+            "description": "Give the session id and unique name of the pile and player you want to discard to\n\n#### To Use Give List of Card Information\n- Suit\n    - [\"DIAMOND\", \"CLUB\", \"SPADES\", \"HEARTS\"]\n- Value\n   - [\"ACE\",\n  \"KING\",\n  \"QUEEN\",\n  \"JACK\",\n  \"10\",\n  \"9\",\n  \"8\",\n  \"7\",\n  \"6\",\n  \"5\",\n  \"4\",\n  \"3\",\n  \"2\",\n  \"1\",\n]\n- Code\n   - First letter of suit + First letter/number of value",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player/discard\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "cards": {
+                                "items": {
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
+                                        "imageURL": {
+                                            "type": "string"
+                                        },
+                                        "suit": {
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "sessionId": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GetPileBySessionIdandName",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/pile",
+            "description": "Give the session id and unique name of the pile you want to get information about",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "draw"
+                },
+                {
+                    "name": "sessionId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "5fbc14b413d4e80004e8eb27"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/pile\"\nquerystring = {\"name\": name, \"sessionId\": sessionid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "cards": {
+                                "items": {
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
+                                        "imageURL": {
+                                            "type": "string"
+                                        },
+                                        "suit": {
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "sessionId": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GetPlayerBySessionIdandName",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/player",
+            "description": "Give the session id and unique name of the player you want to get information about",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "player 1"
+                },
+                {
+                    "name": "sessionId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "5fbc14b413d4e80004e8eb27"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player\"\nquerystring = {\"name\": name, \"sessionId\": sessionid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "cards": {
+                                "items": {
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
+                                        "imageURL": {
+                                            "type": "string"
+                                        },
+                                        "suit": {
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "sessionId": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "ShufflePiletoPile",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/pile/shuffle",
+            "description": "Give the session id and unique name of to pile and from pile to shuffle cards\n\n- Default remaining in from pile: 0",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/pile/shuffle\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "DrawCard",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/player/draw",
+            "description": "Give the session id and unique name of the pile and player you want to draw the card from and put into the players hand\n- Default amount is 1",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player/draw\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "cards": {
+                                "items": {
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
+                                        "imageURL": {
+                                            "type": "string"
+                                        },
+                                        "suit": {
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "sessionId": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "CreateSession",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/session",
+            "description": "Creates A Session\n\n***Field Required Unless Specified**\n\n#### Information Needed\n- playerNames\n    - name: String\n        - should be unique per session\n    - playerHandCount: Number (Optional)\n- pileNames\n    - name: String\n    - count: String \n        - make \"remaining\" for the pile you want to put the rest of the cards in",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/session\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/session\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "pile_ids": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "piles": {
+                                "items": {
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "player_ids": {
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "players": {
+                                "items": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "DiscardCard",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/player/discard",
+            "description": "Give the session id and unique name of the pile and player you want to discard to\n\n#### To Use Give List of Card Information\n- Suit\n    - [\"DIAMOND\", \"CLUB\", \"SPADES\", \"HEARTS\"]\n- Value\n   - [\"ACE\",\n  \"KING\",\n  \"QUEEN\",\n  \"JACK\",\n  \"10\",\n  \"9\",\n  \"8\",\n  \"7\",\n  \"6\",\n  \"5\",\n  \"4\",\n  \"3\",\n  \"2\",\n  \"1\",\n]\n- Code\n   - First letter of suit + First letter/number of value",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player/discard\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player/discard\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "cards": {
+                                "items": {
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
+                                        "imageURL": {
+                                            "type": "string"
+                                        },
+                                        "suit": {
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "sessionId": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "ShufflePiletoPile",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/pile/shuffle",
+            "description": "Give the session id and unique name of to pile and from pile to shuffle cards\n\n- Default remaining in from pile: 0",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/pile/shuffle\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/pile/shuffle\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "DrawCard",
+            "url": "https://mydeckapi2.p.rapidapi.com/api/v1/player/draw",
+            "description": "Give the session id and unique name of the pile and player you want to draw the card from and put into the players hand\n- Default amount is 1",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player/draw\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mydeckapi2.p.rapidapi.com/api/v1/player/draw\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mydeckapi2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "cards": {
+                                "items": {
+                                    "properties": {
+                                        "_id": {
+                                            "type": "string"
+                                        },
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "createdAt": {
+                                            "type": "string"
+                                        },
+                                        "imageURL": {
+                                            "type": "string"
+                                        },
+                                        "suit": {
+                                            "type": "string"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "sessionId": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "integer"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

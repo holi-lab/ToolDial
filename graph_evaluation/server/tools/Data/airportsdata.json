@@ -1,0 +1,154 @@
+{
+    "tool_name":"AirportsData",
+    "tool_description":"Get basic information from 28k+ airports and landing strips around the world. With filtering, sorting and pagination options. ",
+    "title":"AirportsData",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":95,
+        "avgLatency":837,
+        "avgSuccessRate":95,
+        "popularityScore":9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/gamma-solutions-gamma-solutions-default/api/airportsdata/",
+    "host":"airportsdata.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get values",
+            "url":"https://airportsdata.p.rapidapi.com/airports/values",
+            "description":"Get a list of all **unique** values in the dataset for each of the properties. Results can be sorted and paginated.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"key",
+                    "type":"STRING",
+                    "description":"Values will be returned for this property. Possible values are: icao, iata, name, city, subd, country, elevation, lat, lon, tz and lid.",
+                    "default":"iata"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"skip",
+                    "type":"NUMBER",
+                    "description":"Skip n results",
+                    "default":"100"
+                },
+                {
+                    "name":"sortByOrder",
+                    "type":"STRING",
+                    "description":"Specify the sorting order. Possible values are *asc* and *desc*. Results are sorted in ascending order by default. ",
+                    "default":"desc"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limit to n results.",
+                    "default":"50"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airportsdata.p.rapidapi.com/airports/values\"\nquerystring = {\"key\": key, \"skip\": skip, \"sortByOrder\": sortbyorder, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airportsdata.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get airports",
+            "url":"https://airportsdata.p.rapidapi.com/airports",
+            "description":"Will return data from 28k+ airports in the database.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"lid",
+                    "type":"STRING",
+                    "description":"U.S. FAA Location Identifier (12,566 entries), or an empty string",
+                    "default":""
+                },
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"Sort results by a property value. Possible values are: IATA, IACO, name, city, subd, country, tz, lid and elevation. ",
+                    "default":"iata"
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"Filter results by name. The value should be sent as comma-separated.  For example, for *Zabrat Airport*, send *Zabrat,Airport*",
+                    "default":"Ishigaki,Airport"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limit to n results.",
+                    "default":"50"
+                },
+                {
+                    "name":"elevationOver",
+                    "type":"NUMBER",
+                    "description":"Filter airports with an MSL elevation, or highest point of the landing area in feet, over this value.",
+                    "default":"50"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":" ISO 3166-1 alpha-2 country code (plus XK for Kosovo).",
+                    "default":"JP"
+                },
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"Filter results by city. The value should be sent as comma-separated.  For example, for *Zakynthos Island*, send *Zakynthos,Island*",
+                    "default":"Ishigaki"
+                },
+                {
+                    "name":"skip",
+                    "type":"NUMBER",
+                    "description":"Skip first n results. ",
+                    "default":"0"
+                },
+                {
+                    "name":"sortByOrder",
+                    "type":"STRING",
+                    "description":"Specify the sorting order. Possible values are *asc* and *desc*. Results are sorted in ascending order by default. ",
+                    "default":"desc"
+                },
+                {
+                    "name":"elevationUnder",
+                    "type":"NUMBER",
+                    "description":"Filter airports with an MSL elevation, or highest point of the landing area in feet, under this value.",
+                    "default":"2000"
+                },
+                {
+                    "name":"tz",
+                    "type":"STRING",
+                    "description":"Timezone expressed as a tz database name (IANA-compliant) or an empty string for Antarctica.",
+                    "default":"Asia/Tokyo"
+                },
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"ROIG"
+                },
+                {
+                    "name":"subd",
+                    "type":"STRING",
+                    "description":"Filter results by subdivision (e.g. state, province, region, etc.). The value should be sent as comma-separated.  For example, for *Newfoundland and Labrador*, send *Newfoundland,and,Labrador*",
+                    "default":"Okinawa"
+                },
+                {
+                    "name":"iata",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"ISG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airportsdata.p.rapidapi.com/airports\"\nquerystring = {\"sortBy\": sortby, \"name\": name, \"limit\": limit, \"elevationOver\": elevationover, \"country\": country, \"city\": city, \"skip\": skip, \"sortByOrder\": sortbyorder, \"elevationUnder\": elevationunder, \"tz\": tz, \"icao\": icao, \"subd\": subd, \"iata\": iata}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airportsdata.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

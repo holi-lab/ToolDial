@@ -1,0 +1,1406 @@
+{
+    "product_id": "api_e125668a-f1cd-491f-be46-275c13d26f47",
+    "tool_description": "An AI service from Microsoft Azure that analyzes content in images",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/microsoft-computer-vision3/",
+    "name": "Microsoft Computer Vision",
+    "title": "Microsoft Computer Vision",
+    "pricing": "FREEMIUM",
+    "tool_name": "Microsoft Computer Vision",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1863,
+        "avgSuccessRate": 93,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "microsoft-computer-vision3.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "List Models",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/models",
+            "description": "This operation returns the list of domain-specific models that are supported by the Computer Vision API. Currently, the API supports following domain-specific models: celebrity recognizer, landmark recognizer.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/models\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/models\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "models": [
+                    {
+                        "name": "celebrities",
+                        "categories": [
+                            "people_",
+                            "\u4eba_",
+                            "pessoas_",
+                            "gente_"
+                        ]
+                    },
+                    {
+                        "name": "landmarks",
+                        "categories": [
+                            "outdoor_",
+                            "\u6237\u5916_",
+                            "\u5c4b\u5916_",
+                            "aoarlivre_",
+                            "alairelibre_",
+                            "building_",
+                            "\u5efa\u7b51_",
+                            "\u5efa\u7269_",
+                            "edif\u00edcio_"
+                        ]
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Result of the List Domain Models operation.",
+                "properties": {
+                    "models": {
+                        "description": "An array of supported models.",
+                        "items": {
+                            "description": "An object describing supported model by name and categories.",
+                            "properties": {
+                                "categories": {
+                                    "description": "Categories of the model.",
+                                    "items": {
+                                        "type": [
+                                            "string",
+                                            "null"
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "The name of the model.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Analyze Image",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/analyze",
+            "description": "This operation extracts a rich set of visual features based on the image content.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL. Within your request, there is an optional parameter to allow you to choose which features to return. By default, image categories are returned in the response.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;. Supported languages:\n**en** - English, Default. \n**es** - Spanish,\n **ja** - Japanese, \n**pt** - Portuguese,\n **zh** - Simplified Chinese.",
+                    "default": "en"
+                },
+                {
+                    "name": "descriptionExclude",
+                    "type": "ARRAY",
+                    "description": "Turn off specified domain models when generating the description.",
+                    "default": [
+                        "Celebrities"
+                    ]
+                },
+                {
+                    "name": "visualFeatures",
+                    "type": "ARRAY",
+                    "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: \n\n**Categories** - categorizes image content according to a taxonomy defined in documentation. \n**Tags** - tags the image with a detailed list of words related to the image content. \n**Description** - describes the image content with a complete English sentence. \n**Faces** - detects if faces are present. If present, generate coordinates, gender and age. **ImageType** - detects if image is clipart or a line drawing. \n**Color** - determines the accent color, dominant color, and whether an image is black&white. \n**Adult** - detects if the image is pornographic in nature (depicts nudity or a sex act), or is gory (depicts extreme violence or blood). Sexually suggestive content (aka racy content) is also detected. \n**Objects** - detects various objects within an image, including the approximate location. The Objects argument is only available in English. \n**Brands** - detects various brands within an image, including the approximate location. The Brands argument is only available in English.",
+                    "default": [
+                        "ImageType"
+                    ]
+                },
+                {
+                    "name": "details",
+                    "type": "ARRAY",
+                    "description": "A string indicating which domain-specific details to return. Multiple values should be comma-separated. Valid visual feature types include: \n\n**Celebrities** - identifies celebrities if detected in the image, \n**Landmarks** - identifies notable landmarks in the image.",
+                    "default": [
+                        "Celebrities"
+                    ]
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/analyze\"\nquerystring = {\"language\": \"en\", \"descriptionExclude\": [\"Celebrities\"], \"visualFeatures\": [\"ImageType\"], \"details\": [\"Celebrities\"]}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/analyze\"\nquerystring = {\"language\": \"en\", \"descriptionExclude\": [\"Celebrities\"], \"visualFeatures\": [\"ImageType\"], \"details\": [\"Celebrities\"]}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Result of AnalyzeImage operation.",
+                "properties": {
+                    "adult": {
+                        "description": "An object describing whether the image contains adult-oriented content and/or is racy.",
+                        "properties": {
+                            "adultScore": {
+                                "description": "Score from 0 to 1 that indicates how much the content is considered adult-oriented within the image.",
+                                "format": "double",
+                                "maximum": 1.7976931348623157e+308,
+                                "minimum": -1.7976931348623157e+308,
+                                "type": "number"
+                            },
+                            "goreScore": {
+                                "description": "Score from 0 to 1 that indicates how gory is the image.",
+                                "format": "double",
+                                "maximum": 1.7976931348623157e+308,
+                                "minimum": -1.7976931348623157e+308,
+                                "type": "number"
+                            },
+                            "isAdultContent": {
+                                "description": "A value indicating if the image contains adult-oriented content.",
+                                "type": "boolean"
+                            },
+                            "isGoryContent": {
+                                "description": "A value indicating if the image is gory.",
+                                "type": "boolean"
+                            },
+                            "isRacyContent": {
+                                "description": "A value indicating if the image is racy.",
+                                "type": "boolean"
+                            },
+                            "racyScore": {
+                                "description": "Score from 0 to 1 that indicates how suggestive is the image.",
+                                "format": "double",
+                                "maximum": 1.7976931348623157e+308,
+                                "minimum": -1.7976931348623157e+308,
+                                "type": "number"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "brands": {
+                        "description": "Array of brands detected in the image.",
+                        "items": {
+                            "description": "A brand detected in an image.",
+                            "properties": {
+                                "confidence": {
+                                    "description": "Confidence score of having observed the brand in the image, as a value ranging from 0 to 1.",
+                                    "format": "double",
+                                    "maximum": 1.7976931348623157e+308,
+                                    "minimum": -1.7976931348623157e+308,
+                                    "type": "number"
+                                },
+                                "name": {
+                                    "description": "Label for the brand.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    },
+                    "categories": {
+                        "description": "An array indicating identified categories.",
+                        "items": {
+                            "description": "An object describing identified category.",
+                            "properties": {
+                                "detail": {
+                                    "description": "An object describing additional category details.",
+                                    "properties": {
+                                        "celebrities": {
+                                            "description": "An array of celebrities if any identified.",
+                                            "items": {
+                                                "description": "An object describing possible celebrity identification.",
+                                                "properties": {
+                                                    "confidence": {
+                                                        "description": "Confidence level for the celebrity recognition as a value ranging from 0 to 1.",
+                                                        "format": "double",
+                                                        "maximum": 1.7976931348623157e+308,
+                                                        "minimum": -1.7976931348623157e+308,
+                                                        "type": "number"
+                                                    },
+                                                    "faceRectangle": {
+                                                        "description": "An object describing face rectangle.",
+                                                        "properties": {
+                                                            "height": {
+                                                                "description": "Height measured from the top-left point of the face, in pixels.",
+                                                                "format": "int32",
+                                                                "maximum": 2147483647,
+                                                                "minimum": -2147483648,
+                                                                "type": "integer"
+                                                            },
+                                                            "left": {
+                                                                "description": "X-coordinate of the top left point of the face, in pixels.",
+                                                                "format": "int32",
+                                                                "maximum": 2147483647,
+                                                                "minimum": -2147483648,
+                                                                "type": "integer"
+                                                            },
+                                                            "top": {
+                                                                "description": "Y-coordinate of the top left point of the face, in pixels.",
+                                                                "format": "int32",
+                                                                "maximum": 2147483647,
+                                                                "minimum": -2147483648,
+                                                                "type": "integer"
+                                                            },
+                                                            "width": {
+                                                                "description": "Width measured from the top-left point of the face, in pixels.",
+                                                                "format": "int32",
+                                                                "maximum": 2147483647,
+                                                                "minimum": -2147483648,
+                                                                "type": "integer"
+                                                            }
+                                                        },
+                                                        "type": [
+                                                            "object",
+                                                            "null"
+                                                        ]
+                                                    },
+                                                    "name": {
+                                                        "description": "Name of the celebrity.",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": [
+                                                    "object",
+                                                    "null"
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ]
+                                        },
+                                        "landmarks": {
+                                            "description": "An array of landmarks if any identified.",
+                                            "items": {
+                                                "description": "A landmark recognized in the image.",
+                                                "properties": {
+                                                    "confidence": {
+                                                        "description": "Confidence level for the landmark recognition as a value ranging from 0 to 1.",
+                                                        "format": "double",
+                                                        "maximum": 1.7976931348623157e+308,
+                                                        "minimum": -1.7976931348623157e+308,
+                                                        "type": "number"
+                                                    },
+                                                    "name": {
+                                                        "description": "Name of the landmark.",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ]
+                                                    }
+                                                },
+                                                "type": [
+                                                    "object",
+                                                    "null"
+                                                ]
+                                            },
+                                            "type": [
+                                                "array",
+                                                "null"
+                                            ]
+                                        }
+                                    },
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "Name of the category.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "score": {
+                                    "description": "Scoring of the category.",
+                                    "format": "double",
+                                    "maximum": 1.7976931348623157e+308,
+                                    "minimum": -1.7976931348623157e+308,
+                                    "type": "number"
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    },
+                    "color": {
+                        "description": "An object providing additional metadata describing color attributes.",
+                        "properties": {
+                            "accentColor": {
+                                "description": "Possible accent color.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "dominantColorBackground": {
+                                "description": "Possible dominant background color.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "dominantColorForeground": {
+                                "description": "Possible dominant foreground color.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "dominantColors": {
+                                "description": "An array of possible dominant colors.",
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "type": [
+                                    "array",
+                                    "null"
+                                ]
+                            },
+                            "isBWImg": {
+                                "description": "A value indicating if the image is black and white.",
+                                "type": "boolean"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "description": {
+                        "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
+                        "properties": {
+                            "captions": {
+                                "description": "A list of captions, sorted by confidence level.",
+                                "items": {
+                                    "description": "An image caption, i.e. a brief description of what the image depicts.",
+                                    "properties": {
+                                        "confidence": {
+                                            "description": "The level of confidence the service has in the caption.",
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        },
+                                        "text": {
+                                            "description": "The text of the caption.",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
+                                        }
+                                    },
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ]
+                                },
+                                "type": [
+                                    "array",
+                                    "null"
+                                ]
+                            },
+                            "tags": {
+                                "description": "A collection of image tags.",
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "type": [
+                                    "array",
+                                    "null"
+                                ]
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "faces": {
+                        "description": "An array of possible faces within the image.",
+                        "items": {
+                            "description": "An object describing a face identified in the image.",
+                            "properties": {
+                                "age": {
+                                    "description": "Possible age of the face.",
+                                    "format": "int32",
+                                    "maximum": 2147483647,
+                                    "minimum": -2147483648,
+                                    "type": "integer"
+                                },
+                                "gender": {
+                                    "description": "Possible gender of the face.",
+                                    "enum": [
+                                        "Male",
+                                        "Female",
+                                        null
+                                    ],
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "Gender"
+                                    }
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    },
+                    "imageType": {
+                        "description": "An object providing possible image types and matching confidence levels.",
+                        "properties": {
+                            "clipArtType": {
+                                "description": "Confidence level that the image is a clip art.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "lineDrawingType": {
+                                "description": "Confidence level that the image is a line drawing.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "metadata": {
+                        "description": "Image metadata.",
+                        "properties": {
+                            "format": {
+                                "description": "Image format.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "height": {
+                                "description": "Image height, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "width": {
+                                "description": "Image width, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "objects": {
+                        "description": "Array of objects describing what was detected in the image.",
+                        "items": {
+                            "description": "An object detected in an image.",
+                            "properties": {
+                                "confidence": {
+                                    "description": "Confidence score of having observed the object in the image, as a value ranging from 0 to 1.",
+                                    "format": "double",
+                                    "maximum": 1.7976931348623157e+308,
+                                    "minimum": -1.7976931348623157e+308,
+                                    "type": "number"
+                                },
+                                "object": {
+                                    "description": "Label for the object.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "parent": {
+                                    "description": "An object detected inside an image.",
+                                    "properties": {
+                                        "confidence": {
+                                            "description": "Confidence score of having observed the object in the image, as a value ranging from 0 to 1.",
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        },
+                                        "object": {
+                                            "description": "Label for the object.",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
+                                        }
+                                    },
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ]
+                                },
+                                "rectangle": {
+                                    "description": "A bounding box for an area inside an image.",
+                                    "properties": {
+                                        "h": {
+                                            "description": "Height measured from the top-left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "w": {
+                                            "description": "Width measured from the top-left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "x": {
+                                            "description": "X-coordinate of the top left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "y": {
+                                            "description": "Y-coordinate of the top left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    },
+                    "requestId": {
+                        "description": "Id of the REST API request.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "tags": {
+                        "description": "A list of tags with confidence level.",
+                        "items": {
+                            "description": "An entity observation in the image, along with the confidence score.",
+                            "properties": {
+                                "confidence": {
+                                    "description": "The level of confidence that the entity was observed.",
+                                    "format": "double",
+                                    "maximum": 1.7976931348623157e+308,
+                                    "minimum": -1.7976931348623157e+308,
+                                    "type": "number"
+                                },
+                                "hint": {
+                                    "description": "Optional hint/details for this tag.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "Name of the entity.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Describe Image",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/describe",
+            "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. Descriptions may include results from celebrity and landmark domain models, if applicable.\n\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.",
+                    "default": "en"
+                },
+                {
+                    "name": "maxCandidates",
+                    "type": "NUMBER",
+                    "description": "Maximum number of candidate descriptions to be returned.  The default is 1.",
+                    "default": 1
+                },
+                {
+                    "name": "descriptionExclude",
+                    "type": "ARRAY",
+                    "description": "Turn off specified domain models when generating the description.",
+                    "default": [
+                        "Celebrities"
+                    ]
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/describe\"\nquerystring = {\"language\": \"en\", \"maxCandidates\": 1, \"descriptionExclude\": [\"Celebrities\"]}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/describe\"\nquerystring = {\"language\": \"en\", \"maxCandidates\": 1, \"descriptionExclude\": [\"Celebrities\"]}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
+                "properties": {
+                    "description": {
+                        "description": "A collection of content tags, along with a list of captions sorted by confidence level, and image metadata.",
+                        "properties": {
+                            "captions": {
+                                "description": "A list of captions, sorted by confidence level.",
+                                "items": {
+                                    "description": "An image caption, i.e. a brief description of what the image depicts.",
+                                    "properties": {
+                                        "confidence": {
+                                            "description": "The level of confidence the service has in the caption.",
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        },
+                                        "text": {
+                                            "description": "The text of the caption.",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
+                                        }
+                                    },
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ]
+                                },
+                                "type": [
+                                    "array",
+                                    "null"
+                                ]
+                            },
+                            "tags": {
+                                "description": "A collection of image tags.",
+                                "items": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "type": [
+                                    "array",
+                                    "null"
+                                ]
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "metadata": {
+                        "description": "Image metadata.",
+                        "properties": {
+                            "format": {
+                                "description": "Image format.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "height": {
+                                "description": "Image height, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "width": {
+                                "description": "Image width, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "requestId": {
+                        "description": "Id of the REST API request.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Tag Image",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/tag",
+            "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag \"ascomycete\" may be accompanied by the hint \"fungus\".\n\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.",
+                    "default": "en"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/tag\"\nquerystring = {\"language\": \"en\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/tag\"\nquerystring = {\"language\": \"en\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "The results of a image tag operation, including any tags and image metadata.",
+                "properties": {
+                    "metadata": {
+                        "description": "Image metadata.",
+                        "properties": {
+                            "format": {
+                                "description": "Image format.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "height": {
+                                "description": "Image height, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "width": {
+                                "description": "Image width, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "requestId": {
+                        "description": "Id of the REST API request.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "tags": {
+                        "description": "A list of tags with confidence level.",
+                        "items": {
+                            "description": "An entity observation in the image, along with the confidence score.",
+                            "properties": {
+                                "confidence": {
+                                    "description": "The level of confidence that the entity was observed.",
+                                    "format": "double",
+                                    "maximum": 1.7976931348623157e+308,
+                                    "minimum": -1.7976931348623157e+308,
+                                    "type": "number"
+                                },
+                                "hint": {
+                                    "description": "Optional hint/details for this tag.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "Name of the entity.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Analyze Image By Domain",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/models/{model}/analyze",
+            "description": "This operation recognizes content within an image by applying a domain-specific model. The list of domain-specific models that are supported by the Computer Vision API can be retrieved using the /models GET request. Currently, the API provides following domain-specific models: celebrities, landmarks.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "model",
+                    "type": "ENUM",
+                    "description": "The domain-specific content to recognize.\n\nAllowed values:\n**celebrities**\n**landmarks**",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "The desired language for output generation. If this parameter is not specified, the default value is &quot;en&quot;.Supported languages:en - English, Default. es - Spanish, ja - Japanese, pt - Portuguese, zh - Simplified Chinese.",
+                    "default": "en"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/models/{model}/analyze\"\nquerystring = {\"model\": \"\", \"language\": \"en\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/models/{model}/analyze\"\nquerystring = {\"model\": \"\", \"language\": \"en\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Result of image analysis using a specific domain model including additional metadata.",
+                "properties": {
+                    "metadata": {
+                        "description": "Image metadata.",
+                        "properties": {
+                            "format": {
+                                "description": "Image format.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "height": {
+                                "description": "Image height, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "width": {
+                                "description": "Image width, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "requestId": {
+                        "description": "Id of the REST API request.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "result": {
+                        "description": "Model-specific response.",
+                        "type": "object",
+                        "x-ms-client-flatten": true
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Generate Thumbnail",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/generateThumbnail",
+            "description": "This operation generates a thumbnail image with the user-specified width and height. By default, the service analyzes the image, identifies the region of interest (ROI), and generates smart cropping coordinates based on the ROI. Smart cropping helps when you specify an aspect ratio that differs from that of the input image.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "Width of the thumbnail, in pixels. It must be between 1 and 1024. Recommended minimum of 50.",
+                    "default": ""
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "Height of the thumbnail, in pixels. It must be between 1 and 1024. Recommended minimum of 50.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "smartCropping",
+                    "type": "BOOLEAN",
+                    "description": "Boolean flag for enabling smart cropping.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/generateThumbnail\"\nquerystring = {\"width\": \"\", \"smartCropping\": \"\", \"height\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/generateThumbnail\"\nquerystring = {\"width\": \"\", \"smartCropping\": \"\", \"height\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#"
+            }
+        },
+        {
+            "name": "Detect Objects",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/detect",
+            "description": "Performs object detection on the specified image.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/detect\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/detect\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Result of a DetectImage call.",
+                "properties": {
+                    "metadata": {
+                        "description": "Image metadata.",
+                        "properties": {
+                            "format": {
+                                "description": "Image format.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "height": {
+                                "description": "Image height, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "width": {
+                                "description": "Image width, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "objects": {
+                        "description": "An array of detected objects.",
+                        "items": {
+                            "description": "An object detected in an image.",
+                            "properties": {
+                                "confidence": {
+                                    "description": "Confidence score of having observed the object in the image, as a value ranging from 0 to 1.",
+                                    "format": "double",
+                                    "maximum": 1.7976931348623157e+308,
+                                    "minimum": -1.7976931348623157e+308,
+                                    "type": "number"
+                                },
+                                "object": {
+                                    "description": "Label for the object.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "parent": {
+                                    "description": "An object detected inside an image.",
+                                    "properties": {
+                                        "confidence": {
+                                            "description": "Confidence score of having observed the object in the image, as a value ranging from 0 to 1.",
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        },
+                                        "object": {
+                                            "description": "Label for the object.",
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
+                                        }
+                                    },
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ]
+                                },
+                                "rectangle": {
+                                    "description": "A bounding box for an area inside an image.",
+                                    "properties": {
+                                        "h": {
+                                            "description": "Height measured from the top-left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "w": {
+                                            "description": "Width measured from the top-left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "x": {
+                                            "description": "X-coordinate of the top left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "y": {
+                                            "description": "Y-coordinate of the top left point of the area, in pixels.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    },
+                    "requestId": {
+                        "description": "Id of the REST API request.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Recognize Printed Text",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/ocr",
+            "description": "Optical Character Recognition (OCR) detects text in an image and extracts the recognized characters into a machine-usable character stream.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "detectOrientation",
+                    "type": "BOOLEAN",
+                    "description": "Whether detect the text orientation in the image. With detectOrientation=true the OCR service tries to detect the image orientation and correct it before further processing (e.g. if it's upside-down).",
+                    "default": true
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "The BCP-47 language code of the text to be detected in the image. The default value is 'unk'.",
+                    "default": "unk"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/ocr\"\nquerystring = {\"detectOrientation\": true, \"language\": \"unk\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/ocr\"\nquerystring = {\"detectOrientation\": true, \"language\": \"unk\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "language": {
+                        "description": "The BCP-47 language code of the text in the image.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "orientation": {
+                        "description": "Orientation of the text recognized in the image, if requested. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).\r\nIf detection of the orientation was not requested, or no text is detected, the value is 'NotDetected'.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "regions": {
+                        "description": "An array of objects, where each object represents a region of recognized text.",
+                        "items": {
+                            "description": "A region consists of multiple lines (e.g. a column of text in a multi-column document).",
+                            "properties": {
+                                "boundingBox": {
+                                    "description": "Bounding box of a recognized region. The four integers represent the x-coordinate of the left edge, the y-coordinate of the top edge, width, and height of the bounding box, in the coordinate system of the input image, after it has been rotated around its center according to the detected text angle (see textAngle property), with the origin at the top-left corner, and the y-axis pointing down.",
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "lines": {
+                                    "description": "An array of recognized lines of text.",
+                                    "items": {
+                                        "description": "An object describing a single recognized line of text.",
+                                        "properties": {
+                                            "boundingBox": {
+                                                "description": "Bounding box of a recognized line. The four integers represent the x-coordinate of the left edge, the y-coordinate of the top edge, width, and height of the bounding box, in the coordinate system of the input image, after it has been rotated around its center according to the detected text angle (see textAngle property), with the origin at the top-left corner, and the y-axis pointing down.",
+                                                "type": [
+                                                    "string",
+                                                    "null"
+                                                ]
+                                            },
+                                            "words": {
+                                                "description": "An array of objects, where each object represents a recognized word.",
+                                                "items": {
+                                                    "description": "Information on a recognized word.",
+                                                    "properties": {
+                                                        "boundingBox": {
+                                                            "description": "Bounding box of a recognized word. The four integers represent the x-coordinate of the left edge, the y-coordinate of the top edge, width, and height of the bounding box, in the coordinate system of the input image, after it has been rotated around its center according to the detected text angle (see textAngle property), with the origin at the top-left corner, and the y-axis pointing down.",
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        },
+                                                        "text": {
+                                                            "description": "String value of a recognized word.",
+                                                            "type": [
+                                                                "string",
+                                                                "null"
+                                                            ]
+                                                        }
+                                                    },
+                                                    "type": [
+                                                        "object",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "type": [
+                                                    "array",
+                                                    "null"
+                                                ]
+                                            }
+                                        },
+                                        "type": [
+                                            "object",
+                                            "null"
+                                        ]
+                                    },
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ]
+                                }
+                            },
+                            "type": [
+                                "object",
+                                "null"
+                            ]
+                        },
+                        "type": [
+                            "array",
+                            "null"
+                        ]
+                    },
+                    "textAngle": {
+                        "description": "The angle, in radians, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
+                        "format": "double",
+                        "maximum": 1.7976931348623157e+308,
+                        "minimum": -1.7976931348623157e+308,
+                        "type": "number"
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        },
+        {
+            "name": "Get Area Of Interest",
+            "url": "https://microsoft-computer-vision3.p.rapidapi.com/areaOfInterest",
+            "description": "This operation returns a bounding box around the most important area of the image.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/areaOfInterest\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-computer-vision3.p.rapidapi.com/areaOfInterest\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-computer-vision3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Result of AreaOfInterest operation.",
+                "properties": {
+                    "areaOfInterest": {
+                        "description": "A bounding box for an area inside an image.",
+                        "properties": {
+                            "h": {
+                                "description": "Height measured from the top-left point of the area, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "w": {
+                                "description": "Width measured from the top-left point of the area, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "x": {
+                                "description": "X-coordinate of the top left point of the area, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "y": {
+                                "description": "Y-coordinate of the top left point of the area, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "metadata": {
+                        "description": "Image metadata.",
+                        "properties": {
+                            "format": {
+                                "description": "Image format.",
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            },
+                            "height": {
+                                "description": "Image height, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "width": {
+                                "description": "Image width, in pixels.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "type": [
+                            "object",
+                            "null"
+                        ]
+                    },
+                    "requestId": {
+                        "description": "Id of the REST API request.",
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                },
+                "type": [
+                    "object",
+                    "null"
+                ]
+            }
+        }
+    ],
+    "standardized_name": "microsoft_computer_vision"
+}

@@ -1,0 +1,85 @@
+{
+    "tool_name":"Walmart Order Status",
+    "tool_description":"This is an API to provide status of a Walmart order by email and order ID.",
+    "title":"Walmart Order Status",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/ebizapi/api/walmart-order-status/",
+    "host":"walmart-order-status.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"get_order_status",
+            "url":"https://walmart-order-status.p.rapidapi.com/order_status",
+            "description":"Return the order status in json format by email and order_id provided in URL path",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"order_id",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"email",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://walmart-order-status.p.rapidapi.com/order_status\"\nquerystring = {\"order_id\": order_id, \"email\": email}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"walmart-order-status.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "items":[
+                    {
+                        "name":"",
+                        "quantity":0
+                    }
+                ],
+                "delivery_status":"",
+                "delivery_date":""
+            },
+            "headers":{},
+            "schema":{
+                "title":"OrderStatus",
+                "required":[
+                    "delivery_status"
+                ],
+                "type":"object",
+                "properties":{
+                    "items":{
+                        "title":"Items",
+                        "type":"array",
+                        "items":{
+                            "title":"Item",
+                            "required":[
+                                "name",
+                                "quantity"
+                            ],
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "title":"Name",
+                                    "type":"string"
+                                },
+                                "quantity":{
+                                    "title":"Quantity",
+                                    "type":"integer"
+                                }
+                            }
+                        },
+                        "default":[]
+                    },
+                    "delivery_status":{
+                        "title":"Delivery Status",
+                        "type":"string"
+                    },
+                    "delivery_date":{
+                        "title":"Delivery Date",
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    ]
+}

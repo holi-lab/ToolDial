@@ -1,0 +1,159 @@
+{
+    "tool_name": "Ponto",
+    "tool_description": "Ponto is an Isabel Group product that lets you connect your bank account in more than 150 EU banks to get your balance and list of transactions",
+    "title": "Ponto",
+    "pricing": "FREE",
+    "score": null,
+    "home_url": "https://rapidapi.com/isabel-group-isabel-group-default/api/ponto/",
+    "host": "ponto.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Create synchronization",
+            "url": "https://ponto.p.rapidapi.com/synchronizations",
+            "description": "In order to retreive the lastest bank account information, it is necessary to ask Ponto to synchronize the bank account data with the bank. This endpoint allows you to trigger a synchronization both for the bank account balance but also for the bank account transaction list.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Accept",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "content-type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ponto.p.rapidapi.com/synchronizations\"\nquerystring = {\"Accept\": accept, \"content-type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ponto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get synchronization",
+            "url": "https://ponto.p.rapidapi.com/synchronizations/{id}",
+            "description": "Retreives the synchronization object to know its status. If succeeded, then the bank account data has been synchronized with the bank and it can be fetched through the /accounts endpoint.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "c5753175-fa6d-4d22-93a3-60e37b140da8"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Accept",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://ponto.p.rapidapi.com/synchronizations/{id}\"\nquerystring = {\"Accept\": accept}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ponto.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "List transactions",
+            "url": "https://ponto.p.rapidapi.com/accounts/{id}/transactions",
+            "description": "List transactions linked to a specific account",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "accept",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "42732ef0-b19d-4f9c-8df8-a2e9ff35ee8a"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "after",
+                    "type": "STRING",
+                    "description": "Cursor for pagination. Indicates that the API should return the transaction resources which are immediately after this one in the list (the next page)",
+                    "default": "ab1be1c1-d00d-47c6-8785-a555a4123101"
+                },
+                {
+                    "name": "before",
+                    "type": "STRING",
+                    "description": "Cursor for pagination. Indicates that the API should return the transaction resources which are immediately before this one in the list (the previous page)",
+                    "default": "ab1be1c1-d00d-47c6-8785-a555a4123101"
+                },
+                {
+                    "name": "limit",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://ponto.p.rapidapi.com/accounts/{id}/transactions\"\nquerystring = {\"accept\": accept, \"after\": after, \"before\": before, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ponto.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "List accounts",
+            "url": "https://ponto.p.rapidapi.com/accounts",
+            "description": "List the accounts available in this integration",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "accept",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "after",
+                    "type": "STRING",
+                    "description": "Cursor for pagination. Indicates that the API should return the account resources which are immediately after this one in the list (the next page)",
+                    "default": "953934eb-229a-4fd2-8675-07794078cc7d"
+                },
+                {
+                    "name": "before",
+                    "type": "STRING",
+                    "description": "Cursor for pagination. Indicates that the API should return the account resources which are immediately before this one in the list (the previous page)",
+                    "default": "953934eb-229a-4fd2-8675-07794078cc7d"
+                },
+                {
+                    "name": "limit",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://ponto.p.rapidapi.com/accounts\"\nquerystring = {\"accept\": accept, \"after\": after, \"before\": before, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ponto.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create synchronization",
+            "url": "https://ponto.p.rapidapi.com/synchronizations",
+            "description": "In order to retreive the lastest bank account information, it is necessary to ask Ponto to synchronize the bank account data with the bank. This endpoint allows you to trigger a synchronization both for the bank account balance but also for the bank account transaction list.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ponto.p.rapidapi.com/synchronizations\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ponto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ponto.p.rapidapi.com/synchronizations\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ponto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

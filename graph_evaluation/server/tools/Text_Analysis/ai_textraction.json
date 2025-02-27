@@ -1,0 +1,64 @@
+{
+    "product_id": "api_35c5fd5f-8154-4c84-b6c5-10c40d00265b",
+    "tool_description": "A powerful AI-powered text parser that extracts custom user-defined entities from unstructured text.",
+    "home_url": "https://rapidapi.com/TextractionAI/api/ai-textraction/",
+    "name": "AI Textraction",
+    "title": "AI Textraction",
+    "pricing": "FREEMIUM",
+    "tool_name": "AI Textraction",
+    "score": {
+        "avgServiceLevel": 92,
+        "avgLatency": 2462,
+        "avgSuccessRate": 87,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "ai-textraction.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Textraction",
+            "url": "https://ai-textraction.p.rapidapi.com/textraction",
+            "description": "## Textraction: Unleashing the Power of AI in a Structured Format\nTextraction is a powerful AI-powered text parser which processes unstructured text to extract custom user-defined entities. It can be used to extract exact values (examples: prices, dates, names, emails, phone numbers), semantic answers (examples: main topic, diagnosis, customer\u2019s request), and it is pretty much limited by the imagination.\n\nOur website contains an easy to use interactive demo with several examples -  use it to get a quick understanding of the API: https://www.textraction.ai\n\n## Features\n* Extract custom entities from unstructured text.\n* Powered by a powerful SOTA AI model.\n* Multi-language support.\n* Supports long texts: up to 50,000 characters.\n\n## Common Use  Cases\n* Parse any text:\n    * Curriculum Vitae: candidate name, contact details, skills, education, etc.\n    * Product listing: product name, specifications, price, etc.\n    * Financial: revenues, number of sold items, earning per share, stock ticker, etc.\n    * Customer support: order id, customer's request, etc.\n* Automatically fill/validate detailed user input fields (checkboxes, radio buttons, drop-down lists, text boxes, etc) based on a free text user input.\n*  Convert multiple texts into data tables:\n    * Add filters based on text entities.\n    * Train classical Machine Learning (ML) models over the extracted entities.\n* Get answers to questions about a text in a structured format.\n\n## Input Text\n* Text to extract entities from.\n* Up to 50,000 characters long.\n\n**example:** \"The quick brown fox jumps over the lazy dog.\"\n\n## Input Entities:\n* An array of custom query entities to extract from the text, up to 12 entities per request.\n* Each entity entry is described by a JSON with 3-4 key-value pairs:\n    * \"description\": a free text description of the entity, up to 100 characters long.\n    * \"type\": desired entity value output format, any primitive (\"string\", \"integer\", \"float\", \"boolean\"), or any array of them (example: \"array[string]\").\n    * \"var_name\": a descriptive entity variable name to be used in the output results, up to 40 characters long. It must start with a letter, followed by letters, digits, or underscores.\n    * (optional) \"valid_values\": an array of valid extracted entity values - use it to limit the extracted entity value to one of pre-defined possible values. Up to 20 values, up to 40 characters each.\n\n**example:** [{\"description: \"number of animals mentioned in text\", \"type\": \"integer\", \"var_name\": num_of_animals\"}]\n\n## Output\n* \"results\": a JSON containing an entry for each input entity, mapping from var_name to to the extracted value.\n* \"stats\": a JSON with basic request statistics.\n\n**example:** {\"results\": {\"num_of_animals\": 2}, \"stats\": {\"n_characters_text\": 44, \"n_entities\": 1}}\n\n## Tips\n* View our website for inspirational examples: https://textraction.ai/\n* Input Text:\n    * Remove any irrelevant parts of the text to focus the model on the relevant parts only (examples: HTML tags, irrelevant paragraphs, etc).\n    * If relevant, add metadata and context for a better semantic understanding (example: \u201cThe following Curriculum Vitae was received from a candidate on 2023-04-23: \u2026\u201d).\n* Input Entities:\n    * Description:\n        * Be explicit and accurately describe the desired value (example: \"number of rooms in the property, including only bedrooms and living rooms\").\n        * If relevant, specify an output format for better standartization (examples: YYYY-mm-dd, ISO, etc).\n        * If needed, add limitations (example: \"product summary, 3-5 words\").\n    * Variable name: \n        * Should be descriptive.\n        * Think of them as variable names in a programming language, JSON keys, or columns names of a data table.\n    * Type:\n        * Should match the desired output value.\n    * Valid values:\n        * If needed, limit the extracted entity value to one of several expected values.\n        * This is very useful when dealing with categorical values (example: automatically setting a value for a drop-down list or a radio button).\n* Output:\n    * The model is trained to handle missing/uncertain values by returning a \"null\" - handle them according to your product requirements (example: fill them with a default value).",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ai-textraction.p.rapidapi.com/textraction\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ai-textraction.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ai-textraction.p.rapidapi.com/textraction\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ai-textraction.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "type": "object",
+                        "properties": {
+                            "first_name": {
+                                "type": "string"
+                            },
+                            "last_name": {
+                                "type": "string"
+                            },
+                            "age": {
+                                "type": "integer"
+                            },
+                            "state": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "stats": {
+                        "type": "object",
+                        "properties": {
+                            "n_text_characters": {
+                                "type": "integer"
+                            },
+                            "n_entities": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

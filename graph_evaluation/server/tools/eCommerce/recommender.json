@@ -1,0 +1,74 @@
+{
+    "product_id": "api_ea38c655-39cd-41c0-b0ba-7a6fb4f37835",
+    "tool_description": "Machine learning product recommendation service with Universal Recommender\n\nThere is a reason we call this recommender \"universal\" and it's because of the number of use cases it can be applied to.\n\nPersonalized Recommendations: \"just for you\", when you have user history\nSimilar Item Recommendations: \"people who liked this also like these\"\nShopping Cart or Complementary Items Recommendations: more generally item-set recommendations. These can be used with shopping carts, wishlists, watchlists,...",
+    "home_url": "https://rapidapi.com/rusalin/api/recommender8/",
+    "name": "Recommender",
+    "title": "Recommender",
+    "pricing": "FREEMIUM",
+    "tool_name": "Recommender",
+    "score": null,
+    "host": "recommender8.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Add event",
+            "url": "https://recommender8.p.rapidapi.com/engines/events",
+            "description": "Add an event to prediction engine such as \"buy\", \"detail-page-view\", \"category-view\"\n\nAn ECommerce Primary Indicator might look like this:\n\n{\n   \"event\" : \"buy\",\n   \"entityType\" : \"user\",\n   \"entityId\" : \"John Doe\",\n   \"targetEntityType\" : \"item\",\n   \"targetEntityId\" : \"iPad\",\n   \"properties\" : {},\n   \"eventTime\" : \"2015-10-05T21:02:49.228Z\"\n}\nRules for Indicators are:\n\n**event**: the value must be one the \"name\"s in the \"indicators\" array from the UR engine's JSON config.\n**entityType**: This is always \"user\", do not use any other type for indicators.\n**entityId**: This is whatever string you use to identify a user.\n**targetEntityType**: This is always \"item\", do not use any other type for indicators.\n**targetEntityId**: The id for items that correspond to the indicator name. May be a product-id, category-id, a tag-id, search term, location, anything that the event represents.\nproperties: always empty and can be omitted.\neventTime: the ISO8601 formatted string for the time the event occurred. Any datetime should be absolute, with a time zone or in UTC format as explained here. Basically use a time zone or offset from GMT. The popular \"Zulu\" encoding for UTC is often used. Any truncated datetime is not supported since the Harness and the UR can accept events from all over the globe and so the datetimes must be applicable to anywhere.\nThis is what a \"purchase\" event looks like. Note that a usage event always is from a user and has a user id. Also the \"**targetEntityType**\" is always \"**item**\". The actual target entity is implied by the event's \"**event**\" attribute.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/events\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/events\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Add item/s",
+            "url": "https://recommender8.p.rapidapi.com/engines/events",
+            "description": "Add items to be used for predictions. Typically this are products in your online store.\n\n**Set Or Change Item Properties**\nTheses are used by the UR to create, update, or delete Item Properties. They will always be targeted at item-ids and have the side-effect of creating an item object in the store.\n\nTo attach properties to items use a \"$set\" event like this:\n\n{\n   \"event\" : \"$set\",\n   \"entityType\" : \"item\",\n   \"entityId\" : \"iPad\",\n   \"properties\" : {\n      \"category\": [\"electronics\", \"mobile\"],\n      \"expireDate\": \"2016-10-05T21:02:49.228Z\"\n   },\n   \"eventTime\" : \"2015-10-05T21:02:49.228Z\"\n}\n{\n   \"event\":\"$set\",\n   \"entityType\":\"item\",\n   \"entityId\":\"Mr Robot\",\n   \"properties\": {\n      \"content-type\":[\"tv show\"],\n      \"genres\":[\"suspense\",\"sci-fi\", \"drama\"],\n      \"actor\":[\"Rami Malek\", \"Christian Slater\"],\n      \"keywords\":[\"hacker\"],\n      \"first_aired\":[\"2015\"]\n   }\n   \"eventTime\" : \"2016-10-05T21:02:49.228Z\"\n}\n\n**Delete Items**\nThe UR keeps a collection of item objects in its store. These are created when properties are first $set for an item-id. These will grow without limit for each new item-id unless they are removed using the item $delete event. This does not remove any indicator events, which are only accessible using a TTL\n\n{\n   \"event\":\"$delete\",\n   \"entityType\":\"item\",\n   \"entityId\":\"Mr Robot\",\n   \"eventTime\" : \"2016-10-05T21:02:49.228Z\"\n}",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/events\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/events\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Get recommended items for item or user",
+            "url": "https://recommender8.p.rapidapi.com/engines/queries",
+            "description": "Send requests to this endpoint to get recomendations\n\n**Queries**\nThe Universal Recommender has a reasonable set of defaults so queries can be very simple or, when the need arises, very flexible. There are two parts of all UR Queries:\n\nThe Subject: This is a user-id, item-id, or list of item-ids. Recommendations consist of the best item matches to the subject. For users this means the items that have had interactions from the most similar users. For items is means other items that have the most similar interactions.\nBusiness Rules: These consist of restrictions on the items that can be recommended and define matches to item properties that will allow. boost, or exclude them as recommendations. If an item cannot be recommended the Business Rules will never cause them to be returned for a Query.\n\n**The Simplest Query**\n{}\nThis has no user, items, or item-set so it can do nothing but return popular items. For every model there is one \"popularity\" method chosen, that ranks all items that have interactions. This translates to all items that are the target of Events/Indicators. Configuration for the model is supplied in the UR engines JSON algorithm parameters and if not given, just counts the number of primary Indicator Events per item for all recorded time. See Configuration for other tuning of the \"popularity\" ranking.\n\n**Simple Personalized User-Based Query**\n{\n  \"user\": \"John Doe\"\n}\nThis gets historical data for \"John Doe\" and uses this to return the best personalized recommendations. John has left a record of indicators by interacting with a site or app in a way that triggered Events. So depending on what was recorded we would expect maybe purchases, search terms, category-prefs to be in John's history (Harness records this in realtime). So only a moment ago, if John searched, these terms might be used in making recommendations.\n\n**Item-Based Query**\n{\n  \"item\": \"iPad\"\n}\nThis query is the kind you see at the bottom of a product page in Amazon. It shows \"other people who bought 'iPad' also liked these\". It returns items that have seen similar user behavior. This means it is non-personalized (after all there is no user in the query) but finds items which on average are similar to the item in the query. Similarity here is only based on the indicators of other users, not item properties. This type of recommendation is quite useful as the Amazon use case shows, and can be used if you know nothing about the user. It may be useful to think of these as item-details page recommendations.\n\n**Simple Item-Set Query (Wishlist)**\nThis query applies to a wide variety of lists, like watchlists, favorites, shopping carts, wishlists, etc. It returns Similar iItems to the items in the list.\n\n{\n  \"itemSet\": [\"item-1\", \"item-5\", \"item-300\", \"item-2\", ...]   \n}\nTo get the missing items you will need to train a separate model on item-sets (not individual user behavior). However even if your model is made from user behavior this query has a place for lists that do not naturally have missing pieces.\n\n**Complimentary Items (Shopping-Cart)**\nThe query will be exactly the same as an item-set but to get \"Complimentary Items\" based on things that go together, you need to create a model from some grouping of items like things bought together in a shopping cart or items viewed in a session, etc. Doing this will turn the query from \"find items similar to all these\" into \"find the missing items from this list\" this is an important distinction. For example similar items may all look the same, complimentary items may look quite different. If John has a Galaxy S10 and Galaxy Case in this shopping cart, would it be better to recommend \"USB-C cord\" or \"Galaxy S9\"? Past experience and research shows that Complimentary Items get better results than Similar Items in many cases.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/queries\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/queries\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Train recommender",
+            "url": "https://recommender8.p.rapidapi.com/engines/jobs",
+            "description": "When You add items and some events like buy or detail-page-view for user You can train recommendation engine so it can create its magic. This can take some time depending of amount of data you added. From several seconds to minutes.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/jobs\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/engines/jobs\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Initialize service",
+            "url": "https://recommender8.p.rapidapi.com/initservice",
+            "description": "Run this first to create account in the system.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/initservice\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://recommender8.p.rapidapi.com/initservice\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"recommender8.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

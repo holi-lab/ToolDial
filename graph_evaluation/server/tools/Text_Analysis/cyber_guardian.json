@@ -1,0 +1,326 @@
+{
+    "tool_name": "Cyber Guardian",
+    "tool_description": "A highly configurable and precise solution for augmenting your moderation needs, scalable and adaptable for various platforms. State-of-the-art detection of cyberbullying, verbal aggression and toxic messages powered by Samurai Labs\u2019 neuro-symbolic AI along with a suite of moderation tools that empowers you to maintain peace in your community. Protect your community and integrate the Cyber Guardian into your moderation suite with this easy to set up API. Use the \"setup\" endpoint to initialize...",
+    "title": "Cyber Guardian",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 718,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.5,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/samurai-labs-samurai-labs-default/api/cyber-guardian/",
+    "host": "cyber-guardian.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "setup",
+            "url": "https://cyber-guardian.p.rapidapi.com/setup",
+            "description": "Generates a link that grants access to the configuration dashboard for the Cyber Guardian and redirects you to it, already logged in through Rapid.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/setup\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "executions",
+            "url": "https://cyber-guardian.p.rapidapi.com/executions_r",
+            "description": "An API endpoint which stores the details of the moderation action taken in response to the detections endpoint.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/executions_r\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string",
+                        "description": "Informs that the moderation action execution has been stored"
+                    }
+                }
+            }
+        },
+        {
+            "name": "detections",
+            "url": "https://cyber-guardian.p.rapidapi.com/detections_r",
+            "description": "An API endpoint which returns an analysis of the detected content of a given message in regards to the current API configuration",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/detections_r\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "detected_msg_author_id": {
+                        "type": "string",
+                        "description": "ID of the author of the detected message"
+                    },
+                    "detected_msg_id": {
+                        "type": "string",
+                        "description": "ID used to identify the detected message"
+                    },
+                    "detected_channel_id": {
+                        "type": "string",
+                        "description": "ID of the message stream (i.e. a channel of a Discord server) in which the message was detected"
+                    },
+                    "detected_application_id": {
+                        "type": "string",
+                        "description": "ID of the workspace (i.e. the guild ID for Discord) in which the message was detected"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "description": "Timestamp of when the message was detected"
+                    },
+                    "application_custom_data": {
+                        "type": "object",
+                        "description": "Contains fields that specify behavior particular to individual platforms"
+                    },
+                    "detection_details": {
+                        "type": "object",
+                        "description": "Details of what was detected in the message",
+                        "properties": {
+                            "in_citation_detection": {
+                                "type": "bool",
+                                "description": "Informs the API whether to include a module for recognizing if the detected message was part of a quote or not"
+                            },
+                            "copypasta_detection": {
+                                "type": "bool",
+                                "description": "Informs the API whether to include a module for recognizing if the detected message was part of a copypasta or not"
+                            },
+                            "original_text": {
+                                "type": "string",
+                                "description": "The input text provided in the request before any potential whitelisted words are removed"
+                            },
+                            "original_tags": {
+                                "type": "string",
+                                "description": "Tags of the categories detected in the original text, including all categories even ones that are whitelisted in the configuration"
+                            },
+                            "original_type": {
+                                "type": "string",
+                                "description": "The type of violence (severity) of the detected message based on the original text"
+                            },
+                            "resulting_text": {
+                                "type": "string",
+                                "description": "The input text after any potential whitelisted words were already removed"
+                            },
+                            "resulting_tags": {
+                                "type": "string",
+                                "description": "Tags of the categories detected in the original text, without whitelisted ones"
+                            },
+                            "resulting_type": {
+                                "type": "string",
+                                "description": "The type of violence (severity) of the detected message based on the resulting text"
+                            }
+                        }
+                    },
+                    "decision_based_on": {
+                        "type": "array",
+                        "description": "Details informing on what basis the decision regarding the action to take was made (especially important if several factors were taken into account)",
+                        "items": {
+                            "type": "object",
+                            "description": "Details informing on what basis the decision regarding the action to take was made (especially important if several factors were taken into account)",
+                            "properties": {
+                                "config_element_action": {
+                                    "type": "string",
+                                    "description": "The action specified by the configuration for this particular detection"
+                                },
+                                "config_element_type": {
+                                    "type": "string",
+                                    "description": "Which type of configuration element specifies the action for this particular detection"
+                                },
+                                "config_element_name": {
+                                    "type": "string",
+                                    "description": "The name of the configuration element that specifies the action for this particular detection"
+                                }
+                            }
+                        }
+                    },
+                    "actions_to_take": {
+                        "type": "array",
+                        "description": "A list of simple actions including moderation actions regarding the message and the user as well as messages sent by the bot and manual moderation notifications",
+                        "items": {
+                            "type": "object",
+                            "description": "A list of simple actions including moderation actions regarding the message and the user as well as messages sent by the bot and manual moderation notifications",
+                            "properties": {
+                                "action": {
+                                    "type": "string",
+                                    "description": "REMOVE / KICK / MUTE / BAN / DM / POST / MANUAL_MODERATION"
+                                },
+                                "parameters": {
+                                    "type": "object",
+                                    "description": "Specifies the text to be sent in case of DM/POST actions and the duration in case of MUTE/BAN/MANUAL_MODERATION actions"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "executions",
+            "url": "https://cyber-guardian.p.rapidapi.com/executions_r",
+            "description": "An API endpoint which stores the details of the moderation action taken in response to the detections endpoint.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/executions_r\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/executions_r\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "string",
+                        "description": "Informs that the moderation action execution has been stored"
+                    }
+                }
+            }
+        },
+        {
+            "name": "detections",
+            "url": "https://cyber-guardian.p.rapidapi.com/detections_r",
+            "description": "An API endpoint which returns an analysis of the detected content of a given message in regards to the current API configuration",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/detections_r\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cyber-guardian.p.rapidapi.com/detections_r\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cyber-guardian.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "detected_msg_author_id": {
+                        "type": "string",
+                        "description": "ID of the author of the detected message"
+                    },
+                    "detected_msg_id": {
+                        "type": "string",
+                        "description": "ID used to identify the detected message"
+                    },
+                    "detected_channel_id": {
+                        "type": "string",
+                        "description": "ID of the message stream (i.e. a channel of a Discord server) in which the message was detected"
+                    },
+                    "detected_application_id": {
+                        "type": "string",
+                        "description": "ID of the workspace (i.e. the guild ID for Discord) in which the message was detected"
+                    },
+                    "timestamp": {
+                        "type": "integer",
+                        "description": "Timestamp of when the message was detected"
+                    },
+                    "application_custom_data": {
+                        "type": "object",
+                        "description": "Contains fields that specify behavior particular to individual platforms"
+                    },
+                    "detection_details": {
+                        "type": "object",
+                        "description": "Details of what was detected in the message",
+                        "properties": {
+                            "in_citation_detection": {
+                                "type": "bool",
+                                "description": "Informs the API whether to include a module for recognizing if the detected message was part of a quote or not"
+                            },
+                            "copypasta_detection": {
+                                "type": "bool",
+                                "description": "Informs the API whether to include a module for recognizing if the detected message was part of a copypasta or not"
+                            },
+                            "original_text": {
+                                "type": "string",
+                                "description": "The input text provided in the request before any potential whitelisted words are removed"
+                            },
+                            "original_tags": {
+                                "type": "string",
+                                "description": "Tags of the categories detected in the original text, including all categories even ones that are whitelisted in the configuration"
+                            },
+                            "original_type": {
+                                "type": "string",
+                                "description": "The type of violence (severity) of the detected message based on the original text"
+                            },
+                            "resulting_text": {
+                                "type": "string",
+                                "description": "The input text after any potential whitelisted words were already removed"
+                            },
+                            "resulting_tags": {
+                                "type": "string",
+                                "description": "Tags of the categories detected in the original text, without whitelisted ones"
+                            },
+                            "resulting_type": {
+                                "type": "string",
+                                "description": "The type of violence (severity) of the detected message based on the resulting text"
+                            }
+                        }
+                    },
+                    "decision_based_on": {
+                        "type": "array",
+                        "description": "Details informing on what basis the decision regarding the action to take was made (especially important if several factors were taken into account)",
+                        "items": {
+                            "type": "object",
+                            "description": "Details informing on what basis the decision regarding the action to take was made (especially important if several factors were taken into account)",
+                            "properties": {
+                                "config_element_action": {
+                                    "type": "string",
+                                    "description": "The action specified by the configuration for this particular detection"
+                                },
+                                "config_element_type": {
+                                    "type": "string",
+                                    "description": "Which type of configuration element specifies the action for this particular detection"
+                                },
+                                "config_element_name": {
+                                    "type": "string",
+                                    "description": "The name of the configuration element that specifies the action for this particular detection"
+                                }
+                            }
+                        }
+                    },
+                    "actions_to_take": {
+                        "type": "array",
+                        "description": "A list of simple actions including moderation actions regarding the message and the user as well as messages sent by the bot and manual moderation notifications",
+                        "items": {
+                            "type": "object",
+                            "description": "A list of simple actions including moderation actions regarding the message and the user as well as messages sent by the bot and manual moderation notifications",
+                            "properties": {
+                                "action": {
+                                    "type": "string",
+                                    "description": "REMOVE / KICK / MUTE / BAN / DM / POST / MANUAL_MODERATION"
+                                },
+                                "parameters": {
+                                    "type": "object",
+                                    "description": "Specifies the text to be sent in case of DM/POST actions and the duration in case of MUTE/BAN/MANUAL_MODERATION actions"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

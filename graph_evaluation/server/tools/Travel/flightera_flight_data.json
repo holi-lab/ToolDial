@@ -1,0 +1,1982 @@
+{
+    "tool_name":"Flightera Flight Data",
+    "tool_description":"Flight status, on-time performance and statistics by Flightera",
+    "title":"Flightera Flight Data",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":117,
+        "avgSuccessRate":61,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/flightera/api/flightera-flight-data/",
+    "host":"flightera-flight-data.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"flightSearch",
+            "url":"https://flightera-flight-data.p.rapidapi.com/flight/search",
+            "description":"Returns a list of flights for a given flight number. Minimum and/or maximum date can optionally be specified to limit the search. Results are ordered by departure date ascending. The next departure time is returned for pagination.\nWill return a 400 if the date range requested is outside the subscription level",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"flnr",
+                    "type":"STRING",
+                    "description":"The flight number to request",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"dtFrom",
+                    "type":"STRING",
+                    "description":"The minimum date to request",
+                    "default":""
+                },
+                {
+                    "name":"dtTo",
+                    "type":"STRING",
+                    "description":"The maximum date to request",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/flight/search\"\nquerystring = {\"flnr\": flnr}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "flights":[
+                    {
+                        "arrival_ident":"",
+                        "date":"",
+                        "departure_ident":"",
+                        "flnr":"",
+                        "status":""
+                    }
+                ],
+                "next_time":""
+            },
+            "headers":{},
+            "schema":{
+                "description":"FlightSearchResponses contains flights search responses and the next time, to be used for pagination",
+                "type":"object",
+                "properties":{
+                    "flights":{
+                        "description":"A list of flights returned by the search",
+                        "type":"array",
+                        "items":{
+                            "description":"FlightSearchResult contains one flight search response",
+                            "type":"object",
+                            "properties":{
+                                "arrival_ident":{
+                                    "description":"The Identifier of the arrival airport",
+                                    "type":"string",
+                                    "x-go-name":"ArrivalIdent"
+                                },
+                                "date":{
+                                    "description":"The date of the flight in local time of the departure airport",
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "x-go-name":"Date"
+                                },
+                                "departure_ident":{
+                                    "description":"The Identifier of the departure airport",
+                                    "type":"string",
+                                    "x-go-name":"DepartureIdent"
+                                },
+                                "flnr":{
+                                    "description":"The Flight Number in Upper Case",
+                                    "type":"string",
+                                    "x-go-name":"Flnr"
+                                },
+                                "status":{
+                                    "description":"Status of the flight, one of: [live,scheduled,cancelled,landed,unknown]",
+                                    "type":"string",
+                                    "x-go-name":"Status"
+                                }
+                            },
+                            "x-go-package":"wright/internal/api"
+                        },
+                        "x-go-name":"Flights"
+                    },
+                    "next_time":{
+                        "description":"The next time to be used for pagination",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"NextTime"
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"airlineSearch",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airline/search",
+            "description":"Returns a list of airlines for a given country, identifiers or name search pattern. Multiple arguments can be specified to limit the search.\nEither one of the arguments must be specified.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"iata",
+                    "type":"STRING",
+                    "description":"The IATA code of the airline",
+                    "default":""
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"The name or part of the name of the airline, case insensitive",
+                    "default":""
+                },
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"The ICAO code of the airline",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The ISO 3166-1 alpha-2 code country code to request",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airline/search\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "country":"",
+                    "iata":"",
+                    "icao":"",
+                    "ident":"",
+                    "name":""
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "description":"The AirlineSearchResult contains information about one airline",
+                    "type":"object",
+                    "properties":{
+                        "country":{
+                            "description":"The country of the airline as a two letter code, if available",
+                            "type":"string",
+                            "x-go-name":"Country"
+                        },
+                        "iata":{
+                            "description":"The IATA code of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Iata"
+                        },
+                        "icao":{
+                            "description":"The ICAO code of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Icao"
+                        },
+                        "ident":{
+                            "description":"The Ident code of the airline",
+                            "type":"string",
+                            "x-go-name":"Ident"
+                        },
+                        "name":{
+                            "description":"The name of the airline",
+                            "type":"string",
+                            "x-go-name":"Name"
+                        }
+                    },
+                    "x-go-package":"wright/internal/api"
+                }
+            }
+        },
+        {
+            "name":"aircraftSearch",
+            "url":"https://flightera-flight-data.p.rapidapi.com/aircraft/search",
+            "description":"A list of plane registrations for a given search criteria.\nCan search by airline ident, country, model\nIf multiple arguments are provided, they will be chained as AND\nReturns only currently active aircraft",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"model",
+                    "type":"STRING",
+                    "description":"Model ICAO code",
+                    "default":""
+                },
+                {
+                    "name":"airline_ident",
+                    "type":"STRING",
+                    "description":"The ident of the airline, as returned by /airline/search",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Two letter country code",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/aircraft/search\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"string"
+                }
+            }
+        },
+        {
+            "name":"airportSearch",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airport/search",
+            "description":"Returns a list of airports for a given country, bbox or timezone. Multiple arguments can be specified to limit the search.\nEither one of country, bbox or timezone must be specified.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"timezone",
+                    "type":"STRING",
+                    "description":"The timezone of the airport (e.g. Europe/Berlin)",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The ISO 3166-1 alpha-2 code country code to request",
+                    "default":""
+                },
+                {
+                    "name":"bbox",
+                    "type":"STRING",
+                    "description":"A bbox (min Longitude , min Latitude , max Longitude , max Latitude), will restrict results to airports within that box",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airport/search\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "iata":"",
+                    "icao":"",
+                    "ident":"",
+                    "local_id":""
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "description":"The AirportSearchResult contains basic information about one airport",
+                    "type":"object",
+                    "properties":{
+                        "iata":{
+                            "description":"The IATA code of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"Iata"
+                        },
+                        "icao":{
+                            "description":"The ICAO code of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"Icao"
+                        },
+                        "ident":{
+                            "description":"The Ident code of the airport",
+                            "type":"string",
+                            "x-go-name":"Ident"
+                        },
+                        "local_id":{
+                            "description":"The local id (e.g. FaaID) of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"LocalID"
+                        }
+                    },
+                    "x-go-package":"wright/internal/api"
+                }
+            }
+        },
+        {
+            "name":"airportInfo",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airport/info",
+            "description":"Returns detailed airport information for airports identified by the provided identifiers. In most cases the list should contain only one entry.\nHowever, due to the nature of the data, it is possible that multiple entries are returned.\nIf searched by ident, only one airport is returned.\nOne of ident, iata, icao, localID must be provided.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"The ICAO code of the airport, must have a length of 4",
+                    "default":""
+                },
+                {
+                    "name":"localID",
+                    "type":"STRING",
+                    "description":"Local identifiers of the airport, currently mostly available for the US & CA (FAA-ID). Max length is 6",
+                    "default":""
+                },
+                {
+                    "name":"iata",
+                    "type":"STRING",
+                    "description":"The IATA code of the airport, must have a length of 3",
+                    "default":""
+                },
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airport, as returned by /airport/search",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airport/info\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "city":"",
+                    "country":"",
+                    "iata":"",
+                    "icao":"",
+                    "ident":"",
+                    "local_id":"",
+                    "local_time":"",
+                    "name":"",
+                    "operator":"",
+                    "owner":"",
+                    "pos_lat":0,
+                    "pos_lng":0,
+                    "public":true
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "description":"The AirportInfoResult contains information about one airport",
+                    "type":"object",
+                    "properties":{
+                        "city":{
+                            "description":"The city of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"City"
+                        },
+                        "country":{
+                            "description":"The country of the airport as a two letter code",
+                            "type":"string",
+                            "x-go-name":"Country"
+                        },
+                        "iata":{
+                            "description":"The IATA code of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"Iata"
+                        },
+                        "icao":{
+                            "description":"The ICAO code of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"Icao"
+                        },
+                        "ident":{
+                            "description":"The Ident code of the airport",
+                            "type":"string",
+                            "x-go-name":"Ident"
+                        },
+                        "local_id":{
+                            "description":"The local id (e.g. FaaID) of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"LocalID"
+                        },
+                        "local_time":{
+                            "description":"Current time of the airport",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"LocalTime"
+                        },
+                        "name":{
+                            "description":"The name of the airport",
+                            "type":"string",
+                            "x-go-name":"Name"
+                        },
+                        "operator":{
+                            "description":"The operator of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"Operator"
+                        },
+                        "owner":{
+                            "description":"The owner of the airport, optional",
+                            "type":"string",
+                            "x-go-name":"Owner"
+                        },
+                        "pos_lat":{
+                            "description":"The latitude of the airport, optional",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"PosLat",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "pos_lng":{
+                            "description":"The longitude of the airport, optional",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"PosLng",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "public":{
+                            "description":"Indication whether the airport is publicly owned, optional",
+                            "type":"boolean",
+                            "x-go-name":"Public"
+                        }
+                    },
+                    "x-go-package":"wright/internal/api"
+                }
+            }
+        },
+        {
+            "name":"airlineAircrafts",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airline/aircrafts",
+            "description":"A list of plane registrations for a given airline. Can search by ident only.\nOnly returns currently active aircraft",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airline, as returned by /airline/search",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airline/aircrafts\"\nquerystring = {\"ident\": ident}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"string"
+                }
+            }
+        },
+        {
+            "name":"flightStatistics",
+            "url":"https://flightera-flight-data.p.rapidapi.com/flight/statistics",
+            "description":"Returns statistics for a flight number with one entry per route flown. Statistics are updated daily.\nThe query can be filtered by route.\nStatistics are always as of today, please contact us if you require historical statistics.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"flnr",
+                    "type":"STRING",
+                    "description":"The flight number to request",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"aptFrom",
+                    "type":"STRING",
+                    "description":"Departure airport ident",
+                    "default":""
+                },
+                {
+                    "name":"aptTo",
+                    "type":"STRING",
+                    "description":"Arrival airport ident",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/flight/statistics\"\nquerystring = {\"flnr\": flnr}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "acft_models":[],
+                    "avg_delay":0,
+                    "avg_duration":0,
+                    "callsign":"",
+                    "cancelled_30d":0,
+                    "count_30d":0,
+                    "delay_30d":0,
+                    "distance_km":0,
+                    "distance_mi":0,
+                    "distance_nm":0,
+                    "flnr":"",
+                    "from":"",
+                    "last_flight":"",
+                    "to":""
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "description":"FlightStatResult is one element returned by Flight Statistics call",
+                    "type":"object",
+                    "properties":{
+                        "acft_models":{
+                            "description":"A list of icao codes for aircrafts flown on this route within the past 30 days",
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            },
+                            "x-go-name":"AcftModels"
+                        },
+                        "avg_delay":{
+                            "description":"Average delay of flights within the past 30 days",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"AvgDelay",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "avg_duration":{
+                            "description":"Average duration in hours of flights within the past 30 days (excludes cancelled flights)",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"AvgDuration",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "callsign":{
+                            "description":"Callsign of this flight, if available",
+                            "type":"string",
+                            "x-go-name":"CallSign"
+                        },
+                        "cancelled_30d":{
+                            "description":"Percentage of flights cancelled within the past 30 days",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"Cancelled30dPerc",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "count_30d":{
+                            "description":"Number of flights within the past 30 days",
+                            "type":"integer",
+                            "format":"int64",
+                            "x-go-name":"Count30d",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "delay_30d":{
+                            "description":"Percentage of flights delayed (15min+ at arrival) within the past 30 days",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"Delay30dPerc",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "distance_km":{
+                            "description":"Distance in km",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"DistanceKM",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "distance_mi":{
+                            "description":"Distance in miles",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"DistanceMi",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "distance_nm":{
+                            "description":"Distance in nm",
+                            "type":"number",
+                            "format":"double",
+                            "x-go-name":"DistanceNM",
+                            "minimum":-1.7976931348623157e+308,
+                            "maximum":1.7976931348623157e+308
+                        },
+                        "flnr":{
+                            "description":"The Flight Number in Upper Case",
+                            "type":"string",
+                            "x-go-name":"Flnr"
+                        },
+                        "from":{
+                            "description":"Identifier of the departure airport",
+                            "type":"string",
+                            "x-go-name":"From"
+                        },
+                        "last_flight":{
+                            "description":"Date of the last flight on our record",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"LastFlight"
+                        },
+                        "to":{
+                            "description":"Identifier of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"To"
+                        }
+                    },
+                    "x-go-package":"wright/internal/api"
+                }
+            }
+        },
+        {
+            "name":"airlineStatistics",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airline/statistics",
+            "description":"Returns detailed airline statistics for airlines identified by the provided identifiers. In most cases the list should contain only one entry, unless the ident is ambiguous.\nIf searched by ident, only one airline is returned.\nOne of ident, iata, icao must be provided.\nStatistics are calculated overnight and represent the current day's data.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"The ICAO code of the airline, must have a length of 4",
+                    "default":""
+                },
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airline, as returned by /airline/search",
+                    "default":""
+                },
+                {
+                    "name":"iata",
+                    "type":"STRING",
+                    "description":"The IATA code of the airline, must have a length of 3",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airline/statistics\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "average_delay_30_days":0,
+                "average_plane_age":0,
+                "cancel_percentage_30_days":0,
+                "delay_percentage_30_days":0,
+                "flights_30_days":0,
+                "flights_7_days":0,
+                "ident":"",
+                "newest_plane_age":0,
+                "oldest_plane_age":0,
+                "top_airports_30_days":{},
+                "top_countries_30_days":{}
+            },
+            "headers":{},
+            "schema":{
+                "description":"The AirlineStatsResult contains statistics about airlines",
+                "type":"object",
+                "properties":{
+                    "average_delay_30_days":{
+                        "description":"The average delay of delayed flights over the past 30 days, in minutes",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"AverageDelay30Days",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "average_plane_age":{
+                        "description":"The average age of planes in the fleet in years, rounded down",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"AveragePlaneAge",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "cancel_percentage_30_days":{
+                        "description":"The percentage of flights cancelled over the past 30 days",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"CancelPercentage30Days",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "delay_percentage_30_days":{
+                        "description":"The percentage of flights delayed over the past 30 days",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"DelayPercentage30Days",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "flights_30_days":{
+                        "description":"The number of flights of the airline in the past 30 days",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Flights30Days",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "flights_7_days":{
+                        "description":"The number of flights of the airline in the past 7 days",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Flights7Days",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "ident":{
+                        "description":"Identifier of the airline",
+                        "type":"string",
+                        "x-go-name":"Ident"
+                    },
+                    "newest_plane_age":{
+                        "description":"Age of the newest plane in the fleet in years, rounded down",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"NewestPlaneAge",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "oldest_plane_age":{
+                        "description":"Age of the oldest plane in the fleet in years, rounded down",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"OldestPlaneAge",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "top_airports_30_days":{
+                        "description":"The top airports of the airline in the past 30 days with number of flights over the past 30 days\nNote that this dictionary is not sorted",
+                        "type":"object",
+                        "additionalProperties":{
+                            "type":"integer",
+                            "format":"int64",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "x-go-name":"TopAirports30Days"
+                    },
+                    "top_countries_30_days":{
+                        "description":"The top countries of the airline in the past 30 days with number of flights over the past 30 days\nNote that this dictionary is not sorted",
+                        "type":"object",
+                        "additionalProperties":{
+                            "type":"integer",
+                            "format":"int64",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "x-go-name":"TopCountries30Days"
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"flightInfo",
+            "url":"https://flightera-flight-data.p.rapidapi.com/flight/info",
+            "description":"Returns the info for a flight on a specified date, or the current flight if date is omitted. Will return a 400 if the date requested is outside the subscription level",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"flnr",
+                    "type":"STRING",
+                    "description":"The flight number to request",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"The date, if omitted the current flight will be returned",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/flight/info\"\nquerystring = {\"flnr\": flnr}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "actual_arrival_is_estimated":true,
+                    "actual_arrival_local":"",
+                    "actual_arrival_utc":"",
+                    "actual_departure_is_estimated":true,
+                    "actual_departure_local":"",
+                    "actual_departure_utc":"",
+                    "airline_iata":"",
+                    "airline_icao":"",
+                    "airline_name":"",
+                    "arrival_baggage":"",
+                    "arrival_city":"",
+                    "arrival_gate":"",
+                    "arrival_iata":"",
+                    "arrival_icao":"",
+                    "arrival_name":"",
+                    "arrival_terminal":"",
+                    "date":"",
+                    "departure_checkin":"",
+                    "departure_city":"",
+                    "departure_gate":"",
+                    "departure_iata":"",
+                    "departure_icao":"",
+                    "departure_name":"",
+                    "departure_terminal":"",
+                    "family":"",
+                    "flnr":"",
+                    "model":"",
+                    "reg":"",
+                    "scheduled_arrival_local":"",
+                    "scheduled_arrival_utc":"",
+                    "scheduled_departure_local":"",
+                    "scheduled_departure_utc":"",
+                    "status":""
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "description":"The FlightInfoResult contains information about a single flight",
+                    "type":"object",
+                    "properties":{
+                        "actual_arrival_is_estimated":{
+                            "description":"True if the actual departure time is estimated",
+                            "type":"boolean",
+                            "x-go-name":"ActualArrIsEstimated"
+                        },
+                        "actual_arrival_local":{
+                            "description":"Actual or Estimated departure time in Local Time",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ActualArrLocal"
+                        },
+                        "actual_arrival_utc":{
+                            "description":"Actual or Estimated departure time in UTC",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ActualArrUTC"
+                        },
+                        "actual_departure_is_estimated":{
+                            "description":"True if the actual departure time is estimated",
+                            "type":"boolean",
+                            "x-go-name":"ActualDepIsEstimated"
+                        },
+                        "actual_departure_local":{
+                            "description":"Actual or Estimated departure time in Local Time",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ActualDepLocal"
+                        },
+                        "actual_departure_utc":{
+                            "description":"Actual or Estimated departure time in UTC",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ActualDepUTC"
+                        },
+                        "airline_iata":{
+                            "description":"AirlineIATA is the IATA code of the airline",
+                            "type":"string",
+                            "x-go-name":"AirlineIATA"
+                        },
+                        "airline_icao":{
+                            "description":"AirlineICAO is the ICAO code of the airline",
+                            "type":"string",
+                            "x-go-name":"AirlineICAO"
+                        },
+                        "airline_name":{
+                            "description":"AirlineName is the name of the airline",
+                            "type":"string",
+                            "x-go-name":"AirlineName"
+                        },
+                        "arrival_baggage":{
+                            "description":"Baggage contains information on baggage for arrival",
+                            "type":"string",
+                            "x-go-name":"ArrBaggage"
+                        },
+                        "arrival_city":{
+                            "description":"The city of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"ArrCity"
+                        },
+                        "arrival_gate":{
+                            "description":"The gate of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"ArrGate"
+                        },
+                        "arrival_iata":{
+                            "description":"The IATA code of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"ArrIata"
+                        },
+                        "arrival_icao":{
+                            "description":"The ICAO code of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"ArrIcao"
+                        },
+                        "arrival_name":{
+                            "description":"The name of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"ArrName"
+                        },
+                        "arrival_terminal":{
+                            "description":"The terminal of the arrival airport",
+                            "type":"string",
+                            "x-go-name":"ArrTerminal"
+                        },
+                        "date":{
+                            "description":"The date of the flight in local time of the departure airport",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"Date"
+                        },
+                        "departure_checkin":{
+                            "description":"The checkin counter of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepCheckin"
+                        },
+                        "departure_city":{
+                            "description":"The city of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepCity"
+                        },
+                        "departure_gate":{
+                            "description":"The gate of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepGate"
+                        },
+                        "departure_iata":{
+                            "description":"The IATA code of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepIata"
+                        },
+                        "departure_icao":{
+                            "description":"The ICAO code of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepIcao"
+                        },
+                        "departure_name":{
+                            "description":"The name of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepName"
+                        },
+                        "departure_terminal":{
+                            "description":"The terminal of the departure airport",
+                            "type":"string",
+                            "x-go-name":"DepTerminal"
+                        },
+                        "family":{
+                            "description":"The model family in plain text",
+                            "type":"string",
+                            "x-go-name":"Family"
+                        },
+                        "flnr":{
+                            "description":"The Flight Number in Upper Case",
+                            "type":"string",
+                            "x-go-name":"Flnr"
+                        },
+                        "model":{
+                            "description":"ICAO Code of the aircraft model",
+                            "type":"string",
+                            "x-go-name":"Model"
+                        },
+                        "reg":{
+                            "description":"The ICAO code of the aircraft",
+                            "type":"string",
+                            "x-go-name":"Reg"
+                        },
+                        "scheduled_arrival_local":{
+                            "description":"Scheduled departure Time in Local Time",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ScheduledArrLocal"
+                        },
+                        "scheduled_arrival_utc":{
+                            "description":"Scheduled departure Time in UTC",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ScheduledArrUTC"
+                        },
+                        "scheduled_departure_local":{
+                            "description":"Scheduled departure Time in Local Time",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ScheduledDepLocal"
+                        },
+                        "scheduled_departure_utc":{
+                            "description":"Scheduled departure Time in UTC",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"ScheduledDepUTC"
+                        },
+                        "status":{
+                            "description":"Status of the flight, one of: [live,sched,canc,landed,unknown,diverted]",
+                            "type":"string",
+                            "x-go-name":"Status"
+                        }
+                    },
+                    "x-go-package":"wright/internal/api"
+                }
+            }
+        },
+        {
+            "name":"airportMetar",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airport/metar",
+            "description":"Returns the most recent METAR for an airport specified by the given ident.\nIncludes a parsed version of the METAR.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airport (e.g. as returned by /airport/search)",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airport/metar\"\nquerystring = {\"ident\": ident}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "altimeter":0,
+                "altimeter_measure":"",
+                "clear_sky":true,
+                "clouds":[
+                    {
+                        "altitude":0,
+                        "coverage":"",
+                        "designator":""
+                    }
+                ],
+                "date":"",
+                "dew_point":0,
+                "ident":"",
+                "nosig":true,
+                "raw":"",
+                "relative_humidity":0,
+                "temperature":0,
+                "visibility":0,
+                "visibility_measure":"",
+                "weather_elements":[
+                    {
+                        "descriptor":"",
+                        "intensity":"",
+                        "plain":""
+                    }
+                ],
+                "wind_calm":true,
+                "wind_direction":0,
+                "wind_gusts":0,
+                "wind_measure":"",
+                "wind_speed":0,
+                "wind_variable_from":0,
+                "wind_variable_to":0
+            },
+            "headers":{},
+            "schema":{
+                "description":"The AirportMetar object contains parsed metar for an airport",
+                "type":"object",
+                "properties":{
+                    "altimeter":{
+                        "description":"Altimeter, if provided",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Altimeter",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "altimeter_measure":{
+                        "description":"Altimeter measurement unit, if provided",
+                        "type":"string",
+                        "x-go-name":"AltimeterMeasure"
+                    },
+                    "clear_sky":{
+                        "description":"Indicates clear sky conditions",
+                        "type":"boolean",
+                        "x-go-name":"ClearSky"
+                    },
+                    "clouds":{
+                        "description":"A list of parsed cloud levels",
+                        "type":"array",
+                        "items":{
+                            "description":"CloudElement contains information about cloud level",
+                            "type":"object",
+                            "properties":{
+                                "altitude":{
+                                    "description":"Altitude of the cloud layer",
+                                    "type":"integer",
+                                    "format":"int64",
+                                    "x-go-name":"Altitude",
+                                    "minimum":-9223372036854776000,
+                                    "maximum":9223372036854776000
+                                },
+                                "coverage":{
+                                    "description":"Coverage indicator as provided in the metar",
+                                    "type":"string",
+                                    "x-go-name":"Coverage"
+                                },
+                                "designator":{
+                                    "description":"Designator of the cloud layer",
+                                    "type":"string",
+                                    "x-go-name":"Designator"
+                                }
+                            },
+                            "x-go-package":"wright/internal/api"
+                        },
+                        "x-go-name":"Clouds"
+                    },
+                    "date":{
+                        "description":"Date and time of the METAR",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"Date"
+                    },
+                    "dew_point":{
+                        "description":"Dew Point (Celsius)",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"DewPoint",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "ident":{
+                        "description":"The Airport Identifier",
+                        "type":"string",
+                        "x-go-name":"Ident"
+                    },
+                    "nosig":{
+                        "description":"Indicates no significant changes expected",
+                        "type":"boolean",
+                        "x-go-name":"Nosig"
+                    },
+                    "raw":{
+                        "description":"The raw METAR",
+                        "type":"string",
+                        "x-go-name":"Raw"
+                    },
+                    "relative_humidity":{
+                        "description":"Relative humidity in percent",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"RelativeHumidity",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "temperature":{
+                        "description":"Temperature (Celsius)",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Temperature",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "visibility":{
+                        "description":"Visibility",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Visibility",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "visibility_measure":{
+                        "description":"Visibility measurement unit",
+                        "type":"string",
+                        "x-go-name":"VisibilityMeasure"
+                    },
+                    "weather_elements":{
+                        "description":"A list of parsed weather elements",
+                        "type":"array",
+                        "items":{
+                            "description":"WeatherElement describes current weather conditions",
+                            "type":"object",
+                            "properties":{
+                                "descriptor":{
+                                    "description":"The descriptor as provided in the metar",
+                                    "type":"string",
+                                    "x-go-name":"Descriptor"
+                                },
+                                "intensity":{
+                                    "description":"Intensity indicator",
+                                    "type":"string",
+                                    "x-go-name":"Intensity"
+                                },
+                                "plain":{
+                                    "description":"The parsed descriptor",
+                                    "type":"string",
+                                    "x-go-name":"Plain"
+                                }
+                            },
+                            "x-go-package":"wright/internal/api"
+                        },
+                        "x-go-name":"WeatherElements"
+                    },
+                    "wind_calm":{
+                        "description":"Indicates if wind is calm",
+                        "type":"boolean",
+                        "x-go-name":"WindCalm"
+                    },
+                    "wind_direction":{
+                        "description":"Wind direction, if calm==false",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"WindDirection",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "wind_gusts":{
+                        "description":"Wind gusts, if calm==false",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"WindGusts",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "wind_measure":{
+                        "description":"Wind measurement units for wind_speed and wind_gusts",
+                        "type":"string",
+                        "x-go-name":"WindMeasure"
+                    },
+                    "wind_speed":{
+                        "description":"Wind speed, if calm==false",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"WindSpeed",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "wind_variable_from":{
+                        "description":"For variable Wind, from value for the wind direction",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"WindVariableFrom",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "wind_variable_to":{
+                        "description":"For variable Wind, to value for the wind direction",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"WindVariableTo",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"airportDelayDailyStatistics",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airport/delays_by_day",
+            "description":"Returns detailed daily delay statistics for an airport identified by the provided identifiers. If searched by ident, only one airport is returned.\nOne of ident, iata, icao, localID must be provided. Additionally, `dt` and `isDeparture` are required.\nStatistics are calculated overnight and represent the data for the specific date.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"isDeparture",
+                    "type":"BOOLEAN",
+                    "description":"Flag indicating if the desired statistics are for departures (true) or arrivals (false)",
+                    "default":true
+                },
+                {
+                    "name":"dt",
+                    "type":"STRING",
+                    "description":"The date for which delay statistics are desired, formatted as \"YYYY-MM-DD\"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airport, as returned by /airport/search",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airport/delays_by_day\"\nquerystring = {\"isDeparture\": isdeparture, \"dt\": dt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "airport_ident":"",
+                "date":"",
+                "flightsDelayed15To30":0,
+                "flightsDelayed30To45":0,
+                "flightsDelayed45To60":0,
+                "flightsDelayedOver60":0,
+                "flightsDelayedUnknown":0,
+                "flightsOnTime":0,
+                "isDeparture":true,
+                "numFlightsCancelled":0,
+                "numFlightsLanded":0
+            },
+            "headers":{},
+            "schema":{
+                "description":"The AirportDelayDaily contains daily delay statistics for an airport",
+                "type":"object",
+                "properties":{
+                    "airport_ident":{
+                        "description":"Identifier of the airport",
+                        "type":"string",
+                        "x-go-name":"Ident"
+                    },
+                    "date":{
+                        "description":"Date for which the delay statistics are provided",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"Date"
+                    },
+                    "flightsDelayed15To30":{
+                        "description":"The number of flights that were delayed between 15 to 30 minutes on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"FlightsDel15To30",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "flightsDelayed30To45":{
+                        "description":"The number of flights that were delayed between 30 to 45 minutes on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"FlightsDel30To45",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "flightsDelayed45To60":{
+                        "description":"The number of flights that were delayed between 45 to 60 minutes on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"FlightsDel45To60",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "flightsDelayedOver60":{
+                        "description":"The number of flights that were delayed for more than 60 minutes on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"FlightsDel60Plus",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "flightsDelayedUnknown":{
+                        "description":"The number of flights with unknown delay durations on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"FlightsDelUnknown",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "flightsOnTime":{
+                        "description":"The number of flights that were on time on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"FlightsOnTime",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "isDeparture":{
+                        "description":"Flag indicating if the statistics are for departures (true) or arrivals (false)",
+                        "type":"boolean",
+                        "x-go-name":"IsDeparture"
+                    },
+                    "numFlightsCancelled":{
+                        "description":"The number of flights that were cancelled at the airport on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"NumFlightsCanc",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "numFlightsLanded":{
+                        "description":"The number of flights that landed at the airport on the given date",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"NumFlightsLanded",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"airportFlights",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airport/flights",
+            "description":"Returns a list of flights for an airport, direction and time. The list is sorted ascending by scheduled departure time for direction==\"departure\" and sorted descending by scheduled arrival time for direction==\"arrival\".\nThe next departure/arrival time is returned for pagination.\nThe dates returned for each flight represent the scheduled departure date in local time and can be used to query flight data via /flight/info.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"direction",
+                    "type":"STRING",
+                    "description":"Direction, one of \"arrival\", \"departure\"",
+                    "default":""
+                },
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"Ident of the airport to request. Ident is the unique identifier as returned by /airport/search or /airport/info endpoints.",
+                    "default":""
+                },
+                {
+                    "name":"time",
+                    "type":"STRING",
+                    "description":"Timestamp in UTC. If direction is \"arrival\", show flights with scheduled arrival time prior to this timestamp. If direction is \"departure\", show flights with scheduled departure time after this timestamp. Expected in any valid format, such as 2022-01-01T12:00:00.000Z. Maximum range of flights returned is 30 days.",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"counterpart_ident",
+                    "type":"STRING",
+                    "description":"Ident of the counterpart airport (destination if direction=arrival, otherwise arrival). Used to query connections on a defined route. Ident is the unique identifier as returned by /airport/search or /airport/info endpoints.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airport/flights\"\nquerystring = {\"direction\": direction, \"ident\": ident, \"time\": time}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "flights":[
+                    {
+                        "arrival_ident":"",
+                        "date":"",
+                        "departure_ident":"",
+                        "flnr":"",
+                        "status":""
+                    }
+                ],
+                "next_time":""
+            },
+            "headers":{},
+            "schema":{
+                "description":"FlightSearchResponses contains flights search responses and the next time, to be used for pagination",
+                "type":"object",
+                "properties":{
+                    "flights":{
+                        "description":"A list of flights returned by the search",
+                        "type":"array",
+                        "items":{
+                            "description":"FlightSearchResult contains one flight search response",
+                            "type":"object",
+                            "properties":{
+                                "arrival_ident":{
+                                    "description":"The Identifier of the arrival airport",
+                                    "type":"string",
+                                    "x-go-name":"ArrivalIdent"
+                                },
+                                "date":{
+                                    "description":"The date of the flight in local time of the departure airport",
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "x-go-name":"Date"
+                                },
+                                "departure_ident":{
+                                    "description":"The Identifier of the departure airport",
+                                    "type":"string",
+                                    "x-go-name":"DepartureIdent"
+                                },
+                                "flnr":{
+                                    "description":"The Flight Number in Upper Case",
+                                    "type":"string",
+                                    "x-go-name":"Flnr"
+                                },
+                                "status":{
+                                    "description":"Status of the flight, one of: [live,scheduled,cancelled,landed,unknown]",
+                                    "type":"string",
+                                    "x-go-name":"Status"
+                                }
+                            },
+                            "x-go-package":"wright/internal/api"
+                        },
+                        "x-go-name":"Flights"
+                    },
+                    "next_time":{
+                        "description":"The next time to be used for pagination",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"NextTime"
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"aircraftInfo",
+            "url":"https://flightera-flight-data.p.rapidapi.com/aircraft/info",
+            "description":"Returns detailed aircraft information for an aircraft identified by registration.\nOnly works for currently active aircraft",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"reg",
+                    "type":"STRING",
+                    "description":"The registration of the aircraft, as returned by /airline/aircraft or /aircraft/search",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/aircraft/info\"\nquerystring = {\"reg\": reg}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "airline":"",
+                "engines":"",
+                "first_flight":"",
+                "hex":"",
+                "is_cargo":true,
+                "last_flight":"",
+                "last_flight_number":"",
+                "ln":"",
+                "manufacturer":"",
+                "model":"",
+                "model_family":"",
+                "model_spec":"",
+                "msn":"",
+                "reg":"",
+                "seat_config":{}
+            },
+            "headers":{},
+            "schema":{
+                "description":"The AircraftResult contains information about one aircraft",
+                "type":"object",
+                "properties":{
+                    "airline":{
+                        "description":"Airline identifier",
+                        "type":"string",
+                        "x-go-name":"Airline"
+                    },
+                    "engines":{
+                        "description":"Engine configuration, if available",
+                        "type":"string",
+                        "x-go-name":"Engines"
+                    },
+                    "first_flight":{
+                        "description":"First flight date of that aircraft, if available",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"FirstFlight"
+                    },
+                    "hex":{
+                        "description":"The ICAO code of the aircraft, if available",
+                        "type":"string",
+                        "x-go-name":"Hex"
+                    },
+                    "is_cargo":{
+                        "description":"Indicates if the aircraft is a cargo plane",
+                        "type":"boolean",
+                        "x-go-name":"IsCargo"
+                    },
+                    "last_flight":{
+                        "description":"Last flight date, scheduled departure in UTC",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"LastFlight"
+                    },
+                    "last_flight_number":{
+                        "description":"Last flight number of the aircraft",
+                        "type":"string",
+                        "x-go-name":"LastFlightNumber"
+                    },
+                    "ln":{
+                        "description":"Line number of the aircraft, if available",
+                        "type":"string",
+                        "x-go-name":"LN"
+                    },
+                    "manufacturer":{
+                        "description":"Manufacturer of the aircraft",
+                        "type":"string",
+                        "x-go-name":"Mfg"
+                    },
+                    "model":{
+                        "description":"Model ICAO code of the aircraft",
+                        "type":"string",
+                        "x-go-name":"Model"
+                    },
+                    "model_family":{
+                        "description":"Model Family of the aircraft",
+                        "type":"string",
+                        "x-go-name":"ModelFamily"
+                    },
+                    "model_spec":{
+                        "description":"Model Specification for the aircraft",
+                        "type":"string",
+                        "x-go-name":"ModelSpec"
+                    },
+                    "msn":{
+                        "description":"Manufacturer's serial number of the aircraft, if available",
+                        "type":"string",
+                        "x-go-name":"MSN"
+                    },
+                    "reg":{
+                        "description":"The registration of the aircraft",
+                        "type":"string",
+                        "x-go-name":"Reg"
+                    },
+                    "seat_config":{
+                        "description":"Seat configuration of the aircraft. The returned value is a map of seat codes to number of seats.\nThe codes are one of: F (first class), C (business class), Y (economy class), W (economy plus). Empty for cargo planes",
+                        "type":"object",
+                        "additionalProperties":{
+                            "type":"integer",
+                            "format":"int64",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "x-go-name":"SeatConfig"
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"airlineFlights",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airline/flights",
+            "description":"Returns a list of flights for an airline given a start time. The list is sorted ascending by scheduled departure time.\nThe next departure/ time is returned for pagination (use start times to paginate).\nThe dates returned for each flight represent the scheduled departure date in local time and can be used to query flight data via /flight/info.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"time",
+                    "type":"STRING",
+                    "description":"Timestamp in UTC. Shows flights with scheduled departure time after this timestamp. Expected in any valid format, such as 2022-01-01T12:00:00.000Z. Maximum range of flights returned is 30 days.",
+                    "default":""
+                },
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"Ident of the airline to request. Ident is the unique identifier as returned by /airline/search or /airline/info endpoints.",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airline/flights\"\nquerystring = {\"time\": time, \"ident\": ident}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "flights":[
+                    {
+                        "arrival_ident":"",
+                        "date":"",
+                        "departure_ident":"",
+                        "flnr":"",
+                        "status":""
+                    }
+                ],
+                "next_time":""
+            },
+            "headers":{},
+            "schema":{
+                "description":"FlightSearchResponses contains flights search responses and the next time, to be used for pagination",
+                "type":"object",
+                "properties":{
+                    "flights":{
+                        "description":"A list of flights returned by the search",
+                        "type":"array",
+                        "items":{
+                            "description":"FlightSearchResult contains one flight search response",
+                            "type":"object",
+                            "properties":{
+                                "arrival_ident":{
+                                    "description":"The Identifier of the arrival airport",
+                                    "type":"string",
+                                    "x-go-name":"ArrivalIdent"
+                                },
+                                "date":{
+                                    "description":"The date of the flight in local time of the departure airport",
+                                    "type":"string",
+                                    "format":"date-time",
+                                    "x-go-name":"Date"
+                                },
+                                "departure_ident":{
+                                    "description":"The Identifier of the departure airport",
+                                    "type":"string",
+                                    "x-go-name":"DepartureIdent"
+                                },
+                                "flnr":{
+                                    "description":"The Flight Number in Upper Case",
+                                    "type":"string",
+                                    "x-go-name":"Flnr"
+                                },
+                                "status":{
+                                    "description":"Status of the flight, one of: [live,scheduled,cancelled,landed,unknown]",
+                                    "type":"string",
+                                    "x-go-name":"Status"
+                                }
+                            },
+                            "x-go-package":"wright/internal/api"
+                        },
+                        "x-go-name":"Flights"
+                    },
+                    "next_time":{
+                        "description":"The next time to be used for pagination",
+                        "type":"string",
+                        "format":"date-time",
+                        "x-go-name":"NextTime"
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        },
+        {
+            "name":"airlineInfo",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airline/info",
+            "description":"Returns detailed airline information for airlines identified by the provided identifiers. In most cases the list should contain only one entry.\nHowever, due to the nature of the data, it is possible that multiple entries are returned.\nIf searched by ident, only one airline is returned.\nOne of ident, iata, icao, name must be provided.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"The ICAO code of the airline, must have a length of 4",
+                    "default":""
+                },
+                {
+                    "name":"name",
+                    "type":"STRING",
+                    "description":"The name of the airline. Not case sensitive",
+                    "default":""
+                },
+                {
+                    "name":"iata",
+                    "type":"STRING",
+                    "description":"The IATA code of the airline, must have a length of 3",
+                    "default":""
+                },
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airline, as returned by /airline/search",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airline/info\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "alliance":"",
+                    "callsign":"",
+                    "country":"",
+                    "end_date":"",
+                    "founding_date":"",
+                    "iata":"",
+                    "icao":"",
+                    "ident":"",
+                    "name":"",
+                    "start_date":"",
+                    "website":""
+                }
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "description":"The AirlineInfoResult contains information about one airline",
+                    "type":"object",
+                    "properties":{
+                        "alliance":{
+                            "description":"Alliance of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Alliance"
+                        },
+                        "callsign":{
+                            "description":"The callsign of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Callsign"
+                        },
+                        "country":{
+                            "description":"The country of the airline as a two letter code, if available",
+                            "type":"string",
+                            "x-go-name":"Country"
+                        },
+                        "end_date":{
+                            "description":"The date the airline ceased operation, if available",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"CeasedOps"
+                        },
+                        "founding_date":{
+                            "description":"The founding date of the airline, if available",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"FoundingDate"
+                        },
+                        "iata":{
+                            "description":"The IATA code of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Iata"
+                        },
+                        "icao":{
+                            "description":"The ICAO code of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Icao"
+                        },
+                        "ident":{
+                            "description":"The Ident code of the airline",
+                            "type":"string",
+                            "x-go-name":"Ident"
+                        },
+                        "name":{
+                            "description":"The name of the airline",
+                            "type":"string",
+                            "x-go-name":"Name"
+                        },
+                        "start_date":{
+                            "description":"The date the airline started operation, if available",
+                            "type":"string",
+                            "format":"date-time",
+                            "x-go-name":"StartedOps"
+                        },
+                        "website":{
+                            "description":"Website of the airline, if available",
+                            "type":"string",
+                            "x-go-name":"Website"
+                        }
+                    },
+                    "x-go-package":"wright/internal/api"
+                }
+            }
+        },
+        {
+            "name":"airportStatistics",
+            "url":"https://flightera-flight-data.p.rapidapi.com/airport/statistics",
+            "description":"Returns detailed airport statistics for airports identified by the provided identifiers. In most cases the list should contain only one entry, unless the ident is ambiguous.\nIf searched by ident, only one airport is returned.\nOne of ident, iata, icao, localID must be provided.\nStatistics are calculated overnight and represent the current day's data.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"ident",
+                    "type":"STRING",
+                    "description":"The ident of the airport, as returned by /airport/search",
+                    "default":""
+                },
+                {
+                    "name":"localID",
+                    "type":"STRING",
+                    "description":"Local identifiers of the airport, currently mostly available for the US & CA (FAA-ID). Max length is 6",
+                    "default":""
+                },
+                {
+                    "name":"iata",
+                    "type":"STRING",
+                    "description":"The IATA code of the airport, must have a length of 3",
+                    "default":""
+                },
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"The ICAO code of the airport, must have a length of 4",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flightera-flight-data.p.rapidapi.com/airport/statistics\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flightera-flight-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "arrivals":0,
+                "avg_arrival_distance":0,
+                "avg_delay_arrivals":0,
+                "avg_delay_departures":0,
+                "avg_departure_distance":0,
+                "cancelled_arrivals":0,
+                "cancelled_departures":0,
+                "delayed_arrivals":0,
+                "delayed_departures":0,
+                "departures":0,
+                "ident":"",
+                "top_airlines":{},
+                "top_destinations":{},
+                "top_sources":{}
+            },
+            "headers":{},
+            "schema":{
+                "description":"The AirportStatsResult contains detailed statistics for an airport",
+                "type":"object",
+                "properties":{
+                    "arrivals":{
+                        "description":"The number of flights that arrived at the airport within the past 30 days",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Arrivals",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "avg_arrival_distance":{
+                        "description":"Average distance of arriving flights over the past 30 days",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"AvgArrivalDistance",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "avg_delay_arrivals":{
+                        "description":"Average delay of delayed arriving flights over the past 30 days. Only provided if meaningful.",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"AvgDelayArrivals",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "avg_delay_departures":{
+                        "description":"Average delay of delayed departing flights over the past 30 days. Only provided if meaningful.",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"AvgDelayDepartures",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "avg_departure_distance":{
+                        "description":"Average distance of departing flights over the past 30 days",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"AvgDepartureDistance",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "cancelled_arrivals":{
+                        "description":"Percentage of cancelled arrivals. Only provided if meaningful.",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"CancelledArrivals",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "cancelled_departures":{
+                        "description":"Percentage of cancelled departures. Only provided if meaningful.",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"CancelledDepartures",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "delayed_arrivals":{
+                        "description":"Percentage of delayed arrivals (delay > 10 minutes). Only provided if meaningful.",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"DelayedArrivals",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "delayed_departures":{
+                        "description":"Percentage of delayed departures (delay > 10 minutes). Only provided if meaningful.",
+                        "type":"number",
+                        "format":"double",
+                        "x-go-name":"DelayedDepartures",
+                        "minimum":-1.7976931348623157e+308,
+                        "maximum":1.7976931348623157e+308
+                    },
+                    "departures":{
+                        "description":"The number of flights that departed from the airport within the past 30 days",
+                        "type":"integer",
+                        "format":"int64",
+                        "x-go-name":"Departures",
+                        "minimum":-9223372036854776000,
+                        "maximum":9223372036854776000
+                    },
+                    "ident":{
+                        "description":"Identifier of the airport",
+                        "type":"string",
+                        "x-go-name":"Ident"
+                    },
+                    "top_airlines":{
+                        "description":"Top 5 airlines with number of flights within the past 30 days. Contains a map with airline identifier and number of flights",
+                        "type":"object",
+                        "additionalProperties":{
+                            "type":"integer",
+                            "format":"int64",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "x-go-name":"TopAirlines"
+                    },
+                    "top_destinations":{
+                        "description":"Top 10 destinations for departing flights with number of flights within the past 30 days. Contains a map with airport identifier and number of flights",
+                        "type":"object",
+                        "additionalProperties":{
+                            "type":"integer",
+                            "format":"int64",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "x-go-name":"TopDestinations"
+                    },
+                    "top_sources":{
+                        "description":"Top 10 sources for arriving flights with number of flights within the past 30 days. Contains a map with airport identifier and number of flights",
+                        "type":"object",
+                        "additionalProperties":{
+                            "type":"integer",
+                            "format":"int64",
+                            "minimum":-9223372036854776000,
+                            "maximum":9223372036854776000
+                        },
+                        "x-go-name":"TopSources"
+                    }
+                },
+                "x-go-package":"wright/internal/api"
+            }
+        }
+    ]
+}

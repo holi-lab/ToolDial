@@ -1,0 +1,187 @@
+{
+    "tool_name":"OddsBoom",
+    "tool_description":"Best odds for NFL",
+    "title":"OddsBoom",
+    "pricing":"PAID",
+    "score":null,
+    "home_url":"https://rapidapi.com/oddsboom/api/oddsboom/",
+    "host":"oddsboom.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Futures Odds",
+            "url":"https://oddsboom.p.rapidapi.com/futures/odds/",
+            "description":"This endpoint will retrieve a list of futures odds for a given event.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"event_id",
+                    "type":"NUMBER",
+                    "description":"Event to include. Get a list of event IDs from futures/events endpoint.",
+                    "default":"2"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"Set the state to show sportsbooks solely from. Will show nationwide sportsbooks if omitted.",
+                    "default":"nj"
+                },
+                {
+                    "name":"date_format",
+                    "type":"STRING",
+                    "description":"Set date format to UNIX Timestamp or ISO. Defaults to UNIX if omitted.",
+                    "default":"iso"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://oddsboom.p.rapidapi.com/futures/odds/\"\nquerystring = {\"state\": state, \"date_format\": date_format, \"event_id\": event_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"oddsboom.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Futures Events",
+            "url":"https://oddsboom.p.rapidapi.com/futures/events/",
+            "description":"This endpoint will retrieve a list of futures events.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"league",
+                    "type":"STRING",
+                    "description":"League to include, such as NBA, NFL etc.",
+                    "default":"nfl"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"date_format",
+                    "type":"STRING",
+                    "description":"Set date format to UNIX Timestamp or ISO. Defaults to UNIX if omitted.",
+                    "default":"iso"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://oddsboom.p.rapidapi.com/futures/events/\"\nquerystring = {\"league\": league, \"date_format\": date_format}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"oddsboom.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Odds",
+            "url":"https://oddsboom.p.rapidapi.com/odds/",
+            "description":"This endpoint will retrieve a list of odds for a given game.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"event_id",
+                    "type":"NUMBER",
+                    "description":"The Event ID to show. Get event IDs from the events endpoint.",
+                    "default":"20681"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"Set the state to show sportsbooks solely from. Will show nationwide sportsbooks if omitted.",
+                    "default":"nj"
+                },
+                {
+                    "name":"markets",
+                    "type":"STRING",
+                    "description":"Markets to show. For example, money for moneyline. If not set, all markets will be shown.\n\nValue can be playerprops to only show player props if sport allows. This option can only be used on its own.",
+                    "default":"money,spread,total"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://oddsboom.p.rapidapi.com/odds/\"\nquerystring = {\"state\": state, \"markets\": markets, \"event_id\": event_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"oddsboom.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Events",
+            "url":"https://oddsboom.p.rapidapi.com/events/",
+            "description":"This endpoint will retrieve a list of games, in date order.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"league",
+                    "type":"STRING",
+                    "description":"League to include, such as NBA, NFL etc.",
+                    "default":"nfl"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"date_format",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"unix"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"2"
+                },
+                {
+                    "name":"sport",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"basketball"
+                },
+                {
+                    "name":"league",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"nba"
+                },
+                {
+                    "name":"date_format",
+                    "type":"STRING",
+                    "description":"Set date format to UNIX Timestamp or ISO. Defaults to UNIX if omitted.",
+                    "default":"iso"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limit the number of events shown.",
+                    "default":"3"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://oddsboom.p.rapidapi.com/events/\"\nquerystring = {\"date_format\": date_format, \"limit\": limit, \"sport\": sport, \"league\": league}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"oddsboom.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Markets",
+            "url":"https://oddsboom.p.rapidapi.com/markets/",
+            "description":"This endpoint will retrieve all available market types (for example money line, spread, first-quarter total).",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"sport",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"basketball"
+                },
+                {
+                    "name":"sport",
+                    "type":"STRING",
+                    "description":"Sport to include, such as basketball, football.",
+                    "default":"football"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://oddsboom.p.rapidapi.com/markets/\"\nquerystring = {\"sport\": sport}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"oddsboom.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

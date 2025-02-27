@@ -1,0 +1,256 @@
+{
+    "product_id": "api_9a8129ba-2305-4acc-8036-73c2cc04be54",
+    "tool_description": "API for extracting data from image: colors, objects, face recognition and etc.",
+    "home_url": "https://rapidapi.com/rekinm-lnlYQT00U1z/api/regim3/",
+    "name": "Regim",
+    "title": "Regim",
+    "pricing": "FREEMIUM",
+    "tool_name": "Regim",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 2422,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.5,
+        "__typename": "Score"
+    },
+    "host": "regim3.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Dominant colors",
+            "url": "https://regim3.p.rapidapi.com/colors/1.1/",
+            "description": "Get colors service",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "opts",
+                    "type": "STRING",
+                    "description": "\nSet needed options for image processing:\n*    **colors** - dominant colors (as hex code)\n*    **alg=x** - algorithm version. Possible values: 1 (default, fastest), 2 (slowest), 3 (fine)\n*    **closestColors** - find closest colors for each dominant color from palette. \n",
+                    "default": "colors,alg=2,closestColors"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "palette",
+                    "type": "STRING",
+                    "description": "\nOptional. Provide hex colors (without #) list from your pallete (max 30 colors/210 characters), comma separated, for closesColors option. Example: 000000,ff0000,008000,ffffff\n",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://regim3.p.rapidapi.com/colors/1.1/\"\nquerystring = {\"file\": \"\", \"opts\": \"colors,alg=2,closestColors\", \"palette\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"regim3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://regim3.p.rapidapi.com/colors/1.1/\"\nquerystring = {\"file\": \"\", \"opts\": \"colors,alg=2,closestColors\", \"palette\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"regim3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "remoC",
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "dataC",
+                        "type": "object",
+                        "properties": {
+                            "exif": {
+                                "title": "Exif",
+                                "type": "object"
+                            },
+                            "colors": {
+                                "title": "Colors",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "closestColors": {
+                                "title": "Closestcolors",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "geodata": {
+                                "title": "Geodata",
+                                "type": "object"
+                            },
+                            "objects": {
+                                "title": "Objects",
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            },
+                            "segments": {
+                                "title": "Segments",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "objectsShortList": {
+                                "title": "Objectsshortlist",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "objectsCount": {
+                                "title": "Objectscount",
+                                "type": "object"
+                            },
+                            "translated": {
+                                "title": "Translated",
+                                "type": "object"
+                            },
+                            "faces": {
+                                "title": "Faces",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "img_res": {
+                                "title": "Img Res",
+                                "type": "string"
+                            },
+                            "rotation": {
+                                "title": "Rotation",
+                                "type": "object"
+                            },
+                            "orientation": {
+                                "title": "Orientation",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "info": {
+                        "title": "infoC",
+                        "type": "object",
+                        "properties": {
+                            "args": {
+                                "title": "Args",
+                                "type": "object"
+                            },
+                            "exectime": {
+                                "title": "Exectime",
+                                "type": "string"
+                            },
+                            "error": {
+                                "title": "Error",
+                                "type": "string"
+                            },
+                            "def_palette": {
+                                "title": "Def Palette",
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Object recognition and segmentation",
+            "url": "https://regim3.p.rapidapi.com/1.1/",
+            "description": "Object segmentation",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "opts",
+                    "type": "STRING",
+                    "description": "\nSet needed options for image processing:\n*    **segmentation** - recognize objects and segments\n*    **resimg** - return image with object labels (as base64 string)\n*    **facerecognition** - search faces, return face location (top, left, right, bottom) and face image (as base64 string)\n*    **exif** - exif data\n*    **autorotation** - rotate image according exif data before object recognition\n*    **geodata** - decode coordinates from exif\n*    **colors** - dominant colors (as hex code)\n\n",
+                    "default": "segmentation,facerecognition"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://regim3.p.rapidapi.com/1.1/\"\nquerystring = {\"file\": \"\", \"opts\": \"segmentation,facerecognition\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"regim3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://regim3.p.rapidapi.com/1.1/\"\nquerystring = {\"file\": \"\", \"opts\": \"segmentation,facerecognition\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"regim3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "remo",
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "data",
+                        "type": "object",
+                        "properties": {
+                            "exif": {
+                                "title": "Exif",
+                                "type": "object"
+                            },
+                            "colors": {
+                                "title": "Colors",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "geodata": {
+                                "title": "Geodata",
+                                "type": "object"
+                            },
+                            "objects": {
+                                "title": "Objects",
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            },
+                            "segments": {
+                                "title": "Segments",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "objectsShortList": {
+                                "title": "Objectsshortlist",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "objectsCount": {
+                                "title": "Objectscount",
+                                "type": "object"
+                            },
+                            "translated": {
+                                "title": "Translated",
+                                "type": "object"
+                            },
+                            "faces": {
+                                "title": "Faces",
+                                "type": "array",
+                                "items": {}
+                            },
+                            "img_res": {
+                                "title": "Img Res",
+                                "type": "string"
+                            },
+                            "rotation": {
+                                "title": "Rotation",
+                                "type": "object"
+                            },
+                            "orientation": {
+                                "title": "Orientation",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "info": {
+                        "title": "info",
+                        "type": "object",
+                        "properties": {
+                            "args": {
+                                "title": "Args",
+                                "type": "object"
+                            },
+                            "exectime": {
+                                "title": "Exectime",
+                                "type": "string"
+                            },
+                            "error": {
+                                "title": "Error",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

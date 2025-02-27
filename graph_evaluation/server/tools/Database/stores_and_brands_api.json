@@ -1,0 +1,211 @@
+{
+    "tool_name":"Stores And Brands API",
+    "tool_description":"Find all stores and outlets list in the US.",
+    "title":"Stores And Brands API",
+    "pricing":"FREE",
+    "score":null,
+    "home_url":"https://rapidapi.com/findopenhoursorg-findopenhoursorg-default/api/stores-and-brands-api/",
+    "host":"stores-and-brands-api.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get stores in a City",
+            "url":"https://stores-and-brands-api.p.rapidapi.com/stores-in-city/",
+            "description":"Get all stores in the city, [use endpoint /api/v1.1/cities/ to get all city names]                \n    Filter by city,state,brand_alias\nExample Payload\n {\n    \"api_key\":\"iopII2344_ADDDxxw1i1\",\n    \"city\": \"Los Angeles\",\n    \"state\": \"CA\",\n    \"brand\": \"taco-bell\" (Optional)\n  }\nExample Response\n [{\n    \"brand_name\": \"Western Union\",\n    \"store_address\": \"600 West 7th St\",\n    \"phone_no\": \"(213) 896-0083\"\n  },{\n    \"brand_name\": \"Simple Mobile\",\n    \"store_address\": \"727 N Vine St\",\n    \"phone_no\": \"(323) 466-7300\"\n  }]",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"api_key",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stores-and-brands-api.p.rapidapi.com/stores-in-city/\"\nquerystring = {\"state\": state, \"api_key\": api_key, \"city\": city}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stores-and-brands-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Stores Near Me",
+            "url":"https://stores-and-brands-api.p.rapidapi.com/stores-near-me/",
+            "description":"Find Stores Near Me by sending lat and long \n    Get all stores in the city, [use endpoint /api/v1.1/cities/ to get all city names]                \n    Filter by city,state,brand_alias\nExample Payload\n {\n    \"api_key\":\"iopII2344_ADDDxxw1i1\",\n    \"lat\": \"12.34\",\n    \"long\": \"11.55\",\n    \"radius\", 10 (optional in kms)\n  }\nExample Response\n [{\n    \"brand_name\": \"Western Union\",\n    \"store_address\": \"600 West 7th St\",\n    \"phone_no\": \"(213) 896-0083\"\n  },{\n    \"brand_name\": \"Simple Mobile\",\n    \"store_address\": \"727 N Vine St\",\n    \"phone_no\": \"(323) 466-7300\"\n  }]",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"10"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"long",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"api_key",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://stores-and-brands-api.p.rapidapi.com/stores-near-me/\"\nquerystring = {\"radius\": radius, \"lat\": lat, \"long\": long, \"api_key\": api_key}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stores-and-brands-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get Stores By City",
+            "url":"https://stores-and-brands-api.p.rapidapi.com/cities/",
+            "description":"Get all cities and store counts in a particular state\n    Use brand filter to get cities for the brand\n\nExample Payload\n {\n    \"api_key\":\"iopII2344_ADDDxxw1i1\",\n    \"state\":\"CA\",                    \n    \"brand_alias\": \"western-union\" (optional)\n }\nExample Response\n [{\n    \n    \"city\": \"Los Angeles\",\n    \"store_count\": 630,\n    \"state\",\"CA\"\n  },\n  {\n   \n    \"city\": \"Newyork\",\n    \"store_count\": 1200,\n    \"state\":\"NY\"\n  }]",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"api_key",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"brand_alias",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stores-and-brands-api.p.rapidapi.com/cities/\"\nquerystring = {\"api_key\": api_key, \"state\": state}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stores-and-brands-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get All Brand Stores",
+            "url":"https://stores-and-brands-api.p.rapidapi.com/brand-stores/",
+            "description":"Get all brand stores, Use brand_alias \n from /get-all-brands/ endpoint to get brand stores\n You can also filter by lat,lon,radius(in km),city,state\nExample Payload\n {\n    \"api_key\":\"iopII2344_ADDDxxw1i1\",\n    \"brand_alias\": \"western-union\"\n    \"lat\": \"34.0477542\", (optional)\n    \"long\": \"-118.2576388\", (optional)\n    \"radius\": \"10\", (optional)\n    \"city\":\"Los Angeles\",\n    \"state\":\"CA\"\n }\nExample Response\n {\n    \"brand_name\": \"Western Union\",\n    \"store_address\": \"600 West 7th St\",\n    \"phone_no\": \"(213) 896-0083\",\n    \"city\": \"Los Angeles\",\n    \"state\": \"CA\",\n    \"country\": \"US\",\n    \"code\": 200\n  }",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"api_key",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"brand_alias",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"long",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stores-and-brands-api.p.rapidapi.com/brand-stores/\"\nquerystring = {\"api_key\": api_key, \"brand_alias\": brand_alias}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stores-and-brands-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get All Brands",
+            "url":"https://stores-and-brands-api.p.rapidapi.com/get-all-brands/",
+            "description":"get all stores from FindOpenHours you can also filter by [categories](https://findopenhours.org/all-categories/).\nExample Payload\n {\n  \"api_key\":\"iopII2344_ADDDxxw1i1\",\n  \"page\":0,\n  \"limit\":200\n  }\nExample Response\n {\n    \n    \"brand_name\": \"Western Union\",\n    \"brand_alias\": \"western-union\",\n    \"store_count\": 39898,\n    \"code\": 200\n  }",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"api_key",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"100"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stores-and-brands-api.p.rapidapi.com/get-all-brands/\"\nquerystring = {\"limit\": limit, \"page\": page, \"api_key\": api_key}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stores-and-brands-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

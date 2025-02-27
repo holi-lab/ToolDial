@@ -1,0 +1,217 @@
+{
+    "product_id": "api_ed2849ba-56ba-4f1e-a67c-52ff8431e91c",
+    "tool_description": "PixCleaner offers a REST API that allows you to easily use and interact with our service programmatically. Using our HTTP interface integrate our background removal features into any business or application.",
+    "home_url": "https://rapidapi.com/Pixcleaner/api/background-remover5/",
+    "name": "Background Remover",
+    "title": "Background Remover",
+    "pricing": "FREE",
+    "tool_name": "Background Remover",
+    "score": {
+        "avgServiceLevel": 40,
+        "avgLatency": 775,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.1,
+        "__typename": "Score"
+    },
+    "host": "background-remover5.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "getAccount",
+            "url": "https://background-remover5.p.rapidapi.com/account",
+            "description": "Returns a description of your user account information.\nUseful to get the remaining credits on your account\n",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/account\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/account\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "state": "failed",
+                "statusCode": 404,
+                "code": "NOT_FOUND",
+                "title": "Path not found",
+                "message": null
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "user id as it is stored in our system"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "the user's name"
+                    },
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "the user's email"
+                    },
+                    "credits": {
+                        "type": "number",
+                        "description": "the remaining credit balance on your account"
+                    }
+                }
+            }
+        },
+        {
+            "name": "getImage",
+            "url": "https://background-remover5.p.rapidapi.com/image",
+            "description": "Retuns the result of an image that was previously handled by autoremove route for the given image Id.\naccepts two parameters:\n  - imageId: The Id of the image to get.\n  - recompute: bollean, if set to true, asks the server to remove the backgorund again for the specified ID (costs credits).\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "imageId",
+                    "type": "STRING",
+                    "description": "ID of the image to get",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "recompute",
+                    "type": "BOOLEAN",
+                    "description": "ask the server to remove the background again (cost credits)",
+                    "default": true
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/image\"\nquerystring = {\"recompute\": true, \"imageId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/image\"\nquerystring = {\"recompute\": true, \"imageId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "originalImage": {
+                                "type": "object",
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "format": "uri"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    },
+                                    "mimeType": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "resultImage": {
+                                "type": "object",
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "format": "uri"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "autoRemoveBGSingleImage",
+            "url": "https://background-remover5.p.rapidapi.com/autoremove",
+            "description": "removes the background from a single image specified by the user.\n\n  - Content : Any picture with a separate foreground object from the background (human, animal, product, etc..)\n  - Source : a file upload ( binary file ), url or a base64 format of your image.\n\nreturns a url of a semi-transparent PNG image encoded in a json object.\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The binary file corresponding to the user image that we want to remove the BG from",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/autoremove\"\nquerystring = {\"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/autoremove\"\nquerystring = {\"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "originalImage": {
+                                "type": "object",
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "format": "uri"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    },
+                                    "mimeType": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "resultImage": {
+                                "type": "object",
+                                "properties": {
+                                    "path": {
+                                        "type": "string",
+                                        "format": "uri"
+                                    },
+                                    "width": {
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "type": "number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "improvePixCleaner",
+            "url": "https://background-remover5.p.rapidapi.com/improve",
+            "description": "Be part of our improve program.If you believe that a picture is not yet managed correctly by our AI algorithms,\nyou can submit it here.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/improve\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://background-remover5.p.rapidapi.com/improve\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"background-remover5.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "state": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "background_remover"
+}

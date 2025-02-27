@@ -1,0 +1,408 @@
+{
+    "tool_name":"Seloger",
+    "tool_description":"This API helps to query properties for sale or rent in France to create a real estate site/application such as seloger.com",
+    "title":"Seloger",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":4385,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/seloger/",
+    "host":"seloger.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"properties/count",
+            "url":"https://seloger.p.rapidapi.com/properties/count",
+            "description":"Count total properties returned with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"zipCodes",
+                    "type":"STRING",
+                    "description":"Either zipCodes OR districtIds parameter is required. The postal code, separated by comma for multiple values. Ex : 75,13,...",
+                    "default":"75"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"bedrooms",
+                    "type":"STRING",
+                    "description":"Filter by number of bedrooms (1-5). Separated by comma for multiple values. Ex : 2,3",
+                    "default":""
+                },
+                {
+                    "name":"maximumLivingArea",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum living area",
+                    "default":""
+                },
+                {
+                    "name":"rooms",
+                    "type":"STRING",
+                    "description":"Filter by number of rooms (1-5). Separated by comma for multiple values. Ex : 2,3",
+                    "default":""
+                },
+                {
+                    "name":"maximumGroundArea",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum ground area",
+                    "default":""
+                },
+                {
+                    "name":"sortBy",
+                    "type":"NUMBER",
+                    "description":"One of the following : 0-Pertinence | 1-Prix croissant | 2-Prix decroissant | 10-Du + recent au + ancien | 9-Du + ancien au + recent | 5-Surface croissante | 6-Surface decroissante",
+                    "default":"0"
+                },
+                {
+                    "name":"includeNewConstructions",
+                    "type":"BOOLEAN",
+                    "description":"Whether or not includes new constructions in listing",
+                    "default":"true"
+                },
+                {
+                    "name":"maximumPrice",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum price",
+                    "default":""
+                },
+                {
+                    "name":"transactionType",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Louer | 2-Acheter | 5-Viager | 6-Investir",
+                    "default":"1"
+                },
+                {
+                    "name":"minimumGroundArea",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum ground area",
+                    "default":""
+                },
+                {
+                    "name":"minimumFloor",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum number of floors",
+                    "default":""
+                },
+                {
+                    "name":"districtIds",
+                    "type":"STRING",
+                    "description":"Either zipCodes OR districtIds parameter is required. The value of id fields under 'districts' JSON object returned in .../locations/search endpoint. Separated by comma for multiple values. Ex : 133051,133137,...",
+                    "default":""
+                },
+                {
+                    "name":"minimumLivingArea",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum living area",
+                    "default":""
+                },
+                {
+                    "name":"maximumFloor",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum number of floors",
+                    "default":""
+                },
+                {
+                    "name":"realtyTypes",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Appartement | 2-Maison et Villa | 2048-Chateau | 128-Loft/Atelier/Surface | 4096-Hotel Particulier | 4-Parking/Box | 8-Terrain | 512-Immeuble | 1024-Batiment | 16-Boutique | 32-Local Commercial | 64-Bureau",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://seloger.p.rapidapi.com/properties/count\"\nquerystring = {\"zipCodes\": zipcodes, \"sortBy\": sortby, \"includeNewConstructions\": includenewconstructions, \"transactionType\": transactiontype, \"realtyTypes\": realtytypes}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"seloger.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/detail",
+            "url":"https://seloger.p.rapidapi.com/properties/detail",
+            "description":"Get property detailed information",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"NUMBER",
+                    "description":"The value of id fields returned in .../properties/list or .../properties/list-in-boundary endpoint.",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://seloger.p.rapidapi.com/properties/detail\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"seloger.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/list-in-boundary",
+            "url":"https://seloger.p.rapidapi.com/properties/list-in-boundary",
+            "description":"List properties in a bounding box with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"southEastLongitude",
+                    "type":"NUMBER",
+                    "description":"The south east longitude of bounding box",
+                    "default":"-4.923123903572559"
+                },
+                {
+                    "name":"southEastLatitude",
+                    "type":"NUMBER",
+                    "description":"The south east latitude of bounding box",
+                    "default":"38.83832926233735"
+                },
+                {
+                    "name":"zipCodes",
+                    "type":"STRING",
+                    "description":"Either zipCodes OR districtIds parameter is required. The postal code, separated by comma for multiple values. Ex : 75,13,...",
+                    "default":"75"
+                },
+                {
+                    "name":"northWestLongitude",
+                    "type":"NUMBER",
+                    "description":"The north west longitude of bounding box",
+                    "default":"10.897186920046808"
+                },
+                {
+                    "name":"northWestLatitude",
+                    "type":"NUMBER",
+                    "description":"The north west latitude of bounding box",
+                    "default":"53.44775236185636"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"maximumFloor",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum number of floors",
+                    "default":""
+                },
+                {
+                    "name":"maximumPrice",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum price",
+                    "default":""
+                },
+                {
+                    "name":"minimumFloor",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum number of floors",
+                    "default":""
+                },
+                {
+                    "name":"minimumLivingArea",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum living area",
+                    "default":""
+                },
+                {
+                    "name":"maximumLivingArea",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum living area",
+                    "default":""
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"STRING",
+                    "description":"Filter by number of bedrooms (1-5). Separated by comma for multiple values. Ex : 2,3",
+                    "default":""
+                },
+                {
+                    "name":"districtIds",
+                    "type":"STRING",
+                    "description":"Either zipCodes OR districtIds parameter is required. The value of id fields under 'districts' JSON object returned in .../locations/search endpoint. Separated by comma for multiple values. Ex : 133051,133137,...",
+                    "default":""
+                },
+                {
+                    "name":"rooms",
+                    "type":"STRING",
+                    "description":"Filter by number of rooms (1-5). Separated by comma for multiple values. Ex : 2,3",
+                    "default":""
+                },
+                {
+                    "name":"sortBy",
+                    "type":"NUMBER",
+                    "description":"One of the following : 0-Pertinence | 1-Prix croissant | 2-Prix decroissant | 10-Du + recent au + ancien | 9-Du + ancien au + recent | 5-Surface croissante | 6-Surface decroissante",
+                    "default":"0"
+                },
+                {
+                    "name":"maximumGroundArea",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum ground area",
+                    "default":""
+                },
+                {
+                    "name":"minimumGroundArea",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum ground area",
+                    "default":""
+                },
+                {
+                    "name":"includeNewConstructions",
+                    "type":"BOOLEAN",
+                    "description":"Whether or not includes new constructions in listing",
+                    "default":"true"
+                },
+                {
+                    "name":"realtyTypes",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Appartement | 2-Maison et Villa | 2048-Chateau | 128-Loft/Atelier/Surface | 4096-Hotel Particulier | 4-Parking/Box | 8-Terrain | 512-Immeuble | 1024-Batiment | 16-Boutique | 32-Local Commercial | 64-Bureau",
+                    "default":"1"
+                },
+                {
+                    "name":"transactionType",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Louer | 2-Acheter | 5-Viager | 6-Investir",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://seloger.p.rapidapi.com/properties/list-in-boundary\"\nquerystring = {\"southEastLongitude\": southeastlongitude, \"southEastLatitude\": southeastlatitude, \"zipCodes\": zipcodes, \"sortBy\": sortby, \"northWestLongitude\": northwestlongitude, \"northWestLatitude\": northwestlatitude, \"includeNewConstructions\": includenewconstructions, \"realtyTypes\": realtytypes, \"transactionType\": transactiontype}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"seloger.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/list",
+            "url":"https://seloger.p.rapidapi.com/properties/list",
+            "description":"List properties with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"zipCodes",
+                    "type":"STRING",
+                    "description":"Either zipCodes OR districtIds parameter is required. The postal code, separated by comma for multiple values. Ex : 75,13,...",
+                    "default":"75"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose (Max is 50)",
+                    "default":"50"
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"STRING",
+                    "description":"Filter by number of bedrooms (1-5). Separated by comma for multiple values. Ex : 2,3",
+                    "default":""
+                },
+                {
+                    "name":"rooms",
+                    "type":"STRING",
+                    "description":"Filter by number of rooms (1-5). Separated by comma for multiple values. Ex : 2,3",
+                    "default":""
+                },
+                {
+                    "name":"minimumLivingArea",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum living area",
+                    "default":""
+                },
+                {
+                    "name":"includeNewConstructions",
+                    "type":"BOOLEAN",
+                    "description":"Whether or not includes new constructions in listing",
+                    "default":"true"
+                },
+                {
+                    "name":"realtyTypes",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Appartement | 2-Maison et Villa | 2048-Chateau | 128-Loft/Atelier/Surface | 4096-Hotel Particulier | 4-Parking/Box | 8-Terrain | 512-Immeuble | 1024-Batiment | 16-Boutique | 32-Local Commercial | 64-Bureau",
+                    "default":"1"
+                },
+                {
+                    "name":"maximumGroundArea",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum ground area",
+                    "default":""
+                },
+                {
+                    "name":"maximumLivingArea",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum living area",
+                    "default":""
+                },
+                {
+                    "name":"minimumGroundArea",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum ground area",
+                    "default":""
+                },
+                {
+                    "name":"minimumFloor",
+                    "type":"NUMBER",
+                    "description":"Filter by minimum number of floors",
+                    "default":""
+                },
+                {
+                    "name":"maximumPrice",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum price",
+                    "default":""
+                },
+                {
+                    "name":"districtIds",
+                    "type":"STRING",
+                    "description":"Either zipCodes OR districtIds parameter is required. The value of id fields under 'districts' JSON object returned in .../locations/search endpoint. Separated by comma for multiple values. Ex : 133051,133137,...",
+                    "default":""
+                },
+                {
+                    "name":"transactionType",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Louer | 2-Acheter | 5-Viager | 6-Investir",
+                    "default":"1"
+                },
+                {
+                    "name":"sortBy",
+                    "type":"NUMBER",
+                    "description":"One of the following : 0-Pertinence | 1-Prix croissant | 2-Prix decroissant | 10-Du + recent au + ancien | 9-Du + ancien au + recent | 5-Surface croissante | 6-Surface decroissante",
+                    "default":"0"
+                },
+                {
+                    "name":"maximumFloor",
+                    "type":"NUMBER",
+                    "description":"Filter by maximum number of floors",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://seloger.p.rapidapi.com/properties/list\"\nquerystring = {\"pageIndex\": pageindex, \"pageSize\": pagesize, \"includeNewConstructions\": includenewconstructions, \"realtyTypes\": realtytypes, \"zipCodes\": zipcodes, \"transactionType\": transactiontype, \"sortBy\": sortby}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"seloger.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"locations/search",
+            "url":"https://seloger.p.rapidapi.com/locations/search",
+            "description":"Search location by term or phrase",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"searchTerm",
+                    "type":"STRING",
+                    "description":"Any term or phrase that you are familiar with",
+                    "default":"paris"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://seloger.p.rapidapi.com/locations/search\"\nquerystring = {\"searchTerm\": searchterm}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"seloger.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

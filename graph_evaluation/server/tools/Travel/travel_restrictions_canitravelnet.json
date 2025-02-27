@@ -1,0 +1,272 @@
+{
+    "tool_name":"Travel Restrictions - Canitravelnet",
+    "tool_description":"Our API provides the easiest and most comprehensive data on Covid-19 driven travel restrictions. Gain access to tailored travel restrictions based on passport, departure, destination and vaccination",
+    "title":"Travel Restrictions - Canitravelnet",
+    "pricing":"PAID",
+    "score":null,
+    "home_url":"https://rapidapi.com/canitravel-canitravel-default/api/travel-restrictions-canitravelnet/",
+    "host":"travel-restrictions-canitravelnet.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get all supported countries",
+            "url":"https://travel-restrictions-canitravelnet.p.rapidapi.com/api/v1/countries/",
+            "description":"Get the latest list of countries that we provide travel restrictions.\n\nThe Response is in JSON format.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://travel-restrictions-canitravelnet.p.rapidapi.com/api/v1/countries/\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"travel-restrictions-canitravelnet.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Get travel restrictions for a single country",
+            "url":"https://travel-restrictions-canitravelnet.p.rapidapi.com/api/v1/countries/{country_to_iso}",
+            "description":"Get the latest personalised travel restrictions for a country based on departure, passport and vaccination.\n\nThe Response is in JSON format.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"passport",
+                    "type":"STRING",
+                    "description":"Optional: 2 letter ISO country code that represents the passport country",
+                    "default":"{{country_passport_iso}}"
+                },
+                {
+                    "name":"vaccinated",
+                    "type":"STRING",
+                    "description":"Boolean value: either True or False. By default set to false, true if the traveler has been vaccinated",
+                    "default":"{{vaccinated}}"
+                },
+                {
+                    "name":"country_to_iso",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"country_to_iso"
+                },
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"Optional: 2 letter ISO country code that represents the from country",
+                    "default":"{{country_from_iso}}"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://travel-restrictions-canitravelnet.p.rapidapi.com/api/v1/countries/{country_to_iso}\"\nquerystring = {\"passport\": passport, \"vaccinated\": vaccinated, \"from\": is_from}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"travel-restrictions-canitravelnet.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "data":{
+                    "destination_name":"Greece",
+                    "destination_iso":"GR",
+                    "travel_status":{
+                        "published_on":"2021-05-14T00:00:00.000000Z",
+                        "departure_iso":"GB",
+                        "passport_iso":"GB",
+                        "summary_text":"Proof of Health certificate/Negative Covid Test",
+                        "result_text":"CAN",
+                        "is_mask_required":true,
+                        "is_mask_required_text":"required",
+                        "quarantine":{
+                            "is_required_number":0,
+                            "is_required_text":"NO"
+                        },
+                        "covid_test_before_departure":{
+                            "is_required_text":"YES",
+                            "summary_text":"before departure",
+                            "accepted_types":[
+                                "pcr"
+                            ],
+                            "accepted_languages":[
+                                "English"
+                            ],
+                            "before_timing":"72 hours",
+                            "info_html":"COVID-19 negative certification required for entering the country.<br> \n\nAll travellers are subject to the requirement for a pre-departure negative PCR test taken within 72 hours prior to arrival. Children aged 5 and under are exempted.<br>\n\n\n"
+                        },
+                        "sources":[
+                            {
+                                "href":"https://www.gov.uk/foreign-travel-advice/greece",
+                                "text":"Foreign travel advice, Gov.UK"
+                            }
+                        ],
+                        "full_info_text_html":{
+                            "Latest News":"COVID-19 restrictions on domestic flights extended until 14 May (National Herals, 09.05.2021). Government imposes lockdown on Kalymnos Island (Reuters, 04.05.2021). Civil Aviation Authority extends COVID-19 travel restrictions on international flights until 14 May (GTP, 30.04.2021). \n",
+                            "International Restrictions":"<br>\n*From within the EU: <p class=\"border\">Greece adopts its own national classification of risk areas, hence travel restrictions for Greece are not based on the common \"EU Traffic Lights\" map.</p><p>Land border arrivals are allowed through the <strong>Promachonas </strong>and <strong>Nymphaio </strong>border checkpoints.</p><p>Arrivals by sea are prohibited. As of 23 April, blue cruising and yachting are allowed with some restrictions.</p><p>Travellers arriving from EU Member States and Schengen Associated Countries are exempted from the mandatory 7-day quarantine in the following cases:</p><ul><li><img src=\"/static/vaccination-benefits.png\" alt=\"vaccination-benefits\" /> they hold a <strong>certificate of vaccination against Covid-19</strong>, issued by a national authority in the English language, and a <strong>14 day</strong> period has elapsed since these passengers were fully vaccinated;</li><li>they show a <strong>negative result</strong> to a <strong>molecular PCR test for Covid-19</strong>, taken <strong>within 72 hours before their entry in Greece</strong>. Children aged 5 and under are exempted. The certificate should be written in English and must include the name and passport number or national identification number of the traveller.</li></ul><p>Upon their arrival, passengers will also be subject to random testing (rapid tests) as per the procedure described in the <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a>. Those entering from Promachonas will also have to take a rapid test for Covid-19 at the entrance checkpoint.</p><p>In all other cases, travellers will be required to quarantine for at least <strong>7 days</strong>. In case their test result is positive, they will be quarantined <strong>for 14 days</strong>.</p><p>Upon their arrival, passengers will also be subject to random testing (rapid tests) as per the procedure described in the <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a>. Those entering from Promachonas will also have to take a rapid test for Covid-19 at the entrance checkpoint.</p><p>&nbsp;</p><p><strong>Mandatory Travel Documentation</strong></p><p>Before entering the country, all travellers must complete a <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a></p><p>&nbsp;</p><p><strong>Find out more:<br /></strong><a href=\"https://greecehealthfirst.gr/\" target=\"_blank\" rel=\"noopener\">Destination Greece. Health first!</a><strong><br /></strong><a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Travel.gov.gr</a><br /><a href=\"https://covid19.gov.gr/rythmiseis-gia-tin-omali-kinisi-ton-epivaton-aktoploias-kata-tis-ores-apagorefsis-kykloforias21-00-05-00/\" target=\"_blank\" rel=\"noopener\">Arrangements for the smooth movement of coastal passengers during curfew hours</a></p><p>&nbsp;</p><br/><a href=\"https://europa.eu/youreurope/citizens/travel/entry-exit/index_en.htm\">Documents you need to travel in Europe</a><br><a href=\"https://europa.eu/youreurope/citizens/health/unplanned-healthcare/temporary-stays/index_en.htm\">Health cover for temporary stays</a>\n",
+                            "Transit":"<p>As a general rule, passengers in transit in the EU+ area are exempted from temporary travel restriction.</p><p>EU citizens entering the EU from a third country, as well as their family members, irrespective of their nationality, are exempted from the travel restrictions regardless of whether or not they are returning to their country of nationality or residence.</p><p>Passengers travelling from a non-EU country to another non-EU country may transit through the international transit area of airports located in the Schengen area. Rules regarding airport transit visa requirements continue to apply.</p>\n",
+                            "From Third Countries":"<p>Third-country citizens are <strong>not allowed</strong> to enter Greece.</p><p><strong>Exceptions</strong> apply to residents of the following countries:</p><ul><li>United Kingdom</li><li>USA</li><li>Australia</li><li>New Zealand</li><li>South Korea</li><li>Thailand</li><li>Rwanda</li><li>Singapore</li><li>United Arab Emirates</li><li>Russia</li><li>Serbia</li><li>Israel</li></ul><p>Travellers arriving from the countries listed above are exempted from the mandatory 7-day quarantine in the following cases:</p><ul><li>they hold a <strong>certificate of vaccination against Covid-19</strong>, issued by a national authority in the English language, and a <strong>14 day</strong> period has elapsed since these passengers were fully vaccinated;</li><li>they show a <strong>negative result</strong> to a <strong>molecular PCR test for Covid-19</strong>, taken <strong>within 72 hours before their entry in Greece</strong>. Children aged 5 and under are exempted. The certificate should be written in English and must include the name and passport number or national identification number of the traveller.</li></ul><p>Upon their arrival, passengers will also be subject to random testing (rapid tests) as per the procedure described in the <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a>. Those entering from Promachonas will also have to take a rapid test for Covid-19 at the entrance checkpoint.</p><p>In all other cases, travellers will be required to quarantine for at least <strong>7 days</strong>. In case their test result is positive, they will be quarantined&nbsp;<strong>for 14 days</strong>.</p><p>&nbsp;</p><p><strong>Mandatory Travel Documentation</strong></p><p>Before entering the country, all travellers must complete a <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a></p><p>&nbsp;</p><p><strong>Find out more:<br /></strong><a href=\"https://greecehealthfirst.gr/\" target=\"_blank\" rel=\"noopener\">Destination Greece. Health first!</a><strong><br /></strong><a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Travel.gov.gr</a><br /><a href=\"https://covid19.gov.gr/rythmiseis-gia-tin-omali-kinisi-ton-epivaton-aktoploias-kata-tis-ores-apagorefsis-kykloforias21-00-05-00/\" target=\"_blank\" rel=\"noopener\">Arrangements for the smooth movement of coastal passengers during curfew hours</a></p><p>&nbsp;</p>\n",
+                            "Internal Restrictions":"<br> \n*Wearing a mask: At present, it is mandatory to wear a mask in all public places (both indoors and outdoors), in all areas of Greece. <br> \n*COVID-19 restrictions: All restrictions remain under regular review. In Regional Units (περιφερειακές ενότητες) where the spread of Covid-19 is particularly high and hospital capacity is limited, restrictions may be tighter or re-imposed with limited notice.  Only the most relevant measures to travellers are included below. You should keep up-to-date by checking this page regularly, and following local announcements. As restrictions may vary, you should <a href=\"\">here</a> check the latest local guidance (in Greek). <br>\n•        you must use a facemask in all indoor and outdoor public and communal spaces, including work-places and on public transport; <br>\n•        a curfew is in place from 12:30am to 5am; <br>\n•        restricted numbers are in place for churches and religious services; <br>\n•        Maximum 3 persons permitted to travel in a taxi or a private vehicle (unless all members of the same family). <br>\n•        Cross-regional travel is allowed for mainland Greece and the islands of Lefkada, Evia and Salamina (use of self-tests ahead of travel is strongly recommended but is not mandatory). <br>\nCross-regional travel to the rest of the islands is permitted but only with either: <br>\n•        proof of vaccination and 14 days since second dose, or <br>\n•        a negative result from a PCR test carried out up to 72 hours prior to travel; or <br>\n•        a negative result from a rapid test or self-test conducted up to 24 hours before travel; or <br>\n•        documentary proof of having recovered from Covid-19 (at least 2 months since infection, and no more than 9 months) <br>\n*Travel in Greece: Travel within Greece between Regional Units is currently restricted, in line with measures outlined above. The below advice applies to any travel which is permitted within the restrictions currently in place. You must wear a mask at all times on all public transport. If you are travelling via ferry, you will need to complete a health questionnaire and hand it to the ferry operator before boarding. The necessary forms will be provided by the operator: you should contact them directly if you need further information. Temperature checks may also be carried out before boarding. If you are travelling by internal (domestic) flights, specific measures relating to check-in, baggage allowances and other details are in place to reduce the spread of coronavirus. You should check with your operator directly for further detail. <br>\n*Accommodation: All hotels are permitted to open, and other types of accommodation, including e.g. Airbnb, private rentals and hostels, are also available. However, you should note that many operators are likely to reduce their offer and close some accommodation during the winter months, particularly in light of measures put in place by the Greek authorities to fight the spread of COVID-19. You should check directly with your accommodation provider in case of related concerns.\n\n"
+                        }
+                    }
+                }
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "destination_name":{
+                                "type":"string",
+                                "description":"",
+                                "default":"Greece"
+                            },
+                            "destination_iso":{
+                                "type":"string",
+                                "description":"",
+                                "default":"GR"
+                            },
+                            "travel_status":{
+                                "type":"object",
+                                "properties":{
+                                    "published_on":{
+                                        "type":"string",
+                                        "description":"",
+                                        "default":"2021-05-14T00:00:00.000000Z"
+                                    },
+                                    "departure_iso":{
+                                        "type":"string",
+                                        "description":"",
+                                        "default":"GB"
+                                    },
+                                    "passport_iso":{
+                                        "type":"string",
+                                        "description":"",
+                                        "default":"GB"
+                                    },
+                                    "is_vaccinated":{},
+                                    "summary_text":{
+                                        "type":"string",
+                                        "description":"",
+                                        "default":"Proof of Health certificate/Negative Covid Test"
+                                    },
+                                    "result_number":{},
+                                    "result_text":{
+                                        "type":"string",
+                                        "description":"",
+                                        "default":"CAN"
+                                    },
+                                    "is_mask_required":{
+                                        "type":"boolean",
+                                        "description":"",
+                                        "default":true
+                                    },
+                                    "is_mask_required_text":{
+                                        "type":"string",
+                                        "description":"",
+                                        "default":"required"
+                                    },
+                                    "quarantine":{
+                                        "type":"object",
+                                        "properties":{
+                                            "is_required_number":{
+                                                "type":"integer",
+                                                "description":"",
+                                                "default":1
+                                            },
+                                            "is_required_text":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"NO"
+                                            }
+                                        }
+                                    },
+                                    "covid_test_before_departure":{
+                                        "type":"object",
+                                        "properties":{
+                                            "is_required_number":{},
+                                            "is_required_text":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"YES"
+                                            },
+                                            "summary_text":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"before departure"
+                                            },
+                                            "accepted_types":{
+                                                "type":"array",
+                                                "items":{
+                                                    "type":"string",
+                                                    "description":"",
+                                                    "default":"pcr"
+                                                }
+                                            },
+                                            "accepted_languages":{
+                                                "type":"array",
+                                                "items":{
+                                                    "type":"string",
+                                                    "description":"",
+                                                    "default":"English"
+                                                }
+                                            },
+                                            "before_timing":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"72 hours"
+                                            },
+                                            "info_html":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"COVID-19 negative certification required for entering the country.<br> \n\nAll travellers are subject to the requirement for a pre-departure negative PCR test taken within 72 hours prior to arrival. Children aged 5 and under are exempted.<br>\n\n\n"
+                                            }
+                                        }
+                                    },
+                                    "covid_test_in_the_country":{},
+                                    "sources":{
+                                        "type":"array",
+                                        "items":{
+                                            "type":"object",
+                                            "properties":{
+                                                "href":{
+                                                    "type":"string",
+                                                    "description":"",
+                                                    "default":"https://www.gov.uk/foreign-travel-advice/greece"
+                                                },
+                                                "text":{
+                                                    "type":"string",
+                                                    "description":"",
+                                                    "default":"Foreign travel advice, Gov.UK"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "full_info_text_html":{
+                                        "type":"object",
+                                        "properties":{
+                                            "Latest News":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"COVID-19 restrictions on domestic flights extended until 14 May (National Herals, 09.05.2021). Government imposes lockdown on Kalymnos Island (Reuters, 04.05.2021). Civil Aviation Authority extends COVID-19 travel restrictions on international flights until 14 May (GTP, 30.04.2021). \n"
+                                            },
+                                            "International Restrictions":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"<br>\n*From within the EU: <p class=\"border\">Greece adopts its own national classification of risk areas, hence travel restrictions for Greece are not based on the common \"EU Traffic Lights\" map.</p><p>Land border arrivals are allowed through the <strong>Promachonas </strong>and <strong>Nymphaio </strong>border checkpoints.</p><p>Arrivals by sea are prohibited. As of 23 April, blue cruising and yachting are allowed with some restrictions.</p><p>Travellers arriving from EU Member States and Schengen Associated Countries are exempted from the mandatory 7-day quarantine in the following cases:</p><ul><li><img src=\"/static/vaccination-benefits.png\" alt=\"vaccination-benefits\" /> they hold a <strong>certificate of vaccination against Covid-19</strong>, issued by a national authority in the English language, and a <strong>14 day</strong> period has elapsed since these passengers were fully vaccinated;</li><li>they show a <strong>negative result</strong> to a <strong>molecular PCR test for Covid-19</strong>, taken <strong>within 72 hours before their entry in Greece</strong>. Children aged 5 and under are exempted. The certificate should be written in English and must include the name and passport number or national identification number of the traveller.</li></ul><p>Upon their arrival, passengers will also be subject to random testing (rapid tests) as per the procedure described in the <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a>. Those entering from Promachonas will also have to take a rapid test for Covid-19 at the entrance checkpoint.</p><p>In all other cases, travellers will be required to quarantine for at least <strong>7 days</strong>. In case their test result is positive, they will be quarantined <strong>for 14 days</strong>.</p><p>Upon their arrival, passengers will also be subject to random testing (rapid tests) as per the procedure described in the <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a>. Those entering from Promachonas will also have to take a rapid test for Covid-19 at the entrance checkpoint.</p><p>&nbsp;</p><p><strong>Mandatory Travel Documentation</strong></p><p>Before entering the country, all travellers must complete a <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a></p><p>&nbsp;</p><p><strong>Find out more:<br /></strong><a href=\"https://greecehealthfirst.gr/\" target=\"_blank\" rel=\"noopener\">Destination Greece. Health first!</a><strong><br /></strong><a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Travel.gov.gr</a><br /><a href=\"https://covid19.gov.gr/rythmiseis-gia-tin-omali-kinisi-ton-epivaton-aktoploias-kata-tis-ores-apagorefsis-kykloforias21-00-05-00/\" target=\"_blank\" rel=\"noopener\">Arrangements for the smooth movement of coastal passengers during curfew hours</a></p><p>&nbsp;</p><br/><a href=\"https://europa.eu/youreurope/citizens/travel/entry-exit/index_en.htm\">Documents you need to travel in Europe</a><br><a href=\"https://europa.eu/youreurope/citizens/health/unplanned-healthcare/temporary-stays/index_en.htm\">Health cover for temporary stays</a>\n"
+                                            },
+                                            "Transit":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"<p>As a general rule, passengers in transit in the EU+ area are exempted from temporary travel restriction.</p><p>EU citizens entering the EU from a third country, as well as their family members, irrespective of their nationality, are exempted from the travel restrictions regardless of whether or not they are returning to their country of nationality or residence.</p><p>Passengers travelling from a non-EU country to another non-EU country may transit through the international transit area of airports located in the Schengen area. Rules regarding airport transit visa requirements continue to apply.</p>\n"
+                                            },
+                                            "From Third Countries":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"<p>Third-country citizens are <strong>not allowed</strong> to enter Greece.</p><p><strong>Exceptions</strong> apply to residents of the following countries:</p><ul><li>United Kingdom</li><li>USA</li><li>Australia</li><li>New Zealand</li><li>South Korea</li><li>Thailand</li><li>Rwanda</li><li>Singapore</li><li>United Arab Emirates</li><li>Russia</li><li>Serbia</li><li>Israel</li></ul><p>Travellers arriving from the countries listed above are exempted from the mandatory 7-day quarantine in the following cases:</p><ul><li>they hold a <strong>certificate of vaccination against Covid-19</strong>, issued by a national authority in the English language, and a <strong>14 day</strong> period has elapsed since these passengers were fully vaccinated;</li><li>they show a <strong>negative result</strong> to a <strong>molecular PCR test for Covid-19</strong>, taken <strong>within 72 hours before their entry in Greece</strong>. Children aged 5 and under are exempted. The certificate should be written in English and must include the name and passport number or national identification number of the traveller.</li></ul><p>Upon their arrival, passengers will also be subject to random testing (rapid tests) as per the procedure described in the <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a>. Those entering from Promachonas will also have to take a rapid test for Covid-19 at the entrance checkpoint.</p><p>In all other cases, travellers will be required to quarantine for at least <strong>7 days</strong>. In case their test result is positive, they will be quarantined&nbsp;<strong>for 14 days</strong>.</p><p>&nbsp;</p><p><strong>Mandatory Travel Documentation</strong></p><p>Before entering the country, all travellers must complete a <a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Passenger Locator Form</a></p><p>&nbsp;</p><p><strong>Find out more:<br /></strong><a href=\"https://greecehealthfirst.gr/\" target=\"_blank\" rel=\"noopener\">Destination Greece. Health first!</a><strong><br /></strong><a href=\"https://travel.gov.gr/#/\" target=\"_blank\" rel=\"noopener\">Travel.gov.gr</a><br /><a href=\"https://covid19.gov.gr/rythmiseis-gia-tin-omali-kinisi-ton-epivaton-aktoploias-kata-tis-ores-apagorefsis-kykloforias21-00-05-00/\" target=\"_blank\" rel=\"noopener\">Arrangements for the smooth movement of coastal passengers during curfew hours</a></p><p>&nbsp;</p>\n"
+                                            },
+                                            "Internal Restrictions":{
+                                                "type":"string",
+                                                "description":"",
+                                                "default":"<br> \n*Wearing a mask: At present, it is mandatory to wear a mask in all public places (both indoors and outdoors), in all areas of Greece. <br> \n*COVID-19 restrictions: All restrictions remain under regular review. In Regional Units (περιφερειακές ενότητες) where the spread of Covid-19 is particularly high and hospital capacity is limited, restrictions may be tighter or re-imposed with limited notice.  Only the most relevant measures to travellers are included below. You should keep up-to-date by checking this page regularly, and following local announcements. As restrictions may vary, you should <a href=\"\">here</a> check the latest local guidance (in Greek). <br>\n•        you must use a facemask in all indoor and outdoor public and communal spaces, including work-places and on public transport; <br>\n•        a curfew is in place from 12:30am to 5am; <br>\n•        restricted numbers are in place for churches and religious services; <br>\n•        Maximum 3 persons permitted to travel in a taxi or a private vehicle (unless all members of the same family). <br>\n•        Cross-regional travel is allowed for mainland Greece and the islands of Lefkada, Evia and Salamina (use of self-tests ahead of travel is strongly recommended but is not mandatory). <br>\nCross-regional travel to the rest of the islands is permitted but only with either: <br>\n•        proof of vaccination and 14 days since second dose, or <br>\n•        a negative result from a PCR test carried out up to 72 hours prior to travel; or <br>\n•        a negative result from a rapid test or self-test conducted up to 24 hours before travel; or <br>\n•        documentary proof of having recovered from Covid-19 (at least 2 months since infection, and no more than 9 months) <br>\n*Travel in Greece: Travel within Greece between Regional Units is currently restricted, in line with measures outlined above. The below advice applies to any travel which is permitted within the restrictions currently in place. You must wear a mask at all times on all public transport. If you are travelling via ferry, you will need to complete a health questionnaire and hand it to the ferry operator before boarding. The necessary forms will be provided by the operator: you should contact them directly if you need further information. Temperature checks may also be carried out before boarding. If you are travelling by internal (domestic) flights, specific measures relating to check-in, baggage allowances and other details are in place to reduce the spread of coronavirus. You should check with your operator directly for further detail. <br>\n*Accommodation: All hotels are permitted to open, and other types of accommodation, including e.g. Airbnb, private rentals and hostels, are also available. However, you should note that many operators are likely to reduce their offer and close some accommodation during the winter months, particularly in light of measures put in place by the Greek authorities to fight the spread of COVID-19. You should check directly with your accommodation provider in case of related concerns.\n\n"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,3181 @@
+{
+    "tool_name": "sms77io",
+    "tool_description": "Send SMS & text-to-speech messages, perform phone number lookups and much more via seven.io.",
+    "title": "sms77io",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 672,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/sms77io-sms77io-default/api/sms77io/",
+    "host": "sms77io.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Home Location Register",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=hlr",
+            "description": "Retrieves ***H*ome *L*ocation *R*egister** information for a given phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The number to look up.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=hlr\"\nquerystring = {\"p\": p, \"number\": number}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "country_code": "DE",
+                "country_name": "Germany",
+                "country_prefix": "49",
+                "current_carrier": {
+                    "country": "DE",
+                    "name": "Telef\u00f3nica Germany GmbH & Co. oHG (O2)",
+                    "network_code": "26203",
+                    "network_type": "mobile"
+                },
+                "gsm_code": "0",
+                "gsm_message": "No error",
+                "international_format_number": "491771783130",
+                "international_formatted": "+49 177 1783130",
+                "lookup_outcome": true,
+                "lookup_outcome_message": "success",
+                "national_format_number": "0177 1783130",
+                "original_carrier": {
+                    "country": "DE",
+                    "name": "Telef\u00f3nica Germany GmbH & Co. oHG (O2)",
+                    "network_code": "26203",
+                    "network_type": "mobile"
+                },
+                "ported": "assumed_not_ported",
+                "reachable": "reachable",
+                "roaming": "not_roaming",
+                "status": true,
+                "status_message": "success",
+                "valid_number": "valid"
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Wed, 11 Nov 2020 12:05:00 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "707",
+                "connection": "Close"
+            },
+            "schema": {
+                "definitions": {
+                    "carrier": {
+                        "properties": {
+                            "country": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "network_code": {
+                                "type": "string"
+                            },
+                            "network_type": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "network_code",
+                            "name",
+                            "country",
+                            "network_type"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "properties": {
+                    "country_code": {
+                        "type": "string"
+                    },
+                    "country_name": {
+                        "type": "string"
+                    },
+                    "country_prefix": {
+                        "type": "string"
+                    },
+                    "current_carrier": {
+                        "$ref": "#/definitions/carrier"
+                    },
+                    "gsm_code": {
+                        "type": "string"
+                    },
+                    "gsm_message": {
+                        "type": "string"
+                    },
+                    "international_format_number": {
+                        "type": "string"
+                    },
+                    "international_formatted": {
+                        "type": "string"
+                    },
+                    "lookup_outcome": {
+                        "type": "boolean"
+                    },
+                    "lookup_outcome_message": {
+                        "type": "string"
+                    },
+                    "national_format_number": {
+                        "type": "string"
+                    },
+                    "original_carrier": {
+                        "$ref": "#/definitions/carrier"
+                    },
+                    "ported": {
+                        "pattern": "\\b(unknown|ported|not_ported|assumed_not_ported|assumed_ported)",
+                        "type": "string"
+                    },
+                    "reachable": {
+                        "pattern": "\\b(unknown|reachable|undeliverable|absent|bad_number|blacklisted)",
+                        "type": "string"
+                    },
+                    "roaming": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "boolean"
+                    },
+                    "status_message": {
+                        "pattern": "\\b(error|success)",
+                        "type": "string"
+                    },
+                    "valid_number": {
+                        "pattern": "\\b(unknown|valid|not_valid)",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get Contacts",
+            "url": "https://sms77io.p.rapidapi.com/contacts",
+            "description": "Retrieves all contacts for a given API key.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "json",
+                    "type": "ENUM",
+                    "description": "Decides whether to return response as JSON or CSV (default).",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "\"123456\";\"Tom Test\";\"+4901234567890\"",
+            "headers": {},
+            "schema": {
+                "items": {
+                    "properties": {
+                        "ID": {
+                            "minLength": 1,
+                            "type": "string"
+                        },
+                        "Name": {
+                            "type": "string"
+                        },
+                        "Number": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "ID",
+                        "Name",
+                        "Number"
+                    ],
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Get Status",
+            "url": "https://sms77io.p.rapidapi.com/status",
+            "description": "Get a delivery report for a message ID sent with your API key.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "msg_id",
+                    "type": "NUMBER",
+                    "description": "The message ID of the SMS.\nCan be obtained by setting parameter *JSON*, *return_msg_id* or *details* to **1** when sending SMS via the API.\nAlternatively it can be retrieved from the message journal in the user area.",
+                    "default": ""
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/status\"\nquerystring = {\"msg_id\": msg_id, \"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "DELIVERED\n2020-11-04 19:09:17.000",
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Thu, 05 Nov 2020 20:40:57 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "33",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Caller Name Delivery",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=cnam",
+            "description": "Retrieves ***C*alling *N*ame *D*elivery** information for a phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The number to look up.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=cnam\"\nquerystring = {\"p\": p, \"number\": number}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": "100",
+                "name": "GERMANY",
+                "number": "+491771783130",
+                "success": "true"
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Thu, 05 Nov 2020 20:48:55 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "73",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "pattern": "\\b(false|true)",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Mobile Number Portability",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=mnp",
+            "description": "Retrieves ***M*obile *N*umber *P*ortability** information for a given phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key for [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The number to look up.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "json",
+                    "type": "ENUM",
+                    "description": "Whether to return plain text or detailed JSON.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=mnp\"\nquerystring = {\"p\": p, \"number\": number}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": 100,
+                "mnp": {
+                    "country": "DE",
+                    "international_formatted": "+49 177 1783130",
+                    "isPorted": false,
+                    "mccmnc": "26203",
+                    "national_format": "0177 1783130",
+                    "network": "Telef\u00f3nica Germany GmbH & Co. oHG (O2)",
+                    "number": "+491771783130"
+                },
+                "price": 0.005,
+                "success": true
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Mon, 09 Nov 2020 18:31:04 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "256",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "code": {
+                        "minimum": 100,
+                        "type": "integer"
+                    },
+                    "mnp": {
+                        "properties": {
+                            "country": {
+                                "type": "string"
+                            },
+                            "international_formatted": {
+                                "type": "string"
+                            },
+                            "isPorted": {
+                                "type": "boolean"
+                            },
+                            "mccmnc": {
+                                "type": "string"
+                            },
+                            "national_format": {
+                                "type": "string"
+                            },
+                            "network": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "price": {
+                        "minimum": 0,
+                        "type": "number"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get Pricing",
+            "url": "https://sms77io.p.rapidapi.com/pricing",
+            "description": "Retrieves pricing information for a single country or all.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "An ISO Code of the country you wish to retrieve the pricing for.\n*Examples*:\n\n-  \\\"de\\\" for Germany \n- \\\"uk\\\" for Great Britain\n- \\\"fr\\\" for France\n\nIf this parameter is *not* specified, the prices of *all* countries are getting returned.",
+                    "default": ""
+                },
+                {
+                    "name": "format",
+                    "type": "ENUM",
+                    "description": "Whether to return the response as *JSON* or *CSV*. The **default** is *JSON*.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/pricing\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "countCountries": 1,
+                "countNetworks": 27,
+                "countries": [
+                    {
+                        "countryCode": "DE",
+                        "countryName": "Germany",
+                        "countryPrefix": "49",
+                        "networks": [
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "15"
+                                ],
+                                "networkName": " (Airdata)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "42"
+                                ],
+                                "networkName": "Chaos Computer Club (CCC Event)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "75"
+                                ],
+                                "networkName": "Core Network Dynamics GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "10"
+                                ],
+                                "networkName": "DB Netz AG",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "60"
+                                ],
+                                "networkName": "DB Telematik",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "23"
+                                ],
+                                "networkName": "Drillisch Online AG",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "72"
+                                ],
+                                "networkName": "Ericsson GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "41"
+                                ],
+                                "networkName": "First Telecom GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "14"
+                                ],
+                                "networkName": "Group 3G UMTS",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "19"
+                                ],
+                                "networkName": "Inquam Deutschland",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [
+                                    "alpha",
+                                    "numeric",
+                                    "dlr",
+                                    "sc"
+                                ],
+                                "mcc": "262",
+                                "mncs": [
+                                    "43"
+                                ],
+                                "networkName": "Lycamobile (Lycamobile)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "13"
+                                ],
+                                "networkName": "Mobilcom Multimedia",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "21"
+                                ],
+                                "networkName": "Multiconnect GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "92"
+                                ],
+                                "networkName": "Nash Technologies",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "18"
+                                ],
+                                "networkName": "NetCologne",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "79"
+                                ],
+                                "networkName": "ng4T GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "74"
+                                ],
+                                "networkName": "Qualcomm CDMA Technologies GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "76"
+                                ],
+                                "networkName": "Siemens AG",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [
+                                    "alpha",
+                                    "numeric",
+                                    "dlr",
+                                    "sc"
+                                ],
+                                "mcc": "262",
+                                "mncs": [
+                                    "12"
+                                ],
+                                "networkName": "sipgate GmbH (Dolphin Telecom)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "33"
+                                ],
+                                "networkName": "sipgate GmbH (simquadrat)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "22"
+                                ],
+                                "networkName": "sipgate Wireless GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [
+                                    "alpha",
+                                    "numeric",
+                                    "dlr",
+                                    "sc"
+                                ],
+                                "mcc": "262",
+                                "mncs": [
+                                    "03",
+                                    "05",
+                                    "07",
+                                    "08",
+                                    "11",
+                                    "17",
+                                    "77"
+                                ],
+                                "networkName": "Telef\u00f3nica Germany GmbH & Co. oHG (O2)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [
+                                    "alpha",
+                                    "numeric",
+                                    "dlr",
+                                    "sc"
+                                ],
+                                "mcc": "262",
+                                "mncs": [
+                                    "01",
+                                    "06",
+                                    "78"
+                                ],
+                                "networkName": "Telekom Deutschland GmbH (Telekom)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "16"
+                                ],
+                                "networkName": "Telogic Germany GmbH",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [
+                                    "alpha",
+                                    "numeric",
+                                    "dlr",
+                                    "sc"
+                                ],
+                                "mcc": "262",
+                                "mncs": [
+                                    "02",
+                                    "04",
+                                    "09"
+                                ],
+                                "networkName": "Vodafone D2 GmbH (Vodafone)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "20"
+                                ],
+                                "networkName": "Voiceworks GmbH (Voiceworks)",
+                                "price": 0.075
+                            },
+                            {
+                                "comment": "",
+                                "features": [],
+                                "mcc": "262",
+                                "mncs": [
+                                    "73"
+                                ],
+                                "networkName": "Xantaro Deutschland GmbH",
+                                "price": 0.075
+                            }
+                        ]
+                    }
+                ]
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Mon, 09 Nov 2020 21:24:12 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "transfer-encoding": "chunked",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "countCountries": {
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "countNetworks": {
+                        "minimum": 0,
+                        "type": "integer"
+                    },
+                    "countries": {
+                        "items": {
+                            "properties": {
+                                "countryCode": {
+                                    "type": "string"
+                                },
+                                "countryName": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "countryPrefix": {
+                                    "type": "string"
+                                },
+                                "networks": {
+                                    "items": {
+                                        "properties": {
+                                            "comment": {
+                                                "type": "string"
+                                            },
+                                            "features": {
+                                                "items": {
+                                                    "minLength": 1,
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "mcc": {
+                                                "type": "string"
+                                            },
+                                            "mncs": {
+                                                "items": {
+                                                    "minLength": 1,
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "networkName": {
+                                                "type": "string"
+                                            },
+                                            "price": {
+                                                "minimum": 0,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "mcc",
+                                            "mncs",
+                                            "networkName",
+                                            "price",
+                                            "features",
+                                            "comment"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "countryCode",
+                                "countryName",
+                                "countryPrefix",
+                                "networks"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "countCountries",
+                    "countNetworks",
+                    "countries"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get Balance",
+            "url": "https://sms77io.p.rapidapi.com/balance",
+            "description": "Retrieves the account balance for the given API key.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "Your API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/balance\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "17.230",
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Wed, 11 Nov 2020 11:59:24 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "6",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Create Contact",
+            "url": "https://sms77io.p.rapidapi.com/contacts?action=write",
+            "description": "Creates a single contact for a given API key.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts?action=write\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "152\n4980093",
+            "headers": {
+                "content-type": "text/plain;charset=UTF-8",
+                "date": "Thu, 05 Nov 2020 21:03:33 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "11",
+                "connection": "Close"
+            },
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "Create Webhook",
+            "url": "https://sms77io.p.rapidapi.com/hooks?action=subscribe",
+            "description": "Creates a webhook with the given configuration.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "An API key from [Sms77.io](https://www.sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "event_type",
+                    "type": "ENUM",
+                    "description": "Type of event for which you would like to receive a webhook.",
+                    "default": ""
+                },
+                {
+                    "name": "target_url",
+                    "type": "STRING",
+                    "description": "Target URL of your webhook.",
+                    "default": "https://my.tld/callback"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "request_method",
+                    "type": "ENUM",
+                    "description": "Request method used for webhook receivement. The default value is **POST**",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks?action=subscribe\"\nquerystring = {\"p\": p, \"event_type\": event_type, \"target_url\": target_url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "success": false
+            },
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "success"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Delete Webhook",
+            "url": "https://sms77io.p.rapidapi.com/hooks?action=unsubscribe",
+            "description": "Deletes the webhook with the given ID.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "The webhook ID for deletion.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks?action=unsubscribe\"\nquerystring = {\"p\": p, \"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "success": true
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Mon, 09 Nov 2020 18:57:55 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "28",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Number Format Lookup",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=format",
+            "description": "Retrieves the network operator as well as additional (porting) information for the given phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "+491771783130"
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=format\"\nquerystring = {\"number\": number, \"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "carrier": "Eplus",
+                "country_code": "49",
+                "country_iso": "DE",
+                "country_name": "Germany",
+                "international": "+491771783130",
+                "international_formatted": "+49 177 1783130",
+                "national": "0177 1783130",
+                "network_type": "mobile",
+                "success": true
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Mon, 09 Nov 2020 18:43:14 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "224",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "carrier": {
+                        "type": "string"
+                    },
+                    "country_code": {
+                        "type": "string"
+                    },
+                    "country_iso": {
+                        "type": "string"
+                    },
+                    "country_name": {
+                        "type": "string"
+                    },
+                    "international": {
+                        "type": "string"
+                    },
+                    "international_formatted": {
+                        "type": "string"
+                    },
+                    "national": {
+                        "type": "string"
+                    },
+                    "network_type": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Outbound",
+            "url": "https://sms77io.p.rapidapi.com/journal?type=outbound",
+            "description": "Retrieves outbound messages history.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "date_from",
+                    "type": "STRING",
+                    "description": "Start date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Message status - e.g. *completed* / *failed* for **Voice** or *DELIVERED* / *NOTDELIVERED* for **SMS**",
+                    "default": ""
+                },
+                {
+                    "name": "date_to",
+                    "type": "STRING",
+                    "description": "End date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "Message ID",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Receiver phone number in any format",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/journal?type=outbound\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Inbound",
+            "url": "https://sms77io.p.rapidapi.com/journal?type=inbound",
+            "description": "Retrieves inbound messages history.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Receiver phone number in any format",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Message status - e.g. *completed* / *failed* for **Voice** or *DELIVERED* / *NOTDELIVERED* for **SMS**",
+                    "default": ""
+                },
+                {
+                    "name": "date_from",
+                    "type": "STRING",
+                    "description": "Start date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "date_to",
+                    "type": "STRING",
+                    "description": "End date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "Message ID",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/journal?type=inbound\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Replies",
+            "url": "https://sms77io.p.rapidapi.com/journal?type=replies",
+            "description": "Retrieves message replies history.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "Message ID",
+                    "default": ""
+                },
+                {
+                    "name": "date_from",
+                    "type": "STRING",
+                    "description": "Start date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Receiver phone number in any format",
+                    "default": ""
+                },
+                {
+                    "name": "date_to",
+                    "type": "STRING",
+                    "description": "End date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Message status - e.g. *completed* / *failed* for **Voice** or *DELIVERED* / *NOTDELIVERED* for **SMS**",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/journal?type=replies\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create",
+            "url": "https://sms77io.p.rapidapi.com/subaccounts",
+            "description": "Creates a new subaccount.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "John Doe"
+                },
+                {
+                    "name": "action",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "create"
+                },
+                {
+                    "name": "email",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "john@doe.com"
+                },
+                {
+                    "name": "X-Api-Key",
+                    "type": "STRING",
+                    "description": "Your sms77 API key which you can create in your [developer dashboard](https://app.sms77.io/developer).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/subaccounts\"\nquerystring = {\"name\": name, \"action\": action, \"email\": email, \"X-Api-Key\": x_api_key}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Read",
+            "url": "https://sms77io.p.rapidapi.com/subaccounts?action=read",
+            "description": "Retrieves information regarding subacounts.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "X-Api-Key",
+                    "type": "STRING",
+                    "description": "Your sms77 API key for authentication.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/subaccounts?action=read\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Delete Contact",
+            "url": "https://sms77io.p.rapidapi.com/contacts",
+            "description": "Deletes a single contact by ID for the given API key.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "action",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "Your API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "The contact ID for deletion.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts\"\nquerystring = {\"action\": action, \"p\": p, \"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get Analytics",
+            "url": "https://sms77io.p.rapidapi.com/analytics",
+            "description": "Get detailed statistics of your account directly through our API.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "start",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Start date of the statistics in the format YYYY-MM-DD.\nBy default, the date of 30 days ago is set.",
+                    "default": ""
+                },
+                {
+                    "name": "label",
+                    "type": "STRING",
+                    "description": "Shows only data of a specific label.\nAllowed values: 'all' (default) or <label>.",
+                    "default": "all"
+                },
+                {
+                    "name": "end",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "End date of the statistics.\nBy default, the current day.",
+                    "default": ""
+                },
+                {
+                    "name": "subaccounts",
+                    "type": "STRING",
+                    "description": "Receive the data only for the main account, all your (sub-)accounts or only for specific subaccounts. Allowed values: 'only_main', 'all' or subaccount ID.",
+                    "default": "only_main"
+                },
+                {
+                    "name": "group_by",
+                    "type": "ENUM",
+                    "description": "Defines the grouping of the data.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/analytics\"\nquerystring = {\"label\": label, \"p\": p, \"subaccounts\": subaccounts}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "date": "2020-10-06",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-07",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-08",
+                    "direct": 14,
+                    "economy": 0,
+                    "hlr": 3,
+                    "inbound": 0,
+                    "mnp": 9,
+                    "usage_eur": 1.1325,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-09",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-10",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-11",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-12",
+                    "direct": 9,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.675,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-13",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-14",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.225,
+                    "voice": 1
+                },
+                {
+                    "date": "2020-10-15",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 1,
+                    "usage_eur": 0.155,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-16",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-17",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-18",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-19",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-20",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-21",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-22",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 5,
+                    "usage_eur": 0.175,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-23",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-24",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-25",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-26",
+                    "direct": 1,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.075,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-27",
+                    "direct": 2,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0.15,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-28",
+                    "direct": 6,
+                    "economy": 0,
+                    "hlr": 3,
+                    "inbound": 0,
+                    "mnp": 9,
+                    "usage_eur": 0.6975,
+                    "voice": 2
+                },
+                {
+                    "date": "2020-10-29",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 1,
+                    "inbound": 0,
+                    "mnp": 2,
+                    "usage_eur": 0.0275,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-30",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-10-31",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-11-01",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-11-02",
+                    "direct": 4,
+                    "economy": 0,
+                    "hlr": 1,
+                    "inbound": 0,
+                    "mnp": 2,
+                    "usage_eur": 0.3275,
+                    "voice": 2
+                },
+                {
+                    "date": "2020-11-03",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 0,
+                    "usage_eur": 0,
+                    "voice": 0
+                },
+                {
+                    "date": "2020-11-04",
+                    "direct": 11,
+                    "economy": 0,
+                    "hlr": 1,
+                    "inbound": 0,
+                    "mnp": 2,
+                    "usage_eur": 1.01,
+                    "voice": 2
+                },
+                {
+                    "date": "2020-11-05",
+                    "direct": 0,
+                    "economy": 0,
+                    "hlr": 0,
+                    "inbound": 0,
+                    "mnp": 4,
+                    "usage_eur": 0.065,
+                    "voice": 0
+                }
+            ],
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Thu, 05 Nov 2020 20:03:59 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "3102",
+                "connection": "Close"
+            },
+            "schema": {
+                "items": {
+                    "properties": {
+                        "date": {
+                            "format": "date",
+                            "type": "string"
+                        },
+                        "direct": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "economy": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "hlr": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "inbound": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "mnp": {
+                            "minimum": 0,
+                            "type": "integer"
+                        },
+                        "usage_eur": {
+                            "type": "number"
+                        },
+                        "voice": {
+                            "minimum": 0,
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "economy",
+                        "direct",
+                        "voice",
+                        "hlr",
+                        "mnp",
+                        "inbound",
+                        "usage_eur"
+                    ],
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Get Webhooks",
+            "url": "https://sms77io.p.rapidapi.com/hooks",
+            "description": "Retrieves all existing webhooks.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": null,
+                "hooks": [
+                    {
+                        "created": "2020-11-04 23:33:08",
+                        "event_type": "voice_status",
+                        "id": "31",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/webhook1"
+                    },
+                    {
+                        "created": "2020-11-05 10:02:02",
+                        "event_type": "voice_status",
+                        "id": "33",
+                        "request_method": "GET",
+                        "target_url": "http://my.tld/hook1604566922721"
+                    },
+                    {
+                        "created": "2020-11-05 10:03:26",
+                        "event_type": "voice_status",
+                        "id": "34",
+                        "request_method": "GET",
+                        "target_url": "http://my.tld/hook1604567006513"
+                    },
+                    {
+                        "created": "2020-11-05 14:44:29",
+                        "event_type": "voice_status",
+                        "id": "35",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/hook1604583869388"
+                    },
+                    {
+                        "created": "2020-11-05 14:51:29",
+                        "event_type": "sms_mo",
+                        "id": "36",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/1604584288548/1604584288648"
+                    },
+                    {
+                        "created": "2020-11-05 14:57:50",
+                        "event_type": "sms_mo",
+                        "id": "37",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/1604584669331/1604584669431"
+                    },
+                    {
+                        "created": "2020-11-05 14:58:50",
+                        "event_type": "sms_mo",
+                        "id": "38",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/1604584730259/1604584730359"
+                    },
+                    {
+                        "created": "2020-11-05 15:11:34",
+                        "event_type": "voice_status",
+                        "id": "40",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/hook1604585494122"
+                    },
+                    {
+                        "created": "2020-11-05 15:11:51",
+                        "event_type": "voice_status",
+                        "id": "41",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/hook1604585511281"
+                    },
+                    {
+                        "created": "2020-11-05 15:12:48",
+                        "event_type": "voice_status",
+                        "id": "42",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/hook1604585567667"
+                    },
+                    {
+                        "created": "2020-11-05 15:16:37",
+                        "event_type": "voice_status",
+                        "id": "43",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/hook1604585797384"
+                    },
+                    {
+                        "created": "2020-11-05 20:02:08",
+                        "event_type": "dlr",
+                        "id": "44",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/hook"
+                    },
+                    {
+                        "created": "2020-11-06 10:06:40",
+                        "event_type": "sms_mo",
+                        "id": "46",
+                        "request_method": "POST",
+                        "target_url": "http://my.tld/5t13jgh4120gh14k"
+                    },
+                    {
+                        "created": "2020-11-06 10:11:22",
+                        "event_type": "sms_mo",
+                        "id": "47",
+                        "request_method": "POST",
+                        "target_url": "https://my.tld/callback"
+                    },
+                    {
+                        "created": "2020-11-06 10:32:20",
+                        "event_type": "sms_mo",
+                        "id": "48",
+                        "request_method": "POST",
+                        "target_url": "https://my.tld/callback232323"
+                    }
+                ],
+                "success": true
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Mon, 09 Nov 2020 19:18:05 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "2181",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "hooks": {
+                        "items": {
+                            "properties": {
+                                "created": {
+                                    "type": "string"
+                                },
+                                "event_type": {
+                                    "pattern": "\\b(sms_mo|dlr|voice_status)",
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "request_method": {
+                                    "pattern": "\\b(GET|POST)",
+                                    "type": "string"
+                                },
+                                "target_url": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Send SMS",
+            "url": "https://sms77io.p.rapidapi.com/sms",
+            "description": "Send SMS to one/multiple user(s) and/or contact(s).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Recipient number \u2013 possible are numbers and address book entries (groups and contacts). Multiple recipients can be specified separated by commas",
+                    "default": "+491771783130"
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key",
+                    "default": ""
+                },
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Message Content",
+                    "default": "Dear customer. We want to say thanks for your trust. Use code MINUS10 for 10 % discount on your next order!"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "performance_tracking",
+                    "type": "ENUM",
+                    "description": "Enable [Performance Tracking](https://help.sms77.io/en/performance-tracking-1) for URLs found in the message text",
+                    "default": ""
+                },
+                {
+                    "name": "return_msg_id",
+                    "type": "ENUM",
+                    "description": "If this parameter is set, the ID of the SMS is output in the second line after the status code.",
+                    "default": ""
+                },
+                {
+                    "name": "delay",
+                    "type": "STRING",
+                    "description": "Date/time for time-delayed SMS. Expects a UNIX timestamp or a date string with format YYYY-MM-DD hh:ii\n**Examples**: 1141511104 or 2016-03-04 23:25:04",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Sender number. **Maximum length**: 11 alphanumeric or 16 numeric characters.",
+                    "default": ""
+                },
+                {
+                    "name": "ttl",
+                    "type": "NUMBER",
+                    "description": "Specifies the validity period of the SMS in milliseconds.",
+                    "default": ""
+                },
+                {
+                    "name": "udh",
+                    "type": "STRING",
+                    "description": "Individual User Data Header of the SMS. If specified and variable text contains *hexcode*, the message will be sent as 8-bit binary SMS.",
+                    "default": ""
+                },
+                {
+                    "name": "debug",
+                    "type": "ENUM",
+                    "description": "If activated no SMS will be sent or calculated.",
+                    "default": ""
+                },
+                {
+                    "name": "unicode",
+                    "type": "ENUM",
+                    "description": "Transmission as Unicode to support Cyrillic, Arabic etc characters. The SMS length is thereby reduced to 70 characters. Please note that our gateway recognizes the coding automatically. This parameter is therefore not necessary. You can, however, force a certain transmission method hereby.",
+                    "default": ""
+                },
+                {
+                    "name": "flash",
+                    "type": "ENUM",
+                    "description": "Send SMS as Flash SMS. These are displayed directly in the receiver\u2019s display.",
+                    "default": ""
+                },
+                {
+                    "name": "label",
+                    "type": "STRING",
+                    "description": "You can optionally set a separate label for each SMS so that you can assign it to your statistics. **Allowed characters**: a-z, A-Z, 0-9, .-_@",
+                    "default": ""
+                },
+                {
+                    "name": "no_reload",
+                    "type": "ENUM",
+                    "description": "Switch off reload lock. This lock prevents the sending of the same SMS (text, type and recipient alike) within 180 seconds. You can deactivate this lock permanently in your login under Settings > SMS.",
+                    "default": ""
+                },
+                {
+                    "name": "json",
+                    "type": "ENUM",
+                    "description": "The output is more detailed in JSON format",
+                    "default": ""
+                },
+                {
+                    "name": "utf8",
+                    "type": "ENUM",
+                    "description": "Forces the detection as a UTF8 character set and overrides automatic recognition of the API",
+                    "default": ""
+                },
+                {
+                    "name": "details",
+                    "type": "ENUM",
+                    "description": "Shows numerous details to the sent SMS. Handy for debugging.",
+                    "default": ""
+                },
+                {
+                    "name": "foreign_id",
+                    "type": "STRING",
+                    "description": "Provide your own ID for this message. You will get the foreign_id in return back in DLR callbacks etc. **Maximum length**: 64 chars; **allowed characters**: a-z, A-Z, 0-9, .-_@",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/sms\"\nquerystring = {\"to\": to, \"p\": p, \"text\": text}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "100",
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Mon, 09 Nov 2020 19:43:48 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "371",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "balance": {
+                        "type": "number"
+                    },
+                    "debug": {
+                        "pattern": "\\b(false|true)",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "items": {
+                            "properties": {
+                                "encoding": {
+                                    "pattern": "\\b(gsm|ucs2)",
+                                    "type": "string"
+                                },
+                                "error": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "error_text": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "id": {
+                                    "minLength": 1,
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "parts": {
+                                    "minimum": 1,
+                                    "type": "integer"
+                                },
+                                "price": {
+                                    "minimum": 0,
+                                    "type": "number"
+                                },
+                                "recipient": {
+                                    "type": "string"
+                                },
+                                "sender": {
+                                    "type": "string"
+                                },
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "text": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "sms_type": {
+                        "enum": [
+                            "direct"
+                        ],
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "string"
+                    },
+                    "total_price": {
+                        "minimum": 0,
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Validate Caller ID",
+            "url": "https://sms77io.p.rapidapi.com/validate_for_voice",
+            "description": "The caller ID validation API allows you to automatically validate caller IDs for the *Voice API*. After calling this endpoint you will get a code back if successful. At the same time, the phone number is going to receive a call from us. The returned code must then be entered via *DTMF* using the telephone\u2019s keypad.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The phone number to be validated. The format is almost arbitrary \u2013 our gateway automatically formats the number correctly.",
+                    "default": "+491771783130"
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key for [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "callback",
+                    "type": "STRING",
+                    "description": "Callback URL that gets called as soon as the validation has been performed successfully.",
+                    "default": "http://my.tld/callback"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/validate_for_voice\"\nquerystring = {\"callback\": callback, \"number\": number, \"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": "699350",
+                "error": null,
+                "success": true
+            },
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Thu, 05 Nov 2020 17:21:09 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "16",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "error": {
+                        "minLength": 1,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "formatted_output": {
+                        "minLength": 1,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "id": {
+                        "minimum": 0,
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "sender": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "voice": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "success"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Send Voice Call",
+            "url": "https://sms77io.p.rapidapi.com/voice",
+            "description": "Via the Voice Api of sms77 you can issue calls to certain phone numbers. The simplest way is to specify a text which is read to the recipient via our Text-to-Speech Gateway. For advanced applications, you have the option of sending the text in XML format.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Text message to be read or XML data.",
+                    "default": "Your confirmation code is 15943."
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Specifies the recipient number.\nAllowed are numbers and address entries (contacts only). Currently just one recipient per call is possible.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "xml",
+                    "type": "ENUM",
+                    "description": "Specifies whether the text variable is a plain text to be read, or an XML format.",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Caller ID. Please use only verified sender IDs, one of your virtual inbound numbers or one of our shared virtual numbers.",
+                    "default": "Sms77"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/voice\"\nquerystring = {\"text\": text, \"from\": is_from, \"p\": p, \"to\": to}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "100\n123456789\n0",
+            "headers": {
+                "content-type": "text/plain; charset=utf-8",
+                "date": "Tue, 10 Nov 2020 17:04:35 GMT",
+                "server": "RapidAPI-1.2.6",
+                "vary": "Accept-Encoding",
+                "x-frame-options": "SAMEORIGIN",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "15",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Edit Contact",
+            "url": "https://sms77io.p.rapidapi.com/contacts?action=write",
+            "description": "Edit a contact with a given ID.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "The contacts ID.",
+                    "default": "123456"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "empfaenger",
+                    "type": "STRING",
+                    "description": "The contacts phone number.",
+                    "default": "+1234567890"
+                },
+                {
+                    "name": "email",
+                    "type": "STRING",
+                    "description": "The contacts email address.",
+                    "default": "tim@te.st"
+                },
+                {
+                    "name": "nick",
+                    "type": "STRING",
+                    "description": "The contacts name.",
+                    "default": "Tim Test"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts?action=write\"\nquerystring = {\"p\": p, \"empfaenger\": empfaenger, \"email\": email, \"nick\": nick, \"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Voice",
+            "url": "https://sms77io.p.rapidapi.com/journal?type=voice",
+            "description": "Retrieves voice messages history.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "date_to",
+                    "type": "STRING",
+                    "description": "End date for performed search",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "Message ID",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Message status - e.g. *completed* / *failed* etc.",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Receiver phone number in any format",
+                    "default": ""
+                },
+                {
+                    "name": "date_from",
+                    "type": "STRING",
+                    "description": "Start date for performed search",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/journal?type=voice\"\nquerystring = {\"p\": p}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Home Location Register",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=hlr",
+            "description": "Retrieves ***H*ome *L*ocation *R*egister** information for a given phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The number to look up.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=hlr\"\nquerystring = {\"p\": \"\", \"number\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=hlr\"\nquerystring = {\"p\": \"\", \"number\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "definitions": {
+                    "carrier": {
+                        "properties": {
+                            "country": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "network_code": {
+                                "type": "string"
+                            },
+                            "network_type": {
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "network_code",
+                            "name",
+                            "country",
+                            "network_type"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "properties": {
+                    "country_code": {
+                        "type": "string"
+                    },
+                    "country_name": {
+                        "type": "string"
+                    },
+                    "country_prefix": {
+                        "type": "string"
+                    },
+                    "current_carrier": {
+                        "$ref": "#/definitions/carrier"
+                    },
+                    "gsm_code": {
+                        "type": "string"
+                    },
+                    "gsm_message": {
+                        "type": "string"
+                    },
+                    "international_format_number": {
+                        "type": "string"
+                    },
+                    "international_formatted": {
+                        "type": "string"
+                    },
+                    "lookup_outcome": {
+                        "type": "boolean"
+                    },
+                    "lookup_outcome_message": {
+                        "type": "string"
+                    },
+                    "national_format_number": {
+                        "type": "string"
+                    },
+                    "original_carrier": {
+                        "$ref": "#/definitions/carrier"
+                    },
+                    "ported": {
+                        "pattern": "\\b(unknown|ported|not_ported|assumed_not_ported|assumed_ported)",
+                        "type": "string"
+                    },
+                    "reachable": {
+                        "pattern": "\\b(unknown|reachable|undeliverable|absent|bad_number|blacklisted)",
+                        "type": "string"
+                    },
+                    "roaming": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "boolean"
+                    },
+                    "status_message": {
+                        "pattern": "\\b(error|success)",
+                        "type": "string"
+                    },
+                    "valid_number": {
+                        "pattern": "\\b(unknown|valid|not_valid)",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Caller Name Delivery",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=cnam",
+            "description": "Retrieves ***C*alling *N*ame *D*elivery** information for a phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The number to look up.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=cnam\"\nquerystring = {\"p\": \"\", \"number\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=cnam\"\nquerystring = {\"p\": \"\", \"number\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "number": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "pattern": "\\b(false|true)",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Mobile Number Portability",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=mnp",
+            "description": "Retrieves ***M*obile *N*umber *P*ortability** information for a given phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key for [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The number to look up.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "json",
+                    "type": "ENUM",
+                    "description": "Whether to return plain text or detailed JSON.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=mnp\"\nquerystring = {\"p\": \"\", \"json\": \"\", \"number\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=mnp\"\nquerystring = {\"p\": \"\", \"json\": \"\", \"number\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "code": {
+                        "minimum": 100,
+                        "type": "integer"
+                    },
+                    "mnp": {
+                        "properties": {
+                            "country": {
+                                "type": "string"
+                            },
+                            "international_formatted": {
+                                "type": "string"
+                            },
+                            "isPorted": {
+                                "type": "boolean"
+                            },
+                            "mccmnc": {
+                                "type": "string"
+                            },
+                            "national_format": {
+                                "type": "string"
+                            },
+                            "network": {
+                                "type": "string"
+                            },
+                            "number": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "price": {
+                        "minimum": 0,
+                        "type": "number"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Create Contact",
+            "url": "https://sms77io.p.rapidapi.com/contacts?action=write",
+            "description": "Creates a single contact for a given API key.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts?action=write\"\nquerystring = {\"p\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts?action=write\"\nquerystring = {\"p\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "string"
+            }
+        },
+        {
+            "name": "Create Webhook",
+            "url": "https://sms77io.p.rapidapi.com/hooks?action=subscribe",
+            "description": "Creates a webhook with the given configuration.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "An API key from [Sms77.io](https://www.sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "event_type",
+                    "type": "ENUM",
+                    "description": "Type of event for which you would like to receive a webhook.",
+                    "default": ""
+                },
+                {
+                    "name": "target_url",
+                    "type": "STRING",
+                    "description": "Target URL of your webhook.",
+                    "default": "https://my.tld/callback"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "request_method",
+                    "type": "ENUM",
+                    "description": "Request method used for webhook receivement. The default value is **POST**",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks?action=subscribe\"\nquerystring = {\"p\": \"\", \"event_type\": \"\", \"target_url\": \"https://my.tld/callback\", \"request_method\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks?action=subscribe\"\nquerystring = {\"p\": \"\", \"event_type\": \"\", \"target_url\": \"https://my.tld/callback\", \"request_method\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "success"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Delete Webhook",
+            "url": "https://sms77io.p.rapidapi.com/hooks?action=unsubscribe",
+            "description": "Deletes the webhook with the given ID.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://www.sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "The webhook ID for deletion.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks?action=unsubscribe\"\nquerystring = {\"p\": \"\", \"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/hooks?action=unsubscribe\"\nquerystring = {\"p\": \"\", \"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Number Format Lookup",
+            "url": "https://sms77io.p.rapidapi.com/lookup?type=format",
+            "description": "Retrieves the network operator as well as additional (porting) information for the given phone number.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "+491771783130"
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=format\"\nquerystring = {\"number\": \"+491771783130\", \"p\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/lookup?type=format\"\nquerystring = {\"number\": \"+491771783130\", \"p\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "carrier": {
+                        "type": "string"
+                    },
+                    "country_code": {
+                        "type": "string"
+                    },
+                    "country_iso": {
+                        "type": "string"
+                    },
+                    "country_name": {
+                        "type": "string"
+                    },
+                    "international": {
+                        "type": "string"
+                    },
+                    "international_formatted": {
+                        "type": "string"
+                    },
+                    "national": {
+                        "type": "string"
+                    },
+                    "network_type": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Create",
+            "url": "https://sms77io.p.rapidapi.com/subaccounts",
+            "description": "Creates a new subaccount.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "John Doe"
+                },
+                {
+                    "name": "action",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "create"
+                },
+                {
+                    "name": "email",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "john@doe.com"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/subaccounts\"\nquerystring = {\"name\": \"John Doe\", \"action\": \"create\", \"email\": \"john@doe.com\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/subaccounts\"\nquerystring = {\"name\": \"John Doe\", \"action\": \"create\", \"email\": \"john@doe.com\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Delete Contact",
+            "url": "https://sms77io.p.rapidapi.com/contacts",
+            "description": "Deletes a single contact by ID for the given API key.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "action",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "Your API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "The contact ID for deletion.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts\"\nquerystring = {\"action\": \"\", \"p\": \"\", \"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts\"\nquerystring = {\"action\": \"\", \"p\": \"\", \"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Send SMS",
+            "url": "https://sms77io.p.rapidapi.com/sms",
+            "description": "Send SMS to one/multiple user(s) and/or contact(s).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Recipient number \u2013 possible are numbers and address book entries (groups and contacts). Multiple recipients can be specified separated by commas",
+                    "default": "+491771783130"
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API Key",
+                    "default": ""
+                },
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Message Content",
+                    "default": "Dear customer. We want to say thanks for your trust. Use code MINUS10 for 10 % discount on your next order!"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "performance_tracking",
+                    "type": "ENUM",
+                    "description": "Enable [Performance Tracking](https://help.sms77.io/en/performance-tracking-1) for URLs found in the message text",
+                    "default": ""
+                },
+                {
+                    "name": "return_msg_id",
+                    "type": "ENUM",
+                    "description": "If this parameter is set, the ID of the SMS is output in the second line after the status code.",
+                    "default": ""
+                },
+                {
+                    "name": "delay",
+                    "type": "STRING",
+                    "description": "Date/time for time-delayed SMS. Expects a UNIX timestamp or a date string with format YYYY-MM-DD hh:ii\n**Examples**: 1141511104 or 2016-03-04 23:25:04",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Sender number. **Maximum length**: 11 alphanumeric or 16 numeric characters.",
+                    "default": ""
+                },
+                {
+                    "name": "ttl",
+                    "type": "NUMBER",
+                    "description": "Specifies the validity period of the SMS in milliseconds.",
+                    "default": ""
+                },
+                {
+                    "name": "udh",
+                    "type": "STRING",
+                    "description": "Individual User Data Header of the SMS. If specified and variable text contains *hexcode*, the message will be sent as 8-bit binary SMS.",
+                    "default": ""
+                },
+                {
+                    "name": "debug",
+                    "type": "ENUM",
+                    "description": "If activated no SMS will be sent or calculated.",
+                    "default": ""
+                },
+                {
+                    "name": "unicode",
+                    "type": "ENUM",
+                    "description": "Transmission as Unicode to support Cyrillic, Arabic etc characters. The SMS length is thereby reduced to 70 characters. Please note that our gateway recognizes the coding automatically. This parameter is therefore not necessary. You can, however, force a certain transmission method hereby.",
+                    "default": ""
+                },
+                {
+                    "name": "flash",
+                    "type": "ENUM",
+                    "description": "Send SMS as Flash SMS. These are displayed directly in the receiver\u2019s display.",
+                    "default": ""
+                },
+                {
+                    "name": "label",
+                    "type": "STRING",
+                    "description": "You can optionally set a separate label for each SMS so that you can assign it to your statistics. **Allowed characters**: a-z, A-Z, 0-9, .-_@",
+                    "default": ""
+                },
+                {
+                    "name": "no_reload",
+                    "type": "ENUM",
+                    "description": "Switch off reload lock. This lock prevents the sending of the same SMS (text, type and recipient alike) within 180 seconds. You can deactivate this lock permanently in your login under Settings > SMS.",
+                    "default": ""
+                },
+                {
+                    "name": "json",
+                    "type": "ENUM",
+                    "description": "The output is more detailed in JSON format",
+                    "default": ""
+                },
+                {
+                    "name": "utf8",
+                    "type": "ENUM",
+                    "description": "Forces the detection as a UTF8 character set and overrides automatic recognition of the API",
+                    "default": ""
+                },
+                {
+                    "name": "details",
+                    "type": "ENUM",
+                    "description": "Shows numerous details to the sent SMS. Handy for debugging.",
+                    "default": ""
+                },
+                {
+                    "name": "foreign_id",
+                    "type": "STRING",
+                    "description": "Provide your own ID for this message. You will get the foreign_id in return back in DLR callbacks etc. **Maximum length**: 64 chars; **allowed characters**: a-z, A-Z, 0-9, .-_@",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/sms\"\nquerystring = {\"performance_tracking\": \"\", \"return_msg_id\": \"\", \"to\": \"+491771783130\", \"delay\": \"\", \"from\": \"\", \"p\": \"\", \"ttl\": \"\", \"udh\": \"\", \"debug\": \"\", \"unicode\": \"\", \"flash\": \"\", \"label\": \"\", \"no_reload\": \"\", \"json\": \"\", \"utf8\": \"\", \"details\": \"\", \"text\": \"Dear customer. We want to say thanks for your trust. Use code MINUS10 for 10 % discount on your next order!\", \"foreign_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/sms\"\nquerystring = {\"performance_tracking\": \"\", \"return_msg_id\": \"\", \"to\": \"+491771783130\", \"delay\": \"\", \"from\": \"\", \"p\": \"\", \"ttl\": \"\", \"udh\": \"\", \"debug\": \"\", \"unicode\": \"\", \"flash\": \"\", \"label\": \"\", \"no_reload\": \"\", \"json\": \"\", \"utf8\": \"\", \"details\": \"\", \"text\": \"Dear customer. We want to say thanks for your trust. Use code MINUS10 for 10 % discount on your next order!\", \"foreign_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "balance": {
+                        "type": "number"
+                    },
+                    "debug": {
+                        "pattern": "\\b(false|true)",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "items": {
+                            "properties": {
+                                "encoding": {
+                                    "pattern": "\\b(gsm|ucs2)",
+                                    "type": "string"
+                                },
+                                "error": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "error_text": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "id": {
+                                    "minLength": 1,
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "parts": {
+                                    "minimum": 1,
+                                    "type": "integer"
+                                },
+                                "price": {
+                                    "minimum": 0,
+                                    "type": "number"
+                                },
+                                "recipient": {
+                                    "type": "string"
+                                },
+                                "sender": {
+                                    "type": "string"
+                                },
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "text": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "sms_type": {
+                        "enum": [
+                            "direct"
+                        ],
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "string"
+                    },
+                    "total_price": {
+                        "minimum": 0,
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Validate Caller ID",
+            "url": "https://sms77io.p.rapidapi.com/validate_for_voice",
+            "description": "The caller ID validation API allows you to automatically validate caller IDs for the *Voice API*. After calling this endpoint you will get a code back if successful. At the same time, the phone number is going to receive a call from us. The returned code must then be entered via *DTMF* using the telephone\u2019s keypad.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "The phone number to be validated. The format is almost arbitrary \u2013 our gateway automatically formats the number correctly.",
+                    "default": "+491771783130"
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key for [Sms77.io](https://sms77.io).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "callback",
+                    "type": "STRING",
+                    "description": "Callback URL that gets called as soon as the validation has been performed successfully.",
+                    "default": "http://my.tld/callback"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/validate_for_voice\"\nquerystring = {\"callback\": \"http://my.tld/callback\", \"number\": \"+491771783130\", \"p\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/validate_for_voice\"\nquerystring = {\"callback\": \"http://my.tld/callback\", \"number\": \"+491771783130\", \"p\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "error": {
+                        "minLength": 1,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "formatted_output": {
+                        "minLength": 1,
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "id": {
+                        "minimum": 0,
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "sender": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "voice": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "success"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Send Voice Call",
+            "url": "https://sms77io.p.rapidapi.com/voice",
+            "description": "Via the Voice Api of sms77 you can issue calls to certain phone numbers. The simplest way is to specify a text which is read to the recipient via our Text-to-Speech Gateway. For advanced applications, you have the option of sending the text in XML format.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Text message to be read or XML data.",
+                    "default": "Your confirmation code is 15943."
+                },
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Specifies the recipient number.\nAllowed are numbers and address entries (contacts only). Currently just one recipient per call is possible.",
+                    "default": "+491771783130"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "xml",
+                    "type": "ENUM",
+                    "description": "Specifies whether the text variable is a plain text to be read, or an XML format.",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Caller ID. Please use only verified sender IDs, one of your virtual inbound numbers or one of our shared virtual numbers.",
+                    "default": "Sms77"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/voice\"\nquerystring = {\"xml\": \"\", \"text\": \"Your confirmation code is 15943.\", \"from\": \"Sms77\", \"p\": \"\", \"to\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/voice\"\nquerystring = {\"xml\": \"\", \"text\": \"Your confirmation code is 15943.\", \"from\": \"Sms77\", \"p\": \"\", \"to\": \"+491771783130\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Edit Contact",
+            "url": "https://sms77io.p.rapidapi.com/contacts?action=write",
+            "description": "Edit a contact with a given ID.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "API key from [Sms77.io](https://sms77.io).",
+                    "default": ""
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "The contacts ID.",
+                    "default": "123456"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "empfaenger",
+                    "type": "STRING",
+                    "description": "The contacts phone number.",
+                    "default": "+1234567890"
+                },
+                {
+                    "name": "email",
+                    "type": "STRING",
+                    "description": "The contacts email address.",
+                    "default": "tim@te.st"
+                },
+                {
+                    "name": "nick",
+                    "type": "STRING",
+                    "description": "The contacts name.",
+                    "default": "Tim Test"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts?action=write\"\nquerystring = {\"p\": \"\", \"empfaenger\": \"+1234567890\", \"email\": \"tim@te.st\", \"nick\": \"Tim Test\", \"id\": \"123456\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://sms77io.p.rapidapi.com/contacts?action=write\"\nquerystring = {\"p\": \"\", \"empfaenger\": \"+1234567890\", \"email\": \"tim@te.st\", \"nick\": \"Tim Test\", \"id\": \"123456\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"sms77io.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

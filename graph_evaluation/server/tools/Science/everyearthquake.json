@@ -1,0 +1,899 @@
+{
+    "tool_name":"EveryEarthquake",
+    "tool_description":"Get every earthquake and any other event that registers on the richter scale ever catalogued by the USGS, with very detailed location data.",
+    "title":"EveryEarthquake",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":2338,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/dbarkman/api/everyearthquake/",
+    "host":"everyearthquake.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Recent Earthquakes",
+            "url":"https://everyearthquake.p.rapidapi.com/recentEarthquakes",
+            "description":"Get the 100 most recent earthquakes from all over in the world, from now to the date and time determined by the 'interval' property.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"interval",
+                    "type":"STRING",
+                    "description":"Get recent earthquakes from current time, back to a time based on the interval provided. Interval is an ISO8601 Duration, examples: P5D for the last 5 days, PT12H for the last 12 hours. https://en.wikipedia.org/wiki/ISO_8601#Durations",
+                    "default":"P1Y2M3W4DT1H2M3S"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"count",
+                    "type":"STRING",
+                    "description":"Add to any call to limit the number of earthquakes returned.\n100 earthquakes are returned by default, up to 1000 earthquakes can be returned using the 'count' parameter.",
+                    "default":"100"
+                },
+                {
+                    "name":"radius",
+                    "type":"STRING",
+                    "description":"The length across half a circle of the search area. The latitude and longitude together make up the center of the circle, while the radius is the distance from the center to the outside of the circle. A 10 mile radius will be a circle 20 miles across with its center at the latitude/longitude point.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"1000"
+                },
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"Either miles or kilometers for the radius of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"miles"
+                },
+                {
+                    "name":"intensity",
+                    "type":"STRING",
+                    "description":"Intensity can be added to limit results to only those earthquakes with at least the specified intensity or greater.",
+                    "default":"1"
+                },
+                {
+                    "name":"magnitude",
+                    "type":"STRING",
+                    "description":"Magnitude can be added to limit results to only those earthquakes with at least the specified magnitude or greater.",
+                    "default":"3"
+                },
+                {
+                    "name":"longitude",
+                    "type":"STRING",
+                    "description":"The longitude portion of the point at the center of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"-118.3706975"
+                },
+                {
+                    "name":"start",
+                    "type":"STRING",
+                    "description":"Use the 'start' parameter to retrieve more than 1000 earthquakes, up to 1000 at a time. 'Start' is the offset to start at within the overall results.\n100 earthquakes are returned by default, up to 1000 earthquakes can be returned using the 'count' parameter.",
+                    "default":"1"
+                },
+                {
+                    "name":"latitude",
+                    "type":"STRING",
+                    "description":"The latitude portion of the point at the center of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"33.962523"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Type can be added to limit results to only those types specified, e.g.: earthquakes, quarry blasts, explosions. Use the 'types' endpoints to see all available types.",
+                    "default":"earthquake"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/recentEarthquakes\"\nquerystring = {\"count\": count, \"radius\": radius, \"units\": units, \"intensity\": intensity, \"magnitude\": magnitude, \"longitude\": longitude, \"start\": start, \"latitude\": latitude, \"type\": type, \"interval\": interval}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "httpStatus":200,
+                "noun":"earthquakes",
+                "verb":"GET",
+                "errorCode":"none",
+                "errors":[],
+                "friendlyError":"",
+                "result":"success",
+                "count":1,
+                "data":[
+                    {
+                        "id":"ci39989663",
+                        "magnitude":"1.04",
+                        "type":"earthquake",
+                        "title":"M 1.0 - 6km NW of Rialto, CA",
+                        "date":"2022-04-09T23:52:35",
+                        "time":"1649548355440",
+                        "updated":"1649548585442",
+                        "url":"https://earthquake.usgs.gov/earthquakes/eventpage/ci39989663",
+                        "detailUrl":"https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci39989663.geojson",
+                        "felt":"0",
+                        "cdi":"0",
+                        "mmi":"0",
+                        "alert":"",
+                        "status":"automatic",
+                        "tsunami":"0",
+                        "sig":"17",
+                        "net":"ci",
+                        "code":"39989663",
+                        "ids":",ci39989663,",
+                        "sources":",ci,",
+                        "types":",nearby-cities,origin,phase-data,scitech-link,",
+                        "nst":"24",
+                        "dmin":"0.1198",
+                        "rms":"0.21",
+                        "gap":"116",
+                        "magType":"ml",
+                        "geometryType":"Point",
+                        "depth":"6.66",
+                        "latitude":"34.1412",
+                        "longitude":"-117.419",
+                        "place":"6km NW of Rialto, CA",
+                        "location":"Rialto, CA",
+                        "continent":"North America",
+                        "country":"United States of America",
+                        "subnational":"California",
+                        "city":"Rialto",
+                        "locality":"Rialto",
+                        "postcode":"92377",
+                        "what3words":"goodbye.smiling.option",
+                        "timezone":"-420",
+                        "locationDetails":[
+                            {
+                                "id":"9",
+                                "wikidataId":"Q49",
+                                "name":"North America",
+                                "description":"continent on the Earth's northwestern quadrant",
+                                "geonameId":"6255149",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"36",
+                                "wikidataId":"Q578170",
+                                "name":"contiguous United States",
+                                "description":"48 states of the United States apart from Alaska and Hawaii",
+                                "geonameId":"0",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"1242",
+                                "wikidataId":"",
+                                "name":"92377",
+                                "description":"postal code",
+                                "geonameId":"0",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"1",
+                                "wikidataId":"Q30",
+                                "name":"United States of America",
+                                "description":"country in North America",
+                                "geonameId":"6252001",
+                                "adminLevel":"2"
+                            },
+                            {
+                                "id":"46",
+                                "wikidataId":"Q99",
+                                "name":"California",
+                                "description":"state of the United States of America",
+                                "geonameId":"5332921",
+                                "adminLevel":"4"
+                            },
+                            {
+                                "id":"101",
+                                "wikidataId":"Q108053",
+                                "name":"San Bernardino County",
+                                "description":"county in California, United States",
+                                "geonameId":"5391726",
+                                "adminLevel":"6"
+                            },
+                            {
+                                "id":"1527",
+                                "wikidataId":"Q289661",
+                                "name":"Rialto",
+                                "description":"city in California, United States of America",
+                                "geonameId":"5387288",
+                                "adminLevel":"8"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"M1.0+ Earthquakes, Past Day",
+            "url":"https://everyearthquake.p.rapidapi.com/1.0_day.json",
+            "description":"Magnitude 1.0+ Earthquakes, Past Day",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/1.0_day.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"All Earthquakes, Past 30 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/all_month.json",
+            "description":"All Earthquakes, Past Thirty Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/all_month.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M1.0+ Earthquakes, Past 30 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/1.0_month.json",
+            "description":"Magnitude 1.0+ Earthquakes, Past Thirty Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/1.0_month.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M2.5+ Earthquakes, Past 30 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/2.5_month.json",
+            "description":"Magnitude 2.5+ Earthquakes, Past Thirty Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/2.5_month.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M4.5+ Earthquakes, Past 30 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/4.5_month.json",
+            "description":"Magnitude 4.5+ Earthquakes, Past Thirty Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/4.5_month.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Significant Earthquakes, Past 30 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/significant_month.json",
+            "description":"Significant Earthquakes, Past Thirty Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/significant_month.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"All Earthquakes, Past 7 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/all_week.json",
+            "description":"All Earthquakes, Past Seven Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/all_week.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M1.0+ Earthquakes, Past 7 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/1.0_week.json",
+            "description":"Magnitude 1.0+ Earthquakes, Past Seven Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/1.0_week.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M2.5+ Earthquakes, Past 7 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/2.5_week.json",
+            "description":"Magnitude 2.5+ Earthquakes, Past Seven Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/2.5_week.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M4.5+ Earthquakes, Past 7 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/4.5_week.json",
+            "description":"Magnitude 4.5+ Earthquakes, Past Seven Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/4.5_week.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Significant Earthquakes, Past 7 Days",
+            "url":"https://everyearthquake.p.rapidapi.com/significant_week.json",
+            "description":"Significant Earthquakes, Past Seven Days",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/significant_week.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M4.5+ Earthquakes, Past Day",
+            "url":"https://everyearthquake.p.rapidapi.com/4.5_day.json",
+            "description":"Magnitude 4.5+ Earthquakes, Past Day",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/4.5_day.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M2.5+ Earthquakes, Past Day",
+            "url":"https://everyearthquake.p.rapidapi.com/2.5_day.json",
+            "description":"Magnitude 2.5+ Earthquakes, Past Day",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/2.5_day.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M1.0+ Earthquakes, Past Hour",
+            "url":"https://everyearthquake.p.rapidapi.com/1.0_hour.json",
+            "description":"Magnitude 1.0+ Earthquakes, Past Hour",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/1.0_hour.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"All Earthquakes, Past Day",
+            "url":"https://everyearthquake.p.rapidapi.com/all_day.json",
+            "description":"All Earthquakes, Past Day",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/all_day.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Significant Earthquakes, Past Day",
+            "url":"https://everyearthquake.p.rapidapi.com/significant_day.json",
+            "description":"Significant Earthquakes, Past Day",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/significant_day.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"All Earthquakes, Past Hour",
+            "url":"https://everyearthquake.p.rapidapi.com/all_hour.json",
+            "description":"All Earthquakes, Past Hour",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/all_hour.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M2.5+ Earthquakes, Past Hour",
+            "url":"https://everyearthquake.p.rapidapi.com/2.5_hour.json",
+            "description":"Magnitude 2.5+ Earthquakes, Past Hour",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/2.5_hour.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"M4.5+ Earthquakes, Past Hour",
+            "url":"https://everyearthquake.p.rapidapi.com/4.5_hour.json",
+            "description":"Magnitude 4.5+ Earthquakes, Past Hour",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/4.5_hour.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Significant Earthquakes, Past Hour",
+            "url":"https://everyearthquake.p.rapidapi.com/significant_hour.json",
+            "description":"Significant Earthquakes, Past Hour",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/significant_hour.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"API Test",
+            "url":"https://everyearthquake.p.rapidapi.com/testPass",
+            "description":"Simple call to determine if the API is available and responding.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/testPass\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "httpStatus":200,
+                "noun":"testPass",
+                "verb":"GET",
+                "errorCode":"none",
+                "errors":[],
+                "friendlyError":"",
+                "result":"success",
+                "count":0,
+                "data":[]
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Earthquakes By Date",
+            "url":"https://everyearthquake.p.rapidapi.com/earthquakesByDate",
+            "description":"Get the 100 most recent earthquakes from all over in the world, within a specified date range.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"startDate",
+                    "type":"STRING",
+                    "description":"The start date for the search period in YYYY-MM-DD format. All dates start and end at midnight UTC.",
+                    "default":"2021-01-27"
+                },
+                {
+                    "name":"endDate",
+                    "type":"STRING",
+                    "description":"The end date for the search period in YYYY-MM-DD format. All dates start and end at midnight UTC.",
+                    "default":"2022-01-27"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"intensity",
+                    "type":"STRING",
+                    "description":"Intensity can be added to limit results to only those earthquakes with at least the specified intensity or greater.",
+                    "default":"1"
+                },
+                {
+                    "name":"longitude",
+                    "type":"STRING",
+                    "description":"The longitude portion of the point at the center of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"-118.3706975"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Type can be added to limit results to only those types specified, e.g.: earthquakes, quarry blasts, explosions. Use the 'types' endpoints to see all available types.",
+                    "default":"earthquake"
+                },
+                {
+                    "name":"count",
+                    "type":"STRING",
+                    "description":"Add to any call to limit the number of earthquakes returned.\n100 earthquakes are returned by default, up to 1000 earthquakes can be returned using the 'count' parameter.",
+                    "default":"100"
+                },
+                {
+                    "name":"latitude",
+                    "type":"STRING",
+                    "description":"The latitude portion of the point at the center of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"33.962523"
+                },
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"Either miles or kilometers for the radius of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"miles"
+                },
+                {
+                    "name":"start",
+                    "type":"STRING",
+                    "description":"Use the 'start' parameter to retrieve more than 1000 earthquakes, up to 1000 at a time. 'Start' is the offset to start at within the overall results.\n100 earthquakes are returned by default, up to 1000 earthquakes can be returned using the 'count' parameter.",
+                    "default":"1"
+                },
+                {
+                    "name":"radius",
+                    "type":"STRING",
+                    "description":"The length across half a circle of the search area. The latitude and longitude together make up the center of the circle, while the radius is the distance from the center to the outside of the circle. A 10 mile radius will be a circle 20 miles across with its center at the latitude/longitude point.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"1000"
+                },
+                {
+                    "name":"magnitude",
+                    "type":"STRING",
+                    "description":"Magnitude can be added to limit results to only those earthquakes with at least the specified magnitude or greater.",
+                    "default":"3"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/earthquakesByDate\"\nquerystring = {\"intensity\": intensity, \"startDate\": startdate, \"longitude\": longitude, \"type\": type, \"count\": count, \"latitude\": latitude, \"units\": units, \"endDate\": enddate, \"start\": start, \"radius\": radius, \"magnitude\": magnitude}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "httpStatus":200,
+                "noun":"earthquakes",
+                "verb":"GET",
+                "errorCode":"none",
+                "errors":[],
+                "friendlyError":"",
+                "result":"success",
+                "count":1,
+                "data":[
+                    {
+                        "id":"ci39989663",
+                        "magnitude":"1.04",
+                        "type":"earthquake",
+                        "title":"M 1.0 - 6km NW of Rialto, CA",
+                        "date":"2022-04-09T23:52:35",
+                        "time":"1649548355440",
+                        "updated":"1649548585442",
+                        "url":"https://earthquake.usgs.gov/earthquakes/eventpage/ci39989663",
+                        "detailUrl":"https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci39989663.geojson",
+                        "felt":"0",
+                        "cdi":"0",
+                        "mmi":"0",
+                        "alert":"",
+                        "status":"automatic",
+                        "tsunami":"0",
+                        "sig":"17",
+                        "net":"ci",
+                        "code":"39989663",
+                        "ids":",ci39989663,",
+                        "sources":",ci,",
+                        "types":",nearby-cities,origin,phase-data,scitech-link,",
+                        "nst":"24",
+                        "dmin":"0.1198",
+                        "rms":"0.21",
+                        "gap":"116",
+                        "magType":"ml",
+                        "geometryType":"Point",
+                        "depth":"6.66",
+                        "latitude":"34.1412",
+                        "longitude":"-117.419",
+                        "place":"6km NW of Rialto, CA",
+                        "location":"Rialto, CA",
+                        "continent":"North America",
+                        "country":"United States of America",
+                        "subnational":"California",
+                        "city":"Rialto",
+                        "locality":"Rialto",
+                        "postcode":"92377",
+                        "what3words":"goodbye.smiling.option",
+                        "timezone":"-420",
+                        "locationDetails":[
+                            {
+                                "id":"9",
+                                "wikidataId":"Q49",
+                                "name":"North America",
+                                "description":"continent on the Earth's northwestern quadrant",
+                                "geonameId":"6255149",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"36",
+                                "wikidataId":"Q578170",
+                                "name":"contiguous United States",
+                                "description":"48 states of the United States apart from Alaska and Hawaii",
+                                "geonameId":"0",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"1242",
+                                "wikidataId":"",
+                                "name":"92377",
+                                "description":"postal code",
+                                "geonameId":"0",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"1",
+                                "wikidataId":"Q30",
+                                "name":"United States of America",
+                                "description":"country in North America",
+                                "geonameId":"6252001",
+                                "adminLevel":"2"
+                            },
+                            {
+                                "id":"46",
+                                "wikidataId":"Q99",
+                                "name":"California",
+                                "description":"state of the United States of America",
+                                "geonameId":"5332921",
+                                "adminLevel":"4"
+                            },
+                            {
+                                "id":"101",
+                                "wikidataId":"Q108053",
+                                "name":"San Bernardino County",
+                                "description":"county in California, United States",
+                                "geonameId":"5391726",
+                                "adminLevel":"6"
+                            },
+                            {
+                                "id":"1527",
+                                "wikidataId":"Q289661",
+                                "name":"Rialto",
+                                "description":"city in California, United States of America",
+                                "geonameId":"5387288",
+                                "adminLevel":"8"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Types",
+            "url":"https://everyearthquake.p.rapidapi.com/types",
+            "description":"Return all types of events ever recorded by the USGS, such as earthquakes, explosions, landslides and many more.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/types\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Earthquakes",
+            "url":"https://everyearthquake.p.rapidapi.com/earthquakes",
+            "description":"Get the 100 most recent earthquakes from all over in the world. No parameters required.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"Either miles or kilometers for the radius of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"miles"
+                },
+                {
+                    "name":"latitude",
+                    "type":"STRING",
+                    "description":"The latitude portion of the point at the center of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"33.962523"
+                },
+                {
+                    "name":"intensity",
+                    "type":"STRING",
+                    "description":"Intensity can be added to limit results to only those earthquakes with at least the specified intensity or greater.",
+                    "default":"1"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"Type can be added to limit results to only those types specified, e.g.: earthquakes, quarry blasts, explosions. Use the 'types' endpoints to see all available types.",
+                    "default":"earthquake"
+                },
+                {
+                    "name":"magnitude",
+                    "type":"STRING",
+                    "description":"Magnitude can be added to limit results to only those earthquakes with at least the specified magnitude or greater.",
+                    "default":"3"
+                },
+                {
+                    "name":"radius",
+                    "type":"STRING",
+                    "description":"The length across half a circle of the search area. The latitude and longitude together make up the center of the circle, while the radius is the distance from the center to the outside of the circle. A 10 mile radius will be a circle 20 miles across with its center at the latitude/longitude point.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"1000"
+                },
+                {
+                    "name":"count",
+                    "type":"STRING",
+                    "description":"Add to any call to limit the number of earthquakes returned.\n100 earthquakes are returned by default, up to 1000 earthquakes can be returned using the 'count' parameter.",
+                    "default":"100"
+                },
+                {
+                    "name":"longitude",
+                    "type":"STRING",
+                    "description":"The longitude portion of the point at the center of the search circle.\nSearch for earthquakes near a certain location using latitude, longitude, radius and units. All four properties must be included when retrieving earthquakes near a certain location.",
+                    "default":"-118.3706975"
+                },
+                {
+                    "name":"start",
+                    "type":"STRING",
+                    "description":"Use the 'start' parameter to retrieve more than 1000 earthquakes, up to 1000 at a time. 'Start' is the offset to start at within the overall results.\n100 earthquakes are returned by default, up to 1000 earthquakes can be returned using the 'count' parameter.",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/earthquakes\"\nquerystring = {\"units\": units, \"latitude\": latitude, \"intensity\": intensity, \"type\": type, \"magnitude\": magnitude, \"radius\": radius, \"count\": count, \"longitude\": longitude, \"start\": start}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "httpStatus":200,
+                "noun":"earthquakes",
+                "verb":"GET",
+                "errorCode":"none",
+                "errors":[],
+                "friendlyError":"",
+                "result":"success",
+                "count":1,
+                "data":[
+                    {
+                        "id":"ci39989663",
+                        "magnitude":"1.04",
+                        "type":"earthquake",
+                        "title":"M 1.0 - 6km NW of Rialto, CA",
+                        "date":"2022-04-09T23:52:35",
+                        "time":"1649548355440",
+                        "updated":"1649548585442",
+                        "url":"https://earthquake.usgs.gov/earthquakes/eventpage/ci39989663",
+                        "detailUrl":"https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/ci39989663.geojson",
+                        "felt":"0",
+                        "cdi":"0",
+                        "mmi":"0",
+                        "alert":"",
+                        "status":"automatic",
+                        "tsunami":"0",
+                        "sig":"17",
+                        "net":"ci",
+                        "code":"39989663",
+                        "ids":",ci39989663,",
+                        "sources":",ci,",
+                        "types":",nearby-cities,origin,phase-data,scitech-link,",
+                        "nst":"24",
+                        "dmin":"0.1198",
+                        "rms":"0.21",
+                        "gap":"116",
+                        "magType":"ml",
+                        "geometryType":"Point",
+                        "depth":"6.66",
+                        "latitude":"34.1412",
+                        "longitude":"-117.419",
+                        "place":"6km NW of Rialto, CA",
+                        "location":"Rialto, CA",
+                        "continent":"North America",
+                        "country":"United States of America",
+                        "subnational":"California",
+                        "city":"Rialto",
+                        "locality":"Rialto",
+                        "postcode":"92377",
+                        "what3words":"goodbye.smiling.option",
+                        "timezone":"-420",
+                        "locationDetails":[
+                            {
+                                "id":"9",
+                                "wikidataId":"Q49",
+                                "name":"North America",
+                                "description":"continent on the Earth's northwestern quadrant",
+                                "geonameId":"6255149",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"36",
+                                "wikidataId":"Q578170",
+                                "name":"contiguous United States",
+                                "description":"48 states of the United States apart from Alaska and Hawaii",
+                                "geonameId":"0",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"1242",
+                                "wikidataId":"",
+                                "name":"92377",
+                                "description":"postal code",
+                                "geonameId":"0",
+                                "adminLevel":"0"
+                            },
+                            {
+                                "id":"1",
+                                "wikidataId":"Q30",
+                                "name":"United States of America",
+                                "description":"country in North America",
+                                "geonameId":"6252001",
+                                "adminLevel":"2"
+                            },
+                            {
+                                "id":"46",
+                                "wikidataId":"Q99",
+                                "name":"California",
+                                "description":"state of the United States of America",
+                                "geonameId":"5332921",
+                                "adminLevel":"4"
+                            },
+                            {
+                                "id":"101",
+                                "wikidataId":"Q108053",
+                                "name":"San Bernardino County",
+                                "description":"county in California, United States",
+                                "geonameId":"5391726",
+                                "adminLevel":"6"
+                            },
+                            {
+                                "id":"1527",
+                                "wikidataId":"Q289661",
+                                "name":"Rialto",
+                                "description":"city in California, United States of America",
+                                "geonameId":"5387288",
+                                "adminLevel":"8"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Latest Earthquake Near Me",
+            "url":"https://everyearthquake.p.rapidapi.com/latestEarthquakeNearMe",
+            "description":"Call this endpoint with your latitude and longitude and you'll receive a simple return for the most recent earthquake, within 100 miles, of the lat/long coordinates provided.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"latitude",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"33.962523"
+                },
+                {
+                    "name":"longitude",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"-118.3706975"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://everyearthquake.p.rapidapi.com/latestEarthquakeNearMe\"\nquerystring = {\"latitude\": latitude, \"longitude\": longitude}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"everyearthquake.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

@@ -1,0 +1,593 @@
+{
+    "product_id": "57f1ff38e4b0036abc9166f2",
+    "tool_description": "Travelpayouts Data API \u2013 the way to get travel insights for your site or blog. Get flight price trends and find popular destinations for your customers.",
+    "home_url": "https://rapidapi.com/Travelpayouts/api/flight-data/",
+    "name": "Flight Data_v2",
+    "title": "Flight Data",
+    "pricing": "FREE",
+    "tool_name": "Flight Data_v2",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 875,
+        "avgSuccessRate": 81,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "host": "travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "The prices for the alternative directions",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/nearest-places-matrix",
+            "description": "Brings the prices for the directions between the nearest to the target cities back.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "the point of departure. The IATA city code or the country code. The length - from 2 to 3 symbols",
+                    "default": "LED"
+                },
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "the point of destination. The IATA city code or the country code. The length - from 2 to 3 symbols",
+                    "default": "MOW"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "flexibility",
+                    "type": "STRING",
+                    "description": "expansion of the range of dates upward or downward. The value may vary from 0 to 7, where 0 shall show the variants for the dates specified, 7 \u2013 all the variants found for a week prior to the specified dates and a week after",
+                    "default": "0"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "the airline tickets currency",
+                    "default": "RUB"
+                },
+                {
+                    "name": "depart_date",
+                    "type": "STRING",
+                    "description": "day or month of departure",
+                    "default": ""
+                },
+                {
+                    "name": "return_date",
+                    "type": "STRING",
+                    "description": "day or month of return",
+                    "default": ""
+                },
+                {
+                    "name": "show_to_affiliates",
+                    "type": "STRING",
+                    "description": "false - all the prices, true - just the prices, found using the partner marker (recommended)",
+                    "default": true
+                },
+                {
+                    "name": "limit",
+                    "type": "STRING",
+                    "description": "the number of variants entered, from 1 to 20. Where 1 \u2013 is just the variant with the specified points of departure and the points of destination",
+                    "default": "10"
+                },
+                {
+                    "name": "distance",
+                    "type": "STRING",
+                    "description": "the number of variants entered, from 1 to 20. Where 1 \u2013 is just the variant with the specified points of departure and the points of destination",
+                    "default": "100"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/nearest-places-matrix\"\nquerystring = {\"flexibility\": \"0\", \"currency\": \"RUB\", \"depart_date\": \"\", \"return_date\": \"\", \"origin\": \"LED\", \"destination\": \"MOW\", \"show_to_affiliates\": true, \"limit\": \"10\", \"distance\": \"100\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/nearest-places-matrix\"\nquerystring = {\"flexibility\": \"0\", \"currency\": \"RUB\", \"depart_date\": \"\", \"return_date\": \"\", \"origin\": \"LED\", \"destination\": \"MOW\", \"show_to_affiliates\": true, \"limit\": \"10\", \"distance\": \"100\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Non-stop tickets",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/direct/",
+            "description": "Returns the cheapest non-stop tickets for the selected route with departure/return date filters.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "IATA code of the destination city (for all routes, enter \u201c-\u201d). The IATA code is shown in uppercase letters, for example",
+                    "default": "LED"
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "IATA code of the departure city. The IATA code is shown in uppercase letters, for example",
+                    "default": "MOW"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "return_date",
+                    "type": "STRING",
+                    "description": "a month of return (yyyy-mm)",
+                    "default": ""
+                },
+                {
+                    "name": "depart_date",
+                    "type": "STRING",
+                    "description": "a month of departure (yyyy-mm)",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/direct/\"\nquerystring = {\"destination\": \"LED\", \"return_date\": \"\", \"origin\": \"MOW\", \"depart_date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/direct/\"\nquerystring = {\"destination\": \"LED\", \"return_date\": \"\", \"origin\": \"MOW\", \"depart_date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "The popular directions from a city",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/city-directions",
+            "description": "Brings the most popular directions from a specified city back.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "the airline tickets currency",
+                    "default": "RUB"
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "the point of departure. The IATA city code or the country code. The length - from 2 to 3 symbols.",
+                    "default": "MOW"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/city-directions\"\nquerystring = {\"currency\": \"RUB\", \"origin\": \"MOW\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/city-directions\"\nquerystring = {\"currency\": \"RUB\", \"origin\": \"MOW\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Airline data in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airlines.json",
+            "description": "API returns a file with a list of airlines from the database",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airlines.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airlines.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "The calendar of prices for a month",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/month-matrix",
+            "description": "Brings the prices for each day of a month, grouped together by the number of transfers, back",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "the point of destination. The IATA city code or the country code. The length - from 2 to 3 symbols. Note! If the point of departure and the point of destination are not specified, then the API shall bring 30 the most cheapest tickets, which have been found during the recent 48 hours, back.",
+                    "default": "MOW"
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "the point of departure. The IATA city code or the country code. The length - from 2 to 3 symbols",
+                    "default": "LED"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "the airline tickets currency",
+                    "default": ""
+                },
+                {
+                    "name": "month",
+                    "type": "STRING",
+                    "description": "the beginning of the month in the YYYY-MM-DD format",
+                    "default": ""
+                },
+                {
+                    "name": "show_to_affiliates",
+                    "type": "STRING",
+                    "description": "false - all the prices, true - just the prices, found using the partner marker (recommended). The default value - true.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/month-matrix\"\nquerystring = {\"destination\": \"MOW\", \"currency\": \"\", \"origin\": \"LED\", \"month\": \"\", \"show_to_affiliates\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/month-matrix\"\nquerystring = {\"destination\": \"MOW\", \"currency\": \"\", \"origin\": \"LED\", \"month\": \"\", \"show_to_affiliates\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Airplane data in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/planes.json",
+            "description": "API returns a file with a list of airplanes from the database",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/planes.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/planes.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Popular airline routes",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/airline-directions",
+            "description": "Returns routes for which an airline operates flights, sorted by popularity.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "airline_code",
+                    "type": "STRING",
+                    "description": "IATA code of airline",
+                    "default": "SU"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "records limit per page. Default value is 100. Not less than 1000",
+                    "default": "100"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/airline-directions\"\nquerystring = {\"airline_code\": \"SU\", \"limit\": \"100\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/airline-directions\"\nquerystring = {\"airline_code\": \"SU\", \"limit\": \"100\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "City data in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/cities.json",
+            "description": "API returns a file with a list of cities from the database",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/cities.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/cities.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Tickets for each day of month",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/calendar",
+            "description": "Returns the cheapest non-stop, one-stop, and two-stop flights for the selected route for each day of the selected month",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "calendar_type",
+                    "type": "STRING",
+                    "description": "field used to build the calendar. Equal to either: departure_date or return_date",
+                    "default": "departure_date"
+                },
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "IATA code of destination city. IATA code is shown by uppercase letters, for example LED",
+                    "default": "BCN"
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "IATA code of departure city. IATA code is shown by uppercase letters, for example MOW",
+                    "default": "MOW"
+                },
+                {
+                    "name": "depart_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "day or month of departure",
+                    "default": "2020-06"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "currency of prices",
+                    "default": "RUB"
+                },
+                {
+                    "name": "return_date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "day or month of return. Pay attention! If the return_date is not specified, you will get the \"One way\" flights",
+                    "default": ""
+                },
+                {
+                    "name": "length",
+                    "type": "STRING",
+                    "description": "length of stay in the destination city",
+                    "default": "None"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/calendar\"\nquerystring = {\"calendar_type\": \"departure_date\", \"currency\": \"RUB\", \"return_date\": \"\", \"destination\": \"BCN\", \"origin\": \"MOW\", \"length\": \"None\", \"depart_date\": \"2020-06\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/calendar\"\nquerystring = {\"calendar_type\": \"departure_date\", \"currency\": \"RUB\", \"return_date\": \"\", \"destination\": \"BCN\", \"origin\": \"MOW\", \"length\": \"None\", \"depart_date\": \"2020-06\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Alliance data in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/airlines_alliances.json",
+            "description": "API returns a file with a list of alliances from the database",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/airlines_alliances.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/airlines_alliances.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Special offers",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/special-offers",
+            "description": "Brings the recent special offers from the airline companies back in the .XML format.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/special-offers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/special-offers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "The prices for the airline tickets",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/latest",
+            "description": "Brings back to the list of prices, found by our users during the recent 48 hours according to the filters used.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "the point of destination. The IATA city code or the country code",
+                    "default": "LED"
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "the point of departure. The IATA city code or the country code",
+                    "default": "MOW"
+                },
+                {
+                    "name": "period_type",
+                    "type": "STRING",
+                    "description": "the period, for which the tickets have been found (the required parameter)",
+                    "default": "year"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "one_way",
+                    "type": "STRING",
+                    "description": "true \u2014 one way, false \u2014 back-to-back.",
+                    "default": " "
+                },
+                {
+                    "name": "show_to_affiliates",
+                    "type": "NUMBER",
+                    "description": "false \u2014 all the prices, true \u2014 just the prices, found using the partner marker (recommended)",
+                    "default": true
+                },
+                {
+                    "name": "trip_duration",
+                    "type": "NUMBER",
+                    "description": "the length of stay in weeks or days (for period_type=day)",
+                    "default": ""
+                },
+                {
+                    "name": "trip_class",
+                    "type": "NUMBER",
+                    "description": "trip_class. 0 \u2014 The economy class (the default value); 1 \u2014 The business class; 2 \u2014 The first class.",
+                    "default": "0"
+                },
+                {
+                    "name": "beginning_of_period",
+                    "type": "STRING",
+                    "description": "the beginning of the period, within which the dates of departure fall (in the YYYY-MM-DD format, for example, 2016-05-01). Must be specified if period_type is equal to month",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "the airline tickets currency",
+                    "default": "RUB"
+                },
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "a page number",
+                    "default": "1"
+                },
+                {
+                    "name": "sorting",
+                    "type": "STRING",
+                    "description": "the assorting of prices. price \u2014 by the price (the default value). For the directions city \u2014 city assorting by the price is possible only; route \u2014 by the popularity of a route; distance_unit_price \u2014 by the price for 1 km.",
+                    "default": "price"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "the total number of records on a page. The maximum value \u2014 1000",
+                    "default": "30"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/latest\"\nquerystring = {\"one_way\": \" \", \"destination\": \"LED\", \"show_to_affiliates\": true, \"origin\": \"MOW\", \"trip_duration\": \"\", \"trip_class\": \"0\", \"beginning_of_period\": \"\", \"currency\": \"RUB\", \"page\": \"1\", \"period_type\": \"year\", \"sorting\": \"price\", \"limit\": \"30\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/latest\"\nquerystring = {\"one_way\": \" \", \"destination\": \"LED\", \"show_to_affiliates\": true, \"origin\": \"MOW\", \"trip_duration\": \"\", \"trip_class\": \"0\", \"beginning_of_period\": \"\", \"currency\": \"RUB\", \"page\": \"1\", \"period_type\": \"year\", \"sorting\": \"price\", \"limit\": \"30\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Airport data in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airports.json",
+            "description": "API returns a file with a list of airports from the database",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airports.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airports.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "The calendar of prices for a week",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/week-matrix",
+            "description": "Brings the prices for the nearest dates to the target ones back",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "the point of departure. The IATA city code or the country code. The length - from 2 to 3 symbols",
+                    "default": "MOW"
+                },
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "the point of destination. The IATA city code or the country code. The length - from 2 to 3 symbols",
+                    "default": "LED"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "return_date",
+                    "type": "STRING",
+                    "description": "day or month of return",
+                    "default": ""
+                },
+                {
+                    "name": "depart_date",
+                    "type": "STRING",
+                    "description": "day or month of departure",
+                    "default": ""
+                },
+                {
+                    "name": "show_to_affiliates",
+                    "type": "STRING",
+                    "description": "false - all the prices, true - just the prices, found using the partner marker (recommended).",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "the airline tickets currency",
+                    "default": "RUB"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/week-matrix\"\nquerystring = {\"return_date\": \"\", \"depart_date\": \"\", \"show_to_affiliates\": \"\", \"currency\": \"RUB\", \"origin\": \"MOW\", \"destination\": \"LED\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v2/prices/week-matrix\"\nquerystring = {\"return_date\": \"\", \"depart_date\": \"\", \"show_to_affiliates\": \"\", \"currency\": \"RUB\", \"origin\": \"MOW\", \"destination\": \"LED\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Cheapest tickets",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap",
+            "description": "Returns the cheapest non-stop tickets, as well as tickets with 1 or 2 stops, for the selected route with departure/return date filters. Important: Old dates may be specified in a query. No error will be generated, but no data will be returned.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "IATA code of the departure city. IATA code is shown by uppercase letters,",
+                    "default": "HKT"
+                },
+                {
+                    "name": "page",
+                    "type": "STRING",
+                    "description": "Is used to display the found data (by default the page displays 100 found prices. If the destination isn't selected, there can be more data. In this case, use the page, to display the next set of data, for example, page=2).",
+                    "default": "None"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "Currency of prices",
+                    "default": "RUB"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "depart_date",
+                    "type": "STRING",
+                    "description": "Day or month of departure",
+                    "default": ""
+                },
+                {
+                    "name": "return_date",
+                    "type": "STRING",
+                    "description": "Day or month of return",
+                    "default": ""
+                },
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "IATA code of the destination city (for all routes, enter \"-\"). IATA code is shown by uppercase letters",
+                    "default": "-"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap\"\nquerystring = {\"depart_date\": \"\", \"origin\": \"HKT\", \"page\": \"None\", \"currency\": \"RUB\", \"return_date\": \"\", \"destination\": \"-\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap\"\nquerystring = {\"depart_date\": \"\", \"origin\": \"HKT\", \"page\": \"None\", \"currency\": \"RUB\", \"return_date\": \"\", \"destination\": \"-\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Data of countries in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/countries.json",
+            "description": "API returns a file with a list of countrys from the database",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/countries.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/countries.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Cheapest tickets grouped by month",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/monthly",
+            "description": "Returns the cheapest non-stop tickets, as well as tickets with 1 or 2 stops, for the selected route grouped by month.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "IATA code of departure city. IATA code is shown by uppercase letters, for example MOW",
+                    "default": "LED"
+                },
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "IATA code of destination city. IATA code is shown by uppercase letters, for example LED",
+                    "default": " MOW"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "currency of prices",
+                    "default": "RUB"
+                },
+                {
+                    "name": "length",
+                    "type": "STRING",
+                    "description": "length of stay in the destination city",
+                    "default": "3"
+                },
+                {
+                    "name": "depart_date",
+                    "type": "STRING",
+                    "description": "day or month of departure",
+                    "default": ""
+                },
+                {
+                    "name": "return_date",
+                    "type": "STRING",
+                    "description": "day or month of return. Pay attention! If the return_date is not specified, you will get the \"One way\" flights",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/monthly\"\nquerystring = {\"origin\": \"LED\", \"destination\": \" MOW\", \"currency\": \"RUB\", \"length\": \"3\", \"depart_date\": \"\", \"return_date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/monthly\"\nquerystring = {\"origin\": \"LED\", \"destination\": \" MOW\", \"currency\": \"RUB\", \"length\": \"3\", \"depart_date\": \"\", \"return_date\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Data on the routes in json format",
+            "url": "https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/routes.json",
+            "description": "The query returns a file with a list of routes from the database.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/routes.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/routes.json\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ],
+    "standardized_name": "flight_data_v2"
+}

@@ -1,0 +1,124 @@
+{
+    "product_id": "api_55617f2a-de7f-4bfc-aa21-026fdf5b8365",
+    "tool_description": "The Weather Tactics Raw Forecast API is a easy to use forecast API that simply regurgitates publicly available forecasts in a way that is *actually* usable. We guarantee that our forecasts match the original source forecast. All of our forecasts use standard naming which allows you to ingest GFS, NAM, GEM, etc... as if they were the same forecast without any additional coding.",
+    "home_url": "https://rapidapi.com/weather-tactics-weather-tactics-default/api/raw-weather-forecast/",
+    "name": "Raw Weather Forecast",
+    "title": "Raw Weather Forecast",
+    "pricing": "FREE",
+    "tool_name": "Raw Weather Forecast",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 987,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "host": "raw-weather-forecast.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "get_forecast_forecast_post",
+            "url": "https://raw-weather-forecast.p.rapidapi.com/forecast",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://raw-weather-forecast.p.rapidapi.com/forecast\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"raw-weather-forecast.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://raw-weather-forecast.p.rapidapi.com/forecast\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"raw-weather-forecast.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "ForecastSet",
+                "required": [
+                    "metadata",
+                    "forecasts"
+                ],
+                "type": "object",
+                "properties": {
+                    "metadata": {
+                        "title": "ForecastRequest",
+                        "required": [
+                            "model",
+                            "variable",
+                            "longitude",
+                            "latitude"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "model": {
+                                "title": "ForecastModelEnum",
+                                "enum": [
+                                    "gfs-0p25",
+                                    "nam-12km",
+                                    "gem-15km"
+                                ],
+                                "type": "string",
+                                "description": "An enumeration."
+                            },
+                            "forecast_reference_time": {
+                                "title": "Reference time or initialization time of the forecast",
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "variable": {
+                                "title": "CF Convention variable name",
+                                "allOf": [
+                                    {
+                                        "title": "ForecastVariableEnum",
+                                        "enum": [
+                                            "air_pressure_at_mean_sea_level",
+                                            "air_temperature",
+                                            "dew_point_temperature",
+                                            "eastward_wind",
+                                            "lwe_precipitation_amount",
+                                            "northward_wind",
+                                            "relative_humidity",
+                                            "wind_from_direction",
+                                            "wind_speed"
+                                        ],
+                                        "type": "string",
+                                        "description": "An enumeration."
+                                    }
+                                ]
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            },
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "units": {
+                                "title": "Units",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "forecasts": {
+                        "title": "Forecasts",
+                        "type": "array",
+                        "items": {
+                            "title": "Forecast",
+                            "required": [
+                                "time",
+                                "value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "time": {
+                                    "title": "Time",
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "value": {
+                                    "title": "Value",
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

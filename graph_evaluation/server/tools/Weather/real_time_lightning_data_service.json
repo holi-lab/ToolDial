@@ -1,0 +1,30 @@
+{
+    "product_id": "api_95aa169a-6d37-4aff-b5bf-3058e95f02bf",
+    "tool_description": "Near-real time, atmospheric lightning data service covering the United States, southern-western Canada, Mexico and Central-America, New Zealand and the Pacific Ocean from Januray, 1st, 2023 onwards.",
+    "home_url": "https://rapidapi.com/tamasoz/api/real-time-lightning-data-service/",
+    "name": "Real Time Lightning Data Service",
+    "title": "Real Time Lightning Data Service",
+    "pricing": "FREEMIUM",
+    "tool_name": "Real Time Lightning Data Service",
+    "score": {
+        "avgServiceLevel": 50,
+        "avgLatency": 921,
+        "avgSuccessRate": 50,
+        "popularityScore": 8.5,
+        "__typename": "Score"
+    },
+    "host": "real-time-lightning-data-service.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Lighting Flash Data",
+            "url": "https://real-time-lightning-data-service.p.rapidapi.com/api/GetLightningData",
+            "description": "Use this service to acquire possible lightning flash locations in a given timeframe. You need to add a polygon location, a UTC datetime in ISO 8601 format (such as 2023-01-01T01:59:27Z) and an integer number with the value between positive 1 and 1440. Only HTTP POST is allowed and payload must be in application/json format - see RapidApi example below.\n\nThe response returns maximum of 1000 lighting flash events. This means if you select a large area with a large time period (like 1440) then you might be actually encountering more than 1000 lightning flash events in that area - yet your results will only show you the first 1000 events and there is no option for pagination. To overcome this deliberate limitation of the service it is recommended to send API request with smaller polygon area or minimal time window - and send query multiple smaller queries instead of one large. The best way to measure your selection of polygon and time frame is to see the number of returning results. If you are under 1000 features, then you are ok and you have covered the area and the timeframe accurately.\n\nOur system has been built with rather strict parameter validation system but if you use the given example as template from RapidApi then it should work just fine.\n\nThe request has 3 required parameters and only HTTP POST is allowed to send the payload. Content-Type must be set to application/json and the payload must be in JSON format. Missing out any of these parameters or non-conforming with the given template will result in denied request. \n\nThe input datetime is the end time of the time frame/window where lightning strikes are to be monitored. The integer number is an \"offset\" from the given datetime in minutes.\n\nFor example - if you would like to know the lightning flashes in a given area between 2am and 3am on the 1st of January 2023 UTC then you will need the following parameters - besides your polygon coordinates:\n\n- datetime: 2023-01-01T03:00:00Z\n- minutesoffset: 60\n\nThe polygon coordinates parameter is a standard JSON array. The coordinate system employed in our service is WGS84/EPSG4326 and the coordinates are to be added in decimal degrees. This coordinate system is exactly what normally used in all major mapping engines such as Google Maps.\n\nThe polygon payload requires at least 3 coordinate pairs in order to be able to create a polygon. You can either put the first coordinate pair to the last position as well thus closing the area of interest polygon - if you miss this out the system automatically closes the polygon using the very first coordinate pair. It is advised to use polygons that are rectangles instead of having a plethora of corners in order to ensure the responsiveness of the system. This does not mean you cannot use a polygon with 6 or even more vertexes - but then the response you will receive might be slower than just using a rectangle.\n\nThe successful response object conforms with GeoJSON standard. The properties of each individual features are as follows:\n\n- approximate_area: Is the value of the estimated area of the lightning flash in square meters. This estimation has been conducted during processing of satellite data on the instrument itself.\n-  energy: Estimated energy of the lighting flash in Joules.\n-id: The ID number of the flash in Mapcortex Lighting database.\n- approximate_time_utc: Is the approximate start time of the flash. As per the satellite data provider's guidelines a full lighting flash consists of multiple groups of electromagnetic events, therefore in this web service we just provide the approximate start time of the lighting flash.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://real-time-lightning-data-service.p.rapidapi.com/api/GetLightningData\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"real-time-lightning-data-service.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://real-time-lightning-data-service.p.rapidapi.com/api/GetLightningData\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"real-time-lightning-data-service.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

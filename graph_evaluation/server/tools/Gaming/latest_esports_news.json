@@ -1,0 +1,84 @@
+{
+    "tool_name":"Latest eSports News",
+    "tool_description":"Returns information about and links to the newest eSports articles on the web.",
+    "title":"Latest eSports News",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/ampats2008/api/latest-esports-news/",
+    "host":"latest-esports-news.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Dotesports Articles (with Pagination)",
+            "url":"https://latest-esports-news.p.rapidapi.com/api/dotesports/",
+            "description":"Dotesports' articles are published using pagination, so I have enabled you to target each page of articles using a `page` query string parameter. Integers greater than 0 are valid values for `page`. Higher values will return older articles.\n\nThis can also be used in tandem with the `categories` query string parameter if you wish to filter out unrelated articles.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"categories",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"cs"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"Corresponds to the page of results on Dotesports' website.\n\nFor example, `?page=2` would correspond to the articles located at `https://www.dotesports.com/page/2`.",
+                    "default":"3"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://latest-esports-news.p.rapidapi.com/api/dotesports/\"\nquerystring = {\"categories\": categories, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"latest-esports-news.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Articles from One Source",
+            "url":"https://latest-esports-news.p.rapidapi.com/api/{source}",
+            "description":"This endpoint allows you to return the latest articles from a specified news source. It corresponds to the `source` field found in each resource.\n\nFor example, to get articles from _Dexerto_, you would make a GET request to https://latest-esports-news.p.rapidapi.com/api/dexerto.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"source",
+                    "type":"string",
+                    "description":"",
+                    "default":"dexerto"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"categories",
+                    "type":"STRING",
+                    "description":"The `categories` query string parameter allows you to filter the returned list of articles by desired topics.\n\n   A valid category is any category that exists on the news source's website. For example, Dexerto has a category called _Business_, which you could filter by.\n\n   Most categories, however, are popular eSports titles, and these categories are shared between both news sources. Therefore, if you filter by _Valorant_, you'll find articles from both Dexerto and Dotesports in the returned list.\n\n   You can include multiple categories in a query by separating them with a comma. In the example URL above, we would get all of the articles of `category1` or `category2`.",
+                    "default":"valorant,league of legends"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://latest-esports-news.p.rapidapi.com/api/{source}\"\nquerystring = {\"categories\": categories}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"latest-esports-news.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Articles from All Sources",
+            "url":"https://latest-esports-news.p.rapidapi.com/api/",
+            "description":"This is the root endpoint for the API. It will fetch articles from all the supported news sources. They will be sorted from most recently published to oldest.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"categories",
+                    "type":"STRING",
+                    "description":"The `categories` query string parameter allows you to filter the returned list of articles by desired topics.\n\n   A valid category is any category that exists on the news source's website. For example, Dexerto has a category called _Business_, which you could filter by.\n\n   Most categories, however, are popular eSports titles, and these categories are shared between both news sources. Therefore, if you filter by _Valorant_, you'll find articles from both Dexerto and Dotesports in the returned list.\n\n   You can include multiple categories in a query by separating them with a comma. In the example URL above, we would get all of the articles of `category1` or `category2`.",
+                    "default":"cod,cs"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://latest-esports-news.p.rapidapi.com/api/\"\nquerystring = {\"categories\": categories}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"latest-esports-news.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

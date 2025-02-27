@@ -1,0 +1,990 @@
+{
+    "tool_name": "Foxit eSign",
+    "tool_description": "Quickly and effortlessly eSign documents with online signatures using Foxit eSign\u2019s trusted and legally binding electronic signature software.",
+    "title": "Foxit eSign",
+    "pricing": "FREE",
+    "score": null,
+    "home_url": "https://rapidapi.com/foxit-esign-foxit-esign-default/api/foxit-esign/",
+    "host": "foxit-esign.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "documentDownload",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/document/download",
+            "description": "You can download an individual document as a pdf file.\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "folderId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the folder to download.",
+                    "default": ""
+                },
+                {
+                    "name": "docNumber",
+                    "type": "NUMBER",
+                    "description": "The index of the document starting from 1 whose PDF you want to download.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/document/download\"\nquerystring = {\"folderId\": folderid, \"docNumber\": docnumber}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "updateFolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/updateFolder",
+            "description": "You can change the first name, last name, and email if the recipient party has not signed on a shared or a partially signed document using this endpoint. Recipients can be changed only when a folder has a `DRAFT` status.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/updateFolder\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "activityHistory",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/viewActivityHistory",
+            "description": "Get an ordered list of activities that occurred on a specific folder.\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "folderId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the folder to get",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/viewActivityHistory\"\nquerystring = {\"folderId\": folderid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createfolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/createfolder",
+            "description": "With Foxit eSign API you can create a folder of documents and send them for signature right from your own application.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "data",
+                    "type": "OBJECT",
+                    "description": "",
+                    "default": "{\n  \"folderName\": \"Example Document\",\n  \"processTextTags\": true,\n  \"processAcroFields\": true,\n  \"requiredBothEmbeddedSession\": false,\n  \"custom_field1\": {\n    \"name\": \"custom_field_name\",\n    \"value\": \"custom_field_value\"\n  },\n  \"custom_field2\": {\n    \"name\": \"custom_field_name\",\n    \"value\": \"custom_field_value\"\n  },\n  \"signInSequence\": false,\n  \"inPersonEnable\": false,\n  \"folderPassword\": \"\",\n  \"sendNow\": false,\n  \"signSuccessUrlAllParties\": false,\n  \"createEmbeddedSendingSession\": false,\n  \"fixRecipientParties\": true,\n  \"fixDocuments\": true,\n  \"sendSuccessURL\": true,\n  \"sendErrorURL\": true,\n  \"hideSendButton\": false,\n  \"createEmbeddedSigningSession\": false,\n  \"createEmbeddedSigningSessionForAllParties\": false,\n  \"embeddedSignersEmailIds\": [\n    [\n      \"example@example.com\"\n    ]\n  ],\n  \"signSuccessUrl\": \"\",\n  \"signDeclineUrl\": \"\",\n  \"signLaterUrl\": \"\",\n  \"signErrorUrl\": \"\",\n  \"hideNextRequiredFieldBtn\": false,\n  \"allowSendNowAndEmbeddedSigningSession\": false,\n  \"emailTemplateId\": 0,\n  \"signerInstructionId\": 0,\n  \"confirmationInstructionId\": 0,\n  \"signerInstructionCustomFields\": [\n    {\n      \"tag\": \"\",\n      \"type\": \"plain\",\n      \"value\": \"custom_field_value\"\n    }\n  ],\n  \"confirmationInstructionCustomFields\": [\n    {\n      \"tag\": \"\",\n      \"type\": \"plain\",\n      \"value\": \"custom_field_value\"\n    }\n  ],\n  \"parties\": [\n    {\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"emailId\": \"john.doe@gmail.com\",\n      \"permission\": \"FILL_FIELDS_AND_SIGN\",\n      \"isPlaceholder\": false,\n      \"partyRole\": \"director\",\n      \"workflowSequence\": 1,\n      \"sequence\": 1,\n      \"dialingCode\": \"+1\",\n      \"mobileNumber\": \"RECIPIENT_PARTY_NUMBER\",\n      \"signerAuthLevel\": \"Email Access Code\",\n      \"allowNameChange\": true,\n      \"partyIsEmailGroup\": true,\n      \"emailGroupId\": 0,\n      \"allowSingleSignerInBulk\": true,\n      \"hostEmailId\": \"\"\n    }\n  ],\n  \"sessionExpire\": false,\n  \"expiry\": 100000,\n  \"fields\": [\n    {\n      \"type\": \"text\",\n      \"x\": 100,\n      \"y\": 50,\n      \"width\": 60,\n      \"height\": 20,\n      \"documentNumber\": 1,\n      \"pageNumber\": 1,\n      \"tabOrder\": 1\n    }\n  ]\n}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/createfolder\"\nquerystring = {\"data\": data}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "delete",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/delete",
+            "description": "Remove your document(s) folders permanently from Foxit eSign systems.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/delete\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "regenerateEmbeddedSigningSession",
+            "url": "https://foxit-esign.p.rapidapi.com/embedded/regenerateEmbeddedSigningSession",
+            "description": "You can regenerate the folder embedded signing token for accessing the signature from the signer at any time.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/embedded/regenerateEmbeddedSigningSession\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "emailIdOfSigner": "EMAIL_ID_OF_RECIPIENT_PARTY",
+                "embeddedToken": "EMBEDDED_TOKEN_VALUE",
+                "embeddedSessionURL": "UNIQUE_EMBEDDED_SESSION_URL"
+            },
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "emailIdOfSigner": {
+                        "type": "string"
+                    },
+                    "embeddedToken": {
+                        "type": "string"
+                    },
+                    "embeddedSessionURL": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "movetorecyclebin",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/movetorecyclebin",
+            "description": "Using Foxit eSign API you can move your folders to our recycle bin. \nDocuments in the recycle bin are permanently removed from Foxit eSign systems automatically after 14 days.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/movetorecyclebin\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "myfolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/myfolder",
+            "description": "You can poll our API to get the folder/document data from any folder that you have created.\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "folderId",
+                    "type": "STRING",
+                    "description": "ID of the folder to get",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/myfolder\"\nquerystring = {\"folderId\": folderid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "deletedLog",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/deletedLog",
+            "description": "Get the history of a folder which has been deleted\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "folderId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the folder to get",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/deletedLog\"\nquerystring = {\"folderId\": folderid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "folderDownload",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/download",
+            "description": "You can poll our API to get the folder/document data from any folder that you have created.\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "folderId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the folder to get",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/download\"\nquerystring = {\"folderId\": folderid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "updateEnvelopeFields",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/updateEnvelopeFields",
+            "description": "You can update a folder and its custom fields (custom_field1 and custom_field2) anytime before \nit is executed using the this API route. \nThe fields for this folder corresponding to a specific party can only be updated if \nthe document has not been signed by that party yet.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/updateEnvelopeFields\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "result": "",
+                "custom_field1": {
+                    "name": "custom_field_name",
+                    "value": "custom_field_value"
+                },
+                "custom_field2": {
+                    "name": "custom_field_name",
+                    "value": "custom_field_value"
+                },
+                "allFieldsNameValue": [
+                    {
+                        "fieldId": 0,
+                        "documentId": 0,
+                        "documentVersionId": 0,
+                        "fieldType": "textfield"
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "description": "description of things",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "custom_field1": {
+                        "allOf": [
+                            {
+                                "type": "object",
+                                "description": "A Custom field that can be used many purposes such as\nidentifying the application and module where the signed document belongs.\nYou can use custom fields as per your requirements.\nMaximum of two custom fields can be passed to Foxit eSign via API that are stored at the folder level.\nWebhook response includes these custom field.\n",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The identifier of our custom field."
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "description": "The value that the custom field will show."
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "custom_field2": {
+                        "allOf": [
+                            {
+                                "type": "object",
+                                "description": "A Custom field that can be used many purposes such as\nidentifying the application and module where the signed document belongs.\nYou can use custom fields as per your requirements.\nMaximum of two custom fields can be passed to Foxit eSign via API that are stored at the folder level.\nWebhook response includes these custom field.\n",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The identifier of our custom field."
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "description": "The value that the custom field will show."
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "allFieldsNameValue": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "fieldId": {
+                                    "type": "number"
+                                },
+                                "documentId": {
+                                    "type": "number"
+                                },
+                                "documentVersionId": {
+                                    "type": "number"
+                                },
+                                "fieldType": {
+                                    "type": "string",
+                                    "enum": [
+                                        "textfield",
+                                        "signfield",
+                                        "initialfield",
+                                        "datefield",
+                                        "checkboxfield",
+                                        "attachmentfield",
+                                        "imagefield",
+                                        "accept",
+                                        "decline"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "sendDraftFolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/sendDraftFolder",
+            "description": "With Foxit eSign API, you can send any draft document by calling /folders/sendDraftFolder with the given parameters.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/sendDraftFolder\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "templateslist",
+            "url": "https://foxit-esign.p.rapidapi.com/templates/list",
+            "description": "You can get a list of all the templates from your Foxit eSign into your application using the following call\n",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createfolderfromtemplate",
+            "url": "https://foxit-esign.p.rapidapi.com/templates/createFolder",
+            "description": "To create a folder of documents from templates, you need to make a call to this endpoint with the following parameters and use `template_id` to specify the templates.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/createFolder\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "mytemplate",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/mytemplate",
+            "description": "Get all information with regards to a specific template\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "templateId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the template to receive.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/mytemplate\"\nquerystring = {\"templateId\": templateid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createtemplate",
+            "url": "https://foxit-esign.p.rapidapi.com/templates/createtemplate",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/createtemplate\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "updatewebhookchannel",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/updatewebhookchannel",
+            "description": "Update any configuration details with regards to a specific webhook channel.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/updatewebhookchannel\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "deletechannels",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/deletechannels",
+            "description": "Delete a list of channels via the Foxit eSign API.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/deletechannels\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "getemailgroups",
+            "url": "https://foxit-esign.p.rapidapi.com/parties/getEmailGroups",
+            "description": "Get all information with regards to a specific email group.\n**Note:** you can pass an empty request body if you would like to retrieve **all** of the \nemail group details present in your account.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/parties/getEmailGroups\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "channeldeactivate",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/channeldeactivate",
+            "description": "Deactivate a webhook channel to no longer make calls to your API its events occur.\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "channelId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the channel to receive details about.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channeldeactivate\"\nquerystring = {\"channelId\": channelid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "mychannel",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/mychannel",
+            "description": "Receive all information regarding a specific webhook channel.\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "channelId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the channel to receive details about.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/mychannel\"\nquerystring = {\"channelId\": channelid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "channellist",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/channellist",
+            "description": "Receive a list of webhook channel details in your account.\n",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channellist\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "channelreactivate",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/channelreactivate",
+            "description": "Activate a webhook channel so that it can successfully make calls to your API when events happen.\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "channelId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the channel to receive details about.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channelreactivate\"\nquerystring = {\"channelId\": channelid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createwebhookchannel",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/createwebhookchannel",
+            "description": "Webhook Channels enable us to send information to your API directly.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/createwebhookchannel\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createEmailGroup",
+            "url": "https://foxit-esign.p.rapidapi.com/parties/createEmailGroup",
+            "description": "Create an email group using the Parties API. **Note:** you can pass up to `20` party details maximum\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/parties/createEmailGroup\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "downloadfolderreport",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/getFolders/download",
+            "description": "You can download a report of all of your folders as an Excel file.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/getFolders/download\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "updateFolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/updateFolder",
+            "description": "You can change the first name, last name, and email if the recipient party has not signed on a shared or a partially signed document using this endpoint. Recipients can be changed only when a folder has a `DRAFT` status.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/updateFolder\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/updateFolder\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createfolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/createfolder",
+            "description": "With Foxit eSign API you can create a folder of documents and send them for signature right from your own application.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "data",
+                    "type": "OBJECT",
+                    "description": "",
+                    "default": "{\n  \"folderName\": \"Example Document\",\n  \"processTextTags\": true,\n  \"processAcroFields\": true,\n  \"requiredBothEmbeddedSession\": false,\n  \"custom_field1\": {\n    \"name\": \"custom_field_name\",\n    \"value\": \"custom_field_value\"\n  },\n  \"custom_field2\": {\n    \"name\": \"custom_field_name\",\n    \"value\": \"custom_field_value\"\n  },\n  \"signInSequence\": false,\n  \"inPersonEnable\": false,\n  \"folderPassword\": \"\",\n  \"sendNow\": false,\n  \"signSuccessUrlAllParties\": false,\n  \"createEmbeddedSendingSession\": false,\n  \"fixRecipientParties\": true,\n  \"fixDocuments\": true,\n  \"sendSuccessURL\": true,\n  \"sendErrorURL\": true,\n  \"hideSendButton\": false,\n  \"createEmbeddedSigningSession\": false,\n  \"createEmbeddedSigningSessionForAllParties\": false,\n  \"embeddedSignersEmailIds\": [\n    [\n      \"example@example.com\"\n    ]\n  ],\n  \"signSuccessUrl\": \"\",\n  \"signDeclineUrl\": \"\",\n  \"signLaterUrl\": \"\",\n  \"signErrorUrl\": \"\",\n  \"hideNextRequiredFieldBtn\": false,\n  \"allowSendNowAndEmbeddedSigningSession\": false,\n  \"emailTemplateId\": 0,\n  \"signerInstructionId\": 0,\n  \"confirmationInstructionId\": 0,\n  \"signerInstructionCustomFields\": [\n    {\n      \"tag\": \"\",\n      \"type\": \"plain\",\n      \"value\": \"custom_field_value\"\n    }\n  ],\n  \"confirmationInstructionCustomFields\": [\n    {\n      \"tag\": \"\",\n      \"type\": \"plain\",\n      \"value\": \"custom_field_value\"\n    }\n  ],\n  \"parties\": [\n    {\n      \"firstName\": \"John\",\n      \"lastName\": \"Doe\",\n      \"emailId\": \"john.doe@gmail.com\",\n      \"permission\": \"FILL_FIELDS_AND_SIGN\",\n      \"isPlaceholder\": false,\n      \"partyRole\": \"director\",\n      \"workflowSequence\": 1,\n      \"sequence\": 1,\n      \"dialingCode\": \"+1\",\n      \"mobileNumber\": \"RECIPIENT_PARTY_NUMBER\",\n      \"signerAuthLevel\": \"Email Access Code\",\n      \"allowNameChange\": true,\n      \"partyIsEmailGroup\": true,\n      \"emailGroupId\": 0,\n      \"allowSingleSignerInBulk\": true,\n      \"hostEmailId\": \"\"\n    }\n  ],\n  \"sessionExpire\": false,\n  \"expiry\": 100000,\n  \"fields\": [\n    {\n      \"type\": \"text\",\n      \"x\": 100,\n      \"y\": 50,\n      \"width\": 60,\n      \"height\": 20,\n      \"documentNumber\": 1,\n      \"pageNumber\": 1,\n      \"tabOrder\": 1\n    }\n  ]\n}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/createfolder\"\nquerystring = {\"file\": \"\", \"data\": \"{\\n  \\\"folderName\\\": \\\"Example Document\\\",\\n  \\\"processTextTags\\\": true,\\n  \\\"processAcroFields\\\": true,\\n  \\\"requiredBothEmbeddedSession\\\": false,\\n  \\\"custom_field1\\\": {\\n    \\\"name\\\": \\\"custom_field_name\\\",\\n    \\\"value\\\": \\\"custom_field_value\\\"\\n  },\\n  \\\"custom_field2\\\": {\\n    \\\"name\\\": \\\"custom_field_name\\\",\\n    \\\"value\\\": \\\"custom_field_value\\\"\\n  },\\n  \\\"signInSequence\\\": false,\\n  \\\"inPersonEnable\\\": false,\\n  \\\"folderPassword\\\": \\\"\\\",\\n  \\\"sendNow\\\": false,\\n  \\\"signSuccessUrlAllParties\\\": false,\\n  \\\"createEmbeddedSendingSession\\\": false,\\n  \\\"fixRecipientParties\\\": true,\\n  \\\"fixDocuments\\\": true,\\n  \\\"sendSuccessURL\\\": true,\\n  \\\"sendErrorURL\\\": true,\\n  \\\"hideSendButton\\\": false,\\n  \\\"createEmbeddedSigningSession\\\": false,\\n  \\\"createEmbeddedSigningSessionForAllParties\\\": false,\\n  \\\"embeddedSignersEmailIds\\\": [\\n    [\\n      \\\"example@example.com\\\"\\n    ]\\n  ],\\n  \\\"signSuccessUrl\\\": \\\"\\\",\\n  \\\"signDeclineUrl\\\": \\\"\\\",\\n  \\\"signLaterUrl\\\": \\\"\\\",\\n  \\\"signErrorUrl\\\": \\\"\\\",\\n  \\\"hideNextRequiredFieldBtn\\\": false,\\n  \\\"allowSendNowAndEmbeddedSigningSession\\\": false,\\n  \\\"emailTemplateId\\\": 0,\\n  \\\"signerInstructionId\\\": 0,\\n  \\\"confirmationInstructionId\\\": 0,\\n  \\\"signerInstructionCustomFields\\\": [\\n    {\\n      \\\"tag\\\": \\\"\\\",\\n      \\\"type\\\": \\\"plain\\\",\\n      \\\"value\\\": \\\"custom_field_value\\\"\\n    }\\n  ],\\n  \\\"confirmationInstructionCustomFields\\\": [\\n    {\\n      \\\"tag\\\": \\\"\\\",\\n      \\\"type\\\": \\\"plain\\\",\\n      \\\"value\\\": \\\"custom_field_value\\\"\\n    }\\n  ],\\n  \\\"parties\\\": [\\n    {\\n      \\\"firstName\\\": \\\"John\\\",\\n      \\\"lastName\\\": \\\"Doe\\\",\\n      \\\"emailId\\\": \\\"john.doe@gmail.com\\\",\\n      \\\"permission\\\": \\\"FILL_FIELDS_AND_SIGN\\\",\\n      \\\"isPlaceholder\\\": false,\\n      \\\"partyRole\\\": \\\"director\\\",\\n      \\\"workflowSequence\\\": 1,\\n      \\\"sequence\\\": 1,\\n      \\\"dialingCode\\\": \\\"+1\\\",\\n      \\\"mobileNumber\\\": \\\"RECIPIENT_PARTY_NUMBER\\\",\\n      \\\"signerAuthLevel\\\": \\\"Email Access Code\\\",\\n      \\\"allowNameChange\\\": true,\\n      \\\"partyIsEmailGroup\\\": true,\\n      \\\"emailGroupId\\\": 0,\\n      \\\"allowSingleSignerInBulk\\\": true,\\n      \\\"hostEmailId\\\": \\\"\\\"\\n    }\\n  ],\\n  \\\"sessionExpire\\\": false,\\n  \\\"expiry\\\": 100000,\\n  \\\"fields\\\": [\\n    {\\n      \\\"type\\\": \\\"text\\\",\\n      \\\"x\\\": 100,\\n      \\\"y\\\": 50,\\n      \\\"width\\\": 60,\\n      \\\"height\\\": 20,\\n      \\\"documentNumber\\\": 1,\\n      \\\"pageNumber\\\": 1,\\n      \\\"tabOrder\\\": 1\\n    }\\n  ]\\n}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/createfolder\"\nquerystring = {\"file\": \"\", \"data\": \"{\\n  \\\"folderName\\\": \\\"Example Document\\\",\\n  \\\"processTextTags\\\": true,\\n  \\\"processAcroFields\\\": true,\\n  \\\"requiredBothEmbeddedSession\\\": false,\\n  \\\"custom_field1\\\": {\\n    \\\"name\\\": \\\"custom_field_name\\\",\\n    \\\"value\\\": \\\"custom_field_value\\\"\\n  },\\n  \\\"custom_field2\\\": {\\n    \\\"name\\\": \\\"custom_field_name\\\",\\n    \\\"value\\\": \\\"custom_field_value\\\"\\n  },\\n  \\\"signInSequence\\\": false,\\n  \\\"inPersonEnable\\\": false,\\n  \\\"folderPassword\\\": \\\"\\\",\\n  \\\"sendNow\\\": false,\\n  \\\"signSuccessUrlAllParties\\\": false,\\n  \\\"createEmbeddedSendingSession\\\": false,\\n  \\\"fixRecipientParties\\\": true,\\n  \\\"fixDocuments\\\": true,\\n  \\\"sendSuccessURL\\\": true,\\n  \\\"sendErrorURL\\\": true,\\n  \\\"hideSendButton\\\": false,\\n  \\\"createEmbeddedSigningSession\\\": false,\\n  \\\"createEmbeddedSigningSessionForAllParties\\\": false,\\n  \\\"embeddedSignersEmailIds\\\": [\\n    [\\n      \\\"example@example.com\\\"\\n    ]\\n  ],\\n  \\\"signSuccessUrl\\\": \\\"\\\",\\n  \\\"signDeclineUrl\\\": \\\"\\\",\\n  \\\"signLaterUrl\\\": \\\"\\\",\\n  \\\"signErrorUrl\\\": \\\"\\\",\\n  \\\"hideNextRequiredFieldBtn\\\": false,\\n  \\\"allowSendNowAndEmbeddedSigningSession\\\": false,\\n  \\\"emailTemplateId\\\": 0,\\n  \\\"signerInstructionId\\\": 0,\\n  \\\"confirmationInstructionId\\\": 0,\\n  \\\"signerInstructionCustomFields\\\": [\\n    {\\n      \\\"tag\\\": \\\"\\\",\\n      \\\"type\\\": \\\"plain\\\",\\n      \\\"value\\\": \\\"custom_field_value\\\"\\n    }\\n  ],\\n  \\\"confirmationInstructionCustomFields\\\": [\\n    {\\n      \\\"tag\\\": \\\"\\\",\\n      \\\"type\\\": \\\"plain\\\",\\n      \\\"value\\\": \\\"custom_field_value\\\"\\n    }\\n  ],\\n  \\\"parties\\\": [\\n    {\\n      \\\"firstName\\\": \\\"John\\\",\\n      \\\"lastName\\\": \\\"Doe\\\",\\n      \\\"emailId\\\": \\\"john.doe@gmail.com\\\",\\n      \\\"permission\\\": \\\"FILL_FIELDS_AND_SIGN\\\",\\n      \\\"isPlaceholder\\\": false,\\n      \\\"partyRole\\\": \\\"director\\\",\\n      \\\"workflowSequence\\\": 1,\\n      \\\"sequence\\\": 1,\\n      \\\"dialingCode\\\": \\\"+1\\\",\\n      \\\"mobileNumber\\\": \\\"RECIPIENT_PARTY_NUMBER\\\",\\n      \\\"signerAuthLevel\\\": \\\"Email Access Code\\\",\\n      \\\"allowNameChange\\\": true,\\n      \\\"partyIsEmailGroup\\\": true,\\n      \\\"emailGroupId\\\": 0,\\n      \\\"allowSingleSignerInBulk\\\": true,\\n      \\\"hostEmailId\\\": \\\"\\\"\\n    }\\n  ],\\n  \\\"sessionExpire\\\": false,\\n  \\\"expiry\\\": 100000,\\n  \\\"fields\\\": [\\n    {\\n      \\\"type\\\": \\\"text\\\",\\n      \\\"x\\\": 100,\\n      \\\"y\\\": 50,\\n      \\\"width\\\": 60,\\n      \\\"height\\\": 20,\\n      \\\"documentNumber\\\": 1,\\n      \\\"pageNumber\\\": 1,\\n      \\\"tabOrder\\\": 1\\n    }\\n  ]\\n}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "delete",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/delete",
+            "description": "Remove your document(s) folders permanently from Foxit eSign systems.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/delete\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/delete\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "regenerateEmbeddedSigningSession",
+            "url": "https://foxit-esign.p.rapidapi.com/embedded/regenerateEmbeddedSigningSession",
+            "description": "You can regenerate the folder embedded signing token for accessing the signature from the signer at any time.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/embedded/regenerateEmbeddedSigningSession\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/embedded/regenerateEmbeddedSigningSession\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "emailIdOfSigner": {
+                        "type": "string"
+                    },
+                    "embeddedToken": {
+                        "type": "string"
+                    },
+                    "embeddedSessionURL": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "movetorecyclebin",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/movetorecyclebin",
+            "description": "Using Foxit eSign API you can move your folders to our recycle bin. \nDocuments in the recycle bin are permanently removed from Foxit eSign systems automatically after 14 days.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/movetorecyclebin\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/movetorecyclebin\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "updateEnvelopeFields",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/updateEnvelopeFields",
+            "description": "You can update a folder and its custom fields (custom_field1 and custom_field2) anytime before \nit is executed using the this API route. \nThe fields for this folder corresponding to a specific party can only be updated if \nthe document has not been signed by that party yet.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/updateEnvelopeFields\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/updateEnvelopeFields\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "description": "description of things",
+                "properties": {
+                    "result": {
+                        "type": "string"
+                    },
+                    "custom_field1": {
+                        "allOf": [
+                            {
+                                "type": "object",
+                                "description": "A Custom field that can be used many purposes such as\nidentifying the application and module where the signed document belongs.\nYou can use custom fields as per your requirements.\nMaximum of two custom fields can be passed to Foxit eSign via API that are stored at the folder level.\nWebhook response includes these custom field.\n",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The identifier of our custom field."
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "description": "The value that the custom field will show."
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "custom_field2": {
+                        "allOf": [
+                            {
+                                "type": "object",
+                                "description": "A Custom field that can be used many purposes such as\nidentifying the application and module where the signed document belongs.\nYou can use custom fields as per your requirements.\nMaximum of two custom fields can be passed to Foxit eSign via API that are stored at the folder level.\nWebhook response includes these custom field.\n",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The identifier of our custom field."
+                                    },
+                                    "value": {
+                                        "type": "string",
+                                        "description": "The value that the custom field will show."
+                                    }
+                                }
+                            },
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "allFieldsNameValue": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "fieldId": {
+                                    "type": "number"
+                                },
+                                "documentId": {
+                                    "type": "number"
+                                },
+                                "documentVersionId": {
+                                    "type": "number"
+                                },
+                                "fieldType": {
+                                    "type": "string",
+                                    "enum": [
+                                        "textfield",
+                                        "signfield",
+                                        "initialfield",
+                                        "datefield",
+                                        "checkboxfield",
+                                        "attachmentfield",
+                                        "imagefield",
+                                        "accept",
+                                        "decline"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "sendDraftFolder",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/sendDraftFolder",
+            "description": "With Foxit eSign API, you can send any draft document by calling /folders/sendDraftFolder with the given parameters.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/sendDraftFolder\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/sendDraftFolder\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createfolderfromtemplate",
+            "url": "https://foxit-esign.p.rapidapi.com/templates/createFolder",
+            "description": "To create a folder of documents from templates, you need to make a call to this endpoint with the following parameters and use `template_id` to specify the templates.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/createFolder\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/createFolder\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createtemplate",
+            "url": "https://foxit-esign.p.rapidapi.com/templates/createtemplate",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/createtemplate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/templates/createtemplate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "updatewebhookchannel",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/updatewebhookchannel",
+            "description": "Update any configuration details with regards to a specific webhook channel.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/updatewebhookchannel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/updatewebhookchannel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "deletechannels",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/deletechannels",
+            "description": "Delete a list of channels via the Foxit eSign API.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/deletechannels\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/deletechannels\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "getemailgroups",
+            "url": "https://foxit-esign.p.rapidapi.com/parties/getEmailGroups",
+            "description": "Get all information with regards to a specific email group.\n**Note:** you can pass an empty request body if you would like to retrieve **all** of the \nemail group details present in your account.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/parties/getEmailGroups\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/parties/getEmailGroups\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "channeldeactivate",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/channeldeactivate",
+            "description": "Deactivate a webhook channel to no longer make calls to your API its events occur.\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "channelId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the channel to receive details about.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channeldeactivate\"\nquerystring = {\"channelId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channeldeactivate\"\nquerystring = {\"channelId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "channelreactivate",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/channelreactivate",
+            "description": "Activate a webhook channel so that it can successfully make calls to your API when events happen.\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "channelId",
+                    "type": "NUMBER",
+                    "description": "Numeric ID of the channel to receive details about.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channelreactivate\"\nquerystring = {\"channelId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/channelreactivate\"\nquerystring = {\"channelId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createwebhookchannel",
+            "url": "https://foxit-esign.p.rapidapi.com/webhook/createwebhookchannel",
+            "description": "Webhook Channels enable us to send information to your API directly.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/createwebhookchannel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/webhook/createwebhookchannel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "createEmailGroup",
+            "url": "https://foxit-esign.p.rapidapi.com/parties/createEmailGroup",
+            "description": "Create an email group using the Parties API. **Note:** you can pass up to `20` party details maximum\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/parties/createEmailGroup\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/parties/createEmailGroup\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        },
+        {
+            "name": "downloadfolderreport",
+            "url": "https://foxit-esign.p.rapidapi.com/folders/getFolders/download",
+            "description": "You can download a report of all of your folders as an Excel file.\n",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/getFolders/download\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://foxit-esign.p.rapidapi.com/folders/getFolders/download\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"foxit-esign.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": true
+            }
+        }
+    ]
+}

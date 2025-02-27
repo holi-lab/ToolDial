@@ -1,0 +1,197 @@
+{
+    "product_id": "api_be6b4c30-dcd3-403c-b0c2-7b4d17583762",
+    "tool_description": "Backend for shopping portal. Use these apis to create a sample shopping portal for Development purposes.  \nThe project has APIs for user, product, cart & images.\n\nCreate a partner & use the partnerId (uuidv4) as a header in All other requests \n\nThese apis are suitable for developers who have expertise on UI but need a ready-made backend system to create shopping cart applications to practise their UI skills",
+    "home_url": "https://rapidapi.com/amolsingh/api/ecommerce-backend/",
+    "name": "Ecommerce Backend",
+    "title": "Ecommerce Backend",
+    "pricing": "FREEMIUM",
+    "tool_name": "Ecommerce Backend",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1021,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "ecommerce-backend.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Upload Images",
+            "url": "https://ecommerce-backend.p.rapidapi.com/image/upload",
+            "description": "This endpoint is used to upload `multiple images` in the application. The response includes `url` of the uploaded images / files",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "files",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/image/upload\"\nquerystring = {\"files\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/image/upload\"\nquerystring = {\"files\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get List of products",
+            "url": "https://ecommerce-backend.p.rapidapi.com/product/list",
+            "description": "Get a list of products against a `partner`.  This api uses pagination & accepts page number & size",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/product/list\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/product/list\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "items": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "createdOn": {
+                                            "type": "string"
+                                        },
+                                        "partnerId": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "category": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        },
+                                        "price": {
+                                            "type": "integer"
+                                        },
+                                        "features": {
+                                            "type": "object",
+                                            "properties": {
+                                                "color": {
+                                                    "type": "null"
+                                                },
+                                                "material": {
+                                                    "type": "null"
+                                                },
+                                                "brand": {
+                                                    "type": "null"
+                                                },
+                                                "otherFeatures": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "warrenty": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "sku": {
+                                            "type": "null"
+                                        },
+                                        "averageRating": {
+                                            "type": "null"
+                                        },
+                                        "image": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            },
+                            "totalCount": {
+                                "type": "integer"
+                            },
+                            "pageSize": {
+                                "type": "integer"
+                            },
+                            "page": {
+                                "type": "integer"
+                            },
+                            "prev": {
+                                "type": "null"
+                            },
+                            "next": {
+                                "type": "null"
+                            }
+                        }
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "errors": {
+                        "type": "null"
+                    },
+                    "requestId": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Create Partner",
+            "url": "https://ecommerce-backend.p.rapidapi.com/partner",
+            "description": "This Api creates a new `partner`. The name should be unique in the request\nThis should be the first API, since everything is linked to a partner [users , products etc]\n\n**The partner is used as header in all other apis**",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/partner\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/partner\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Add Product to cart",
+            "url": "https://ecommerce-backend.p.rapidapi.com/cart",
+            "description": "This endpoint is used to add a `product` to cart for a particular `user`",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/cart\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/cart\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Add User",
+            "url": "https://ecommerce-backend.p.rapidapi.com/user",
+            "description": "This endpoint adds a user against a `Partner` .  Users will be linked to single partner.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/user\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/user\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Add Products",
+            "url": "https://ecommerce-backend.p.rapidapi.com/product",
+            "description": "This endpoint is used to add products for a partner. Partner can add multiple products & all products are linked with a   **partner** .  if you need to upload thumbnails , use `upload images` api to get URLs & pass those urls in request",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/product\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecommerce-backend.p.rapidapi.com/product\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecommerce-backend.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

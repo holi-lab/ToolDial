@@ -1,0 +1,123 @@
+{
+    "product_id": "api_402df8f9-ffca-4126-b605-959795a04a56",
+    "tool_description": "Ordering Stack Menu API.  Manage menu for restaurants, menu nodes, menu items, priceslists, combo meals, etc.",
+    "home_url": "https://rapidapi.com/ordering-stack-ordering-stack-default/api/menu7/",
+    "name": "Menu",
+    "title": "Menu",
+    "pricing": "FREE",
+    "tool_name": "Menu",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 374,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "menu7.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "previewProduct",
+            "url": "https://menu7.p.rapidapi.com/menu-api/api/preview",
+            "description": "Preview product. Resolves references and queries to provide full product config. Nothing more (i.e. pricelists, prices and locks) is calculated here so that no sub-products are removed. Bear in mind that final product may not contain some of options due to those additional computations.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "menu",
+                    "type": "STRING",
+                    "description": "Menu identifier for computations.",
+                    "default": "DEFAULT_menu"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "channel",
+                    "type": "STRING",
+                    "description": "Channel used in menu computations.",
+                    "default": "DELIVERY"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/preview\"\nquerystring = {\"channel\": \"DELIVERY\", \"menu\": \"DEFAULT_menu\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/preview\"\nquerystring = {\"channel\": \"DELIVERY\", \"menu\": \"DEFAULT_menu\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "postMenu",
+            "url": "https://menu7.p.rapidapi.com/menu-api/api/menu-definitions",
+            "description": "Create new menu definition. If ID is not provided it will be generated. Otherwise this method is similar to PUT method and does upsert in database.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/menu-definitions\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/menu-definitions\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "validateProduct",
+            "url": "https://menu7.p.rapidapi.com/menu-api/api/menu/DEFAULT_menu/validate",
+            "description": "Validate product. Validates product with provided configuration of options and sub-products against product definition, current locks, etc. It also generates ProductDescription on successfull validation.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "instance",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "venue-1"
+                },
+                {
+                    "name": "menu",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DEFAULT_menu"
+                },
+                {
+                    "name": "product",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "product-id-1"
+                },
+                {
+                    "name": "channel",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DELIVERY"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/menu/DEFAULT_menu/validate\"\nquerystring = {\"instance\": \"venue-1\", \"product\": \"product-id-1\", \"channel\": \"DELIVERY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/menu/{menu}/validate\"\nquerystring = {\"instance\": \"venue-1\", \"product\": \"product-id-1\", \"channel\": \"DELIVERY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "postLock",
+            "url": "https://menu7.p.rapidapi.com/menu-api/api/manage-locks",
+            "description": "Create new lock. Its ID must be new end unique. Overriding existing locks is not allowed. To alter a lock simply delete old one and create new.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/manage-locks\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/manage-locks\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "postItem",
+            "url": "https://menu7.p.rapidapi.com/menu-api/api/items",
+            "description": "Create new menu item. If ID is not provided it will be generated. Otherwise this method is similar to PUT method and does upsert in database.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/items\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://menu7.p.rapidapi.com/menu-api/api/items\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"menu7.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

@@ -1,0 +1,86 @@
+{
+    "product_id": "api_8bed5e2b-a78c-4761-8aa4-d47d7e076b5f",
+    "tool_description": "API for hiding faces and car license plates in images.",
+    "home_url": "https://rapidapi.com/api4ai-api4ai-default/api/image-anonymization/",
+    "name": "Image Anonymization",
+    "title": "Image Anonymization",
+    "pricing": "FREEMIUM",
+    "tool_name": "Image Anonymization",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 860,
+        "avgSuccessRate": 100,
+        "popularityScore": 9,
+        "__typename": "Score"
+    },
+    "host": "image-anonymization.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get list of available modes",
+            "url": "https://image-anonymization.p.rapidapi.com/v1/modes",
+            "description": "Service provides server modes that may be used to choose which kind of objects to hide. This endpoint returns list of modes that may be used as query parameters for requests to the `results` endpoint.\n\nThe following modes are supported:\n\n* `hide-clp` \u2013 to hide car license plates\n* `hide-face` \u2013 to hide faces",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://image-anonymization.p.rapidapi.com/v1/modes\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"image-anonymization.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://image-anonymization.p.rapidapi.com/v1/modes\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"image-anonymization.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": [
+                "hide-clp",
+                "hide-face"
+            ],
+            "statuscode": 200,
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "name": "Get version",
+            "url": "https://image-anonymization.p.rapidapi.com/v1/version",
+            "description": "Returns an actual version of the service in format `vX.Y.Z` where X is the version of API.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://image-anonymization.p.rapidapi.com/v1/version\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"image-anonymization.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://image-anonymization.p.rapidapi.com/v1/version\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"image-anonymization.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Anonymize image and return results",
+            "url": "https://image-anonymization.p.rapidapi.com/v1/results",
+            "description": "Performs actual image anonymize and responds with results.\n\nImage must be a regular JPEG or PNG image (with or without transparency) or PDF file.\nUsually such images have extensions: `.jpg`, `.jpeg`, `.png`, `.pdf`. In case of PDF\neach page will be converted to PNG image and processed separately.\nThe service checks input file by MIME type and accepts the following types:\n\n* `image/jpeg`\n* `image/png`\n* `application/pdf`\n\nThe size of image file must be less than `16Mb`.\n\nResponse contains anonymised image (jpeg or png) and bounding boxes of hidden objects.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Note: Use this form data field if you want to pass image as a binary file. If you want to pass image as a link to a public web resource, please, use another field named `url`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Note: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": "https://storage.googleapis.com/api4ai-static/samples/img-anonymization-0.jpg"
+                },
+                {
+                    "name": "mode",
+                    "type": "STRING",
+                    "description": "Query parameter `mode` is optional and may be used to choose which kind of objects to hide. The following modes are supported:\n\n* `hide-clp` \u2013 to hide car license plates\n* `hide-face` to hide faces\n\nBy default (if `mode` is not passed via query) all supported objects will be hidden.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://image-anonymization.p.rapidapi.com/v1/results\"\nquerystring = {\"image\": \"\", \"url\": \"https://storage.googleapis.com/api4ai-static/samples/img-anonymization-0.jpg\", \"mode\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"image-anonymization.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://image-anonymization.p.rapidapi.com/v1/results\"\nquerystring = {\"image\": \"\", \"url\": \"https://storage.googleapis.com/api4ai-static/samples/img-anonymization-0.jpg\", \"mode\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"image-anonymization.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "image_anonymization"
+}

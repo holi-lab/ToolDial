@@ -1,0 +1,355 @@
+{
+    "product_id": "api_602ba936-6fba-4d08-9323-3c8dd842f155",
+    "tool_description": "API for face attributes recognition in real time.",
+    "home_url": "https://rapidapi.com/promityai-promityai-default/api/promity-face-analyzer/",
+    "name": "Promity Face Analyzer",
+    "title": "Promity Face Analyzer",
+    "pricing": "FREEMIUM",
+    "tool_name": "Promity Face Analyzer",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 4108,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.1,
+        "__typename": "Score"
+    },
+    "host": "promity-face-analyzer.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Face attributes by file",
+            "url": "https://promity-face-analyzer.p.rapidapi.com/face_attributes/process_file",
+            "description": "Endpoint for 40 face attributes detection. Send us link to image, we return  position of detected faces and found attributes.\nAttributes:\n1. 5oClockShadow\n2. ArchedEyebrows\n3. BagsUnderEyes\n4. Bald\n5. Bangs\n6. BigLips\n7. BigNose\n8. BlackHair\n9. BlondHair\n10. Blurry\n11. BrownHair\n12. BushyEyebrows\n13. Chubby\n14. DoubleChin\n15. Eyeglasses\n16. Goatee\n17. GrayHair\n18. HeavyMakeup\n19. HighCheekbones\n20. MouthSlightlyOpen\n21. Mustache\n22. NarrowEyes\n23. NoBeard\n24. OvalFace\n25. PaleSkin\n26. PointyNose\n27. RecedingHairline\n28. RosyCheeks\n29. Sideburns\n30. Smiling\n31. StraightHair\n32. WavyHair\n33. WearingEarrings\n34. WearingHat\n35. WearingLipstick\n36. WearingNecklace\n37. WearingNecktie\n\nPython example:\n```\n#!/usr/bin/python3\nimport cv2\nimport json\nimport requests\n\n\nimg_path = 'test_image.jpg'\n\nurl = \"https://faceanalysis.p.rapidapi.com/face_attributes/process\"\n\nfiles = {'image_file': open(img_path, 'rb')}\n\nheaders = {\n    \"x-rapidapi-key\": \"XXX\",\n    'x-rapidapi-host': \"faceanalysis.p.rapidapi.com\",\n}\n\nresponse = requests.post(url, files=files, headers=headers)\njson_dict = json.loads(response.text)\n\nimg = cv2.imread(img_path)\nimg_height, img_width, _ = img.shape\n\n\nfont = cv2.FONT_HERSHEY_SIMPLEX\nbottomLeftCornerOfText = (10, 500)\nfontScale = 0.5\nfontColor = (0, 255, 0)\nlineType = 2\nGREEN = (0, 250, 0)\n\nlables_groups = {\n    'hair_color': [\"Black_Hair\",\n                   \"Blond_Hair\",\n                   \"Brown_Hair\",\n                   \"Bald\",\n                   \"Gray_Hair\"],\n    'hair_style': [\"Straight_Hair\",\n                   \"Wavy_Hair\",\n                   \"Bangs\"],\n    'additions': [\"Eyeglasses\",\n                  \"Heavy_Makeup\",\n                  \"Wearing_Earrings\",\n                  \"Wearing_Hat\",\n                  \"Wearing_Lipstick\",\n                  \"Wearing_Necklace\",\n                  \"Wearing_Necktie\"],\n    'face_attributes': [\"5_o_Clock_Shadow\",\n                        \"Arched_Eyebrows\",\n                        \"Attractive\",\n                        \"Bags_Under_Eyes\",\n                        \"Big_Lips\",\n                        \"Big_Nose\",\n                        \"Bushy_Eyebrows\",\n                        \"Chubby\",\n                        \"Double_Chin\",\n                        \"Goatee\",\n                        \"High_Cheekbones\",\n                        \"Mouth_Slightly_Open\",\n                        \"Mustache\",\n                        \"Narrow_Eyes\",\n                        \"No_Beard\",\n                        \"Oval_Face\",\n                        \"Pale_Skin\",\n                        \"Pointy_Nose\",\n                        \"Receding_Hairline\",\n                        \"Rosy_Cheeks\",\n                        \"Sideburns\",\n                        \"Smiling\"]\n\n}\n\n\ndef draw_labels(image, result, x, y):\n    predicted_labels = {\n        'hair_color': [],\n        'hair_style': [],\n        'additions': [],\n        'face_attributes': []\n\n    }\n    hair_color = \"\"\n    hair_style = \"\"\n    additions = \"\"\n    face_attributes = \"\"\n\n    for label, score in result.items():\n        if score > 0.2:\n            for group, labels in lables_groups.items():\n                if label in labels:\n                    predicted_labels[group].append((label, score))\n    if len(predicted_labels['hair_color']) > 0:\n        hair_color = predicted_labels['hair_color'][0][0]\n    if len(predicted_labels['hair_style']) > 0:\n        hair_style = predicted_labels['hair_style'][0][0]\n    if len(predicted_labels['additions']) > 0:\n        additions = predicted_labels['additions'][0][0]\n    if len(predicted_labels['face_attributes']) > 0:\n        face_attributes = predicted_labels['face_attributes'][0][0]\n\n    if hair_color != \"\" and hair_style != \"\" and face_attributes != \"\":\n        cv2.putText(image, \"Hair Color: \", (x, y), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, hair_color, (x, y + 15), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, \"Hair Style: \", (x, y + 30), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, hair_style, (x, y + 45), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, \"Additions: \", (x, y + 60), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, additions, (x, y + 75), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, \"Face attribute: \", (x, y + 90), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, face_attributes, (x, y + 105), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n\n\nfor det in json_dict['detections']:\n    print(det)\n    crop = det['crop']\n    if crop['score'] < 0.8:\n        continue\n    x1 = int(crop['x1'] * img_width)\n    x2 = int(crop['x2'] * img_width)\n    y1 = int(crop['y1'] * img_height)\n    y2 = int(crop['y2'] * img_height)\n    img = cv2.rectangle(img, (x1, y1), (x2, y2), GREEN, 3)\n    draw_labels(img, det['face_attributes'], x2, y2)\ncv2.imwrite('face_attributes_endpoint.png', img)\n```",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image_file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://promity-face-analyzer.p.rapidapi.com/face_attributes/process_file\"\nquerystring = {\"image_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"promity-face-analyzer.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://promity-face-analyzer.p.rapidapi.com/face_attributes/process_file\"\nquerystring = {\"image_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"promity-face-analyzer.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "detections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "crop": {
+                                    "type": "object",
+                                    "properties": {
+                                        "x1": {
+                                            "type": "number"
+                                        },
+                                        "y1": {
+                                            "type": "number"
+                                        },
+                                        "x2": {
+                                            "type": "number"
+                                        },
+                                        "y2": {
+                                            "type": "number"
+                                        },
+                                        "score": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "face_attributes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "5_o_Clock_Shadow": {
+                                            "type": "number"
+                                        },
+                                        "Arched_Eyebrows": {
+                                            "type": "number"
+                                        },
+                                        "Bags_Under_Eyes": {
+                                            "type": "number"
+                                        },
+                                        "Bald": {
+                                            "type": "number"
+                                        },
+                                        "Bangs": {
+                                            "type": "number"
+                                        },
+                                        "Big_Lips": {
+                                            "type": "number"
+                                        },
+                                        "Big_Nose": {
+                                            "type": "number"
+                                        },
+                                        "Black_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Blond_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Blurry": {
+                                            "type": "number"
+                                        },
+                                        "Brown_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Bushy_Eyebrows": {
+                                            "type": "number"
+                                        },
+                                        "Chubby": {
+                                            "type": "number"
+                                        },
+                                        "Double_Chin": {
+                                            "type": "number"
+                                        },
+                                        "Eyeglasses": {
+                                            "type": "number"
+                                        },
+                                        "Goatee": {
+                                            "type": "number"
+                                        },
+                                        "Gray_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Heavy_Makeup": {
+                                            "type": "number"
+                                        },
+                                        "High_Cheekbones": {
+                                            "type": "number"
+                                        },
+                                        "Mouth_Slightly_Open": {
+                                            "type": "number"
+                                        },
+                                        "Mustache": {
+                                            "type": "number"
+                                        },
+                                        "Narrow_Eyes": {
+                                            "type": "number"
+                                        },
+                                        "No_Beard": {
+                                            "type": "number"
+                                        },
+                                        "Oval_Face": {
+                                            "type": "number"
+                                        },
+                                        "Pale_Skin": {
+                                            "type": "number"
+                                        },
+                                        "Pointy_Nose": {
+                                            "type": "number"
+                                        },
+                                        "Receding_Hairline": {
+                                            "type": "number"
+                                        },
+                                        "Rosy_Cheeks": {
+                                            "type": "number"
+                                        },
+                                        "Sideburns": {
+                                            "type": "number"
+                                        },
+                                        "Smiling": {
+                                            "type": "number"
+                                        },
+                                        "Straight_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Wavy_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Earrings": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Hat": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Lipstick": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Necklace": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Necktie": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Face attributes by URL",
+            "url": "https://promity-face-analyzer.p.rapidapi.com/face_attributes/process_url",
+            "description": "Endpoint for 37 face attributes detection. Send us link to image, we return  position of detected faces and found attributes.\nAttributes:\n1. 5oClockShadow\n2. ArchedEyebrows\n3. BagsUnderEyes\n4. Bald\n5. Bangs\n6. BigLips\n7. BigNose\n8. BlackHair\n9. BlondHair\n10. Blurry\n11. BrownHair\n12. BushyEyebrows\n13. Chubby\n14. DoubleChin\n15. Eyeglasses\n16. Goatee\n17. GrayHair\n18. HeavyMakeup\n19. HighCheekbones\n20. MouthSlightlyOpen\n21. Mustache\n22. NarrowEyes\n23. NoBeard\n24. OvalFace\n25. PaleSkin\n26. PointyNose\n27. RecedingHairline\n28. RosyCheeks\n29. Sideburns\n30. Smiling\n31. StraightHair\n32. WavyHair\n33. WearingEarrings\n34. WearingHat\n35. WearingLipstick\n36. WearingNecklace\n37. WearingNecktie\n\nExample in python:\n``` \n#!/usr/bin/python3\nimport cv2\nimport json\nimport requests\nimport numpy as np\n\nheaders = {\n    \"X-Rapidapi-Key\": \"XXX\",\n    \"Content-Type\": \"application/json\",\n}\n\nimg_address = \"https://lelum.pl/wp-content/uploads/2018/10/okulary2-1.jpg\"\nparams = {'img_url': img_address}\n\naddress = \"https://faceanalysis.p.rapidapi.com/face_attributes/process\"\n\nresponse = requests.get(address, headers=headers, params=params)\njson_dict = json.loads(response.text)\n\nresp_img = requests.get(img_address, stream=True)\narr = np.asarray(bytearray(resp_img.content), dtype=np.uint8)\nimg = cv2.imdecode(arr, -1)\n\nimg_height, img_width, _ = img.shape\n\nfont = cv2.FONT_HERSHEY_SIMPLEX\nbottomLeftCornerOfText = (10, 500)\nfontScale = 0.5\nfontColor = (0, 255, 0)\nlineType = 2\nGREEN = (0, 250, 0)\n\nlables_groups = {\n    'hair_color': [\"Black_Hair\",\n                   \"Blond_Hair\",\n                   \"Brown_Hair\",\n                   \"Bald\",\n                   \"Gray_Hair\"],\n    'hair_style': [\"Straight_Hair\",\n                   \"Wavy_Hair\",\n                   \"Bangs\"],\n    'additions': [\"Eyeglasses\",\n                  \"Heavy_Makeup\",\n                  \"Wearing_Earrings\",\n                  \"Wearing_Hat\",\n                  \"Wearing_Lipstick\",\n                  \"Wearing_Necklace\",\n                  \"Wearing_Necktie\"],\n    'face_attributes': [\"5_o_Clock_Shadow\",\n                        \"Arched_Eyebrows\",\n                        \"Attractive\",\n                        \"Bags_Under_Eyes\",\n                        \"Big_Lips\",\n                        \"Big_Nose\",\n                        \"Bushy_Eyebrows\",\n                        \"Chubby\",\n                        \"Double_Chin\",\n                        \"Goatee\",\n                        \"High_Cheekbones\",\n                        \"Mouth_Slightly_Open\",\n                        \"Mustache\",\n                        \"Narrow_Eyes\",\n                        \"No_Beard\",\n                        \"Oval_Face\",\n                        \"Pale_Skin\",\n                        \"Pointy_Nose\",\n                        \"Receding_Hairline\",\n                        \"Rosy_Cheeks\",\n                        \"Sideburns\",\n                        \"Smiling\"]\n}\n\n\ndef draw_labels(image, result, x, y):\n    predicted_labels = {\n        'hair_color': [],\n        'hair_style': [],\n        'additions': [],\n        'face_attributes': []\n\n    }\n    hair_color = \"\"\n    hair_style = \"\"\n    additions = \"\"\n    face_attributes = \"\"\n\n    for label, score in result.items():\n        if score > 0.2:\n            for group, labels in lables_groups.items():\n                if label in labels:\n                    predicted_labels[group].append((label, score))\n    if len(predicted_labels['hair_color']) > 0:\n        hair_color = predicted_labels['hair_color'][0][0]\n    if len(predicted_labels['hair_style']) > 0:\n        hair_style = predicted_labels['hair_style'][0][0]\n    if len(predicted_labels['additions']) > 0:\n        additions = predicted_labels['additions'][0][0]\n    if len(predicted_labels['face_attributes']) > 0:\n        face_attributes = predicted_labels['face_attributes'][0][0]\n\n    if hair_color != \"\" and hair_style != \"\" and face_attributes != \"\":\n        cv2.putText(image, \"Hair Color: \", (x, y), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, hair_color, (x, y + 15), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, \"Hair Style: \", (x, y + 30), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, hair_style, (x, y + 45), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, \"Additions: \", (x, y + 60), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, additions, (x, y + 75), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, \"Face attribute: \", (x, y + 90), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n        cv2.putText(image, face_attributes, (x, y + 105), cv2.FONT_HERSHEY_PLAIN, 1, GREEN, 1)\n\n\nfor det in json_dict['detections']:\n    crop = det['crop']\n    if crop['score'] < 0.8:\n        continue\n    x1 = int(crop['x1'] * img_width)\n    x2 = int(crop['x2'] * img_width)\n    y1 = int(crop['y1'] * img_height)\n    y2 = int(crop['y2'] * img_height)\n    img = cv2.rectangle(img, (x1, y1), (x2, y2), GREEN, 3)\n    draw_labels(img, det['face_attributes'], x2, y2)\ncv2.imwrite('test_out.png', img)\n```",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "img_url",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://promity.com/wp-content/uploads/2021/05/image-0111a.jpg"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://promity-face-analyzer.p.rapidapi.com/face_attributes/process_url\"\nquerystring = {\"img_url\": \"https://promity.com/wp-content/uploads/2021/05/image-0111a.jpg\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"promity-face-analyzer.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://promity-face-analyzer.p.rapidapi.com/face_attributes/process_url\"\nquerystring = {\"img_url\": \"https://promity.com/wp-content/uploads/2021/05/image-0111a.jpg\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"promity-face-analyzer.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "detections": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "crop": {
+                                    "type": "object",
+                                    "properties": {
+                                        "x1": {
+                                            "type": "number"
+                                        },
+                                        "y1": {
+                                            "type": "number"
+                                        },
+                                        "x2": {
+                                            "type": "number"
+                                        },
+                                        "y2": {
+                                            "type": "number"
+                                        },
+                                        "score": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "face_attributes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "5_o_Clock_Shadow": {
+                                            "type": "number"
+                                        },
+                                        "Arched_Eyebrows": {
+                                            "type": "number"
+                                        },
+                                        "Bags_Under_Eyes": {
+                                            "type": "number"
+                                        },
+                                        "Bald": {
+                                            "type": "number"
+                                        },
+                                        "Bangs": {
+                                            "type": "number"
+                                        },
+                                        "Big_Lips": {
+                                            "type": "number"
+                                        },
+                                        "Big_Nose": {
+                                            "type": "number"
+                                        },
+                                        "Black_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Blond_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Blurry": {
+                                            "type": "number"
+                                        },
+                                        "Brown_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Bushy_Eyebrows": {
+                                            "type": "number"
+                                        },
+                                        "Chubby": {
+                                            "type": "number"
+                                        },
+                                        "Double_Chin": {
+                                            "type": "number"
+                                        },
+                                        "Eyeglasses": {
+                                            "type": "number"
+                                        },
+                                        "Goatee": {
+                                            "type": "number"
+                                        },
+                                        "Gray_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Heavy_Makeup": {
+                                            "type": "number"
+                                        },
+                                        "High_Cheekbones": {
+                                            "type": "number"
+                                        },
+                                        "Mouth_Slightly_Open": {
+                                            "type": "number"
+                                        },
+                                        "Mustache": {
+                                            "type": "number"
+                                        },
+                                        "Narrow_Eyes": {
+                                            "type": "number"
+                                        },
+                                        "No_Beard": {
+                                            "type": "number"
+                                        },
+                                        "Oval_Face": {
+                                            "type": "number"
+                                        },
+                                        "Pale_Skin": {
+                                            "type": "number"
+                                        },
+                                        "Pointy_Nose": {
+                                            "type": "number"
+                                        },
+                                        "Receding_Hairline": {
+                                            "type": "number"
+                                        },
+                                        "Rosy_Cheeks": {
+                                            "type": "number"
+                                        },
+                                        "Sideburns": {
+                                            "type": "number"
+                                        },
+                                        "Smiling": {
+                                            "type": "number"
+                                        },
+                                        "Straight_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Wavy_Hair": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Earrings": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Hat": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Lipstick": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Necklace": {
+                                            "type": "number"
+                                        },
+                                        "Wearing_Necktie": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

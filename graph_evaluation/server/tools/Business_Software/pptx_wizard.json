@@ -1,0 +1,119 @@
+{
+    "product_id": "api_57a30065-5ccb-4b7c-b42a-0f19427fe810",
+    "tool_description": "Simple and fast API to extract information, delete/insert/ merge slides, replace text, extract/insert images in PPTX files. More endpoints are in the works - stay tuned. Full docs here: https://bitbucket.org/nebis/ppt-wizard-docs/src/master/",
+    "home_url": "https://rapidapi.com/info-MEVwcMJTn/api/pptx-wizard/",
+    "name": "PPTX wizard",
+    "title": "PPTX wizard",
+    "pricing": "FREEMIUM",
+    "tool_name": "PPTX wizard",
+    "score": null,
+    "host": "pptx-wizard.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "extractText",
+            "url": "https://pptx-wizard.p.rapidapi.com/extractText",
+            "description": "Returns the text contained in each slide of the uploaded file\n\n IMPORTANT: Powerpoint splits the text into \"runs\", so sometimes a single word can be split into several pieces, with no simple way to glue them together.. This API employs a number of heuristics to solve the most common issues, let us know if you find some odd cases.\n\n Usage: **POST** to endpoint (please use always a multi-part)\n\nAuthorization: the one requested by RapidAPI \n\nInput parameters: \n\n-  file (multipart upload)  \n\nOutput:\na **JSON** with the following keys:\n\n- extractedText: an array with elements like:\n\n       {\n         \"slide\": 1 // the number of the slide\n         \"text\" : \"lorem ipsum\"  // the text of the slide\n       }\n\nIMPORTANT: we count slides from 1 (i.e. as they are shown from the Powerpoint app)\n\nExample output:\n      \n      {\n          \"extractedText\": [\n              {\n                  \"slide\": 1,\n                  \"text\": \"lorem ipsum\"\n              },\n              {\n                  \"slide\": 2,\n                  \"text\": \"igitur etc etc\"\n              }\n          ]\n      }\nExample usage via curl:\n\n\n\n       curl --request POST  \\\n           --header 'X-RapidAPI-Host: pptx-wizard.p.rapidapi.com'  \\\n           --header 'X-RapidAPI-Key: <yourkey> \\\n            -v -F file=@samplefiles/samplepptx.pptx https://pptx-wizard.p.rapidapi.com/extractText",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/extractText\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/extractText\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "replaceKeywords",
+            "url": "https://pptx-wizard.p.rapidapi.com/replaceKeywords",
+            "description": "Replace your custom-defined keywords in the uploaded files, very useful to automate business presentations starting from a template.\n\nFor example, you can have a slide with the text \"The total sales for @customer@ in the @period@ period is #sales#\", and then replace @customer@ with \"ACME spa\", @period@ with \"2021-2022\", and #sales# with \"USD 3.14B\". As simple as that! You can define your own keywords with your own syntax.\n\nIMPORTANT: keywords are case-sensitive, i.e. @customer is DIFFERENT from @CustOmEr\n\nNote: Powerpoint splits the text into \"runs\", so sometimes a single word can be split into several pieces, with no simple way to glue them together.. This API employs a number of heuristics to solve the most common issues, let us know if you find some odd cases.\n\n Usage: **POST** to endpoint (please use always a multi-part)\n\nAuthorization: the one requested by RapidAPI\n\nInput parameters:\n\n- file (multipart upload)\n- keywords: a stringyfied **JSON** containing an array with the following structure:\n\n         [\n              {\n                  \"keyword\": \"@customer@\",\n                  \"value\": \"Acme SPA\"\n              },\n              {\n                  \"keyword\": \"{{budget}}\",\n                  \"value\": \"lorem ipsum\"\n              }\n          ]\n\nOutput:\n\n- a pptx file with all the matched keywords replaced in all slides (see example below)\n\nExample usage via curl:\n\n\n\n       curl --request POST  \\\n           --header 'X-RapidAPI-Host: pptx-wizard.p.rapidapi.com'  \\\n           --header 'X-RapidAPI-Key: <yourkey>' \\\n            -F 'keywords=[{\"keyword\":\"#customer\",\"value\":\"ACME spa\"},{\"keyword\":\"@budget@\",\"value\":\"100B\"}]' -F file=@samplefiles/samplepptx.pptx https://pptx-wizard.p.rapidapi.com/replaceKeywords  --output final_presentation.pptx",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "keywords",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[{\"keyword\":\"#customer\",\"value\":\"ACME spa\"},{\"keyword\":\"@budget@\",\"value\":\"100B\"}]"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/replaceKeywords\"\nquerystring = {\"file\": \"\", \"keywords\": \"[{\\\"keyword\\\":\\\"#customer\\\",\\\"value\\\":\\\"ACME spa\\\"},{\\\"keyword\\\":\\\"@budget@\\\",\\\"value\\\":\\\"100B\\\"}]\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/replaceKeywords\"\nquerystring = {\"file\": \"\", \"keywords\": \"[{\\\"keyword\\\":\\\"#customer\\\",\\\"value\\\":\\\"ACME spa\\\"},{\\\"keyword\\\":\\\"@budget@\\\",\\\"value\\\":\\\"100B\\\"}]\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "extractInfo",
+            "url": "https://pptx-wizard.p.rapidapi.com/extractInfo",
+            "description": "Returns information about the uploaded file.\n\nUsage: POST to endpoint (please use always a multi-part)\n\nAuthorization: the one requested by RapidAPI\n\nInput parameters:\n\nfile (multipart upload)\nOutput: a JSON with the following keys:\n\n- n_slides: int - number of slides\n- author: string\n- category: string\n- comments: string\n- content_status: string\n- created: datetime\n- identifier: string\n- keywords: string\n- language: string\n- last_modified_by: string\n- last_printed: datetime\n- modified: datetime\n- revision: int\n- subject: string\n- title: string\n- version: string\n\nExample usage via curl:\n\n   curl --request POST  \\\n       --header 'X-RapidAPI-Host: pptx-wizard.p.rapidapi.com'  \\\n       --header 'X-RapidAPI-Key: <yourkey> \\\n        -v -F file=@samplefiles/samplepptx.pptx https://pptx-wizard.p.rapidapi.com/extractInfo",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/extractInfo\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/extractInfo\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "extractImages",
+            "url": "https://pptx-wizard.p.rapidapi.com/extractImages",
+            "description": "Returns a zip file with all the images contained in the uploaded file.\n\n Usage: **POST** to endpoint (please use always a multi-part)\n\nAuthorization: the one requested by RapidAPI \n\nInput parameters: \n\n-  file (multipart upload)  \n\nOutput:\n\n- a zip file, with images numbered starting from zero, keeping the original file name where possible (see example below)\n\nExample usage via curl:\n\n\n\n       curl --request POST  \\\n           --header 'X-RapidAPI-Host: pptx-wizard.p.rapidapi.com'  \\\n           --header 'X-RapidAPI-Key: <yourkey>' \\\n            -v -F file=@samplefiles/samplepptx.pptx https://pptx-wizard.p.rapidapi.com/extractImages --output extracted_images.zip \n\n     unzip -t extracted_images.zip\n         Archive:  extracted_images.zip\n          extracting: 0__image4.png           \n          extracting: 1__image5.svg           \n          extracting: 2__image6.jpg           \n          extracting: 3__image7.jpeg",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/extractImages\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/extractImages\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "split",
+            "url": "https://pptx-wizard.p.rapidapi.com/split",
+            "description": "Returns a zip file contaning one PPTX file for each slide of the uploaded file, i.e. we split a 10 pages PPTX into 10 PPTXs 1 slide each.\n\n Usage: **POST** to endpoint (please use always a multi-part)\n\nAuthorization: the one requested by RapidAPI \n\nInput parameters: \n\n-  file (multipart upload)  \n\nOutput:\n\n- a zip file, with pages numbered starting from 1 (see example below)\n\nExample usage via curl:\n\n\n\n       curl --request POST  \\\n           --header 'X-RapidAPI-Host: pptx-wizard.p.rapidapi.com'  \\\n           --header 'X-RapidAPI-Key: <yourkey>' \\\n            -v -F file=@samplefiles/samplepptx.pptx https://pptx-wizard.p.rapidapi.com/split --output split_slides.zip \n\n     unzip -t split_slides.zip\n         Archive:  split_slides.zip\n          extracting: slide_1.pptx           \n          extracting: slide_2.pptx           \n          extracting: slide_3.pptx           \n          extracting: slide_4.pptx",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/split\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pptx-wizard.p.rapidapi.com/split\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pptx-wizard.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

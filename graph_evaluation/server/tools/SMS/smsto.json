@@ -1,0 +1,979 @@
+{
+    "tool_name": "SMSto",
+    "tool_description": "Implement SMS notifications, OTP, reminders, etc. into your workflow and build apps that send SMS with our redundant SSL SMS API.",
+    "title": "SMSto",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 742,
+        "avgSuccessRate": 12,
+        "popularityScore": 2.1,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/intergo-telecom-ltd-intergo-telecom-ltd-default/api/smsto/",
+    "host": "smsto.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get messages",
+            "url": "https://smsto.p.rapidapi.com/messages",
+            "description": "Fetch paginated messages.\n\nPlease note that the messages will be sorted by the date of creating (sending) - latest first.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "created_at",
+                    "type": "STRING",
+                    "description": "Filter by created at",
+                    "default": "2022-08-19"
+                },
+                {
+                    "name": "order_by",
+                    "type": "STRING",
+                    "description": "Field to sort by",
+                    "default": "created_at"
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Filter by recipient number",
+                    "default": "+3579865333"
+                },
+                {
+                    "name": "order_direction",
+                    "type": "STRING",
+                    "description": "Sort messages.",
+                    "default": "desc"
+                },
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "description": "Filter by status",
+                    "default": "REJECTED"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The number of messages per page.",
+                    "default": "15"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/messages\"\nquerystring = {\"created_at\": created_at, \"order_by\": order_by, \"to\": to, \"order_direction\": order_direction, \"status\": status, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "current_page": 1,
+                "data": [],
+                "first_page_url": "https://api.sms.to/messages?page=1",
+                "from": null,
+                "last_page": 1,
+                "last_page_url": "https://api.sms.to/messages?page=1",
+                "links": [
+                    {
+                        "url": null,
+                        "label": "pagination.previous",
+                        "active": false
+                    },
+                    {
+                        "url": "https://api.sms.to/messages?page=1",
+                        "label": "1",
+                        "active": true
+                    },
+                    {
+                        "url": null,
+                        "label": "pagination.next",
+                        "active": false
+                    }
+                ],
+                "next_page_url": null,
+                "path": "https://api.sms.to/messages",
+                "per_page": "15",
+                "prev_page_url": null,
+                "to": null,
+                "total": 0
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 06:50:59 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "current_page": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "type": "array"
+                    },
+                    "first_page_url": {
+                        "type": "string"
+                    },
+                    "from": {
+                        "type": "null"
+                    },
+                    "last_page": {
+                        "type": "integer"
+                    },
+                    "last_page_url": {
+                        "type": "string"
+                    },
+                    "links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "next_page_url": {
+                        "type": "null"
+                    },
+                    "path": {
+                        "type": "string"
+                    },
+                    "per_page": {
+                        "type": "string"
+                    },
+                    "prev_page_url": {
+                        "type": "null"
+                    },
+                    "to": {
+                        "type": "null"
+                    },
+                    "total": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Estimate campaign message",
+            "url": "https://smsto.p.rapidapi.com/sms/estimate",
+            "description": "Estimate the cost of sending message to multiple recipients (phone numbers)",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/estimate\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "estimated_cost": 0.02,
+                "contact_count": 2,
+                "invalid_count": 0,
+                "sms_count": 1,
+                "errors": []
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Thu, 21 Jul 2022 03:48:29 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "estimated_cost": {
+                        "type": "number"
+                    },
+                    "contact_count": {
+                        "type": "integer"
+                    },
+                    "invalid_count": {
+                        "type": "integer"
+                    },
+                    "sms_count": {
+                        "type": "integer"
+                    },
+                    "errors": {
+                        "type": "array"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Estimate single message",
+            "url": "https://smsto.p.rapidapi.com/sms/estimate",
+            "description": "Estimate the cost of sending single message",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/estimate\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "sms_count": 1,
+                "estimated_cost": 0.01,
+                "contact_count": 1,
+                "invalid_count": 0,
+                "errors": []
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Thu, 21 Jul 2022 03:44:55 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "sms_count": {
+                        "type": "integer"
+                    },
+                    "estimated_cost": {
+                        "type": "number"
+                    },
+                    "contact_count": {
+                        "type": "integer"
+                    },
+                    "invalid_count": {
+                        "type": "integer"
+                    },
+                    "errors": {
+                        "type": "array"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get last campaign",
+            "url": "https://smsto.p.rapidapi.com/last/campaign",
+            "description": "Get the last campaign that you have sent",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/last/campaign\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "id": 3682696,
+                "_id": "11ed-0723-1deccd0a-b385-0242ac120004",
+                "type": "sms",
+                "user_id": 7243,
+                "sender_id": "SMSto",
+                "template_id": null,
+                "message": "This is test",
+                "list_id": null,
+                "status": "SCHEDULED",
+                "client_total_cost": 0,
+                "estimated_cost": 0,
+                "delivered_messages": 0,
+                "failed_messages": 0,
+                "pending_messages": 2,
+                "sent_messages": 2,
+                "bypass_optout": null,
+                "callback_url": "https://example.com/callback/handler",
+                "scheduled_for": 1672467300,
+                "timezone": "Asia/Kathmandu",
+                "created_at": "2022-07-19T05:24:52.000000Z",
+                "updated_at": "2022-07-19T05:24:52.000000Z",
+                "sms_count": 1,
+                "is_api": 1,
+                "canceled_at": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Thu, 21 Jul 2022 03:02:02 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "_id": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "user_id": {
+                        "type": "integer"
+                    },
+                    "sender_id": {
+                        "type": "string"
+                    },
+                    "template_id": {
+                        "type": "null"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "list_id": {
+                        "type": "null"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "client_total_cost": {
+                        "type": "integer"
+                    },
+                    "estimated_cost": {
+                        "type": "integer"
+                    },
+                    "delivered_messages": {
+                        "type": "integer"
+                    },
+                    "failed_messages": {
+                        "type": "integer"
+                    },
+                    "pending_messages": {
+                        "type": "integer"
+                    },
+                    "sent_messages": {
+                        "type": "integer"
+                    },
+                    "bypass_optout": {
+                        "type": "null"
+                    },
+                    "callback_url": {
+                        "type": "string"
+                    },
+                    "scheduled_for": {
+                        "type": "integer"
+                    },
+                    "timezone": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "sms_count": {
+                        "type": "integer"
+                    },
+                    "is_api": {
+                        "type": "integer"
+                    },
+                    "canceled_at": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Schedule sending messages",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Schedule messages to send later\n\nThis is the same as Send personalized messages, but scheduled_for and timezone parameters are additionally specified.\n\nPlease note that if you do not provide the timezone parameter, then timezone from your SMS.to account settings will be used.\n\nIf you did not set the timezone (on your account settings and as a parameter), then the UTC timezone will be used by default.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "campaign_id": "11ed-0722-e4feb47c-9c5b-0242ac120008"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 05:23:17 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-campaign-id": "11ed-0722-e4feb47c-9c5b-0242ac120008"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "campaign_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send flash message",
+            "url": "https://smsto.p.rapidapi.com/fsms/send",
+            "description": "Send flash message to a number",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/fsms/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "message_id": "11ed-072a-d324d4c2-bb8f-02420a000287"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 06:20:03 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-message-id": "11ed-072a-d324d4c2-bb8f-02420a000287"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send viber message",
+            "url": "https://smsto.p.rapidapi.com/viber/send",
+            "description": "Send viber message to a number",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/viber/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "message_id": "11ed-072c-094a82bc-a6e3-02420a000287"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 06:28:43 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-message-id": "11ed-072c-094a82bc-a6e3-02420a000287"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get message by id",
+            "url": "https://smsto.p.rapidapi.com/message/{id}",
+            "description": "Get the message that you have sent by ID",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "11ed-072c-2e295590-89fe-02420a000287"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/message/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "id": "11ed-072c-2e295590-89fe-02420a000287",
+                "campaign_id": null,
+                "sender_id": "SMSto",
+                "message": "This is a test message",
+                "to": "+35799999999999",
+                "status": "REJECTED",
+                "cost": 0,
+                "sms_count": 1,
+                "type": "viber",
+                "callback_url": "https://example.com/callback/handler",
+                "scheduled_for": null,
+                "timezone": null,
+                "updated_at": "2022-07-19 06:31:04",
+                "created_at": "2022-07-19 06:29:46",
+                "sent_at": "2022-07-19 06:31:04",
+                "is_api": true
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 07:13:12 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "campaign_id": {
+                        "type": "null"
+                    },
+                    "sender_id": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "cost": {
+                        "type": "integer"
+                    },
+                    "sms_count": {
+                        "type": "integer"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "callback_url": {
+                        "type": "string"
+                    },
+                    "scheduled_for": {
+                        "type": "null"
+                    },
+                    "timezone": {
+                        "type": "null"
+                    },
+                    "updated_at": {
+                        "type": "string"
+                    },
+                    "created_at": {
+                        "type": "string"
+                    },
+                    "sent_at": {
+                        "type": "string"
+                    },
+                    "is_api": {
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send campaign message",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send message to multiple recipients (phone numbers)",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "campaign_id": "11ed-071b-815e933a-bfe0-0242ac120004"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 04:30:23 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-campaign-id": "11ed-071b-815e933a-bfe0-0242ac120004"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Send personalized messages",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send personalized messages",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "campaign_id": "11ed-071f-9e08ec98-8059-0242ac120004"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 04:59:49 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-campaign-id": "11ed-071f-9e08ec98-8059-0242ac120004"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "campaign_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send Message to a list or multiple list in array",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send Message to a list or multiple list in array",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "campaign_id": "11ed-071c-3bd2a1b6-a974-0242ac120008"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 04:35:36 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-campaign-id": "11ed-071c-3bd2a1b6-a974-0242ac120008"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "campaign_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send single message",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send a single message to a number",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "message": "Message is queued for sending! Please check report for update",
+                "success": true,
+                "message_id": "11ed-0719-3e6b8882-b76f-02420a000287"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-cache, private",
+                "content-type": "application/json",
+                "date": "Tue, 19 Jul 2022 04:14:12 GMT",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-smsto-message-id": "11ed-0719-3e6b8882-b76f-02420a000287"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Estimate campaign message",
+            "url": "https://smsto.p.rapidapi.com/sms/estimate",
+            "description": "Estimate the cost of sending message to multiple recipients (phone numbers)",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/estimate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/estimate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "estimated_cost": {
+                        "type": "number"
+                    },
+                    "contact_count": {
+                        "type": "integer"
+                    },
+                    "invalid_count": {
+                        "type": "integer"
+                    },
+                    "sms_count": {
+                        "type": "integer"
+                    },
+                    "errors": {
+                        "type": "array"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Estimate single message",
+            "url": "https://smsto.p.rapidapi.com/sms/estimate",
+            "description": "Estimate the cost of sending single message",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/estimate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/estimate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "sms_count": {
+                        "type": "integer"
+                    },
+                    "estimated_cost": {
+                        "type": "number"
+                    },
+                    "contact_count": {
+                        "type": "integer"
+                    },
+                    "invalid_count": {
+                        "type": "integer"
+                    },
+                    "errors": {
+                        "type": "array"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Schedule sending messages",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Schedule messages to send later\n\nThis is the same as Send personalized messages, but scheduled_for and timezone parameters are additionally specified.\n\nPlease note that if you do not provide the timezone parameter, then timezone from your SMS.to account settings will be used.\n\nIf you did not set the timezone (on your account settings and as a parameter), then the UTC timezone will be used by default.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "campaign_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send flash message",
+            "url": "https://smsto.p.rapidapi.com/fsms/send",
+            "description": "Send flash message to a number",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/fsms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/fsms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send viber message",
+            "url": "https://smsto.p.rapidapi.com/viber/send",
+            "description": "Send viber message to a number",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/viber/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/viber/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send campaign message",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send message to multiple recipients (phone numbers)",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Send personalized messages",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send personalized messages",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "campaign_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send Message to a list or multiple list in array",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send Message to a list or multiple list in array",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "campaign_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Send single message",
+            "url": "https://smsto.p.rapidapi.com/sms/send",
+            "description": "Send a single message to a number",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://smsto.p.rapidapi.com/sms/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"smsto.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "message_id": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

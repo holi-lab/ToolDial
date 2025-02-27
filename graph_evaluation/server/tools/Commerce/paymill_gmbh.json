@@ -1,0 +1,290 @@
+{
+    "product_id": "53aa3c4fe4b059614033fba7",
+    "tool_description": "< Payments made easy />\r\n\r\n* Secure REST API\r\n* Full integration with your website\r\n* Simple pricing\r\n* Accept multiple currencies\r\n* Fast and local support\r\n* Fast account activation",
+    "home_url": "https://rapidapi.com/paymill/api/paymill-gmbh/",
+    "name": "PAYMILL GmbH",
+    "title": "PAYMILL GmbH",
+    "pricing": "FREE",
+    "tool_name": "PAYMILL GmbH",
+    "score": null,
+    "host": "paymill.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "create transaction",
+            "url": "https://paymill.p.rapidapi.com/transactions",
+            "description": "You have to create at least either a token or a payment object before you can execute a transaction. You get back a response object indicating whether a transaction was successful or not.  Note  The transaction will not be charged at the bank if the test keys are implemented in your code. Please use only the test credit cards mentioned in the documentation.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "amount",
+                    "type": "NUMBER",
+                    "description": "Amount (in cents) which will be charged",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "ISO 4217 formatted currency code",
+                    "default": ""
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "A short description for the transaction",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "client",
+                    "type": "STRING",
+                    "description": "The identifier of a client (client-object) When this parameter is used, you have also to specify a payment method which is not assigned to a client yet. If you attempt to use this parameter when creating a transaction and when specifying a token or preauthorization, the specified client will be ignored.",
+                    "default": ""
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "A token generated through our JavaScript-Bridge When this parameter is used, none of the following should be used: payment, preauthorization.",
+                    "default": ""
+                },
+                {
+                    "name": "payment",
+                    "type": "STRING",
+                    "description": "The identifier of a payment (creditcard-object or directdebit-object) When this parameter is used, none of the following should be used: token, preauthorization.",
+                    "default": ""
+                },
+                {
+                    "name": "preauthorization",
+                    "type": "STRING",
+                    "description": "The identifier of a preauthorization (preauthorization-object) When this parameter is used, none of the following should be used: token, payment.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/transactions\"\nquerystring = {\"amount\": \"\", \"currency\": \"\", \"description\": \"\", \"client\": \"\", \"token\": \"\", \"payment\": \"\", \"preauthorization\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/transactions\"\nquerystring = {\"amount\": \"\", \"currency\": \"\", \"description\": \"\", \"client\": \"\", \"token\": \"\", \"payment\": \"\", \"preauthorization\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "create new subscription",
+            "url": "https://paymill.p.rapidapi.com/subscriptions",
+            "description": "This function creates a subscription between a client and an offer. A client can have several subscriptions to different offers, but only one subscription to the same offer. The clients is charged for each billing interval entered.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "client",
+                    "type": "STRING",
+                    "description": "Unique client identifier",
+                    "default": ""
+                },
+                {
+                    "name": "offer",
+                    "type": "STRING",
+                    "description": "Unique offer identifier",
+                    "default": ""
+                },
+                {
+                    "name": "payment",
+                    "type": "STRING",
+                    "description": "Unique payment identifier",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/subscriptions\"\nquerystring = {\"client\": \"\", \"offer\": \"\", \"payment\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/subscriptions\"\nquerystring = {\"client\": \"\", \"offer\": \"\", \"payment\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "refund transaction",
+            "url": "https://paymill.p.rapidapi.com/refunds/",
+            "description": "This function refunds a transaction that has been created previously and was refunded in parts or wasn\u2019t refunded at all. The inserted amount will be refunded to the credit card / direct debit of the original transaction. There will be some fees for the merchant for every refund.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "amount",
+                    "type": "NUMBER",
+                    "description": "Amount (in cents) which will be charged",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "additional description for this refund",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/refunds/\"\nquerystring = {\"amount\": \"\", \"description\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/refunds/\"\nquerystring = {\"amount\": \"\", \"description\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "create new offer",
+            "url": "https://paymill.p.rapidapi.com/offers",
+            "description": "With this call you can create an offer via the API. You can also create an offer with the merchant cockpit.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "amount",
+                    "type": "STRING",
+                    "description": "Amount (in cents)",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "ISO 4217 formatted currency code",
+                    "default": ""
+                },
+                {
+                    "name": "interval",
+                    "type": "STRING",
+                    "description": "Defining how often the client should be charged. Format: number DAY|WEEK|MONTH|YEAR Example: 2 DAY",
+                    "default": ""
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Your name for this offer",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/offers\"\nquerystring = {\"amount\": \"\", \"currency\": \"\", \"interval\": \"\", \"name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/offers\"\nquerystring = {\"amount\": \"\", \"currency\": \"\", \"interval\": \"\", \"name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "create preauthorization",
+            "url": "https://paymill.p.rapidapi.com/preauthorizations",
+            "description": "Use either a token or an existing payment to authorize the given amount.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "amount",
+                    "type": "NUMBER",
+                    "description": "Amount (in cents) which will be charged",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "ISO 4217 formatted currency code",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "The identifier of a token",
+                    "default": ""
+                },
+                {
+                    "name": "payment",
+                    "type": "STRING",
+                    "description": "The identifier of a payment",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/preauthorizations\"\nquerystring = {\"amount\": \"\", \"currency\": \"\", \"token\": \"\", \"payment\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/preauthorizations\"\nquerystring = {\"amount\": \"\", \"currency\": \"\", \"token\": \"\", \"payment\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "create new URL or EMAIL webhook",
+            "url": "https://paymill.p.rapidapi.com/webhooks",
+            "description": "With this call you can create a webhook to a url via the API.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "the url of the webhook",
+                    "default": ""
+                },
+                {
+                    "name": "event_types",
+                    "type": "STRING",
+                    "description": "includes a set of webhook event types as strings",
+                    "default": "subscription.succeeded,subscription.failed"
+                },
+                {
+                    "name": "email",
+                    "type": "STRING",
+                    "description": "the webhooks email. must be a valid mail address",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/webhooks\"\nquerystring = {\"url\": \"\", \"event_types\": \"subscription.succeeded,subscription.failed\", \"email\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/webhooks\"\nquerystring = {\"url\": \"\", \"event_types\": \"subscription.succeeded,subscription.failed\", \"email\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "create payment with token or client",
+            "url": "https://paymill.p.rapidapi.com/payments",
+            "description": "Creates a credit card payment from a given token, if you\u2019re providing the client-property, the payment will be created and subsequently be added to the client.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "Unique credit or debit card token",
+                    "default": ""
+                },
+                {
+                    "name": "client",
+                    "type": "STRING",
+                    "description": "Unique client identifier",
+                    "default": "client_88a388d9dd48f86c3136"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/payments\"\nquerystring = {\"token\": \"\", \"client\": \"client_88a388d9dd48f86c3136\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/payments\"\nquerystring = {\"token\": \"\", \"client\": \"client_88a388d9dd48f86c3136\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "create new client",
+            "url": "https://paymill.p.rapidapi.com/clients",
+            "description": "This function creates a client object.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "email",
+                    "type": "STRING",
+                    "description": "Mail address of the client, is optional if the transaction creates an user itself",
+                    "default": ""
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Description for the client",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/clients\"\nquerystring = {\"email\": \"\", \"description\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://paymill.p.rapidapi.com/clients\"\nquerystring = {\"email\": \"\", \"description\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"paymill.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

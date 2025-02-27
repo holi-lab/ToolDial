@@ -1,0 +1,532 @@
+{
+    "tool_name":"meteostat",
+    "tool_description":"Historical Weather & Climate Data API",
+    "title":"meteostat",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":382,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/meteostat/api/meteostat/",
+    "host":"meteostat.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Monthly Point Data",
+            "url":"https://meteostat.p.rapidapi.com/point/monthly",
+            "description":"This endpoint provides historical monthly statistics for a geographic location. The data provided through this endpoint is aggregated from multiple governmental interfaces.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon",
+                    "type":"NUMBER",
+                    "description":"The point's longitude.",
+                    "default":"13.4105"
+                },
+                {
+                    "name":"end",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The end date of the period (YYYY-MM-DD).",
+                    "default":"2020-12-31"
+                },
+                {
+                    "name":"start",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The start date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"The point's latitude.",
+                    "default":"52.5244"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"freq",
+                    "type":"STRING",
+                    "description":"The time frequency of the records. Can be used for custom aggregation. Default is *null*.",
+                    "default":""
+                },
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                },
+                {
+                    "name":"alt",
+                    "type":"NUMBER",
+                    "description":"The point's elevation.",
+                    "default":"43"
+                },
+                {
+                    "name":"model",
+                    "type":"BOOLEAN",
+                    "description":"A boolean parameter which specifies whether missing data should be substituted with statistically optimized model data. Default is *true*.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/point/monthly\"\nquerystring = {\"lon\": lon, \"end\": end, \"start\": start, \"lat\": lat, \"alt\": alt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Monthly Station Data",
+            "url":"https://meteostat.p.rapidapi.com/stations/monthly",
+            "description":"This endpoint provides historical monthly statistics for a particular weather station. The data provided through this endpoint is aggregated from multiple governmental interfaces.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"station",
+                    "type":"STRING",
+                    "description":"The Meteostat weather station identifier.",
+                    "default":"10637"
+                },
+                {
+                    "name":"end",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The end date of the period (YYYY-MM-DD).",
+                    "default":"2020-12-31"
+                },
+                {
+                    "name":"start",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The start date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                },
+                {
+                    "name":"model",
+                    "type":"BOOLEAN",
+                    "description":"A boolean parameter which specifies whether missing data should be substituted with statistically optimized model data. Default is *true*.",
+                    "default":""
+                },
+                {
+                    "name":"freq",
+                    "type":"STRING",
+                    "description":"The time frequency of the records. Can be used for custom aggregation. Default is *null*.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/stations/monthly\"\nquerystring = {\"station\": station, \"end\": end, \"start\": start}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Station Meta Data",
+            "url":"https://meteostat.p.rapidapi.com/stations/meta",
+            "description":"This endpoint provides meta data for a particular weather station.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"wmo",
+                    "type":"STRING",
+                    "description":"The WMO identifier of a weather station.",
+                    "default":""
+                },
+                {
+                    "name":"icao",
+                    "type":"STRING",
+                    "description":"The ICAO identifier of a weather station.",
+                    "default":""
+                },
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"The Meteostat identifier of a weather station.",
+                    "default":"10637"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/stations/meta\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Daily Point Data",
+            "url":"https://meteostat.p.rapidapi.com/point/daily",
+            "description":"This endpoint provides historical daily statistics for a geographic location. The data provided through this endpoint is aggregated from multiple governmental interfaces.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon",
+                    "type":"NUMBER",
+                    "description":"The point's longitude.",
+                    "default":"-79.4"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"The point's latitude.",
+                    "default":"43.6667"
+                },
+                {
+                    "name":"start",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The start date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"end",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The end date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-31"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                },
+                {
+                    "name":"freq",
+                    "type":"STRING",
+                    "description":"The time frequency of the records. Can be used for custom aggregation. Default is *null*.",
+                    "default":""
+                },
+                {
+                    "name":"model",
+                    "type":"BOOLEAN",
+                    "description":"A boolean parameter which specifies whether missing data should be substituted with statistically optimized model data. Default is *true*.",
+                    "default":""
+                },
+                {
+                    "name":"alt",
+                    "type":"NUMBER",
+                    "description":"The point's elevation.",
+                    "default":"184"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/point/daily\"\nquerystring = {\"lon\": lon, \"lat\": lat, \"start\": start, \"end\": end, \"alt\": alt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Hourly Point Data",
+            "url":"https://meteostat.p.rapidapi.com/point/hourly",
+            "description":"This endpoint provides historical hourly observations for a geographic location. The data provided through this endpoint is aggregated from multiple governmental interfaces.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon",
+                    "type":"NUMBER",
+                    "description":"The point's longitude.",
+                    "default":"-79.4"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"The point's latitude.",
+                    "default":"43.6667"
+                },
+                {
+                    "name":"end",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The end date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"start",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The start date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"tz",
+                    "type":"STRING",
+                    "description":"The time zone according to the tz database. Default is UTC.",
+                    "default":"America/Toronto"
+                },
+                {
+                    "name":"alt",
+                    "type":"NUMBER",
+                    "description":"The point's elevation.",
+                    "default":"113"
+                },
+                {
+                    "name":"freq",
+                    "type":"STRING",
+                    "description":"The time frequency of the records. Can be used for custom aggregation. Default is *null*.",
+                    "default":""
+                },
+                {
+                    "name":"model",
+                    "type":"BOOLEAN",
+                    "description":"A boolean parameter which specifies whether missing data should be substituted with statistically optimized model data. Default is *true*.",
+                    "default":""
+                },
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/point/hourly\"\nquerystring = {\"lon\": lon, \"lat\": lat, \"end\": end, \"start\": start, \"tz\": tz, \"alt\": alt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Station Climate Data",
+            "url":"https://meteostat.p.rapidapi.com/stations/normals",
+            "description":"This endpoint provides climate normals for a particular weather station.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"station",
+                    "type":"STRING",
+                    "description":"The Meteostat weather station identifier.",
+                    "default":"10637"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"end",
+                    "type":"NUMBER",
+                    "description":"The end year of the reference period.",
+                    "default":"1990"
+                },
+                {
+                    "name":"start",
+                    "type":"NUMBER",
+                    "description":"The start year of the reference period.",
+                    "default":"1961"
+                },
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/stations/normals\"\nquerystring = {\"end\": end, \"start\": start, \"station\": station}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Point Climate Data",
+            "url":"https://meteostat.p.rapidapi.com/point/normals",
+            "description":"This endpoint provides climate normals for any geo location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"The point's latitude.",
+                    "default":"59.9127"
+                },
+                {
+                    "name":"lon",
+                    "type":"NUMBER",
+                    "description":"The point's longitude.",
+                    "default":"10.7461"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                },
+                {
+                    "name":"end",
+                    "type":"NUMBER",
+                    "description":"The end year of the reference period.",
+                    "default":"1990"
+                },
+                {
+                    "name":"start",
+                    "type":"NUMBER",
+                    "description":"The start year of the reference period.",
+                    "default":"1961"
+                },
+                {
+                    "name":"alt",
+                    "type":"NUMBER",
+                    "description":"The point's elevation.",
+                    "default":"26"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/point/normals\"\nquerystring = {\"lat\": lat, \"lon\": lon, \"end\": end, \"start\": start, \"alt\": alt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Nearby Stations",
+            "url":"https://meteostat.p.rapidapi.com/stations/nearby",
+            "description":"This endpoint provides a list of nearby weather stations for a given geographical location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon",
+                    "type":"NUMBER",
+                    "description":"The location's longitude.",
+                    "default":"-0.1257"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"The location's latitude.",
+                    "default":"51.5085"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"The maximum number of weather stations. Default is 10.",
+                    "default":""
+                },
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"The meter radius to search in. Default is 100000.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/stations/nearby\"\nquerystring = {\"lon\": lon, \"lat\": lat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Hourly Station Data",
+            "url":"https://meteostat.p.rapidapi.com/stations/hourly",
+            "description":"This endpoint provides historical hourly observations for a particular weather station. The data provided through this endpoint is aggregated from multiple governmental interfaces.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"start",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The start date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"station",
+                    "type":"STRING",
+                    "description":"The Meteostat weather station identifier.",
+                    "default":"10637"
+                },
+                {
+                    "name":"end",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The end date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"model",
+                    "type":"BOOLEAN",
+                    "description":"A boolean parameter which specifies whether missing observations should be substituted with statistically optimized model data. Default is *true*.",
+                    "default":""
+                },
+                {
+                    "name":"tz",
+                    "type":"STRING",
+                    "description":"The time zone according to the tz database. Default is UTC.",
+                    "default":"Europe/Berlin"
+                },
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                },
+                {
+                    "name":"freq",
+                    "type":"STRING",
+                    "description":"The time frequency of the records. Can be used for custom aggregation. Default is *null*.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/stations/hourly\"\nquerystring = {\"start\": start, \"station\": station, \"tz\": tz, \"end\": end}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Daily Station Data",
+            "url":"https://meteostat.p.rapidapi.com/stations/daily",
+            "description":"This endpoint provides historical daily statistics for a particular weather station. The data provided through this endpoint is aggregated from multiple governmental interfaces.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"start",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The start date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"station",
+                    "type":"STRING",
+                    "description":"The Meteostat weather station identifier.",
+                    "default":"10637"
+                },
+                {
+                    "name":"end",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"The end date of the period (YYYY-MM-DD).",
+                    "default":"2020-01-31"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"units",
+                    "type":"STRING",
+                    "description":"The unit system of the meteorological parameters. Default is metric.",
+                    "default":""
+                },
+                {
+                    "name":"model",
+                    "type":"BOOLEAN",
+                    "description":"A boolean parameter which specifies whether missing data should be substituted with statistically optimized model data. Default is *true*.",
+                    "default":""
+                },
+                {
+                    "name":"freq",
+                    "type":"STRING",
+                    "description":"The time frequency of the records. Can be used for custom aggregation. Default is *null*.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://meteostat.p.rapidapi.com/stations/daily\"\nquerystring = {\"start\": start, \"station\": station, \"end\": end}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"meteostat.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

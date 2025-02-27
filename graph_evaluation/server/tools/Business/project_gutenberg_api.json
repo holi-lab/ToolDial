@@ -1,0 +1,195 @@
+{
+    "product_id": "api_969b08c7-881c-42b0-adcc-dba290f22374",
+    "tool_description": "This is a stable and reliable unofficial API for Project Gutenberg, allowing you to download ebooks as well as get information about a certain book (title, author, language, copyrights and publish date).",
+    "home_url": "https://rapidapi.com/rabahdjebbes6-VpFXFzqdF1R/api/project-gutenberg-api/",
+    "name": "Project Gutenberg API",
+    "title": "Project Gutenberg API",
+    "pricing": "FREEMIUM",
+    "tool_name": "Project Gutenberg API",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 195,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "host": "project-gutenberg-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Search Books",
+            "url": "https://project-gutenberg-api.p.rapidapi.com/books/search/shakespeare",
+            "description": "Search for books using full name or just a snippit and get the book's ID.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "term",
+                    "type": "string",
+                    "description": "",
+                    "default": "shakespeare"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://project-gutenberg-api.p.rapidapi.com/books/search/shakespeare\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"project-gutenberg-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://project-gutenberg-api.p.rapidapi.com/books/search/{term}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"project-gutenberg-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Extract Info",
+            "url": "https://project-gutenberg-api.p.rapidapi.com/books/{id}",
+            "description": "Get all the informations about a book using it's ID\nInformations : \n- title.\n- authors.\n- language.\n- download links.\n- download count.\nand much more ...",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://project-gutenberg-api.p.rapidapi.com/books/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"project-gutenberg-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://project-gutenberg-api.p.rapidapi.com/books/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"project-gutenberg-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "id": 15,
+                "title": "Moby-Dick; or, The Whale",
+                "authors": [
+                    {
+                        "name": "Melville, Herman",
+                        "birth_year": 1819,
+                        "death_year": 1891
+                    }
+                ],
+                "translators": [],
+                "subjects": [
+                    "Adventure stories",
+                    "Ahab, Captain (Fictitious character) -- Fiction",
+                    "Mentally ill -- Fiction",
+                    "Psychological fiction",
+                    "Sea stories",
+                    "Ship captains -- Fiction",
+                    "Whales -- Fiction",
+                    "Whaling -- Fiction",
+                    "Whaling ships -- Fiction"
+                ],
+                "bookshelves": [
+                    "Adventure",
+                    "Best Books Ever Listings"
+                ],
+                "languages": [
+                    "en"
+                ],
+                "copyright": false,
+                "media_type": "Text",
+                "formats": {
+                    "text/plain": "https://www.gutenberg.org/ebooks/15.txt.utf-8",
+                    "application/octet-stream": "https://www.gutenberg.org/files/15/15-0.zip",
+                    "text/plain; charset=us-ascii": "https://www.gutenberg.org/files/15/15-0.txt",
+                    "application/x-mobipocket-ebook": "https://www.gutenberg.org/ebooks/15.kf8.images",
+                    "application/epub+zip": "https://www.gutenberg.org/ebooks/15.epub3.images",
+                    "image/jpeg": "https://www.gutenberg.org/cache/epub/15/pg15.cover.medium.jpg",
+                    "text/html": "https://www.gutenberg.org/ebooks/15.html.images",
+                    "application/rdf+xml": "https://www.gutenberg.org/ebooks/15.rdf"
+                },
+                "download_count": 1235
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "authors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "birth_year": {
+                                    "type": "integer"
+                                },
+                                "death_year": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "translators": {
+                        "type": "array"
+                    },
+                    "subjects": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "bookshelves": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "languages": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "copyright": {
+                        "type": "boolean"
+                    },
+                    "media_type": {
+                        "type": "string"
+                    },
+                    "formats": {
+                        "type": "object",
+                        "properties": {
+                            "text/html; charset=utf-8": {
+                                "type": "string"
+                            },
+                            "application/epub+zip": {
+                                "type": "string"
+                            },
+                            "application/rdf+xml": {
+                                "type": "string"
+                            },
+                            "application/x-mobipocket-ebook": {
+                                "type": "string"
+                            },
+                            "image/jpeg": {
+                                "type": "string"
+                            },
+                            "text/plain; charset=utf-8": {
+                                "type": "string"
+                            },
+                            "text/html": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "download_count": {
+                        "type": "integer"
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "project_gutenberg_api"
+}

@@ -1,0 +1,107 @@
+{
+    "product_id": "api_5d322ea3-dc78-4851-beb6-0c1a009a39d1",
+    "tool_description": "Image blind watermarking algorithm, add/parse watermark, add content as text. Algorithm service body is divided into two: `encode_text `, `decode_text `.",
+    "home_url": "https://rapidapi.com/ailabapi-ailabapi-default/api/add-blind-text-watermark/",
+    "name": "Add blind text watermark",
+    "title": "Add blind text watermark",
+    "pricing": "FREEMIUM",
+    "tool_name": "Add blind text watermark",
+    "score": null,
+    "host": "add-blind-text-watermark.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Add blind text watermark",
+            "url": "https://add-blind-text-watermark.p.rapidapi.com/image/editing/add_blind_text_watermark",
+            "description": "Add blind text watermark",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "function_type",
+                    "type": "ENUM",
+                    "description": "Specifies the calling function.\n- `encode_text`: Add text watermark using the old version model.\n- `encode_text_plus`: Add text watermark using the new version model 1.\n- `encode_text_bold`: Add text watermark using the new version model 2.\n- `decode_text`: Use the old model to decode the text watermark in the image.\n- `decode_text_plus`: Use the new version of Model 1 to decode text watermarks in images.\n- `decode_text_bold`: Use the new version Model 2 to decode the image watermark in the image.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "output_file_type",
+                    "type": "ENUM",
+                    "description": "Output format.\n- If the value of `function_type` is `encode_text`, `encode_text_plus`, `encode_text_bold`, this parameter is valid; if the value of `function_type` is `decode_text`, `decode_text_plus`, `decode_text_bold`, this parameter is invalid.",
+                    "default": ""
+                },
+                {
+                    "name": "quality_factor",
+                    "type": "NUMBER",
+                    "description": "The quality size of the output image, the higher the quality the larger the image.\n- **Range of values**: [1, 100]\n- This parameter is valid when `output_file_type`=`jpg`.",
+                    "default": ""
+                },
+                {
+                    "name": "watermark_image",
+                    "type": "BINARY",
+                    "description": "The image to be resolved, i.e., a composite image with a text watermark.\n- If the value of `function_type` is `decode_text`, `decode_text_plus`, `decode_text_bold`, this parameter is mandatory; if the value of `function_type` is `encode_text`, `encode_text_plus`, `encode_text_bold`, this parameter is invalid.\n- **Image format**: `JPEG` `JPG` `PNG` `BMP`\n- **Image size**: No more than 3 MB.\n- **Image resolution**: Larger than 5x5px, smaller than 4096x4096px.",
+                    "default": ""
+                },
+                {
+                    "name": "origin_image",
+                    "type": "BINARY",
+                    "description": "Original image.\n- If the value of `function_type` is `encode_text`, `encode_text_plus`, `encode_text_bold`, `decode_text`, this parameter is mandatory; if the value of `function_type` is `decode_text_plus`, `decode_text_bold`, this parameter is invalid.\n- **Image format**: `JPEG` `JPG` `PNG` `BMP`\n- **Image size**: No more than 3 MB.\n- **Image resolution**: Larger than 5x5px, smaller than 4096x4096px.",
+                    "default": ""
+                },
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "The text of the watermark to be added.\n- If the value of `function_type` is `encode_text`, `encode_text_plus`, `encode_text_bold`, this parameter is mandatory; if the value of `function_type` is `decode_text`, `decode_text_plus`, `decode_text_bold`, this parameter is invalid.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://add-blind-text-watermark.p.rapidapi.com/image/editing/add_blind_text_watermark\"\nquerystring = {\"output_file_type\": \"\", \"quality_factor\": \"\", \"watermark_image\": \"\", \"origin_image\": \"\", \"function_type\": \"\", \"text\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"add-blind-text-watermark.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://add-blind-text-watermark.p.rapidapi.com/image/editing/add_blind_text_watermark\"\nquerystring = {\"output_file_type\": \"\", \"quality_factor\": \"\", \"watermark_image\": \"\", \"origin_image\": \"\", \"function_type\": \"\", \"text\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"add-blind-text-watermark.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "request_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Request ID."
+                },
+                "log_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Log ID."
+                },
+                "error_code": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_code_str": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_msg": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Message."
+                },
+                "data": {
+                    "type": "object",
+                    "required": false,
+                    "description": "The content of the result data returned.",
+                    "properties": {
+                        "watermark_image_url": {
+                            "type": "string",
+                            "required": false,
+                            "description": "`function_type`: `encode_pic`, `encode_pic_plus`, return the URL address of the image with the added watermark. **Note**: The URL address is a temporary address, valid for 30 minutes, and cannot be accessed after expiration."
+                        },
+                        "text_image_url": {
+                            "type": "string",
+                            "required": false,
+                            "description": "`function_type`: `decode_pic`, `decode_pic_plus`, return the parsed image URL address containing only text. **Note**: The URL address is a temporary address, valid for 30 minutes, and cannot be accessed after expiration."
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

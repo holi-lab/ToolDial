@@ -1,0 +1,101 @@
+{
+    "product_id": "api_37aa338a-8664-46cd-a63c-7a59e5367338",
+    "tool_description": "Access a suite of over 20 filters and mask options to change the mood in an instant with Picsart\u2019s Filters API",
+    "home_url": "https://rapidapi.com/picsart-for-developers-picsart-for-developers-default/api/picsart-effects/",
+    "name": "Picsart - Effects",
+    "title": "Picsart - Effects",
+    "pricing": "FREEMIUM",
+    "tool_name": "Picsart - Effects",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 965,
+        "avgSuccessRate": 26,
+        "popularityScore": 2.1,
+        "__typename": "Score"
+    },
+    "host": "picsart-effects.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/effects/previews",
+            "url": "https://picsart-effects.p.rapidapi.com/effects/previews",
+            "description": "**Service Description:**\n  The *effects previews* service applies an effect to a given input image and returns a preview (i.e., thumbnail) of the effect.\n\n**Limitations:** Can apply up to 10 effects to an image in one call. To minimize the networking and processing loads, use the same input image size as the desired preview size. Supported source image formats are JPG, PNG, TIFF and WEBP. \n\n**Minimums/Maximums:**\n  * Maximum height or width of preview image is 240px\n\n**Options:**\n  * You can set the size of the preview image\n  * There are 24 different effects to choose from\n\n**Source Image:**\n  If you want to preview more than 10 effects, we recommend you first upload the source image using the *Upload* method and then use the reference image ID. Otherwise, you can source the image by providing a file or a URL to an online image.\n\n**Authorization:**\n    Requires an API key to be provided in the **X-Picsart-API-Key** request header.\n\n**cURL:** \n  Use this file [EffectsPreviews.sh](https://picsart.io/files/api-samples-curl-EffectsPreviews.sh) for cURL samples.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "image_url",
+                    "type": "STRING",
+                    "description": "Source image URL. (If this parameter is present, the other image source parameters must be empty.)",
+                    "default": ""
+                },
+                {
+                    "name": "effect_names",
+                    "type": "ARRAY",
+                    "description": "Select up to 10 effects to preview by holding down the Ctrl key. The list of effects are as follows:\n  * icy1\n  * icy2\n  * icy3\n  * brnz1\n  * brnz2\n  * brnz3\n  * mnch1\n  * mnch2\n  * mnch3\n  * noise\n  * saturation\n  * cyber1\n  * cyber2\n  * food1\n  * food2\n  * nature1\n  * nature2\n  * urban1\n  * urban2\n  * water1\n  * water2\n  * shadow1\n  * shadow2\n  * sketcher2\n",
+                    "default": "[\n  \"icy1\"\n]"
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "Optionally select one of the image formats (JPG is default). Options are as follows:\n  * JPG\n  * PNG\n  * WEBP\n",
+                    "default": "JPG"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Source image file (binary). (If this parameter is present, the other image source parameters must be empty.)",
+                    "default": ""
+                },
+                {
+                    "name": "preview_size",
+                    "type": "NUMBER",
+                    "description": "Enter the width of the preview image. The max value is 240px. The default is 120px.",
+                    "default": "120"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://picsart-effects.p.rapidapi.com/effects/previews\"\nquerystring = {\"image_url\": \"\", \"effect_names\": \"[\\n  \\\"icy1\\\"\\n]\", \"format\": \"JPG\", \"image\": \"\", \"preview_size\": \"120\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"picsart-effects.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://picsart-effects.p.rapidapi.com/effects/previews\"\nquerystring = {\"image_url\": \"\", \"effect_names\": \"[\\n  \\\"icy1\\\"\\n]\", \"format\": \"JPG\", \"image\": \"\", \"preview_size\": \"120\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"picsart-effects.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/effects",
+            "url": "https://picsart-effects.p.rapidapi.com/effects",
+            "description": "**Service Description:**\n  With the *effects* service you can apply up to 24 different effects to an image.\n\n**Limitations:** Works best with color-rich photos. Supported source image formats are JPG, PNG, TIFF and WEBP. \n\n**Examples:**\n  Examples of where effects can be used include the following:\n  * Works with all photo types\n  * Makes any photo stand out\n  * Helps with branding\n  * Great with look up tables (LUT)\n\n**Options:** Choose the effect to apply\n\n**Source Image:**\n  If you plan to apply effects to an image several times, we recommend you first upload the source image using the *Upload* method and then use the reference image ID. Otherwise, you can source the image by providing a file or a URL to an online image.\n\n**Authorization:**\n    Requires an API key to be provided in the **X-Picsart-API-Key** request header.\n\n**cURL:** \n  Use this file [PostEffects.sh](https://picsart.io/files/api-samples-curl-PostEffects.sh) for cURL samples.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Source image file (binary). If this parameter is present, the other image source parameter image_url must be empty.",
+                    "default": ""
+                },
+                {
+                    "name": "image_url",
+                    "type": "STRING",
+                    "description": "Source image URL. If this parameter is present, the other image source parameters, image must be empty.",
+                    "default": ""
+                },
+                {
+                    "name": "effect_name",
+                    "type": "STRING",
+                    "description": "Choose an effect from the dropdown menu. The list of effects are as follows\n  * apr1\n  * apr2\n  * apr3\n  * brnz1\n  * brnz2\n  * brnz3\n  * cyber1\n  * cyber2\n  * dodger\n  * food1\n  * food2\n  * icy1\n  * icy2\n  * icy3\n  * mnch1\n  * mnch2\n  * mnch3\n  * noise\n  * nature1\n  * nature2\n  * ntrl1\n  * ntrl2\n  * saturation\n  * sft1\n  * sft2\n  * sft3\n  * sft4\n  * shadow1\n  * shadow2\n  * sketcher2\n  * tl1\n  * tl2\n  * urban1\n  * urban2\n  * water1\n  * water2\n  * pixelize\n  * popart\n",
+                    "default": "apr1"
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "Optionally select one of the output image formats (JPG is chosen if left blank). Options are as follows:\n  * JPG\n  * PNG\n  * WEBP\n",
+                    "default": "JPG"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://picsart-effects.p.rapidapi.com/effects\"\nquerystring = {\"image\": \"\", \"image_url\": \"\", \"effect_name\": \"apr1\", \"format\": \"JPG\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"picsart-effects.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://picsart-effects.p.rapidapi.com/effects\"\nquerystring = {\"image\": \"\", \"image_url\": \"\", \"effect_name\": \"apr1\", \"format\": \"JPG\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"picsart-effects.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

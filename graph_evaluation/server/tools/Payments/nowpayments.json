@@ -1,0 +1,268 @@
+{
+    "tool_name": "NOWPayments",
+    "tool_description": "NOWPayments is a non-custodial cryptocurrency payment processing platform. Accept payments in a wide range of cryptos and get them instantly converted into a coin of your choice and sent to your wallet.  NOWPayments' API allows you to integrate crypto payments in 200+ assets into any platform.",
+    "title": "NOWPayments",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 96,
+        "avgLatency": 968,
+        "avgSuccessRate": 66,
+        "popularityScore": 9.5,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/pauline.l/api/nowpayments/",
+    "host": "nowpayments.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "8.Createinvoice",
+            "url": "https://nowpayments.p.rapidapi.com/v1/invoice",
+            "description": "Creates invoice with url where you can complete the payment.\nRequest fields:\n- price_amount (required) - the amount that users have to pay for the order stated in fiat currency. In case you do not indicate the price in crypto, our system will automatically convert this fiat amount into its crypto equivalent.\n- price_currency (required) - the fiat currency in which the price_amount is specified (usd, eur, etc).\n- pay_currency (optional) - the crypto currency in which the pay_amount is specified (btc, eth, etc).If not specified, can be chosen on the invoice_url\n- ipn_callback_url (optional) - url to receive callbacks, should contain \"http\" or \"https\", eg. \"https://nowpayments.io\"\n- order_id (optional) - inner store order ID, e.g. \"RGDBP-21314\"\n- order_description (optional) - inner store order description, e.g. \"Apple Macbook Pro 2019 x 1\" \n- success_url(optional) - url where the customer will be redirected after successful payment.\n- cancel_url(optional) - url where the customer will be redirected after failed payment.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_api_key>"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/invoice\"\nquerystring = {\"x-api-key\": x_api_key}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "7.Getlistofpayments",
+            "url": "https://nowpayments.p.rapidapi.com/v1/payment/",
+            "description": "Returns the entire list of all transactions, created with certain API key.\nThe list of optional parameters:\n- limit - number of records in one page. (possible values: from 1 to 500)\n- page - the page number you want to get (possible values: from 0 to **page count - 1**)\n- sortBy - sort the received list by a paramenter. Set to **created_at** by default (possible values: payment_id, payment_status, pay_address, price_amount, price_currency, pay_amount, actually_paid, pay_currency, order_id, order_description, purchase_id, outcome_amount, outcome_currency)\n- orderBy - display the list in ascending or descending order. Set to **asc** by default (possible values: asc, desc)\n- dateFrom - select the displayed period start date (date format: YYYY-MM-DD or yy-MM-ddTHH:mm:ss.SSSZ).\n- dateTo - select the displayed period end date (date format: YYYY-MM-DD or yy-MM-ddTHH:mm:ss.SSSZ).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_api_key>"
+                },
+                {
+                    "name": "dateFrom",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2020-01-01"
+                },
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": 10
+                },
+                {
+                    "name": "sortBy",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "created_at"
+                },
+                {
+                    "name": "orderBy",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "asc"
+                },
+                {
+                    "name": "dateTo",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2021-01-01"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/payment/\"\nquerystring = {\"x-api-key\": x_api_key, \"dateFrom\": datefrom, \"page\": page, \"limit\": limit, \"sortBy\": sortby, \"orderBy\": orderby, \"dateTo\": dateto}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "1.GetAPIstatus",
+            "url": "https://nowpayments.p.rapidapi.com/v1/status",
+            "description": "This is a method to get information about the current state of the API. If everything is OK, you will receive an \"OK\" message. Otherwise, you'll see some error.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/status\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "4.Createpayment",
+            "url": "https://nowpayments.p.rapidapi.com/v1/payment",
+            "description": "This is the method to create a payment. You need to provide your data as a JSON-object payload. Next is a description of the required request fields:\n\n- price_amount (required) - the fiat equivalent of the price to be paid in crypto. If the pay_amount parameter is left empty, our system will automatically convert this fiat price into its crypto equivalent. Please note that this does not enable fiat payments, only provides a fiat price for yours and the customer\u2019s convenience and information.\n- price_currency (required) - the fiat currency in which the price_amount is specified (usd, eur, etc).\n- pay_amount (optional) - the amount that users have to pay for the order stated in crypto. You can either specify  it yourself,  or we will automatically convert the amount you indicated in price_amount.\n- pay_currency (required) - the crypto currency in which the pay_amount is specified (btc, eth, etc).\n- ipn_callback_url (optional) - url to receive callbacks, should contain \"http\" or \"https\", eg. \"https://nowpayments.io\"\n- order_id (optional) - inner store order ID, e.g. \"RGDBP-21314\"\n- order_description (optional) - inner store order description, e.g. \"Apple Macbook Pro 2019 x 1\" \n- purchase_id (optional) - id of purchase for which you want to create aother payment, only used for several payments for one order\n- payout_address (optional) - usually the funds will go to the address you specify in your Personal account. In case you want to receive funds on another address, you can specify it in this parameter.\n- payout_currency (optional) - currency of your external payout_address, required when payout_adress is specified.\n- payout_extra_id(optional) - extra id or memo or tag for external payout_address.\n- fixed_rate(optional) - boolean, can be **true** or **false**. Required for fixed-rate exchanges.\n\nHere the list of avalable statuses of payment:\n- waiting - waiting for the customer to send the payment. The initial status of each payment.\n- confirming - the transaction is being processed on the blockchain. Appears when NOWPayments detect the funds from the user on the blockchain.\n- confirmed -  the process is confirmed by the blockchain. Customer\u2019s funds have accumulated enough confirmations.\n- sending - the funds are being sent to your personal wallet. We are in the process of sending the funds to you.\n- partially_paid -  it shows that the customer sent the less than the actual price. Appears when the funds have arrived in your wallet.\n- finished - the funds have reached your personal address and the payment is finished.\n- failed -  the payment wasn't completed due to the error of some kind.\n- refunded -  the funds were refunded back to the user.\n- expired - the user didn't send the funds to the specified address in the 24 hour time window.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_key>"
+                },
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/payment\"\nquerystring = {\"x-api-key\": x_api_key, \"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "2.Getavailablecurrencies",
+            "url": "https://nowpayments.p.rapidapi.com/v1/currencies",
+            "description": "This is a method for obtaining information about the cryptocurrencies available for payments. This depends on the cryptocurrency you choose for your particular store.\nOptional parameters:\n- fixed_rate(optional) - boolean, can be **true** or **false**. Returns avaliable currencies with minimum and maximum amount of the exchange.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_api_key>"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/currencies\"\nquerystring = {\"x-api-key\": x_api_key}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "3.Getestimatedprice",
+            "url": "https://nowpayments.p.rapidapi.com/v1/estimate",
+            "description": "This is a method for calculating the approximate price in cryptocurrency for a given value in Fiat currency. You will need to provide the initial cost in the Fiat currency (amount, currency_from) and the necessary cryptocurrency (currency_to)\nCurrently following fiat currencies are available: usd, eur, nzd, brl, gbp.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_api_key>"
+                },
+                {
+                    "name": "currency_to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "btc"
+                },
+                {
+                    "name": "currency_from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "usd"
+                },
+                {
+                    "name": "amount",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": 3999.5
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/estimate\"\nquerystring = {\"x-api-key\": x_api_key, \"currency_to\": currency_to, \"currency_from\": currency_from, \"amount\": amount}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "6.Gettheminimumpaymentamount",
+            "url": "https://nowpayments.p.rapidapi.com/v1/min-amount",
+            "description": "Get the minimum payment amount for a specific pair.\n\nYou can provide both currencies in the pair or just currency_from, and we will calculate the minimum payment amount for currency_from and currency which you have specified as the outcome in the Store Settings.\n\nIn the case of several outcome wallets we will calculate the minimum amount in the same way we route your payment to a specific wallet.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_api_key>"
+                },
+                {
+                    "name": "currency_from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "eth"
+                },
+                {
+                    "name": "currency_to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "trx"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/min-amount\"\nquerystring = {\"x-api-key\": x_api_key, \"currency_from\": currency_from, \"currency_to\": currency_to}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "5.Getpaymentstatus",
+            "url": "https://nowpayments.p.rapidapi.com/v1/payment/<your_payment_id>",
+            "description": "Get the actual information about the payment. You need to provide the ID of the payment in the request.\n\nNOTE! You should make the get payment status request with the same API key that you used in the create payment request.\nHere is the list of avalable statuses:\n- waiting - waiting for the customer to send the payment. The initial status of each payment.\n- confirming - the transaction is being processed on the blockchain. Appears when NOWPayments detect the funds from the user on the blockchain.\n- confirmed -  the process is confirmed by the blockchain. Customer\u2019s funds have accumulated enough confirmations.\n- sending - the funds are being sent to your personal wallet. We are in the process of sending the funds to you.\n- partially_paid -  it shows that the customer sent the less than the actual price. Appears when the funds have arrived in your wallet.\n- finished - the funds have reached your personal address and the payment is finished.\n- failed -  the payment wasn't completed due to the error of some kind.\n- refunded -  the funds were refunded back to the user.\n- expired - the user didn't send the funds to the specified address in the 24 hour time window.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "x-api-key",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<your_api_key>"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/payment/<your_payment_id>\"\nquerystring = {\"x-api-key\": x_api_key}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "8.Createinvoice",
+            "url": "https://nowpayments.p.rapidapi.com/v1/invoice",
+            "description": "Creates invoice with url where you can complete the payment.\nRequest fields:\n- price_amount (required) - the amount that users have to pay for the order stated in fiat currency. In case you do not indicate the price in crypto, our system will automatically convert this fiat amount into its crypto equivalent.\n- price_currency (required) - the fiat currency in which the price_amount is specified (usd, eur, etc).\n- pay_currency (optional) - the crypto currency in which the pay_amount is specified (btc, eth, etc).If not specified, can be chosen on the invoice_url\n- ipn_callback_url (optional) - url to receive callbacks, should contain \"http\" or \"https\", eg. \"https://nowpayments.io\"\n- order_id (optional) - inner store order ID, e.g. \"RGDBP-21314\"\n- order_description (optional) - inner store order description, e.g. \"Apple Macbook Pro 2019 x 1\" \n- success_url(optional) - url where the customer will be redirected after successful payment.\n- cancel_url(optional) - url where the customer will be redirected after failed payment.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/invoice\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/invoice\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "4.Createpayment",
+            "url": "https://nowpayments.p.rapidapi.com/v1/payment",
+            "description": "This is the method to create a payment. You need to provide your data as a JSON-object payload. Next is a description of the required request fields:\n\n- price_amount (required) - the fiat equivalent of the price to be paid in crypto. If the pay_amount parameter is left empty, our system will automatically convert this fiat price into its crypto equivalent. Please note that this does not enable fiat payments, only provides a fiat price for yours and the customer\u2019s convenience and information.\n- price_currency (required) - the fiat currency in which the price_amount is specified (usd, eur, etc).\n- pay_amount (optional) - the amount that users have to pay for the order stated in crypto. You can either specify  it yourself,  or we will automatically convert the amount you indicated in price_amount.\n- pay_currency (required) - the crypto currency in which the pay_amount is specified (btc, eth, etc).\n- ipn_callback_url (optional) - url to receive callbacks, should contain \"http\" or \"https\", eg. \"https://nowpayments.io\"\n- order_id (optional) - inner store order ID, e.g. \"RGDBP-21314\"\n- order_description (optional) - inner store order description, e.g. \"Apple Macbook Pro 2019 x 1\" \n- purchase_id (optional) - id of purchase for which you want to create aother payment, only used for several payments for one order\n- payout_address (optional) - usually the funds will go to the address you specify in your Personal account. In case you want to receive funds on another address, you can specify it in this parameter.\n- payout_currency (optional) - currency of your external payout_address, required when payout_adress is specified.\n- payout_extra_id(optional) - extra id or memo or tag for external payout_address.\n- fixed_rate(optional) - boolean, can be **true** or **false**. Required for fixed-rate exchanges.\n\nHere the list of avalable statuses of payment:\n- waiting - waiting for the customer to send the payment. The initial status of each payment.\n- confirming - the transaction is being processed on the blockchain. Appears when NOWPayments detect the funds from the user on the blockchain.\n- confirmed -  the process is confirmed by the blockchain. Customer\u2019s funds have accumulated enough confirmations.\n- sending - the funds are being sent to your personal wallet. We are in the process of sending the funds to you.\n- partially_paid -  it shows that the customer sent the less than the actual price. Appears when the funds have arrived in your wallet.\n- finished - the funds have reached your personal address and the payment is finished.\n- failed -  the payment wasn't completed due to the error of some kind.\n- refunded -  the funds were refunded back to the user.\n- expired - the user didn't send the funds to the specified address in the 24 hour time window.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/payment\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://nowpayments.p.rapidapi.com/v1/payment\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nowpayments.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

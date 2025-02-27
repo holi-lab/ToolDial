@@ -1,0 +1,199 @@
+{
+    "product_id": "api_c033637f-005c-43b1-a64c-c4f049d4e7ed",
+    "tool_description": "Resell travel eSIMs with our API for eSIM delivery",
+    "home_url": "https://rapidapi.com/bryan-EgILJOihv/api/esim-access-api/",
+    "name": "eSIM Access API",
+    "title": "eSIM Access API",
+    "pricing": "FREE",
+    "tool_name": "eSIM Access API",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 548,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.7,
+        "__typename": "Score"
+    },
+    "host": "esim-access-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "orderProfiles",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/esim/order",
+            "description": "Order profiles individualy or in batch. After successful ordering, the SM-DP+ server will return the `OrderNo` and allocate profiles asynchronously for the order.\n\n##### To make an order\n\n1. Provide a uniqe `transactionId` for each order. Duplicate `transactionId` will be identified as the same request.\n2. Provide the `packageCode` of the data package(s) you will order.\n3. Provide the `price` and `count` each package. Sum these for the total cost to provide the `amount`.\n    \n\nA successful order will generate an `orderNo`. Query all the allocated profiles in the endpoint `/api/v1/open/esim/query`\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `transactionId` | String | mandatory | User generated unique transaction ID. Max 50 chars, utf8mb4. If the request is retired, it needs to be contained; otherwise, a new transaction will be created. | `ABC-210-2s7Fr` |\n| `amount` | Long | mandatory | Total order amount | `20000` |\n| `packageInfoList` | List | mandatory | `packageCode` `count` `price` |   <br>  <br>  <br>  <br> |\n\n| Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `packageCode` | String | mandatory | Package ID | `JC016` |\n| `count` | Integer | mandatory | Number of packages to be ordered | `2` |\n| `price` | Integer | mandatory | Package price, value \\* 10,000 (10000 = $1.00) | `10000` |\n\n##### Response Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: success `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed. | `null` |\n| `errorMessage` | String | optional | Error code explanation | `null` |\n| `obj` | Object | optional | Includes: `orderNo` |  |\n\n| Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `orderNo` | String | mandatory | Order number | `B22102010075311` |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/order\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/order\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "suspendProfile",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/esim/suspend",
+            "description": "Request to suspend or pause data service to an esim profile.\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `iccid` | String | required | eSIM ICCID | `89852246280001113119` |\n\n##### Response Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed | `null` |\n| `errorMessage` | String | optional | Explanation of the error code | `null` |\n| `obj` | Object | optional | Includes: `eSimList` |  |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/suspend\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/suspend\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "revokeProfile",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/esim/revoke",
+            "description": "Request to close and remove an active eSIM and data plan.\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `iccid` | String | required | eSIM ICCID | `89852246280001113119` |\n\n##### Response Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed | `null` |\n| `errorMessage` | String | optional | Explanation of the error code | `null` |\n| `obj` | Object | optional | Includes: `eSimList` |  |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/revoke\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/revoke\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "getMerchantBalance",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/balance/query",
+            "description": "Query the `balance` of a merchant account. Balance is used when ordering data profiles.\n\n##### Request Parameters\n\nNone.\n\n##### Reponse Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed. | `null` |\n| `errorMessage` | String | optional | Explanation of the error code | `null` |\n| `obj` | Object | optional | Includes: `balance` |  |\n| Domain | Type | MOC | Description | Example |\n| `balance` | Long | mandatory | Merchant balance, expressed \\*10000 (100000 = $10.00) | `100000` |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/balance/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/balance/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "unsuspendProfile",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/esim/unsuspend",
+            "description": "Request to unsuspend or reactivate data service to an esim profile.\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `iccid` | String | required | eSIM ICCID | `89852246280001113119` |\n\n##### Response Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed | `null` |\n| `errorMessage` | String | optional | Explanation of the error code | `null` |\n| `obj` | Object | optional | Includes: `eSimList` |  |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/unsuspend\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/unsuspend\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "getAllDataPackages",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/package/list",
+            "description": "Request a list of all the available data packages for offered. Filter by country optional.\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `locationCode` | String | optional | Filter by Alpha-2 ISO Country Code | `JP` |\n\n##### Reponse Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed. | `null` |\n| `errorMessage` | String | optional | Error code explanation | `null` |\n| `obj` | Object | optional | `null` : failed. Success includes: `packageList` |  |\n\n| Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `packageList` | List | mandatory | Available data packages, including: `packageCode` `name` `price` `currencyCode` `volume` `unusedValidTime` `duration` `durationUnit` `location` `description` `activeType` |  |\n| `packageCode` | String | mandatory | Package code | `JC016` |\n| `name` | String | mandatory | Package name | `Asia 11 countries 1GB 30 Days` |\n| `price` | Integer | mandatory | Package price, value \\* 10,000 (10000 = $1.00) | `10000` |\n| `currencyCode` | String | mandatory | Currency code | `USD` |\n| `volume` | Long | mandatory | Data volume (in bytes) of the package | `10485760` |\n| `unusedValidTime` | Integer | mandatory | Time till package invalid | `30` |\n| `duration` | Integer | mandatory | Plan validity peirod | `1` |\n| `durationUnit` | String | mandatory | Time unit, used in `unusedValidTime`/`duration` | `DAY` |\n| `location` | String | mandatory | Alpha-2 ISO Country Code of package use | `CN,HK,ID,JP,MO,MY,PH,SG,KR,TW,TH,IN,VN,SA,KH,PK,LK` |\n| `description` | String | mandatory | Description of the data package | `Asia 11 countries` |\n| `activeType` | Integer | mandatory | `1`. Profile installation activation `2`. First package activation | `1` |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/package/list\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/package/list\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "queryAllAllocatedProfiles",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/esim/query",
+            "description": "Query all eSIM profile details allocated to partner and their status.\n\nAvaible to filter by `orderNo` , `iccid` or between `startTime` and `endTime` range with paging options.\n\nUse `orderNo`,to request newly orderd eSIMs. The response will return the eSIM payload after all the allocated profiles are asynchronously allocated by the server. Expect times wait times of up to 30 seconds.\n\nUse `iccid` to request the status of an eSIM including it's current `orderUsage` and `eSIMStatus`.\n\nIf the profiles are not ready for download, the error will be returned (error code will be `200010`, meaning SM-DP+ is still allocating profiles for the order).\n\n##### Understanding eSIM Profile Status\n\nResults of several paramaters can identify the current state of any eSIM profile. For example:\n\n| **eSIM Status** | `smdpStatus` | `esimStatus` | `orderUsage` | `eid` |\n| --- | --- | --- | --- | --- |\n| **Not Installed** | `RELEASED` | `GOT_RESOURCE` | `0` | `\"\"` |\n| **Just Installed** | `ENABLED` | `IN_USE` | `0` | `\"890\u2026222\"` |\n| **In Use** | `ENABLED` | `IN_USE` | `123` | `\"890\u2026222\"` |\n| **Data Consumed** | `ENABLED` | `USED_UP` | `999` | `\"890\u2026222\"` |\n| **Deleted** | `DELETED` | `USED_UP` | `999` | `\"890\u2026222\"` |\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `orderNo` | String | optional | Order number | `B2210206381924` |\n| `iccid` | String | optional | eSIM ICCID | `89852246280001113119` |\n| `startTime` | String | optional | Starting time (ISO UTC time) | `2010-06-30T01:20+00:00` |\n| `endTime` | String | optional | End time (ISO UTC time) | `2010-06-30T02:20+00:00` |\n| `pager` | PageParam | mandatory | Page parameters: `pageSize` `pageNum` |  |\n\n| Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `pageSize` | Integer | mandatory | Page size, value range: \\[5, 500\\] | `10` |\n| `pageNum` | Integer | mandatory | Page number, value range: \\[1, 10000\\] | `1` |\n\n##### Response Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed | `null` |\n| `errorMessage` | String | optional | Explanation of the error code | `null` |\n| `obj` | Object | optional | Includes: `eSimList` `pager` |  |\n\n| Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `pager` | PageParam | mandatory | Includes: `pageSize` `pageNum` |  |\n| `eSimList` | List | mandatory | List of eSIM Profiles, including: `eSimTranNo` `orderNo` `imsi` `iccid` `ac` `qrCodeUrl` `smdpStatus` `eid` `activeType` `expiredTime` `totalVolume` `totalDuration` `durationUnit` `orderUsage` `eSimStatus` `packageList` |  |\n\n| PageParam Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `pageSize` | Integer | mandatory | Page size, range: \\[5, 500\\] | `10` |\n| `pageNum` | Integer | mandatory | Page number, value range: \\[1, 10000\\] | `1` |\n| `total` | Long | mandatory | Total number of Profiles | `120` |\n\n| eSIM Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `eSimTranNo` | String | mandatory | eSIM transaction number | `22102706381912` |\n| `orderNo` | String | mandatory | Order number | `B22102706381924` |\n| `imsi` | String | mandatory | IMSI | `454006109846571` |\n| `iccid` | String | mandatory | ICCID | `89852245280000942210` |\n| `ac` | String | mandatory | eSIM Activation Code  <br>LPA:1${SM-DP+_ADDRESS}${MATCHING_ID} | `LPA:1$rsp-eu.redteamobile.com$451F9802E6854E3E85FB985235EDB4E5` |\n| `qrCodeUrl` | String | mandatory | QR Code URL | [`http://static.redtea.io//hedy/qrcodes/image/d6dbada5054a4dfeb941e601327a4b42.png`](http://static.redtea.io//hedy/qrcodes/image/d6dbada5054a4dfeb941e601327a4b42.png) |\n| `smdpStatus` | String | mandatory | SM-DP+ status: `RELEASE`: Profile is ready for download `DOWNLOAD`: Profile has been downloaded `INSTALLATION`: Profile has been installed `ENABLED`: Profile has been enabled `DISABLED`: Profile has been disabled `DELETED`: Profile has been deleted | `RELEASED` |\n| `eid` | String | optional | EID |  |\n| `activeType` | String | mandatory | Activation type: `0`: Unactivated `1`: Profile installation `2`: Frist package activation | `1` |\n| `expiredTime` | DateTime | mandatory | Expiration time | `2023-03-03T06:20:00+0000` |\n| `totalVolume` | Long | mandatory | Total data volume (in bytes) in the package | `1073741824` |\n| `totalDuration` | Integer | mandatory | Total valid period of the package | `7` |\n| `durationUnit` | String | mandatory | Time unit | `DAY` |\n| `orderUsage` | Long | mandatory | Volume (in bytes) of used data | `0` |\n| `eSimStatus` | String | mandatory | `CREATE`: an order has been created `PAYING`: the subscriber is making payment for the eSIM `PAID`: the eSIM has been paid `GETTING_RESOURCE`: the eSIM is being allocated for the order `GOT_RESOURCE`: the eSIM has been allocated for the order `IN_USE`: the eSIM data package is in use `USED_UP`: the data in the package is used up `UNUSED_EXPIRED`: The valid period for eSIM download has expired `USED_EXPIRED`: the valid period for the order activation has expired `CANCEL`: the order has been canceled | `UNUSED_EXPIRED` |\n| `packageList` | List | mandatory | Includes: `packageCode` `duration` `volume` `locationCode` |  |\n\n| eSIM Domain | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `packageCode` | String | mandatory | Package ID | `CKH179` |\n| `duration` | Integer | mandatory | Valid period of the order | `7` |\n| `volume` | Long | mandatory | Data volume (in bytes) in the order | `1073741824` |\n| `locationCode` | String | mandatory | Country code of plan | `JP` |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "cancelProfile",
+            "url": "https://esim-access-api.p.rapidapi.com/api/v1/open/esim/cancel",
+            "description": "Cancel an inactive eSIM profile removing all information associated with it.\n\nThis operation is avaialbe when `esimStatus` is `GOT_RESOURCE` and `smdpStatus` is `RELEASED` meaning the eSIM was created, but not installed on a device.\n\nCancel endpoint not possible once user installed the eSIM.\n\n##### Request Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `iccid` | String | required | eSIM ICCID | `89852246280001113119` |\n\n##### Response Parameters\n\n| Name | Type | MOC | Description | Example |\n| --- | --- | --- | --- | --- |\n| `success` | String | mandatory | `true`: succeeded `false`: failed | `true` |\n| `errorCode` | String | optional | `null` or `0` when successful. Error code when failed | `null` |\n| `errorMessage` | String | optional | Explanation of the error code | `null` |\n| `obj` | Object | optional | Includes: `eSimList` |  |",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/cancel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://esim-access-api.p.rapidapi.com/api/v1/open/esim/cancel\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"esim-access-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object"
+            }
+        }
+    ]
+}

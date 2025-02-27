@@ -1,0 +1,70 @@
+{
+    "tool_name":"Crystal Ball Financial Predictor",
+    "tool_description":"This tool predicts a few days into the future for any given stock or crypocurrency.\n\nDisclaimer: This should be used for educational purposes only. Predictions are NOT certain, but can be helpful in understanding potential trends.",
+    "title":"Crystal Ball Financial Predictor",
+    "pricing":"PAID",
+    "score":null,
+    "home_url":"https://rapidapi.com/willtejeda/api/crystal-ball-financial-predictor/",
+    "host":"crystal-ball-financial-predictor.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"PredictCrypto",
+            "url":"https://crystal-ball-financial-predictor.p.rapidapi.com/predict_crypto",
+            "description":"This endpoint deals with digital currencies.\n\nAll predictions are based off of the daily closing price. \n\nIt returns json data with future \"x\" days closing prices and their respective timestamps  (EST)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"predictionLength",
+                    "type":"NUMBER",
+                    "description":"How many days into the future you'd like to predict",
+                    "default":15
+                },
+                {
+                    "name":"cryptoSymbol",
+                    "type":"STRING",
+                    "description":"Crypto Symbol for the Coin  you'd like to predict [Example: BTC for Bitcoin or LTC for Litecoin]",
+                    "default":"BTC"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://crystal-ball-financial-predictor.p.rapidapi.com/predict_crypto\"\nquerystring = {\"predictionLength\": predictionlength, \"cryptoSymbol\": cryptosymbol}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"crystal-ball-financial-predictor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"PredictStock",
+            "url":"https://crystal-ball-financial-predictor.p.rapidapi.com/predict_stock",
+            "description":"This endpoint deals with traditional stock assets.\n\nAll predictions are based off of the daily closing price. \n\nIt returns json data with future \"x\" days closing prices and their respective timestamps  (EST)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerSymbol",
+                    "type":"STRING",
+                    "description":"Ticker for Stock you'd like to predict [Example: SPY for the S&P500 or APPL for Apple]",
+                    "default":"SPY"
+                },
+                {
+                    "name":"predictionLength",
+                    "type":"NUMBER",
+                    "description":"How many days into the future you'd like to predict. [Max: 30]",
+                    "default":15
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"stock",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"f"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://crystal-ball-financial-predictor.p.rapidapi.com/predict_stock\"\nquerystring = {\"stock\": stock, \"tickerSymbol\": tickersymbol, \"predictionLength\": predictionlength}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"crystal-ball-financial-predictor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

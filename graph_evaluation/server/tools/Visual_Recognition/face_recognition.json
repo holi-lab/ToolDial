@@ -1,0 +1,304 @@
+{
+    "product_id": "api_b47643a4-9808-4ae9-97fb-8cdc25e03370",
+    "tool_description": "All-in-one Face recognition & analysis with dedicated database. Output location of human faces, recognized UID, liveness detection, age, gender, expression (emotion), and facemask detection",
+    "home_url": "https://rapidapi.com/arsa-technology-arsa-technology-default/api/face-recognition18/",
+    "name": "Face Recognition",
+    "title": "Face Recognition",
+    "pricing": "FREEMIUM",
+    "tool_name": "Face Recognition",
+    "score": {
+        "avgServiceLevel": 78,
+        "avgLatency": 750,
+        "avgSuccessRate": 77,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "face-recognition18.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "View DB",
+            "url": "https://face-recognition18.p.rapidapi.com/view_db",
+            "description": "Read / view all face uids in your DB as \"faces_list\"",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/view_db\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/view_db\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "status": "success",
+                "message": "faces list retrieved successfully",
+                "num_of_faces": 0,
+                "faces_list": [],
+                "latency_ms": 4.97
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "faces_list": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "time_ms": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Recognize 2",
+            "url": "https://face-recognition18.p.rapidapi.com/recognize_face2",
+            "description": "Recognize & analyze one or multiple faces inside one image\nmin face dimension is 200x200px, use Super-resolution option to up-size the image input\n\nsame as \"regular\" Recognize  endpoint above\nbut using JSON body of image urls as input",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/recognize_face2\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/recognize_face2\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "image_file_name": {
+                        "type": "string"
+                    },
+                    "recognition_result": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "recognition_uidresult": {
+                                    "type": "string"
+                                },
+                                "recognition_confidence": {
+                                    "type": "number"
+                                },
+                                "recognition_otheruids": {
+                                    "type": "array"
+                                },
+                                "bbox": {
+                                    "type": "object",
+                                    "properties": {
+                                        "x1": {
+                                            "type": "number"
+                                        },
+                                        "y1": {
+                                            "type": "number"
+                                        },
+                                        "x2": {
+                                            "type": "number"
+                                        },
+                                        "y2": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "is_real_face": {
+                                    "type": "boolean"
+                                },
+                                "is_real_face_probability": {
+                                    "type": "number"
+                                },
+                                "age": {
+                                    "type": "number"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "gender_probability": {
+                                    "type": "number"
+                                },
+                                "emotion": {
+                                    "type": "string"
+                                },
+                                "emotion_probability": {
+                                    "type": "number"
+                                },
+                                "wear_facemask": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "latency_ms": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Recognize",
+            "url": "https://face-recognition18.p.rapidapi.com/recognize_face",
+            "description": "Recognize & analyze one or multiple faces inside one image\nmin face dimension is 200x200px, use Super-resolution option to up-size the image input\n\nRecognition Result :\nrecognition_uidresult = closest possible uid\nrecognition_confidence = confidence level of the recognition\nrecognition_otheruids = other closest possible uids\n\nface attributes detection :\nFace Liveness (is_real_face)\n\"age\"\n\"gender\"\n\"emotion\" : [\"neutral\", \"happy\", \"sad\", \"surprise\", \"anger\"]\n\"wear_facemask\"",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image_input",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/recognize_face\"\nquerystring = {\"image_input\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/recognize_face\"\nquerystring = {\"image_input\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "image_file_name": {
+                        "type": "string"
+                    },
+                    "recognition_result": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "recognition_uidresult": {
+                                    "type": "string"
+                                },
+                                "recognition_confidence": {
+                                    "type": "number"
+                                },
+                                "recognition_otheruids": {
+                                    "type": "array"
+                                },
+                                "bbox": {
+                                    "type": "object",
+                                    "properties": {
+                                        "x1": {
+                                            "type": "number"
+                                        },
+                                        "y1": {
+                                            "type": "number"
+                                        },
+                                        "x2": {
+                                            "type": "number"
+                                        },
+                                        "y2": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "is_real_face": {
+                                    "type": "boolean"
+                                },
+                                "is_real_face_probability": {
+                                    "type": "number"
+                                },
+                                "age": {
+                                    "type": "number"
+                                },
+                                "gender": {
+                                    "type": "string"
+                                },
+                                "gender_probability": {
+                                    "type": "number"
+                                },
+                                "emotion": {
+                                    "type": "string"
+                                },
+                                "emotion_probability": {
+                                    "type": "number"
+                                },
+                                "wear_facemask": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    },
+                    "latency_ms": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Register Face",
+            "url": "https://face-recognition18.p.rapidapi.com/register_face",
+            "description": "Register a Face to database\nenter the face id as x-face-uid in the header (case sensitive)\n\ninput the face image in \"face_image\" form,\nif you have more than one image for one UID, upload the additional image as \nadditional_face_image_0, \nadditional_face_image_1,\nadditional_face_image_2. \nYou have maximum 3 additional images, \n\nSo in total you can have 4 face images in one UID\n\nHaving more face images will result in higher recognition accuracy & robustness",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "face_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "additional_face_image_0",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "additional_face_image_2",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "additional_face_image_1",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/register_face\"\nquerystring = {\"face_image\": \"\", \"additional_face_image_0\": \"\", \"additional_face_image_2\": \"\", \"additional_face_image_1\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/register_face\"\nquerystring = {\"face_image\": \"\", \"additional_face_image_0\": \"\", \"additional_face_image_2\": \"\", \"additional_face_image_1\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Register Face 2",
+            "url": "https://face-recognition18.p.rapidapi.com/register_face2",
+            "description": "Register a Face to database\nenter the face id as x-face-uid in the header (case sensitive)\n\nsame as \"regular\" Register Face endpoint above\nbut using JSON body of image urls as input",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/register_face2\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face-recognition18.p.rapidapi.com/register_face2\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face-recognition18.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "time_ms": {
+                        "type": "number"
+                    },
+                    "image_file_names": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "face_recognition"
+}

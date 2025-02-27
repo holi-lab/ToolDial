@@ -1,0 +1,221 @@
+{
+    "tool_name": "Lingvanex Translate",
+    "tool_description": "Lingvanex works via HTTPS requests. The URL of all requests starts with https://api-b2b.backenster.com/b1/api/v3/. In case of a protocol selection error and using HTTP, the request will be redirected to the address with the HTTPS protocol (status code 302). <br><br>Authentication of requests is done by adding the \u201cAuthorization\u201d header with the following data format: Bearer The key can be created on the user control panel page https://lingvanex.com/account",
+    "title": "Lingvanex Translate",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 664,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/Lingvanex/api/lingvanex-translate/",
+    "host": "lingvanex-translate.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/getLanguages",
+            "url": "https://lingvanex-translate.p.rapidapi.com/getLanguages",
+            "description": "",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "code",
+                    "type": "STRING",
+                    "description": "the language code in the format \u201clanguage code_code of the country\u201d, which is used to display the names of the languages. The language code is represented only in lowercase letters, the country code only in uppercase letters (example en_GB, es_ES, ru_RU etc). If this option is not present, then English is used by default",
+                    "default": "en_GB"
+                },
+                {
+                    "name": "platform",
+                    "type": "STRING",
+                    "description": "api",
+                    "default": "api"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lingvanex-translate.p.rapidapi.com/getLanguages\"\nquerystring = {\"code\": code, \"platform\": platform}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"lingvanex-translate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "err": "",
+                "result": [
+                    {
+                        "full_code": "",
+                        "code_alpha_1": "",
+                        "englishName": "",
+                        "codeName": "",
+                        "flagPath": "",
+                        "testWordForSyntezis": "",
+                        "modes": [
+                            {
+                                "name": "",
+                                "value": true,
+                                "genders": true
+                            }
+                        ]
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "err": {
+                        "description": "the text of the error. It is null if the response status is 200. Otherwise, it contains a string",
+                        "type": "string"
+                    },
+                    "result": {
+                        "items": {
+                            "properties": {
+                                "codeName": {
+                                    "description": "the language name translated using the language specified by the query parameter \u201ccode\u201d",
+                                    "type": "string"
+                                },
+                                "code_alpha_1": {
+                                    "description": "the language code in the \u201clanguage code\u201d format",
+                                    "type": "string"
+                                },
+                                "englishName": {
+                                    "description": "English name of the language",
+                                    "type": "string"
+                                },
+                                "flagPath": {
+                                    "description": "the relative address of which is the image of the country flag. Example static/flags/afrikaans. The full address for downloading the flag will be https://backenster.com/v2/static/flags/afrikaans.png. In order to download flags in increased resolutions, you should add to this parameter: @2x or @3x (example https://backenster.com/v2/static/flags/afrikaans@2x.png or  https://backenster.com/v2/static/flags/afrikaans@3x.png)",
+                                    "type": "string"
+                                },
+                                "full_code": {
+                                    "description": "the language code in the format \u201clanguage code_code of the country\u201d",
+                                    "type": "string"
+                                },
+                                "modes": {
+                                    "description": "an array of objects, each of which is a description of the function that is supported in the given language",
+                                    "items": {
+                                        "properties": {
+                                            "genders": {
+                                                "description": "logical value true or false, which shows the ability to synthesize speech for both sexes. Displayed only for function \u201cSpeech synthesis\u201c",
+                                                "type": "boolean"
+                                            },
+                                            "name": {
+                                                "description": "name of the function. Currently, only 4 functions are widely supported: \u201cSpeech synthesis\u201c, \u201cImage recognition\u201c, \u201cTranslation\u201c, \u201cSpeech recognition\u201c",
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "description": "logical value true or false, which shows the status of the function: on or off",
+                                                "type": "boolean"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "testWordForSyntezis": {
+                                    "description": "a word for testing a speech synthesizer",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/translate",
+            "url": "https://lingvanex-translate.p.rapidapi.com/translate",
+            "description": "",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lingvanex-translate.p.rapidapi.com/translate\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"lingvanex-translate.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "err": null,
+                "result": "London ist die Hauptstadt und gr\u00f6\u00dfte Stadt Englands und des Vereinigten K\u00f6nigreichs.",
+                "cacheUse": 0,
+                "source": "London is the capital and largest city of England and of the United Kingdom.",
+                "from": "en",
+                "sourceTransliteration": "London is the capital and largest city of England and of the United Kingdom.",
+                "targetTransliteration": "London ist die Hauptstadt und grosste Stadt Englands und des Vereinigten Konigreichs."
+            },
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "cacheUse": {
+                        "description": "the number of letters translated using the Lingvanex service cache",
+                        "type": "integer"
+                    },
+                    "err": {
+                        "description": "the text of the error. It is null if the response status is 200. Otherwise, it contains a string",
+                        "type": "string"
+                    },
+                    "from": {
+                        "description": "code of the source language in the format \u201clanguage code\u201d. In the case of sending a translation of an array of strings with different language content, only the language of the first element of the array is returned",
+                        "type": "string"
+                    },
+                    "result": {
+                        "description": "result of translation. In the event that a line was sent to the translation, the result is also a string; if an array of strings, then we also get an array of strings",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "source data for translation",
+                        "type": "string"
+                    },
+                    "sourceTransliteration": {
+                        "description": "transliteration of source data. In the event that a line was sent to the translation, the result is also a string; if an array of strings, then we also get an array of strings",
+                        "type": "string"
+                    },
+                    "targetTransliteration": {
+                        "description": "transliteration results. In the event that a line was sent to the translation, the result is also a string; if an array of strings, then we also get an array of strings",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/translate",
+            "url": "https://lingvanex-translate.p.rapidapi.com/translate",
+            "description": "",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://lingvanex-translate.p.rapidapi.com/translate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lingvanex-translate.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://lingvanex-translate.p.rapidapi.com/translate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"lingvanex-translate.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "cacheUse": {
+                        "description": "the number of letters translated using the Lingvanex service cache",
+                        "type": "integer"
+                    },
+                    "err": {
+                        "description": "the text of the error. It is null if the response status is 200. Otherwise, it contains a string",
+                        "type": "string"
+                    },
+                    "from": {
+                        "description": "code of the source language in the format \u201clanguage code\u201d. In the case of sending a translation of an array of strings with different language content, only the language of the first element of the array is returned",
+                        "type": "string"
+                    },
+                    "result": {
+                        "description": "result of translation. In the event that a line was sent to the translation, the result is also a string; if an array of strings, then we also get an array of strings",
+                        "type": "string"
+                    },
+                    "source": {
+                        "description": "source data for translation",
+                        "type": "string"
+                    },
+                    "sourceTransliteration": {
+                        "description": "transliteration of source data. In the event that a line was sent to the translation, the result is also a string; if an array of strings, then we also get an array of strings",
+                        "type": "string"
+                    },
+                    "targetTransliteration": {
+                        "description": "transliteration results. In the event that a line was sent to the translation, the result is also a string; if an array of strings, then we also get an array of strings",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

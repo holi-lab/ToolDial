@@ -1,0 +1,233 @@
+{
+    "tool_name":"Rent Estimate",
+    "tool_description":"Get instant access to 140+ million real-time property rent estimates and comparable rental listings with the Realty Mole rental data API. Available nationwide in the US.",
+    "title":"Rent Estimate",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":386,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/moneals/api/rent-estimate/",
+    "host":"realtymole-rental-estimate-v1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Property Rent Estimate",
+            "url":"https://realtymole-rental-estimate-v1.p.rapidapi.com/rentalPrice",
+            "description":"Returns a rent estimate and comparable rental listings for an address or lat/long coordinate. Providing property feature parameters will improve the estimate accuracy. [More info.](https://rapidapi.com/moneals/api/rent-estimate/details)",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"bathrooms",
+                    "type":"NUMBER",
+                    "description":"The number of bathrooms in the property. Supports fractions to indicate partial bathrooms",
+                    "default":"2"
+                },
+                {
+                    "name":"daysOld",
+                    "type":"NUMBER",
+                    "description":"The maximum number of days since comparable listings were last seen on the market, with a minimum of 1",
+                    "default":""
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"The number of bedrooms in the property",
+                    "default":"4"
+                },
+                {
+                    "name":"maxRadius",
+                    "type":"NUMBER",
+                    "description":"The maximum distance between comparable listings and the subject property, in kilometers. Defaults to 50 if not provided",
+                    "default":""
+                },
+                {
+                    "name":"squareFootage",
+                    "type":"NUMBER",
+                    "description":"The total living area size of the property, in square feet",
+                    "default":"1600"
+                },
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"The latitude of the property. The `latitude`/`longitude` can be provided instead of the `address` parameter",
+                    "default":""
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"The longitude of the property. The `latitude`/`longitude` can be provided instead of the `address` parameter",
+                    "default":""
+                },
+                {
+                    "name":"propertyType",
+                    "type":"STRING",
+                    "description":"The type of the property. Supported values are: `Single Family`, `Condo`, `Townhouse`, `Manufactured`, `Duplex-Triplex`, `Apartment`",
+                    "default":"Single Family"
+                },
+                {
+                    "name":"address",
+                    "type":"STRING",
+                    "description":"The property address in the format of 'Street, City, State, Zip'. You need to provide either the `address` or the `latitude`/`longitude` parameters",
+                    "default":"5500 Grand Lake Drive, San Antonio, TX, 78244"
+                },
+                {
+                    "name":"compCount",
+                    "type":"NUMBER",
+                    "description":"The number of comparable listings returned by the API, between 5 and 25. Defaults to 10 if not provided",
+                    "default":"5"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realtymole-rental-estimate-v1.p.rapidapi.com/rentalPrice\"\nquerystring = {\"bathrooms\": bathrooms, \"bedrooms\": bedrooms, \"squareFootage\": squarefootage, \"propertyType\": propertytype, \"address\": address, \"compCount\": compcount}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realtymole-rental-estimate-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "rent":1434,
+                "rentRangeLow":1379.81,
+                "rentRangeHigh":1488.19,
+                "latitude":29.4759532,
+                "longitude":-98.35147909999999,
+                "listings":[
+                    {
+                        "address":"5114 Pond Lk",
+                        "bathrooms":"2",
+                        "bedrooms":4,
+                        "city":"San Antonio",
+                        "county":"Bexar",
+                        "formattedAddress":"5114 Pond Lk, San Antonio, Texas 78244",
+                        "latitude":29.471978,
+                        "longitude":-98.3509,
+                        "photo":"https://ap.rdcpix.com/2062405879/642bca386732d79c6fff329322df786al-m0xd-w480_h480_q80.jpg",
+                        "price":1350,
+                        "propertyType":"Single Family",
+                        "publishedDate":"2019-06-09T23:02:44.288Z",
+                        "squareFootage":1747,
+                        "state":"TX",
+                        "zipcode":"78244",
+                        "distance":0.45,
+                        "daysOld":26.74,
+                        "correlation":0.9793
+                    },
+                    {
+                        "address":"5015 Silent Lk",
+                        "bathrooms":"2",
+                        "bedrooms":4,
+                        "city":"San Antonio",
+                        "formattedAddress":"5015 Silent Lake, San Antonio, TX 78244, USA",
+                        "latitude":29.4720425,
+                        "longitude":-98.3499812,
+                        "price":1475,
+                        "propertyType":"Single Family",
+                        "publishedDate":"2019-03-16T02:15:29.422Z",
+                        "squareFootage":1759,
+                        "state":"TX",
+                        "zipcode":"78244",
+                        "distance":0.46,
+                        "daysOld":112.6,
+                        "correlation":0.9779
+                    },
+                    {
+                        "address":"6819 Oak Lake Dr",
+                        "bathrooms":"2",
+                        "bedrooms":4,
+                        "city":"San Antonio",
+                        "formattedAddress":"6819 Oak Lake Dr, San Antonio, TX 78244, USA",
+                        "latitude":29.4740549,
+                        "longitude":-98.354475,
+                        "photo":"https://ar.rdcpix.com/581750352/a028de65b1c3d51ef89ef0379bf24f4bl-f0xd-w480_h480_q80.jpg",
+                        "price":1475,
+                        "propertyType":"Single Family",
+                        "publishedDate":"2019-03-16T02:15:29.422Z",
+                        "squareFootage":1800,
+                        "state":"TX",
+                        "zipcode":"78244",
+                        "distance":0.36,
+                        "daysOld":112.6,
+                        "correlation":0.9768
+                    },
+                    {
+                        "address":"5222 Cabin Lake Dr",
+                        "bathrooms":"2",
+                        "bedrooms":4,
+                        "city":"San Antonio",
+                        "county":"Bexar",
+                        "formattedAddress":"5222 Cabin Lake Dr, San Antonio, Texas 78244",
+                        "latitude":29.470311,
+                        "longitude":-98.352375,
+                        "photo":"https://ap.rdcpix.com/3286441123/4bd8ee9c42f96c55592f916b18744f26l-m0xd-w480_h480_q80.jpg",
+                        "price":1495,
+                        "propertyType":"Single Family",
+                        "publishedDate":"2019-04-28T04:45:22.713Z",
+                        "squareFootage":1747,
+                        "state":"TX",
+                        "zipcode":"78244",
+                        "distance":0.63,
+                        "daysOld":69.5,
+                        "correlation":0.9757
+                    },
+                    {
+                        "address":"6707 Calm Lake Dr",
+                        "bathrooms":"2",
+                        "bedrooms":4,
+                        "city":"San Antonio",
+                        "formattedAddress":"6707 Calm Lake Dr, San Antonio, TX 78244, USA",
+                        "latitude":29.472091,
+                        "longitude":-98.3567219,
+                        "photo":"https://ap.rdcpix.com/406134584/b088764768ade37f3766d169079fb126l-m0xd-w480_h480_q80.jpg",
+                        "price":1375,
+                        "propertyType":"Single Family",
+                        "publishedDate":"2019-03-29T14:55:18.346Z",
+                        "squareFootage":1842,
+                        "state":"TX",
+                        "zipcode":"78244",
+                        "distance":0.66,
+                        "daysOld":99.07,
+                        "correlation":0.9683
+                    }
+                ]
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-methods":"GET",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=2592000,h3-29=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+                "content-length":"2393",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Sat, 04 Feb 2023 21:30:30 GMT",
+                "etag":"W/\"959-AO5kS07GZPkRBzsU7g6zhpVl9Fg\"",
+                "server":"RapidAPI-1.2.8",
+                "x-cloud-trace-context":"ae678ae49f8226085547da69ea74f1c4;o=1",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "rent":{
+                        "type":"number"
+                    },
+                    "rentRangeLow":{
+                        "type":"number"
+                    },
+                    "rentRangeHigh":{
+                        "type":"number"
+                    },
+                    "longitude":{
+                        "type":"number"
+                    },
+                    "latitude":{
+                        "type":"number"
+                    },
+                    "listings":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

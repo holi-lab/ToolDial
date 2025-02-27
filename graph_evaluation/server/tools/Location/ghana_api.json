@@ -1,0 +1,192 @@
+{
+    "tool_name":"Ghana API",
+    "tool_description":"Welcome to the Ghanaian Location Lookup API! This API allows you to retrieve the latitude, longitude, and name of any location in Ghana.",
+    "title":"Ghana API",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":94,
+        "avgLatency":209,
+        "avgSuccessRate":88,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/dakidarts-dakidarts-default/api/ghana-api/",
+    "host":"ghana-api.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Directions Between 2 Locations",
+            "url":"https://ghana-api.p.rapidapi.com/directions",
+            "description":"This endpoint returns information about the route between two locations in terms of distance, duration, and steps.\n\nBelow Example: **Directions from Kumasi to Accra**",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"end_lon",
+                    "type":"NUMBER",
+                    "description":"Longitude of the ending point (required)",
+                    "default":"-0.1870"
+                },
+                {
+                    "name":"end_lat",
+                    "type":"NUMBER",
+                    "description":"Latitude of the ending point (required)",
+                    "default":"5.6037"
+                },
+                {
+                    "name":"start_lon",
+                    "type":"NUMBER",
+                    "description":"Longitude of the starting point (required)",
+                    "default":"-1.6233086"
+                },
+                {
+                    "name":"start_lat",
+                    "type":"NUMBER",
+                    "description":"Latitude of the starting point (required)",
+                    "default":"6.6985605"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"distance_unit",
+                    "type":"STRING",
+                    "description":"Unit of distance measurement, valid options are **km** (default), and **mi**.",
+                    "default":"km"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ghana-api.p.rapidapi.com/directions\"\nquerystring = {\"end_lon\": end_lon, \"distance_unit\": distance_unit, \"end_lat\": end_lat, \"start_lon\": start_lon, \"start_lat\": start_lat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ghana-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Measure Distance",
+            "url":"https://ghana-api.p.rapidapi.com/distance",
+            "description":"This endpoint calculates the distance between two locations based on their latitude and longitude coordinates, while allowing the user to specify the unit of measurement.\n\nBelow Example: **Distance from Kumasi to Accra**",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon1",
+                    "type":"NUMBER",
+                    "description":"Longitude of the first location (required)",
+                    "default":"-1.6233086"
+                },
+                {
+                    "name":"lat2",
+                    "type":"NUMBER",
+                    "description":"Latitude of the second location (required)",
+                    "default":"5.6037"
+                },
+                {
+                    "name":"lat1",
+                    "type":"NUMBER",
+                    "description":"Latitude of the first location (required)",
+                    "default":"6.6985605"
+                },
+                {
+                    "name":"lon2",
+                    "type":"NUMBER",
+                    "description":"Longitude of the second location (required)",
+                    "default":"-0.1870"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"unit",
+                    "type":"STRING",
+                    "description":"Unit of distance measurement, valid options are **km** (default), **mi**, **ft**, and **yd**.\n",
+                    "default":"km"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ghana-api.p.rapidapi.com/distance\"\nquerystring = {\"lon1\": lon1, \"lat2\": lat2, \"unit\": unit, \"lat1\": lat1, \"lon2\": lon2}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ghana-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Reverse Geocode",
+            "url":"https://ghana-api.p.rapidapi.com/georev",
+            "description":"This endpoint allows you to perform reverse geocoding in Ghana by providing query parameters for latitude and longitude. It returns the name of the city where the location is located.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"The longitude of the location.",
+                    "default":"-0.1870"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"The latitude of the location.",
+                    "default":"5.6037"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ghana-api.p.rapidapi.com/georev\"\nquerystring = {\"lon\": lon, \"lat\": lat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ghana-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Facilities Lookup",
+            "url":"https://ghana-api.p.rapidapi.com/facility",
+            "description":"This endpoint allows you to get facilities in Ghana like hospital, bank, college, etc. by providing optional query parameters for facility type, region and city. It returns a list of facilities that match the query parameters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"region",
+                    "type":"STRING",
+                    "description":"The region where the facility is located",
+                    "default":"Greater Accra"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"The type of amenity facility to search for (default: **hospital**)\nOptions:\n**aerodrome, bar, cafe, fast_food, pub, restaurant, college, driving_school, school, university, bank, atm, pharmacy,** etc..        \n\n[More options->](https://wiki.openstreetmap.org/wiki/Map_features#Amenity)",
+                    "default":"hospital"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"The number of facilities to query.",
+                    "default":"10"
+                },
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"The city where the facility is located",
+                    "default":"Accra"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ghana-api.p.rapidapi.com/facility\"\nquerystring = {\"limit\": limit, \"city\": city, \"region\": region, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ghana-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Geocode",
+            "url":"https://ghana-api.p.rapidapi.com/geofy",
+            "description":"This endpoint allows you to lookup locations in Ghana by providing an address query parameter. It returns the latitude, longitude and city name of the location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"address",
+                    "type":"STRING",
+                    "description":"Name of address to lookup",
+                    "default":"Kumasi"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ghana-api.p.rapidapi.com/geofy\"\nquerystring = {\"address\": address}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ghana-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

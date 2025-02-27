@@ -1,0 +1,327 @@
+{
+    "product_id": "api_a8028688-a780-4058-a167-d0cd82b3c4e5",
+    "tool_description": "The Skyscanner API offers developers a way to integrate Skyscanner's data into their own applications, allowing users to access and interact with the vast travel data offered by Skyscanner. \n\n![](https://tip.ep-proxy.net/t/ra-ss-main)",
+    "home_url": "https://rapidapi.com/rpi4gx/api/skyscanner-api/",
+    "name": "Skyscanner API",
+    "title": "Skyscanner API",
+    "pricing": "FREEMIUM",
+    "tool_name": "Skyscanner API",
+    "score": {
+        "avgServiceLevel": 98,
+        "avgLatency": 3821,
+        "avgSuccessRate": 98,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "host": "skyscanner-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Locations",
+            "url": "https://skyscanner-api.p.rapidapi.com/v3/geo/hierarchy/flights/en-US",
+            "description": "Geographical locations have the concept of hierarchy. Each location has a parent of a larger hierarchy.  I.e.: a place `type` of `airport` can have a parent of `city` and `city` can have a parent of `country`.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Locale of the request. \nList of locales can be retrieved from the `Locales` endpoint.\n",
+                    "default": "en-US"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/geo/hierarchy/flights/en-US\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/geo/hierarchy/flights/{locale}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Operation result",
+                        "enum": [
+                            "RESULT_STATUS_UNSPECIFIED",
+                            "RESULT_STATUS_COMPLETE",
+                            "RESULT_STATUS_INCOMPLETE",
+                            "RESULT_STATUS_FAILED"
+                        ]
+                    },
+                    "places": {
+                        "type": "object",
+                        "description": "Entity Id",
+                        "additionalProperties": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "required": [
+                                "entityId",
+                                "parentId",
+                                "name",
+                                "type"
+                            ],
+                            "properties": {
+                                "entityId": {
+                                    "type": "string",
+                                    "description": "A unique ID for the place."
+                                },
+                                "parentId": {
+                                    "type": "string",
+                                    "description": "A reference to another place, i.e. an airport can have a parent place which is a city."
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The localised name of the place."
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "description": "The type of the place.",
+                                    "enum": [
+                                        "PLACE_TYPE_UNSPECIFIED",
+                                        "PLACE_TYPE_AIRPORT",
+                                        "PLACE_TYPE_CITY",
+                                        "PLACE_TYPE_COUNTRY",
+                                        "PLACE_TYPE_CONTINENT"
+                                    ]
+                                },
+                                "iata": {
+                                    "type": "string",
+                                    "description": "The IATA code of the place. It will only be set for airports and cities."
+                                },
+                                "coordinates": {
+                                    "type": [
+                                        "object",
+                                        "null"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "latitude": {
+                                            "type": "number"
+                                        },
+                                        "longitude": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Locales",
+            "url": "https://skyscanner-api.p.rapidapi.com/v3/culture/locales",
+            "description": "You can use the `/locales` endpoint to retrieve the locales that we support to translate your content. The names of the locales returned are in the native language associated with the locale.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/culture/locales\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/culture/locales\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Operation result.",
+                        "enum": [
+                            "RESULT_STATUS_UNSPECIFIED",
+                            "RESULT_STATUS_COMPLETE",
+                            "RESULT_STATUS_INCOMPLETE",
+                            "RESULT_STATUS_FAILED"
+                        ]
+                    },
+                    "locales": {
+                        "type": "array",
+                        "description": "List of locales.",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": "The locale code."
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The locale name."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Markets",
+            "url": "https://skyscanner-api.p.rapidapi.com/v3/culture/markets/en-US",
+            "description": "You can use the `/markets` endpoint to retrieve the market countries that we support. Most suppliers (airlines, travel agents, and car hire dealers) set their fares based on the market (or country of purchase). It is therefore necessary to specify the market country in every query. The names of the markets returned are localised based on a locale passed as a parameter.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Locale of the request.\nList of locales can be retrieved from the `Locales` endpoint.\n",
+                    "default": "en-US"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/culture/markets/en-US\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/culture/markets/{locale}\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Operation result.",
+                        "enum": [
+                            "RESULT_STATUS_UNSPECIFIED",
+                            "RESULT_STATUS_COMPLETE",
+                            "RESULT_STATUS_INCOMPLETE",
+                            "RESULT_STATUS_FAILED"
+                        ]
+                    },
+                    "markets": {
+                        "type": "array",
+                        "description": "List of locales.",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": "The market code."
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The market name."
+                                },
+                                "currency": {
+                                    "type": "string",
+                                    "description": "The default currency."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Currencies",
+            "url": "https://skyscanner-api.p.rapidapi.com/v3/culture/currencies",
+            "description": "You can use the `/currencies` endpoint to retrieve the currencies that we support and information about how we format them in Skyscanner.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/culture/currencies\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/culture/currencies\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Operation result.",
+                        "enum": [
+                            "RESULT_STATUS_UNSPECIFIED",
+                            "RESULT_STATUS_COMPLETE",
+                            "RESULT_STATUS_INCOMPLETE",
+                            "RESULT_STATUS_FAILED"
+                        ]
+                    },
+                    "currencies": {
+                        "type": "array",
+                        "description": "List of currencies.",
+                        "items": {
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "code": {
+                                    "type": "string",
+                                    "description": "The currency code."
+                                },
+                                "symbol": {
+                                    "type": "string",
+                                    "description": "The currency symbol."
+                                },
+                                "thousandsSeparator": {
+                                    "type": "string",
+                                    "description": "The string for thousands separation."
+                                },
+                                "decimalSeparator": {
+                                    "type": "string",
+                                    "description": "The string for decimal separation."
+                                },
+                                "symbolOnLeft": {
+                                    "type": "boolean",
+                                    "description": "Whether to show the currency symbol on the left or right."
+                                },
+                                "spaceBetweenAmountAndSymbol": {
+                                    "type": "boolean",
+                                    "description": "Whether to include a space between the amount and symbol."
+                                },
+                                "decimalDigits": {
+                                    "type": "number",
+                                    "description": "The number of digits shown after the decimal separator."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Carriers",
+            "url": "https://skyscanner-api.p.rapidapi.com/v3/flights/carriers",
+            "description": "The Carriers API returns a full list of active carriers with name and IATA code indexed by their carrierId.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/flights/carriers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner-api.p.rapidapi.com/v3/flights/carriers\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Operation result",
+                        "enum": [
+                            "RESULT_STATUS_UNSPECIFIED",
+                            "RESULT_STATUS_COMPLETE",
+                            "RESULT_STATUS_INCOMPLETE",
+                            "RESULT_STATUS_FAILED"
+                        ]
+                    },
+                    "carriers": {
+                        "type": "object",
+                        "description": "Carrier Id",
+                        "additionalProperties": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "Legal name of the carrier."
+                                },
+                                "iata": {
+                                    "type": "string",
+                                    "description": "IATA code of the carrier"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "skyscanner_api"
+}

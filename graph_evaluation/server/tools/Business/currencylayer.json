@@ -1,0 +1,173 @@
+{
+    "tool_name":"currencylayer",
+    "tool_description":"Currencylayer provides an easy-to-integrate REST API with real-time and historical exchange rates for 168 world currencies and precious metals, delivered in lightweight and highly portable JSON format and compatible with any application, framework or language. \r\n\r\nSign up for your free API Access Key at https://currencylayer.com/product",
+    "title":"currencylayer",
+    "pricing":"PAID",
+    "score":null,
+    "home_url":"https://rapidapi.com/apilayer/api/currencylayer/",
+    "host":"apilayer-currencylayer-v1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"\"list\" endpoint - obtain a JSON list of all supported currencies",
+            "url":"https://apilayer-currencylayer-v1.p.rapidapi.com/list",
+            "description":"",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://apilayer-currencylayer-v1.p.rapidapi.com/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apilayer-currencylayer-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"\"change\" endpoint - request a currency's change parameters",
+            "url":"https://apilayer-currencylayer-v1.p.rapidapi.com/change",
+            "description":"Using the \"change\" API endpoint, you can obtain the \"change\" parameters (margin and percentage) of one or more currencies, optionally within a specific time-frame. Important: If you do not specify a time-frame, change parameters for \"yesterday to now\" will be displayed.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"currencies",
+                    "type":"STRING",
+                    "description":"\"currencies\" - request only specific currencies (e.g. EUR,CAD,GBP)",
+                    "default":""
+                },
+                {
+                    "name":"start_date",
+                    "type":"STRING",
+                    "description":"\"start_date\" - optional - the starting date of the time-frame you want to specify (format: YYYY-MM-DD)",
+                    "default":""
+                },
+                {
+                    "name":"end_date",
+                    "type":"STRING",
+                    "description":"\"end_date\" - optional - the end date of the time-frame you want to specify (format: YYYY-MM-DD)",
+                    "default":""
+                },
+                {
+                    "name":"source",
+                    "type":"STRING",
+                    "description":"\"source\" - the currency to which all other exchange rates are relative (\"Source Currency\")",
+                    "default":"USD"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://apilayer-currencylayer-v1.p.rapidapi.com/change\"\nquerystring = {\"source\": source}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apilayer-currencylayer-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"\"historical\" endpoint - request exchange rates for a specific date",
+            "url":"https://apilayer-currencylayer-v1.p.rapidapi.com/historical",
+            "description":"Make a request to the API's \"historical\" endpoint providing a valid \"date\" in the format \"YYYY-MM-DD\"",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"The date you want to obtain exchange rates for (e.g. 2014-12-31)",
+                    "default":"YYYY-MM-DD"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"currencies",
+                    "type":"STRING",
+                    "description":"\"currencies\" - request only specific currencies (e.g. EUR,CAD,GBP)",
+                    "default":""
+                },
+                {
+                    "name":"source",
+                    "type":"STRING",
+                    "description":"\"source\" - the currency to which all other exchange rates are relative (\"Source Currency\")",
+                    "default":"USD"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://apilayer-currencylayer-v1.p.rapidapi.com/historical\"\nquerystring = {\"date\": date, \"source\": source}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apilayer-currencylayer-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"\"convert\" endpoint - convert any amount from one currency to another",
+            "url":"https://apilayer-currencylayer-v1.p.rapidapi.com/convert",
+            "description":"The \"convert\" endpoint lets you convert any amount from one currency to another using real-time exchange rates. If you append an additional \"date\" parameter, exchange rates of the specified dates will be used for your conversion.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"\"from\" - the currency your conversion is based on",
+                    "default":"USD"
+                },
+                {
+                    "name":"to",
+                    "type":"STRING",
+                    "description":"\"to\" - the currency you convert the specified amount to",
+                    "default":"EUR"
+                },
+                {
+                    "name":"amount",
+                    "type":"STRING",
+                    "description":"\"amount\" - the amount to be converted",
+                    "default":"1"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"\"date\" (format: YYYY-MM-DD) - perform the conversion with historical data from the date you specify",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://apilayer-currencylayer-v1.p.rapidapi.com/convert\"\nquerystring = {\"from\": is_from, \"to\": to, \"amount\": amount}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apilayer-currencylayer-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"\"timeframe\" endpoint - request exchange rates for a specified timeframe",
+            "url":"https://apilayer-currencylayer-v1.p.rapidapi.com/timeframe",
+            "description":"Appending a valid \"start_date\" and \"end_date\", the API's \"timeframe\" endpoint will return exchange rates for this specified period.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"start_date",
+                    "type":"STRING",
+                    "description":"\"start_date\" - the starting date of the time-frame you want to specify",
+                    "default":"YYYY-MM-DD"
+                },
+                {
+                    "name":"end_date",
+                    "type":"STRING",
+                    "description":"\"end_date\" - the end date of the time-frame you want to specify",
+                    "default":"YYYY-MM-DD"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"currencies",
+                    "type":"STRING",
+                    "description":"\"currencies\" - request only specific currencies (e.g. EUR,CAD,GBP)",
+                    "default":""
+                },
+                {
+                    "name":"source",
+                    "type":"STRING",
+                    "description":"\"source\" - the currency to which all other exchange rates are relative (\"Source Currency\")",
+                    "default":"USD"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://apilayer-currencylayer-v1.p.rapidapi.com/timeframe\"\nquerystring = {\"start_date\": start_date, \"end_date\": end_date, \"source\": source}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apilayer-currencylayer-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

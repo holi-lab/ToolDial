@@ -1,0 +1,158 @@
+{
+    "tool_name":"Brooklyn Nine Nine Quotes",
+    "tool_description":"A simple API to retrieve quotes from the TV show Brooklyn 99. You can search quotes from characters and episode, also with a random functionality Limit of 100 requests a day per IP address.",
+    "title":"Brooklyn Nine Nine Quotes",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":553,
+        "avgSuccessRate":0,
+        "popularityScore":0.1,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/JacksonBright/api/brooklyn-nine-nine-quotes/",
+    "host":"brooklyn-nine-nine-quotes.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"/api/v1/quotes/random/from",
+            "url":"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/random/from",
+            "description":"If both query params are provided only character quotes are returned. Sample Request:\r\n            \r\n    GET api/quotes/random/from?character=Amy\r\n    {\r\n       \"Message\": \"Quote returned.\",\r\n       \"Data\": {\r\n            \"Character\": \"Amy\",\r\n            \"Episode\": \"Paranoia\",\r\n            \"QuoteText\": \"...\"\r\n        }       \r\n    }\r\n    \r\n    GET api/quotes/random/from?episode=AC/DC\r\n    {\r\n       \"Message\": \"Quote returned.\",\r\n       \"Data\": {\r\n            \"Character\": \"Rosa\",\r\n            \"Episode\": \"AC/DC\",\r\n            \"QuoteText\": \"...\"\r\n        }       \r\n    }\r\n    \r\n    GET api/quotes/random/from?episode=a\r\n    {\r\n       \"Message\": \"Quote not found.\",\r\n       \"Data\": null       \r\n    }",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"episode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"character",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/random/from\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"brooklyn-nine-nine-quotes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"/api/v1/quotes/all/from",
+            "url":"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/all/from",
+            "description":"Can navigate pages by setting param pageNumber.\r\nPage size limited by maximum of 50, can be set lower.\r\nIf both query params are provided only character quotes are returned. Request Sample:\r\n\r\n    GET api/quotes/all/from?character=Jake\r\n    {   \r\n        \"PageNumber\": 1,\r\n        \"PageSize\": 2,\r\n        \"Message\": \"Quote returned.\",\r\n        \"Data\": [\r\n            {\r\n                \"Character\": \"Jake\",\r\n                \"Episode\": \"Honeymoon\",\r\n                \"QuoteText\": \"...\"\r\n            },\r\n            {\r\n                \"Character\": \"Jake\",\r\n                \"Episode\": \"M.E. Time\",\r\n                \"QuoteText\": \"...\"\r\n            }\r\n        ]\r\n    }\r\n    \r\n    GET api/quotes/all/from?character=a\r\n    {\r\n       \"Message\": \"Quote not found.\",\r\n       \"Data\": null       \r\n    }",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"character",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"PageSize",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"PageNumber",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"episode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/all/from\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"brooklyn-nine-nine-quotes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"/api/v1/quotes/find",
+            "url":"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/find",
+            "description":"Can navigate pages by setting param pageNumber.\r\nPage size limited by maximum of 50, can be set lower.\r\nCan search for term in isolation but also filter by character.\r\nCase insensitive. Request Sample:\r\n\r\n    GET api/quotes/find?searchTerm=pet\r\n    {   \r\n        \"PageNumber\": 1,\r\n        \"PageSize\": 2,\r\n        \"Message\": \"Quote returned.\",\r\n        \"Data\": [\r\n            {\r\n                \"Character\": \"Amy\",\r\n                \"Episode\": \"Greg and Larry\",\r\n                \"QuoteText\": \"...\"\r\n            },\r\n            {\r\n                \"Character\": \"Scully\",\r\n                \"Episode\": \"The Honeypot\",\r\n                \"QuoteText\": \"...\"\r\n            }\r\n        ]\r\n    }\r\n    \r\n    GET api/quotes/find?character=Amy&searchTerm=pet\r\n    {   \r\n        \"PageNumber\": 1,\r\n        \"PageSize\": 2,\r\n        \"Message\": \"Quote returned.\",\r\n        \"Data\": [\r\n            {\r\n                \"Character\": \"Amy\",\r\n                \"Episode\": \"Greg and Larry\",\r\n                \"QuoteText\": \"...\"\r\n            },\r\n            {\r\n                \"Character\": \"Amy\",\r\n                \"Episode\": \"Chocolate Milk\",\r\n                \"QuoteText\": \"...\"\r\n            }\r\n        ]\r\n    }\r\n    \r\n    GET api/quotes/find?character=1\r\n    {\r\n       \"Message\": \"Quote not found.\",\r\n       \"Data\": null       \r\n    }",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"character",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"PageNumber",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"searchTerm",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"PageSize",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/find\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"brooklyn-nine-nine-quotes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"/api/v1/quotes/all",
+            "url":"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/all",
+            "description":"Can navigate pages by setting param pageNumber.\r\nPage size limited by maximum of 50, can be set lower. Sample Request:\r\n\r\n    GET api/quotes/all\r\n    {   \r\n        \"PageNumber\": 1,\r\n        \"PageSize\": 2,\r\n        \"Message\": \"Quote returned.\",\r\n        \"Data\": [\r\n            {\r\n                \"Character\": \"Captain Holt\",\r\n                \"Episode\": \"Honeymoon\",\r\n                \"QuoteText\": \"...\"\r\n            },\r\n            {\r\n                \"Character\": \"Hitchcock\",\r\n                \"Episode\": \"M.E. Time\",\r\n                \"QuoteText\": \"...\"\r\n            }\r\n        ]\r\n    }\r\n    \r\n    GET api/quotes/all?PageNumber=500\r\n    {\r\n       \"Message\": \"Quote not found.\",\r\n       \"Data\": null       \r\n    }",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"PageSize",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"PageNumber",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/all\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"brooklyn-nine-nine-quotes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"/api/v1/quotes/random",
+            "url":"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/random",
+            "description":"Sample request:\r\n            \r\n    GET api/quotes/random\r\n    {\r\n       \"Message\": \"Quote returned.\",\r\n       \"Data\": {\r\n            \"Character\": \"Charles\",\r\n            \"Episode\": \"Paranoia\",\r\n            \"QuoteText\": \"...\"\r\n        }       \r\n    }",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://brooklyn-nine-nine-quotes.p.rapidapi.com/api/v1/quotes/random\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"brooklyn-nine-nine-quotes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

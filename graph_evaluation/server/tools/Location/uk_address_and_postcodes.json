@@ -1,0 +1,110 @@
+{
+    "tool_name":"UK Address and Postcodes",
+    "tool_description":"Autofill addresses from postcodes and UK Royal Mail address finder",
+    "title":"UK Address and Postcodes",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/knocode-knocode-default/api/uk-address-and-postcodes/",
+    "host":"uk-address-and-postcodes.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Fetch suggested addresses for auto complete",
+            "url":"https://uk-address-and-postcodes.p.rapidapi.com/rapidapi/v1/autocomplete/addresses",
+            "description":"Returns a list of suggested addresses which best match the supplied partial address.  Typically this endpoint is called as the user types an address on a form.   The suggested addresses are then displayed for the user to select the actual correct address.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Specifies the partial address you wish to query.  Typically this is the value entered in a text input field from the UI.  The returned suggested addresses are what the API thinks are the most likely addresses the user will select based on this query parameter.  \n\nRoyal Mail postcodes are recognised as a special case, in which case the suggested addresses will be all within that postcode.\n\nThe query value is case insensitive and expected to be url encoded.",
+                    "default":"topstreet"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uk-address-and-postcodes.p.rapidapi.com/rapidapi/v1/autocomplete/addresses\"\nquerystring = {\"query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uk-address-and-postcodes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "message":{
+                        "type":"string"
+                    },
+                    "result":{
+                        "properties":{
+                            "hits":{
+                                "items":{
+                                    "properties":{
+                                        "addressId":{
+                                            "type":"integer"
+                                        },
+                                        "suggestion":{
+                                            "type":"string"
+                                        }
+                                    },
+                                    "type":"object"
+                                },
+                                "type":"array"
+                            }
+                        },
+                        "type":"object"
+                    }
+                },
+                "type":"object"
+            }
+        },
+        {
+            "name":"Fetch the full address of a suggested address",
+            "url":"https://uk-address-and-postcodes.p.rapidapi.com/rapidapi/v1/address/{addressid}",
+            "description":"Fetches the full address given an `addressId` from an auto completion suggested address.  Call this API to get the full address used to auto populate an address form when a user selects a suggested address.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"addressId",
+                    "type":"string",
+                    "description":"This is the `addressId` from a suggested address return from the `Fetch suggested addresses for auto complete` endpoint.\n",
+                    "default":"247394150194452"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uk-address-and-postcodes.p.rapidapi.com/rapidapi/v1/address/{addressid}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uk-address-and-postcodes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "message":{
+                        "type":"string"
+                    },
+                    "result":{
+                        "type":"object",
+                        "properties":{
+                            "line_1":{
+                                "type":"string"
+                            },
+                            "line_2":{
+                                "type":"string"
+                            },
+                            "line_3":{
+                                "type":"string"
+                            },
+                            "post_town":{
+                                "type":"string"
+                            },
+                            "postcode":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

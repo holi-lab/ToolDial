@@ -1,0 +1,277 @@
+{
+    "tool_name":"Property Lines",
+    "tool_description":"Tax Parcel Property Boundary lines across the US based on input coordinates. New updated servers for faster responses!",
+    "title":"Property Lines",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":3992,
+        "avgSuccessRate":95,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/admin-DS8z8zYSG/api/property-lines/",
+    "host":"property-lines.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get All US State Boundaries",
+            "url":"https://property-lines.p.rapidapi.com/get_all_us_state_boundaries",
+            "description":"Returns all US state boundaries.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://property-lines.p.rapidapi.com/get_all_us_state_boundaries\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"property-lines.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get Radius Boundary",
+            "url":"https://property-lines.p.rapidapi.com/get_us_radius_property_boundaries",
+            "description":"This endpoint retrieves the property boundaries associated with a given latitude and longitude coordinate within a given radius, if any exist.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"Radius of property boundaries to return.",
+                    "default":"1000"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"(Optional) Provide state abbreviation and county to reduce response time.",
+                    "default":"ny"
+                },
+                {
+                    "name":"county",
+                    "type":"STRING",
+                    "description":"(Optional) Provide state abbreviation and county to reduce response time.",
+                    "default":"manhattan"
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"Provide either coords or lat & lon.",
+                    "default":"-73.94504387923337"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Provide either coords or lat & lon.",
+                    "default":"40.79975635358477"
+                },
+                {
+                    "name":"coords",
+                    "type":"STRING",
+                    "description":"Provide coordinates (lat,lon)",
+                    "default":"40.79975635358477, -73.94504387923337"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://property-lines.p.rapidapi.com/get_us_radius_property_boundaries\"\nquerystring = {\"state\": state, \"county\": county, \"lon\": lon, \"radius\": radius, \"lat\": lat, \"coords\": coords}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"property-lines.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "featureCollection":{
+                        "type":"object"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Get County Boundary",
+            "url":"https://property-lines.p.rapidapi.com/get_us_county_boundary",
+            "description":"This endpoint retrieves the  county property boundaries associated with a given latitude and longitude coordinate, if any exist.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"coords",
+                    "type":"STRING",
+                    "description":"Provide coordinates (lat,lon).",
+                    "default":"40.79975635358477, -73.94504387923337"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Provide either coords or lat & lon.",
+                    "default":"40.79975635358477"
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"Provide either coords or lat & lon.",
+                    "default":"-73.94504387923337"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://property-lines.p.rapidapi.com/get_us_county_boundary\"\nquerystring = {\"coords\": coords, \"lat\": lat, \"lon\": lon}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"property-lines.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "featureCollection":{
+                        "type":"object"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Get All Counties In State Boundaries",
+            "url":"https://property-lines.p.rapidapi.com/get_all_counties_for_us_state",
+            "description":"This endpoint retrieves all county boundaries in the state associated with a given latitude and longitude coordinate, if any exist.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"Either coords or lat & lon are required.",
+                    "default":"-73.94504387923337"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Either coords or lat & lon are required. ",
+                    "default":"40.79975635358477"
+                },
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"(Optional) Provide a state abbreviation to reduce response time.",
+                    "default":"il"
+                },
+                {
+                    "name":"coords",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"40.79975635358477, -73.94504387923337"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://property-lines.p.rapidapi.com/get_all_counties_for_us_state\"\nquerystring = {\"lon\": lon, \"lat\": lat, \"state\": state, \"coords\": coords}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"property-lines.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "featureCollection":{
+                        "type":"object"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Get Single Boundary",
+            "url":"https://property-lines.p.rapidapi.com/get_single_us_boundary",
+            "description":"This endpoint retrieves the property boundaries associated with a given latitude and longitude coordinate, if any exist.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"(Optional) Provide state abbreviation and county to reduce response time.",
+                    "default":""
+                },
+                {
+                    "name":"county",
+                    "type":"STRING",
+                    "description":"(Optional) Provide state and county to reduce response time.",
+                    "default":""
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"Either coords or lat & lon are required.",
+                    "default":"-73.94531505009626"
+                },
+                {
+                    "name":"coords",
+                    "type":"STRING",
+                    "description":"Provide coordinates (lat,lon).",
+                    "default":"40.79982062892406, -73.94531505009626"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Either coords or lat & lon are required. ",
+                    "default":"40.79982062892406,"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://property-lines.p.rapidapi.com/get_single_us_boundary\"\nquerystring = {\"lon\": lon, \"coords\": coords, \"lat\": lat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"property-lines.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "featureCollection":{
+                        "type":"object"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Get State Boundary",
+            "url":"https://property-lines.p.rapidapi.com/get_us_state_boundary",
+            "description":"This endpoint retrieves the  state property boundaries associated with a given latitude and longitude coordinate, if any exist.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"-73.94504387923337"
+                },
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"Provide either coords or lat & lon.",
+                    "default":"40.79975635358477"
+                },
+                {
+                    "name":"coords",
+                    "type":"STRING",
+                    "description":"Provide coordinates (lat,lon)",
+                    "default":"40.79975635358477, -73.94504387923337"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://property-lines.p.rapidapi.com/get_us_state_boundary\"\nquerystring = {\"lon\": lon, \"lat\": lat, \"coords\": coords}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"property-lines.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "featureCollection":{
+                        "type":"object"
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,2562 @@
+{
+    "product_id": "api_f5e0d7a8-7c5b-49a8-900b-b13a51a2c8ad",
+    "tool_description": "A collection of location and time utilities. You can search for country/city information worldwide, find out distance between two locations/cities, get location data from IP address, solve any time questions regarding different timezones, get sunrise/sunset times at any location, get holiday information worldwide, and much more!",
+    "home_url": "https://rapidapi.com/dfskGT/api/location-and-time/",
+    "name": "Location and Time",
+    "title": "Location and Time",
+    "pricing": "FREEMIUM",
+    "tool_name": "Location and Time",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 764,
+        "avgSuccessRate": 85,
+        "popularityScore": 9,
+        "__typename": "Score"
+    },
+    "host": "location-and-time.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Astral Data by City",
+            "url": "https://location-and-time.p.rapidapi.com/astral/bycity",
+            "description": "Get times of various aspects of the sun for specified date and city, including dawn, sunrise, noon, sunset, dusk times. **Note**: the fuzzy search of provided city may not be the one you want due to multiple cities may have the same name, the most common one will be used. In this case, use a geocoding service to find the exact geolocation of the city, use /astral/bylocation endpoint instead.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "Los Angeles"
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "Local date at location specified by `lat` and `lon`, fuzzy search is supported.",
+                    "default": "2023-01-01"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/astral/bycity\"\nquerystring = {\"city\": \"Los Angeles\", \"date\": \"2023-01-01\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/astral/bycity\"\nquerystring = {\"city\": \"Los Angeles\", \"date\": \"2023-01-01\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "request": {
+                    "date": "2023-01-01",
+                    "city": "Los Angeles, US",
+                    "latitude": 34.05223,
+                    "longitude": -118.24368,
+                    "timezone": "America/Los_Angeles"
+                },
+                "response": {
+                    "dawn": "2023-01-01T06:30:37-08:00",
+                    "sunrise": "2023-01-01T06:58:49-08:00",
+                    "noon": "2023-01-01T11:56:11-08:00",
+                    "sunset": "2023-01-01T16:54:26-08:00",
+                    "dusk": "2023-01-01T17:22:38-08:00"
+                }
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "AstralByCityResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "date",
+                            "city",
+                            "latitude",
+                            "longitude",
+                            "timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "date": {
+                                "title": "Date",
+                                "type": "string"
+                            },
+                            "city": {
+                                "title": "City",
+                                "type": "string"
+                            },
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            },
+                            "timezone": {
+                                "title": "Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "AstralResponse",
+                        "required": [
+                            "dawn",
+                            "sunrise",
+                            "noon",
+                            "sunset",
+                            "dusk"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "dawn": {
+                                "title": "Dawn",
+                                "type": "string"
+                            },
+                            "sunrise": {
+                                "title": "Sunrise",
+                                "type": "string"
+                            },
+                            "noon": {
+                                "title": "Noon",
+                                "type": "string"
+                            },
+                            "sunset": {
+                                "title": "Sunset",
+                                "type": "string"
+                            },
+                            "dusk": {
+                                "title": "Dusk",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Calculate Distance Between Locations",
+            "url": "https://location-and-time.p.rapidapi.com/distance/bylocation",
+            "description": "Calculate distance between two geolocations. We return the [Geodesic distance](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid)  and [Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance) for different use cases.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "to_lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -75.2536137
+                },
+                {
+                    "name": "to_lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 40.4637385
+                },
+                {
+                    "name": "from_lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 51.50853
+                },
+                {
+                    "name": "from_lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -0.12574
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "unit",
+                    "type": "STRING",
+                    "description": "Length unit [mi|km]",
+                    "default": "mi"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/distance/bylocation\"\nquerystring = {\"to_lon\": -75.2536137, \"to_lat\": 40.4637385, \"from_lat\": 51.50853, \"unit\": \"mi\", \"from_lon\": -0.12574}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/distance/bylocation\"\nquerystring = {\"to_lon\": -75.2536137, \"to_lat\": 40.4637385, \"from_lat\": 51.50853, \"unit\": \"mi\", \"from_lon\": -0.12574}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "request": {
+                    "from_latitude": 51.50853,
+                    "from_longitude": -0.12574,
+                    "to_latitude": 40.4637385,
+                    "to_longitude": -75.2536137
+                },
+                "response": {
+                    "geodesic": {
+                        "unit": "mi",
+                        "value": 3532.4
+                    },
+                    "greatcircle": {
+                        "unit": "mi",
+                        "value": 3522.9
+                    }
+                }
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "DistanceByLocationResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "from_latitude",
+                            "from_longitude",
+                            "to_latitude",
+                            "to_longitude"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_latitude": {
+                                "title": "From Latitude",
+                                "type": "number"
+                            },
+                            "from_longitude": {
+                                "title": "From Longitude",
+                                "type": "number"
+                            },
+                            "to_latitude": {
+                                "title": "To Latitude",
+                                "type": "number"
+                            },
+                            "to_longitude": {
+                                "title": "To Longitude",
+                                "type": "number"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "DistanceResponse",
+                        "required": [
+                            "geodesic",
+                            "greatcircle"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "geodesic": {
+                                "title": "Geodesic",
+                                "type": "object"
+                            },
+                            "greatcircle": {
+                                "title": "Greatcircle",
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Decode Geohash",
+            "url": "https://location-and-time.p.rapidapi.com/geohash/decode",
+            "description": "Decode a [geohash](https://en.wikipedia.org/wiki/Geohash) string into a geolocation with a bounding box.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "gh",
+                    "type": "STRING",
+                    "description": "Geohash.",
+                    "default": "dr5re"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/geohash/decode\"\nquerystring = {\"gh\": \"dr5re\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/geohash/decode\"\nquerystring = {\"gh\": \"dr5re\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GeoHashDecodeResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "geohash"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "geohash": {
+                                "title": "Geohash",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "required": [
+                            "latitude",
+                            "longitude",
+                            "bounding_box",
+                            "neighbors",
+                            "bbox_url"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            },
+                            "latitude_delta": {
+                                "title": "Latitude Delta",
+                                "type": "number"
+                            },
+                            "longitude_delta": {
+                                "title": "Longitude Delta",
+                                "type": "number"
+                            },
+                            "bounding_box": {
+                                "title": "Bounding Box",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "number"
+                                }
+                            },
+                            "neighbors": {
+                                "title": "Neighbors",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "bbox_url": {
+                                "title": "Bbox Url",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search City by Name",
+            "url": "https://location-and-time.p.rapidapi.com/city/byname",
+            "description": "Get details of the city specified by name, fuzzy search is supported. Up to 10 records for cities with similar name may be returned. Information includes city name, alternative names, geolocation (latitude/longitude), population, timezone, map url, and more.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "New York"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/city/byname\"\nquerystring = {\"name\": \"New York\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/city/byname\"\nquerystring = {\"name\": \"New York\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "CityByNameResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "city"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "city": {
+                                "title": "City",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "type": "array",
+                        "items": {
+                            "title": "City",
+                            "required": [
+                                "name",
+                                "asciiname",
+                                "alternatenames",
+                                "latitude",
+                                "longitude",
+                                "countrycode",
+                                "population",
+                                "timezone",
+                                "map_url"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "title": "Name",
+                                    "type": "string"
+                                },
+                                "asciiname": {
+                                    "title": "Asciiname",
+                                    "type": "string"
+                                },
+                                "alternatenames": {
+                                    "title": "Alternatenames",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "latitude": {
+                                    "title": "Latitude",
+                                    "type": "number"
+                                },
+                                "longitude": {
+                                    "title": "Longitude",
+                                    "type": "number"
+                                },
+                                "countrycode": {
+                                    "title": "Countrycode",
+                                    "type": "string"
+                                },
+                                "population": {
+                                    "title": "Population",
+                                    "type": "integer"
+                                },
+                                "timezone": {
+                                    "title": "Timezone",
+                                    "type": "string"
+                                },
+                                "map_url": {
+                                    "title": "Map Url",
+                                    "type": "string"
+                                },
+                                "distance": {
+                                    "title": "Distance",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Time at Other City",
+            "url": "https://location-and-time.p.rapidapi.com/timeat/bycity",
+            "description": "Find out time at `to_city` given `from_time` and `from_city`. Daylight saving time are taken care of.  **Note**: the fuzzy search of provided city may not be the one you want due to multiple cities may have the same name, the most common one will be used. In this case, use a geocoding service to find the exact geolocation of the city, use `/timeat/bylocation` endpoint instead.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "from_city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "Los Angeles"
+                },
+                {
+                    "name": "to_city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "New York"
+                },
+                {
+                    "name": "from_time",
+                    "type": "STRING",
+                    "description": "Date and time, fuzzy search is supported.",
+                    "default": "2020-01-01 12:34:56"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timeat/bycity\"\nquerystring = {\"from_city\": \"Los Angeles\", \"to_city\": \"New York\", \"from_time\": \"2020-01-01 12:34:56\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timeat/bycity\"\nquerystring = {\"from_city\": \"Los Angeles\", \"to_city\": \"New York\", \"from_time\": \"2020-01-01 12:34:56\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimeAtByCityResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "TimeAtByCityRequest",
+                        "required": [
+                            "from_time",
+                            "from_city",
+                            "from_timezone",
+                            "to_city",
+                            "to_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_time": {
+                                "title": "From Time",
+                                "type": "string"
+                            },
+                            "from_city": {
+                                "title": "From City",
+                                "type": "string"
+                            },
+                            "from_timezone": {
+                                "title": "From Timezone",
+                                "type": "string"
+                            },
+                            "to_city": {
+                                "title": "To City",
+                                "type": "string"
+                            },
+                            "to_timezone": {
+                                "title": "To Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "TimeAtResponse",
+                        "required": [
+                            "to_time",
+                            "year",
+                            "month",
+                            "day",
+                            "hour",
+                            "minute",
+                            "second",
+                            "weekday",
+                            "week_number",
+                            "utc_time",
+                            "seconds_since_epoch",
+                            "ctime",
+                            "local_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "to_time": {
+                                "title": "To Time",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            },
+                            "month": {
+                                "title": "Month",
+                                "type": "integer"
+                            },
+                            "day": {
+                                "title": "Day",
+                                "type": "integer"
+                            },
+                            "hour": {
+                                "title": "Hour",
+                                "type": "integer"
+                            },
+                            "minute": {
+                                "title": "Minute",
+                                "type": "integer"
+                            },
+                            "second": {
+                                "title": "Second",
+                                "type": "integer"
+                            },
+                            "weekday": {
+                                "title": "Weekday",
+                                "type": "string"
+                            },
+                            "week_number": {
+                                "title": "Week Number",
+                                "type": "integer"
+                            },
+                            "utc_time": {
+                                "title": "Utc Time",
+                                "type": "string"
+                            },
+                            "seconds_since_epoch": {
+                                "title": "Seconds Since Epoch",
+                                "type": "integer"
+                            },
+                            "ctime": {
+                                "title": "Ctime",
+                                "type": "string"
+                            },
+                            "local_timezone": {
+                                "title": "Local Timezone",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Time Diff by Timezone",
+            "url": "https://location-and-time.p.rapidapi.com/timediff/bytimezone",
+            "description": "Find out time difference from `from_time` to `to_time` for specified timezone. Daylight saving time are taken care of.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "from_timezone",
+                    "type": "STRING",
+                    "description": "Timezone from the response of /timezone endpoint.",
+                    "default": "America/Los_Angeles"
+                },
+                {
+                    "name": "to_timezone",
+                    "type": "STRING",
+                    "description": "Timezone from the response of /timezone endpoint.",
+                    "default": "America/New_York"
+                },
+                {
+                    "name": "from_time",
+                    "type": "STRING",
+                    "description": "Time, fuzzy search is supported.",
+                    "default": "2020-01-01 12:34:56"
+                },
+                {
+                    "name": "to_time",
+                    "type": "STRING",
+                    "description": "Time, fuzzy search is supported.",
+                    "default": "2023-01-01 12:34:56"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timediff/bytimezone\"\nquerystring = {\"from_timezone\": \"America/Los_Angeles\", \"to_timezone\": \"America/New_York\", \"from_time\": \"2020-01-01 12:34:56\", \"to_time\": \"2023-01-01 12:34:56\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timediff/bytimezone\"\nquerystring = {\"from_timezone\": \"America/Los_Angeles\", \"to_timezone\": \"America/New_York\", \"from_time\": \"2020-01-01 12:34:56\", \"to_time\": \"2023-01-01 12:34:56\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimeDiffByTimezoneResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "from_time",
+                            "from_timezone",
+                            "to_time",
+                            "to_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_time": {
+                                "title": "From Time",
+                                "type": "string"
+                            },
+                            "from_timezone": {
+                                "title": "From Timezone",
+                                "type": "string"
+                            },
+                            "to_time": {
+                                "title": "To Time",
+                                "type": "string"
+                            },
+                            "to_timezone": {
+                                "title": "To Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "TimeDiffResponse",
+                        "required": [
+                            "years",
+                            "months",
+                            "days",
+                            "hours",
+                            "minutes",
+                            "seconds"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "years": {
+                                "title": "Years",
+                                "type": "integer"
+                            },
+                            "months": {
+                                "title": "Months",
+                                "type": "integer"
+                            },
+                            "days": {
+                                "title": "Days",
+                                "type": "integer"
+                            },
+                            "hours": {
+                                "title": "Hours",
+                                "type": "integer"
+                            },
+                            "minutes": {
+                                "title": "Minutes",
+                                "type": "integer"
+                            },
+                            "seconds": {
+                                "title": "Seconds",
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Date and Time by Location",
+            "url": "https://location-and-time.p.rapidapi.com/datetime/bylocation",
+            "description": "Get date and time for specified location.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 34.05
+                },
+                {
+                    "name": "lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -118.24
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/datetime/bylocation\"\nquerystring = {\"lat\": 34.05, \"lon\": -118.24}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/datetime/bylocation\"\nquerystring = {\"lat\": 34.05, \"lon\": -118.24}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "DatetimeByLocationResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "latitude",
+                            "longitude"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "DatetimeResponse",
+                        "required": [
+                            "time",
+                            "year",
+                            "month",
+                            "day",
+                            "hour",
+                            "minute",
+                            "second",
+                            "weekday",
+                            "week_number",
+                            "utc_time",
+                            "seconds_since_epoch",
+                            "ctime",
+                            "local_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "title": "Time",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            },
+                            "month": {
+                                "title": "Month",
+                                "type": "integer"
+                            },
+                            "day": {
+                                "title": "Day",
+                                "type": "integer"
+                            },
+                            "hour": {
+                                "title": "Hour",
+                                "type": "integer"
+                            },
+                            "minute": {
+                                "title": "Minute",
+                                "type": "integer"
+                            },
+                            "second": {
+                                "title": "Second",
+                                "type": "integer"
+                            },
+                            "weekday": {
+                                "title": "Weekday",
+                                "type": "string"
+                            },
+                            "week_number": {
+                                "title": "Week Number",
+                                "type": "integer"
+                            },
+                            "utc_time": {
+                                "title": "Utc Time",
+                                "type": "string"
+                            },
+                            "seconds_since_epoch": {
+                                "title": "Seconds Since Epoch",
+                                "type": "integer"
+                            },
+                            "ctime": {
+                                "title": "Ctime",
+                                "type": "string"
+                            },
+                            "local_timezone": {
+                                "title": "Local Timezone",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Time at Other Timezone",
+            "url": "https://location-and-time.p.rapidapi.com/timeat/bytimezone",
+            "description": "Find out time at `to_timezone` for given `from_time` and `from_timezone`. Daylight saving time are taken care of.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "to_timezone",
+                    "type": "STRING",
+                    "description": "Timezone from the response of `/timezone` endpoint.",
+                    "default": "America/New_York"
+                },
+                {
+                    "name": "from_time",
+                    "type": "STRING",
+                    "description": "Date and time, fuzzy search is supported.",
+                    "default": "2020-01-01 12:34:56"
+                },
+                {
+                    "name": "from_timezone",
+                    "type": "STRING",
+                    "description": "Timezone from the response of `/timezone` endpoint.",
+                    "default": "America/Los_Angeles"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timeat/bytimezone\"\nquerystring = {\"to_timezone\": \"America/New_York\", \"from_time\": \"2020-01-01 12:34:56\", \"from_timezone\": \"America/Los_Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timeat/bytimezone\"\nquerystring = {\"to_timezone\": \"America/New_York\", \"from_time\": \"2020-01-01 12:34:56\", \"from_timezone\": \"America/Los_Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimeAtByTimezoneResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "TimeAtByTimezoneRequest",
+                        "required": [
+                            "from_time",
+                            "from_timezone",
+                            "to_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_time": {
+                                "title": "From Time",
+                                "type": "string"
+                            },
+                            "from_timezone": {
+                                "title": "From Timezone",
+                                "type": "string"
+                            },
+                            "to_timezone": {
+                                "title": "To Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "TimeAtResponse",
+                        "required": [
+                            "to_time",
+                            "year",
+                            "month",
+                            "day",
+                            "hour",
+                            "minute",
+                            "second",
+                            "weekday",
+                            "week_number",
+                            "utc_time",
+                            "seconds_since_epoch",
+                            "ctime",
+                            "local_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "to_time": {
+                                "title": "To Time",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            },
+                            "month": {
+                                "title": "Month",
+                                "type": "integer"
+                            },
+                            "day": {
+                                "title": "Day",
+                                "type": "integer"
+                            },
+                            "hour": {
+                                "title": "Hour",
+                                "type": "integer"
+                            },
+                            "minute": {
+                                "title": "Minute",
+                                "type": "integer"
+                            },
+                            "second": {
+                                "title": "Second",
+                                "type": "integer"
+                            },
+                            "weekday": {
+                                "title": "Weekday",
+                                "type": "string"
+                            },
+                            "week_number": {
+                                "title": "Week Number",
+                                "type": "integer"
+                            },
+                            "utc_time": {
+                                "title": "Utc Time",
+                                "type": "string"
+                            },
+                            "seconds_since_epoch": {
+                                "title": "Seconds Since Epoch",
+                                "type": "integer"
+                            },
+                            "ctime": {
+                                "title": "Ctime",
+                                "type": "string"
+                            },
+                            "local_timezone": {
+                                "title": "Local Timezone",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Encode Geohash",
+            "url": "https://location-and-time.p.rapidapi.com/geohash/encode",
+            "description": "Encode a geolocation into [geohash](https://en.wikipedia.org/wiki/Geohash) string which can then used for applications such as proximity search.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -74.00597
+                },
+                {
+                    "name": "lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 40.71427
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "precision",
+                    "type": "NUMBER",
+                    "description": "Geohash precision.",
+                    "default": 5
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/geohash/encode\"\nquerystring = {\"lon\": -74.00597, \"lat\": 40.71427, \"precision\": 5}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/geohash/encode\"\nquerystring = {\"lon\": -74.00597, \"lat\": 40.71427, \"precision\": 5}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GeoHashEncodeResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "latitude",
+                            "longitude",
+                            "precision"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            },
+                            "precision": {
+                                "title": "Precision",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "required": [
+                            "geohash",
+                            "bounding_box",
+                            "neighbors",
+                            "bbox_url"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "geohash": {
+                                "title": "Geohash",
+                                "type": "string"
+                            },
+                            "bounding_box": {
+                                "title": "Bounding Box",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "number"
+                                }
+                            },
+                            "neighbors": {
+                                "title": "Neighbors",
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "bbox_url": {
+                                "title": "Bbox Url",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Calculate Distance Between Cities",
+            "url": "https://location-and-time.p.rapidapi.com/distance/bycity",
+            "description": "Calculate distance between two cities. We return the [Geodesic distance](https://en.wikipedia.org/wiki/Geodesics_on_an_ellipsoid) and [Great-circle distance](https://en.wikipedia.org/wiki/Great-circle_distance) for different use cases. Note: the fuzzy search of provided city may not be the one you want due to multiple cities may have the same name, the most common one will be used. In this case, use a geocoding service to find the exact geolocation of the city, use `/distance/bylocation` endpoint instead.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "to_city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "New York"
+                },
+                {
+                    "name": "from_city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "Los Angeles"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "unit",
+                    "type": "STRING",
+                    "description": "Length unit [mi|km]",
+                    "default": "mi"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/distance/bycity\"\nquerystring = {\"unit\": \"mi\", \"to_city\": \"New York\", \"from_city\": \"Los Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/distance/bycity\"\nquerystring = {\"unit\": \"mi\", \"to_city\": \"New York\", \"from_city\": \"Los Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "DistanceByCityResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "from_city",
+                            "to_city"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_city": {
+                                "title": "From City",
+                                "type": "string"
+                            },
+                            "to_city": {
+                                "title": "To City",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "DistanceResponse",
+                        "required": [
+                            "geodesic",
+                            "greatcircle"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "geodesic": {
+                                "title": "Geodesic",
+                                "type": "object"
+                            },
+                            "greatcircle": {
+                                "title": "Greatcircle",
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Geolocation by IP",
+            "url": "https://location-and-time.p.rapidapi.com/geoip",
+            "description": "Get geographic location information about the specific IP address. Information includes the city, country, continent, geolocation with accuracy, postal code, and more.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ip",
+                    "type": "STRING",
+                    "description": "IP address.",
+                    "default": "128.101.101.101"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/geoip\"\nquerystring = {\"ip\": \"128.101.101.101\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/geoip\"\nquerystring = {\"ip\": \"128.101.101.101\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GeoIpResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "ip"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "ip": {
+                                "title": "Ip",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "required": [
+                            "traits"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "city": {
+                                "title": "GeoIpCity",
+                                "required": [
+                                    "names"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "names": {
+                                        "title": "Names",
+                                        "type": "object",
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "continent": {
+                                "title": "GeoIpContinent",
+                                "required": [
+                                    "code",
+                                    "names"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "title": "Code",
+                                        "type": "string"
+                                    },
+                                    "names": {
+                                        "title": "Names",
+                                        "type": "object",
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "country": {
+                                "title": "GeoIpCountry",
+                                "required": [
+                                    "iso_code",
+                                    "names"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "iso_code": {
+                                        "title": "Iso Code",
+                                        "type": "string"
+                                    },
+                                    "names": {
+                                        "title": "Names",
+                                        "type": "object",
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "location": {
+                                "title": "GeoIpLocation",
+                                "required": [
+                                    "accuracy_radius",
+                                    "latitude",
+                                    "longitude",
+                                    "time_zone"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "accuracy_radius": {
+                                        "title": "Accuracy Radius",
+                                        "type": "integer"
+                                    },
+                                    "latitude": {
+                                        "title": "Latitude",
+                                        "type": "number"
+                                    },
+                                    "longitude": {
+                                        "title": "Longitude",
+                                        "type": "number"
+                                    },
+                                    "metro_code": {
+                                        "title": "Metro Code",
+                                        "type": "integer"
+                                    },
+                                    "time_zone": {
+                                        "title": "Time Zone",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "postal": {
+                                "title": "Postal",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            },
+                            "registered_country": {
+                                "title": "GeoIpCountry",
+                                "required": [
+                                    "iso_code",
+                                    "names"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "iso_code": {
+                                        "title": "Iso Code",
+                                        "type": "string"
+                                    },
+                                    "names": {
+                                        "title": "Names",
+                                        "type": "object",
+                                        "additionalProperties": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "subdivisions": {
+                                "title": "Subdivisions",
+                                "type": "array",
+                                "items": {
+                                    "title": "GeoIpCity",
+                                    "required": [
+                                        "names"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "names": {
+                                            "title": "Names",
+                                            "type": "object",
+                                            "additionalProperties": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "traits": {
+                                "title": "GeoIpTraints",
+                                "required": [
+                                    "ip_address",
+                                    "prefix_len"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "ip_address": {
+                                        "title": "Ip Address",
+                                        "type": "string"
+                                    },
+                                    "prefix_len": {
+                                        "title": "Prefix Len",
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search City by Location",
+            "url": "https://location-and-time.p.rapidapi.com/city/bylocation",
+            "description": "Get details of the city near specified geolocation (latitude/longitude). Up to 10 records for cities close to the specified location may be returned. Information includes city name, alternative names, geolocation (latitude/longitude), population, timezone, map url, and more.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 51.50853
+                },
+                {
+                    "name": "lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -0.12574
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "radius",
+                    "type": "NUMBER",
+                    "description": "Search radius in meters.",
+                    "default": 100000
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Max number of results.",
+                    "default": 2
+                },
+                {
+                    "name": "min_population",
+                    "type": "NUMBER",
+                    "description": "Minimum population.",
+                    "default": 100000
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/city/bylocation\"\nquerystring = {\"radius\": 100000, \"limit\": 2, \"lat\": 51.50853, \"lon\": -0.12574, \"min_population\": 100000}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/city/bylocation\"\nquerystring = {\"radius\": 100000, \"limit\": 2, \"lat\": 51.50853, \"lon\": -0.12574, \"min_population\": 100000}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "CityByLocationResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "latitude",
+                            "longitude",
+                            "radius",
+                            "min_population",
+                            "limit"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            },
+                            "radius": {
+                                "title": "Radius",
+                                "type": "number"
+                            },
+                            "min_population": {
+                                "title": "Min Population",
+                                "type": "integer"
+                            },
+                            "limit": {
+                                "title": "Limit",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "type": "array",
+                        "items": {
+                            "title": "City",
+                            "required": [
+                                "name",
+                                "asciiname",
+                                "alternatenames",
+                                "latitude",
+                                "longitude",
+                                "countrycode",
+                                "population",
+                                "timezone",
+                                "map_url"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "title": "Name",
+                                    "type": "string"
+                                },
+                                "asciiname": {
+                                    "title": "Asciiname",
+                                    "type": "string"
+                                },
+                                "alternatenames": {
+                                    "title": "Alternatenames",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "latitude": {
+                                    "title": "Latitude",
+                                    "type": "number"
+                                },
+                                "longitude": {
+                                    "title": "Longitude",
+                                    "type": "number"
+                                },
+                                "countrycode": {
+                                    "title": "Countrycode",
+                                    "type": "string"
+                                },
+                                "population": {
+                                    "title": "Population",
+                                    "type": "integer"
+                                },
+                                "timezone": {
+                                    "title": "Timezone",
+                                    "type": "string"
+                                },
+                                "map_url": {
+                                    "title": "Map Url",
+                                    "type": "string"
+                                },
+                                "distance": {
+                                    "title": "Distance",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search Country by Name",
+            "url": "https://location-and-time.p.rapidapi.com/country",
+            "description": "Get details of the country specified by name, fuzzy search is supported. Up to 10 records for countries with similar name may be returned. Information includes country name, capital, area, population, languages, neighbors, phone code, postal code, and more.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Name of the country.",
+                    "default": "United States"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/country\"\nquerystring = {\"name\": \"United States\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/country\"\nquerystring = {\"name\": \"United States\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "CountryResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "country"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "country": {
+                                "title": "Country",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "type": "array",
+                        "items": {
+                            "title": "Country",
+                            "required": [
+                                "iso",
+                                "iso3",
+                                "country",
+                                "capital",
+                                "areakm2",
+                                "population",
+                                "continent",
+                                "tld",
+                                "currencycode",
+                                "currencyname",
+                                "phone",
+                                "postalcodeformat",
+                                "postalcoderegex",
+                                "languages",
+                                "neighbours",
+                                "wiki_url"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "iso": {
+                                    "title": "Iso",
+                                    "type": "string"
+                                },
+                                "iso3": {
+                                    "title": "Iso3",
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "title": "Country",
+                                    "type": "string"
+                                },
+                                "capital": {
+                                    "title": "Capital",
+                                    "type": "string"
+                                },
+                                "areakm2": {
+                                    "title": "Areakm2",
+                                    "type": "number"
+                                },
+                                "population": {
+                                    "title": "Population",
+                                    "type": "integer"
+                                },
+                                "continent": {
+                                    "title": "Continent",
+                                    "type": "string"
+                                },
+                                "tld": {
+                                    "title": "Tld",
+                                    "type": "string"
+                                },
+                                "currencycode": {
+                                    "title": "Currencycode",
+                                    "type": "string"
+                                },
+                                "currencyname": {
+                                    "title": "Currencyname",
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "title": "Phone",
+                                    "type": "string"
+                                },
+                                "postalcodeformat": {
+                                    "title": "Postalcodeformat",
+                                    "type": "string"
+                                },
+                                "postalcoderegex": {
+                                    "title": "Postalcoderegex",
+                                    "type": "string"
+                                },
+                                "languages": {
+                                    "title": "Languages",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "neighbours": {
+                                    "title": "Neighbours",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "wiki_url": {
+                                    "title": "Wiki Url",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Time Diff by City",
+            "url": "https://location-and-time.p.rapidapi.com/timediff/bycity",
+            "description": "Find out time difference from `from_time` to `to_time` for specified cities. Daylight saving time are taken care of.  **Note**: the fuzzy search of provided city may not be the one you want due to multiple cities may have the same name, the most common one will be used. In this case, use a geocoding service to find the exact geolocation of the city, use `/timediff/bylocation` endpoint instead.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "from_city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "Los Angeles"
+                },
+                {
+                    "name": "to_city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "New York"
+                },
+                {
+                    "name": "to_time",
+                    "type": "STRING",
+                    "description": "Time, fuzzy search is supported.",
+                    "default": "2023-01-01 12:34:56"
+                },
+                {
+                    "name": "from_time",
+                    "type": "STRING",
+                    "description": "Time, fuzzy search is supported.",
+                    "default": "2020-01-01 12:34:56"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timediff/bycity\"\nquerystring = {\"from_city\": \"Los Angeles\", \"to_city\": \"New York\", \"to_time\": \"2023-01-01 12:34:56\", \"from_time\": \"2020-01-01 12:34:56\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timediff/bycity\"\nquerystring = {\"from_city\": \"Los Angeles\", \"to_city\": \"New York\", \"to_time\": \"2023-01-01 12:34:56\", \"from_time\": \"2020-01-01 12:34:56\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimeDiffByCityResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "from_time",
+                            "from_city",
+                            "from_timezone",
+                            "to_time",
+                            "to_city",
+                            "to_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_time": {
+                                "title": "From Time",
+                                "type": "string"
+                            },
+                            "from_city": {
+                                "title": "From City",
+                                "type": "string"
+                            },
+                            "from_timezone": {
+                                "title": "From Timezone",
+                                "type": "string"
+                            },
+                            "to_time": {
+                                "title": "To Time",
+                                "type": "string"
+                            },
+                            "to_city": {
+                                "title": "To City",
+                                "type": "string"
+                            },
+                            "to_timezone": {
+                                "title": "To Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "TimeDiffResponse",
+                        "required": [
+                            "years",
+                            "months",
+                            "days",
+                            "hours",
+                            "minutes",
+                            "seconds"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "years": {
+                                "title": "Years",
+                                "type": "integer"
+                            },
+                            "months": {
+                                "title": "Months",
+                                "type": "integer"
+                            },
+                            "days": {
+                                "title": "Days",
+                                "type": "integer"
+                            },
+                            "hours": {
+                                "title": "Hours",
+                                "type": "integer"
+                            },
+                            "minutes": {
+                                "title": "Minutes",
+                                "type": "integer"
+                            },
+                            "seconds": {
+                                "title": "Seconds",
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Time at Other Location",
+            "url": "https://location-and-time.p.rapidapi.com/timeat/bylocation",
+            "description": "Find out time at `[to_lat, to_lon]` given `from_time` and `[from_lat, from_lon]`. Daylight saving time are taken care of.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "to_lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 40.7
+                },
+                {
+                    "name": "from_lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -118.24
+                },
+                {
+                    "name": "from_time",
+                    "type": "STRING",
+                    "description": "Date and time, fuzzy search is supported.",
+                    "default": "2020-01-01 12:34:56"
+                },
+                {
+                    "name": "to_lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -74
+                },
+                {
+                    "name": "from_lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 34
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timeat/bylocation\"\nquerystring = {\"to_lat\": 40.7, \"from_lon\": -118.24, \"from_time\": \"2020-01-01 12:34:56\", \"to_lon\": -74, \"from_lat\": 34}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timeat/bylocation\"\nquerystring = {\"to_lat\": 40.7, \"from_lon\": -118.24, \"from_time\": \"2020-01-01 12:34:56\", \"to_lon\": -74, \"from_lat\": 34}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimeAtByLocationResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "TimeAtByLocationRequest",
+                        "required": [
+                            "from_time",
+                            "from_latitude",
+                            "from_longitude",
+                            "from_timezone",
+                            "to_latitude",
+                            "to_longitude",
+                            "to_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_time": {
+                                "title": "From Time",
+                                "type": "string"
+                            },
+                            "from_latitude": {
+                                "title": "From Latitude",
+                                "type": "number"
+                            },
+                            "from_longitude": {
+                                "title": "From Longitude",
+                                "type": "number"
+                            },
+                            "from_timezone": {
+                                "title": "From Timezone",
+                                "type": "string"
+                            },
+                            "to_latitude": {
+                                "title": "To Latitude",
+                                "type": "number"
+                            },
+                            "to_longitude": {
+                                "title": "To Longitude",
+                                "type": "number"
+                            },
+                            "to_timezone": {
+                                "title": "To Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "TimeAtResponse",
+                        "required": [
+                            "to_time",
+                            "year",
+                            "month",
+                            "day",
+                            "hour",
+                            "minute",
+                            "second",
+                            "weekday",
+                            "week_number",
+                            "utc_time",
+                            "seconds_since_epoch",
+                            "ctime",
+                            "local_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "to_time": {
+                                "title": "To Time",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            },
+                            "month": {
+                                "title": "Month",
+                                "type": "integer"
+                            },
+                            "day": {
+                                "title": "Day",
+                                "type": "integer"
+                            },
+                            "hour": {
+                                "title": "Hour",
+                                "type": "integer"
+                            },
+                            "minute": {
+                                "title": "Minute",
+                                "type": "integer"
+                            },
+                            "second": {
+                                "title": "Second",
+                                "type": "integer"
+                            },
+                            "weekday": {
+                                "title": "Weekday",
+                                "type": "string"
+                            },
+                            "week_number": {
+                                "title": "Week Number",
+                                "type": "integer"
+                            },
+                            "utc_time": {
+                                "title": "Utc Time",
+                                "type": "string"
+                            },
+                            "seconds_since_epoch": {
+                                "title": "Seconds Since Epoch",
+                                "type": "integer"
+                            },
+                            "ctime": {
+                                "title": "Ctime",
+                                "type": "string"
+                            },
+                            "local_timezone": {
+                                "title": "Local Timezone",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Supported Timezones",
+            "url": "https://location-and-time.p.rapidapi.com/timezone",
+            "description": "Get all supported timezones.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timezone\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timezone\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimezoneResponse",
+                "required": [
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "response": {
+                        "title": "Response",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Holidays",
+            "url": "https://location-and-time.p.rapidapi.com/holiday",
+            "description": "List holidays for the specified country and year.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Name of the country, fuzzy search is supported.",
+                    "default": "USA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "year",
+                    "type": "NUMBER",
+                    "description": "Year. If not provided, current year will be used.",
+                    "default": 2023
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/holiday\"\nquerystring = {\"country\": \"USA\", \"year\": 2023}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/holiday\"\nquerystring = {\"country\": \"USA\", \"year\": 2023}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "HolidayResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "country",
+                            "country_code",
+                            "year"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "country": {
+                                "title": "Country",
+                                "type": "string"
+                            },
+                            "country_code": {
+                                "title": "Country Code",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "Response",
+                        "required": [
+                            "holidays"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "holidays": {
+                                "title": "Holidays",
+                                "type": "object",
+                                "additionalProperties": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Date and Time by Timezone",
+            "url": "https://location-and-time.p.rapidapi.com/datetime/bytimezone",
+            "description": "Get date and time for specified timezone.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "timezone",
+                    "type": "STRING",
+                    "description": "Specify time zone from the response of `/timezone` endpoint.",
+                    "default": "America/Los_Angeles"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/datetime/bytimezone\"\nquerystring = {\"timezone\": \"America/Los_Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/datetime/bytimezone\"\nquerystring = {\"timezone\": \"America/Los_Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "DatetimeByTimeZoneResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "timezone": {
+                                "title": "Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "DatetimeResponse",
+                        "required": [
+                            "time",
+                            "year",
+                            "month",
+                            "day",
+                            "hour",
+                            "minute",
+                            "second",
+                            "weekday",
+                            "week_number",
+                            "utc_time",
+                            "seconds_since_epoch",
+                            "ctime",
+                            "local_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "title": "Time",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            },
+                            "month": {
+                                "title": "Month",
+                                "type": "integer"
+                            },
+                            "day": {
+                                "title": "Day",
+                                "type": "integer"
+                            },
+                            "hour": {
+                                "title": "Hour",
+                                "type": "integer"
+                            },
+                            "minute": {
+                                "title": "Minute",
+                                "type": "integer"
+                            },
+                            "second": {
+                                "title": "Second",
+                                "type": "integer"
+                            },
+                            "weekday": {
+                                "title": "Weekday",
+                                "type": "string"
+                            },
+                            "week_number": {
+                                "title": "Week Number",
+                                "type": "integer"
+                            },
+                            "utc_time": {
+                                "title": "Utc Time",
+                                "type": "string"
+                            },
+                            "seconds_since_epoch": {
+                                "title": "Seconds Since Epoch",
+                                "type": "integer"
+                            },
+                            "ctime": {
+                                "title": "Ctime",
+                                "type": "string"
+                            },
+                            "local_timezone": {
+                                "title": "Local Timezone",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Date and Time by City",
+            "url": "https://location-and-time.p.rapidapi.com/datetime/bycity",
+            "description": "Get current date and time for specified city, fuzzy search is supported. **Note**: the fuzzy search of provided city may not be the one you want due to multiple cities may have the same name, the most common one will be used. In this case, use a geocoding service to find the exact geolocation of the city, use `/datetime/bylocation` endpoint instead.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "description": "Name of the city.",
+                    "default": "Los Angeles"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/datetime/bycity\"\nquerystring = {\"city\": \"Los Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/datetime/bycity\"\nquerystring = {\"city\": \"Los Angeles\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "DatetimeByCityResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "city"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "city": {
+                                "title": "City",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "DatetimeResponse",
+                        "required": [
+                            "time",
+                            "year",
+                            "month",
+                            "day",
+                            "hour",
+                            "minute",
+                            "second",
+                            "weekday",
+                            "week_number",
+                            "utc_time",
+                            "seconds_since_epoch",
+                            "ctime",
+                            "local_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "time": {
+                                "title": "Time",
+                                "type": "string"
+                            },
+                            "year": {
+                                "title": "Year",
+                                "type": "integer"
+                            },
+                            "month": {
+                                "title": "Month",
+                                "type": "integer"
+                            },
+                            "day": {
+                                "title": "Day",
+                                "type": "integer"
+                            },
+                            "hour": {
+                                "title": "Hour",
+                                "type": "integer"
+                            },
+                            "minute": {
+                                "title": "Minute",
+                                "type": "integer"
+                            },
+                            "second": {
+                                "title": "Second",
+                                "type": "integer"
+                            },
+                            "weekday": {
+                                "title": "Weekday",
+                                "type": "string"
+                            },
+                            "week_number": {
+                                "title": "Week Number",
+                                "type": "integer"
+                            },
+                            "utc_time": {
+                                "title": "Utc Time",
+                                "type": "string"
+                            },
+                            "seconds_since_epoch": {
+                                "title": "Seconds Since Epoch",
+                                "type": "integer"
+                            },
+                            "ctime": {
+                                "title": "Ctime",
+                                "type": "string"
+                            },
+                            "local_timezone": {
+                                "title": "Local Timezone",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Astral Data by Location",
+            "url": "https://location-and-time.p.rapidapi.com/astral/bylocation",
+            "description": "Get times of various aspects of the sun for specified date and location, including dawn, sunrise, noon, sunset, dusk times.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -118.24
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "Local date at location specified by `lat` and `lon`, fuzzy search is supported.",
+                    "default": "2023-01-01"
+                },
+                {
+                    "name": "lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 34.05
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/astral/bylocation\"\nquerystring = {\"lon\": -118.24, \"date\": \"2023-01-01\", \"lat\": 34.05}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/astral/bylocation\"\nquerystring = {\"lon\": -118.24, \"date\": \"2023-01-01\", \"lat\": 34.05}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "AstralByLocationResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "date",
+                            "latitude",
+                            "longitude",
+                            "timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "date": {
+                                "title": "Date",
+                                "type": "string"
+                            },
+                            "latitude": {
+                                "title": "Latitude",
+                                "type": "number"
+                            },
+                            "longitude": {
+                                "title": "Longitude",
+                                "type": "number"
+                            },
+                            "timezone": {
+                                "title": "Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "AstralResponse",
+                        "required": [
+                            "dawn",
+                            "sunrise",
+                            "noon",
+                            "sunset",
+                            "dusk"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "dawn": {
+                                "title": "Dawn",
+                                "type": "string"
+                            },
+                            "sunrise": {
+                                "title": "Sunrise",
+                                "type": "string"
+                            },
+                            "noon": {
+                                "title": "Noon",
+                                "type": "string"
+                            },
+                            "sunset": {
+                                "title": "Sunset",
+                                "type": "string"
+                            },
+                            "dusk": {
+                                "title": "Dusk",
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Time Diff by Location",
+            "url": "https://location-and-time.p.rapidapi.com/timediff/bylocation",
+            "description": "Find out time difference from `from_time` to `to_time` for specified location. Daylight saving time are taken care of.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "from_lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -118.24
+                },
+                {
+                    "name": "from_lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 34
+                },
+                {
+                    "name": "from_time",
+                    "type": "STRING",
+                    "description": "Time, fuzzy search is supported.",
+                    "default": "2020-01-01 12:34:56"
+                },
+                {
+                    "name": "to_lon",
+                    "type": "NUMBER",
+                    "description": "Longitude in degree.",
+                    "default": -74
+                },
+                {
+                    "name": "to_time",
+                    "type": "STRING",
+                    "description": "Time, fuzzy search is supported.",
+                    "default": "2023-01-01 12:34:56"
+                },
+                {
+                    "name": "to_lat",
+                    "type": "NUMBER",
+                    "description": "Latitude in degree.",
+                    "default": 40.7
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timediff/bylocation\"\nquerystring = {\"from_lon\": -118.24, \"from_lat\": 34, \"from_time\": \"2020-01-01 12:34:56\", \"to_lon\": -74, \"to_time\": \"2023-01-01 12:34:56\", \"to_lat\": 40.7}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://location-and-time.p.rapidapi.com/timediff/bylocation\"\nquerystring = {\"from_lon\": -118.24, \"from_lat\": 34, \"from_time\": \"2020-01-01 12:34:56\", \"to_lon\": -74, \"to_time\": \"2023-01-01 12:34:56\", \"to_lat\": 40.7}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"location-and-time.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": "You have exceeded the rate limit per second for your plan, BASIC, by the API provider"
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "TimeDiffByLocationResponse",
+                "required": [
+                    "request",
+                    "response"
+                ],
+                "type": "object",
+                "properties": {
+                    "request": {
+                        "title": "Request",
+                        "required": [
+                            "from_time",
+                            "from_latitude",
+                            "from_longitude",
+                            "from_timezone",
+                            "to_time",
+                            "to_latitude",
+                            "to_longitude",
+                            "to_timezone"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "from_time": {
+                                "title": "From Time",
+                                "type": "string"
+                            },
+                            "from_latitude": {
+                                "title": "From Latitude",
+                                "type": "number"
+                            },
+                            "from_longitude": {
+                                "title": "From Longitude",
+                                "type": "number"
+                            },
+                            "from_timezone": {
+                                "title": "From Timezone",
+                                "type": "string"
+                            },
+                            "to_time": {
+                                "title": "To Time",
+                                "type": "string"
+                            },
+                            "to_latitude": {
+                                "title": "To Latitude",
+                                "type": "number"
+                            },
+                            "to_longitude": {
+                                "title": "To Longitude",
+                                "type": "number"
+                            },
+                            "to_timezone": {
+                                "title": "To Timezone",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "response": {
+                        "title": "TimeDiffResponse",
+                        "required": [
+                            "years",
+                            "months",
+                            "days",
+                            "hours",
+                            "minutes",
+                            "seconds"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "years": {
+                                "title": "Years",
+                                "type": "integer"
+                            },
+                            "months": {
+                                "title": "Months",
+                                "type": "integer"
+                            },
+                            "days": {
+                                "title": "Days",
+                                "type": "integer"
+                            },
+                            "hours": {
+                                "title": "Hours",
+                                "type": "integer"
+                            },
+                            "minutes": {
+                                "title": "Minutes",
+                                "type": "integer"
+                            },
+                            "seconds": {
+                                "title": "Seconds",
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "location_and_time"
+}

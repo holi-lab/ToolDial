@@ -1,0 +1,348 @@
+{
+    "product_id": "api_536f9149-5467-4529-8f0c-daacc1be71c4",
+    "tool_description": "Do you struggle to identify entities from large volumes of text data? Are you tired of manually linking entities with external information?",
+    "home_url": "https://rapidapi.com/factiverse-as-factiverse-as-default/api/entity-detection-linking/",
+    "name": "Entity Detection & Linking",
+    "title": "Entity Detection & Linking",
+    "pricing": "PAID",
+    "tool_name": "Entity Detection & Linking",
+    "score": null,
+    "host": "entity-detection-linking.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "entity_detection",
+            "url": "https://entity-detection-linking.p.rapidapi.com/v1/microfacts",
+            "description": "Named entities (e.g. persons, places, organisations, etc.) are found within the given text and additional info is provided for each entity (e.g. descriptions, images, position within the text. etc.).",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://entity-detection-linking.p.rapidapi.com/v1/microfacts\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"entity-detection-linking.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://entity-detection-linking.p.rapidapi.com/v1/microfacts\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"entity-detection-linking.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "EntityLinkResponse",
+                "required": [
+                    "spots",
+                    "recommended"
+                ],
+                "type": "object",
+                "properties": {
+                    "_id": {
+                        "title": " Id",
+                        "type": "string"
+                    },
+                    "collection": {
+                        "title": "Collection",
+                        "type": "string"
+                    },
+                    "spots": {
+                        "title": "Spots",
+                        "type": "array",
+                        "items": {
+                            "title": "Spot",
+                            "required": [
+                                "score",
+                                "text",
+                                "start",
+                                "stop",
+                                "entity"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "score": {
+                                    "title": "Score",
+                                    "type": "number",
+                                    "description": "A score between 0 and 1."
+                                },
+                                "text": {
+                                    "title": "Text",
+                                    "type": "string",
+                                    "description": "The string of the entity within the text"
+                                },
+                                "start": {
+                                    "title": "Start",
+                                    "type": "integer",
+                                    "description": "The start index within the text."
+                                },
+                                "stop": {
+                                    "title": "Stop",
+                                    "type": "integer",
+                                    "description": "The stop index within the text."
+                                },
+                                "entity": {
+                                    "title": "NamedEntity",
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "title": "Title",
+                                            "type": "string"
+                                        },
+                                        "entity_type": {
+                                            "title": "Entity Type",
+                                            "type": "string"
+                                        },
+                                        "kbs_refs": {
+                                            "title": "Kbs Refs",
+                                            "type": "array",
+                                            "items": {
+                                                "title": "KnowledgeBaseReference",
+                                                "required": [
+                                                    "title",
+                                                    "description",
+                                                    "lang",
+                                                    "domain"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                    "title": {
+                                                        "title": "Title",
+                                                        "type": "string",
+                                                        "description": "Full entity title (not necessarily the same as the entity string found within the text, e.g. \"The president\", \"Washington\", \"President Washington\" might all be linked to the same entity \"George Washington\")."
+                                                    },
+                                                    "description": {
+                                                        "title": "Description",
+                                                        "type": "string",
+                                                        "description": "A snippet describing the entity."
+                                                    },
+                                                    "lang": {
+                                                        "title": "Lang",
+                                                        "type": "string",
+                                                        "description": "The language of the description in ISO 639-1 code (e.g. \"en\", \"es\", \"fr\", etc.)."
+                                                    },
+                                                    "domain": {
+                                                        "title": "Domain",
+                                                        "type": "string",
+                                                        "description": "The knowledge base from which the description is from (e.g. \"Wikipedia\", \"Store Norske Leksikon\", etc.)."
+                                                    },
+                                                    "author": {
+                                                        "title": "Author",
+                                                        "type": "string",
+                                                        "description": "The authors of the description (comma separated)."
+                                                    },
+                                                    "license": {
+                                                        "title": "License",
+                                                        "type": "string",
+                                                        "description": "The license of the description."
+                                                    },
+                                                    "kb_id": {
+                                                        "title": "Kb Id",
+                                                        "type": "string",
+                                                        "description": "Id within the knowledge base."
+                                                    },
+                                                    "page_url": {
+                                                        "title": "Page Url",
+                                                        "type": "string",
+                                                        "description": "The url to the source page."
+                                                    },
+                                                    "entity_type": {
+                                                        "title": "Entity Type",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "The SpaCy entity type."
+                                                    },
+                                                    "image_url": {
+                                                        "title": "Image Url",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "The url to the entity image."
+                                                    },
+                                                    "image_license": {
+                                                        "title": "Image License",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "The license of the image."
+                                                    },
+                                                    "image_author": {
+                                                        "title": "Image Author",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "The author of the image."
+                                                    },
+                                                    "description_embedding": {
+                                                        "title": "Description Embedding",
+                                                        "description": "Entity description embedded."
+                                                    },
+                                                    "entity_match": {
+                                                        "title": "Entity Match",
+                                                        "type": "boolean",
+                                                        "default": true,
+                                                        "description": "True if the title matches the alias perfectly. If false the match could be incorrect."
+                                                    },
+                                                    "added_date": {
+                                                        "title": "Added Date",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "The date when the entity got created in the data collection."
+                                                    },
+                                                    "last_updated": {
+                                                        "title": "Last Updated",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "The date when the entity got last updated."
+                                                    },
+                                                    "factiverse_id": {
+                                                        "title": "Factiverse Id",
+                                                        "type": [
+                                                            "string",
+                                                            "null"
+                                                        ],
+                                                        "description": "A unique id for the entity."
+                                                    }
+                                                },
+                                                "description": "Represents a single knowledge base reference."
+                                            },
+                                            "default": []
+                                        }
+                                    },
+                                    "description": "Microfacts NamedEntity response."
+                                }
+                            },
+                            "description": "Microfacts Spot aka named entity."
+                        }
+                    },
+                    "recommended": {
+                        "title": "Recommended",
+                        "type": "array",
+                        "items": {
+                            "title": "NamedEntity",
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "title": "Title",
+                                    "type": "string"
+                                },
+                                "entity_type": {
+                                    "title": "Entity Type",
+                                    "type": "string"
+                                },
+                                "kbs_refs": {
+                                    "title": "Kbs Refs",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "KnowledgeBaseReference",
+                                        "required": [
+                                            "title",
+                                            "description",
+                                            "lang",
+                                            "domain"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "title": {
+                                                "title": "Title",
+                                                "type": "string",
+                                                "description": "Full entity title (not necessarily the same as the entity string found within the text, e.g. \"The president\", \"Washington\", \"President Washington\" might all be linked to the same entity \"George Washington\")."
+                                            },
+                                            "description": {
+                                                "title": "Description",
+                                                "type": "string",
+                                                "description": "A snippet describing the entity."
+                                            },
+                                            "lang": {
+                                                "title": "Lang",
+                                                "type": "string",
+                                                "description": "The language of the description in ISO 639-1 code (e.g. \"en\", \"es\", \"fr\", etc.)."
+                                            },
+                                            "domain": {
+                                                "title": "Domain",
+                                                "type": "string",
+                                                "description": "The knowledge base from which the description is from (e.g. \"Wikipedia\", \"Store Norske Leksikon\", etc.)."
+                                            },
+                                            "author": {
+                                                "title": "Author",
+                                                "type": "string",
+                                                "description": "The authors of the description (comma separated)."
+                                            },
+                                            "license": {
+                                                "title": "License",
+                                                "type": "string",
+                                                "description": "The license of the description."
+                                            },
+                                            "kb_id": {
+                                                "title": "Kb Id",
+                                                "type": "string",
+                                                "description": "Id within the knowledge base."
+                                            },
+                                            "page_url": {
+                                                "title": "Page Url",
+                                                "type": "string",
+                                                "description": "The url to the source page."
+                                            },
+                                            "entity_type": {
+                                                "title": "Entity Type",
+                                                "type": "string",
+                                                "description": "The SpaCy entity type."
+                                            },
+                                            "image_url": {
+                                                "title": "Image Url",
+                                                "type": "string",
+                                                "description": "The url to the entity image."
+                                            },
+                                            "image_license": {
+                                                "title": "Image License",
+                                                "type": "string",
+                                                "description": "The license of the image."
+                                            },
+                                            "image_author": {
+                                                "title": "Image Author",
+                                                "type": "string",
+                                                "description": "The author of the image."
+                                            },
+                                            "description_embedding": {
+                                                "title": "Description Embedding",
+                                                "description": "Entity description embedded."
+                                            },
+                                            "entity_match": {
+                                                "title": "Entity Match",
+                                                "type": "boolean",
+                                                "default": true,
+                                                "description": "True if the title matches the alias perfectly. If false the match could be incorrect."
+                                            },
+                                            "added_date": {
+                                                "title": "Added Date",
+                                                "type": "string",
+                                                "description": "The date when the entity got created in the data collection."
+                                            },
+                                            "last_updated": {
+                                                "title": "Last Updated",
+                                                "type": "string",
+                                                "description": "The date when the entity got last updated."
+                                            },
+                                            "factiverse_id": {
+                                                "title": "Factiverse Id",
+                                                "type": "string",
+                                                "description": "A unique id for the entity."
+                                            }
+                                        },
+                                        "description": "Represents a single knowledge base reference."
+                                    },
+                                    "default": []
+                                }
+                            },
+                            "description": "Microfacts NamedEntity response."
+                        }
+                    },
+                    "lang": {
+                        "title": "Lang",
+                        "type": "string",
+                        "default": "en"
+                    }
+                },
+                "description": "Information per entity linking.\n\nArgs:\n    lang: Language of the entity description and the linked text.\n    spots: Linked spots.\n    recommended: Recommended NamedEntities."
+            }
+        }
+    ]
+}

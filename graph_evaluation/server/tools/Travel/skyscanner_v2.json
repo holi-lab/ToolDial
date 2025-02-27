@@ -1,0 +1,1403 @@
+{
+    "product_id": "api_017da0b7-7e4d-44a7-ba6c-d4729dca53de",
+    "tool_description": "Skyscanner API allows users to search best flights and hotels with details and best price. This API has all needed by any developer to create a new application with some extended features.",
+    "home_url": "https://rapidapi.com/DataCrawler/api/skyscanner50/",
+    "name": "Skyscanner_v2",
+    "title": "Skyscanner",
+    "pricing": "FREEMIUM",
+    "tool_name": "Skyscanner_v2",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1436,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "skyscanner50.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Similar Hotels",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getSimilarHotels",
+            "description": "Get all the similar hotels based on the selected hotel.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "hotelId",
+                    "type": "STRING",
+                    "description": "**Hotel ID** can be retrieved from **Search Hotel** or **Get Hotel Details** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of adult guests (with age 18 and over)",
+                    "default": "1"
+                },
+                {
+                    "name": "checkin",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkin Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "checkout",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkout Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "price",
+                    "type": "ENUM",
+                    "description": "**total** - Total price for the stay.\n**per**   - Price per night",
+                    "default": ""
+                },
+                {
+                    "name": "waitTime",
+                    "type": "NUMBER",
+                    "description": "Wait time in milliseconds. Sometimes the API needs **wait times** or more than **one** API call to get **complete data**. ",
+                    "default": "2000"
+                },
+                {
+                    "name": "sorting",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "stars",
+                    "type": "ARRAY",
+                    "description": "The Hotel **star** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "maxPrice",
+                    "type": "NUMBER",
+                    "description": "Maximum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "minPrice",
+                    "type": "NUMBER",
+                    "description": "Minimum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "mealPlan",
+                    "type": "ARRAY",
+                    "description": "The Hotel **mealPlan** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "searchId",
+                    "type": "STRING",
+                    "description": "**searchId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "guestType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **guestType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "chain",
+                    "type": "ARRAY",
+                    "description": "The Hotel **chain** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "amenities",
+                    "type": "ARRAY",
+                    "description": "The Hotel **amenities** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "discounts",
+                    "type": "ARRAY",
+                    "description": "The Hotel **discounts** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "propertyType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **propertyType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "rating",
+                    "type": "ARRAY",
+                    "description": "The Hotel **rating** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "cancellation",
+                    "type": "ARRAY",
+                    "description": "The Hotel **cancellation** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getSimilarHotels\"\nquerystring = {\"hotelId\": \"\", \"price\": \"\", \"waitTime\": \"2000\", \"sorting\": \"\", \"stars\": \"\", \"maxPrice\": \"\", \"minPrice\": \"\", \"mealPlan\": \"\", \"adults\": \"1\", \"checkin\": \"\", \"checkout\": \"\", \"searchId\": \"\", \"guestType\": \"\", \"chain\": \"\", \"amenities\": \"\", \"discounts\": \"\", \"propertyType\": \"\", \"rating\": \"\", \"cancellation\": \"\", \"market\": \"en-US\", \"countryCode\": \"US\", \"currency\": \"USD\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getSimilarHotels\"\nquerystring = {\"hotelId\": \"\", \"price\": \"\", \"waitTime\": \"2000\", \"sorting\": \"\", \"stars\": \"\", \"maxPrice\": \"\", \"minPrice\": \"\", \"mealPlan\": \"\", \"adults\": \"1\", \"checkin\": \"\", \"checkout\": \"\", \"searchId\": \"\", \"guestType\": \"\", \"chain\": \"\", \"amenities\": \"\", \"discounts\": \"\", \"propertyType\": \"\", \"rating\": \"\", \"cancellation\": \"\", \"market\": \"en-US\", \"countryCode\": \"US\", \"currency\": \"USD\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Flights Filter By Agent Id",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchFlightsByAgent",
+            "description": "Get and poll all flights, search between origin and destination with prices, filter, sorting for specific agent id.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "Destination airport **IATA** code. The **IATA** code can be extracted from the **Search Airport** API in the **Flights** collection.",
+                    "default": "NYCA"
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "Origin airport **IATA** code. The **IATA** code can be extracted from the **Search Airport** API in the **Flights** collection.",
+                    "default": "LOND"
+                },
+                {
+                    "name": "date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Departure or travel date.\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "agentId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "tike"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "returnDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Return date.\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "cabinClass",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "children",
+                    "type": "NUMBER",
+                    "description": "Number of Childrens (with age between 2-12 years)",
+                    "default": ""
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of Adults (with age 18 and over)\nDefault Value: 1",
+                    "default": "1"
+                },
+                {
+                    "name": "infants",
+                    "type": "NUMBER",
+                    "description": "Number of Infants (with age < 2 years)",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "filter",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightsByAgent\"\nquerystring = {\"destination\": \"NYCA\", \"origin\": \"LOND\", \"returnDate\": \"\", \"date\": \"\", \"cabinClass\": \"\", \"children\": \"\", \"agentId\": \"tike\", \"countryCode\": \"US\", \"adults\": \"1\", \"infants\": \"\", \"currency\": \"USD\", \"filter\": \"\", \"market\": \"en-US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightsByAgent\"\nquerystring = {\"destination\": \"NYCA\", \"origin\": \"LOND\", \"returnDate\": \"\", \"date\": \"\", \"cabinClass\": \"\", \"children\": \"\", \"agentId\": \"tike\", \"countryCode\": \"US\", \"adults\": \"1\", \"infants\": \"\", \"currency\": \"USD\", \"filter\": \"\", \"market\": \"en-US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Search Flights Multi Stops",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchFlightsMultiStops",
+            "description": "Get and poll all flights. Searching the flights between multiple locations with prices, filter, sorting etc.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "legs",
+                    "type": "OBJECT",
+                    "description": "The legs must contain the **origin**, **destination** and **date** in object format and must be passed in an array.\nEXAMPLE:\n[\n  {\n    'origin': 'LOND',\n    'destination': 'NYCA',\n    'date': '2023-02-07'\n  },\n  ...\n]\n**Note:** If there are multiple stops, there should be more leg objects on the board.",
+                    "default": "[{\"origin\":\"LOND\",\"destination\":\"NYCA\",\"date\":\"2023-02-07\"},{\"origin\":\"NYCA\",\"destination\":\"LAXA\",\"date\":\"2023-02-13\"},{\"origin\":\"LAXA\",\"destination\":\"LOND\",\"date\":\"2023-02-18\"}]"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "infants",
+                    "type": "NUMBER",
+                    "description": "Number of Infants (with age < 2 years)",
+                    "default": ""
+                },
+                {
+                    "name": "waitTime",
+                    "type": "NUMBER",
+                    "description": "Wait time in milliseconds. Sometimes the API needs **wait times** or more than **one** API call to get **complete data**. ",
+                    "default": "5000"
+                },
+                {
+                    "name": "filter",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "children",
+                    "type": "NUMBER",
+                    "description": "Number of Childrens (with age between 2-12 years)",
+                    "default": ""
+                },
+                {
+                    "name": "cabinClass",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of Adults (with age 18 and over)\nDefault Value: 1",
+                    "default": "1"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightsMultiStops\"\nquerystring = {\"infants\": \"\", \"waitTime\": \"5000\", \"filter\": \"\", \"market\": \"en-US\", \"children\": \"\", \"cabinClass\": \"\", \"countryCode\": \"US\", \"legs\": \"[{\\\"origin\\\":\\\"LOND\\\",\\\"destination\\\":\\\"NYCA\\\",\\\"date\\\":\\\"2023-02-07\\\"},{\\\"origin\\\":\\\"NYCA\\\",\\\"destination\\\":\\\"LAXA\\\",\\\"date\\\":\\\"2023-02-13\\\"},{\\\"origin\\\":\\\"LAXA\\\",\\\"destination\\\":\\\"LOND\\\",\\\"date\\\":\\\"2023-02-18\\\"}]\", \"adults\": \"1\", \"currency\": \"USD\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightsMultiStops\"\nquerystring = {\"infants\": \"\", \"waitTime\": \"5000\", \"filter\": \"\", \"market\": \"en-US\", \"children\": \"\", \"cabinClass\": \"\", \"countryCode\": \"US\", \"legs\": \"[{\\\"origin\\\":\\\"LOND\\\",\\\"destination\\\":\\\"NYCA\\\",\\\"date\\\":\\\"2023-02-07\\\"},{\\\"origin\\\":\\\"NYCA\\\",\\\"destination\\\":\\\"LAXA\\\",\\\"date\\\":\\\"2023-02-13\\\"},{\\\"origin\\\":\\\"LAXA\\\",\\\"destination\\\":\\\"LOND\\\",\\\"date\\\":\\\"2023-02-18\\\"}]\", \"adults\": \"1\", \"currency\": \"USD\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Cars",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchCars",
+            "description": "Use this API for searching the cars for hire based on location.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "pickUpEntityId",
+                    "type": "NUMBER",
+                    "description": "**pickUpEntityId** can be retrieved from **Search Location** API in **Cars** collection as **entity_id**",
+                    "default": ""
+                },
+                {
+                    "name": "pickUpDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Pick Up Date",
+                    "default": ""
+                },
+                {
+                    "name": "pickUpTime",
+                    "type": "TIME (24-hour HH:MM)",
+                    "description": "Pick Up Time",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "dropOffEntityId",
+                    "type": "NUMBER",
+                    "description": "**dropOffEntityId** can be retrieved from **Search Location** API  in **Cars** collection **entity_id**",
+                    "default": ""
+                },
+                {
+                    "name": "dropOffTime",
+                    "type": "TIME (24-hour HH:MM)",
+                    "description": "Drop Off Time",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "driverAge",
+                    "type": "NUMBER",
+                    "description": "Driver's age (21 years and over)",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "dropOffDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Drop Off Date",
+                    "default": ""
+                },
+                {
+                    "name": "waitTime",
+                    "type": "STRING",
+                    "description": "Wait time in milliseconds. Sometimes the API needs **wait times** or more than **one** API call to get **complete data**.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchCars\"\nquerystring = {\"pickUpEntityId\": \"\", \"dropOffEntityId\": \"\", \"dropOffTime\": \"\", \"pickUpDate\": \"\", \"currency\": \"\", \"driverAge\": \"\", \"market\": \"\", \"pickUpTime\": \"\", \"countryCode\": \"\", \"dropOffDate\": \"\", \"waitTime\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchCars\"\nquerystring = {\"pickUpEntityId\": \"\", \"dropOffEntityId\": \"\", \"dropOffTime\": \"\", \"pickUpDate\": \"\", \"currency\": \"\", \"driverAge\": \"\", \"market\": \"\", \"pickUpTime\": \"\", \"countryCode\": \"\", \"dropOffDate\": \"\", \"waitTime\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Location",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchLocation",
+            "description": "Use this API to get EntityId for the pickup and drop location.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "Location name for pickup/drop off.",
+                    "default": "london"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchLocation\"\nquerystring = {\"query\": \"london\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchLocation\"\nquerystring = {\"query\": \"london\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Recommend Hotels",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getRecommendHotels",
+            "description": "Use this API to get recommend hotel based on the hotel selected.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "searchId",
+                    "type": "STRING",
+                    "description": "**searchId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "checkout",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkout Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "hotelId",
+                    "type": "STRING",
+                    "description": "**Hotel ID** can be retrieved from **Search Hotel** or **Get Hotel Details** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "entityId",
+                    "type": "STRING",
+                    "description": "**entityId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "checkin",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkin Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of adult guests (With age 18 and over)",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "waitTime",
+                    "type": "NUMBER",
+                    "description": "Wait time in milliseconds. Sometimes the API needs **wait times** or more than **one** API call to get **complete data**. ",
+                    "default": "2000"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "maxPrice",
+                    "type": "NUMBER",
+                    "description": "Maximum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "chain",
+                    "type": "ARRAY",
+                    "description": "The Hotel **chain** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "rating",
+                    "type": "ARRAY",
+                    "description": "The Hotel **rating** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "minPrice",
+                    "type": "NUMBER",
+                    "description": "Minimum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "stars",
+                    "type": "ARRAY",
+                    "description": "The Hotel **star** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "guestType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **guestType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "cancellation",
+                    "type": "ARRAY",
+                    "description": "The Hotel **cancellation** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "mealPlan",
+                    "type": "ARRAY",
+                    "description": "The Hotel **mealPlan** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "discounts",
+                    "type": "ARRAY",
+                    "description": "The Hotel **discounts** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "propertyType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **propertyType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "amenities",
+                    "type": "ARRAY",
+                    "description": "The Hotel **amenities** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getRecommendHotels\"\nquerystring = {\"searchId\": \"\", \"checkout\": \"\", \"market\": \"en-US\", \"hotelId\": \"\", \"entityId\": \"\", \"checkin\": \"\", \"currency\": \"USD\", \"waitTime\": \"2000\", \"countryCode\": \"US\", \"adults\": \"1\", \"maxPrice\": \"\", \"chain\": \"\", \"rating\": \"\", \"minPrice\": \"\", \"stars\": \"\", \"guestType\": \"\", \"cancellation\": \"\", \"mealPlan\": \"\", \"discounts\": \"\", \"propertyType\": \"\", \"amenities\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getRecommendHotels\"\nquerystring = {\"searchId\": \"\", \"checkout\": \"\", \"market\": \"en-US\", \"hotelId\": \"\", \"entityId\": \"\", \"checkin\": \"\", \"currency\": \"USD\", \"waitTime\": \"2000\", \"countryCode\": \"US\", \"adults\": \"1\", \"maxPrice\": \"\", \"chain\": \"\", \"rating\": \"\", \"minPrice\": \"\", \"stars\": \"\", \"guestType\": \"\", \"cancellation\": \"\", \"mealPlan\": \"\", \"discounts\": \"\", \"propertyType\": \"\", \"amenities\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Things To Do",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getThingsToDo",
+            "description": "Use this API to get Thing  to do nearby the hotel selected.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "entityId",
+                    "type": "STRING",
+                    "description": "**entityId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "lat",
+                    "type": "STRING",
+                    "description": "**lat** can be retrieved from **Hotel Details** or **Search Hotel** API in **Hotels** collection as **latitude**.",
+                    "default": ""
+                },
+                {
+                    "name": "lng",
+                    "type": "STRING",
+                    "description": "**lng** can be retrieved from **Hotel Details** or **Search Hotel** API in **Hotels** collection as **longitude**.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getThingsToDo\"\nquerystring = {\"entityId\": \"\", \"lat\": \"\", \"market\": \"en-US\", \"currency\": \"USD\", \"countryCode\": \"US\", \"lng\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getThingsToDo\"\nquerystring = {\"entityId\": \"\", \"lat\": \"\", \"market\": \"en-US\", \"currency\": \"USD\", \"countryCode\": \"US\", \"lng\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Hotel Reviews",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getHotelReviews",
+            "description": "Get all the review related to the hotel selected.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "hotelId",
+                    "type": "STRING",
+                    "description": "**Hotel ID** can be retrieved from **Search Hotel** or **Get Hotel Details** API in **Hotels** collection.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "searchId",
+                    "type": "STRING",
+                    "description": "**searchId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelReviews\"\nquerystring = {\"hotelId\": \"\", \"searchId\": \"\", \"currency\": \"USD\", \"countryCode\": \"US\", \"offset\": \"\", \"market\": \"en-US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelReviews\"\nquerystring = {\"hotelId\": \"\", \"searchId\": \"\", \"currency\": \"USD\", \"countryCode\": \"US\", \"offset\": \"\", \"market\": \"en-US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Hotel Price",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getHotelPrice",
+            "description": "Get the detail price for the hotel and room selected.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "checkin",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkin Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "checkout",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkout Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of adult guests (with age 18 and over)",
+                    "default": "1"
+                },
+                {
+                    "name": "entityId",
+                    "type": "STRING",
+                    "description": "**entityId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "hotelId",
+                    "type": "STRING",
+                    "description": "**Hotel ID** can be retrieved from **Search Hotel** or **Get Hotel Details** API in **Hotels** collection.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "childrenAges",
+                    "type": "ARRAY",
+                    "description": "Number of children (with age between 0 and 17)\nExample:\nIf 1st child's age is 11 months and 2nd child's age is 10 years, then the parameter should be passed as [0,10]",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "searchId",
+                    "type": "STRING",
+                    "description": "**searchId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "minPrice",
+                    "type": "NUMBER",
+                    "description": "Minimum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "stars",
+                    "type": "ARRAY",
+                    "description": "The Hotel **star** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "guestType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **guestType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "discounts",
+                    "type": "ARRAY",
+                    "description": "The Hotel **discounts** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "maxPrice",
+                    "type": "NUMBER",
+                    "description": "Maximum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "mealPlan",
+                    "type": "ARRAY",
+                    "description": "The Hotel **mealPlan** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "propertyType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **propertyType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "rating",
+                    "type": "ARRAY",
+                    "description": "The Hotel **rating** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "cancellation",
+                    "type": "ARRAY",
+                    "description": "The Hotel **cancellation** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "amenities",
+                    "type": "ARRAY",
+                    "description": "The Hotel **amenities** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "chain",
+                    "type": "ARRAY",
+                    "description": "The Hotel **chain** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelPrice\"\nquerystring = {\"childrenAges\": \"\", \"checkin\": \"\", \"checkout\": \"\", \"adults\": \"1\", \"market\": \"en-US\", \"currency\": \"USD\", \"entityId\": \"\", \"hotelId\": \"\", \"countryCode\": \"US\", \"searchId\": \"\", \"minPrice\": \"\", \"stars\": \"\", \"guestType\": \"\", \"discounts\": \"\", \"maxPrice\": \"\", \"mealPlan\": \"\", \"propertyType\": \"\", \"rating\": \"\", \"cancellation\": \"\", \"amenities\": \"\", \"chain\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelPrice\"\nquerystring = {\"childrenAges\": \"\", \"checkin\": \"\", \"checkout\": \"\", \"adults\": \"1\", \"market\": \"en-US\", \"currency\": \"USD\", \"entityId\": \"\", \"hotelId\": \"\", \"countryCode\": \"US\", \"searchId\": \"\", \"minPrice\": \"\", \"stars\": \"\", \"guestType\": \"\", \"discounts\": \"\", \"maxPrice\": \"\", \"mealPlan\": \"\", \"propertyType\": \"\", \"rating\": \"\", \"cancellation\": \"\", \"amenities\": \"\", \"chain\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Hotel Details",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getHotelDetails",
+            "description": "Get all the details of the hotel, room, amenities, reviews etc. based on a unique Id selected.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "hotelId",
+                    "type": "STRING",
+                    "description": "**Hotel ID** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelDetails\"\nquerystring = {\"hotelId\": \"\", \"countryCode\": \"US\", \"currency\": \"USD\", \"market\": \"en-US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelDetails\"\nquerystring = {\"hotelId\": \"\", \"countryCode\": \"US\", \"currency\": \"USD\", \"market\": \"en-US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Hotel",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchHotel",
+            "description": "Get and poll hotel room search with prices, filter etc.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "entityId",
+                    "type": "STRING",
+                    "description": "**entityId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "checkin",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkin Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "checkout",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkout Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "waitTime",
+                    "type": "NUMBER",
+                    "description": "Wait time in milliseconds. Sometimes the API needs **wait times** or more than **one** API call to get **complete data**. ",
+                    "default": "2000"
+                },
+                {
+                    "name": "stars",
+                    "type": "ARRAY",
+                    "description": "The Hotel **star** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of adult guests (with age 18 and over)",
+                    "default": ""
+                },
+                {
+                    "name": "price",
+                    "type": "ENUM",
+                    "description": "**total** - Total price for the stay.\n**per**   - Price per night",
+                    "default": ""
+                },
+                {
+                    "name": "maxPrice",
+                    "type": "NUMBER",
+                    "description": "Maximum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "minPrice",
+                    "type": "NUMBER",
+                    "description": "Minimum cost filter to stay in the hotel.",
+                    "default": ""
+                },
+                {
+                    "name": "cancellation",
+                    "type": "ARRAY",
+                    "description": "The Hotel **cancellation** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "amenities",
+                    "type": "ARRAY",
+                    "description": "The Hotel **amenities** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "guestType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **guestType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "propertyType",
+                    "type": "ARRAY",
+                    "description": "The Hotel **propertyType** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "chain",
+                    "type": "ARRAY",
+                    "description": "The Hotel **chain** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "discounts",
+                    "type": "ARRAY",
+                    "description": "The Hotel **discounts** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "sorting",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "mealPlan",
+                    "type": "ARRAY",
+                    "description": "The Hotel **mealPlan** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "rating",
+                    "type": "ARRAY",
+                    "description": "The Hotel **rating** filter range is retrievable from the **Get Hotel Filters** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "childrenAges",
+                    "type": "ARRAY",
+                    "description": "Number of children (with age between 0 and 17)\nExample:\nIf 1st child's age is 11 months and 2nd child's age is 10 years, then the parameter should be passed as [0,10]",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchHotel\"\nquerystring = {\"currency\": \"USD\", \"entityId\": \"\", \"checkin\": \"\", \"countryCode\": \"US\", \"checkout\": \"\", \"market\": \"en-US\", \"waitTime\": \"2000\", \"stars\": \"\", \"adults\": \"\", \"price\": \"\", \"maxPrice\": \"\", \"minPrice\": \"\", \"cancellation\": \"\", \"amenities\": \"\", \"guestType\": \"\", \"propertyType\": \"\", \"chain\": \"\", \"discounts\": \"\", \"sorting\": \"\", \"mealPlan\": \"\", \"rating\": \"\", \"childrenAges\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchHotel\"\nquerystring = {\"currency\": \"USD\", \"entityId\": \"\", \"checkin\": \"\", \"countryCode\": \"US\", \"checkout\": \"\", \"market\": \"en-US\", \"waitTime\": \"2000\", \"stars\": \"\", \"adults\": \"\", \"price\": \"\", \"maxPrice\": \"\", \"minPrice\": \"\", \"cancellation\": \"\", \"amenities\": \"\", \"guestType\": \"\", \"propertyType\": \"\", \"chain\": \"\", \"discounts\": \"\", \"sorting\": \"\", \"mealPlan\": \"\", \"rating\": \"\", \"childrenAges\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Hotel Filters",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getHotelFilters",
+            "description": "This API is used to get all the available filters for the place to visit.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of adult guests (with age 18 and over)",
+                    "default": "1"
+                },
+                {
+                    "name": "checkout",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkout Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "entityId",
+                    "type": "STRING",
+                    "description": "**entityId** can be retrieved from **Search Hotel** API in **Hotels** collection.",
+                    "default": ""
+                },
+                {
+                    "name": "checkin",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Checkin Date\nFormat: YYYY-MM-DD",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "childrenAges",
+                    "type": "ARRAY",
+                    "description": "Number of children (with age between 0 and 17)\nExample:\nIf 1st child's age is 11 months and 2nd child's age is 10 years, then the parameter should be passed as [0,10]",
+                    "default": ""
+                },
+                {
+                    "name": "waitTime",
+                    "type": "NUMBER",
+                    "description": "Wait time in milliseconds. Sometimes the API needs **wait times** or more than **one** API call to get **complete data**. ",
+                    "default": "2000"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelFilters\"\nquerystring = {\"childrenAges\": \"\", \"adults\": \"1\", \"checkout\": \"\", \"entityId\": \"\", \"checkin\": \"\", \"waitTime\": \"2000\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getHotelFilters\"\nquerystring = {\"childrenAges\": \"\", \"adults\": \"1\", \"checkout\": \"\", \"entityId\": \"\", \"checkin\": \"\", \"waitTime\": \"2000\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Place",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchPlace",
+            "description": "Search for a place to get the **entityId** needed in searching the hotel API.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "Location Name in which you want to visit.",
+                    "default": "london"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchPlace\"\nquerystring = {\"query\": \"london\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchPlace\"\nquerystring = {\"query\": \"london\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Flights",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchFlights",
+            "description": "Get and poll all flights, search between origin and destination with prices, filter, sorting.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Departure or travel date.\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "Origin airport **IATA** code. The **IATA** code can be extracted from the **Search Airport** API in the **Flights** collection.",
+                    "default": "LOND"
+                },
+                {
+                    "name": "destination",
+                    "type": "STRING",
+                    "description": "Destination airport **IATA** code. The **IATA** code can be extracted from the **Search Airport** API in the **Flights** collection.",
+                    "default": "NYCA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "infants",
+                    "type": "NUMBER",
+                    "description": "Number of Infants (with age < 2 years)",
+                    "default": ""
+                },
+                {
+                    "name": "cabinClass",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "returnDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Return date.\nFormat: YYYY-MM-DD",
+                    "default": ""
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of Adults (with age 18 and over)\nDefault Value: 1",
+                    "default": "1"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "children",
+                    "type": "NUMBER",
+                    "description": "Number of Childrens (with age between 2-12 years)",
+                    "default": ""
+                },
+                {
+                    "name": "filter",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlights\"\nquerystring = {\"infants\": \"\", \"cabinClass\": \"\", \"returnDate\": \"\", \"adults\": \"1\", \"date\": \"\", \"origin\": \"LOND\", \"currency\": \"USD\", \"children\": \"\", \"destination\": \"NYCA\", \"filter\": \"\", \"market\": \"en-US\", \"countryCode\": \"US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlights\"\nquerystring = {\"infants\": \"\", \"cabinClass\": \"\", \"returnDate\": \"\", \"adults\": \"1\", \"date\": \"\", \"origin\": \"LOND\", \"currency\": \"USD\", \"children\": \"\", \"destination\": \"NYCA\", \"filter\": \"\", \"market\": \"en-US\", \"countryCode\": \"US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Flight Details",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getFlightDetails",
+            "description": "Get all the details of the fights based on a unique Id.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "legs",
+                    "type": "OBJECT",
+                    "description": "The legs must contain the **origin**, **destination** and **date** in object format and must be passed in an array.\nEXAMPLE:\n[\n  {\n    'origin': 'LOND',\n    'destination': 'NYCA',\n    'date': '2023-02-07'\n  },\n  ...\n]\n**Note:** If there are multiple stops, there should be more leg objects on the board. And the legs have to be the same as the **Search Flights** API in **Flight** collection.",
+                    "default": "[{\"origin\":\"LOND\",\"destination\":\"NYCA\",\"date\":\"2023-02-07\"},{\"date\":\"2023-02-14\",\"destination\":\"LOND\",\"origin\":\"NYCA\"}]"
+                },
+                {
+                    "name": "itineraryId",
+                    "type": "STRING",
+                    "description": "**itineraryId** can be retrieved from **Search Flights** API in **Flight** collection as **id**.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "children",
+                    "type": "NUMBER",
+                    "description": "Number of Childrens (with age between 2-12 years)",
+                    "default": ""
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "adults",
+                    "type": "NUMBER",
+                    "description": "Number of Adults (with age 18 and over)\nDefault Value: 1",
+                    "default": "1"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "infants",
+                    "type": "NUMBER",
+                    "description": "Number of Infants (with age < 2 years)",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getFlightDetails\"\nquerystring = {\"children\": \"\", \"legs\": \"[{\\\"origin\\\":\\\"LOND\\\",\\\"destination\\\":\\\"NYCA\\\",\\\"date\\\":\\\"2023-02-07\\\"},{\\\"date\\\":\\\"2023-02-14\\\",\\\"destination\\\":\\\"LOND\\\",\\\"origin\\\":\\\"NYCA\\\"}]\", \"market\": \"en-US\", \"itineraryId\": \"\", \"adults\": \"1\", \"countryCode\": \"US\", \"currency\": \"USD\", \"infants\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getFlightDetails\"\nquerystring = {\"children\": \"\", \"legs\": \"[{\\\"origin\\\":\\\"LOND\\\",\\\"destination\\\":\\\"NYCA\\\",\\\"date\\\":\\\"2023-02-07\\\"},{\\\"date\\\":\\\"2023-02-14\\\",\\\"destination\\\":\\\"LOND\\\",\\\"origin\\\":\\\"NYCA\\\"}]\", \"market\": \"en-US\", \"itineraryId\": \"\", \"adults\": \"1\", \"countryCode\": \"US\", \"currency\": \"USD\", \"infants\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Flight Everywhere",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchFlightEverywhere",
+            "description": "Use this API to get flights when the destination is everywhere or unsure.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "Origin airport **IATA** code. The **IATA** code can be extracted from the **Search Airport** API in the **Flights** collection.",
+                    "default": "LOND"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "oneWay",
+                    "type": "BOOLEAN",
+                    "description": "Send **oneWay** as **true** when you are unsure of the return date.",
+                    "default": "false"
+                },
+                {
+                    "name": "anytime",
+                    "type": "BOOLEAN",
+                    "description": "Send **anytime** as **true** when you are unsure of the trip date.",
+                    "default": "true"
+                },
+                {
+                    "name": "returnDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Return date.\nFormat: YYYY-MM-DD\n\nNote: If **anytime** is **true**, you do not need to pass **returnDate**.",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                },
+                {
+                    "name": "travelDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Departure or travel date.\nFormat: YYYY-MM-DD\n\nNote: If **anytime** is **true**, you do not need to pass **travelDate**.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightEverywhere\"\nquerystring = {\"origin\": \"LOND\", \"oneWay\": \"false\", \"anytime\": \"true\", \"returnDate\": \"\", \"currency\": \"USD\", \"market\": \"en-US\", \"countryCode\": \"US\", \"travelDate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightEverywhere\"\nquerystring = {\"origin\": \"LOND\", \"oneWay\": \"false\", \"anytime\": \"true\", \"returnDate\": \"\", \"currency\": \"USD\", \"market\": \"en-US\", \"countryCode\": \"US\", \"travelDate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Flight Everywhere Details",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchFlightEverywhereDetails",
+            "description": "Get all the details of the fights based on a unique Id.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "Origin airport **IATA** code. The **IATA** code can be extracted from the **Search Airport** API in the **Flights** collection.",
+                    "default": "LOND"
+                },
+                {
+                    "name": "CountryId",
+                    "type": "STRING",
+                    "description": "The **CountryId** can be extracted from the **Search Flight Everywhere** API in the **Flights** collection.",
+                    "default": "US"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "returnDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Return date.\nFormat: YYYY-MM-DD\n\nNote: If **anytime** is **true**, you do not need to pass **returnDate**.",
+                    "default": ""
+                },
+                {
+                    "name": "oneWay",
+                    "type": "BOOLEAN",
+                    "description": "Send **oneWay** as **true** when you are unsure of the return date.",
+                    "default": "false"
+                },
+                {
+                    "name": "market",
+                    "type": "STRING",
+                    "description": "The list of available **market** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "en-US"
+                },
+                {
+                    "name": "anytime",
+                    "type": "BOOLEAN",
+                    "description": "Send **anytime** as **true** when you are unsure of the trip date.",
+                    "default": "true"
+                },
+                {
+                    "name": "travelDate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Departure or travel date.\nFormat: YYYY-MM-DD\n\nNote: If **anytime** is **true**, you do not need to pass **travelDate**.",
+                    "default": ""
+                },
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The list of available **currencies** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "USD"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The list of available **countryCode** can be retrieved through the **Get Config** API in the **Config** collection.",
+                    "default": "US"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightEverywhereDetails\"\nquerystring = {\"returnDate\": \"\", \"oneWay\": \"false\", \"market\": \"en-US\", \"anytime\": \"true\", \"travelDate\": \"\", \"currency\": \"USD\", \"countryCode\": \"US\", \"origin\": \"LOND\", \"CountryId\": \"US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchFlightEverywhereDetails\"\nquerystring = {\"returnDate\": \"\", \"oneWay\": \"false\", \"market\": \"en-US\", \"anytime\": \"true\", \"travelDate\": \"\", \"currency\": \"USD\", \"countryCode\": \"US\", \"origin\": \"LOND\", \"CountryId\": \"US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Test API",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/test",
+            "description": "This API is to test if server is up and running",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/test\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/test\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Get Config",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/getConfig",
+            "description": "This API endpoint is responsible for providing  some of the parameters require for most of the API's.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getConfig\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/getConfig\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search Airport",
+            "url": "https://skyscanner50.p.rapidapi.com/api/v1/searchAirport",
+            "description": "This API endpoint is responsible for providing a list of Airports for the location.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "Name of the location where the **Airport** is situated.",
+                    "default": "london"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchAirport\"\nquerystring = {\"query\": \"london\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://skyscanner50.p.rapidapi.com/api/v1/searchAirport\"\nquerystring = {\"query\": \"london\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"skyscanner50.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ],
+    "standardized_name": "skyscanner_v2"
+}

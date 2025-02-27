@@ -1,0 +1,179 @@
+{
+    "tool_name":"Yelp Reviews",
+    "tool_description":"Extremely Fast and Simple API to search for businesses and get their reviews on Yelp in real-time.",
+    "title":"Yelp Reviews",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":99,
+        "avgLatency":975,
+        "avgSuccessRate":99,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/letscrape-6bRBa3QguO5/api/yelp-reviews/",
+    "host":"yelp-reviews.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Business Search",
+            "url":"https://yelp-reviews.p.rapidapi.com/business-search",
+            "description":"Search for Yelp businesses by query / keyword and location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"location",
+                    "type":"STRING",
+                    "description":"Search location (e.g. *New York, NY, USA*).",
+                    "default":"San Francisco, CA, USA"
+                },
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Search query / keyword.\n\n**Examples:**\n- *Alansi’s Plumbing*\n- *Chinese restaurants*",
+                    "default":"Plumbers"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"start",
+                    "type":"NUMBER",
+                    "description":"Number of results to skip. Mainly used for pagination.\n\n**Default:** `0`.\n\n**Allowed values:** positive integers.",
+                    "default":"0"
+                },
+                {
+                    "name":"price_range",
+                    "type":"STRING",
+                    "description":"Find business with specific price ranges, specified as a comma delimited list of the following values: `$`, `$$`, `$$$`, `$$$`.\n\n**Examples:**\n- *$$*\n- *$,$$*",
+                    "default":""
+                },
+                {
+                    "name":"yelp_domain",
+                    "type":"STRING",
+                    "description":"The yelp domain to use for the search.\n\n**Default:** `yelp.com`\n\n**Supported domains:** `yelp.com`, `yelp.com.au`, `yelp.co.nz`, `ms.yelp.my`, `yelp.cz`, `yelp.dk`, `yelp.de`, `yelp.at`, `de.yelp.ch`, `en.yelp.be`, `yelp.ca`, `en.yelp.com.hk`, `en.yelp.my`, `en.yelp.com.ph`, `yelp.ie`, `yelp.com.sg`, `en.yelp.ch`, `yelp.co.uk`, `yelp.com.ar`, `yelp.cl`, `yelp.es`, `yelp.com.mx`, `fil.yelp.com.ph`, `yelp.fr`, `fr.yelp.ca`, `fr.yelp.ch`, `fr.yelp.be`, `yelp.no`, `yelp.pl`, `yelp.pot`, `yelp.com.br`, `fi.yelp.fi`, `sv.yelp.fi`, `yelp.se`, `yelp.com.tr`, `yelp.co.jp`, `zh.yelp.com.hk`, `yelp.com.tw`.",
+                    "default":"yelp.com"
+                },
+                {
+                    "name":"sort_by",
+                    "type":"ENUM",
+                    "description":"Return the results in a specific sort order.\n\n**Default:** `RECOMMENDED`\n\n**Allowed values:** `RECOMMENDED, HIGHEST_RATED, REVIEW_COUNT`",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://yelp-reviews.p.rapidapi.com/business-search\"\nquerystring = {\"start\": start, \"yelp_domain\": yelp_domain, \"location\": location, \"query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"yelp-reviews.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Business Reviews",
+            "url":"https://yelp-reviews.p.rapidapi.com/business-reviews",
+            "description":"Fetch a single or multiple business review pages from Yelp (each page includes up to 10 reviews).",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"business_id",
+                    "type":"STRING",
+                    "description":"Yelp business id or alias to fetch reviews for.\n\n**Examples**\n- *WHJ2spR-_1P_tbiOqOibjg*\n- *pearls-deluxe-burgers-san-francisco-3*",
+                    "default":"pearls-deluxe-burgers-san-francisco-3"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"num_pages",
+                    "type":"STRING",
+                    "description":"Number of pages to return, starting from `page`.\n\n**Default:** `1`.\n\n**Allowed values:** 1-10.\n\n **Note**: requests for more than one page are charged 2x.",
+                    "default":"1"
+                },
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Return reviews matching a text query.",
+                    "default":"cheese"
+                },
+                {
+                    "name":"sort",
+                    "type":"ENUM",
+                    "description":"How to sort reviews in the results. Note that the `ELITES` value will cause the API to only return reviews posted by elite members.\n\n**Default:** `BEST_MATCH`\n\n**Allowed values:** `BEST_MATCH`, `NEWEST`, `OLDEST`, `HIGHEST_RATED`, `LOWEST_RATED`, `ELITES`.",
+                    "default":""
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"Only return reviews of a certain language. For a list of supported language codes see https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 .\n\n**Default:** `en`.",
+                    "default":"en"
+                },
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"Page to return (each page includes up to 10 results).\n\n**Default:** `1`.",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://yelp-reviews.p.rapidapi.com/business-reviews\"\nquerystring = {\"num_pages\": num_pages, \"query\": query, \"business_id\": business_id, \"language\": language, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"yelp-reviews.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "reviews":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            },
+                            "total":{
+                                "type":"integer"
+                            },
+                            "review_languages":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object",
+                                    "properties":{
+                                        "language":{
+                                            "type":"string"
+                                        },
+                                        "count":{
+                                            "type":"integer"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

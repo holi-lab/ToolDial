@@ -1,0 +1,71 @@
+{
+    "product_id": "api_d3ff8d59-f200-441e-be55-4262a6ab62c9",
+    "tool_description": "An API which converts natural language input into structured data which can be used for data mining and consumed by machines. It is useful for extracting entities from user inputs while you are building apps such as chatbot or text data mining through Natural Language Processing(NLP).",
+    "home_url": "https://rapidapi.com/ggbondt/api/text-data-parser/",
+    "name": "Text Data Parser",
+    "title": "Text Data Parser",
+    "pricing": "FREEMIUM",
+    "tool_name": "Text Data Parser",
+    "score": null,
+    "host": "text-data-parser.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "parse",
+            "url": "https://text-data-parser.p.rapidapi.com/parse",
+            "description": "It converts text into structured data.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "The text that will be parsed into structured data.",
+                    "default": "The closest store is 2 miles from here and will be opened at 9 a.m. tomorrow"
+                },
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "The language of the input text",
+                    "default": "en_US"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "dims",
+                    "type": "STRING",
+                    "description": "Dimensons of the structured data that a text will be parsed into. Ex: [\"duration\", \"temperature\"]. Exclude this parameter to use all dimensions.\n\n\n|:dim | examples|\n| --- | ----------- |\n|time | \u201ctoday\u201d<br> \u201cMonday, Feb 18\u201d <br>\u201cthe 1st of march\u201d<br>\u201clast week\u201d<br>\u201ca quarter to noon\u201d<br>\u201c11:45am\u201d<br>\u201cthree months ago\u201d<br>\u201cnext 3 weeks\u201d<br>\u201cthanksgiving\u201d<br>\u201cMother\u2019s Day\u201d<br>\u201cfrom 9:30 - 11:00 on Thursday<br>\u201cthe day before labor day 2020\u201d|\n|temperature| \t\u201c70\u00b0F\u201d<br>\u201c72\u00b0 Fahrenheit\u201d<br>\u201cthirty two celsius\u201d<br>\u201c65 degrees\u201d|\n| number| \"eighteen\" <br> \"0.77\" <br>\"100K\"<br>\"33\"|\n|ordinal | \"4th\" <br> \"first\"<br>\"seventh\"|\n| distance | \u201c8miles\u201d<br>\u201c3 feet\u201d<br>\u201c2 inches\u201d<br>\u201c3\u2019\u2019<br>\u201c4km\u201d<br>\u201c12cm\u201d| \n| volume | \u201c250ml\u201d<br>\u201c2liters\u201d<br>\u201c1 gallon\u201d |\n| amount-of-money | \u201cten dollars\u201d<br>\u201c4 bucks\u201d<br>\u201c$20\u201d |\n| duration | \t\u201c2 hours\u201d<br>\u201c4 days\u201d<br>\u201d3 minutes\u201d|\n| email |\t\u201chelp@wit.ai\u201d |\n| url\t| \u201chttp://wit.ai\u201d<br>\u201cwww.foo.com:8080/path\u201d<br>\u201chttps://myserver?foo=bar\u201d<br>\u201ccnn.com/info\u201d<br>\u201cfoo.com/path/path?ext=%23&foo=bla\u201d<br>\u201clocalhost\u201d |\n| phone-number |  \u201c415-123-3444\u201d <br>\u201c+33 4 76095663\u201d <br>\u201c(650)-283-4757 ext 897\u201d |",
+                    "default": "[\"time\", \"distance\"]"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://text-data-parser.p.rapidapi.com/parse\"\nquerystring = {\"dims\": \"[\\\"time\\\", \\\"distance\\\"]\", \"text\": \"The closest store is 2 miles from here and will be opened at 9 a.m. tomorrow\", \"locale\": \"en_US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"text-data-parser.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://text-data-parser.p.rapidapi.com/parse\"\nquerystring = {\"dims\": \"[\\\"time\\\", \\\"distance\\\"]\", \"text\": \"The closest store is 2 miles from here and will be opened at 9 a.m. tomorrow\", \"locale\": \"en_US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"text-data-parser.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "body": {
+                            "type": "string"
+                        },
+                        "start": {
+                            "type": "integer"
+                        },
+                        "value": {
+                            "type": "object"
+                        },
+                        "end": {
+                            "type": "integer"
+                        },
+                        "dim": {
+                            "type": "string"
+                        },
+                        "latent": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,677 @@
+{
+    "product_id": "api_ccaa8c71-8f32-4089-b430-1f53a8eba85c",
+    "tool_description": "Create thousands of personalized caricatures & GIF stickers from a simple face photo",
+    "home_url": "https://rapidapi.com/eureka-studios-devs/api/mojipop/",
+    "name": "MojiPop",
+    "title": "MojiPop",
+    "pricing": "FREEMIUM",
+    "tool_name": "MojiPop",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 857,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "mojipop.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "GenerateSmallGif",
+            "url": "https://mojipop.p.rapidapi.com/api/Render/Gif200",
+            "description": "Generate a personalized GIF Sticker ( 200x200) with the *AvatarID* you got from **CreateAvatar**\nTutorial: https://mojipop.com/content/EurekaStudios_MojiPop-API%20Tutorial.pdf",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "The *AvatarID* you got from **CreateAvatar**",
+                    "default": "20b037dd4e264e18889d2b30129af321"
+                },
+                {
+                    "name": "TemplateID",
+                    "type": "STRING",
+                    "description": "The GIF Sticker background ID that you want to add your AvatarID to.\n\nHello: 06201000600390 (default)\nThank you: 06201000600140\nHappy Birthday: 06210004006410",
+                    "default": "06201000600390"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "BackgroundLayer",
+                    "type": "STRING",
+                    "description": "true - maintains template background layer (default)\nfalse - removes template background layer ",
+                    "default": ""
+                },
+                {
+                    "name": "Format",
+                    "type": "STRING",
+                    "description": "gif - output will be in .gif format (default)\nwebp - output will be in .webp format",
+                    "default": ""
+                },
+                {
+                    "name": "Quality",
+                    "type": "NUMBER",
+                    "description": "Compression level (1-100)\n100: No compression, highest quality\n70: Half the size, high quality (recommended setting)\n(**for WebP only**) ",
+                    "default": "70"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/Gif200\"\nquerystring = {\"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"BackgroundLayer\": \"\", \"TemplateID\": \"06201000600390\", \"Format\": \"\", \"Quality\": \"70\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/Gif200\"\nquerystring = {\"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"BackgroundLayer\": \"\", \"TemplateID\": \"06201000600390\", \"Format\": \"\", \"Quality\": \"70\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "PreviewUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "EditAvatar",
+            "url": "https://mojipop.p.rapidapi.com/api/FaceDetection/EditAvatar",
+            "description": "You can find the Asset list and explanations in the following website: https://cms.mojipop.com/AssetList \n\n| Face Edit Asset | Description |\n|:--:|---|\n| AvatarID | Your Avatar ID |\n| FaceShapeAssetID | Face ID |\n| HairstyleAssetID | Hairstyle ID |\n| HairstyleColorID | Hairstyle Color |\n| IsFlipHair | Whether to flip the hairstyle horizontally |\n| GlassesAssetID | Glasses ID |\n| EarringsAssetID | Earrings ID |\n| AccessoriesAssetID | Headwear ID |\n\nWhen an AssetID is left empty -> The previously set AssetID will remain;\nWhen an AssetID is set as *Unselected*, asset will be removed (ex.removing glasses, beards, etc);",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "AccessoriesAssetID",
+                    "type": "STRING",
+                    "description": "Example: 09021003900490",
+                    "default": ""
+                },
+                {
+                    "name": "HairstyleAssetID",
+                    "type": "STRING",
+                    "description": "Example: 08511003914001",
+                    "default": ""
+                },
+                {
+                    "name": "HairstyleColorID",
+                    "type": "STRING",
+                    "description": "Example: 04 (Blond Hair)",
+                    "default": ""
+                },
+                {
+                    "name": "FaceShapeAssetID",
+                    "type": "STRING",
+                    "description": "Example: 08811003900010",
+                    "default": ""
+                },
+                {
+                    "name": "IsFlipHair",
+                    "type": "STRING",
+                    "description": "Example: true / false",
+                    "default": ""
+                },
+                {
+                    "name": "EarringsAssetID",
+                    "type": "STRING",
+                    "description": "Example: 09100000100240",
+                    "default": ""
+                },
+                {
+                    "name": "GlassesAssetID",
+                    "type": "STRING",
+                    "description": "Example: 08701003900090",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/FaceDetection/EditAvatar\"\nquerystring = {\"AccessoriesAssetID\": \"\", \"HairstyleAssetID\": \"\", \"HairstyleColorID\": \"\", \"FaceShapeAssetID\": \"\", \"AvatarID\": \"\", \"IsFlipHair\": \"\", \"EarringsAssetID\": \"\", \"GlassesAssetID\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/FaceDetection/EditAvatar\"\nquerystring = {\"AccessoriesAssetID\": \"\", \"HairstyleAssetID\": \"\", \"HairstyleColorID\": \"\", \"FaceShapeAssetID\": \"\", \"AvatarID\": \"\", \"IsFlipHair\": \"\", \"EarringsAssetID\": \"\", \"GlassesAssetID\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GetAvatarInfo",
+            "url": "https://mojipop.p.rapidapi.com/api/FaceDetection/GetAvatar",
+            "description": "| Name | Description |\n|:--:|---|\n|Gender                         |Avatar Gender        |\n|Age                            |Age Range        |\n|DetectedSkinColorID            |Detected Skin color ID code        |\n|DetectedHairstyleColorID       |Detected Hairstyle color code        |\n|HairstyleColorID               |Hairstyle color code        |\n|HairstyleAssetID                Hairstyles Asset ID|\n|IsFlipHair                     |Whether Hairstyle should be flipped left/right        |\n|SkinColorID                    |Skin color ID code        |\n|FaceShapeAssetID               |Face Shape Asset ID|\n|BeardAssetID                   |Beard Asset ID|\n|BeardColorID                   |Beard color ID        |\n|GlassesAssetID                 |Glasses Asset ID        |\n|EyesAssetID                    |Eyes Asset ID      |\n|EarringsAssetID                |Earrings Asset ID                        |\n|AccessoriesAssetID             |Accessories Asset ID(Hats, head accessories, headscarves)|\n|MakeupAssetID                  |Face Makeup ID        |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "9311c6bb77824e0db72119296314b869"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/FaceDetection/GetAvatar\"\nquerystring = {\"AvatarID\": \"9311c6bb77824e0db72119296314b869\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/FaceDetection/GetAvatar\"\nquerystring = {\"AvatarID\": \"9311c6bb77824e0db72119296314b869\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GenerateCaricature",
+            "url": "https://mojipop.p.rapidapi.com/api/Render/Caricature",
+            "description": "Generate a personalized Caricature (300DPI @ 496x700) with the *AvatarID* you got from **CreateAvatar**\nTutorial: https://mojipop.com/content/EurekaStudios_MojiPop-API%20Tutorial.pdf",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "TemplateID",
+                    "type": "STRING",
+                    "description": "The Caricature background ID that you want to add your AvatarID to.\n\nHappy Birthday: 00511004504170 (default)\nGood Morning: 00522100102840\nColosseum: 00511002402670\n\nGet more template IDs from to https://mojipop.com/content.html",
+                    "default": "00511004504170"
+                },
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "The *AvatarID* you got from **CreateAvatar**",
+                    "default": "20b037dd4e264e18889d2b30129af321"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Quality",
+                    "type": "NUMBER",
+                    "description": "**for WebP only**\nCompression level (1-100)\n100: No compression, highest quality\n80: Half the size of PNG, high quality (recommended setting)\n",
+                    "default": "80"
+                },
+                {
+                    "name": "Format",
+                    "type": "STRING",
+                    "description": "jpg - Caricature output will be in .jpg format (default)\npng - Caricature output will be in .png format\nwebp -  Caricature output will be in .webp format\n*Note: * png & webp * supports background transparency*",
+                    "default": "jpg"
+                },
+                {
+                    "name": "BackgroundLayer",
+                    "type": "STRING",
+                    "description": "true - maintains template background layer (default)\nfalse - removes template background layer  ",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/Caricature\"\nquerystring = {\"TemplateID\": \"00511004504170\", \"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"Quality\": \"80\", \"Format\": \"jpg\", \"BackgroundLayer\": \"true\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/Caricature\"\nquerystring = {\"TemplateID\": \"00511004504170\", \"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"Quality\": \"80\", \"Format\": \"jpg\", \"BackgroundLayer\": \"true\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "PreviewUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GenerateOrUpdateIcon",
+            "url": "https://mojipop.p.rapidapi.com/api/Render/GenerateOrUpdateIcon",
+            "description": "Create or update small avatar Icon",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "avatarId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/GenerateOrUpdateIcon\"\nquerystring = {\"avatarId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/GenerateOrUpdateIcon\"\nquerystring = {\"avatarId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GetCaricatureDataByCode",
+            "url": "https://mojipop.p.rapidapi.com/api/Resource/GetCaricatureDataByCode",
+            "description": "| Name | Description |\n|:--:|---|\n|CaricatureCode|   Template ID     |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "caricatureCode",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "00522100200200"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Resource/GetCaricatureDataByCode\"\nquerystring = {\"caricatureCode\": \"00522100200200\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Resource/GetCaricatureDataByCode\"\nquerystring = {\"caricatureCode\": \"00522100200200\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GenerateCaricatureUHD",
+            "url": "https://mojipop.p.rapidapi.com/api/Render/CaricatureUHD",
+            "description": "Generate a personalized UHD Caricature (300DPI 2480x3504) with the *AvatarID* you got from **CreateAvatar**\nTutorial: https://mojipop.com/content/EurekaStudios_MojiPop-API%20Tutorial.pdf",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "TemplateID",
+                    "type": "STRING",
+                    "description": "The Caricature background ID that you want to add your AvatarID to.\n\nHappy Birthday: 00511004504170 (default)\nGood Morning: 00522100102840\nColosseum: 00511002402670\n\nGet more template IDs from to https://mojipop.com/content.html",
+                    "default": "00511004504170"
+                },
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "The *AvatarID* you got from **CreateAvatar**",
+                    "default": "20b037dd4e264e18889d2b30129af321"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Quality",
+                    "type": "NUMBER",
+                    "description": "**for WebP only**\nCompression level (1-100)\n100: No compression, highest quality\n80: Half the size of PNG, high quality (recommended setting)",
+                    "default": "80"
+                },
+                {
+                    "name": "Format",
+                    "type": "STRING",
+                    "description": "jpg - Caricature output will be in .jpg format (default)\npng - Caricature output will be in .png format\nwebp -  Caricature output will be in .webp format\n*Note: * png & webp * supports background transparency*",
+                    "default": "jpg"
+                },
+                {
+                    "name": "BackgroundLayer",
+                    "type": "STRING",
+                    "description": "true - maintains template background layer (default)\nfalse - removes template background layer",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/CaricatureUHD\"\nquerystring = {\"TemplateID\": \"00511004504170\", \"Quality\": \"80\", \"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"Format\": \"jpg\", \"BackgroundLayer\": \"true\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/CaricatureUHD\"\nquerystring = {\"TemplateID\": \"00511004504170\", \"Quality\": \"80\", \"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"Format\": \"jpg\", \"BackgroundLayer\": \"true\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "PreviewUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GetCaricaturesByCode",
+            "url": "https://mojipop.p.rapidapi.com/api/Resource/GetCaricaturesByCode",
+            "description": "| Name | Description |\n|:--:|---|\n|CaricatureCode|   Template ID     |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "caricatureCode",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "00522100200200"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Resource/GetCaricaturesByCode\"\nquerystring = {\"caricatureCode\": \"00522100200200\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Resource/GetCaricaturesByCode\"\nquerystring = {\"caricatureCode\": \"00522100200200\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GetGifDataByCode",
+            "url": "https://mojipop.p.rapidapi.com/api/Resource/GetGifDataByCode",
+            "description": "| Name | Description |\n|:--:|---|\n|CaricatureCode|   TemplateID     |",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "gifCode",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "06220010817481"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Resource/GetGifDataByCode\"\nquerystring = {\"gifCode\": \"06220010817481\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Resource/GetGifDataByCode\"\nquerystring = {\"gifCode\": \"06220010817481\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "CreateAvatar",
+            "url": "https://mojipop.p.rapidapi.com/api/FaceDetection/CreateAvatar",
+            "description": "Step I: Creating a Cartoon *AvatarID* from a face photo\nUpload a photo below to create your \"AvatarID\" code\nTutorial: https://mojipop.com/content/EurekaStudios_MojiPop-API%20Tutorial.pdf",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "photo",
+                    "type": "BINARY",
+                    "description": "1. Only JPG/PNG formats are supported\n2. Under 2MB\n3. Recommended size for best performance is 700x700px ",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "makeUpAssetID",
+                    "type": "STRING",
+                    "description": "For choosing how realistic the avatar is or applying makeup.\nChoose makeup Asset ID from https://cms.mojipop.com/AssetList\nor\nFor more realistic avatar: \nFemale: 0832101080003002\nMale: 0831101080002002\n\nFor no cartoon filter on avatar use:\nFemale: 0832101080019002\nMale: 0831101080020002\n\nNo Face Filter & No Makeup: 08322994600170  \nYes Face Filter & No Makeup: 08321974600130 \nNo FaceFilter & Yes Makeup: 08321994600130  ",
+                    "default": ""
+                },
+                {
+                    "name": "createIcon",
+                    "type": "BOOLEAN",
+                    "description": "createIcon will return a small avatar icon to represent the AvatarID.",
+                    "default": "false"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/FaceDetection/CreateAvatar\"\nquerystring = {\"photo\": \"\", \"makeUpAssetID\": \"\", \"createIcon\": \"false\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/FaceDetection/CreateAvatar\"\nquerystring = {\"photo\": \"\", \"makeUpAssetID\": \"\", \"createIcon\": \"false\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "AvatarId": {
+                                "type": "string"
+                            },
+                            "Gender": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GenerateGif",
+            "url": "https://mojipop.p.rapidapi.com/api/Render/Gif",
+            "description": "Generate a personalized GIF Sticker ( 500x500) with the *AvatarID* you got from **CreateAvatar**\nTutorial: https://mojipop.com/content/EurekaStudios_MojiPop-API%20Tutorial.pdf",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "The *AvatarID* you got from **CreateAvatar**",
+                    "default": "20b037dd4e264e18889d2b30129af321"
+                },
+                {
+                    "name": "TemplateID",
+                    "type": "STRING",
+                    "description": "The GIF Sticker background ID that you want to add your AvatarID to.\n\nHello: 06201000600390 (default)\nThank you: 06201000600140\nHappy Birthday: 06210004006410",
+                    "default": "06201000600390"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "BackgroundLayer",
+                    "type": "STRING",
+                    "description": "true - maintains template background layer (default)\nfalse - removes template background layer ",
+                    "default": ""
+                },
+                {
+                    "name": "Quality",
+                    "type": "NUMBER",
+                    "description": "Compression level (1-100)\n100: No compression, highest quality\n70: Half the size, high quality (recommended setting)\n(**for WebP only**) ",
+                    "default": "75"
+                },
+                {
+                    "name": "Format",
+                    "type": "STRING",
+                    "description": "gif - output will be in .gif format (default)\nwebp - output will be in .webp format",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/Gif\"\nquerystring = {\"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"TemplateID\": \"06201000600390\", \"BackgroundLayer\": \"\", \"Quality\": \"75\", \"Format\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/Gif\"\nquerystring = {\"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"TemplateID\": \"06201000600390\", \"BackgroundLayer\": \"\", \"Quality\": \"75\", \"Format\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "PreviewUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "GenerateCaricatureHD",
+            "url": "https://mojipop.p.rapidapi.com/api/Render/CaricatureHD",
+            "description": "Generate a personalized HD Caricature  (300DPI 1240x1752) with the *AvatarID* you got from **CreateAvatar**\nTutorial: https://mojipop.com/content/EurekaStudios_MojiPop-API%20Tutorial.pdf",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "AvatarID",
+                    "type": "STRING",
+                    "description": "The *AvatarID* you got from **CreateAvatar**",
+                    "default": "20b037dd4e264e18889d2b30129af321"
+                },
+                {
+                    "name": "TemplateID",
+                    "type": "STRING",
+                    "description": "The Caricature background ID that you want to add your AvatarID to.\n\nHappy Birthday: 00511004504170 (default)\nGood Morning: 00522100102840\nColosseum: 00511002402670\n\nGet more template IDs from to https://mojipop.com/content.html",
+                    "default": "00511004504170"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Quality",
+                    "type": "NUMBER",
+                    "description": "**for WebP only**\nCompression level (1-100)\n100: No compression, highest quality\n80: Half the size of PNG, high quality (recommended setting)",
+                    "default": "80"
+                },
+                {
+                    "name": "BackgroundLayer",
+                    "type": "STRING",
+                    "description": "true - maintains template background layer (default)\nfalse - removes template background layer",
+                    "default": "true"
+                },
+                {
+                    "name": "Format",
+                    "type": "STRING",
+                    "description": "jpg - Caricature output will be in .jpg format (default)\npng - Caricature output will be in .png format\nwebp -  Caricature output will be in .webp format\n*Note: * png & webp * supports background transparency*",
+                    "default": "jpg"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/CaricatureHD\"\nquerystring = {\"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"TemplateID\": \"00511004504170\", \"Quality\": \"80\", \"BackgroundLayer\": \"true\", \"Format\": \"jpg\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mojipop.p.rapidapi.com/api/Render/CaricatureHD\"\nquerystring = {\"AvatarID\": \"20b037dd4e264e18889d2b30129af321\", \"TemplateID\": \"00511004504170\", \"Quality\": \"80\", \"BackgroundLayer\": \"true\", \"Format\": \"jpg\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mojipop.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Description": {
+                        "type": "string"
+                    },
+                    "Result": {
+                        "properties": {
+                            "PreviewUrl": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "StatusCode": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

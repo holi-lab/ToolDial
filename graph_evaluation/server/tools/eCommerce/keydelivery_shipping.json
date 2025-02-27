@@ -1,0 +1,153 @@
+{
+    "product_id": "api_b80beb9a-2144-4374-8d2c-877edc35ac52",
+    "tool_description": "KeyDelivery's Logistics APIs have all the features and integrations you need for shipping, label printing, package tracking, address validation, and order management.",
+    "home_url": "https://rapidapi.com/KeyDeliveryAPI/api/keydelivery-shipping/",
+    "name": "KeyDelivery  Shipping",
+    "title": "KeyDelivery  Shipping",
+    "pricing": "FREE",
+    "tool_name": "KeyDelivery  Shipping",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 257,
+        "avgSuccessRate": 100,
+        "popularityScore": 8,
+        "__typename": "Score"
+    },
+    "host": "keydelivery-shipping.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Real-time Shipment Tracking",
+            "url": "https://keydelivery-shipping.p.rapidapi.com/tracking/realtime",
+            "description": "You can get real-time shipment status information through this API without creating a tracking command. Real-time shipment tracking API will get the shipment information from the carrier and respond, the tracking details after you submit the tracking number. The information includes shipment route, shipment status, date, and time, etc.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "carrier_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "fedex"
+                },
+                {
+                    "name": "tracking_number",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "283278688216"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "phone",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "area_show",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "ship_to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "ship_from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "order",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://keydelivery-shipping.p.rapidapi.com/tracking/realtime\"\nquerystring = {\"carrier_id\": \"fedex\", \"tracking_number\": \"283278688216\", \"phone\": \"\", \"area_show\": \"\", \"ship_to\": \"\", \"ship_from\": \"\", \"order\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"keydelivery-shipping.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://keydelivery-shipping.p.rapidapi.com/tracking/realtime\"\nquerystring = {\"carrier_id\": \"fedex\", \"tracking_number\": \"283278688216\", \"phone\": \"\", \"area_show\": \"\", \"ship_to\": \"\", \"ship_from\": \"\", \"order\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"keydelivery-shipping.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Carrier Auto-detection",
+            "url": "https://keydelivery-shipping.p.rapidapi.com/carriers/detect",
+            "description": "You can submit the courier tracking number through this API to determine the carrier ID to which the tracking number may belong. The returned data is a list of possible carrier IDs, and the carrier ID with high possibility ranks first.\n\nReminder: The tracking number of each carrier is constantly changing, and there is no standardized rule for tracking number naming. We cannot guarantee that the returned result is 100 percent accurate. Our existing mechanism uses our accumulated data to analyze each carrier\u2019s tracking number naming rule and update the rules daily.\n\nWe will not provide legal commitments on the accuracy and validity of the returned result. If you provide this service to your users, it is recommended that you should use the following reminders when giving the tracking result to your users:\n\nAdd a description such as \"Possible Results\" or \"Possible Results Powered by KeyDelivery\" or \"This Result Is for Reference Only.\"\nThe user can manually modify the carrier.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "tracking_number",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://keydelivery-shipping.p.rapidapi.com/carriers/detect\"\nquerystring = {\"tracking_number\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"keydelivery-shipping.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://keydelivery-shipping.p.rapidapi.com/carriers/detect\"\nquerystring = {\"tracking_number\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"keydelivery-shipping.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Create Tracking",
+            "url": "https://keydelivery-shipping.p.rapidapi.com/tracking/create",
+            "description": "You can use this API to add tracking numbers to KeyDelivery's tracking system. Then you can receive shipment status updates automatically with our webhooks. You must submit the following two parameters to use this feature, the carrier ID and the tracking number. Besides, you also need to use a webhook to receive the updated information.\n\nWe will track your orders after receiving the tracking number. When the shipment status changes, we will send the tracking information to you by using the webhooks until the life cycle of these tracking numbers ends (usually we will end the tracking when the shipment is \"Delivered\").\n\nFor some tracking requests, we will usually check the shipment status for the first time in 15 minutes after activating the Create Tracking API correctly. If there is no shipment status information about it in the first 15 minutes, we will check it every 4 hours and adjust the tracking frequency based on factors such as the status of the shipment.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "carrier_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "webhook_url",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "tracking_number",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "ship_to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "ship_from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "area_show",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "phone",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://keydelivery-shipping.p.rapidapi.com/tracking/create\"\nquerystring = {\"carrier_id\": \"\", \"ship_to\": \"\", \"ship_from\": \"\", \"webhook_url\": \"\", \"area_show\": \"\", \"phone\": \"\", \"tracking_number\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"keydelivery-shipping.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://keydelivery-shipping.p.rapidapi.com/tracking/create\"\nquerystring = {\"carrier_id\": \"\", \"ship_to\": \"\", \"ship_from\": \"\", \"webhook_url\": \"\", \"area_show\": \"\", \"phone\": \"\", \"tracking_number\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"keydelivery-shipping.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

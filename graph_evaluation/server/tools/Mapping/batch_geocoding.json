@@ -1,0 +1,125 @@
+{
+    "tool_name":"Batch Geocoding",
+    "tool_description":"Batch Geocoding API is a REST API that allows you to geocode large data sets. You can geocode a lot of addresses at once, as minimum - starting from one address and ending with maximum 100 addresses.",
+    "title":"Batch Geocoding",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/samsandr1996-4VrhG4ruory/api/batch-geocoding/",
+    "host":"batch-geocoding.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Batch Reverse Geocoding",
+            "url":"https://batch-geocoding.p.rapidapi.com/reverse-geocode-batch",
+            "description":"This endpoint allows to to reverse geocode large data sets. You can reverse geocode a lot of latitudes and longitudes at once, as minimum - starting from one set of coordinates and ending with maximum 100 sets of latitudes and longitudes. Response of this API looks like Google Maps API compact response .",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"coordinates",
+                    "type":"STRING",
+                    "description":"An array of coordinates (latitude and longitude values specifying the location for which you wish to obtain the closest, human-readable address). Latitude and Longitude should be delimited by comma. They should be specified in an array and delimited by comma.",
+                    "default":"[\"40.748428399999995,-73.98565461987332\",\"50.43347000000006,30.51968000000005\"]"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://batch-geocoding.p.rapidapi.com/reverse-geocode-batch\"\nquerystring = {\"coordinates\": coordinates}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"batch-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "results":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "formatted_address":{
+                                    "type":"string"
+                                },
+                                "geometry":{
+                                    "type":"object",
+                                    "properties":{
+                                        "location":{
+                                            "type":"object",
+                                            "properties":{
+                                                "lat":{
+                                                    "type":"number"
+                                                },
+                                                "lng":{
+                                                    "type":"number"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "status":{
+                        "type":"string"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Batch Forward Geocoding",
+            "url":"https://batch-geocoding.p.rapidapi.com/geocode-batch",
+            "description":"This endpoint allows to to geocode large data sets. You can geocode a lot of addresses at once, as minimum - starting from one address and ending with maximum 100 addresses. Response of this API looks like Google Maps API compact response .",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"addresses",
+                    "type":"STRING",
+                    "description":"An array of street addresses that you want to geocode. Specify addresses in accordance with the format used by the national postal service of the country concerned. Additional address elements such as business names and unit, suite or floor numbers should be avoided. Street address elements should be delimited by spaces. Addresses should be specified in an array and delimited by comma.",
+                    "default":"[\"350, 5th Avenue, New York, 10018, United States\", \"Volodymirska, 40A, Kyiv, 01034, Ukraine\"]"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://batch-geocoding.p.rapidapi.com/geocode-batch\"\nquerystring = {\"addresses\": addresses}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"batch-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "results":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "formatted_address":{
+                                    "type":"string"
+                                },
+                                "geometry":{
+                                    "type":"object",
+                                    "properties":{
+                                        "location":{
+                                            "type":"object",
+                                            "properties":{
+                                                "lat":{
+                                                    "type":"number"
+                                                },
+                                                "lng":{
+                                                    "type":"number"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "status":{
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    ]
+}

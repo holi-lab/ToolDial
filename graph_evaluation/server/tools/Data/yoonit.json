@@ -1,0 +1,847 @@
+{
+    "tool_name": "yoonit",
+    "tool_description": "Parse quantities and units from text / text replace",
+    "title": "yoonit",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 72,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/sidfeiner-7tDZ3MBZ_Ta/api/yoonit/",
+    "host": "yoonit.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "currencies",
+            "url": "https://yoonit.p.rapidapi.com/currencies",
+            "description": "Returns a list of all supported currencies",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/currencies\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "currencies": [
+                    "NGN",
+                    "PHP",
+                    "BHD",
+                    "AUD",
+                    "EUR",
+                    "SLL",
+                    "KGS",
+                    "USD"
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "currencies": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "enp5puhws0ed9"
+                        },
+                        "description": "List of currency codes (ISO 4217 format)",
+                        "items": {
+                            "x-stoplight": {
+                                "id": "3jd7mrw4b09xh"
+                            },
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "currencies"
+                ]
+            }
+        },
+        {
+            "name": "parse",
+            "url": "https://yoonit.p.rapidapi.com/parse",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/parse\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "units": [
+                    {
+                        "dimension": "length",
+                        "unit": "ft",
+                        "quantity": 0.36089238845144356,
+                        "original": {
+                            "unit": "cm",
+                            "quantity": 11
+                        },
+                        "match": {
+                            "text": "11 cm",
+                            "startIndex": 10,
+                            "endIndex": 15
+                        }
+                    },
+                    {
+                        "dimension": "mass",
+                        "unit": "g",
+                        "quantity": 102,
+                        "original": null,
+                        "match": {
+                            "text": "102 grams",
+                            "startIndex": 32,
+                            "endIndex": 41
+                        }
+                    },
+                    {
+                        "dimension": "length",
+                        "unit": "mile",
+                        "quantity": 0.001081185874492961,
+                        "original": {
+                            "unit": "m",
+                            "quantity": 1.74
+                        },
+                        "match": {
+                            "text": "1.74 meters",
+                            "startIndex": 56,
+                            "endIndex": 67
+                        }
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "units": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "gh1uko8q5r9k6"
+                        },
+                        "items": {
+                            "x-stoplight": {
+                                "id": "t9u8fkqmuulop"
+                            },
+                            "title": "ParsedUnit",
+                            "type": "object",
+                            "properties": {
+                                "dimension": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "io10g4ngbdx6c"
+                                    },
+                                    "enum": [
+                                        "currency",
+                                        "length",
+                                        "mass",
+                                        "time"
+                                    ]
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "t2nkfmyd6zxn4"
+                                    },
+                                    "description": "Unit of the dimension, as returned by the /units endpoints"
+                                },
+                                "quantity": {
+                                    "type": "number",
+                                    "x-stoplight": {
+                                        "id": "g5vgw04qvz6n6"
+                                    }
+                                },
+                                "original": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                        "id": "1c97abs78t97i"
+                                    },
+                                    "description": "If matched unit was converted as requested, this field will contain the original quantity and unit",
+                                    "properties": {
+                                        "unit": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "ersrftkcu99sd"
+                                            },
+                                            "description": "Unit of the dimension, as returned by the /units endpoints"
+                                        },
+                                        "quantity": {
+                                            "type": "number",
+                                            "x-stoplight": {
+                                                "id": "7l6z1quxcou1j"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "unit",
+                                        "quantity"
+                                    ]
+                                },
+                                "match": {
+                                    "x-stoplight": {
+                                        "id": "lk5m04hwpn3g5"
+                                    },
+                                    "description": "Original text where the quantity and unit were found",
+                                    "title": "TextMatch",
+                                    "type": "object",
+                                    "properties": {
+                                        "text": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "naijn26nbdnat"
+                                            }
+                                        },
+                                        "startIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "86r2sou8s3g82"
+                                            }
+                                        },
+                                        "endIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "yybl66f2w42hd"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "dimension",
+                                "unit",
+                                "quantity",
+                                "match"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "units",
+            "url": "https://yoonit.p.rapidapi.com/units",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/units\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "currencies": [
+                    "SLE",
+                    "SDG",
+                    "TMT",
+                    "SYP",
+                    "BHD",
+                    "MDL",
+                    "KYD",
+                    "FOK"
+                ],
+                "length": [
+                    {
+                        "unit": "m",
+                        "description": "meter"
+                    },
+                    {
+                        "unit": "km",
+                        "description": "kilometer"
+                    },
+                    {
+                        "unit": "cm",
+                        "description": "centimeter"
+                    },
+                    {
+                        "unit": "inch",
+                        "description": "inch"
+                    },
+                    {
+                        "unit": "ft",
+                        "description": "foot"
+                    },
+                    {
+                        "unit": "yd",
+                        "description": "yard"
+                    },
+                    {
+                        "unit": "mile",
+                        "description": "mile"
+                    }
+                ],
+                "mass": [
+                    {
+                        "unit": "g",
+                        "description": "gram"
+                    },
+                    {
+                        "unit": "kg",
+                        "description": "kilogram"
+                    },
+                    {
+                        "unit": "mg",
+                        "description": "milligram"
+                    },
+                    {
+                        "unit": "lb",
+                        "description": "pound"
+                    },
+                    {
+                        "unit": "oz",
+                        "description": "ounce"
+                    },
+                    {
+                        "unit": "ton",
+                        "description": "ton"
+                    }
+                ],
+                "time": [
+                    {
+                        "unit": "s",
+                        "description": "second"
+                    },
+                    {
+                        "unit": "ms",
+                        "description": "millisecond"
+                    },
+                    {
+                        "unit": "min",
+                        "description": "minute"
+                    },
+                    {
+                        "unit": "hr",
+                        "description": "hour"
+                    },
+                    {
+                        "unit": "day",
+                        "description": "day"
+                    },
+                    {
+                        "unit": "yr",
+                        "description": "year"
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "currencies": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "unpseydmpbw23"
+                        },
+                        "items": {
+                            "x-stoplight": {
+                                "id": "fe29w9ljn0x68"
+                            },
+                            "type": "string"
+                        }
+                    },
+                    "length": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "xqq8jw0gromac"
+                        },
+                        "items": {
+                            "x-stoplight": {
+                                "id": "dm70x8wfjry52"
+                            },
+                            "title": "UnitDescription",
+                            "type": "object",
+                            "properties": {
+                                "description": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "620layxgrpobe"
+                                    }
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "ipvhqmywn7r4o"
+                                    },
+                                    "description": "Unit to use in other endpoints"
+                                }
+                            },
+                            "required": [
+                                "description",
+                                "unit"
+                            ]
+                        }
+                    },
+                    "mass": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "m8x2uvhzr2v3j"
+                        },
+                        "items": {
+                            "x-stoplight": {
+                                "id": "jxfjc0anjfbrm"
+                            },
+                            "title": "UnitDescription",
+                            "type": "object",
+                            "properties": {
+                                "description": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "620layxgrpobe"
+                                    }
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "ipvhqmywn7r4o"
+                                    },
+                                    "description": "Unit to use in other endpoints"
+                                }
+                            },
+                            "required": [
+                                "description",
+                                "unit"
+                            ]
+                        }
+                    },
+                    "time": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "ekda8c9o5bfsc"
+                        },
+                        "items": {
+                            "x-stoplight": {
+                                "id": "fbz0lj8zxv5rb"
+                            },
+                            "title": "UnitDescription",
+                            "type": "object",
+                            "properties": {
+                                "description": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "620layxgrpobe"
+                                    }
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "ipvhqmywn7r4o"
+                                    },
+                                    "description": "Unit to use in other endpoints"
+                                }
+                            },
+                            "required": [
+                                "description",
+                                "unit"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "replace-parse",
+            "url": "https://yoonit.p.rapidapi.com/replace",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/replace\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "text": "I am Assaf and I am 5.7743 ft tall and I weigh 157.6305 lb. I just discovered that my phone costs 1315.928 USD",
+                "units": [
+                    {
+                        "dimension": "length",
+                        "unit": "ft",
+                        "quantity": 5.774278215223097,
+                        "original": {
+                            "unit": "cm",
+                            "quantity": 176
+                        },
+                        "match": {
+                            "text": "176 cm",
+                            "startIndex": 20,
+                            "endIndex": 26
+                        }
+                    },
+                    {
+                        "dimension": "mass",
+                        "unit": "lb",
+                        "quantity": 157.63051746218747,
+                        "original": {
+                            "unit": "kg",
+                            "quantity": 71.5
+                        },
+                        "match": {
+                            "text": "71.5 kg",
+                            "startIndex": 44,
+                            "endIndex": 51
+                        }
+                    },
+                    {
+                        "dimension": "currency",
+                        "unit": "USD",
+                        "quantity": 1315.9279924202547,
+                        "original": {
+                            "unit": "EUR",
+                            "quantity": 1200
+                        },
+                        "match": {
+                            "text": "1,200 euros",
+                            "startIndex": 91,
+                            "endIndex": 102
+                        }
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "x-stoplight": {
+                            "id": "56si5ggqe7qwi"
+                        }
+                    },
+                    "units": {
+                        "x-stoplight": {
+                            "id": "9bcuuw0bogexq"
+                        },
+                        "type": "array",
+                        "items": {
+                            "x-stoplight": {
+                                "id": "iylyx1wgpreuw"
+                            },
+                            "title": "ParsedUnit",
+                            "type": "object",
+                            "properties": {
+                                "dimension": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "io10g4ngbdx6c"
+                                    },
+                                    "enum": [
+                                        "currency",
+                                        "length",
+                                        "mass",
+                                        "time"
+                                    ]
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "t2nkfmyd6zxn4"
+                                    },
+                                    "description": "Unit of the dimension, as returned by the /units endpoints"
+                                },
+                                "quantity": {
+                                    "type": "number",
+                                    "x-stoplight": {
+                                        "id": "g5vgw04qvz6n6"
+                                    }
+                                },
+                                "original": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                        "id": "1c97abs78t97i"
+                                    },
+                                    "description": "If matched unit was converted as requested, this field will contain the original quantity and unit",
+                                    "properties": {
+                                        "unit": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "ersrftkcu99sd"
+                                            },
+                                            "description": "Unit of the dimension, as returned by the /units endpoints"
+                                        },
+                                        "quantity": {
+                                            "type": "number",
+                                            "x-stoplight": {
+                                                "id": "7l6z1quxcou1j"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "unit",
+                                        "quantity"
+                                    ]
+                                },
+                                "match": {
+                                    "x-stoplight": {
+                                        "id": "lk5m04hwpn3g5"
+                                    },
+                                    "description": "Original text where the quantity and unit were found",
+                                    "title": "TextMatch",
+                                    "type": "object",
+                                    "properties": {
+                                        "text": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "naijn26nbdnat"
+                                            }
+                                        },
+                                        "startIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "86r2sou8s3g82"
+                                            }
+                                        },
+                                        "endIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "yybl66f2w42hd"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "dimension",
+                                "unit",
+                                "quantity",
+                                "match"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "parse",
+            "url": "https://yoonit.p.rapidapi.com/parse",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/parse\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/parse\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "units": {
+                        "type": "array",
+                        "x-stoplight": {
+                            "id": "gh1uko8q5r9k6"
+                        },
+                        "items": {
+                            "x-stoplight": {
+                                "id": "t9u8fkqmuulop"
+                            },
+                            "title": "ParsedUnit",
+                            "type": "object",
+                            "properties": {
+                                "dimension": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "io10g4ngbdx6c"
+                                    },
+                                    "enum": [
+                                        "currency",
+                                        "length",
+                                        "mass",
+                                        "time"
+                                    ]
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "t2nkfmyd6zxn4"
+                                    },
+                                    "description": "Unit of the dimension, as returned by the /units endpoints"
+                                },
+                                "quantity": {
+                                    "type": "number",
+                                    "x-stoplight": {
+                                        "id": "g5vgw04qvz6n6"
+                                    }
+                                },
+                                "original": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                        "id": "1c97abs78t97i"
+                                    },
+                                    "description": "If matched unit was converted as requested, this field will contain the original quantity and unit",
+                                    "properties": {
+                                        "unit": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "ersrftkcu99sd"
+                                            },
+                                            "description": "Unit of the dimension, as returned by the /units endpoints"
+                                        },
+                                        "quantity": {
+                                            "type": "number",
+                                            "x-stoplight": {
+                                                "id": "7l6z1quxcou1j"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "unit",
+                                        "quantity"
+                                    ]
+                                },
+                                "match": {
+                                    "x-stoplight": {
+                                        "id": "lk5m04hwpn3g5"
+                                    },
+                                    "description": "Original text where the quantity and unit were found",
+                                    "title": "TextMatch",
+                                    "type": "object",
+                                    "properties": {
+                                        "text": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "naijn26nbdnat"
+                                            }
+                                        },
+                                        "startIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "86r2sou8s3g82"
+                                            }
+                                        },
+                                        "endIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "yybl66f2w42hd"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "dimension",
+                                "unit",
+                                "quantity",
+                                "match"
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "replace-parse",
+            "url": "https://yoonit.p.rapidapi.com/replace",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/replace\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://yoonit.p.rapidapi.com/replace\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"yoonit.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "x-stoplight": {
+                            "id": "56si5ggqe7qwi"
+                        }
+                    },
+                    "units": {
+                        "x-stoplight": {
+                            "id": "9bcuuw0bogexq"
+                        },
+                        "type": "array",
+                        "items": {
+                            "x-stoplight": {
+                                "id": "iylyx1wgpreuw"
+                            },
+                            "title": "ParsedUnit",
+                            "type": "object",
+                            "properties": {
+                                "dimension": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "io10g4ngbdx6c"
+                                    },
+                                    "enum": [
+                                        "currency",
+                                        "length",
+                                        "mass",
+                                        "time"
+                                    ]
+                                },
+                                "unit": {
+                                    "type": "string",
+                                    "x-stoplight": {
+                                        "id": "t2nkfmyd6zxn4"
+                                    },
+                                    "description": "Unit of the dimension, as returned by the /units endpoints"
+                                },
+                                "quantity": {
+                                    "type": "number",
+                                    "x-stoplight": {
+                                        "id": "g5vgw04qvz6n6"
+                                    }
+                                },
+                                "original": {
+                                    "type": "object",
+                                    "x-stoplight": {
+                                        "id": "1c97abs78t97i"
+                                    },
+                                    "description": "If matched unit was converted as requested, this field will contain the original quantity and unit",
+                                    "properties": {
+                                        "unit": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "ersrftkcu99sd"
+                                            },
+                                            "description": "Unit of the dimension, as returned by the /units endpoints"
+                                        },
+                                        "quantity": {
+                                            "type": "number",
+                                            "x-stoplight": {
+                                                "id": "7l6z1quxcou1j"
+                                            }
+                                        }
+                                    },
+                                    "required": [
+                                        "unit",
+                                        "quantity"
+                                    ]
+                                },
+                                "match": {
+                                    "x-stoplight": {
+                                        "id": "lk5m04hwpn3g5"
+                                    },
+                                    "description": "Original text where the quantity and unit were found",
+                                    "title": "TextMatch",
+                                    "type": "object",
+                                    "properties": {
+                                        "text": {
+                                            "type": "string",
+                                            "x-stoplight": {
+                                                "id": "naijn26nbdnat"
+                                            }
+                                        },
+                                        "startIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "86r2sou8s3g82"
+                                            }
+                                        },
+                                        "endIndex": {
+                                            "type": "integer",
+                                            "x-stoplight": {
+                                                "id": "yybl66f2w42hd"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "dimension",
+                                "unit",
+                                "quantity",
+                                "match"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

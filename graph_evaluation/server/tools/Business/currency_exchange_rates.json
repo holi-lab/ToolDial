@@ -1,0 +1,267 @@
+{
+    "tool_name":"Currency Exchange Rates",
+    "tool_description":"Get live and historical data from 60+ fiat and crypto currencies via a modern REST API",
+    "title":"Currency Exchange Rates",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":966,
+        "avgSuccessRate":69,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/standingapi-standingapi-default/api/currency-exchange-rates3/",
+    "host":"currency-exchange-rates3.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Getting the latest exchange rate(s)",
+            "url":"https://currency-exchange-rates3.p.rapidapi.com/v1/live",
+            "description":"The /live/ endpoint returns the most recent exchange rate(s) for a given set of currencies. The base currency is the currency you're converting FROM, while the target currency or currencies are what you're converting TO.\n\nIf no target currency or currencies are specified, then all available currencies are returned. You can see a full list of supported currencies at the bottom of this documentation.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"base",
+                    "type":"STRING",
+                    "description":"The base currency used to get the latest exchange rate(s) for. Uses the ISO 4217 currency standard (e.g., USD for United States Dollars), like all currency parameters in this API. You can see a full list of supported currencies here.",
+                    "default":"USD"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"target",
+                    "type":"STRING",
+                    "description":"The target currency or currencies to get the exchange rate of versus the base currency. Like the base parameters, any currency passed here follows the ISO 4217 standard. If multiple currencies are passed in the target, they should be separated by commas (e.g., &target=EUR,CAD,AUD).",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://currency-exchange-rates3.p.rapidapi.com/v1/live\"\nquerystring = {\"base\": base}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"currency-exchange-rates3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"USD",
+                "last_updated":1650157200,
+                "exchange_rates":{
+                    "EUR":0.919287,
+                    "JPY":125.317154,
+                    "BGN":1.797941,
+                    "CZK":22.44898,
+                    "DKK":6.838481,
+                    "GBP":0.762162,
+                    "HUF":346.175768,
+                    "PLN":4.27266,
+                    "RON":4.5467,
+                    "SEK":9.469388,
+                    "CHF":0.936661,
+                    "ISK":129.067843,
+                    "NOK":8.761997,
+                    "HRK":6.948612,
+                    "RUB":104.99999999999999,
+                    "TRY":14.620886,
+                    "AUD":1.343262,
+                    "BRL":4.709138,
+                    "CAD":1.256021,
+                    "CNY":6.372495,
+                    "HKD":7.841331,
+                    "IDR":14360.452289,
+                    "ILS":3.207943,
+                    "INR":76.129803,
+                    "KRW":1226.981063,
+                    "MXN":19.851167,
+                    "MYR":4.231476,
+                    "NZD":1.466906,
+                    "PHP":52.17779,
+                    "SGD":1.354293,
+                    "THB":33.65968,
+                    "ZAR":14.647086,
+                    "ARS":75.269373,
+                    "DZD":124.445887,
+                    "MAD":8.83269,
+                    "TWD":27.466513,
+                    "BTC":2.5e-05,
+                    "ETH":0.00033,
+                    "BNB":0.002405,
+                    "DOGE":6.938463,
+                    "XRP":1.279539,
+                    "BCH":0.002901,
+                    "LTC":0.008689
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "allow":"GET, HEAD, OPTIONS",
+                "connection":"keep-alive",
+                "content-length":"730",
+                "content-type":"application/json",
+                "date":"Sun, 17 Apr 2022 08:01:46 GMT",
+                "referrer-policy":"same-origin",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=31536000; includeSubDomains",
+                "vary":"Cookie, Origin",
+                "x-content-type-options":"nosniff",
+                "x-frame-options":"DENY",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{}
+        },
+        {
+            "name":"Converting currencies",
+            "url":"https://currency-exchange-rates3.p.rapidapi.com/v1/convert",
+            "description":"The /convert/ endpoint is similar to the /live/ and /historical/ endpoints, except it allows you to convert an arbitrary amount of currency.\n\nFor example, it calculates how many EUR you would get for 1,337.99 USD today, or how many GBP and CAD you'd get for that amount on January 1, 2020.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"base",
+                    "type":"STRING",
+                    "description":"The base currency used to get the latest exchange rate(s) for. Uses the ISO 4217 currency standard (e.g., USD for United States Dollars), like all currency parameters in this API. You can see a full list of supported currencies here.",
+                    "default":"USD"
+                },
+                {
+                    "name":"target",
+                    "type":"STRING",
+                    "description":"The target currency or currencies to get the exchange rate of versus the base currency. Like the base parameters, any currency passed here follows the ISO 4217 standard. Note that unlinke the other endpoints, /convert/ only accepts one target currency at a time.",
+                    "default":"SGD"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"The historical date you'd like to get rates from, in the format of YYYY-MM-DD. If you leave this blank, it will use the latest available rate(s).",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"base_amount",
+                    "type":"STRING",
+                    "description":"The amount of the base currency you would like to convert to the target currency.",
+                    "default":"500"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://currency-exchange-rates3.p.rapidapi.com/v1/convert\"\nquerystring = {\"base\": base, \"target\": target, \"date\": date, \"base_amount\": base_amount}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"currency-exchange-rates3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"USD",
+                "target":"SGD",
+                "base_amount":500,
+                "converted_amount":672.556525,
+                "exchange_rate":1.345113,
+                "date":"2020-01-01"
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "allow":"GET, HEAD, OPTIONS",
+                "connection":"keep-alive",
+                "content-length":"122",
+                "content-type":"application/json",
+                "date":"Sun, 17 Apr 2022 08:07:02 GMT",
+                "referrer-policy":"same-origin",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=31536000; includeSubDomains",
+                "vary":"Cookie, Origin",
+                "x-content-type-options":"nosniff",
+                "x-frame-options":"DENY",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{}
+        },
+        {
+            "name":"Getting historical exchange rate(s)",
+            "url":"https://currency-exchange-rates3.p.rapidapi.com/v1/historical",
+            "description":"The /historical/ endpoint functions almost exactly like the /live/ endpoint, except it requires you to request a date parameter, and subsequently returns the returns the most recent exchange rate(s) for a given set of currencies.\n\nAs with the /live/ endpoint, the base currency is the currency you're converting FROM, while the target currency or currencies are what you're converting TO. Also, if no target currency or currencies are specified, then all available currencies are returned. You can see a full list of supported currencies at the bottom of this documentation.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"The historical date you'd like to get rates from, in the format of YYYY-MM-DD",
+                    "default":"2020-01-01"
+                },
+                {
+                    "name":"base",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"USD"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"target",
+                    "type":"STRING",
+                    "description":"The target currency or currencies to get the exchange rate of versus the base currency. Like the base parameters, any currency passed here follows the ISO 4217 standard. If multiple currencies are passed in the target, they should be separated by commas (e.g., &target=EUR,CAD,AUD).",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://currency-exchange-rates3.p.rapidapi.com/v1/historical\"\nquerystring = {\"date\": date, \"base\": base}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"currency-exchange-rates3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"USD",
+                "date":"2020-01-01",
+                "exchange_rates":{
+                    "EUR":0.890155,
+                    "JPY":108.545487,
+                    "BGN":1.740965,
+                    "CZK":22.617055,
+                    "DKK":6.650792,
+                    "GBP":0.757344,
+                    "HUF":294.222895,
+                    "PLN":3.789211,
+                    "RON":4.257611,
+                    "SEK":9.29927,
+                    "CHF":0.966174,
+                    "ISK":120.883034,
+                    "NOK":8.78031,
+                    "HRK":6.622307,
+                    "RUB":62.271942,
+                    "TRY":5.950062,
+                    "AUD":1.423803,
+                    "BRL":4.019672,
+                    "CAD":1.299448,
+                    "CNY":6.961456,
+                    "HKD":7.786452,
+                    "IDR":13882.499555,
+                    "ILS":3.457807,
+                    "INR":71.37885,
+                    "KRW":1153.889977,
+                    "MXN":18.889265,
+                    "MYR":4.090529,
+                    "NZD":1.482375,
+                    "PHP":50.649813,
+                    "SGD":1.345113,
+                    "THB":29.744526,
+                    "ZAR":14.044241,
+                    "ARS":59.880007,
+                    "DZD":119.005964,
+                    "MAD":9.566049,
+                    "TWD":29.913655,
+                    "BTC":0.000139,
+                    "ETH":0.007628,
+                    "BNB":0.072675,
+                    "DOGE":488.703088,
+                    "XRP":5.260002,
+                    "BCH":0.004887,
+                    "LTC":0.023656
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "allow":"GET, HEAD, OPTIONS",
+                "connection":"keep-alive",
+                "content-length":"722",
+                "content-type":"application/json",
+                "date":"Sun, 17 Apr 2022 08:04:17 GMT",
+                "referrer-policy":"same-origin",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=31536000; includeSubDomains",
+                "vary":"Cookie, Origin",
+                "x-content-type-options":"nosniff",
+                "x-frame-options":"DENY",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{}
+        }
+    ]
+}

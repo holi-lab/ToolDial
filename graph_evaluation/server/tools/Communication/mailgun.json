@@ -1,0 +1,224 @@
+{
+    "product_id": "53aa61ade4b0a9b1348dc002",
+    "tool_description": "Mailgun is a programmable email platform. It allows your application to become a fully featured email server. Send, receive and track messages with ease using your favorite programming language.",
+    "home_url": "https://rapidapi.com/orliesaurus/api/mailgun-1/",
+    "name": "Mailgun",
+    "title": "Mailgun",
+    "pricing": "FREE",
+    "tool_name": "Mailgun",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 453,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "mailgun.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Create domain",
+            "url": "https://mailgun.p.rapidapi.com/domains",
+            "description": "Create a domain",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Name of the domain (ex. domain.com)",
+                    "default": "www.mysite.com"
+                },
+                {
+                    "name": "smtp_password",
+                    "type": "STRING",
+                    "description": "Password for SMTP authentication",
+                    "default": "mypa$$w@rd"
+                },
+                {
+                    "name": "spam_action",
+                    "type": "STRING",
+                    "description": "One of: \"Disable\",\"Tag\". Disable, no spam filtering will occur for inbound messages. Tag, messages will be tagged wtih a spam header",
+                    "default": "Disable"
+                },
+                {
+                    "name": "wildcard",
+                    "type": "STRING",
+                    "description": "One of \"true\" or \"false\" . Determines whether the domain will accept email for sub-domains.",
+                    "default": true
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mailgun.p.rapidapi.com/domains\"\nquerystring = {\"name\": \"www.mysite.com\", \"smtp_password\": \"mypa$$w@rd\", \"spam_action\": \"Disable\", \"wildcard\": true}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mailgun.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mailgun.p.rapidapi.com/domains\"\nquerystring = {\"name\": \"www.mysite.com\", \"smtp_password\": \"mypa$$w@rd\", \"spam_action\": \"Disable\", \"wildcard\": true}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mailgun.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Create Domain Credentials",
+            "url": "https://mailgun.p.rapidapi.com/domains/sample.com/credentials",
+            "description": "Creating domain credentials",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "login",
+                    "type": "STRING",
+                    "description": "The user name, for example",
+                    "default": "myuser"
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "A password for the SMTP credentials. (Length Min 5, Max 32)",
+                    "default": "mypassword"
+                },
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "Your site",
+                    "default": "sample.com"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://mailgun.p.rapidapi.com/domains/sample.com/credentials\"\nquerystring = {\"login\": \"myuser\", \"password\": \"mypassword\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mailgun.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mailgun.p.rapidapi.com/domains/{domain}/credentials\"\nquerystring = {\"login\": \"myuser\", \"password\": \"mypassword\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mailgun.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Send an Email",
+            "url": "https://mailgun.p.rapidapi.com/mysite.com/messages",
+            "description": "Allows you to send messages",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Email address for From header",
+                    "default": "me@myemail.com"
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Email address of the recipient(s). Example: \"Bob <bob@host.com>\". You can use commas to separate multiple recipients.",
+                    "default": "you@youemail.com"
+                },
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Body of the message. (text version)",
+                    "default": "Plain text lines are pretty"
+                },
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "The hostname of your site as specified in the control panel",
+                    "default": "mysite.com"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "cc",
+                    "type": "STRING",
+                    "description": "Same as To but for Cc",
+                    "default": "him@email.com"
+                },
+                {
+                    "name": "bcc",
+                    "type": "STRING",
+                    "description": "Same as To but for Bcc",
+                    "default": "another@email.com"
+                },
+                {
+                    "name": "subject",
+                    "type": "STRING",
+                    "description": "Message subject",
+                    "default": "My subject line"
+                },
+                {
+                    "name": "html",
+                    "type": "STRING",
+                    "description": "Body of the message. (HTML version)",
+                    "default": "<b>Mailgun rocks</b>"
+                },
+                {
+                    "name": "attachment",
+                    "type": "STRING",
+                    "description": "File attachment. You can post multiple attachment values. Important: You must use multipart/form-data encoding when sending attachments.",
+                    "default": ""
+                },
+                {
+                    "name": "inline",
+                    "type": "STRING",
+                    "description": "Attachment with inline disposition. Can be used to send inline images (see example). You can post multiple inline values.",
+                    "default": "@files/awesome.gif"
+                },
+                {
+                    "name": "o:tag",
+                    "type": "STRING",
+                    "description": "Sometimes it\u2019s helpful to categorize your outgoing email traffic based on some criteria. Mailgun lets you tag each outgoing message with a custom value. When you access stats on you messages, they will be aggregated by these tags.",
+                    "default": "newsletter"
+                },
+                {
+                    "name": "o:campaign",
+                    "type": "STRING",
+                    "description": "Id of the campaign the message belongs to",
+                    "default": "some_campaign_id"
+                },
+                {
+                    "name": "o:dkim",
+                    "type": "STRING",
+                    "description": "One of \"Yes\", \"No\" to enable or disable DKIM signature on messages sent",
+                    "default": "yes"
+                },
+                {
+                    "name": "o:deliverytime",
+                    "type": "STRING",
+                    "description": "Desired time of delivery; max 3 days",
+                    "default": "'Thu, 12 April 2018 15:11:30 GMT'"
+                },
+                {
+                    "name": "o:testmode",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "o:tracking",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "o:tracking-clicks",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "o:tracking-opens",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "h:",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "h:X-My-Header"
+                },
+                {
+                    "name": "v:",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "v:my-var"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mailgun.p.rapidapi.com/mysite.com/messages\"\nquerystring = {\"from\": \"me@myemail.com\", \"to\": \"you@youemail.com\", \"cc\": \"him@email.com\", \"bcc\": \"another@email.com\", \"subject\": \"My subject line\", \"text\": \"Plain text lines are pretty\", \"html\": \"<b>Mailgun rocks</b>\", \"attachment\": \"\", \"inline\": \"@files/awesome.gif\", \"o:tag\": \"newsletter\", \"o:campaign\": \"some_campaign_id\", \"o:dkim\": \"yes\", \"o:deliverytime\": \"'Thu, 12 April 2018 15:11:30 GMT'\", \"o:testmode\": \"\", \"o:tracking\": \"\", \"o:tracking-clicks\": \"\", \"o:tracking-opens\": \"\", \"h:\": \"h:X-My-Header\", \"v:\": \"v:my-var\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mailgun.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mailgun.p.rapidapi.com/{domain}/messages\"\nquerystring = {\"from\": \"me@myemail.com\", \"to\": \"you@youemail.com\", \"cc\": \"him@email.com\", \"bcc\": \"another@email.com\", \"subject\": \"My subject line\", \"text\": \"Plain text lines are pretty\", \"html\": \"<b>Mailgun rocks</b>\", \"attachment\": \"\", \"inline\": \"@files/awesome.gif\", \"o:tag\": \"newsletter\", \"o:campaign\": \"some_campaign_id\", \"o:dkim\": \"yes\", \"o:deliverytime\": \"'Thu, 12 April 2018 15:11:30 GMT'\", \"o:testmode\": \"\", \"o:tracking\": \"\", \"o:tracking-clicks\": \"\", \"o:tracking-opens\": \"\", \"h:\": \"h:X-My-Header\", \"v:\": \"v:my-var\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mailgun.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

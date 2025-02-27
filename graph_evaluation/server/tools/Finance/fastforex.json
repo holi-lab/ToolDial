@@ -1,0 +1,315 @@
+{
+    "tool_name":"fastFOREX",
+    "tool_description":"Secure JSON API for 145+ World Currencies",
+    "title":"fastFOREX",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":45,
+        "avgSuccessRate":100,
+        "popularityScore":9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/fastforex-fastforex-default/api/fastforex/",
+    "host":"fastforex.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"/currencies",
+            "url":"https://fastforex.p.rapidapi.com/currencies",
+            "description":"Fetch a list of supported currencies",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://fastforex.p.rapidapi.com/currencies\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fastforex.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "ms":0,
+                "currencies":{}
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "currencies":{
+                        "additionalProperties":{
+                            "type":"string"
+                        },
+                        "minProperties":130,
+                        "type":"object"
+                    },
+                    "ms":{
+                        "description":"Server response time in milliseconds",
+                        "format":"int32",
+                        "maximum":2147483647,
+                        "minimum":-2147483648,
+                        "type":"number"
+                    }
+                },
+                "type":"object"
+            }
+        },
+        {
+            "name":"/fetch-all",
+            "url":"https://fastforex.p.rapidapi.com/fetch-all",
+            "description":"Fetch all available currency rates",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"Base currency 3-letter symbol, defaults to USD",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://fastforex.p.rapidapi.com/fetch-all\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fastforex.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"",
+                "updated":"",
+                "ms":0,
+                "result":{}
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "base":{
+                        "description":"Three letter currency code",
+                        "pattern":"[A-Z]{3}",
+                        "type":"string"
+                    },
+                    "ms":{
+                        "description":"Server response time in milliseconds",
+                        "format":"int32",
+                        "maximum":2147483647,
+                        "minimum":-2147483648,
+                        "type":"number"
+                    },
+                    "result":{
+                        "additionalProperties":{
+                            "format":"float",
+                            "maximum":3.402823669209385e+38,
+                            "minimum":-3.402823669209385e+38,
+                            "type":"number"
+                        },
+                        "minProperties":130,
+                        "type":"object"
+                    },
+                    "updated":{
+                        "description":"Datetime YYYY-MM-DD HH:MM:SS",
+                        "pattern":"[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}",
+                        "type":"string"
+                    }
+                },
+                "type":"object"
+            }
+        },
+        {
+            "name":"/fetch-one",
+            "url":"https://fastforex.p.rapidapi.com/fetch-one",
+            "description":"Fetch a single currency exchange rate",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"to",
+                    "type":"STRING",
+                    "description":"Target currency 3-letter symbol",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"Base currency 3-letter symbol, defaults to USD",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://fastforex.p.rapidapi.com/fetch-one\"\nquerystring = {\"to\": to}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fastforex.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"",
+                "updated":"",
+                "ms":0,
+                "result":{}
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "base":{
+                        "description":"Three letter currency code",
+                        "pattern":"[A-Z]{3}",
+                        "type":"string"
+                    },
+                    "ms":{
+                        "description":"Server response time in milliseconds",
+                        "format":"int32",
+                        "maximum":2147483647,
+                        "minimum":-2147483648,
+                        "type":"number"
+                    },
+                    "result":{
+                        "additionalProperties":{
+                            "format":"float",
+                            "maximum":3.402823669209385e+38,
+                            "minimum":-3.402823669209385e+38,
+                            "type":"number"
+                        },
+                        "maxProperties":1,
+                        "minProperties":1,
+                        "type":"object"
+                    },
+                    "updated":{
+                        "description":"Datetime YYYY-MM-DD HH:MM:SS",
+                        "pattern":"[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}",
+                        "type":"string"
+                    }
+                },
+                "type":"object"
+            }
+        },
+        {
+            "name":"/fetch-multi",
+            "url":"https://fastforex.p.rapidapi.com/fetch-multi",
+            "description":"Fetch multiple currency rates at once",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"to",
+                    "type":"STRING",
+                    "description":"Target currencies, comma separated list of 3-letter symbols",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"Base currency 3-letter symbol, defaults to USD",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://fastforex.p.rapidapi.com/fetch-multi\"\nquerystring = {\"to\": to}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fastforex.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"",
+                "updated":"",
+                "ms":0,
+                "result":{}
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "base":{
+                        "description":"Three letter currency code",
+                        "pattern":"[A-Z]{3}",
+                        "type":"string"
+                    },
+                    "ms":{
+                        "description":"Server response time in milliseconds",
+                        "format":"int32",
+                        "maximum":2147483647,
+                        "minimum":-2147483648,
+                        "type":"number"
+                    },
+                    "result":{
+                        "additionalProperties":{
+                            "format":"float",
+                            "maximum":3.402823669209385e+38,
+                            "minimum":-3.402823669209385e+38,
+                            "type":"number"
+                        },
+                        "minProperties":1,
+                        "type":"object"
+                    },
+                    "updated":{
+                        "description":"Datetime YYYY-MM-DD HH:MM:SS",
+                        "pattern":"[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}",
+                        "type":"string"
+                    }
+                },
+                "type":"object"
+            }
+        },
+        {
+            "name":"/convert",
+            "url":"https://fastforex.p.rapidapi.com/convert",
+            "description":"Convert an amount of one currency into another currency",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"amount",
+                    "type":"NUMBER",
+                    "description":"Amount of source currency to convert",
+                    "default":""
+                },
+                {
+                    "name":"to",
+                    "type":"STRING",
+                    "description":"Target currency 3-letter symbol",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"from",
+                    "type":"STRING",
+                    "description":"Base currency 3-letter symbol, defaults to USD",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://fastforex.p.rapidapi.com/convert\"\nquerystring = {\"amount\": amount, \"to\": to}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fastforex.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "base":"",
+                "ms":0,
+                "amount":0,
+                "result":{
+                    "rate":0
+                }
+            },
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "amount":{
+                        "format":"float",
+                        "maximum":3.402823669209385e+38,
+                        "minimum":-3.402823669209385e+38,
+                        "type":"number"
+                    },
+                    "base":{
+                        "description":"Three letter currency code",
+                        "pattern":"[A-Z]{3}",
+                        "type":"string"
+                    },
+                    "ms":{
+                        "description":"Server response time in milliseconds",
+                        "format":"int32",
+                        "maximum":2147483647,
+                        "minimum":-2147483648,
+                        "type":"number"
+                    },
+                    "result":{
+                        "additionalProperties":{
+                            "format":"float",
+                            "maximum":3.402823669209385e+38,
+                            "minimum":-3.402823669209385e+38,
+                            "type":"number"
+                        },
+                        "maxProperties":2,
+                        "minProperties":2,
+                        "properties":{
+                            "rate":{
+                                "format":"float",
+                                "maximum":3.402823669209385e+38,
+                                "minimum":-3.402823669209385e+38,
+                                "type":"number"
+                            }
+                        },
+                        "type":"object"
+                    }
+                },
+                "type":"object"
+            }
+        }
+    ]
+}

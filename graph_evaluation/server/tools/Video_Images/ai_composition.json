@@ -1,0 +1,104 @@
+{
+    "product_id": "api_995ddf28-da22-4aa7-97b7-dcc0e903cd58",
+    "tool_description": "By evaluating the aesthetics of the input image, the bounding box is intelligently output, and according to these bounding boxes the original image can be cropped into a better image.",
+    "home_url": "https://rapidapi.com/ailabapi-ailabapi-default/api/ai-composition/",
+    "name": "AI Composition",
+    "title": "AI Composition",
+    "pricing": "FREEMIUM",
+    "tool_name": "AI Composition",
+    "score": null,
+    "host": "ai-composition.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "AI Composition",
+            "url": "https://ai-composition.p.rapidapi.com/image/editing/ai_composition",
+            "description": "AI Composition",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "- **Image format**: `JPEG` `JPG` `PNG` `BMP` `WEBP`\n- **Image size**: No more than 3 MB.\n- **Image resolution**: Larger than 32x32px, smaller than 4096x4096px.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "num_boxes",
+                    "type": "ENUM",
+                    "description": "The number of output boxes.\nDefault: `5`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://ai-composition.p.rapidapi.com/image/editing/ai_composition\"\nquerystring = {\"image\": \"\", \"num_boxes\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ai-composition.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ai-composition.p.rapidapi.com/image/editing/ai_composition\"\nquerystring = {\"image\": \"\", \"num_boxes\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ai-composition.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "request_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Request ID."
+                },
+                "log_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Log ID."
+                },
+                "error_code": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_code_str": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_msg": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Message."
+                },
+                "data": {
+                    "type": "object",
+                    "required": false,
+                    "description": "The content of the result data returned.",
+                    "properties": {
+                        "elements": {
+                            "type": "array",
+                            "required": true,
+                            "properties": {
+                                "min_x": {
+                                    "type": "integer",
+                                    "required": true,
+                                    "description": "The abscissa of the upper left corner of the output box."
+                                },
+                                "max_x": {
+                                    "type": "integer",
+                                    "required": true,
+                                    "description": "The abscissa of the lower right corner of the output box."
+                                },
+                                "min_y": {
+                                    "type": "integer",
+                                    "required": true,
+                                    "description": "The ordinate of the upper left corner of the output box."
+                                },
+                                "max_y": {
+                                    "type": "integer",
+                                    "required": true,
+                                    "description": "The vertical coordinate of the lower right corner of the output box."
+                                },
+                                "score": {
+                                    "type": "double",
+                                    "required": true,
+                                    "description": "The score of the output box, ranging from 0 to 5. The higher the score, the better the composition effect, and a better composition score is recommended above 3.8."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

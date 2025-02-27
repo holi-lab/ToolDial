@@ -1,0 +1,352 @@
+{
+    "tool_name": "MusicAPI",
+    "tool_description": "Spotify, Apple Music, YouTube, Amazon, Tidal, and more. Over 19 services supported.\n\nFetch metadata for the tracks, albums, playlists from multiple streaming services via URL.\nUse single search endpoints to find at once on all services and get sharable URLs to all of them. \n\nMusicAPI.com",
+    "title": "MusicAPI",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 99,
+        "avgLatency": 747,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/freeyourmusic-freeyourmusic-default/api/musicapi13/",
+    "host": "musicapi13.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/public/search/introspection",
+            "url": "https://musicapi13.p.rapidapi.com/public/search/introspection",
+            "description": "Allows you to fetch all different enums needed for sending API requests",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/search/introspection\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "sources": [
+                    "amazonMusic"
+                ],
+                "authSources": [
+                    "spotify"
+                ],
+                "types": [
+                    "track"
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "authSources": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "types": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/public/search",
+            "url": "https://musicapi13.p.rapidapi.com/public/search",
+            "description": "Search Endpoint allows you to search for\n\n- tracks\n- albums\n- playlists\n\nin any of the music service we support.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/search\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "tracks": [
+                    {
+                        "source": "spotify",
+                        "status": "success",
+                        "data": {
+                            "externalId": "5aszL9hl6SBzFNsOvw8u8w",
+                            "name": "Bezos I",
+                            "artistNames": [
+                                "Bo Burnham"
+                            ],
+                            "albumName": "INSIDE",
+                            "imageUrl": "https://i.scdn.co/image/ab67616d0000b27388fed14b936c38007a302413",
+                            "isrc": "",
+                            "duration": "58149",
+                            "url": "https://open.spotify.com/track/5aszL9hl6SBzFNsOvw8u8w"
+                        },
+                        "type": "track"
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "tracks": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "externalId": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "artistNames": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "albumName": {
+                                            "type": "string"
+                                        },
+                                        "imageUrl": {
+                                            "type": "string"
+                                        },
+                                        "isrc": {
+                                            "type": "string"
+                                        },
+                                        "duration": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "minimum": -2147483648,
+                                            "maximum": 2147483647
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/public/inspect/url",
+            "url": "https://musicapi13.p.rapidapi.com/public/inspect/url",
+            "description": "Inspect Endpoint allows you fetch the metadata of music service URL.\nYou can pass any URL from music service (eg. `https://tidal.com/browse/track/131696293`) and the API will\nreturn you information about what it points at.\n\nInspect API supports: \n- albums\n- tracks\n- playlists",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/inspect/url\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "source": "spotify",
+                "type": "track",
+                "data": {
+                    "externalId": "5aszL9hl6SBzFNsOvw8u8w",
+                    "name": "Bezos I",
+                    "artistNames": [
+                        "Bo Burnham"
+                    ],
+                    "albumName": "INSIDE",
+                    "imageUrl": "https://i.scdn.co/image/ab67616d00001e0288fed14b936c38007a302413",
+                    "isrc": "",
+                    "duration": "58149",
+                    "url": "https://open.spotify.com/track/5aszL9hl6SBzFNsOvw8u8w"
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "externalId": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "artistNames": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "albumName": {
+                                "type": "string"
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            },
+                            "isrc": {
+                                "type": "string"
+                            },
+                            "duration": {
+                                "type": "number"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/public/search",
+            "url": "https://musicapi13.p.rapidapi.com/public/search",
+            "description": "Search Endpoint allows you to search for\n\n- tracks\n- albums\n- playlists\n\nin any of the music service we support.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/search\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/search\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "tracks": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "source": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "data": {
+                                    "type": "object",
+                                    "properties": {
+                                        "externalId": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "artistNames": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "albumName": {
+                                            "type": "string"
+                                        },
+                                        "imageUrl": {
+                                            "type": "string"
+                                        },
+                                        "isrc": {
+                                            "type": "string"
+                                        },
+                                        "duration": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "minimum": -2147483648,
+                                            "maximum": 2147483647
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/public/inspect/url",
+            "url": "https://musicapi13.p.rapidapi.com/public/inspect/url",
+            "description": "Inspect Endpoint allows you fetch the metadata of music service URL.\nYou can pass any URL from music service (eg. `https://tidal.com/browse/track/131696293`) and the API will\nreturn you information about what it points at.\n\nInspect API supports: \n- albums\n- tracks\n- playlists",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/inspect/url\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://musicapi13.p.rapidapi.com/public/inspect/url\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"musicapi13.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "source": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "externalId": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            },
+                            "artistNames": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                }
+                            },
+                            "albumName": {
+                                "type": "string"
+                            },
+                            "imageUrl": {
+                                "type": "string"
+                            },
+                            "isrc": {
+                                "type": "string"
+                            },
+                            "duration": {
+                                "type": "number"
+                            },
+                            "url": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,2697 @@
+{
+    "product_id": "api_b031af52-8267-4bb2-8d4a-946fb2cc9d0b",
+    "tool_description": "Unified Blockchain API, use one, use them all. \n\n \n\nFrom NFTs, DeFi, Wallets, GameFi, Tokens, or simply launching contracts, we've got tools to help build them both easier and faster.\n\nUniblockis a suite of blockchain tooling to support developers in building any blockchain project.",
+    "home_url": "https://rapidapi.com/uniblock-uniblock-default/api/uniblock1/",
+    "name": "Uniblock",
+    "title": "Uniblock",
+    "pricing": "FREE",
+    "tool_name": "Uniblock",
+    "score": {
+        "avgServiceLevel": 2,
+        "avgLatency": 236,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.2,
+        "__typename": "Score"
+    },
+    "host": "uniblock1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Historical Token Balance",
+            "url": "https://uniblock1.p.rapidapi.com/balance/{walletAddress}/historical",
+            "description": "Gets the user's historical portfolio value and balance records along with token info.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The address that the balance records are tied to. Accepts either address or ENS",
+                    "default": ""
+                },
+                {
+                    "name": "timestamp",
+                    "type": "NUMBER",
+                    "description": "Numerical representation of the earliest date the balance records were indexed. Unix timestamp in seconds.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to filter through balance records.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "sortBy",
+                    "type": "STRING",
+                    "description": "Specify how to sort assets. E.g. 'balance', 'value'...",
+                    "default": "balance"
+                },
+                {
+                    "name": "sortByDate",
+                    "type": "STRING",
+                    "description": "Specify whether to sort records chronologically or reverse-chronologically (asc/desc).",
+                    "default": "desc"
+                },
+                {
+                    "name": "tokenAddress",
+                    "type": "STRING",
+                    "description": "The address of a specific token to filter through the balance records.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of balance records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "sortDirection",
+                    "type": "STRING",
+                    "description": "Specify whether to sort records in ascending or descending order (asc/desc).",
+                    "default": "desc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/balance/{walletAddress}/historical\"\nquerystring = {\"offset\": \"0\", \"sortBy\": \"balance\", \"sortByDate\": \"desc\", \"walletAddress\": \"\", \"timestamp\": \"\", \"tokenAddress\": \"\", \"limit\": \"100\", \"sortDirection\": \"desc\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/balance/{walletAddress}/historical\"\nquerystring = {\"offset\": \"0\", \"sortBy\": \"balance\", \"sortByDate\": \"desc\", \"walletAddress\": \"\", \"timestamp\": \"\", \"tokenAddress\": \"\", \"limit\": \"100\", \"sortDirection\": \"desc\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "portfolioValue": {
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "assets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "count",
+                    "total",
+                    "portfolioValue",
+                    "timestamp",
+                    "assets"
+                ]
+            }
+        },
+        {
+            "name": "Format Units",
+            "url": "https://uniblock1.p.rapidapi.com/utils/formatUnits",
+            "description": "Gets a string representation of a given value formatted with unit digits.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "value",
+                    "type": "STRING",
+                    "description": "Value to format in string.",
+                    "default": ""
+                },
+                {
+                    "name": "unit",
+                    "type": "STRING",
+                    "description": "Number of decimals (\u201c18\u201d, ...) or named units (\u201cwei\u201d, \u201cether\u201d, ...).",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/formatUnits\"\nquerystring = {\"value\": \"\", \"unit\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/formatUnits\"\nquerystring = {\"value\": \"\", \"unit\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Convert Units",
+            "url": "https://uniblock1.p.rapidapi.com/utils/convertUnits",
+            "description": "Gets the converted value (decimal units to number or number to decimal units) of a specified amount of a token.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "value",
+                    "type": "STRING",
+                    "description": "Value to format.",
+                    "default": ""
+                },
+                {
+                    "name": "direction",
+                    "type": "STRING",
+                    "description": "Specifies conversion method.\n    \n * From: Converts a number in units to an actual number.\n    \n * To: Converts the actual number to a number in units.",
+                    "default": ""
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Token contract address that will be used to determine the number of digits to convert the value.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the token resides on.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/convertUnits\"\nquerystring = {\"value\": \"\", \"direction\": \"\", \"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/convertUnits\"\nquerystring = {\"value\": \"\", \"direction\": \"\", \"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "formatted": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "formatted"
+                ]
+            }
+        },
+        {
+            "name": "Parse Ether",
+            "url": "https://uniblock1.p.rapidapi.com/utils/parseEther",
+            "description": "Gets a string representation of a given value, parsed with 18 digits (in terms of wei).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "value",
+                    "type": "STRING",
+                    "description": "Value to parse.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/parseEther\"\nquerystring = {\"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/parseEther\"\nquerystring = {\"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "formatted": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "formatted"
+                ]
+            }
+        },
+        {
+            "name": "Create Wallet from Mnemonic",
+            "url": "https://uniblock1.p.rapidapi.com/wallet/fromMnemonic",
+            "description": "Generates a wallet from a mnemonic phrase and index. If no index is provided, it will default to 0.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "mnemonic",
+                    "type": "STRING",
+                    "description": "Mnemonic phrase to generate a wallet from.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "index",
+                    "type": "NUMBER",
+                    "description": "Generate a wallet from the index and the mnemonic phrase pair.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/wallet/fromMnemonic\"\nquerystring = {\"index\": \"\", \"mnemonic\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/wallet/fromMnemonic\"\nquerystring = {\"index\": \"\", \"mnemonic\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    },
+                    "privateKey": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "address",
+                    "privateKey"
+                ]
+            }
+        },
+        {
+            "name": "Generate Mnemonic",
+            "url": "https://uniblock1.p.rapidapi.com/wallet/generateMnemonic",
+            "description": "Generates a random mnemonic, defaults to 128-bits of entropy",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/wallet/generateMnemonic\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/wallet/generateMnemonic\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "mnemonic": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "mnemonic"
+                ]
+            }
+        },
+        {
+            "name": "Get Current Block Number",
+            "url": "https://uniblock1.p.rapidapi.com/block/blockNumber",
+            "description": "Gets the current block number.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch the current block number from.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockNumber\"\nquerystring = {\"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockNumber\"\nquerystring = {\"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Look up Address",
+            "url": "https://uniblock1.p.rapidapi.com/ens/lookupName",
+            "description": "Looks up the ens domain for a crypto address if there is any domain bound with the address.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch the default ENS domain for.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Address of the user to fetch the default ENS domain for.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/ens/lookupName\"\nquerystring = {\"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/ens/lookupName\"\nquerystring = {\"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "domain": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "domain"
+                ]
+            }
+        },
+        {
+            "name": "Get Token Balance",
+            "url": "https://uniblock1.p.rapidapi.com/token/tokenBalance",
+            "description": "Gets the balance of an ERC-20 token.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "contractAddress",
+                    "type": "STRING",
+                    "description": "Contract address of ERC-20 token.",
+                    "default": ""
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The wallet address of the ERC-20 token's owner.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the contract address resides on.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/tokenBalance\"\nquerystring = {\"contractAddress\": \"\", \"walletAddress\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/tokenBalance\"\nquerystring = {\"contractAddress\": \"\", \"walletAddress\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "balance": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "balance"
+                ]
+            }
+        },
+        {
+            "name": "Get Decimals",
+            "url": "https://uniblock1.p.rapidapi.com/token/decimals",
+            "description": "Gets the number of decimal places used by an ERC-20 token.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Contract address of ERC-20 token.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the contract address resides on.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/decimals\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/decimals\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "decimals": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "decimals"
+                ]
+            }
+        },
+        {
+            "name": "Get Native Balance at Block",
+            "url": "https://uniblock1.p.rapidapi.com/token/nativeBalanceAt",
+            "description": "Gets the native token balance of an address at a given block.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "blockNumber",
+                    "type": "NUMBER",
+                    "description": "Block number to retrieve user balance.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network to fetch the user balance for.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The wallet address of the user whose balance is being retrieved.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/nativeBalanceAt\"\nquerystring = {\"blockNumber\": \"\", \"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/nativeBalanceAt\"\nquerystring = {\"blockNumber\": \"\", \"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "balance": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "balance"
+                ]
+            }
+        },
+        {
+            "name": "Get Total Supply",
+            "url": "https://uniblock1.p.rapidapi.com/token/totalSupply",
+            "description": "Gets the total supply of an ERC-20 or ERC-721 token.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the token resides on.",
+                    "default": "1"
+                },
+                {
+                    "name": "tokenAddress",
+                    "type": "STRING",
+                    "description": "Contract address of the token to retrieve total supply from.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/totalSupply\"\nquerystring = {\"chainId\": \"1\", \"tokenAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/totalSupply\"\nquerystring = {\"chainId\": \"1\", \"tokenAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "totalSupply": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "totalSupply"
+                ]
+            }
+        },
+        {
+            "name": "Get Approval For NFT Transfer",
+            "url": "https://uniblock1.p.rapidapi.com/token/approvalForAll",
+            "description": "Determines whether or not a spender address can transfer the NFTs of an owner address.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "owner",
+                    "type": "STRING",
+                    "description": "The address which we want to determine the approval of all NFTs of.",
+                    "default": ""
+                },
+                {
+                    "name": "spender",
+                    "type": "STRING",
+                    "description": "The spender of the allowed tokens.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the token resides on.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "ERC-721/ERC-1155 contract address that will be used to determine whether or not the spender can transfer tokens from the owner.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/approvalForAll\"\nquerystring = {\"owner\": \"\", \"spender\": \"\", \"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/approvalForAll\"\nquerystring = {\"owner\": \"\", \"spender\": \"\", \"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "approve": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "approve"
+                ]
+            }
+        },
+        {
+            "name": "Get Event Logs",
+            "url": "https://uniblock1.p.rapidapi.com/log",
+            "description": "Gets the logs of a contract.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch logs for.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The address to fetch logs from.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "startBlock",
+                    "type": "NUMBER",
+                    "description": "The block to start fetching logs for.",
+                    "default": ""
+                },
+                {
+                    "name": "endBlock",
+                    "type": "NUMBER",
+                    "description": "The block to stop fetching logs for.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/log\"\nquerystring = {\"startBlock\": \"\", \"endBlock\": \"\", \"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/log\"\nquerystring = {\"startBlock\": \"\", \"endBlock\": \"\", \"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    },
+                    "logs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "count",
+                    "logs"
+                ]
+            }
+        },
+        {
+            "name": "Get Event Logs within Block range",
+            "url": "https://uniblock1.p.rapidapi.com/log/topics",
+            "description": "Gets the event logs in a block range, filtered by topics.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "topics",
+                    "type": "STRING",
+                    "description": "The topic to fetch logs for.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch logs for.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "startBlock",
+                    "type": "NUMBER",
+                    "description": "The block to start fetching logs for.",
+                    "default": ""
+                },
+                {
+                    "name": "endBlock",
+                    "type": "NUMBER",
+                    "description": "The block to stop fetching logs for.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/log/topics\"\nquerystring = {\"topics\": \"\", \"startBlock\": \"\", \"endBlock\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/log/topics\"\nquerystring = {\"topics\": \"\", \"startBlock\": \"\", \"endBlock\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Collection NFTs",
+            "url": "https://uniblock1.p.rapidapi.com/nft/inCollection",
+            "description": "Gets all NFTs in a collection",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Enter the chain ID of the specific NFT to query",
+                    "default": "1"
+                },
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "Enter the address of the NFT collection",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of NFT balance records to return.",
+                    "default": "100"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/inCollection\"\nquerystring = {\"offset\": \"0\", \"limit\": \"100\", \"chainId\": \"1\", \"nftAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/inCollection\"\nquerystring = {\"offset\": \"0\", \"limit\": \"100\", \"chainId\": \"1\", \"nftAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "nfts": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "count",
+                    "total",
+                    "nfts"
+                ]
+            }
+        },
+        {
+            "name": "Get Token Price History between Dates",
+            "url": "https://uniblock1.p.rapidapi.com/price/history/date",
+            "description": "Gets the price chart of a token between two dates in USD.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "startDate",
+                    "type": "NUMBER",
+                    "description": "Returns the chart starting at this timestamp. Unix timestamp in seconds.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network the desired coin resides on.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The token address of the desired coin.",
+                    "default": ""
+                },
+                {
+                    "name": "endDate",
+                    "type": "NUMBER",
+                    "description": "Returns the chart ending at this timestamp. Unix timestamp in seconds.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price/history/date\"\nquerystring = {\"startDate\": \"\", \"chainId\": \"1\", \"address\": \"\", \"endDate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price/history/date\"\nquerystring = {\"startDate\": \"\", \"chainId\": \"1\", \"address\": \"\", \"endDate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Transaction By Hash",
+            "url": "https://uniblock1.p.rapidapi.com/transaction/transactionByHash",
+            "description": "Gets transaction information of a given hash",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "hash",
+                    "type": "STRING",
+                    "description": "Transaction hash to get transaction information from.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to retrieve transaction information from.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transaction/transactionByHash\"\nquerystring = {\"hash\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transaction/transactionByHash\"\nquerystring = {\"hash\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "chainId": {
+                        "type": "number"
+                    },
+                    "hash": {
+                        "type": "string"
+                    },
+                    "blockHash": {
+                        "type": "string"
+                    },
+                    "blockNumber": {
+                        "type": "number"
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "gasPrice": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "chainId",
+                    "hash",
+                    "blockHash",
+                    "blockNumber",
+                    "from",
+                    "gasPrice",
+                    "to",
+                    "value"
+                ]
+            }
+        },
+        {
+            "name": "Get Transactions For User",
+            "url": "https://uniblock1.p.rapidapi.com/transaction/history/{walletAddress}",
+            "description": "Gets transaction records for a specified user.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to filter through transaction records.",
+                    "default": "1"
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The user address that the transaction records are tied to. Accepts either address or ENS.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "startTimestamp",
+                    "type": "NUMBER",
+                    "description": "Returns transactions starting from this date. Unix timestamp in seconds.",
+                    "default": ""
+                },
+                {
+                    "name": "interactingWith",
+                    "type": "STRING",
+                    "description": "Specifies the wallet or contract address of the second-party involved in the transaction.",
+                    "default": ""
+                },
+                {
+                    "name": "endTimestamp",
+                    "type": "NUMBER",
+                    "description": "Returns transactions before this date. Unix timestamp in seconds.",
+                    "default": ""
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The cursor returned in the previous response (used to getting the next page).",
+                    "default": ""
+                },
+                {
+                    "name": "sortByDate",
+                    "type": "STRING",
+                    "description": "Specify whether to sort records chronologically or reverse-chronologically (asc/desc).",
+                    "default": "desc"
+                },
+                {
+                    "name": "tokenType",
+                    "type": "STRING",
+                    "description": "Specify token type to filter through transaction records.",
+                    "default": "any"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of balance records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "direction",
+                    "type": "STRING",
+                    "description": "Filter transactions based on whether they were sent or received.",
+                    "default": "both"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transaction/history/{walletAddress}\"\nquerystring = {\"chainId\": \"1\", \"startTimestamp\": \"\", \"interactingWith\": \"\", \"endTimestamp\": \"\", \"offset\": \"0\", \"cursor\": \"\", \"sortByDate\": \"desc\", \"walletAddress\": \"\", \"tokenType\": \"any\", \"limit\": \"100\", \"direction\": \"both\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transaction/history/{walletAddress}\"\nquerystring = {\"chainId\": \"1\", \"startTimestamp\": \"\", \"interactingWith\": \"\", \"endTimestamp\": \"\", \"offset\": \"0\", \"cursor\": \"\", \"sortByDate\": \"desc\", \"walletAddress\": \"\", \"tokenType\": \"any\", \"limit\": \"100\", \"direction\": \"both\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "walletAddress": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "cursor": {
+                        "type": "string"
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "walletAddress",
+                    "count",
+                    "total",
+                    "cursor",
+                    "transactions"
+                ]
+            }
+        },
+        {
+            "name": "Get Current Token Balance",
+            "url": "https://uniblock1.p.rapidapi.com/balance/{walletAddress}",
+            "description": "Gets the user's current portfolio value and balance records along with token info.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to filter through balance records.",
+                    "default": "1"
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The address that the balance records are tied to. Accepts either address or ENS",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "sortBy",
+                    "type": "STRING",
+                    "description": "Specify how to sort assets. E.g. 'balance', 'value'...",
+                    "default": "balance"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of balance records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The cursor returned in the previous response (used to getting the next page).",
+                    "default": ""
+                },
+                {
+                    "name": "tokenAddress",
+                    "type": "STRING",
+                    "description": "The address of a specific token to filter through the balance records.",
+                    "default": ""
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "sortDirection",
+                    "type": "STRING",
+                    "description": "Specify whether to sort records in ascending or descending order (asc/desc).",
+                    "default": "desc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/balance/{walletAddress}\"\nquerystring = {\"chainId\": \"1\", \"walletAddress\": \"\", \"sortBy\": \"balance\", \"limit\": \"100\", \"cursor\": \"\", \"tokenAddress\": \"\", \"offset\": \"0\", \"sortDirection\": \"desc\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/balance/{walletAddress}\"\nquerystring = {\"chainId\": \"1\", \"walletAddress\": \"\", \"sortBy\": \"balance\", \"limit\": \"100\", \"cursor\": \"\", \"tokenAddress\": \"\", \"offset\": \"0\", \"sortDirection\": \"desc\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "cursor": {
+                        "type": "string"
+                    },
+                    "portfolioValue": {
+                        "type": "number"
+                    },
+                    "assets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "count",
+                    "total",
+                    "cursor",
+                    "portfolioValue",
+                    "assets"
+                ]
+            }
+        },
+        {
+            "name": "Ping Server",
+            "url": "https://uniblock1.p.rapidapi.com/ping",
+            "description": "Check API server status.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/ping\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/ping\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "ping": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ping"
+                ]
+            }
+        },
+        {
+            "name": "Get Current Price",
+            "url": "https://uniblock1.p.rapidapi.com/price",
+            "description": "Gets the current price of a token in USD.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The token address of the desired coin.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network the desired coin resides on.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Token Price History by Period",
+            "url": "https://uniblock1.p.rapidapi.com/price/history/period",
+            "description": "Gets the price chart of a token within a given period in USD.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network the desired coin resides on.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The token address of the desired coin.",
+                    "default": ""
+                },
+                {
+                    "name": "period",
+                    "type": "STRING",
+                    "description": "Returns the chart within this time.",
+                    "default": "hour"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price/history/period\"\nquerystring = {\"chainId\": \"1\", \"address\": \"\", \"period\": \"hour\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price/history/period\"\nquerystring = {\"chainId\": \"1\", \"address\": \"\", \"period\": \"hour\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "priceData": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "priceData"
+                ]
+            }
+        },
+        {
+            "name": "Create Wallet",
+            "url": "https://uniblock1.p.rapidapi.com/wallet/createWallet",
+            "description": "Creates and gets a new wallet with a random private key, generated from cryptographically secure entropy sources.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/wallet/createWallet\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/wallet/createWallet\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "_isSigner": {
+                        "type": "boolean"
+                    },
+                    "_signingKey": {
+                        "type": "object"
+                    },
+                    "address": {
+                        "type": "string"
+                    },
+                    "_mnemonic": {
+                        "type": "object"
+                    },
+                    "provider": {
+                        "allOf": [
+                            {
+                                "type": "object"
+                            }
+                        ]
+                    }
+                },
+                "required": [
+                    "_isSigner",
+                    "_signingKey",
+                    "address",
+                    "_mnemonic",
+                    "provider"
+                ]
+            }
+        },
+        {
+            "name": "Get Token Price History between Blocks",
+            "url": "https://uniblock1.p.rapidapi.com/price/history/block",
+            "description": "Gets the price chart of a token between two blocks in USD",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network the desired coin resides on.",
+                    "default": "1"
+                },
+                {
+                    "name": "endBlock",
+                    "type": "NUMBER",
+                    "description": "Returns the users net worth chart ending at this block.",
+                    "default": ""
+                },
+                {
+                    "name": "startBlock",
+                    "type": "NUMBER",
+                    "description": "The start block that was requested.",
+                    "default": ""
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The token address of the desired coin.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price/history/block\"\nquerystring = {\"chainId\": \"1\", \"endBlock\": \"\", \"startBlock\": \"\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/price/history/block\"\nquerystring = {\"chainId\": \"1\", \"endBlock\": \"\", \"startBlock\": \"\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Detailed Block Info",
+            "url": "https://uniblock1.p.rapidapi.com/block/blockDetailed",
+            "description": "Gets detailed block information of a given block number",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "blockNumber",
+                    "type": "NUMBER",
+                    "description": "Block number to retrieve block.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch information about a specific block.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockDetailed\"\nquerystring = {\"blockNumber\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockDetailed\"\nquerystring = {\"blockNumber\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "hash": {
+                        "type": "string"
+                    },
+                    "parentHash": {
+                        "type": "string"
+                    },
+                    "blockNumber": {
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "nonce": {
+                        "type": "string"
+                    },
+                    "difficulty": {
+                        "type": "number"
+                    },
+                    "gasLimit": {
+                        "type": "string"
+                    },
+                    "gasUsed": {
+                        "type": "string"
+                    },
+                    "miner": {
+                        "type": "string"
+                    },
+                    "extraData": {
+                        "type": "string"
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "baseFeePerGas": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "hash",
+                    "parentHash",
+                    "blockNumber",
+                    "timestamp",
+                    "nonce",
+                    "difficulty",
+                    "gasLimit",
+                    "gasUsed",
+                    "miner",
+                    "extraData",
+                    "transactions",
+                    "baseFeePerGas"
+                ]
+            }
+        },
+        {
+            "name": "Get Timestamp of Block Number",
+            "url": "https://uniblock1.p.rapidapi.com/block/blockTimestamp",
+            "description": "Gets a numerical timestamp of a given block number",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch a timestamp from.",
+                    "default": "1"
+                },
+                {
+                    "name": "blockNumber",
+                    "type": "NUMBER",
+                    "description": "Block number to retrieve timestamp.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockTimestamp\"\nquerystring = {\"chainId\": \"1\", \"blockNumber\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockTimestamp\"\nquerystring = {\"chainId\": \"1\", \"blockNumber\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 404,
+                "message": "portfolio/v1/block/blockTimestamp could not be found.",
+                "method": "GET",
+                "path": "/portfolio/v1/block/blockTimestamp?chainId=1&blockNumber=",
+                "body": {},
+                "timestamp": "2023-06-16T17:11:51.843Z"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Block Number From Timestamp",
+            "url": "https://uniblock1.p.rapidapi.com/block/blockNumberFromTimestamp",
+            "description": "Gets the block number closest to the given timestamp.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch a timestamp from.",
+                    "default": "1"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "NUMBER",
+                    "description": "Date to retrieve block. Unix timestamp in seconds.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockNumberFromTimestamp\"\nquerystring = {\"chainId\": \"1\", \"timestamp\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockNumberFromTimestamp\"\nquerystring = {\"chainId\": \"1\", \"timestamp\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "blockNumber": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "blockNumber"
+                ]
+            }
+        },
+        {
+            "name": "Get Block Info with Transactions",
+            "url": "https://uniblock1.p.rapidapi.com/block/blockWithTransactions",
+            "description": "Gets a block with transactions of a given block number",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "blockNumber",
+                    "type": "NUMBER",
+                    "description": "Block number to retrieve block.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch information about a specific block.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockWithTransactions\"\nquerystring = {\"blockNumber\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/blockWithTransactions\"\nquerystring = {\"blockNumber\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "hash": {
+                        "type": "string"
+                    },
+                    "parentHash": {
+                        "type": "string"
+                    },
+                    "blockNumber": {
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "nonce": {
+                        "type": "string"
+                    },
+                    "difficulty": {
+                        "type": "number"
+                    },
+                    "gasLimit": {
+                        "type": "string"
+                    },
+                    "gasUsed": {
+                        "type": "string"
+                    },
+                    "miner": {
+                        "type": "string"
+                    },
+                    "extraData": {
+                        "type": "string"
+                    },
+                    "baseFeePerGas": {
+                        "type": "string"
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "hash",
+                    "parentHash",
+                    "blockNumber",
+                    "timestamp",
+                    "nonce",
+                    "difficulty",
+                    "gasLimit",
+                    "gasUsed",
+                    "miner",
+                    "extraData",
+                    "baseFeePerGas",
+                    "transactions"
+                ]
+            }
+        },
+        {
+            "name": "Get Block Info",
+            "url": "https://uniblock1.p.rapidapi.com/block/block",
+            "description": "Gets the block of a given block number",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch the block from.",
+                    "default": "1"
+                },
+                {
+                    "name": "blockNumber",
+                    "type": "NUMBER",
+                    "description": "Block number to retrieve timestamp.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/block\"\nquerystring = {\"chainId\": \"1\", \"blockNumber\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/block/block\"\nquerystring = {\"chainId\": \"1\", \"blockNumber\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "hash": {
+                        "type": "string"
+                    },
+                    "parentHash": {
+                        "type": "string"
+                    },
+                    "blockNumber": {
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "gasUsed": {
+                        "type": "string"
+                    },
+                    "transactions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "hash",
+                    "parentHash",
+                    "blockNumber",
+                    "timestamp",
+                    "gasUsed",
+                    "transactions"
+                ]
+            }
+        },
+        {
+            "name": "Resolve ENS Domain",
+            "url": "https://uniblock1.p.rapidapi.com/ens/resolveName",
+            "description": "Resolves the ens domain to get the address.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to resolve the domain for.",
+                    "default": "1"
+                },
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "ENS domain to resolve.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/ens/resolveName\"\nquerystring = {\"chainId\": \"1\", \"domain\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/ens/resolveName\"\nquerystring = {\"chainId\": \"1\", \"domain\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "address"
+                ]
+            }
+        },
+        {
+            "name": "Get Detailed Transaction By Hash",
+            "url": "https://uniblock1.p.rapidapi.com/transaction/transactionByHashDetailed",
+            "description": "Gets detailed transaction information of a given hash.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "hash",
+                    "type": "STRING",
+                    "description": "Transaction hash to get transaction information from.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to retrieve transaction information from.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transaction/transactionByHashDetailed\"\nquerystring = {\"hash\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transaction/transactionByHashDetailed\"\nquerystring = {\"hash\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "chainId": {
+                        "type": "number"
+                    },
+                    "hash": {
+                        "type": "string"
+                    },
+                    "blockHash": {
+                        "type": "string"
+                    },
+                    "blockNumber": {
+                        "type": "number"
+                    },
+                    "type": {
+                        "type": "number"
+                    },
+                    "accessList": {
+                        "type": "string"
+                    },
+                    "transactionIndex": {
+                        "type": "number"
+                    },
+                    "confirmations": {
+                        "type": "number"
+                    },
+                    "from": {
+                        "type": "string"
+                    },
+                    "gasPrice": {
+                        "type": "string"
+                    },
+                    "gasLimit": {
+                        "type": "string"
+                    },
+                    "to": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    },
+                    "nonce": {
+                        "type": "number"
+                    },
+                    "data": {
+                        "type": "string"
+                    },
+                    "r": {
+                        "type": "string"
+                    },
+                    "s": {
+                        "type": "string"
+                    },
+                    "v": {
+                        "type": "number"
+                    },
+                    "creates": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "chainId",
+                    "hash",
+                    "blockHash",
+                    "blockNumber",
+                    "type",
+                    "accessList",
+                    "transactionIndex",
+                    "confirmations",
+                    "from",
+                    "gasPrice",
+                    "gasLimit",
+                    "to",
+                    "value",
+                    "nonce",
+                    "data",
+                    "r",
+                    "s",
+                    "v",
+                    "creates"
+                ]
+            }
+        },
+        {
+            "name": "Get Native Balance",
+            "url": "https://uniblock1.p.rapidapi.com/token/nativeBalance",
+            "description": "Gets the native token balance of an address.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network to fetch the user balance for.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The wallet address of the user whose balance is being retrieved.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/nativeBalance\"\nquerystring = {\"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/nativeBalance\"\nquerystring = {\"chainId\": \"1\", \"address\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Allowance",
+            "url": "https://uniblock1.p.rapidapi.com/token/allowance",
+            "description": "Gets the token allowance limit of a spender for tokens owned by another address.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "spender",
+                    "type": "STRING",
+                    "description": "The spender of the allowance.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the token resides on.",
+                    "default": "1"
+                },
+                {
+                    "name": "owner",
+                    "type": "STRING",
+                    "description": "The address which we want to determine the allowance of.",
+                    "default": ""
+                },
+                {
+                    "name": "tokenAddress",
+                    "type": "STRING",
+                    "description": "The ERC-20 token contract address to check allowance for.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/allowance\"\nquerystring = {\"spender\": \"\", \"chainId\": \"1\", \"owner\": \"\", \"tokenAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/allowance\"\nquerystring = {\"spender\": \"\", \"chainId\": \"1\", \"owner\": \"\", \"tokenAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "allowance": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "allowance"
+                ]
+            }
+        },
+        {
+            "name": "Get Symbol",
+            "url": "https://uniblock1.p.rapidapi.com/token/symbol",
+            "description": "Gets the symbol of a given ERC-20 token",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Contract address of ERC-20 token.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the contract address resides on.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/symbol\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/token/symbol\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Format Ether",
+            "url": "https://uniblock1.p.rapidapi.com/utils/formatEther",
+            "description": "Gets a string representation of a given value in terms of ether.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "value",
+                    "type": "STRING",
+                    "description": "Value to format.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/formatEther\"\nquerystring = {\"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/formatEther\"\nquerystring = {\"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "formatted": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "formatted"
+                ]
+            }
+        },
+        {
+            "name": "Parse Units",
+            "url": "https://uniblock1.p.rapidapi.com/utils/parseUnits",
+            "description": "Gets a string representation of value, parsed with unit digits.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "unit",
+                    "type": "STRING",
+                    "description": "Number of decimals (\u201c18\u201d, ...) or named units (\u201cwei\u201d, \u201cether\u201d, ...).",
+                    "default": ""
+                },
+                {
+                    "name": "value",
+                    "type": "STRING",
+                    "description": "Value to parse.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/parseUnits\"\nquerystring = {\"unit\": \"\", \"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/parseUnits\"\nquerystring = {\"unit\": \"\", \"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Code",
+            "url": "https://uniblock1.p.rapidapi.com/utils/code",
+            "description": "Gets the code at a given address and network (chainId). This code can be used to distinguish between contract addresses and wallet addresses. Contract addresses return bytecode whereas wallet addresses return \"0x\".",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Wallet or contract address to retrieve code from.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network that the given address resides on.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/code\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/code\"\nquerystring = {\"address\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "code"
+                ]
+            }
+        },
+        {
+            "name": "Commify",
+            "url": "https://uniblock1.p.rapidapi.com/utils/commify",
+            "description": "Gets a string grouped by three digits separated by comma(s).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "value",
+                    "type": "NUMBER",
+                    "description": "Numerical value to format.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/commify\"\nquerystring = {\"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/commify\"\nquerystring = {\"value\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "commified": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "commified"
+                ]
+            }
+        },
+        {
+            "name": "Get Gas Price",
+            "url": "https://uniblock1.p.rapidapi.com/utils/gasPrice",
+            "description": "Gets the best estimate for gas price to use in a transaction.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to retrieve gas price estimate for.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/gasPrice\"\nquerystring = {\"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/utils/gasPrice\"\nquerystring = {\"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Event Logs filtered by Topic",
+            "url": "https://uniblock1.p.rapidapi.com/log/address/topics",
+            "description": "Gets the event logs by address filtered by topics.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to fetch logs for.",
+                    "default": "1"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The address to fetch logs from.",
+                    "default": ""
+                },
+                {
+                    "name": "topics",
+                    "type": "STRING",
+                    "description": "The topic to fetch logs for.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "endBlock",
+                    "type": "NUMBER",
+                    "description": "The block to stop fetching logs for.",
+                    "default": ""
+                },
+                {
+                    "name": "startBlock",
+                    "type": "NUMBER",
+                    "description": "The block to start fetching logs for.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/log/address/topics\"\nquerystring = {\"chainId\": \"1\", \"endBlock\": \"\", \"address\": \"\", \"topics\": \"\", \"startBlock\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/log/address/topics\"\nquerystring = {\"chainId\": \"1\", \"endBlock\": \"\", \"address\": \"\", \"topics\": \"\", \"startBlock\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    },
+                    "logs": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "count",
+                    "logs"
+                ]
+            }
+        },
+        {
+            "name": "Get NFT Owner",
+            "url": "https://uniblock1.p.rapidapi.com/nft/nftOwner",
+            "description": "Gets the owner of a specific ERC-721 NFT.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Enter the chain ID of the specific NFT to query.",
+                    "default": "1"
+                },
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "Enter the address of the NFT contract.",
+                    "default": ""
+                },
+                {
+                    "name": "nftId",
+                    "type": "STRING",
+                    "description": "Enter the NFT ID of the specific NFT to query.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/nftOwner\"\nquerystring = {\"chainId\": \"1\", \"nftAddress\": \"\", \"nftId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/nftOwner\"\nquerystring = {\"chainId\": \"1\", \"nftAddress\": \"\", \"nftId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "owner": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "owner"
+                ]
+            }
+        },
+        {
+            "name": "Get Current NFT Balance for User",
+            "url": "https://uniblock1.p.rapidapi.com/nft/{walletAddress}",
+            "description": "Gets the NFT balance of a specific user.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network to fetch the user's NFT balance.",
+                    "default": "1"
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The wallet address of the user whose NFT balances are being retrieved. Accepts either address or ENS.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of NFT balance records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The cursor returned in the previous response (used to getting the next page).",
+                    "default": ""
+                },
+                {
+                    "name": "nftId",
+                    "type": "STRING",
+                    "description": "Id of the specific NFT to query.",
+                    "default": ""
+                },
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "The address of a specific NFT contract.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/{walletAddress}\"\nquerystring = {\"offset\": \"0\", \"limit\": \"100\", \"cursor\": \"\", \"chainId\": \"1\", \"walletAddress\": \"\", \"nftId\": \"\", \"nftAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/{walletAddress}\"\nquerystring = {\"offset\": \"0\", \"limit\": \"100\", \"cursor\": \"\", \"chainId\": \"1\", \"walletAddress\": \"\", \"nftId\": \"\", \"nftAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get NFT Collection Metadata",
+            "url": "https://uniblock1.p.rapidapi.com/nft/collection/{collectionAddress}/metadata",
+            "description": "Fetches NFT collection metadata.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network to fetch the user's NFT balance.",
+                    "default": "1"
+                },
+                {
+                    "name": "collectionAddress",
+                    "type": "STRING",
+                    "description": "The address of a specific NFT contract.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/collection/{collectionAddress}/metadata\"\nquerystring = {\"chainId\": \"1\", \"collectionAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/collection/{collectionAddress}/metadata\"\nquerystring = {\"chainId\": \"1\", \"collectionAddress\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get Historical NFT Balances",
+            "url": "https://uniblock1.p.rapidapi.com/nft/{walletAddress}/historical",
+            "description": "Gets the user's historical NFT balance records.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The wallet address of the user whose NFT balances are being retrieved. Accepts either address or ENS.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Specific network to fetch the user's NFT balance.",
+                    "default": "1"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "NUMBER",
+                    "description": "Date to retrieve user's NFT balances. Unix timestamp in seconds.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "nftId",
+                    "type": "STRING",
+                    "description": "Id of the specific NFT to query.",
+                    "default": ""
+                },
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "The address of a particular NFT contract.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of NFT balance records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of rows to skip in query.",
+                    "default": "0"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/{walletAddress}/historical\"\nquerystring = {\"nftId\": \"\", \"nftAddress\": \"\", \"walletAddress\": \"\", \"chainId\": \"1\", \"limit\": \"100\", \"offset\": \"0\", \"timestamp\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/{walletAddress}/historical\"\nquerystring = {\"nftId\": \"\", \"nftAddress\": \"\", \"walletAddress\": \"\", \"chainId\": \"1\", \"limit\": \"100\", \"offset\": \"0\", \"timestamp\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "timestamp": {
+                        "type": "number"
+                    },
+                    "assets": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "count",
+                    "total",
+                    "timestamp",
+                    "assets"
+                ]
+            }
+        },
+        {
+            "name": "Get Nft Info",
+            "url": "https://uniblock1.p.rapidapi.com/nft/nftInfo",
+            "description": "Gets information of a specific NFT.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Enter the chain ID of the specific NFT to query.",
+                    "default": "1"
+                },
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "Enter the address of the NFT contract.",
+                    "default": ""
+                },
+                {
+                    "name": "nftId",
+                    "type": "STRING",
+                    "description": "Enter the NFT ID of the specific NFT to query.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/nftInfo\"\nquerystring = {\"chainId\": \"1\", \"nftAddress\": \"\", \"nftId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/nftInfo\"\nquerystring = {\"chainId\": \"1\", \"nftAddress\": \"\", \"nftId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "tokenURI": {
+                        "type": "string"
+                    },
+                    "nftAddress": {
+                        "type": "string"
+                    },
+                    "nftId": {
+                        "type": "string"
+                    },
+                    "totalSupply": {
+                        "type": "string"
+                    },
+                    "chainId": {
+                        "type": "number"
+                    },
+                    "contractType": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "externalUrl": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "animationUrl": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "metadata": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "tokenURI",
+                    "nftAddress",
+                    "nftId",
+                    "totalSupply",
+                    "chainId",
+                    "contractType",
+                    "image",
+                    "externalUrl",
+                    "name",
+                    "animationUrl",
+                    "description",
+                    "metadata"
+                ]
+            }
+        },
+        {
+            "name": "Get NFT Transfers For User",
+            "url": "https://uniblock1.p.rapidapi.com/transfer/{walletAddress}/nft",
+            "description": "Gets NFT transfer records for a specified user.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to filter through NFT transfer records.",
+                    "default": "1"
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The user address that the transaction records are tied to. Accepts either address or ENS.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "Specify NFT address to filter for in the NFT transfer records.",
+                    "default": ""
+                },
+                {
+                    "name": "direction",
+                    "type": "STRING",
+                    "description": "Filter transactions based on whether they were sent or received.",
+                    "default": "both"
+                },
+                {
+                    "name": "sortByDate",
+                    "type": "STRING",
+                    "description": "Specify whether to sort NFT transfers chronologically or reverse-chronologically (asc/desc).",
+                    "default": "desc"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of NFT transfer records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The cursor returned in the previous response (used to getting the next page).",
+                    "default": ""
+                },
+                {
+                    "name": "nftId",
+                    "type": "STRING",
+                    "description": "Specify NFT ID to filter for in the NFT transfer records.",
+                    "default": ""
+                },
+                {
+                    "name": "interactingWith",
+                    "type": "STRING",
+                    "description": "Specifies the wallet or contract address of the second-party involved in the NFT transfer.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transfer/{walletAddress}/nft\"\nquerystring = {\"nftAddress\": \"\", \"direction\": \"both\", \"chainId\": \"1\", \"sortByDate\": \"desc\", \"walletAddress\": \"\", \"limit\": \"100\", \"offset\": \"0\", \"cursor\": \"\", \"nftId\": \"\", \"interactingWith\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transfer/{walletAddress}/nft\"\nquerystring = {\"nftAddress\": \"\", \"direction\": \"both\", \"chainId\": \"1\", \"sortByDate\": \"desc\", \"walletAddress\": \"\", \"limit\": \"100\", \"offset\": \"0\", \"cursor\": \"\", \"nftId\": \"\", \"interactingWith\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "walletAddress": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "cursor": {
+                        "type": "string"
+                    },
+                    "transfers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "walletAddress",
+                    "count",
+                    "total",
+                    "cursor",
+                    "transfers"
+                ]
+            }
+        },
+        {
+            "name": "Get User Collections",
+            "url": "https://uniblock1.p.rapidapi.com/nft/{walletAddress}/collections",
+            "description": "Gets all NFT collections of a specific user.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Enter the chain ID of the specific NFT to query.",
+                    "default": "1"
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The wallet address of the user whose NFT balances are being retrieved. Accepts either address or ENS.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "Enter the address of the NFT collection.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of NFT balance records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/{walletAddress}/collections\"\nquerystring = {\"chainId\": \"1\", \"nftAddress\": \"\", \"limit\": \"100\", \"walletAddress\": \"\", \"offset\": \"0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/nft/{walletAddress}/collections\"\nquerystring = {\"chainId\": \"1\", \"nftAddress\": \"\", \"limit\": \"100\", \"walletAddress\": \"\", \"offset\": \"0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Token Transfers For User",
+            "url": "https://uniblock1.p.rapidapi.com/transfer/{walletAddress}/tokens",
+            "description": "Gets token transfer records for a specified user.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to filter through token transfer records.",
+                    "default": "1"
+                },
+                {
+                    "name": "walletAddress",
+                    "type": "STRING",
+                    "description": "The user address that the transaction records are tied to. Accepts either address or ENS.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "direction",
+                    "type": "STRING",
+                    "description": "Filter transactions based on whether they were sent or received.",
+                    "default": "both"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The cursor returned in the previous response (used to getting the next page).",
+                    "default": ""
+                },
+                {
+                    "name": "interactingWith",
+                    "type": "STRING",
+                    "description": "Specifies the wallet or contract address of the second-party involved in the token transfer.",
+                    "default": ""
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "sortByDate",
+                    "type": "STRING",
+                    "description": "Specify whether to sort token transfers chronologically or reverse-chronologically (asc/desc).",
+                    "default": "desc"
+                },
+                {
+                    "name": "tokenAddress",
+                    "type": "STRING",
+                    "description": "Specify token address to filter for in the token transfer records.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of token transfer records to return.",
+                    "default": "100"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transfer/{walletAddress}/tokens\"\nquerystring = {\"direction\": \"both\", \"chainId\": \"1\", \"cursor\": \"\", \"walletAddress\": \"\", \"interactingWith\": \"\", \"offset\": \"0\", \"sortByDate\": \"desc\", \"tokenAddress\": \"\", \"limit\": \"100\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transfer/{walletAddress}/tokens\"\nquerystring = {\"direction\": \"both\", \"chainId\": \"1\", \"cursor\": \"\", \"walletAddress\": \"\", \"interactingWith\": \"\", \"offset\": \"0\", \"sortByDate\": \"desc\", \"tokenAddress\": \"\", \"limit\": \"100\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "walletAddress": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "cursor": {
+                        "type": "string"
+                    },
+                    "transfers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "walletAddress",
+                    "count",
+                    "total",
+                    "cursor",
+                    "transfers"
+                ]
+            }
+        },
+        {
+            "name": "Get NFT Transfers For NFT Collection",
+            "url": "https://uniblock1.p.rapidapi.com/transfer/{nftAddress}",
+            "description": "Gets NFT transfer records for a specified NFT collection inclusive of token ID and addresses involved.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "nftAddress",
+                    "type": "STRING",
+                    "description": "The contract address that the transaction records are tied to.",
+                    "default": ""
+                },
+                {
+                    "name": "chainId",
+                    "type": "NUMBER",
+                    "description": "Network to filter through NFT transfer records.",
+                    "default": "1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "The maximum number of NFT transfer records to return.",
+                    "default": "100"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of records to skip in the query.",
+                    "default": "0"
+                },
+                {
+                    "name": "cursor",
+                    "type": "STRING",
+                    "description": "The cursor returned in the previous response (used to getting the next page).",
+                    "default": ""
+                },
+                {
+                    "name": "sortByDate",
+                    "type": "STRING",
+                    "description": "Specify whether to sort NFT transfers chronologically or reverse-chronologically (asc/desc).",
+                    "default": "desc"
+                },
+                {
+                    "name": "nftId",
+                    "type": "STRING",
+                    "description": "Specify NFT ID to filter for in the NFT transfer records.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transfer/{nftAddress}\"\nquerystring = {\"limit\": \"100\", \"nftAddress\": \"\", \"offset\": \"0\", \"cursor\": \"\", \"sortByDate\": \"desc\", \"nftId\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://uniblock1.p.rapidapi.com/transfer/{nftAddress}\"\nquerystring = {\"limit\": \"100\", \"nftAddress\": \"\", \"offset\": \"0\", \"cursor\": \"\", \"sortByDate\": \"desc\", \"nftId\": \"\", \"chainId\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"uniblock1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "statusCode": 500,
+                "message": "Internal server error"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "contractAddress": {
+                        "type": "string"
+                    },
+                    "count": {
+                        "type": "number"
+                    },
+                    "total": {
+                        "type": "number"
+                    },
+                    "cursor": {
+                        "type": "string"
+                    },
+                    "transfers": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "required": [
+                    "contractAddress",
+                    "count",
+                    "total",
+                    "cursor",
+                    "transfers"
+                ]
+            }
+        }
+    ],
+    "standardized_name": "uniblock"
+}

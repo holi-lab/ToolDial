@@ -1,0 +1,153 @@
+{
+    "product_id": "api_e6227bc3-cd07-43fd-ba32-7c8a3f0f7650",
+    "tool_description": "Rest API that serves random, catagorized and filteres lighthearted familial insults/jokes",
+    "home_url": "https://rapidapi.com/TerryBrooksJr/api/the-dozen-the-yo-mamsa-roast-api/",
+    "name": "The Dozen - The Yo Mamsa Roast API",
+    "title": "The Dozen - The Yo Mamsa Roast API",
+    "pricing": "FREE",
+    "tool_name": "The Dozen - The Yo Mamsa Roast API",
+    "score": {
+        "avgServiceLevel": 98,
+        "avgLatency": 660,
+        "avgSuccessRate": 97,
+        "popularityScore": 9,
+        "__typename": "Score"
+    },
+    "host": "the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get All Jokes in a Single Category",
+            "url": "https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insults/{category}",
+            "description": "This endpoint will return all joke  in a catagory.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "category",
+                    "type": "string",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insults/{category}\"\nquerystring = {\"category\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insults/{category}\"\nquerystring = {\"category\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "All fat jokes": {
+                        "type": "object",
+                        "description": "A list of all the available jokes in catagory passed as in the slug of the endpoint"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get a Random, Categorized and/or Filter Joke",
+            "url": "https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult",
+            "description": "Allows for either randomize, categorized or filtered insults to be returned with or without metadata.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "explicit",
+                    "type": "STRING",
+                    "description": "Classification of the Joke to determine if it's content is considered explicit or otherwise NSFW.",
+                    "default": ""
+                },
+                {
+                    "name": "metadata",
+                    "type": "STRING",
+                    "description": "To get the entire Joke, including metadata <sub>(date added, contributor, catagory, content, etc.)</sub>, set this to true. Default is false.",
+                    "default": ""
+                },
+                {
+                    "name": "catagory",
+                    "type": "STRING",
+                    "description": "Jokes are catagorized based on content. To get a full list of categories, see the documentation for the `insult/categories` endpoint",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult\"\nquerystring = {\"explicit\": \"\", \"metadata\": \"\", \"catagory\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult\"\nquerystring = {\"explicit\": \"\", \"metadata\": \"\", \"catagory\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "_id": {
+                        "type": "number",
+                        "description": "A nested Object with a single nested key $oid a string representation of the MongoDB ObjectID."
+                    },
+                    "explicit": {
+                        "type": "boolean",
+                        "description": "Classification of the Joke to determine if it's content is considered explicit or otherwise NSFW. (Case Insensitive) <sub>If you feel a joke needs to be reclassified, please report the joke and provide the id</sub> "
+                    },
+                    "catagory": {
+                        "type": "string",
+                        "description": "Each joke is assigned to a category based on content. To get a full list of categories, see the documentation for the insult/categories endpoint"
+                    },
+                    "content": {
+                        "type": "string",
+                        "description": "This the Content of the Joke"
+                    },
+                    "added_on": {
+                        "type": "string",
+                        "description": "String representation of the date the joke was logged to the API database. Format: YYYY-MM-DD. (Auto Set By Server)"
+                    },
+                    "added_by": {
+                        "type": "string",
+                        "description": "The Initials of the contributor and a unique identifier who added the joke to the API. (Registration Required - Planned Enhancement"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "The status of the Joke in the API. Valid Status include ['Active', 'Pending', 'Under Review', 'Deleted'] If a status is 'Deleted' please open and issue and provide the ID"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get Specific Insult",
+            "url": "https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult/{id}",
+            "description": "Allows for a specific insults to be returned with or without metadata.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "This is the UUID for a Specific Joke",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get All Joke Categories",
+            "url": "https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult/categories",
+            "description": "Returns a list of all joke categories, whose as values can be used as a path or query parameter in other endpoints.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult/categories\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com/insult/categories\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"the-dozen-the-yo-mamsa-roast-api.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "Available Joke Categories": {
+                        "type": "object",
+                        "description": "A list of all the available joke categories"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ],
+    "standardized_name": "the_dozen_the_yo_mamsa_roast_api"
+}

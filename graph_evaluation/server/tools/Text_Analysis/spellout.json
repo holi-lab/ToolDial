@@ -1,0 +1,140 @@
+{
+    "tool_name":"Spellout",
+    "tool_description":"This API allows converting numbers to spelled-out format in any language, e.g.: 1234 -> “one thousand two hundred thirty-four”.",
+    "title":"Spellout",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":141,
+        "avgSuccessRate":94,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/StaticAPI/api/spellout/",
+    "host":"spellout.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Languages",
+            "url":"https://spellout.p.rapidapi.com/v1/languages",
+            "description":"List ISO 639 languages",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"nameFilter",
+                    "type":"STRING",
+                    "description":"Filter as \"contains\" by language name",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://spellout.p.rapidapi.com/v1/languages\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"spellout.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "code":"fr",
+                "name":"French",
+                "nativeName":"français"
+            },
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "code":{
+                            "type":"string",
+                            "description":"2 letter ICO 639 language code"
+                        },
+                        "name":{
+                            "type":"string",
+                            "description":"Language name"
+                        },
+                        "nativeName":{
+                            "type":"string",
+                            "description":"Native language name"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"RuleSets",
+            "url":"https://spellout.p.rapidapi.com/v1/rulesets",
+            "description":"List of availible rule sets for given language",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"2 letter ICO 639 language code. Specifies language for which all availible rule sets will be provided. Use /v1/languages endpoint to list all supported languages.",
+                    "default":"en"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://spellout.p.rapidapi.com/v1/rulesets\"\nquerystring = {\"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"spellout.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "ruleset":"spellout-cardinal-verbose",
+                "sample":"one thousand two hundred and thirty-four"
+            },
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "ruleset":{
+                            "type":"string",
+                            "description":"Rule Set name"
+                        },
+                        "sample":{
+                            "type":"string",
+                            "description":"Spell out sample"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"SpellOut",
+            "url":"https://spellout.p.rapidapi.com/v1/spellout",
+            "description":"Spell out number in given language using provided rule set",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"data",
+                    "type":"NUMBER",
+                    "description":"Number to spell out",
+                    "default":123
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"2 letter ICO 639 language code. Specifies language in which number will be spelled out. Use /v1/languages endpoint to list all supported languages.",
+                    "default":"en"
+                },
+                {
+                    "name":"ruleset",
+                    "type":"STRING",
+                    "description":"Rule Set name. Specifiles rule set accoring to which number will be spelled out. Use /v1/rulesets to list all supported rule sets for any given language.",
+                    "default":"spellout-cardinal"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://spellout.p.rapidapi.com/v1/spellout\"\nquerystring = {\"data\": data, \"lang\": lang, \"ruleset\": ruleset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"spellout.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "spellout":"one thousand two hundred and thirty-four"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "spellout":{
+                        "type":"string",
+                        "description":"Spelled out number"
+                    }
+                }
+            }
+        }
+    ]
+}

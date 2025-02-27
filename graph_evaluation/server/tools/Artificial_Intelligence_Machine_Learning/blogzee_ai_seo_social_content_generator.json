@@ -1,0 +1,253 @@
+{
+    "tool_name":"Blogzee AI - SEO & Social Content Generator",
+    "tool_description":"Blogzee AI is an innovative SEO content generator API powered by advanced machine learning algorithms. It uses OpenAI's cutting-edge language model to produce high-quality, SEO-optimized blog post ideas and content based on the user-specified keywords. Blogzee AI is capable of generating engaging blog posts, incorporating HTML, emojis, and up to five keywords to enhance readability and search engine visibility. Perfect for bloggers, content marketers, and SEO professionals who need a quick bo...",
+    "title":"Blogzee AI - SEO & Social Content Generator",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":92,
+        "avgLatency":6582,
+        "avgSuccessRate":84,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/jaykshepherd92-H9RhOLV66A_/api/blogzee-ai-seo-social-content-generator/",
+    "host":"blogzee-ai-seo-social-content-generator.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Generate Youtube Video Description",
+            "url":"https://blogzee-ai-seo-social-content-generator.p.rapidapi.com/generate_youtube_video_description",
+            "description":"Endpoint: /generate_youtube_video_description\n\nMethod: GET\n\nSummary: This endpoint generates an SEO-optimized, keyword-rich description for a YouTube video. It also optionally includes social media links.\n\nParameters:\n\n    video_title (required): The title of the YouTube video.\n    include_emojis (required): A boolean indicating whether to include emojis in the video description.\n    keyword1 to keyword5 (required for keyword1 and keyword2, optional for keyword3 to keyword5): Keywords relevant to the video. A minimum of two keywords and a maximum of five can be specified. Each keyword should not exceed 30 characters.\n    facebook_link, twitter_link, instagram_link, linkedin_link, tiktok_link (all optional): Valid URLs pointing to respective social media profiles.\n\nResponse: The response is a YouTubeDescriptionResponse model that includes the video title, video description (which includes the social media links if provided), a boolean indicating if emojis were included, and a list of the provided keywords.\n\nUse Case: Use this endpoint when you need to generate a unique, keyword-rich description for a YouTube video. This can be particularly useful for SEO and improving the visibility of your video in YouTube search results. Also, by providing social media links, you can direct your audience to your other platforms, enhancing your overall online presence.\n\nErrors:\n\n    400 Bad Request: Raised if the number of keywords is not between 2 and 5, or if a keyword exceeds 30 characters.\n    500 Internal Server Error: Raised for unknown API errors.\n    503 Service Unavailable: Raised if the OpenAI server is unavailable.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"keyword1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"unreal engine ai"
+                },
+                {
+                    "name":"keyword2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"npcs"
+                },
+                {
+                    "name":"include_emojis",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"True"
+                },
+                {
+                    "name":"video_title",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Telling NPCs they Live in a Simulation - Unreal Engine 5 AI NPCs"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"keyword5",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"facebook_link",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://www.facebook.com/"
+                },
+                {
+                    "name":"linkedin_link",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://www.linkedin.com"
+                },
+                {
+                    "name":"tiktok_link",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://www.tiktok.com/en/"
+                },
+                {
+                    "name":"twitter_link",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://twitter.com/home?lang=en"
+                },
+                {
+                    "name":"instagram_link",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://www.instagram.com/"
+                },
+                {
+                    "name":"keyword4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"keyword3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://blogzee-ai-seo-social-content-generator.p.rapidapi.com/generate_youtube_video_description\"\nquerystring = {\"keyword1\": keyword1, \"facebook_link\": facebook_link, \"linkedin_link\": linkedin_link, \"keyword2\": keyword2, \"tiktok_link\": tiktok_link, \"twitter_link\": twitter_link, \"instagram_link\": instagram_link, \"include_emojis\": include_emojis, \"video_title\": video_title}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blogzee-ai-seo-social-content-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Generate Blog Post",
+            "url":"https://blogzee-ai-seo-social-content-generator.p.rapidapi.com/generate_blog_post",
+            "description":"This is the /generate_blog_post endpoint for the Blogzee AI service, designed to generate a complete blog post based on user-provided input parameters.\n\nEndpoint Structure:\n\n    Method: GET\n    Route: /generate_blog_post\n    Response Model: BlogPostResponse\n\nFunctionality:\nThis endpoint accepts a blog post title, a list of keywords (minimum of 2, maximum of 5), and two boolean flags (include_html, include_emojis) as parameters. It uses these inputs to generate a complete blog post using the underlying AI model.\n\nInput Validation:\nThe endpoint expects the keywords to be a list with a minimum length of 2 and a maximum length of 5, with each keyword being no longer than 30 characters. If these conditions are not met, an error is thrown.\n\nError Handling:\nThe endpoint has a mechanism to handle potential API errors from OpenAI's language model. If there is a \"Request failed due to server shutdown\" error, it responds with an HTTP 503 status code and a \"Service Unavailable: API server shutdown\" message. For other unknown errors, it returns an HTTP 500 status code with a \"Internal Server Error: Unknown API error\" message.\n\nOutput Formatting:\nIf the 'include_html' flag is set, it converts new lines in the generated blog post to HTML break tags for better web display.\n\nOutput:\nThis endpoint returns a BlogPostResponse, which includes the blog post title, the generated blog post content, and the values of include_html and include_emojis flags, and the keywords used for generation.\n\nOverall, this endpoint provides a way for users to generate complete blog posts tailored to specific titles and keywords, significantly accelerating the content creation process with the help of AI.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"include_html",
+                    "type":"BOOLEAN",
+                    "description":"",
+                    "default":"true"
+                },
+                {
+                    "name":"title",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Living in London on a Budget"
+                },
+                {
+                    "name":"keyword1",
+                    "type":"STRING",
+                    "description":"First keyword, max 30 characters",
+                    "default":"student"
+                },
+                {
+                    "name":"keyword2",
+                    "type":"STRING",
+                    "description":"Second keyword, max 30 characters",
+                    "default":"save money"
+                },
+                {
+                    "name":"include_emojis",
+                    "type":"BOOLEAN",
+                    "description":"",
+                    "default":"true"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"keyword3",
+                    "type":"STRING",
+                    "description":"Optional third keyword, max 30 characters",
+                    "default":""
+                },
+                {
+                    "name":"keyword5",
+                    "type":"STRING",
+                    "description":"Optional fifth keyword, max 30 characters",
+                    "default":""
+                },
+                {
+                    "name":"keyword4",
+                    "type":"STRING",
+                    "description":"Optional fourth keyword, max 30 characters",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://blogzee-ai-seo-social-content-generator.p.rapidapi.com/generate_blog_post\"\nquerystring = {\"include_html\": include_html, \"title\": title, \"keyword1\": keyword1, \"keyword2\": keyword2, \"include_emojis\": include_emojis}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blogzee-ai-seo-social-content-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "title":"",
+                "blog_post":"",
+                "include_html":true,
+                "include_emojis":true,
+                "keywords":[]
+            },
+            "headers":{},
+            "schema":{
+                "title":"BlogPostResponse",
+                "required":[
+                    "title",
+                    "blog_post",
+                    "include_html",
+                    "include_emojis",
+                    "keywords"
+                ],
+                "type":"object",
+                "properties":{
+                    "title":{
+                        "title":"Title",
+                        "type":"string"
+                    },
+                    "blog_post":{
+                        "title":"Blog Post",
+                        "type":"string"
+                    },
+                    "include_html":{
+                        "title":"Include Html",
+                        "type":"boolean"
+                    },
+                    "include_emojis":{
+                        "title":"Include Emojis",
+                        "type":"boolean"
+                    },
+                    "keywords":{
+                        "title":"Keywords",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Generate Blog Post Ideas",
+            "url":"https://blogzee-ai-seo-social-content-generator.p.rapidapi.com/generate_blog_ideas",
+            "description":"This is the /generate_blog_ideas endpoint for the Blogzee AI service, designed to generate blog post ideas based on user-provided keywords.\n\nEndpoint Structure:\n\n    Method: GET\n    Route: /generate_blog_ideas\n    Response Model: BlogIdeasResponse\n\nFunctionality:\nThis endpoint accepts a list of keywords (minimum of 2, maximum of 5), each with a maximum length of 30 characters. The keywords are used to generate blog post ideas using the underlying AI model.\n\nInput Validation:\nThe endpoint validates the input parameters to ensure they are within the expected range and character limits. If the validation fails, it returns an HTTP 400 status code with an appropriate error message.\n\nError Handling:\nThe endpoint handles potential API errors from OpenAI's language model, specifically the \"Request failed due to server shutdown\" error. In this case, it returns an HTTP 503 status code with the detail \"OpenAI API is currently unavailable\". If an unknown error occurs, it returns an HTTP 500 status code.\n\nOutput:\nThis endpoint returns a BlogIdeasResponse, which is a list of blog post ideas generated based on the input keywords.\n\nOverall, this endpoint provides a way for users to leverage AI to generate creative blog post ideas tailored to specific keywords, helping to streamline the content creation process.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"keyword1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"living in london"
+                },
+                {
+                    "name":"keyword2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"budget"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"keyword5",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"keyword4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"keyword3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"student"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://blogzee-ai-seo-social-content-generator.p.rapidapi.com/generate_blog_ideas\"\nquerystring = {\"keyword3\": keyword3, \"keyword1\": keyword1, \"keyword2\": keyword2}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"blogzee-ai-seo-social-content-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

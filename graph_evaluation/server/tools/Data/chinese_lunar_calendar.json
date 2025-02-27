@@ -1,0 +1,78 @@
+{
+    "tool_name":"Chinese Lunar Calendar",
+    "tool_description":"Convert a date in western calendar(Gregorian calendar, solar calendar) into a Chinese lunar calendar date for any dates from 1900-01-01 to 2100-12-31. Also returns its sexagenary cycle, a.k.a. Gan Zi, solar term, a.k.a. Jie Qi, zodiac sign, and Chinese zodiac sign.  The result will be in Chinese (Traditional or Simplified), and English translation for some of those properties.  ",
+    "title":"Chinese Lunar Calendar",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":780,
+        "avgSuccessRate":100,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/copy2sim/api/chinese-lunar-calendar/",
+    "host":"chinese-lunar-calendar.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"getchineselunarcalendar",
+            "url":"https://chinese-lunar-calendar.p.rapidapi.com/",
+            "description":"Convert a solar calendar date into its corresponding Chinese lunar calendar date",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"A date in western calendar(Gregorian calendar), in a format of YYYYMMDD. For example, 20230325.",
+                    "default":"20230124"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"timezone",
+                    "type":"STRING",
+                    "description":"The timezone of the date parameter. It only impacts the result of solar term. All other properties are all based on the solar date, regardless whichever time zone it is.\n\nThe default value is 480 , which stands for the Shanghai/Singapore/Hong Kong/Taibei timezone (UTC+8:00). \n\nHow to set the timezone value? It is how many minutes it deviates from UTC+0:00. Suppose your timezone is UTC+5:30, so the value of the timezone parameter is 5 * 60 + 30 = 330.",
+                    "default":"480"
+                },
+                {
+                    "name":"simplified",
+                    "type":"STRING",
+                    "description":"Indicate whether the returned results should be in Simplified Chinese which people in mainland China use, or Traditional Chinese which HK and Taiwan people use.\n\nThe default value is 1. 1 stand for Simplified Chinese, 0 stands for Traditional Chinese.\n",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://chinese-lunar-calendar.p.rapidapi.com/\"\nquerystring = {\"timezone\": timezone, \"simplified\": simplified, \"date\": date}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"chinese-lunar-calendar.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "status":"string",
+                "msg":"string",
+                "result":{
+                    "solarDate":{
+                        "solarDay":"number",
+                        "solarMonth":"number",
+                        "solarYear":"number"
+                    },
+                    "lunarDate":{
+                        "isleap":"number",
+                        "lunarDay":"number",
+                        "lunarMonth":"number",
+                        "lunarYear":"number"
+                    },
+                    "lunarDateinChinese":"string",
+                    "sexagenaryCycle":"string",
+                    "solarTerm":"string",
+                    "solarTerminEnglish":"string",
+                    "festival":"string",
+                    "chineseZodiacSign":"string",
+                    "chineseZodiacSigninEnglish":"string",
+                    "westernZodiacSign":"string",
+                    "westernZodiacSigninEnglish":"string"
+                }
+            }
+        }
+    ]
+}

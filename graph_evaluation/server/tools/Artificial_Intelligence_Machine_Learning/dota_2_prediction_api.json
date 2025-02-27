@@ -1,0 +1,24 @@
+{
+    "product_id": "api_57963add-4f0d-4bc8-b53d-43134438a3ca",
+    "tool_description": "This is an API application that uses machine learning to predict the outcome of a game in the Dota 2 video game. It receives the heroes picked by each team and uses a logistic regression model to predict which team will win. ",
+    "home_url": "https://rapidapi.com/fer.sl.24/api/dota-2-prediction-api/",
+    "name": "Dota 2 Prediction API",
+    "title": "Dota 2 Prediction API",
+    "pricing": "FREEMIUM",
+    "tool_name": "Dota 2 Prediction API",
+    "score": null,
+    "host": "dota-2-prediction-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/predict",
+            "url": "https://dota-2-prediction-api.p.rapidapi.com/predict",
+            "description": "This endpoint allows you to get the predicted outcome of a Dota 2 match based on the heroes picked by each team. The predicted outcome is a binary classification result indicating whether the Radiant team will win or lose.\n\nRequest Body\nThe request body must be a JSON object with the following keys:\n\nRadiant: An object containing the Radiant team's hero picks. The object must have keys hero1, hero2, hero3, hero4, and hero5, and the values must be strings representing the names of the heroes.\nDire: An object containing the Dire team's hero picks. The object must have keys hero1, hero2, hero3, hero4, and hero5, and the values must be strings representing the names of the heroes.\n\nExample request body:\n{\n  \"Radiant\": {\n    \"hero1\": \"Anti-Mage\",\n    \"hero2\": \"Puck\",\n    \"hero3\": \"Lion\",\n    \"hero4\": \"Sand King\",\n    \"hero5\": \"Chaos Knight\"\n  },\n  \"Dire\": {\n    \"hero1\": \"Drow Ranger\",\n    \"hero2\": \"Necrophos\",\n    \"hero3\": \"Tidehunter\",\n    \"hero4\": \"Phantom Assassin\",\n    \"hero5\": \"Witch Doctor\"\n  }\n}\n\nResponse\nIf the request is successful, the API will respond with a JSON object containing the following keys:\n\nprediction: A string indicating the predicted outcome of the match. Possible values are \"Radiant Win\" or \"Dire Win\".\nprobability: A list of two floats indicating the probability of each possible outcome. The first element of the list represents the probability of the Radiant team winning, and the second element represents the probability of the Dire team winning.\n\nExample response:\n{\n  \"prediction\": \"Radiant Win\",\n  \"probability\": [0.7494555379129427, 0.25054446208705734]\n}\n\nErrors\nIf the request body is invalid, or if there is an error during the prediction process, the API will respond with an error message in the following format:\n\n{\n  \"error\": \"Error message\"\n}\n\nPossible error messages are:\n\n\"The request must include Radiant and Dire heroes\": The request body is missing either the Radiant or Dire key, or both.\n\"Invalid hero name\": One or more of the hero names in the request body are not valid Dota 2 hero names.\n\"Hero is repeated in same or both teams\": One or more of the hero names in the request body are repeated in the same team or in both teams.\n\"Heroes cannot repeat, try again with unique heroes\": One or more of the hero names in the request body are repeated more than once in both teams.\n\"Error during prediction: Error message\": There was an error during the prediction process. The error message will provide more information about the specific error.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://dota-2-prediction-api.p.rapidapi.com/predict\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dota-2-prediction-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://dota-2-prediction-api.p.rapidapi.com/predict\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dota-2-prediction-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

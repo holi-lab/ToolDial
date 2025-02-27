@@ -1,0 +1,462 @@
+{
+    "tool_name":"Real-Time Amazon Data",
+    "tool_description":"Fast and Simple product searches, data and reviews on Amazon.com in real-time.",
+    "title":"Real-Time Amazon Data",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":90,
+        "avgLatency":2458,
+        "avgSuccessRate":90,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/letscrape-6bRBa3QguO5/api/real-time-amazon-data/",
+    "host":"real-time-amazon-data.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Search",
+            "url":"https://real-time-amazon-data.p.rapidapi.com/search",
+            "description":"Search for product offers on Amazon with support for multiple filters and options.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Search query. Supports both free-form text queries or a product asin.",
+                    "default":"Phone"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"Find products with a specific brand. Multiple brands can be specified as a comma (,) separated list. The brand values can be seen from Amazon's search left filters panel, as seen [here](https://www.amazon.com/s?k=phone).\n\n**e.g.** `SAMSUNG`\n**e.g.** `Google,Apple`",
+                    "default":""
+                },
+                {
+                    "name":"min_price",
+                    "type":"NUMBER",
+                    "description":"Only return product offers with price greater than a certain value. Specified in the currency of the selected country. For example, in case country=US, a value of *105.34* means *$105.34*.",
+                    "default":""
+                },
+                {
+                    "name":"max_price",
+                    "type":"NUMBER",
+                    "description":"Only return product offers with price lower than a certain value. Specified in the currency of the selected country. For example, in case country=US, a value of *105.34* means *$105.34*.",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Sets the marketplace country, language and currency. \n\n**Default:** `US`\n\n**Allowed values:**  `US, AU, BR, CA, CN, FR, DE, IN, IT, MX, NL, SG, ES, TR, AE, GB, JP`\n",
+                    "default":"US"
+                },
+                {
+                    "name":"category_id",
+                    "type":"STRING",
+                    "description":"Find products in a specific category / department. Use the **Product Category List** endpoint to get a list of valid categories and their ids for the country specified in the request.\n\n**Default:** `aps` (All Departments)",
+                    "default":"aps"
+                },
+                {
+                    "name":"sort_by",
+                    "type":"ENUM",
+                    "description":"Return the results in a specific sort order.\n\n**Default:** `RELEVANCE`\n\n**Allowed values:** `RELEVANCE, LOWEST_PRICE, HIGHEST_PRICE, REVIEWS, NEWEST`\n",
+                    "default":""
+                },
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"Results page to return.\n\n**Default:** `1`",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-time-amazon-data.p.rapidapi.com/search\"\nquerystring = {\"country\": country, \"query\": query, \"category_id\": category_id, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-time-amazon-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "total_products":{
+                                "type":"integer"
+                            },
+                            "country":{
+                                "type":"string"
+                            },
+                            "products":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Product Details",
+            "url":"https://real-time-amazon-data.p.rapidapi.com/product-details",
+            "description":"Get additional product information / details such as description, about, rating distribution and specs.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"asin",
+                    "type":"STRING",
+                    "description":"Product ASIN for which to get details. Supports batching of up to 10 ASINs in a single request, separated by comma (e.g. *B08PPDJWC8,B07ZPKBL9V, B08BHXG144*).\n\nNote that each ASIN in a batch request is counted as a single request against the plan quota.",
+                    "default":"B07ZPKBL9V"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Sets the marketplace country, language and currency. \n\n**Default:** `US`\n\n**Allowed values:**  `US, AU, BR, CA, CN, FR, DE, IN, IT, MX, NL, SG, ES, TR, AE, GB, JP`\n",
+                    "default":"US"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-time-amazon-data.p.rapidapi.com/product-details\"\nquerystring = {\"country\": country, \"asin\": asin}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-time-amazon-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "asin":{
+                                "type":"string"
+                            },
+                            "country":{
+                                "type":"string"
+                            },
+                            "about_product":{
+                                "type":"array",
+                                "items":{
+                                    "type":"string"
+                                }
+                            },
+                            "product_description":{
+                                "type":"string"
+                            },
+                            "product_information":{
+                                "type":"object",
+                                "properties":{
+                                    "Product Dimensions":{
+                                        "type":"string"
+                                    },
+                                    "Item Weight":{
+                                        "type":"string"
+                                    },
+                                    "ASIN":{
+                                        "type":"string"
+                                    },
+                                    "Item model number":{
+                                        "type":"string"
+                                    },
+                                    "Batteries":{
+                                        "type":"string"
+                                    },
+                                    "OS":{
+                                        "type":"string"
+                                    },
+                                    "Wireless communication technologies":{
+                                        "type":"string"
+                                    },
+                                    "Connectivity technologies":{
+                                        "type":"string"
+                                    },
+                                    "Other display features":{
+                                        "type":"string"
+                                    },
+                                    "Human Interface Input":{
+                                        "type":"string"
+                                    },
+                                    "Other camera features":{
+                                        "type":"string"
+                                    },
+                                    "Form Factor":{
+                                        "type":"string"
+                                    },
+                                    "Color":{
+                                        "type":"string"
+                                    },
+                                    "Battery Power Rating":{
+                                        "type":"string"
+                                    },
+                                    "Whats in the box":{
+                                        "type":"string"
+                                    },
+                                    "Manufacturer":{
+                                        "type":"string"
+                                    },
+                                    "Date First Available":{
+                                        "type":"string"
+                                    },
+                                    "Memory Storage Capacity":{
+                                        "type":"string"
+                                    },
+                                    "Standing screen display size":{
+                                        "type":"string"
+                                    },
+                                    "Ram Memory Installed Size":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Product Reviews",
+            "url":"https://real-time-amazon-data.p.rapidapi.com/product-reviews",
+            "description":"Get and paginate through all product reviews on Amazon.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"asin",
+                    "type":"STRING",
+                    "description":"Product asin for which to get reviews.",
+                    "default":"B07ZPKN6YR"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Find reviews matching a search query.",
+                    "default":""
+                },
+                {
+                    "name":"sort_by",
+                    "type":"ENUM",
+                    "description":"Return reviews in a specific sort order.\n\n**Default:** `TOP_REVIEWS`\n\n**Allowed values:** `TOP_REVIEWS, MOST_RECENT`\n",
+                    "default":""
+                },
+                {
+                    "name":"verified_purchases_only",
+                    "type":"BOOLEAN",
+                    "description":"Only return reviews by reviewers who made a verified purchase.",
+                    "default":"false"
+                },
+                {
+                    "name":"page_size",
+                    "type":"NUMBER",
+                    "description":"Results page size.\n\n**Allowed values:** `1-20`\n\n**Default:** `10`",
+                    "default":"10"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"Results page to return.\n\n**Default:** `1`",
+                    "default":"1"
+                },
+                {
+                    "name":"star_rating",
+                    "type":"ENUM",
+                    "description":"Only return reviews with a specific star rating.\n\n**Default:** `ALL`\n\n**Allowed values:** `ALL, 5_STARS, 4_STARS, 3_STARS, 2_STARS, 1_STARS, POSITIVE, CRITICAL`\n",
+                    "default":""
+                },
+                {
+                    "name":"images_or_videos_only",
+                    "type":"BOOLEAN",
+                    "description":"Only return reviews containing images and / or videos.",
+                    "default":"false"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Sets the marketplace country, language and currency. \n\n**Default:** `US`\n\n**Allowed values:**  `US, AU, BR, CA, CN, FR, DE, IN, IT, MX, NL, SG, ES, TR, AE, GB, JP`\n",
+                    "default":"US"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-time-amazon-data.p.rapidapi.com/product-reviews\"\nquerystring = {\"asin\": asin, \"verified_purchases_only\": verified_purchases_only, \"page_size\": page_size, \"page\": page, \"images_or_videos_only\": images_or_videos_only, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-time-amazon-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "asin":{
+                                "type":"string"
+                            },
+                            "total_reviews":{
+                                "type":"integer"
+                            },
+                            "total_ratings":{
+                                "type":"integer"
+                            },
+                            "country":{
+                                "type":"string"
+                            },
+                            "reviews":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Product Category List",
+            "url":"https://real-time-amazon-data.p.rapidapi.com/product-category-list",
+            "description":"Get Amazon product categories (per country / marketplace).",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Sets the marketplace country, language and currency. \n\n**Default:** `US`\n\n**Allowed values:**  `US, AU, BR, CA, CN, FR, DE, IN, IT, MX, NL, SG, ES, TR, AE, GB, JP`\n",
+                    "default":"US"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-time-amazon-data.p.rapidapi.com/product-category-list\"\nquerystring = {\"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-time-amazon-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string"
+                                },
+                                "name":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Product Offers",
+            "url":"https://real-time-amazon-data.p.rapidapi.com/product-offers",
+            "description":"Get top 10 offers of a specific product on Amazon by its asin, the first offer in the list is the pinned offer returned by the **Search** endpoint. Supports filtering by product condition.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"asin",
+                    "type":"STRING",
+                    "description":"Product ASIN for which to get offers. Supports batching of up to 10 ASINs in a single request, separated by comma (e.g. *B08PPDJWC8,B07ZPKBL9V, B08BHXG144*).\n\nNote that each ASIN in a batch request is counted as a single request against the plan quota.",
+                    "default":"B07ZPKBL9V"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"delivery",
+                    "type":"STRING",
+                    "description":"[EXPERIMENTAL]\nFind products with specific delivery option, specified as a comma delimited list of the following values: `PRIME_ELIGIBLE,FREE_DELIVERY`.\n\n**e.g.** `FREE_DELIVERY`\n**e.g.** `PRIME_ELIGIBLE,FREE_DELIVERY`\n",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Maximum number of offers to return.\n\n**Default:** `100`",
+                    "default":"100"
+                },
+                {
+                    "name":"product_condition",
+                    "type":"STRING",
+                    "description":"Find products in specific conditions, specified as a comma delimited list of the following values: `NEW, USED_LIKE_NEW, USED_VERY_GOOD, USED_GOOD, USED_ACCEPTABLE`.\n\n**e.g.** `NEW,USED_LIKE_NEW`\n**e.g.** `USED_VERY_GOOD,USED_GOOD,USED_LIKE_NEW`\n",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Sets the marketplace country, language and currency. \n\n**Default:** `US`\n\n**Allowed values:**  `US, AU, BR, CA, CN, FR, DE, IN, IT, MX, NL, SG, ES, TR, AE, GB, JP`\n",
+                    "default":"US"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-time-amazon-data.p.rapidapi.com/product-offers\"\nquerystring = {\"limit\": limit, \"asin\": asin, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-time-amazon-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "asin":{
+                                "type":"string"
+                            },
+                            "country":{
+                                "type":"string"
+                            },
+                            "product_offers":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

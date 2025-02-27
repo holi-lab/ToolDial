@@ -1,0 +1,481 @@
+{
+    "product_id": "53aa3291e4b008bb2ef84f7d",
+    "tool_description": "An easy to use Face Detection and Recognition API. Detect faces at various angle, determine gender, check if the person is smiling or wears glasses (maybe sunglasses) with a single API call. You must have an application created in your account at SkyBiometry to use it (sign up at https://www.skybiometry.com/Account/Register if you don't have account yet).",
+    "home_url": "https://rapidapi.com/skybiometry/api/skybiometry-face-detection-and-recognition/",
+    "name": "SkyBiometry Face Detection and Recognition",
+    "title": "SkyBiometry Face Detection and Recognition",
+    "pricing": "FREE",
+    "tool_name": "SkyBiometry Face Detection and Recognition",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1379,
+        "avgSuccessRate": 51,
+        "popularityScore": 9,
+        "__typename": "Score"
+    },
+    "host": "face.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Account/Users",
+            "url": "https://face.p.rapidapi.com/account/users",
+            "description": "Returns tags that were registered in the specified user data namespace. Tags are added to namespaces by calling tags/save method.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "namespaces",
+                    "type": "STRING",
+                    "description": "A comma separated list of one or more data namespaces.",
+                    "default": "MyNamespace"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/users\"\nquerystring = {\"namespaces\": \"MyNamespace\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/users\"\nquerystring = {\"namespaces\": \"MyNamespace\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Account/Namespaces",
+            "url": "https://face.p.rapidapi.com/account/namespaces",
+            "description": "Returns all valid data namespaces for user authorized by specified api_key.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/namespaces\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/namespaces\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Faces/Group",
+            "url": "https://face.p.rapidapi.com/faces/group",
+            "description": "Method can be used to detect, group and optionally recognize one or more user faces in one or more photos. faces/group method tries to match all the faces that were found in the images specified by urls or through POST one to other, then assigns a group ID for all detected faces that appear to be of the same person. If user ids are specified when calling this methods, method also attempts to assign the most likely user id for each detected face/group of faces.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uids",
+                    "type": "STRING",
+                    "description": "A comma separated list of user ids to search for.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "urls",
+                    "type": "STRING",
+                    "description": "A comma separated list of images. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": "http://tinyurl.com/673cksr"
+                },
+                {
+                    "name": "namespace",
+                    "type": "STRING",
+                    "description": "Default data namespace to be used for all specified uids without data namespace specified.",
+                    "default": "MyNamespace"
+                },
+                {
+                    "name": "detector",
+                    "type": "STRING",
+                    "description": "Face detection quality attribute. Normal (default) \u2013 fast face and attribute detection, Aggressive \u2013 more accurate and slower face and attribute detection.",
+                    "default": "Aggressive"
+                },
+                {
+                    "name": "attributes",
+                    "type": "STRING",
+                    "description": "Specifies which attributes will be returned with the results. Accepted values: all, none or a comma separated list of supported attributes (currently supported attributes are gender, glasses and smiling, with more to be added in the future). face attribute is the default and is always returned regardless of the specified attributes. dark_glasses attribute is returned additionally when glasses is requested to differentiate between dark and clear glasses.",
+                    "default": "all"
+                },
+                {
+                    "name": "files",
+                    "type": "BINARY",
+                    "description": "A set of binary image files. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": ""
+                },
+                {
+                    "name": "threshold",
+                    "type": "NUMBER",
+                    "description": "Specifies threshold used for tags comparison (minimal confidence value) and splitting faces to groups as a percentage from 0 to 100. Default value is 60.",
+                    "default": "30"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/group\"\nquerystring = {\"uids\": \"all\", \"urls\": \"http://tinyurl.com/673cksr\", \"namespace\": \"MyNamespace\", \"detector\": \"Aggressive\", \"attributes\": \"all\", \"files\": \"\", \"threshold\": \"30\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/group\"\nquerystring = {\"uids\": \"all\", \"urls\": \"http://tinyurl.com/673cksr\", \"namespace\": \"MyNamespace\", \"detector\": \"Aggressive\", \"attributes\": \"all\", \"files\": \"\", \"threshold\": \"30\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Faces/Recognize",
+            "url": "https://face.p.rapidapi.com/faces/recognize",
+            "description": "Method is used for recognizing trained user ids in one or more photos. For each detected face, method will return user ids that match specified face or empty result set if no matches found. Each tag also includes a threshold score, if matching score is below this threshold - matched user id can be treated as unlikely match.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uids",
+                    "type": "STRING",
+                    "description": "A comma separated list of user ids to search for.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "urls",
+                    "type": "STRING",
+                    "description": "A comma separated list of images. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": "http://tinyurl.com/673cksr"
+                },
+                {
+                    "name": "namespace",
+                    "type": "STRING",
+                    "description": "Default data namespace to be used for all specified uids without data namespace specified.",
+                    "default": "MyNamespace"
+                },
+                {
+                    "name": "detector",
+                    "type": "STRING",
+                    "description": "Face detection quality attribute. Normal (default) \u2013 fast face and attribute detection, Aggressive \u2013 more accurate and slower face and attribute detection.",
+                    "default": "Aggressive"
+                },
+                {
+                    "name": "attributes",
+                    "type": "STRING",
+                    "description": "Specifies which attributes will be returned with the results. Accepted values: all, none or a comma separated list of supported attributes (currently supported attributes are gender, glasses and smiling, with more to be added in the future). face attribute is the default and is always returned regardless of the specified attributes. dark_glasses attribute is returned additionally when glasses is requested to differentiate between dark and clear glasses.",
+                    "default": "all"
+                },
+                {
+                    "name": "files",
+                    "type": "BINARY",
+                    "description": "A set of binary image files. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Maximum number of results in candidates list.",
+                    "default": "64"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/recognize\"\nquerystring = {\"uids\": \"all\", \"urls\": \"http://tinyurl.com/673cksr\", \"namespace\": \"MyNamespace\", \"detector\": \"Aggressive\", \"attributes\": \"all\", \"files\": \"\", \"limit\": \"64\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/recognize\"\nquerystring = {\"uids\": \"all\", \"urls\": \"http://tinyurl.com/673cksr\", \"namespace\": \"MyNamespace\", \"detector\": \"Aggressive\", \"attributes\": \"all\", \"files\": \"\", \"limit\": \"64\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Account/Authenticate",
+            "url": "https://face.p.rapidapi.com/account/authenticate",
+            "description": "Returns authentication status. Method can be used to test connection and/or authentication to the API access point. It is not required to call this method before calling any other API methods.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/authenticate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/authenticate\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Account/Limits",
+            "url": "https://face.p.rapidapi.com/account/limits",
+            "description": "Returns authentication status. Method can be used to test connection and/or authentication to the API access point. It is not required to call this method before calling any other API methods.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/limits\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/account/limits\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Faces/Status",
+            "url": "https://face.p.rapidapi.com/faces/status",
+            "description": "Method can be used to get training status for specified user ids.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uids",
+                    "type": "STRING",
+                    "description": "A comma separated list of user ids to get training information for.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "namespace",
+                    "type": "STRING",
+                    "description": "Default data namespace to be used for all specified uids without data namespace specified.",
+                    "default": "MyNamespace"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/status\"\nquerystring = {\"uids\": \"all\", \"namespace\": \"MyNamespace\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/status\"\nquerystring = {\"uids\": \"all\", \"namespace\": \"MyNamespace\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Faces/Detect",
+            "url": "https://face.p.rapidapi.com/faces/detect",
+            "description": "Returns tags for detected faces in one or more photos, with geometric information of the tag, eyes, nose and mouth, as well as additional attributes such as gender.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "urls",
+                    "type": "STRING",
+                    "description": "A comma separated list of images. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": "http://tinyurl.com/673cksr"
+                },
+                {
+                    "name": "detector",
+                    "type": "STRING",
+                    "description": "Face detection quality attribute. Normal (default) \u2013 fast face and attribute detection, Aggressive \u2013 more accurate and slower face and attribute detection.",
+                    "default": "Aggressive"
+                },
+                {
+                    "name": "attributes",
+                    "type": "STRING",
+                    "description": "Specifies which attributes will be returned with the results. Accepted values: all, none or a comma separated list of supported attributes (currently supported attributes are gender, glasses and smiling, with more to be added in the future). face attribute is the default and is always returned regardless of the specified attributes. dark_glasses attribute is returned additionally when glasses is requested to differentiate between dark and clear glasses.",
+                    "default": "all"
+                },
+                {
+                    "name": "files",
+                    "type": "BINARY",
+                    "description": "A set of binary image files. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/detect\"\nquerystring = {\"urls\": \"http://tinyurl.com/673cksr\", \"detector\": \"Aggressive\", \"attributes\": \"all\", \"files\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/detect\"\nquerystring = {\"urls\": \"http://tinyurl.com/673cksr\", \"detector\": \"Aggressive\", \"attributes\": \"all\", \"files\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Faces/Train",
+            "url": "https://face.p.rapidapi.com/faces/train",
+            "description": "",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uids",
+                    "type": "STRING",
+                    "description": "comma separated list of user ids to begin training for.",
+                    "default": "all"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "namespace",
+                    "type": "STRING",
+                    "description": "Default data namespace to be used for all specified uids without data namespace specified.",
+                    "default": "MyNamespace"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/train\"\nquerystring = {\"uids\": \"all\", \"namespace\": \"MyNamespace\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/faces/train\"\nquerystring = {\"uids\": \"all\", \"namespace\": \"MyNamespace\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Tags/Add",
+            "url": "https://face.p.rapidapi.com/tags/add",
+            "description": "Allows to add face tags manually.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "x",
+                    "type": "NUMBER",
+                    "description": "Horizontal center position of the tag, as a percentage from 0 to 100, from the left of the photo.",
+                    "default": ""
+                },
+                {
+                    "name": "y",
+                    "type": "NUMBER",
+                    "description": "Vertical center position of the tag, as a percentage from 0 to 100, from the left of the photo.",
+                    "default": ""
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "Width of the tag, as a percentage from 0 to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "Height of the tag, as a percentage from 0 to 100.",
+                    "default": ""
+                },
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Id of the user being tagged.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Url to the image to add the tag to. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": ""
+                },
+                {
+                    "name": "label",
+                    "type": "STRING",
+                    "description": "Display name of the user being tagged (e.g. First and Last name).",
+                    "default": ""
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "Adding of the tag can be password protected if you want to make tags.add a administrative operation. You can specify password in account settings.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/add\"\nquerystring = {\"url\": \"\", \"x\": \"\", \"y\": \"\", \"width\": \"\", \"height\": \"\", \"uid\": \"\", \"label\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/add\"\nquerystring = {\"url\": \"\", \"x\": \"\", \"y\": \"\", \"width\": \"\", \"height\": \"\", \"uid\": \"\", \"label\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Tags/Get",
+            "url": "https://face.p.rapidapi.com/tags/get",
+            "description": "Allows to get already saved tags to data namespace. By specifying different parameters and criteria you can influence the returned tags.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "uids",
+                    "type": "STRING",
+                    "description": "A comma separated list of user ids to get tags for.",
+                    "default": "somebody@MyNamespace"
+                },
+                {
+                    "name": "pids",
+                    "type": "STRING",
+                    "description": "A comma separated list of photo ids to get tags for (photo ids are returned for faces/detect and faces/recognize).",
+                    "default": ""
+                },
+                {
+                    "name": "urls",
+                    "type": "STRING",
+                    "description": "A comma separated list of images to get tags for. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "STRING",
+                    "description": "Maximum tags to return. Default: 5.",
+                    "default": ""
+                },
+                {
+                    "name": "together",
+                    "type": "STRING",
+                    "description": "When multiple uids are provided, return only tags for photos where all uids appear together in the photo(s). Default: false.",
+                    "default": ""
+                },
+                {
+                    "name": "order",
+                    "type": "STRING",
+                    "description": "Specifies the order of returned tags (recent \u2013 for latest tags, random \u2013 random selected tags). Default: \"recent\".",
+                    "default": ""
+                },
+                {
+                    "name": "namespace",
+                    "type": "STRING",
+                    "description": "Default data namespace to be used for all specified uids without data namespace specified.",
+                    "default": ""
+                },
+                {
+                    "name": "filter",
+                    "type": "STRING",
+                    "description": "Ability to specify facial attributes for filtering the returned tags.",
+                    "default": ""
+                },
+                {
+                    "name": "files",
+                    "type": "BINARY",
+                    "description": "A set of binary image files. Accepted image formats: PNG, JPEG, BMP, JPEG2000.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/get\"\nquerystring = {\"uids\": \"somebody@MyNamespace\", \"pids\": \"\", \"urls\": \"\", \"limit\": \"\", \"together\": \"\", \"order\": \"\", \"namespace\": \"\", \"filter\": \"\", \"files\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/get\"\nquerystring = {\"uids\": \"somebody@MyNamespace\", \"pids\": \"\", \"urls\": \"\", \"limit\": \"\", \"together\": \"\", \"order\": \"\", \"namespace\": \"\", \"filter\": \"\", \"files\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Tags/Remove",
+            "url": "https://face.p.rapidapi.com/tags/remove",
+            "description": "Removes a previously saved tag using tags/save.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "tids",
+                    "type": "STRING",
+                    "description": "One or more tag ids to remove. Tag id is a reference field in the response of faces/detect, faces/recognize and tags/get methods.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "Removing of the tag can be password protected if you want to make tags.remove a administrative operation. You can specify password in account settings.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/remove\"\nquerystring = {\"tids\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/remove\"\nquerystring = {\"tids\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Tags/Save",
+            "url": "https://face.p.rapidapi.com/tags/save",
+            "description": "Saves a specified face tag to permanent storage. Once the face tag has been saved, you can call faces/train method, which will use the saved tag information to create face template for specified user id and will add it to specified data namespace. When completed you can start recognizing the specified user id (using faces/recognize method).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Id of the user being tagged (e.g. mark@docs, where mark \u2013 is the name of your choice and docs is the name of created data namespace).",
+                    "default": ""
+                },
+                {
+                    "name": "tids",
+                    "type": "STRING",
+                    "description": "One or more comma separated tag ids to associate with the specified uid. Tag id is a reference field in the response of faces/detect and faces/recognize methods.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "label",
+                    "type": "STRING",
+                    "description": "Display name of the user being tagged (e.g. First and Last name).",
+                    "default": ""
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "Saving of the tag can be password protected if you want to make tags.save a administrative operation. You can specify password in account settings.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/save\"\nquerystring = {\"uid\": \"\", \"tids\": \"\", \"label\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://face.p.rapidapi.com/tags/save\"\nquerystring = {\"uid\": \"\", \"tids\": \"\", \"label\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"face.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

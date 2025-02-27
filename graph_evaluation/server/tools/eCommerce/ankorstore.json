@@ -1,0 +1,2995 @@
+{
+    "product_id": "api_20993cd8-d13d-40e7-96f3-a4d93bbb2fb1",
+    "tool_description": "Process your Ankorstore orders and manage your catalog with the ankorstore API!",
+    "home_url": "https://rapidapi.com/tovasoft-tovasoft-default/api/ankorstore/",
+    "name": "Ankorstore",
+    "title": "Ankorstore",
+    "pricing": "FREEMIUM",
+    "tool_name": "Ankorstore",
+    "score": null,
+    "host": "ankorstore.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Register pickup",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/pickup",
+            "description": "Register pickup date and time after creating parcels when you ship via ankorstore carrier partners.\nThe pickup address id is the id of the pickup address you don't have to carry about this field if you have a single warehouse. Otherwise you can retrieve (and store) your addresses ids under the \"brand\" section of an order.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/pickup\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/pickup\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "OrderPayload",
+                "required": [
+                    "orders"
+                ],
+                "type": "object",
+                "properties": {
+                    "orders": {
+                        "title": "Order",
+                        "required": [
+                            "id",
+                            "created_at",
+                            "submitted_at",
+                            "updated_at",
+                            "status_details",
+                            "shipping_lead_time",
+                            "brand_net_amount",
+                            "invoices",
+                            "retailer",
+                            "brand",
+                            "items",
+                            "total_amount",
+                            "total_amount_vat",
+                            "total_amount_with_vat",
+                            "shipping_address",
+                            "billing_address"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "title": "Id",
+                                "type": "integer"
+                            },
+                            "created_at": {
+                                "title": "Created At",
+                                "type": "string"
+                            },
+                            "submitted_at": {
+                                "title": "Submitted At",
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "title": "Updated At",
+                                "type": "string"
+                            },
+                            "status_details": {
+                                "title": "OrderStatusDetails",
+                                "required": [
+                                    "key",
+                                    "title"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "title": "Key",
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "title": "Title",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_lead_time": {
+                                "title": "OrderShippingLeadTime",
+                                "required": [
+                                    "minimum_estimated_shipping_date",
+                                    "maximum_estimated_shipping_date"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "minimum_estimated_shipping_date": {
+                                        "title": "Minimum Estimated Shipping Date",
+                                        "type": "string"
+                                    },
+                                    "maximum_estimated_shipping_date": {
+                                        "title": "Maximum Estimated Shipping Date",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "brand_net_amount": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_method": {
+                                "title": "ShippingMethod",
+                                "enum": [
+                                    "label",
+                                    "custom"
+                                ],
+                                "type": "string",
+                                "description": "An enumeration."
+                            },
+                            "last_shipping_label_quote": {
+                                "title": "OrderShippingLabelQuote",
+                                "required": [
+                                    "parcels",
+                                    "rate_amount",
+                                    "rate_provider"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "parcels": {
+                                        "title": "Parcels",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "OrderShippingParcel",
+                                            "type": "object",
+                                            "properties": {
+                                                "length": {
+                                                    "title": "Length",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "width": {
+                                                    "title": "Width",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "height": {
+                                                    "title": "Height",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "weight": {
+                                                    "title": "Weight",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "distance_unit": {
+                                                    "title": "Distance Unit",
+                                                    "type": "string"
+                                                },
+                                                "mass_unit": {
+                                                    "title": "Mass Unit",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "rate_amount": {
+                                        "title": "Amount",
+                                        "required": [
+                                            "amount",
+                                            "currency"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "amount": {
+                                                "title": "Amount",
+                                                "type": "integer"
+                                            },
+                                            "currency": {
+                                                "title": "Currency",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "rate_provider": {
+                                        "title": "Rate Provider",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "tracking_link": {
+                                "title": "Tracking Link",
+                                "type": "string"
+                            },
+                            "shipping_label": {
+                                "title": "OrderShippingLabel",
+                                "type": "object",
+                                "properties": {
+                                    "tracking": {
+                                        "title": "OrderShippingLabelTracking",
+                                        "required": [
+                                            "tracking_number",
+                                            "tracking_link",
+                                            "current_status"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "tracking_number": {
+                                                "title": "Tracking Number",
+                                                "type": "string"
+                                            },
+                                            "tracking_link": {
+                                                "title": "Tracking Link",
+                                                "type": "string"
+                                            },
+                                            "current_status": {
+                                                "title": "OrderShippingLabelTrackingStatus",
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "title": "Status",
+                                                        "type": "string"
+                                                    },
+                                                    "status_details": {
+                                                        "title": "Status Details",
+                                                        "type": "string"
+                                                    },
+                                                    "updated_at": {
+                                                        "title": "Updated At",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "tracked_packages": {
+                                        "title": "Tracked Packages",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "OrderTrackedPackage",
+                                            "required": [
+                                                "tracking"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "label_url": {
+                                                    "title": "Label Url",
+                                                    "type": "string"
+                                                },
+                                                "label_content": {
+                                                    "title": "Label Content",
+                                                    "type": "string"
+                                                },
+                                                "parcel": {
+                                                    "title": "OrderShippingParcel",
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "length": {
+                                                            "title": "Length",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "width": {
+                                                            "title": "Width",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "height": {
+                                                            "title": "Height",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "weight": {
+                                                            "title": "Weight",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "distance_unit": {
+                                                            "title": "Distance Unit",
+                                                            "type": "string"
+                                                        },
+                                                        "mass_unit": {
+                                                            "title": "Mass Unit",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "tracking": {
+                                                    "title": "OrderShippingLabelTracking",
+                                                    "required": [
+                                                        "tracking_number",
+                                                        "tracking_link",
+                                                        "current_status"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "tracking_number": {
+                                                            "title": "Tracking Number",
+                                                            "type": "string"
+                                                        },
+                                                        "tracking_link": {
+                                                            "title": "Tracking Link",
+                                                            "type": "string"
+                                                        },
+                                                        "current_status": {
+                                                            "title": "OrderShippingLabelTrackingStatus",
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "status": {
+                                                                    "title": "Status",
+                                                                    "type": "string"
+                                                                },
+                                                                "status_details": {
+                                                                    "title": "Status Details",
+                                                                    "type": "string"
+                                                                },
+                                                                "updated_at": {
+                                                                    "title": "Updated At",
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "pickup": {
+                                        "title": "OrderShippingPickup",
+                                        "required": [
+                                            "pickup_date",
+                                            "close_time",
+                                            "ready_time"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "pickup_date": {
+                                                "title": "Pickup Date",
+                                                "type": "string"
+                                            },
+                                            "close_time": {
+                                                "title": "Close Time",
+                                                "type": "string"
+                                            },
+                                            "ready_time": {
+                                                "title": "Ready Time",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "ship_from_address": {
+                                        "title": "Address",
+                                        "required": [
+                                            "organisation_name",
+                                            "street",
+                                            "postal_code",
+                                            "city",
+                                            "country"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "organisation_name": {
+                                                "title": "Organisation Name",
+                                                "type": "string"
+                                            },
+                                            "street": {
+                                                "title": "Street",
+                                                "type": "string"
+                                            },
+                                            "postal_code": {
+                                                "title": "Postal Code",
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "title": "City",
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "title": "AddressCountry",
+                                                "required": [
+                                                    "id",
+                                                    "name",
+                                                    "iso_code"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "title": "Id",
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "title": "Name",
+                                                        "type": "string"
+                                                    },
+                                                    "iso_code": {
+                                                        "title": "Iso Code",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "shipping_fees_refund": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "invoices": {
+                                "title": "Invoices",
+                                "type": "array",
+                                "items": {
+                                    "title": "OrderInvoice",
+                                    "required": [
+                                        "title",
+                                        "number",
+                                        "path"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "title": "Title",
+                                            "type": "string"
+                                        },
+                                        "number": {
+                                            "title": "Number",
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "title": "Path",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "retailer": {
+                                "title": "Retailer",
+                                "required": [
+                                    "name",
+                                    "phone_number",
+                                    "email"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "title": "Phone Number",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "title": "Email",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "brand": {
+                                "title": "Brand",
+                                "required": [
+                                    "business"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "business": {
+                                        "title": "BrandBusiness",
+                                        "required": [
+                                            "addresses"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "addresses": {
+                                                "title": "Addresses",
+                                                "type": "array",
+                                                "items": {
+                                                    "title": "Address",
+                                                    "required": [
+                                                        "organisation_name",
+                                                        "street",
+                                                        "postal_code",
+                                                        "city",
+                                                        "country"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "title": "Id",
+                                                            "type": "integer"
+                                                        },
+                                                        "name": {
+                                                            "title": "Name",
+                                                            "type": "string"
+                                                        },
+                                                        "organisation_name": {
+                                                            "title": "Organisation Name",
+                                                            "type": "string"
+                                                        },
+                                                        "street": {
+                                                            "title": "Street",
+                                                            "type": "string"
+                                                        },
+                                                        "postal_code": {
+                                                            "title": "Postal Code",
+                                                            "type": "string"
+                                                        },
+                                                        "city": {
+                                                            "title": "City",
+                                                            "type": "string"
+                                                        },
+                                                        "country": {
+                                                            "title": "AddressCountry",
+                                                            "required": [
+                                                                "id",
+                                                                "name",
+                                                                "iso_code"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "title": "Id",
+                                                                    "type": "integer"
+                                                                },
+                                                                "name": {
+                                                                    "title": "Name",
+                                                                    "type": "string"
+                                                                },
+                                                                "iso_code": {
+                                                                    "title": "Iso Code",
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "items": {
+                                "title": "Items",
+                                "type": "array",
+                                "items": {
+                                    "title": "OrderItem",
+                                    "required": [
+                                        "option",
+                                        "quantity",
+                                        "unit_price",
+                                        "amount",
+                                        "amount_vat",
+                                        "amount_with_vat"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "title": "Id",
+                                            "type": "integer"
+                                        },
+                                        "option": {
+                                            "title": "OrderProductOption",
+                                            "required": [
+                                                "id",
+                                                "sku",
+                                                "name",
+                                                "unit_multiplier",
+                                                "out_of_stock"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "title": "Id",
+                                                    "type": "integer"
+                                                },
+                                                "sku": {
+                                                    "title": "Sku",
+                                                    "type": "string"
+                                                },
+                                                "ian": {
+                                                    "title": "Ian",
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "title": "Name",
+                                                    "type": "string"
+                                                },
+                                                "unit_multiplier": {
+                                                    "title": "Unit Multiplier",
+                                                    "type": "integer"
+                                                },
+                                                "out_of_stock": {
+                                                    "title": "Out Of Stock",
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        },
+                                        "quantity": {
+                                            "title": "Quantity",
+                                            "type": "integer"
+                                        },
+                                        "unit_price": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount_vat": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount_with_vat": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "total_amount": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "total_amount_vat": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "total_amount_with_vat": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_address": {
+                                "title": "Address",
+                                "required": [
+                                    "organisation_name",
+                                    "street",
+                                    "postal_code",
+                                    "city",
+                                    "country"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "title": "Id",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "organisation_name": {
+                                        "title": "Organisation Name",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "title": "Street",
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "title": "Postal Code",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "title": "City",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "title": "AddressCountry",
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "iso_code"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "iso_code": {
+                                                "title": "Iso Code",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "billing_address": {
+                                "title": "Address",
+                                "required": [
+                                    "organisation_name",
+                                    "street",
+                                    "postal_code",
+                                    "city",
+                                    "country"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "title": "Id",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "organisation_name": {
+                                        "title": "Organisation Name",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "title": "Street",
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "title": "Postal Code",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "title": "City",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "title": "AddressCountry",
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "iso_code"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "iso_code": {
+                                                "title": "Iso Code",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Ship order",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/ship",
+            "description": "**For custom shipment only**. If you choose to ship your order by yourself so you will not have to fetch labels or register pickup but you will have to notify the shipment of the order with this endpoing, You can also provide a tracking url",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "tracking_url",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/ship\"\nquerystring = {\"order_id\": \"\", \"tracking_url\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/ship\"\nquerystring = {\"order_id\": \"\", \"tracking_url\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Update order items",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/items",
+            "description": "Update the order items **before accepting it**. You need to provide the order_item_ids of the line items you want to edit. You can get within the order model",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/items\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/items\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Create parcels",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/parcels",
+            "description": "Create parcels to ship. According to the provider you choose you could fetch shipping label and register pickup or provide tracking link.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/parcels\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/parcels\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "OrderPayload",
+                "required": [
+                    "orders"
+                ],
+                "type": "object",
+                "properties": {
+                    "orders": {
+                        "title": "Order",
+                        "required": [
+                            "id",
+                            "created_at",
+                            "submitted_at",
+                            "updated_at",
+                            "status_details",
+                            "shipping_lead_time",
+                            "brand_net_amount",
+                            "invoices",
+                            "retailer",
+                            "brand",
+                            "items",
+                            "total_amount",
+                            "total_amount_vat",
+                            "total_amount_with_vat",
+                            "shipping_address",
+                            "billing_address"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "title": "Id",
+                                "type": "integer"
+                            },
+                            "created_at": {
+                                "title": "Created At",
+                                "type": "string"
+                            },
+                            "submitted_at": {
+                                "title": "Submitted At",
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "title": "Updated At",
+                                "type": "string"
+                            },
+                            "status_details": {
+                                "title": "OrderStatusDetails",
+                                "required": [
+                                    "key",
+                                    "title"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "title": "Key",
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "title": "Title",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_lead_time": {
+                                "title": "OrderShippingLeadTime",
+                                "required": [
+                                    "minimum_estimated_shipping_date",
+                                    "maximum_estimated_shipping_date"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "minimum_estimated_shipping_date": {
+                                        "title": "Minimum Estimated Shipping Date",
+                                        "type": "string"
+                                    },
+                                    "maximum_estimated_shipping_date": {
+                                        "title": "Maximum Estimated Shipping Date",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "brand_net_amount": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_method": {
+                                "title": "ShippingMethod",
+                                "enum": [
+                                    "label",
+                                    "custom"
+                                ],
+                                "type": "string",
+                                "description": "An enumeration."
+                            },
+                            "last_shipping_label_quote": {
+                                "title": "OrderShippingLabelQuote",
+                                "required": [
+                                    "parcels",
+                                    "rate_amount",
+                                    "rate_provider"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "parcels": {
+                                        "title": "Parcels",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "OrderShippingParcel",
+                                            "type": "object",
+                                            "properties": {
+                                                "length": {
+                                                    "title": "Length",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "width": {
+                                                    "title": "Width",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "height": {
+                                                    "title": "Height",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "weight": {
+                                                    "title": "Weight",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "distance_unit": {
+                                                    "title": "Distance Unit",
+                                                    "type": "string"
+                                                },
+                                                "mass_unit": {
+                                                    "title": "Mass Unit",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "rate_amount": {
+                                        "title": "Amount",
+                                        "required": [
+                                            "amount",
+                                            "currency"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "amount": {
+                                                "title": "Amount",
+                                                "type": "integer"
+                                            },
+                                            "currency": {
+                                                "title": "Currency",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "rate_provider": {
+                                        "title": "Rate Provider",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "tracking_link": {
+                                "title": "Tracking Link",
+                                "type": "string"
+                            },
+                            "shipping_label": {
+                                "title": "OrderShippingLabel",
+                                "type": "object",
+                                "properties": {
+                                    "tracking": {
+                                        "title": "OrderShippingLabelTracking",
+                                        "required": [
+                                            "tracking_number",
+                                            "tracking_link",
+                                            "current_status"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "tracking_number": {
+                                                "title": "Tracking Number",
+                                                "type": "string"
+                                            },
+                                            "tracking_link": {
+                                                "title": "Tracking Link",
+                                                "type": "string"
+                                            },
+                                            "current_status": {
+                                                "title": "OrderShippingLabelTrackingStatus",
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "title": "Status",
+                                                        "type": "string"
+                                                    },
+                                                    "status_details": {
+                                                        "title": "Status Details",
+                                                        "type": "string"
+                                                    },
+                                                    "updated_at": {
+                                                        "title": "Updated At",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "tracked_packages": {
+                                        "title": "Tracked Packages",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "OrderTrackedPackage",
+                                            "required": [
+                                                "tracking"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "label_url": {
+                                                    "title": "Label Url",
+                                                    "type": "string"
+                                                },
+                                                "label_content": {
+                                                    "title": "Label Content",
+                                                    "type": "string"
+                                                },
+                                                "parcel": {
+                                                    "title": "OrderShippingParcel",
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "length": {
+                                                            "title": "Length",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "width": {
+                                                            "title": "Width",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "height": {
+                                                            "title": "Height",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "weight": {
+                                                            "title": "Weight",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "distance_unit": {
+                                                            "title": "Distance Unit",
+                                                            "type": "string"
+                                                        },
+                                                        "mass_unit": {
+                                                            "title": "Mass Unit",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "tracking": {
+                                                    "title": "OrderShippingLabelTracking",
+                                                    "required": [
+                                                        "tracking_number",
+                                                        "tracking_link",
+                                                        "current_status"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "tracking_number": {
+                                                            "title": "Tracking Number",
+                                                            "type": "string"
+                                                        },
+                                                        "tracking_link": {
+                                                            "title": "Tracking Link",
+                                                            "type": "string"
+                                                        },
+                                                        "current_status": {
+                                                            "title": "OrderShippingLabelTrackingStatus",
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "status": {
+                                                                    "title": "Status",
+                                                                    "type": "string"
+                                                                },
+                                                                "status_details": {
+                                                                    "title": "Status Details",
+                                                                    "type": "string"
+                                                                },
+                                                                "updated_at": {
+                                                                    "title": "Updated At",
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "pickup": {
+                                        "title": "OrderShippingPickup",
+                                        "required": [
+                                            "pickup_date",
+                                            "close_time",
+                                            "ready_time"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "pickup_date": {
+                                                "title": "Pickup Date",
+                                                "type": "string"
+                                            },
+                                            "close_time": {
+                                                "title": "Close Time",
+                                                "type": "string"
+                                            },
+                                            "ready_time": {
+                                                "title": "Ready Time",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "ship_from_address": {
+                                        "title": "Address",
+                                        "required": [
+                                            "organisation_name",
+                                            "street",
+                                            "postal_code",
+                                            "city",
+                                            "country"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "organisation_name": {
+                                                "title": "Organisation Name",
+                                                "type": "string"
+                                            },
+                                            "street": {
+                                                "title": "Street",
+                                                "type": "string"
+                                            },
+                                            "postal_code": {
+                                                "title": "Postal Code",
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "title": "City",
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "title": "AddressCountry",
+                                                "required": [
+                                                    "id",
+                                                    "name",
+                                                    "iso_code"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "title": "Id",
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "title": "Name",
+                                                        "type": "string"
+                                                    },
+                                                    "iso_code": {
+                                                        "title": "Iso Code",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "shipping_fees_refund": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "invoices": {
+                                "title": "Invoices",
+                                "type": "array",
+                                "items": {
+                                    "title": "OrderInvoice",
+                                    "required": [
+                                        "title",
+                                        "number",
+                                        "path"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "title": "Title",
+                                            "type": "string"
+                                        },
+                                        "number": {
+                                            "title": "Number",
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "title": "Path",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "retailer": {
+                                "title": "Retailer",
+                                "required": [
+                                    "name",
+                                    "phone_number",
+                                    "email"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "title": "Phone Number",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "title": "Email",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "brand": {
+                                "title": "Brand",
+                                "required": [
+                                    "business"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "business": {
+                                        "title": "BrandBusiness",
+                                        "required": [
+                                            "addresses"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "addresses": {
+                                                "title": "Addresses",
+                                                "type": "array",
+                                                "items": {
+                                                    "title": "Address",
+                                                    "required": [
+                                                        "organisation_name",
+                                                        "street",
+                                                        "postal_code",
+                                                        "city",
+                                                        "country"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "title": "Id",
+                                                            "type": "integer"
+                                                        },
+                                                        "name": {
+                                                            "title": "Name",
+                                                            "type": "string"
+                                                        },
+                                                        "organisation_name": {
+                                                            "title": "Organisation Name",
+                                                            "type": "string"
+                                                        },
+                                                        "street": {
+                                                            "title": "Street",
+                                                            "type": "string"
+                                                        },
+                                                        "postal_code": {
+                                                            "title": "Postal Code",
+                                                            "type": "string"
+                                                        },
+                                                        "city": {
+                                                            "title": "City",
+                                                            "type": "string"
+                                                        },
+                                                        "country": {
+                                                            "title": "AddressCountry",
+                                                            "required": [
+                                                                "id",
+                                                                "name",
+                                                                "iso_code"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "title": "Id",
+                                                                    "type": "integer"
+                                                                },
+                                                                "name": {
+                                                                    "title": "Name",
+                                                                    "type": "string"
+                                                                },
+                                                                "iso_code": {
+                                                                    "title": "Iso Code",
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "items": {
+                                "title": "Items",
+                                "type": "array",
+                                "items": {
+                                    "title": "OrderItem",
+                                    "required": [
+                                        "option",
+                                        "quantity",
+                                        "unit_price",
+                                        "amount",
+                                        "amount_vat",
+                                        "amount_with_vat"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "title": "Id",
+                                            "type": "integer"
+                                        },
+                                        "option": {
+                                            "title": "OrderProductOption",
+                                            "required": [
+                                                "id",
+                                                "sku",
+                                                "name",
+                                                "unit_multiplier",
+                                                "out_of_stock"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "title": "Id",
+                                                    "type": "integer"
+                                                },
+                                                "sku": {
+                                                    "title": "Sku",
+                                                    "type": "string"
+                                                },
+                                                "ian": {
+                                                    "title": "Ian",
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "title": "Name",
+                                                    "type": "string"
+                                                },
+                                                "unit_multiplier": {
+                                                    "title": "Unit Multiplier",
+                                                    "type": "integer"
+                                                },
+                                                "out_of_stock": {
+                                                    "title": "Out Of Stock",
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        },
+                                        "quantity": {
+                                            "title": "Quantity",
+                                            "type": "integer"
+                                        },
+                                        "unit_price": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount_vat": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount_with_vat": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "total_amount": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "total_amount_vat": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "total_amount_with_vat": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_address": {
+                                "title": "Address",
+                                "required": [
+                                    "organisation_name",
+                                    "street",
+                                    "postal_code",
+                                    "city",
+                                    "country"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "title": "Id",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "organisation_name": {
+                                        "title": "Organisation Name",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "title": "Street",
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "title": "Postal Code",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "title": "City",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "title": "AddressCountry",
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "iso_code"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "iso_code": {
+                                                "title": "Iso Code",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "billing_address": {
+                                "title": "Address",
+                                "required": [
+                                    "organisation_name",
+                                    "street",
+                                    "postal_code",
+                                    "city",
+                                    "country"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "title": "Id",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "organisation_name": {
+                                        "title": "Organisation Name",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "title": "Street",
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "title": "Postal Code",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "title": "City",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "title": "AddressCountry",
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "iso_code"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "iso_code": {
+                                                "title": "Iso Code",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get access token",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/login/access-token",
+            "description": "Get access token in order to consume the API. The need to provide your ankorstore credantials",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/login/access-token\"\nquerystring = {\"username\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/login/access-token\"\nquerystring = {\"username\": \"\", \"password\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "Token",
+                "required": [
+                    "access_token",
+                    "token_type"
+                ],
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "title": "Access Token",
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "title": "Token Type",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Accept order",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/accept",
+            "description": "Accept the order for shipment",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "order_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/accept\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/orders/{order_id}/accept\"\nquerystring = {\"order_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "OrderPayload",
+                "required": [
+                    "orders"
+                ],
+                "type": "object",
+                "properties": {
+                    "orders": {
+                        "title": "Order",
+                        "required": [
+                            "id",
+                            "created_at",
+                            "submitted_at",
+                            "updated_at",
+                            "status_details",
+                            "shipping_lead_time",
+                            "brand_net_amount",
+                            "invoices",
+                            "retailer",
+                            "brand",
+                            "items",
+                            "total_amount",
+                            "total_amount_vat",
+                            "total_amount_with_vat",
+                            "shipping_address",
+                            "billing_address"
+                        ],
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "title": "Id",
+                                "type": "integer"
+                            },
+                            "created_at": {
+                                "title": "Created At",
+                                "type": "string"
+                            },
+                            "submitted_at": {
+                                "title": "Submitted At",
+                                "type": "string"
+                            },
+                            "updated_at": {
+                                "title": "Updated At",
+                                "type": "string"
+                            },
+                            "status_details": {
+                                "title": "OrderStatusDetails",
+                                "required": [
+                                    "key",
+                                    "title"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "title": "Key",
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "title": "Title",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_lead_time": {
+                                "title": "OrderShippingLeadTime",
+                                "required": [
+                                    "minimum_estimated_shipping_date",
+                                    "maximum_estimated_shipping_date"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "minimum_estimated_shipping_date": {
+                                        "title": "Minimum Estimated Shipping Date",
+                                        "type": "string"
+                                    },
+                                    "maximum_estimated_shipping_date": {
+                                        "title": "Maximum Estimated Shipping Date",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "brand_net_amount": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_method": {
+                                "title": "ShippingMethod",
+                                "enum": [
+                                    "label",
+                                    "custom"
+                                ],
+                                "type": "string",
+                                "description": "An enumeration."
+                            },
+                            "last_shipping_label_quote": {
+                                "title": "OrderShippingLabelQuote",
+                                "required": [
+                                    "parcels",
+                                    "rate_amount",
+                                    "rate_provider"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "parcels": {
+                                        "title": "Parcels",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "OrderShippingParcel",
+                                            "type": "object",
+                                            "properties": {
+                                                "length": {
+                                                    "title": "Length",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "width": {
+                                                    "title": "Width",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "height": {
+                                                    "title": "Height",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "weight": {
+                                                    "title": "Weight",
+                                                    "minimum": 0,
+                                                    "type": "integer"
+                                                },
+                                                "distance_unit": {
+                                                    "title": "Distance Unit",
+                                                    "type": "string"
+                                                },
+                                                "mass_unit": {
+                                                    "title": "Mass Unit",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "rate_amount": {
+                                        "title": "Amount",
+                                        "required": [
+                                            "amount",
+                                            "currency"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "amount": {
+                                                "title": "Amount",
+                                                "type": "integer"
+                                            },
+                                            "currency": {
+                                                "title": "Currency",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "rate_provider": {
+                                        "title": "Rate Provider",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "tracking_link": {
+                                "title": "Tracking Link",
+                                "type": "string"
+                            },
+                            "shipping_label": {
+                                "title": "OrderShippingLabel",
+                                "type": "object",
+                                "properties": {
+                                    "tracking": {
+                                        "title": "OrderShippingLabelTracking",
+                                        "required": [
+                                            "tracking_number",
+                                            "tracking_link",
+                                            "current_status"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "tracking_number": {
+                                                "title": "Tracking Number",
+                                                "type": "string"
+                                            },
+                                            "tracking_link": {
+                                                "title": "Tracking Link",
+                                                "type": "string"
+                                            },
+                                            "current_status": {
+                                                "title": "OrderShippingLabelTrackingStatus",
+                                                "type": "object",
+                                                "properties": {
+                                                    "status": {
+                                                        "title": "Status",
+                                                        "type": "string"
+                                                    },
+                                                    "status_details": {
+                                                        "title": "Status Details",
+                                                        "type": "string"
+                                                    },
+                                                    "updated_at": {
+                                                        "title": "Updated At",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "tracked_packages": {
+                                        "title": "Tracked Packages",
+                                        "type": "array",
+                                        "items": {
+                                            "title": "OrderTrackedPackage",
+                                            "required": [
+                                                "tracking"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "label_url": {
+                                                    "title": "Label Url",
+                                                    "type": "string"
+                                                },
+                                                "label_content": {
+                                                    "title": "Label Content",
+                                                    "type": "string"
+                                                },
+                                                "parcel": {
+                                                    "title": "OrderShippingParcel",
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "length": {
+                                                            "title": "Length",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "width": {
+                                                            "title": "Width",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "height": {
+                                                            "title": "Height",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "weight": {
+                                                            "title": "Weight",
+                                                            "minimum": 0,
+                                                            "type": "integer"
+                                                        },
+                                                        "distance_unit": {
+                                                            "title": "Distance Unit",
+                                                            "type": "string"
+                                                        },
+                                                        "mass_unit": {
+                                                            "title": "Mass Unit",
+                                                            "type": "string"
+                                                        }
+                                                    }
+                                                },
+                                                "tracking": {
+                                                    "title": "OrderShippingLabelTracking",
+                                                    "required": [
+                                                        "tracking_number",
+                                                        "tracking_link",
+                                                        "current_status"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "tracking_number": {
+                                                            "title": "Tracking Number",
+                                                            "type": "string"
+                                                        },
+                                                        "tracking_link": {
+                                                            "title": "Tracking Link",
+                                                            "type": "string"
+                                                        },
+                                                        "current_status": {
+                                                            "title": "OrderShippingLabelTrackingStatus",
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "status": {
+                                                                    "title": "Status",
+                                                                    "type": "string"
+                                                                },
+                                                                "status_details": {
+                                                                    "title": "Status Details",
+                                                                    "type": "string"
+                                                                },
+                                                                "updated_at": {
+                                                                    "title": "Updated At",
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "pickup": {
+                                        "title": "OrderShippingPickup",
+                                        "required": [
+                                            "pickup_date",
+                                            "close_time",
+                                            "ready_time"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "pickup_date": {
+                                                "title": "Pickup Date",
+                                                "type": "string"
+                                            },
+                                            "close_time": {
+                                                "title": "Close Time",
+                                                "type": "string"
+                                            },
+                                            "ready_time": {
+                                                "title": "Ready Time",
+                                                "type": "string"
+                                            }
+                                        }
+                                    },
+                                    "ship_from_address": {
+                                        "title": "Address",
+                                        "required": [
+                                            "organisation_name",
+                                            "street",
+                                            "postal_code",
+                                            "city",
+                                            "country"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "organisation_name": {
+                                                "title": "Organisation Name",
+                                                "type": "string"
+                                            },
+                                            "street": {
+                                                "title": "Street",
+                                                "type": "string"
+                                            },
+                                            "postal_code": {
+                                                "title": "Postal Code",
+                                                "type": "string"
+                                            },
+                                            "city": {
+                                                "title": "City",
+                                                "type": "string"
+                                            },
+                                            "country": {
+                                                "title": "AddressCountry",
+                                                "required": [
+                                                    "id",
+                                                    "name",
+                                                    "iso_code"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "title": "Id",
+                                                        "type": "integer"
+                                                    },
+                                                    "name": {
+                                                        "title": "Name",
+                                                        "type": "string"
+                                                    },
+                                                    "iso_code": {
+                                                        "title": "Iso Code",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "shipping_fees_refund": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "invoices": {
+                                "title": "Invoices",
+                                "type": "array",
+                                "items": {
+                                    "title": "OrderInvoice",
+                                    "required": [
+                                        "title",
+                                        "number",
+                                        "path"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "title": {
+                                            "title": "Title",
+                                            "type": "string"
+                                        },
+                                        "number": {
+                                            "title": "Number",
+                                            "type": "string"
+                                        },
+                                        "path": {
+                                            "title": "Path",
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "retailer": {
+                                "title": "Retailer",
+                                "required": [
+                                    "name",
+                                    "phone_number",
+                                    "email"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "phone_number": {
+                                        "title": "Phone Number",
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "title": "Email",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "brand": {
+                                "title": "Brand",
+                                "required": [
+                                    "business"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "business": {
+                                        "title": "BrandBusiness",
+                                        "required": [
+                                            "addresses"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "addresses": {
+                                                "title": "Addresses",
+                                                "type": "array",
+                                                "items": {
+                                                    "title": "Address",
+                                                    "required": [
+                                                        "organisation_name",
+                                                        "street",
+                                                        "postal_code",
+                                                        "city",
+                                                        "country"
+                                                    ],
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "title": "Id",
+                                                            "type": "integer"
+                                                        },
+                                                        "name": {
+                                                            "title": "Name",
+                                                            "type": "string"
+                                                        },
+                                                        "organisation_name": {
+                                                            "title": "Organisation Name",
+                                                            "type": "string"
+                                                        },
+                                                        "street": {
+                                                            "title": "Street",
+                                                            "type": "string"
+                                                        },
+                                                        "postal_code": {
+                                                            "title": "Postal Code",
+                                                            "type": "string"
+                                                        },
+                                                        "city": {
+                                                            "title": "City",
+                                                            "type": "string"
+                                                        },
+                                                        "country": {
+                                                            "title": "AddressCountry",
+                                                            "required": [
+                                                                "id",
+                                                                "name",
+                                                                "iso_code"
+                                                            ],
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "id": {
+                                                                    "title": "Id",
+                                                                    "type": "integer"
+                                                                },
+                                                                "name": {
+                                                                    "title": "Name",
+                                                                    "type": "string"
+                                                                },
+                                                                "iso_code": {
+                                                                    "title": "Iso Code",
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "items": {
+                                "title": "Items",
+                                "type": "array",
+                                "items": {
+                                    "title": "OrderItem",
+                                    "required": [
+                                        "option",
+                                        "quantity",
+                                        "unit_price",
+                                        "amount",
+                                        "amount_vat",
+                                        "amount_with_vat"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "title": "Id",
+                                            "type": "integer"
+                                        },
+                                        "option": {
+                                            "title": "OrderProductOption",
+                                            "required": [
+                                                "id",
+                                                "sku",
+                                                "name",
+                                                "unit_multiplier",
+                                                "out_of_stock"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "title": "Id",
+                                                    "type": "integer"
+                                                },
+                                                "sku": {
+                                                    "title": "Sku",
+                                                    "type": "string"
+                                                },
+                                                "ian": {
+                                                    "title": "Ian",
+                                                    "type": "string"
+                                                },
+                                                "name": {
+                                                    "title": "Name",
+                                                    "type": "string"
+                                                },
+                                                "unit_multiplier": {
+                                                    "title": "Unit Multiplier",
+                                                    "type": "integer"
+                                                },
+                                                "out_of_stock": {
+                                                    "title": "Out Of Stock",
+                                                    "type": "boolean"
+                                                }
+                                            }
+                                        },
+                                        "quantity": {
+                                            "title": "Quantity",
+                                            "type": "integer"
+                                        },
+                                        "unit_price": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount_vat": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "amount_with_vat": {
+                                            "title": "Amount",
+                                            "required": [
+                                                "amount",
+                                                "currency"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                                "amount": {
+                                                    "title": "Amount",
+                                                    "type": "integer"
+                                                },
+                                                "currency": {
+                                                    "title": "Currency",
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "total_amount": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "total_amount_vat": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "total_amount_with_vat": {
+                                "title": "Amount",
+                                "required": [
+                                    "amount",
+                                    "currency"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "amount": {
+                                        "title": "Amount",
+                                        "type": "integer"
+                                    },
+                                    "currency": {
+                                        "title": "Currency",
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shipping_address": {
+                                "title": "Address",
+                                "required": [
+                                    "organisation_name",
+                                    "street",
+                                    "postal_code",
+                                    "city",
+                                    "country"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "title": "Id",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "organisation_name": {
+                                        "title": "Organisation Name",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "title": "Street",
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "title": "Postal Code",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "title": "City",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "title": "AddressCountry",
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "iso_code"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "iso_code": {
+                                                "title": "Iso Code",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "billing_address": {
+                                "title": "Address",
+                                "required": [
+                                    "organisation_name",
+                                    "street",
+                                    "postal_code",
+                                    "city",
+                                    "country"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "title": "Id",
+                                        "type": "integer"
+                                    },
+                                    "name": {
+                                        "title": "Name",
+                                        "type": "string"
+                                    },
+                                    "organisation_name": {
+                                        "title": "Organisation Name",
+                                        "type": "string"
+                                    },
+                                    "street": {
+                                        "title": "Street",
+                                        "type": "string"
+                                    },
+                                    "postal_code": {
+                                        "title": "Postal Code",
+                                        "type": "string"
+                                    },
+                                    "city": {
+                                        "title": "City",
+                                        "type": "string"
+                                    },
+                                    "country": {
+                                        "title": "AddressCountry",
+                                        "required": [
+                                            "id",
+                                            "name",
+                                            "iso_code"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "iso_code": {
+                                                "title": "Iso Code",
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Update products stock",
+            "url": "https://ankorstore.p.rapidapi.com/api/v1/products/stocks",
+            "description": "Bulk update products stock",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/products/stocks\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ankorstore.p.rapidapi.com/api/v1/products/stocks\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ankorstore.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "ProductListResponse",
+                "required": [
+                    "products"
+                ],
+                "type": "object",
+                "properties": {
+                    "products": {
+                        "title": "Products",
+                        "type": "array",
+                        "items": {
+                            "title": "Product",
+                            "required": [
+                                "id",
+                                "name",
+                                "unit_multiplier",
+                                "out_of_stock",
+                                "vat_rate",
+                                "description",
+                                "active",
+                                "link",
+                                "created_at"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "title": "Id",
+                                    "type": "integer"
+                                },
+                                "name": {
+                                    "title": "Name",
+                                    "type": "string"
+                                },
+                                "options": {
+                                    "title": "Options",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "ProductOption",
+                                        "required": [
+                                            "id",
+                                            "sku",
+                                            "name",
+                                            "unit_multiplier",
+                                            "out_of_stock"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "title": "Id",
+                                                "type": "integer"
+                                            },
+                                            "sku": {
+                                                "title": "Sku",
+                                                "type": "string"
+                                            },
+                                            "ian": {
+                                                "title": "Ian",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "unit_multiplier": {
+                                                "title": "Unit Multiplier",
+                                                "type": "integer"
+                                            },
+                                            "out_of_stock": {
+                                                "title": "Out Of Stock",
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                },
+                                "unit_multiplier": {
+                                    "title": "Unit Multiplier",
+                                    "type": "integer"
+                                },
+                                "out_of_stock": {
+                                    "title": "Out Of Stock",
+                                    "type": "boolean"
+                                },
+                                "retail_price": {
+                                    "title": "Amount",
+                                    "required": [
+                                        "amount",
+                                        "currency"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "amount": {
+                                            "title": "Amount",
+                                            "type": "integer"
+                                        },
+                                        "currency": {
+                                            "title": "Currency",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "wholesale_price": {
+                                    "title": "Amount",
+                                    "required": [
+                                        "amount",
+                                        "currency"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "amount": {
+                                            "title": "Amount",
+                                            "type": "integer"
+                                        },
+                                        "currency": {
+                                            "title": "Currency",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "discount_rate": {
+                                    "title": "Discount Rate",
+                                    "type": "integer"
+                                },
+                                "original_wholesale_price": {
+                                    "title": "Amount",
+                                    "required": [
+                                        "amount",
+                                        "currency"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "amount": {
+                                            "title": "Amount",
+                                            "type": "integer"
+                                        },
+                                        "currency": {
+                                            "title": "Currency",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "vat_rate": {
+                                    "title": "Vat Rate",
+                                    "type": "string"
+                                },
+                                "properties": {
+                                    "title": "Properties",
+                                    "type": "array",
+                                    "items": {
+                                        "title": "ProductProperty",
+                                        "required": [
+                                            "key",
+                                            "name",
+                                            "value",
+                                            "original_content",
+                                            "auto_translate"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "key": {
+                                                "title": "Key",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "title": "Name",
+                                                "type": "string"
+                                            },
+                                            "value": {
+                                                "title": "Value",
+                                                "type": "string"
+                                            },
+                                            "original_content": {
+                                                "title": "Original Content",
+                                                "type": "string"
+                                            },
+                                            "auto_translate": {
+                                                "title": "Auto Translate",
+                                                "type": "boolean"
+                                            }
+                                        }
+                                    }
+                                },
+                                "description": {
+                                    "title": "Description",
+                                    "type": "string"
+                                },
+                                "made_in": {
+                                    "title": "AddressCountry",
+                                    "required": [
+                                        "id",
+                                        "name",
+                                        "iso_code"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "title": "Id",
+                                            "type": "integer"
+                                        },
+                                        "name": {
+                                            "title": "Name",
+                                            "type": "string"
+                                        },
+                                        "iso_code": {
+                                            "title": "Iso Code",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "tags": {
+                                    "title": "Tags",
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "active": {
+                                    "title": "Active",
+                                    "type": "boolean"
+                                },
+                                "link": {
+                                    "title": "Link",
+                                    "type": "string"
+                                },
+                                "created_at": {
+                                    "title": "Created At",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

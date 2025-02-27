@@ -1,0 +1,83 @@
+{
+    "tool_name":"Stadia Maps Time Zone API",
+    "tool_description":"The Stadia TZ API provides time zone information, as well as information about any special offset (such as DST) in effect, now or in the future.",
+    "title":"Stadia Maps Time Zone API",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":55,
+        "avgSuccessRate":100,
+        "popularityScore":9.1,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/stadia-maps-stadia-maps-default/api/stadia-maps-time-zone-api/",
+    "host":"stadia-maps-time-zone-api.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"TZ Lookup by Location",
+            "url":"https://stadia-maps-time-zone-api.p.rapidapi.com/tz/lookup/v1",
+            "description":"The Stadia TZ Lookup API provides time zone information, as well as information about any special offset (such as DST) in effect based on the latest IANA TZDB. Note that this API may not be accurate for timestamps in the past and does not claim to report precise nautical times in the open ocean beyond territorial waters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"The latitude component of any point on land.",
+                    "default":"37.4666405"
+                },
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"The longitude component of any point on land.",
+                    "default":"-85.89465"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"timestamp",
+                    "type":"NUMBER",
+                    "description":"The UNIX timestamp at which the UTC and DST offsets will be calculated. This defaults to the present time. This endpoint is not necessarily guaranteed to be accurate for timestamps that occurred in the past. Time zone geographic boundaries change over time, so if the point you are querying for was previously in a different time zone, historical results will not be accurate. If, however, the point has been in the same geographic time zone for a very long time (ex: America/New_York), the historical data may be accurate for 100+ years in the past (depending on how far back the IANA TZDB rules have been specified).",
+                    "default":"1589932800"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stadia-maps-time-zone-api.p.rapidapi.com/tz/lookup/v1\"\nquerystring = {\"timestamp\": timestamp, \"lat\": lat, \"lng\": lng}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stadia-maps-time-zone-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "tz_id":"America/New_York",
+                "base_utc_offset":-18000,
+                "dst_offset":3600
+            },
+            "headers":{
+                "content-length":"71",
+                "content-type":"application/json",
+                "date":"Wed, 19 Oct 2022 17:04:47 GMT",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=31536000; includeSubDomains; preload"
+            },
+            "schema":{
+                "tzResponse":{
+                    "type":"object",
+                    "properties":{
+                        "tz_id":{
+                            "type":"string",
+                            "description":"The canonical time zone ID. In the event that multiple time zones could be returned, the first one from the Unicode CLDR timezone.xml is returned."
+                        },
+                        "base_utc_offset":{
+                            "type":"integer",
+                            "description":"The base offset, in seconds, from UTC that is normally in effect for this time zone."
+                        },
+                        "dst_offset":{
+                            "type":"integer",
+                            "description":"The special offset, in seconds, from UTC that is in effect for this time zone as of the queried timestamp (defaults to now). If no additional offsets are in effect, this value is zero. This typically reflects Daylight Saving Time, but may indicate other special offsets. To get the total offset in effect, add `dst_offset` and `utc_offset` together."
+                        }
+                    },
+                    "required":[
+                        "tz_id",
+                        "base_utc_offset",
+                        "dst_offset"
+                    ]
+                }
+            }
+        }
+    ]
+}

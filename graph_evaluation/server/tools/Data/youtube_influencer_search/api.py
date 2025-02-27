@@ -1,0 +1,51 @@
+import requests
+import json
+from datetime import date, datetime, timedelta
+import os
+
+from typing import Optional, Dict, Union, List
+
+
+def getsearchresults(is_id: str, toolbench_rapidapi_key: str='088440d910mshef857391f2fc461p17ae9ejsnaebc918926ff'):
+    """
+    "Get the results from a certain search id"
+    id: Unique identifier of the search.
+        
+    """
+    url = f"https://youtube-influencer-search.p.rapidapi.com/searches/{is_id}/results"
+    querystring = {}
+    
+    headers = {
+            "X-RapidAPI-Key": toolbench_rapidapi_key,
+            "X-RapidAPI-Host": "youtube-influencer-search.p.rapidapi.com"
+        }
+
+
+    response = requests.get(url, headers=headers, params=querystring)
+    try:
+        observation = response.json()
+    except:
+        observation = response.text
+    return observation
+
+def getallsearches(toolbench_rapidapi_key: str='088440d910mshef857391f2fc461p17ae9ejsnaebc918926ff'):
+    """
+    "Get all searches"
+    
+    """
+    url = f"https://youtube-influencer-search.p.rapidapi.com/searches"
+    querystring = {}
+    
+    headers = {
+            "X-RapidAPI-Key": toolbench_rapidapi_key,
+            "X-RapidAPI-Host": "youtube-influencer-search.p.rapidapi.com"
+        }
+
+
+    response = requests.get(url, headers=headers, params=querystring)
+    try:
+        observation = response.json()
+    except:
+        observation = response.text
+    return observation
+

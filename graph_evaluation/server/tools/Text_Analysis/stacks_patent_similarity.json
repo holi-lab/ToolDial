@@ -1,0 +1,396 @@
+{
+    "tool_name": "Stacks Patent Similarity",
+    "tool_description": "This is a useful API for finding claims similar to the user's input text. The \"Infringement Research\" is a tool for returning similar claims that the text is likely to infringe. The \"101 Eligibility Analyzer\" is a tool for testing a claim for eligibility under both \"Alice Test Step One\" and \"Alice Test Step Two\". The \"Patent Analytics\" provides multiple useful endpoints powered by the Stacks Similarity Engine for exploring IP infringement and clearance, client prospecting, finding patent lawy...",
+    "title": "Stacks Patent Similarity",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 0,
+        "avgLatency": 344,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/stacks-stacks-default/api/stacks-patent-similarity1/",
+    "host": "stacks-patent-similarity1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "get_infringement_v1_infringement_research_predict_get",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict",
+            "description": "Create a request item with the following information:\n\n- **text**: could be the description of a company asset or a product explanation. It should be minimum length of `20` words for better performance. Note that GET queries are limited to `2048` characters (_required_).\n- **patent_number**: should start with a country code and end with the _Kind_ _Code_. You can enter as many as `5` patent numbers, each separated with a comma (_required_).\n- **model_name**: is the name of the model empowering Stacks Patent Similarity engine. Defaults to `stk_nova`.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "patent_number",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "model_name",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict\"\nquerystring = {\"patent_number\": patent_number, \"text\": text}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": [
+                    {
+                        "patent_number": "US10455622B2",
+                        "document_url": "https://patents.google.com/patent/US10455622B2",
+                        "predictions": [
+                            {
+                                "claim_number": 1,
+                                "claim_text": "A method for a User Equipment (UE) operating in a wireless communication system, the method comprising: initiating a Random Access Preamble (RAP) transmission procedure on an unlicensed Secondary Cell (SCell), wherein a timer is started when the UE initiates the RAP transmission procedure on the unlicensed SCell; stopping the RAP transmission procedure on the unlicensed SCell when a certain condition is met, wherein the certain condition is met when the RAP has not been transmitted within a predefined number of subframes from a subframe where the timer expires, even when a number of the RAP transmissions is less than a threshold value; and transmitting, to a Base Station (BS), information on the UE stopping the RAP transmission procedure on the unlicensed SCell through a cell configured for the UE when the RAP transmission procedure on the unlicensed SCell is stopped.",
+                                "infringement_prob": 0.9357516169548035
+                            },
+                            "..."
+                        ]
+                    }
+                ],
+                "model": "stk_nova",
+                "messages": []
+            },
+            "headers": {},
+            "schema": {
+                "title": "InfringementGetResponse",
+                "required": [
+                    "data",
+                    "messages"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {}
+                    },
+                    "model": {
+                        "title": "Model",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "title": "Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Returned response has the following information:\n\n- **data**: is a list of results each containing a dictionary with the following keys:\n    - **patent_number**: shows the patent number,\n    - **document_url**: is the address to the patent,\n    - **predictions**:\n        - **claim_number**: is the claim number from the associated patent.\n        - **claim_text**: is the text of the claim.\n        - **infringement_prob**: is the likelihood of infringing the claim. Any probability below a threshold of `0.3` will be considered too low for infringement to take place regardless of the model in action.\n- **model**: is the model used in Stacks to make predictions.\n- **messages**: is the list of messages sent from the backend."
+            }
+        },
+        {
+            "name": "post_infringement_v1_infringement_research_predict_post",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict",
+            "description": "Create a request item with the following information:\n\n- **text**: should be minimum length of `20` words for better performance. The maximum limit is `512` words, so longer queries will be truncated. (_required_).\n- **claims**: is a list of claims on which you're testing to see if the text is infringing. The maximum number of entries is `25` (_optional_).\n- **patent_number**: has the same format and limits as in the GET request (_optional_).\n- **model_name**: (_required_).",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": [
+                    {
+                        "patent_number": "US9141433B2",
+                        "document_url": "https://patents.google.com/patent/US9141433B2",
+                        "predictions": [
+                            {
+                                "claim_number": 1,
+                                "claim_text": "A system, comprising: a memory; and a processor programmed to: retrieve a computing job comprising a plurality of prioritized tasks from the memory, where the prioritized tasks comprise associated priority information usable to identify relative priorities among the prioritized tasks; ...",
+                                "infringement_prob": 0.8490521907806396
+                            },
+                            {
+                                "claim_number": 8,
+                                "claim_text": "A computer program product comprises a computer readable storage medium including computer readable program code, wherein the computer readable program code when executed on a computer causes the computer to: retrieve a computing job comprising a plurality of prioritized tasks, where the prioritized tasks comprise associated priority information usable to identify relative priorities among the prioritized tasks; ...",
+                                "infringement_prob": 0.8665629625320435
+                            }
+                        ]
+                    },
+                    "..."
+                ],
+                "model": "stk_nova",
+                "messages": []
+            },
+            "headers": {},
+            "schema": {
+                "title": "InfringementPostResponse",
+                "required": [
+                    "data",
+                    "messages"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {}
+                    },
+                    "model": {
+                        "title": "Model",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "title": "Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Returned response has the following information:\n\n- **data**: is a list of results each containing a dictionary with the following keys:\n    - **patent_number**: shows the patent number,\n    - **document_url**: is the address to the patent,\n    - **predictions**:\n        - **claim_number**: is the claim number. If a list of claims is submitted, it would be\n        the same as the index of the item in the list.\n        - **claim_text**: is the text of the claim.\n        - **infringement_prob**: is the likelihood of infringing the claim. Any probability below a threshold of `0.3` will be considered too low for infringement to take place regardless of the model in action.\n- **model**: is the model used in Stacks to make predictions.\n- **messages**: is the list of messages sent from the backend."
+            }
+        },
+        {
+            "name": "eligibility_post_v1_101_eligibility_predict_post",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/101-eligibility/predict",
+            "description": "Create a request item with the following information:\n\n- **claim**: should be minimum length of `20` words for better performance. The maximum limit is `512` words, so longer queries will be truncated. (_required_).\n- **court_or_agency**: filters results based on a list of courts/agencies. The default value allows for top results from any US federal court (_optional_).\n- **judges**: filters results based on a list of judges responsible for making decisions on the cases returned. The default value allows for top results decided by any US federal judge (_optional_).\n- **from_date**: filters results starting from this date. Defaults to the decision date of the Alice case (_optional_).\n- **to_date**: filters results until this date. Defaults to today's date (_optional_).\n- **model_name**: is the name of the model for predicting (in)eligibility under step 1 and step 2 of the Alice test. Defaults to `stk_alora`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/101-eligibility/predict\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": [
+                    {
+                        "claim": "A method of controlling braking of a towed vehicle said method comprising: receiving a speed signal based on the speed of a towing vehicle, or a towed vehicle, or both said towing vehicle and said towed vehicle; receiving a pressure signal based on a brake system of the said towing vehicle.",
+                        "predictions": [
+                            {
+                                "alice_step_1": {
+                                    "prediction": "ineligible",
+                                    "confidence_level": 0.9894353747367859
+                                },
+                                "alice_step_2": {
+                                    "prediction": "eligible",
+                                    "confidence_level": 0.9528544529531114
+                                },
+                                "similar_cases": [
+                                    {
+                                        "court_code": "mied",
+                                        "decision": "eligible",
+                                        "claim_hierarchy": {
+                                            "9": "A method of controlling braking of a towed vehicle, said method comprising: receiving an input signal based on: i) a pressure in a brake system of a towing vehicle; and ii) speed of a towing vehicle, or a towed vehicle, or ..."
+                                        },
+                                        "claim_id": 4749133611,
+                                        "patent_number": "US9758138",
+                                        "issue_type": [
+                                            "101"
+                                        ],
+                                        "citation": "HORIZON GLOBAL AMERICAS INC. v. CONTINENTAL AUTOMOTIVE SYSTEMS, INC., No. 2:20-cv-10536 (E.D. Mich. Mar. 02, 2021)",
+                                        "decision_date": "2021-03-02",
+                                        "claim_number": 9,
+                                        "decision_history": [],
+                                        "application_number": "",
+                                        "document_url": "https://scholar.google.com/scholar_case?case=9862061449582190482",
+                                        "court_or_agency": "E.D. Michigan",
+                                        "document_id": "9862061449582190482",
+                                        "judges": [
+                                            "Sean F. Cox"
+                                        ],
+                                        "confidence_level": 0.9576371312141418
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    "..."
+                ],
+                "model": "stk_alora + stk_nova",
+                "messages": []
+            },
+            "headers": {},
+            "schema": {
+                "title": "EligibilityResponse",
+                "required": [
+                    "data",
+                    "messages"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {}
+                    },
+                    "model": {
+                        "title": "Model",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "title": "Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Returned response has the following information:\n\n- **data**: is a list of results each containing a dictionary with the following keys:\n    - **claim**: is the text of the claim entered.\n    - **predictions**:\n        - **alice_step_1**:\n            - **prediction**: is the likely decision under Alice Test Step One.\n            - **confidence_level**: is a number between 0 and 1 that shows the confidence for the predicted decisions.\n        - **alice_step_2**:\n            - **prediction**: is the likely decision under Alice Test Step Two.\n            - **confidence_level**: is a number between 0 and 1 that shows the confidence for the predicted de.\n        - **similar_cases**: is the list of cases with similar context to the entered claim based on\n        which predictions are made. To make it to this list, the confidence level of the case has to exceed `0.75`.\n- **model**: is the model used in Stacks to make predictions.\n- **messages**: is the list of messages sent from the backend."
+            }
+        },
+        {
+            "name": "post_infringement_clearance_v1_patent_analytics_clearance_post",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/patent-analytics/clearance",
+            "description": "Create a request item with the following information:\n\n- **text**: should be minimum length of `20` words for better performance. The maximum limit is `512` words, so longer queries will be truncated. (_required_).\n- **max_limit**: is the maximum number of results to be returned (_optional_). Default number is `10` and it cannot go over `100`.\n- **model_name**: (_required_).",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/patent-analytics/clearance\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": [
+                    {
+                        "patent_id": "8570814",
+                        "type": "utility",
+                        "number": "8570814",
+                        "country": "US",
+                        "date": "2013-10-29",
+                        "year": 2013,
+                        "abstract": "Memory states of a multi-bit memory cell are demarcated by generating read reference signals having levels that constitute boundaries of the memory states. The read reference signals may be dependent upon the levels of programming reference signals used for controlling the programming of the memory cell. The memory cell can thus be programmed without reading out its memory state during the programming process, with programming margins being assured by the dependence of the read reference signals on the programming reference signals. Both sets of reference signals may be generated by reference cells which track variations in the operating characteristics of the memory cell with changes in conditions, such as temperature and system voltages, to enhance the reliability of memory programming and readout.",
+                        "title": "Memory apparatus including programmable non-volatile multi-bit memory cell, and apparatus and method for demarcating memory states of the cell",
+                        "kind": "B2",
+                        "num_claims": 19,
+                        "firstnamed_assignee_id": 9289,
+                        "firstnamed_assignee_persistent_id": "6ef12aaf-f924-4065-9af6-11374dee7909",
+                        "firstnamed_assignee_location_id": 33512,
+                        "firstnamed_assignee_persistent_location_id": "37.3818|-122.179",
+                        "firstnamed_assignee_city": "Palo Alto",
+                        "firstnamed_assignee_state": "CA",
+                        "firstnamed_assignee_country": "US",
+                        "firstnamed_assignee_latitude": 37.3818,
+                        "firstnamed_assignee_longitude": -122.179,
+                        "firstnamed_inventor_id": 252038,
+                        "firstnamed_inventor_persistent_id": "fl:g_ln:banks-6",
+                        "firstnamed_inventor_location_id": 34016,
+                        "firstnamed_inventor_persistent_location_id": "37.5308|-121.942",
+                        "firstnamed_inventor_city": "Fremont",
+                        "firstnamed_inventor_state": "CA",
+                        "firstnamed_inventor_country": "US",
+                        "firstnamed_inventor_latitude": 37.5308,
+                        "firstnamed_inventor_longitude": -121.942,
+                        "num_foreign_documents_cited": 40,
+                        "num_us_applications_cited": 0,
+                        "num_us_patents_cited": 191,
+                        "num_total_documents_cited": 231,
+                        "num_times_cited_by_us_patents": 0,
+                        "earliest_application_date": "2011-03-04",
+                        "patent_processing_days": 970,
+                        "uspc_current_mainclass_average_patent_processing_days": 769,
+                        "cpc_current_group_average_patent_processing_days": 829,
+                        "detail_desc_length": 50394,
+                        "claim_number": [
+                            1
+                        ],
+                        "confidence_level": [
+                            0.7604705393314362
+                        ]
+                    },
+                    "..."
+                ],
+                "model": "stk_nova",
+                "messages": []
+            },
+            "headers": {},
+            "schema": {
+                "title": "AnalyticsClearancePostResponse",
+                "required": [
+                    "data",
+                    "messages"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {}
+                    },
+                    "model": {
+                        "title": "Model",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "title": "Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Returned response has the following information:\n\n- **data**: is a list of results\n- **model**: is the model used in Stacks to analyze the text.\n- **messages**: is the list of messages sent from the backend."
+            }
+        },
+        {
+            "name": "post_infringement_v1_infringement_research_predict_post",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict",
+            "description": "Create a request item with the following information:\n\n- **text**: should be minimum length of `20` words for better performance. The maximum limit is `512` words, so longer queries will be truncated. (_required_).\n- **claims**: is a list of claims on which you're testing to see if the text is infringing. The maximum number of entries is `25` (_optional_).\n- **patent_number**: has the same format and limits as in the GET request (_optional_).\n- **model_name**: (_required_).",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/infringement-research/predict\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "eligibility_post_v1_101_eligibility_predict_post",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/101-eligibility/predict",
+            "description": "Create a request item with the following information:\n\n- **claim**: should be minimum length of `20` words for better performance. The maximum limit is `512` words, so longer queries will be truncated. (_required_).\n- **court_or_agency**: filters results based on a list of courts/agencies. The default value allows for top results from any US federal court (_optional_).\n- **judges**: filters results based on a list of judges responsible for making decisions on the cases returned. The default value allows for top results decided by any US federal judge (_optional_).\n- **from_date**: filters results starting from this date. Defaults to the decision date of the Alice case (_optional_).\n- **to_date**: filters results until this date. Defaults to today's date (_optional_).\n- **model_name**: is the name of the model for predicting (in)eligibility under step 1 and step 2 of the Alice test. Defaults to `stk_alora`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/101-eligibility/predict\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/101-eligibility/predict\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "post_infringement_clearance_v1_patent_analytics_clearance_post",
+            "url": "https://stacks-patent-similarity1.p.rapidapi.com/v1/patent-analytics/clearance",
+            "description": "Create a request item with the following information:\n\n- **text**: should be minimum length of `20` words for better performance. The maximum limit is `512` words, so longer queries will be truncated. (_required_).\n- **max_limit**: is the maximum number of results to be returned (_optional_). Default number is `10` and it cannot go over `100`.\n- **model_name**: (_required_).",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/patent-analytics/clearance\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://stacks-patent-similarity1.p.rapidapi.com/v1/patent-analytics/clearance\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"stacks-patent-similarity1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "AnalyticsClearancePostResponse",
+                "required": [
+                    "data",
+                    "messages"
+                ],
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {}
+                    },
+                    "model": {
+                        "title": "Model",
+                        "type": "string"
+                    },
+                    "messages": {
+                        "title": "Messages",
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "description": "Returned response has the following information:\n\n- **data**: is a list of results\n- **model**: is the model used in Stacks to analyze the text.\n- **messages**: is the list of messages sent from the backend."
+            }
+        }
+    ]
+}

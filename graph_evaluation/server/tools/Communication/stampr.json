@@ -1,0 +1,130 @@
+{
+    "product_id": "53aa6114e4b0b60946a30cf5",
+    "tool_description": "Postal mail has finally moved to the cloud. Mail letters online; Free Account; Fast & Secure; Support from Humans.",
+    "home_url": "https://rapidapi.com/community/api/stampr/",
+    "name": "Stampr",
+    "title": "Stampr",
+    "pricing": "FREE",
+    "tool_name": "Stampr",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 303,
+        "avgSuccessRate": 25,
+        "popularityScore": 1.5,
+        "__typename": "Score"
+    },
+    "host": "community-stampr.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Health",
+            "url": "https://community-stampr.p.rapidapi.com/health",
+            "description": "",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/health\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/health\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "3. Create new mailing",
+            "url": "https://community-stampr.p.rapidapi.com/mailings",
+            "description": "Returns: Mailing Object",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "batch_id",
+                    "type": "STRING",
+                    "description": "The Batch the Mailing belongs to.",
+                    "default": "717"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "The postal mailing address to send the mailing to.   (Not Implement Yet. This Can be Ignored) String provided should contain an address that conforms to the USPS CASS system -- http://en.wikipedia.org/wiki/Coding_Accuracy_Support_System",
+                    "default": "500 Montgomery St., San Francisco, CA"
+                },
+                {
+                    "name": "returnaddress",
+                    "type": "STRING",
+                    "description": "The postal return mailing address.  (Not Implement Yet. This Can be Ignored) String provided should contain an address that conforms to the USPS CASS system -- http://en.wikipedia.org/wiki/Coding_Accuracy_Support_System",
+                    "default": "500 Montgomery St., San Francisco, CA"
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "Valid values (case sensitive): -\"json\" - Key/Value data to be merged and rendered into Batch template -\"html\" - HTML to be rendered and sent as-is -\"pdf\" - PDF to be mailed -\"none\" - No data being provided. Send Batch template as-is.  This is the format of the data being provided.  -JSON is useful for variable-data mailings (mail merge), when combined with Batch template. -HTML is useful for the same reason, but provides more control to the end-user.  -PDF is identical to HTML, only data is rendered as PDF. -None allows many duplicate mailings (Batch template) to be sent.",
+                    "default": "none"
+                },
+                {
+                    "name": "data",
+                    "type": "STRING",
+                    "description": "The data payload in the format specified.  Data should be always be base64 encoded. Example:  HtmlData = ' hello  ' HtmlMailing.Data = Base64(HtmlData) PdfData = io.File('my.pdf') PdfMailing.Data = Base64(PdfData)",
+                    "default": "hello"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "md5",
+                    "type": "STRING",
+                    "description": "To ensure data integrity, an optional MD5 hash of the data can be supplied. See `data` above for details on how to encode data prior to md5 hashing. It is calculated as follows:  RawData = Raw_User_Data; Data = Base64( RawData ); Md5Hash = Md5( Data );",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/mailings\"\nquerystring = {\"batch_id\": \"717\", \"address\": \"500 Montgomery St., San Francisco, CA\", \"returnaddress\": \"500 Montgomery St., San Francisco, CA\", \"format\": \"none\", \"data\": \"hello\", \"md5\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/mailings\"\nquerystring = {\"batch_id\": \"717\", \"address\": \"500 Montgomery St., San Francisco, CA\", \"returnaddress\": \"500 Montgomery St., San Francisco, CA\", \"format\": \"none\", \"data\": \"hello\", \"md5\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "2. Create new batch",
+            "url": "https://community-stampr.p.rapidapi.com/batches",
+            "description": "Create a new, empty batch container to be used with Mailings.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "config_id",
+                    "type": "STRING",
+                    "description": "The configuration all the mailings in this batch will conform to.",
+                    "default": "719"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "template",
+                    "type": "STRING",
+                    "description": "This will be the base HTML template used for all mailings created in this batch. Templates use mustache syntax. -- Details: http://mustache.github.io/  Example Template:  \"Hello {{name}}!\"  And then `$name` can be sent via the Mailing and the template will be merged with the data and rendered.",
+                    "default": ""
+                },
+                {
+                    "name": "status",
+                    "type": "STRING",
+                    "description": "Valid values (case sensitive): * \"processing\" (default, if excluded) * \"hold\"  When mailings are created, they are printed and shipped as soon as possible. Set a batch to \"hold\" and mailing will not be printed until the batch status is changed to processing.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/batches\"\nquerystring = {\"config_id\": \"719\", \"template\": \"\", \"status\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/batches\"\nquerystring = {\"config_id\": \"719\", \"template\": \"\", \"status\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "1. Create new config",
+            "url": "https://community-stampr.p.rapidapi.com/configs",
+            "description": "Create a new mailing configuration to be used with Batches.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/configs\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://community-stampr.p.rapidapi.com/configs\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"community-stampr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "stampr"
+}

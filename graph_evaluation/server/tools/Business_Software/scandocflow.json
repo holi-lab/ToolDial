@@ -1,0 +1,183 @@
+{
+    "tool_name": "ScanDocFlow",
+    "tool_description": "API for extraction keyfields from documents, such as: invoices, checks, receipts, taxforms etc. We use ML, OCR and NLP to get information from documents",
+    "title": "ScanDocFlow",
+    "pricing": "FREE",
+    "score": null,
+    "home_url": "https://rapidapi.com/JohnSt/api/scandocflow/",
+    "host": "scandocflow.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Checkstatusofrequest",
+            "url": "https://scandocflow.p.rapidapi.com/documents/status",
+            "description": "Return status of request",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "request_id",
+                    "type": "STRING",
+                    "description": "(Required) request id of previously sended request",
+                    "default": "\"{{request_id}}\""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/status\"\nquerystring = {\"request_id\": request_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Extract(synchronousAPIendpoint)",
+            "url": "https://scandocflow.p.rapidapi.com/documents/extract",
+            "description": "This is synchronys API endpoint for getting key fields from attached file(s). It may take up to 2 minutes for response depends on pages count in request. We recommend using an asynchronous API for embedding. Synchronus APIs presented more for demonstration purposes.\n\n<h4>How it works:</h4>\n<ul>\n<li>step 1: recognizes all pages from attached file or couple of files</li>\n<li>step 2: merge/split pages into structured Documents (for example you uploaded 3 separate captured photo of one original invoice, so as a result we will get one Document)</li>\n<li>step 3: extract key field values atached to choosed DocumentType</li>\n<li>step 4: return extracted key fields with information about how Documents was generated from original attached file(s)</li>\n</ul>",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "invoice"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "eng"
+                },
+                {
+                    "name": "files",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[\"<binary>\",\"<binary>\"]"
+                },
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "(Required) Content-Type of the request",
+                    "default": "\"multipart/form-data\""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/extract\"\nquerystring = {\"type\": type, \"lang\": lang, \"files\": files, \"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Extract(asynchronousAPIendpoint)",
+            "url": "https://scandocflow.p.rapidapi.com/documents/extractAsync",
+            "description": "This is asynchronys API endpoint for getting key fields from attached file(s). It may take up to 2 minutes for response depends on pages count in request. How it works: \n  - step 1: recognizes all pages from attached file or couple of files\n  - step 2: merge/split pages into structured Documents (for example you uploaded 3 separate captured photo of one original invoice, so as a result we will get one Document)\n  - step 3: extract key field values atached to choosed DocumentType\n  - step 4: sending to webhook URL extracted key fields with information about how Documents was generated from original attached file(s)\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "files",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[\"<binary>\",\"<binary>\"]"
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "invoice"
+                },
+                {
+                    "name": "webhookUrl",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{{webhookUrl}}"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "eng"
+                },
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "\"multipart/form-data\""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/extractAsync\"\nquerystring = {\"files\": files, \"type\": type, \"webhookUrl\": webhookurl, \"lang\": lang, \"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Extract(synchronousAPIendpoint)",
+            "url": "https://scandocflow.p.rapidapi.com/documents/extract",
+            "description": "This is synchronys API endpoint for getting key fields from attached file(s). It may take up to 2 minutes for response depends on pages count in request. We recommend using an asynchronous API for embedding. Synchronus APIs presented more for demonstration purposes.\n\n<h4>How it works:</h4>\n<ul>\n<li>step 1: recognizes all pages from attached file or couple of files</li>\n<li>step 2: merge/split pages into structured Documents (for example you uploaded 3 separate captured photo of one original invoice, so as a result we will get one Document)</li>\n<li>step 3: extract key field values atached to choosed DocumentType</li>\n<li>step 4: return extracted key fields with information about how Documents was generated from original attached file(s)</li>\n</ul>",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "invoice"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "eng"
+                },
+                {
+                    "name": "files",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[\"<binary>\",\"<binary>\"]"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/extract\"\nquerystring = {\"type\": \"invoice\", \"lang\": \"eng\", \"files\": \"[\\\"<binary>\\\",\\\"<binary>\\\"]\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/extract\"\nquerystring = {\"type\": \"invoice\", \"lang\": \"eng\", \"files\": \"[\\\"<binary>\\\",\\\"<binary>\\\"]\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Extract(asynchronousAPIendpoint)",
+            "url": "https://scandocflow.p.rapidapi.com/documents/extractAsync",
+            "description": "This is asynchronys API endpoint for getting key fields from attached file(s). It may take up to 2 minutes for response depends on pages count in request. How it works: \n  - step 1: recognizes all pages from attached file or couple of files\n  - step 2: merge/split pages into structured Documents (for example you uploaded 3 separate captured photo of one original invoice, so as a result we will get one Document)\n  - step 3: extract key field values atached to choosed DocumentType\n  - step 4: sending to webhook URL extracted key fields with information about how Documents was generated from original attached file(s)\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "files",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "[\"<binary>\",\"<binary>\"]"
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "invoice"
+                },
+                {
+                    "name": "webhookUrl",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{{webhookUrl}}"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "eng"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/extractAsync\"\nquerystring = {\"files\": \"[\\\"<binary>\\\",\\\"<binary>\\\"]\", \"type\": \"invoice\", \"webhookUrl\": \"{{webhookUrl}}\", \"lang\": \"eng\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://scandocflow.p.rapidapi.com/documents/extractAsync\"\nquerystring = {\"files\": \"[\\\"<binary>\\\",\\\"<binary>\\\"]\", \"type\": \"invoice\", \"webhookUrl\": \"{{webhookUrl}}\", \"lang\": \"eng\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"scandocflow.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

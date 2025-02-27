@@ -1,0 +1,366 @@
+{
+    "tool_name": "Appointment System API",
+    "tool_description": "Appointment System Api with user operations and admin operations. Api has all appointment operations for a clinic",
+    "title": "Appointment System API",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 520,
+        "avgSuccessRate": 90,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/endertasar/api/appointment-system-api/",
+    "host": "appointment-system-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Create Account",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/createAccount",
+            "description": "!!!Important -- For testing Endpoint please change username and clinicName parameters. With the default sample parameters it returns warning. \n\nThis Endpoint is use for Creating Account in Appointment System. It needs username, password, clinicName, userFirstName, userLastName and interval as query parameters. \nParameter descriptions:\nusername --> parameter for username in the system\npassword --> password for the username\nclinicName --> Name of the clinic as username it doesn't allows space character\nuserFirstName --> Is using for Users First Name\nuserLastName --> Is using for Users Last Name\ninterval --> It sets the appointment duration. In V1 it allows 15 and 30 for interval. If it is not set its default value is 30.\n\nReturn Value\nThis Endpoint returns string value. \nIf you get \"OK\" value it means that you successfully create the acoount. \nIf you get \"W1\" it means a warning that you are trying to create an existing clinicName.\nIf you get \"W2\" it meas a warning that you are trying to create an existing username.\nIf you get \"E1\" it means a programmatic internal error. If you get E1 in the next calls you can get help from us.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "userFirstName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "Appointment"
+                },
+                {
+                    "name": "userLastName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "System"
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoPass"
+                },
+                {
+                    "name": "clinicName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoClinic"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "interval",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "15"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/createAccount\"\nquerystring = {\"userFirstName\": userfirstname, \"userLastName\": userlastname, \"password\": password, \"clinicName\": clinicname, \"interval\": interval, \"username\": username}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get Appointments",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/getAppointments",
+            "description": "EndPoints returns all appointments in the date. \n\nParameter Description :\ndate : the date the appointments is requested\nclinicName : Name of the clinic\n\nReturn Value : \nIt returns json object. Json contains all the appointments in requested date.\n\nJson Format :\n\nhLabel:\"07:00\"\nid:5\naDay:\"2022-09-09T00:00:00\"\naHour:58\naName:\"Efe Kemal TASAR\"\naTel:\"+905376853054\"\naType:\"Appoint\"",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2022.09.09"
+                },
+                {
+                    "name": "clinicName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/getAppointments\"\nquerystring = {\"date\": date, \"clinicName\": clinicname}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Delete Appointment",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/deleteappointment",
+            "description": "Endpoint to delete an appointment. Authorization required for the delete operation. Username and token parameters are using for that.\n\nParameter Description:\nappId : Id of the appointment to be deleted\nusername :  username of the user\ntoken : Accesskey for the username. Can be get from Login EndPoint.\n\nReturn Value : \nEndPoint returns string value.\n\nIf you get \"OK\" value it means that record is successfully updated.\nIf you get \"W1\" it means a warning the authorization is unsuccessful. username or token value is invalid.\nIf you get \"W2\" a warning from system. If still get \"W2\" in the next attempts please contact with us.\nIf you get \"W3\" it means a warning that there is not a record which wanted to delete. Id value is incorrrect.\nIf you get \"E1\" it means a programmatic internal error. If you get E1 in the next calls you can get help from us.",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "appId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "4"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "ZGTRPY"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/deleteappointment\"\nquerystring = {\"appId\": appid, \"token\": token, \"username\": username}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Appointment Time List",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/getHoursByDayByClinic",
+            "description": "EndPoint gets Appointment Time List by Day. EndPoint gets date parameter and returns List of Appointment Times of that date. In the list there is available field, This field indicates whether there is an appointment at the specified time.\nParameter Descriptions : \ndate --> The day that hours will be return\nclinicName --> Name of the clinic\n\nReturn Value: \nThe EndPoint returns json object in format below.\n[\n{\"id\":1\n\"hLabel\":\"07:00\"\n\"available\":\"true\"\n\"hour\":7\n\"minute\":0\n\"interval\":15\n},\n......\n]\n\nId --> is the key value of the record.\nhLabel --> is the string format of the time\navailable --> if is true that means the time is suitable for new record. If it is false that means there is another appointment in this time interval. \nhour --> Hour of the appointment time.\nminute --> Minute of the appointment time.\ninterval  --> this field points out to the interval whether 15 minutes or 30 minutes",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2022.09.05"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "clinicName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoClinic"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/getHoursByDayByClinic\"\nquerystring = {\"date\": date, \"clinicName\": clinicname}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Login",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/login",
+            "description": "This Endpoint is use for login to the system and getting the Api Key for the clinic. It needs username and password as query parameters. \nParameter Descriptions:\nusername --> parameter for username in the system. It is the same with username while creating the account.\npassword --> password for the username. It is same with the password while creating the acoount.\n\nReturn Value\nThis Endpoint returns string value.\nIf you get a sting with 6+ long this means that you have successfully passed username and password check and you are getting the Accesskey fort he system.\nIf you get \u201cW1\u201d it means a warning that your username doesn\u2019t exists\nIf you get \u201cW2\u201d it means a warning that your password is not correct.\nIt you get \u201cE1\u201d it means a programmatic internal error. If you get E1 in the next calls you can get help from us.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoPass"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/login\"\nquerystring = {\"password\": password, \"username\": username}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Update Appointment",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/updateAppointment",
+            "description": "EndPoint is for updating an appointment.  For update authorization is required. username and token parameters is for authorization. \n\nParameter Description : \nusername --> username of the clinic\ntoken --> Accesskey for the username. Can be get from Login EndPoint.\n\nFrom the body appointment record details is getting as json object. The format of the json is below:\n{\n    \"id\": 5,\n    \"aDay\": \"2022-09-05\",\n    \"aHour\": 57,\n    \"aName\": \"Name\",\n    \"aTel\": \"tel\",\n    \"aType\": \"appoint\"\n}\n\nReturn Value : \nEndPoint returns string value.\n\nIf you get \"OK\" value it means that record is successfully updated.\nIf you get \"W1\" it means a warning the authorization is unsuccessful. username or token value is invalid.\nIf you get \"W2\" a warning from system. If still get \"W2\" in the next attempts please contact with us.\nIf you get \"W3\" it means a warning that there is not a record which wanted to change. Id value is incorrrect.\nIf you get \"W4\" it means a warning that new Appointment Time is not available. This means that Appointment Time is not suitable.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "ZGTRPY"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/updateAppointment\"\nquerystring = {\"username\": username, \"token\": token}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Add Appointment",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/addappointment",
+            "description": "For Making an Appointment",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "clinicName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoClinic"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/addappointment\"\nquerystring = {\"clinicName\": clinicname}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Update Appointment Time Availability",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/updatehTable",
+            "description": "Updating availablity of an hour. If available field sets to false it doesn't appear in the Get Hour List EndPoint.\nEndPoint gets username and token parameter from query and a json object from body.\n\nParameter Descriptions: \nusername --> username of the systemuser\ntoken --> token (accesskey) which can be get from login EndPoint\n\nJson Object Detail:\n{\n\t\"id\": (Id of hour - its from Get Hour List EndPoint) ,\n\t\"available\": \"false\" (True -->  sets Hour visible in Get Hour List EndPoint, False --> sets Hour invisible in Get Hour List EndPoint )\n}\n\nReturn Value : \nEndPoint returns string value.\nIf you get \"OK\" value it means that you successfully change the availbility of record.\nIf you get \"W1\" it means a warning that incorrect token.\nIf you get \"E1\" it means a programmatic internal error. If you get E1 in the next calls you can get help from us.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "ZGTRPY"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/updatehTable\"\nquerystring = {\"username\": username, \"token\": token}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create Account",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/createAccount",
+            "description": "!!!Important -- For testing Endpoint please change username and clinicName parameters. With the default sample parameters it returns warning. \n\nThis Endpoint is use for Creating Account in Appointment System. It needs username, password, clinicName, userFirstName, userLastName and interval as query parameters. \nParameter descriptions:\nusername --> parameter for username in the system\npassword --> password for the username\nclinicName --> Name of the clinic as username it doesn't allows space character\nuserFirstName --> Is using for Users First Name\nuserLastName --> Is using for Users Last Name\ninterval --> It sets the appointment duration. In V1 it allows 15 and 30 for interval. If it is not set its default value is 30.\n\nReturn Value\nThis Endpoint returns string value. \nIf you get \"OK\" value it means that you successfully create the acoount. \nIf you get \"W1\" it means a warning that you are trying to create an existing clinicName.\nIf you get \"W2\" it meas a warning that you are trying to create an existing username.\nIf you get \"E1\" it means a programmatic internal error. If you get E1 in the next calls you can get help from us.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "userFirstName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "Appointment"
+                },
+                {
+                    "name": "userLastName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "System"
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoPass"
+                },
+                {
+                    "name": "clinicName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoClinic"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "interval",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "15"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/createAccount\"\nquerystring = {\"userFirstName\": \"Appointment\", \"userLastName\": \"System\", \"password\": \"DemoPass\", \"clinicName\": \"DemoClinic\", \"interval\": \"15\", \"username\": \"DemoUser\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/createAccount\"\nquerystring = {\"userFirstName\": \"Appointment\", \"userLastName\": \"System\", \"password\": \"DemoPass\", \"clinicName\": \"DemoClinic\", \"interval\": \"15\", \"username\": \"DemoUser\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Update Appointment",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/updateAppointment",
+            "description": "EndPoint is for updating an appointment.  For update authorization is required. username and token parameters is for authorization. \n\nParameter Description : \nusername --> username of the clinic\ntoken --> Accesskey for the username. Can be get from Login EndPoint.\n\nFrom the body appointment record details is getting as json object. The format of the json is below:\n{\n    \"id\": 5,\n    \"aDay\": \"2022-09-05\",\n    \"aHour\": 57,\n    \"aName\": \"Name\",\n    \"aTel\": \"tel\",\n    \"aType\": \"appoint\"\n}\n\nReturn Value : \nEndPoint returns string value.\n\nIf you get \"OK\" value it means that record is successfully updated.\nIf you get \"W1\" it means a warning the authorization is unsuccessful. username or token value is invalid.\nIf you get \"W2\" a warning from system. If still get \"W2\" in the next attempts please contact with us.\nIf you get \"W3\" it means a warning that there is not a record which wanted to change. Id value is incorrrect.\nIf you get \"W4\" it means a warning that new Appointment Time is not available. This means that Appointment Time is not suitable.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "ZGTRPY"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/updateAppointment\"\nquerystring = {\"username\": \"DemoUser\", \"token\": \"ZGTRPY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/updateAppointment\"\nquerystring = {\"username\": \"DemoUser\", \"token\": \"ZGTRPY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Add Appointment",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/addappointment",
+            "description": "For Making an Appointment",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "clinicName",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoClinic"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/addappointment\"\nquerystring = {\"clinicName\": \"DemoClinic\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/addappointment\"\nquerystring = {\"clinicName\": \"DemoClinic\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Update Appointment Time Availability",
+            "url": "https://appointment-system-api.p.rapidapi.com/appointment/updatehTable",
+            "description": "Updating availablity of an hour. If available field sets to false it doesn't appear in the Get Hour List EndPoint.\nEndPoint gets username and token parameter from query and a json object from body.\n\nParameter Descriptions: \nusername --> username of the systemuser\ntoken --> token (accesskey) which can be get from login EndPoint\n\nJson Object Detail:\n{\n\t\"id\": (Id of hour - its from Get Hour List EndPoint) ,\n\t\"available\": \"false\" (True -->  sets Hour visible in Get Hour List EndPoint, False --> sets Hour invisible in Get Hour List EndPoint )\n}\n\nReturn Value : \nEndPoint returns string value.\nIf you get \"OK\" value it means that you successfully change the availbility of record.\nIf you get \"W1\" it means a warning that incorrect token.\nIf you get \"E1\" it means a programmatic internal error. If you get E1 in the next calls you can get help from us.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "DemoUser"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "ZGTRPY"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/updatehTable\"\nquerystring = {\"username\": \"DemoUser\", \"token\": \"ZGTRPY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://appointment-system-api.p.rapidapi.com/appointment/updatehTable\"\nquerystring = {\"username\": \"DemoUser\", \"token\": \"ZGTRPY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"appointment-system-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

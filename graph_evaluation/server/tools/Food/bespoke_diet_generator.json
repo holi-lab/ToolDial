@@ -1,0 +1,1148 @@
+{
+    "product_id": "api_7a9bcc3e-10a9-4f9c-b02c-7a63b5f51e24",
+    "tool_description": "Our API generates a complete meal plan that is specific to the nutrition counseling world. We create fully detailed, personalized meal plans with specific ingredients / quantities and little cooking skill required. For better flexibility, our ingredient replacement algorithm creates a template where users can adapt their menu even more to fit their desires.",
+    "home_url": "https://rapidapi.com/genez-io-genez-io-default/api/bespoke-diet-generator/",
+    "name": "Bespoke Diet Generator",
+    "title": "Bespoke Diet Generator",
+    "pricing": "FREEMIUM",
+    "tool_name": "Bespoke Diet Generator",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 225,
+        "avgSuccessRate": 79,
+        "popularityScore": 9.5,
+        "__typename": "Score"
+    },
+    "host": "bespoke-diet-generator.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get food replacement options in diet",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet/{dayIndex}/BREAKFAST/{ingredientId}/replace",
+            "description": "Retrieve the list of ingredients that can replace another ingredient in an existing diet.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "dayIndex",
+                    "type": "NUMBER",
+                    "description": "The index of the day for a given diet",
+                    "default": ""
+                },
+                {
+                    "name": "ingredientId",
+                    "type": "STRING",
+                    "description": "The id of the ingredient that will be changed.",
+                    "default": ""
+                },
+                {
+                    "name": "mealType",
+                    "type": "STRING",
+                    "description": "The meal type for which the change should be made.",
+                    "default": "BREAKFAST"
+                },
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": "Existing user.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet/{dayIndex}/BREAKFAST/{ingredientId}/replace\"\nquerystring = {\"dayIndex\": \"\", \"ingredientId\": \"\", \"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet/{dayIndex}/{mealtype}/{ingredientId}/replace\"\nquerystring = {\"dayIndex\": \"\", \"ingredientId\": \"\", \"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get user's information",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/user/{userId}",
+            "description": "Retrieve the information of the user with the matching user ID.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": "Id of an existing user.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}\"\nquerystring = {\"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}\"\nquerystring = {\"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "status": "NOT_FOUND",
+                    "message": "The user ({userId}) does not exist."
+                }
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "User",
+                "type": "object",
+                "description": "",
+                "examples": [
+                    {
+                        "id": 0,
+                        "height": 170,
+                        "weight": 90,
+                        "dateOfBirth": "1997-10-31",
+                        "sex": "string",
+                        "createDate": "2019-08-24",
+                        "activityLevel": "mostlySedentary"
+                    }
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique identifier for the given user."
+                    },
+                    "height": {
+                        "type": "number",
+                        "description": "Height in cm.",
+                        "minimum": 20,
+                        "maximum": 300
+                    },
+                    "weight": {
+                        "type": "number",
+                        "description": "Weight in kg."
+                    },
+                    "dateOfBirth": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The user's birth date."
+                    },
+                    "sex": {
+                        "type": "string",
+                        "description": "Biological sex.",
+                        "enum": [
+                            "MALE",
+                            "FEMALE"
+                        ]
+                    },
+                    "createDate": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "The date that the user was created."
+                    },
+                    "activityLevel": {
+                        "type": "string",
+                        "enum": [
+                            "MOSTLY_SEDENTARY",
+                            "VERY_ACTIVE",
+                            "MODERATELY_ACTIVE",
+                            "SOMEWHAT_ACTIVE",
+                            "SOMEWHAT_SEDENTARY"
+                        ],
+                        "description": "How active the user is."
+                    }
+                },
+                "required": [
+                    "id",
+                    "height",
+                    "weight",
+                    "dateOfBirth",
+                    "sex",
+                    "createDate",
+                    "activityLevel"
+                ]
+            }
+        },
+        {
+            "name": "Retrieve user's food preferences.",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/ingredients/excluded",
+            "description": "Retrieve the list of all ingredients that will be excluded from user's diets.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": "The user that does not want these ingredients in their diet.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/ingredients/excluded\"\nquerystring = {\"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/ingredients/excluded\"\nquerystring = {\"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "status": "NOT_FOUND",
+                    "message": "The user ({userId}) does not exist."
+                }
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get user's diet",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet",
+            "description": "Return the diet configuration and the diet plan for each day.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": "The user for which the diet will be generated.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet\"\nquerystring = {\"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet\"\nquerystring = {\"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "status": "NOT_FOUND",
+                    "message": "The user ({userId}) does not exist."
+                }
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get user's diet for a specific day",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet/{dayIndex}",
+            "description": "Get the current diet plan for the specified user for a specific day.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "dayIndex",
+                    "type": "STRING",
+                    "description": "The day index of the diet.",
+                    "default": ""
+                },
+                {
+                    "name": "userId",
+                    "type": "STRING",
+                    "description": "The user id.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet/{dayIndex}\"\nquerystring = {\"dayIndex\": \"\", \"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user/{userId}/diet/{dayIndex}\"\nquerystring = {\"dayIndex\": \"\", \"userId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "get-ingredients",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/ingredients",
+            "description": "Retrieve all the ingredients.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/ingredients\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/ingredients\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": [
+                {
+                    "id": "616ec98c27b0e601644583eb",
+                    "name": "Vegetables",
+                    "ingredients": [
+                        {
+                            "id": "616eca55953bf31b472e0e39",
+                            "name": "Arugula"
+                        },
+                        {
+                            "id": "616eca55953bf31b472e0e3a",
+                            "name": "Asian Stir-fry vegetables"
+                        },
+                        {
+                            "id": "616eca56953bf31b472e0e3b",
+                            "name": "Mixed grilled vegetables"
+                        },
+                        {
+                            "id": "616eca57953bf31b472e0e40",
+                            "name": "Baby spinach"
+                        },
+                        {
+                            "id": "616eca59953bf31b472e0e48",
+                            "name": "Beets, cooked"
+                        },
+                        {
+                            "id": "616eca5a953bf31b472e0e4c",
+                            "name": "Beans, black, dry"
+                        },
+                        {
+                            "id": "616eca5c953bf31b472e0e52",
+                            "name": "Lentils, boiled"
+                        },
+                        {
+                            "id": "616eca5d953bf31b472e0e57",
+                            "name": "Broccoli, raw"
+                        },
+                        {
+                            "id": "616eca5e953bf31b472e0e58",
+                            "name": "Mushroom, portabella"
+                        },
+                        {
+                            "id": "616eca60953bf31b472e0e5f",
+                            "name": "Baked beans, canned, fat free"
+                        },
+                        {
+                            "id": "616eca60953bf31b472e0e60",
+                            "name": "Chickpeas, canned"
+                        },
+                        {
+                            "id": "616eca60953bf31b472e0e62",
+                            "name": "Beans, Kidney, red, canned"
+                        },
+                        {
+                            "id": "616eca61953bf31b472e0e65",
+                            "name": "Carrots"
+                        },
+                        {
+                            "id": "616eca62953bf31b472e0e66",
+                            "name": "Cauliflower, raw"
+                        },
+                        {
+                            "id": "616eca62953bf31b472e0e67",
+                            "name": "Celery sticks"
+                        },
+                        {
+                            "id": "616eca63953bf31b472e0e6a",
+                            "name": "Tomatoes,grape, ripe"
+                        },
+                        {
+                            "id": "616eca68953bf31b472e0e7c",
+                            "name": "Cucumbers"
+                        },
+                        {
+                            "id": "616eca68953bf31b472e0e7d",
+                            "name": "Seaweed, dehydrated"
+                        },
+                        {
+                            "id": "616eca6a953bf31b472e0e84",
+                            "name": "Frozen edamame in the pod"
+                        },
+                        {
+                            "id": "616eca6a953bf31b472e0e85",
+                            "name": "Eggplant"
+                        },
+                        {
+                            "id": "616eca6e953bf31b472e0e93",
+                            "name": "Green beans, frozen"
+                        },
+                        {
+                            "id": "616eca6f953bf31b472e0e95",
+                            "name": "Oven roasted seasoned vegetables, frozen"
+                        },
+                        {
+                            "id": "616eca6f953bf31b472e0e97",
+                            "name": "Broccoli, cauliflower, carrots frozen mix"
+                        },
+                        {
+                            "id": "616eca70953bf31b472e0e98",
+                            "name": "Asian medley, frozen"
+                        },
+                        {
+                            "id": "616eca70953bf31b472e0e99",
+                            "name": "Mixed vegetables(carrots, corn, green beans, peas), frozen "
+                        },
+                        {
+                            "id": "616eca71953bf31b472e0e9b",
+                            "name": "Green peas, frozen"
+                        },
+                        {
+                            "id": "616eca71953bf31b472e0e9d",
+                            "name": "Stir fry vegetable mix, frozen"
+                        },
+                        {
+                            "id": "616eca74953bf31b472e0ea6",
+                            "name": "Green bell pepper"
+                        },
+                        {
+                            "id": "616eca77953bf31b472e0eae",
+                            "name": "Hummus"
+                        },
+                        {
+                            "id": "616eca79953bf31b472e0eb6",
+                            "name": "Lentil pasta"
+                        },
+                        {
+                            "id": "616eca7d953bf31b472e0ec2",
+                            "name": "Garden salad blend "
+                        },
+                        {
+                            "id": "616eca7d953bf31b472e0ec3",
+                            "name": "Mixed lettuce salad"
+                        },
+                        {
+                            "id": "616eca85953bf31b472e0ee1",
+                            "name": "Potatoes"
+                        },
+                        {
+                            "id": "616eca86953bf31b472e0ee4",
+                            "name": "Radishes"
+                        },
+                        {
+                            "id": "616eca88953bf31b472e0eea",
+                            "name": "Mushrooms, white "
+                        },
+                        {
+                            "id": "616eca88953bf31b472e0eec",
+                            "name": "Butternut squash"
+                        },
+                        {
+                            "id": "616eca8a953bf31b472e0ef3",
+                            "name": "Red bell pepper"
+                        },
+                        {
+                            "id": "616eca8b953bf31b472e0ef4",
+                            "name": "Cabbage, red"
+                        },
+                        {
+                            "id": "616eca8c953bf31b472e0ef8",
+                            "name": "Red pepper"
+                        },
+                        {
+                            "id": "616eca91953bf31b472e0f0c",
+                            "name": "Spinach, frozen"
+                        },
+                        {
+                            "id": "616eca92953bf31b472e0f10",
+                            "name": "Potatoes, sweet potatoes"
+                        },
+                        {
+                            "id": "616eca93953bf31b472e0f14",
+                            "name": "Tomatoes"
+                        },
+                        {
+                            "id": "616eca96953bf31b472e0f1c",
+                            "name": "Cabbage, white"
+                        },
+                        {
+                            "id": "616eca9a953bf31b472e0f27",
+                            "name": "Zucchini"
+                        },
+                        {
+                            "id": "616f8d3917631b48b113df24",
+                            "name": "Asparagus"
+                        },
+                        {
+                            "id": "616f8e3d17631b48b113df25",
+                            "name": "Sugar snap peas"
+                        },
+                        {
+                            "id": "616f8ee517631b48b113df26",
+                            "name": "Romaine lettuce"
+                        },
+                        {
+                            "id": "616f8f4f17631b48b113df27",
+                            "name": "Cabbage, Napa cabbage"
+                        },
+                        {
+                            "id": "616f8feb17631b48b113df28",
+                            "name": "Kale leaves"
+                        },
+                        {
+                            "id": "616f910a17631b48b113df29",
+                            "name": "Bok choy"
+                        },
+                        {
+                            "id": "6176ebe11e91e114a6146362",
+                            "name": "Brussel sprouts, frozen"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98c27b0e601644583ea",
+                    "name": "Dairy and substitutes",
+                    "ingredients": [
+                        {
+                            "id": "616eca5d953bf31b472e0e56",
+                            "name": "Cheese, Brie "
+                        },
+                        {
+                            "id": "616eca5f953bf31b472e0e5d",
+                            "name": "Cheese, Colby Jack"
+                        },
+                        {
+                            "id": "616eca60953bf31b472e0e61",
+                            "name": "Milk alternative, Coconut milk, used in cooking"
+                        },
+                        {
+                            "id": "616eca62953bf31b472e0e68",
+                            "name": "Cheese, Cheddar"
+                        },
+                        {
+                            "id": "616eca66953bf31b472e0e75",
+                            "name": "Milk alternative, Yogurt, coconut, unsweetened"
+                        },
+                        {
+                            "id": "616eca66953bf31b472e0e77",
+                            "name": "Cheese, cottage cheese, regular fat"
+                        },
+                        {
+                            "id": "616eca67953bf31b472e0e78",
+                            "name": "Cheese, cottage cheese, low fat"
+                        },
+                        {
+                            "id": "616eca67953bf31b472e0e79",
+                            "name": "Milk alternative, soy milk, unsweetened"
+                        },
+                        {
+                            "id": "616eca6b953bf31b472e0e87",
+                            "name": "Cheese, Swiss cheese"
+                        },
+                        {
+                            "id": "616eca6c953bf31b472e0e8a",
+                            "name": "Cheese, Feta cheese, regular fat"
+                        },
+                        {
+                            "id": "616eca72953bf31b472e0e9e",
+                            "name": "Cheese, goat cheese, plain"
+                        },
+                        {
+                            "id": "616eca72953bf31b472e0e9f",
+                            "name": "Cheese, goat cheese semi-soft"
+                        },
+                        {
+                            "id": "616eca72953bf31b472e0ea0",
+                            "name": "Cheese, Gorgonzola "
+                        },
+                        {
+                            "id": "616eca73953bf31b472e0ea4",
+                            "name": "Yogurt, Greek yogurt low fat"
+                        },
+                        {
+                            "id": "616eca75953bf31b472e0ea9",
+                            "name": "Cheese, light cream cheese spread"
+                        },
+                        {
+                            "id": "616eca7b953bf31b472e0ebc",
+                            "name": "Cheese, Blue cheese"
+                        },
+                        {
+                            "id": "616eca7b953bf31b472e0ebd",
+                            "name": "Milk, low fat"
+                        },
+                        {
+                            "id": "616eca7b953bf31b472e0ebe",
+                            "name": "Milk, regular fat"
+                        },
+                        {
+                            "id": "616eca7d953bf31b472e0ec4",
+                            "name": "Cheese, Mozarella"
+                        },
+                        {
+                            "id": "616eca81953bf31b472e0ed1",
+                            "name": "Cheese, Parmesan"
+                        },
+                        {
+                            "id": "616eca84953bf31b472e0edb",
+                            "name": "Milk alternatives, Almond milk, no added sugar"
+                        },
+                        {
+                            "id": "616eca8d953bf31b472e0efc",
+                            "name": "Cheese, Ricotta, part skimmed"
+                        },
+                        {
+                            "id": "616eca90953bf31b472e0f09",
+                            "name": "Milk alternatives, Soy yogurt, no added sugar"
+                        },
+                        {
+                            "id": "616eca93953bf31b472e0f13",
+                            "name": "Milk alternatives, Tofu, firm"
+                        },
+                        {
+                            "id": "616eca98953bf31b472e0f25",
+                            "name": "Milk alternatives, Coconut milk, organic, unsweetened"
+                        },
+                        {
+                            "id": "616eca99953bf31b472e0f26",
+                            "name": "Yogurt drink low fat, sugar free"
+                        },
+                        {
+                            "id": "616fa3ab17631b48b113df2a",
+                            "name": "Milk alternatives, Dairy-free cheddar cheese substitute"
+                        },
+                        {
+                            "id": "616fa3f217631b48b113df2b",
+                            "name": "Milk alternatives, Dairy free mozzarella cheese substitute"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98d27b0e601644583ed",
+                    "name": "Fish and seafood",
+                    "ingredients": [
+                        {
+                            "id": "616eca61953bf31b472e0e63",
+                            "name": "Fish, salmon, canned in water"
+                        },
+                        {
+                            "id": "616eca6e953bf31b472e0e91",
+                            "name": "Fish, salmon fillet, fresh"
+                        },
+                        {
+                            "id": "616eca71953bf31b472e0e9c",
+                            "name": "Shrimp tails, peeled, frozen"
+                        },
+                        {
+                            "id": "616eca7a953bf31b472e0ebb",
+                            "name": "Fish, Salmon, marinated fillet"
+                        },
+                        {
+                            "id": "616eca7e953bf31b472e0ec8",
+                            "name": "Fish, Tilapia filet"
+                        },
+                        {
+                            "id": "616eca87953bf31b472e0ee8",
+                            "name": "Fish, Alaska Cod Fillet, raw"
+                        },
+                        {
+                            "id": "616eca89953bf31b472e0eed",
+                            "name": "Fish, Flounder fillet"
+                        },
+                        {
+                            "id": "616eca89953bf31b472e0ef0",
+                            "name": "Fish, Mahi Mahi Fillet"
+                        },
+                        {
+                            "id": "616eca8e953bf31b472e0eff",
+                            "name": "Fish, Sardines, canned in oil, solids"
+                        },
+                        {
+                            "id": "616eca8f953bf31b472e0f04",
+                            "name": "Fish, Salmon, smoked fillets"
+                        },
+                        {
+                            "id": "616eca8f953bf31b472e0f05",
+                            "name": "Fish, Tuna, smoked"
+                        },
+                        {
+                            "id": "616eca94953bf31b472e0f15",
+                            "name": "Fish, Halibut Fillet"
+                        },
+                        {
+                            "id": "616eca94953bf31b472e0f16",
+                            "name": "Fish, Tuna, canned in brine, solids"
+                        },
+                        {
+                            "id": "616eca95953bf31b472e0f18",
+                            "name": "Fish, Tuna Steak"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98c27b0e601644583e9",
+                    "name": "Fats",
+                    "ingredients": [
+                        {
+                            "id": "616eca54953bf31b472e0e36",
+                            "name": "Almond butter, unsweetened"
+                        },
+                        {
+                            "id": "616eca56953bf31b472e0e3e",
+                            "name": "Avocado chunks"
+                        },
+                        {
+                            "id": "616eca5f953bf31b472e0e5b",
+                            "name": "Butter, light, stick"
+                        },
+                        {
+                            "id": "616eca6b953bf31b472e0e88",
+                            "name": "Oil, Extra virgin olive oil"
+                        },
+                        {
+                            "id": "616eca73953bf31b472e0ea2",
+                            "name": "Oil, Grapeseed oil"
+                        },
+                        {
+                            "id": "616eca76953bf31b472e0eab",
+                            "name": "Seeds, hemp seeds, raw"
+                        },
+                        {
+                            "id": "616eca7f953bf31b472e0ec9",
+                            "name": "Olives, various"
+                        },
+                        {
+                            "id": "616eca82953bf31b472e0ed4",
+                            "name": "Peanut butter, no added sugar"
+                        },
+                        {
+                            "id": "616eca83953bf31b472e0ed9",
+                            "name": "Seeds, pistachios, shelled, raw"
+                        },
+                        {
+                            "id": "616eca87953bf31b472e0ee6",
+                            "name": "Seeds,Almonds, raw"
+                        },
+                        {
+                            "id": "616eca87953bf31b472e0ee7",
+                            "name": "Seeds, Brazil nuts, raw"
+                        },
+                        {
+                            "id": "616eca88953bf31b472e0ee9",
+                            "name": "Seeds, cashews, raw"
+                        },
+                        {
+                            "id": "616eca88953bf31b472e0eeb",
+                            "name": "Seeds, Macadamia nuts, raw"
+                        },
+                        {
+                            "id": "616eca92953bf31b472e0f0e",
+                            "name": "Oil,Vegetable oil"
+                        },
+                        {
+                            "id": "616eca95953bf31b472e0f1a",
+                            "name": "Seeds, Walnuts, raw"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98c27b0e601644583e7",
+                    "name": "Sweets",
+                    "ingredients": [
+                        {
+                            "id": "616eca5f953bf31b472e0e5e",
+                            "name": "Cranberries, dried"
+                        },
+                        {
+                            "id": "616eca69953bf31b472e0e80",
+                            "name": "Dates, dried"
+                        },
+                        {
+                            "id": "616eca69953bf31b472e0e82",
+                            "name": "Plums, dried"
+                        },
+                        {
+                            "id": "616eca6c953bf31b472e0e8c",
+                            "name": "Figs, dried"
+                        },
+                        {
+                            "id": "616eca76953bf31b472e0eac",
+                            "name": "Honey"
+                        },
+                        {
+                            "id": "616eca77953bf31b472e0eb0",
+                            "name": "Fruit jam"
+                        },
+                        {
+                            "id": "616eca80953bf31b472e0ecf",
+                            "name": "Papaya, dried"
+                        },
+                        {
+                            "id": "616fa52917631b48b113df2c",
+                            "name": "Dark chocolate, 72% cocoa"
+                        },
+                        {
+                            "id": "616fa60117631b48b113df2d",
+                            "name": "Protein Bar, sugar free "
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98c27b0e601644583ec",
+                    "name": "Eggs",
+                    "ingredients": [
+                        {
+                            "id": "616eca64953bf31b472e0e6f",
+                            "name": "Egg, grade A, whole"
+                        },
+                        {
+                            "id": "616fac7017631b48b113df2e",
+                            "name": "Liquid egg whites"
+                        },
+                        {
+                            "id": "616fad4f17631b48b113df2f",
+                            "name": "Egg substitute, plant based"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98c27b0e601644583e8",
+                    "name": "Fruits",
+                    "ingredients": [
+                        {
+                            "id": "616eca55953bf31b472e0e38",
+                            "name": "Apples, with skin, raw"
+                        },
+                        {
+                            "id": "616eca57953bf31b472e0e41",
+                            "name": "Bananas"
+                        },
+                        {
+                            "id": "616eca5b953bf31b472e0e4f",
+                            "name": "Blackberries, raw"
+                        },
+                        {
+                            "id": "616eca5b953bf31b472e0e50",
+                            "name": "Blueberries, raw"
+                        },
+                        {
+                            "id": "616eca62953bf31b472e0e69",
+                            "name": "Cherries, sweet, raw"
+                        },
+                        {
+                            "id": "616eca65953bf31b472e0e73",
+                            "name": "Clementines"
+                        },
+                        {
+                            "id": "616eca6d953bf31b472e0e90",
+                            "name": "Pineapple, fresh"
+                        },
+                        {
+                            "id": "616eca6e953bf31b472e0e94",
+                            "name": "Mixed berries, frozen"
+                        },
+                        {
+                            "id": "616eca72953bf31b472e0ea1",
+                            "name": "Grapes"
+                        },
+                        {
+                            "id": "616eca76953bf31b472e0ead",
+                            "name": "Honeydew melon"
+                        },
+                        {
+                            "id": "616eca78953bf31b472e0eb2",
+                            "name": "Kiwi"
+                        },
+                        {
+                            "id": "616eca7a953bf31b472e0eba",
+                            "name": "Mango"
+                        },
+                        {
+                            "id": "616eca7e953bf31b472e0ec6",
+                            "name": "Nectarines"
+                        },
+                        {
+                            "id": "616eca7f953bf31b472e0ecb",
+                            "name": "Oranges"
+                        },
+                        {
+                            "id": "616eca80953bf31b472e0ed0",
+                            "name": "Papaya, fresh"
+                        },
+                        {
+                            "id": "616eca81953bf31b472e0ed3",
+                            "name": "Peaches"
+                        },
+                        {
+                            "id": "616eca82953bf31b472e0ed5",
+                            "name": "Pears"
+                        },
+                        {
+                            "id": "616eca83953bf31b472e0ed8",
+                            "name": "Pineapple tidbits, canned, solids, no added sugar"
+                        },
+                        {
+                            "id": "616eca84953bf31b472e0edc",
+                            "name": "Plums"
+                        },
+                        {
+                            "id": "616eca84953bf31b472e0edd",
+                            "name": "Pomegranate, peeled"
+                        },
+                        {
+                            "id": "616eca86953bf31b472e0ee5",
+                            "name": "Raspberries"
+                        },
+                        {
+                            "id": "616eca8b953bf31b472e0ef6",
+                            "name": "Grapefruit, pink"
+                        },
+                        {
+                            "id": "616eca91953bf31b472e0f0d",
+                            "name": "Strawberries"
+                        },
+                        {
+                            "id": "616eca95953bf31b472e0f1b",
+                            "name": "Watermelon"
+                        },
+                        {
+                            "id": "616eca96953bf31b472e0f1d",
+                            "name": "Grapefruit, white"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98b27b0e601644583e5",
+                    "name": "Meat and substitutes",
+                    "ingredients": [
+                        {
+                            "id": "616eca58953bf31b472e0e42",
+                            "name": "Beef, rib eye steak, boneless, raw"
+                        },
+                        {
+                            "id": "616eca58953bf31b472e0e43",
+                            "name": "Ground beef, 80% lean meat/20%fat, raw"
+                        },
+                        {
+                            "id": "616eca58953bf31b472e0e44",
+                            "name": "Ground beef, 93% lean meat/7% fat, raw"
+                        },
+                        {
+                            "id": "616eca58953bf31b472e0e45",
+                            "name": "New York strip steak"
+                        },
+                        {
+                            "id": "616eca59953bf31b472e0e46",
+                            "name": "Beef, tenderloin, lean, trimmed to 0% fat"
+                        },
+                        {
+                            "id": "616eca63953bf31b472e0e6c",
+                            "name": "Chicken breast, skinless, boneless"
+                        },
+                        {
+                            "id": "616eca64953bf31b472e0e6d",
+                            "name": "Chicken burger patty, meat only"
+                        },
+                        {
+                            "id": "616eca64953bf31b472e0e6e",
+                            "name": "Chicken, drumsticks, meat and skin, boneless"
+                        },
+                        {
+                            "id": "616eca65953bf31b472e0e71",
+                            "name": "Chicken, pastrami deli"
+                        },
+                        {
+                            "id": "616eca65953bf31b472e0e72",
+                            "name": "Chicken thighs, skinless, boneless, fat trimmed"
+                        },
+                        {
+                            "id": "616eca78953bf31b472e0eb4",
+                            "name": "Lamb, meat"
+                        },
+                        {
+                            "id": "616eca7f953bf31b472e0ecc",
+                            "name": "Chicken, Organic chicken deli"
+                        },
+                        {
+                            "id": "616eca80953bf31b472e0ecd",
+                            "name": "Turkey, organic turkey deli"
+                        },
+                        {
+                            "id": "616eca85953bf31b472e0edf",
+                            "name": "Pork, loin"
+                        },
+                        {
+                            "id": "616eca85953bf31b472e0ee0",
+                            "name": "Pork, tenderloin"
+                        },
+                        {
+                            "id": "616eca8a953bf31b472e0ef1",
+                            "name": "Turkey, breast fillet, raw"
+                        },
+                        {
+                            "id": "616eca95953bf31b472e0f19",
+                            "name": "Turkey, ground meat 93% lean"
+                        },
+                        {
+                            "id": "616faf5717631b48b113df30",
+                            "name": "Meat substitute, plant based ground"
+                        },
+                        {
+                            "id": "616fb00717631b48b113df31",
+                            "name": "Meat substitute, plant based sausage"
+                        }
+                    ]
+                },
+                {
+                    "id": "616ec98c27b0e601644583e6",
+                    "name": "Cereals and bread",
+                    "ingredients": [
+                        {
+                            "id": "616eca5b953bf31b472e0e4e",
+                            "name": "Rice, brown, raw"
+                        },
+                        {
+                            "id": "616eca5e953bf31b472e0e59",
+                            "name": "Bread, whole wheat"
+                        },
+                        {
+                            "id": "616eca5e953bf31b472e0e5a",
+                            "name": "Buckwheat, whole, uncooked"
+                        },
+                        {
+                            "id": "616eca61953bf31b472e0e64",
+                            "name": "Corn, sweet, yellow, boiled, no added sugar"
+                        },
+                        {
+                            "id": "616eca63953bf31b472e0e6b",
+                            "name": "Seeds, chia seeds"
+                        },
+                        {
+                            "id": "616eca66953bf31b472e0e76",
+                            "name": "Cereals, corn flakes"
+                        },
+                        {
+                            "id": "616eca69953bf31b472e0e7f",
+                            "name": "Cereals, couscous, dry"
+                        },
+                        {
+                            "id": "616eca6c953bf31b472e0e8b",
+                            "name": "Cereals, multigrain thin crisps"
+                        },
+                        {
+                            "id": "616eca7c953bf31b472e0ec0",
+                            "name": "Cereals, Granola, no added sugar"
+                        },
+                        {
+                            "id": "616eca7d953bf31b472e0ec5",
+                            "name": "Cereals, Muesli, sugar free"
+                        },
+                        {
+                            "id": "616eca7e953bf31b472e0ec7",
+                            "name": "Cereals, Oat flakes"
+                        },
+                        {
+                            "id": "616eca83953bf31b472e0eda",
+                            "name": "Cereals, Bread, Pita"
+                        },
+                        {
+                            "id": "616eca8c953bf31b472e0ef9",
+                            "name": "Cereals, Quinoa, rice and spinach mix, frozen"
+                        },
+                        {
+                            "id": "616eca8c953bf31b472e0efa",
+                            "name": "Cereals, rice cakes"
+                        },
+                        {
+                            "id": "616eca8d953bf31b472e0efb",
+                            "name": "Cereals, rice noodles"
+                        },
+                        {
+                            "id": "616eca8d953bf31b472e0efd",
+                            "name": "Cereals, Rye bread"
+                        },
+                        {
+                            "id": "616eca8d953bf31b472e0efe",
+                            "name": "Cereals, Rye flakes "
+                        },
+                        {
+                            "id": "616eca91953bf31b472e0f0b",
+                            "name": "Cereals, Pasta, regular"
+                        },
+                        {
+                            "id": "616eca96953bf31b472e0f1e",
+                            "name": "Cereals, white rice, uncooked"
+                        },
+                        {
+                            "id": "616eca96953bf31b472e0f1f",
+                            "name": "Cereals, rice and quinoa mix, uncooked"
+                        },
+                        {
+                            "id": "616eca97953bf31b472e0f20",
+                            "name": "Cereals, Sourdough bread"
+                        },
+                        {
+                            "id": "616eca97953bf31b472e0f21",
+                            "name": "Cereals, Spanish style brown rice microwave pouch"
+                        },
+                        {
+                            "id": "616eca97953bf31b472e0f22",
+                            "name": "Cereals, Pasta, whole wheat"
+                        }
+                    ]
+                }
+            ],
+            "statuscode": 200,
+            "schema": {
+                "type": "array",
+                "items": {
+                    "title": "FoodGroup",
+                    "type": "object",
+                    "examples": [
+                        {
+                            "id": "string",
+                            "name": "string",
+                            "food": [
+                                {
+                                    "name": "string",
+                                    "calories": 0,
+                                    "proteins": 0,
+                                    "lipids": 0,
+                                    "carbs": 0,
+                                    "fibres": 0,
+                                    "id": "string"
+                                }
+                            ]
+                        }
+                    ],
+                    "properties": {
+                        "id": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string",
+                            "description": "Name of the good group."
+                        },
+                        "ingredients": {
+                            "type": "array",
+                            "description": "The ingredients belonging to this food group.",
+                            "items": {
+                                "type": "object",
+                                "x-examples": {
+                                    "example-1": {
+                                        "name": "Almond butter, unsweetened",
+                                        "calories": 675,
+                                        "proteins": 15,
+                                        "lipids": 59,
+                                        "carbs": 21,
+                                        "fibres": 3.7,
+                                        "minWeight": 7,
+                                        "maxWeight": 30,
+                                        "image": "https://s3.us-east-2.amazonaws.com/crave-media-dev/food-images/b850eec1-a245-4f58-af2d-95a8952df8da.jpg",
+                                        "oldId": "1291",
+                                        "deleted": false,
+                                        "validated": true
+                                    }
+                                },
+                                "title": "Ingredient",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the ingredient."
+                                    },
+                                    "calories": {
+                                        "type": "integer",
+                                        "description": "The number of calories this ingredient has."
+                                    },
+                                    "proteins": {
+                                        "type": "integer"
+                                    },
+                                    "lipids": {
+                                        "type": "integer"
+                                    },
+                                    "carbs": {
+                                        "type": "integer"
+                                    },
+                                    "fibres": {
+                                        "type": "number"
+                                    }
+                                },
+                                "required": [
+                                    "id",
+                                    "name",
+                                    "calories"
+                                ]
+                            }
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "name",
+                        "ingredients"
+                    ]
+                }
+            }
+        },
+        {
+            "name": "Create new user",
+            "url": "https://bespoke-diet-generator.p.rapidapi.com/user",
+            "description": "Create a new user.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bespoke-diet-generator.p.rapidapi.com/user\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bespoke-diet-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "bespoke_diet_generator"
+}

@@ -1,0 +1,49 @@
+{
+    "product_id": "api_1efe4ce0-e10b-4357-85ca-5ba3ab81f57e",
+    "tool_description": "Ensure a seamless identification of NSFW photos with our advanced API for photo classification.",
+    "home_url": "https://rapidapi.com/SkyWriter/api/nsfw-images-detector/",
+    "name": "NSFW Images Detector",
+    "title": "NSFW Images Detector",
+    "pricing": "FREEMIUM",
+    "tool_name": "NSFW Images Detector",
+    "score": null,
+    "host": "nsfw-images-detector.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Classify a photo",
+            "url": "https://nsfw-images-detector.p.rapidapi.com/predict",
+            "description": "Submit a photo and get NSFW scores in return.\n\nIt assigns weights (which roughly add up to 1) to three of the following classes:\n\n- `neutral` - a completely neutral photo\n- `sexy` - a photo that is sexy, but probably can be found on people's social media (e.g. quite a few of the swimsuit images)\n- `porn` - an explicit photo, which are unlikely to be displayed in public (e.g. explicitly naked or porn)",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Binary PNG or JPEG file up to 16 Mb in size.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nsfw-images-detector.p.rapidapi.com/predict\"\nquerystring = {\"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nsfw-images-detector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://nsfw-images-detector.p.rapidapi.com/predict\"\nquerystring = {\"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nsfw-images-detector.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "class": {
+                        "type": "string"
+                    },
+                    "neutral": {
+                        "type": "number"
+                    },
+                    "porn": {
+                        "type": "number"
+                    },
+                    "sexy": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    ]
+}

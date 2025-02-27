@@ -1,0 +1,62 @@
+{
+    "tool_name":"Weather Forecast Map Tiles",
+    "tool_description":"Generate weather forecast map tiles to overlay on any web map.",
+    "title":"Weather Forecast Map Tiles",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":301,
+        "avgSuccessRate":100,
+        "popularityScore":9.5,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/samvanemelen/api/weather-forecast-map-tiles/",
+    "host":"weather-forecast-map-tiles.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get Weather Tile",
+            "url":"https://weather-forecast-map-tiles.p.rapidapi.com/tile/{z}/{x}/{y}",
+            "description":"Get a transparent weather tile according to the [Web Tile Standard(https://en.wikipedia.org/wiki/Tiled_web_map).",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"y",
+                    "type":"NUMBER",
+                    "description":"The y value of the requested tile",
+                    "default":"44"
+                },
+                {
+                    "name":"z",
+                    "type":"NUMBER",
+                    "description":"The z value of the requested tile",
+                    "default":"7"
+                },
+                {
+                    "name":"x",
+                    "type":"NUMBER",
+                    "description":"The x value of the requested tile",
+                    "default":"68"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"time",
+                    "type":"NUMBER",
+                    "description":"The local time at which the weather should be shown. This is measured in hours since today 00:00. A time value of 10 would be today at 10:00 (even if this already passed). A time value of 40 would be tomorrow at 16:00 local time. Forecast tiles can be requested for 7 days. This results in a max time value of 168. Defaults to 'current'",
+                    "default":"30"
+                },
+                {
+                    "name":"unit",
+                    "type":"STRING",
+                    "description":"The unit in which temperature and precipitation should be shown. Can be 'none', for no temperature or precipitation labels, 'metric' for temperature in °C and precipitation in mm or 'imperial' for temperature in °F and precipitation in inches. Defaults to 'metric'",
+                    "default":"metric"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://weather-forecast-map-tiles.p.rapidapi.com/tile/{z}/{x}/{y}\"\nquerystring = {\"time\": time, \"unit\": unit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"weather-forecast-map-tiles.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

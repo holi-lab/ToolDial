@@ -1,0 +1,407 @@
+{
+    "tool_name": "timedb",
+    "tool_description": "Store sensor data in managed/cloud database compatible to InfluxDB.  Tested to work with Grafana, Node-RED, and other platforms. Each plan provides data retention up to 10 years.  Use webhooks to trigger events in systems like n8n or other low-code environments.",
+    "title": "timedb",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 97,
+        "avgLatency": 232,
+        "avgSuccessRate": 97,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/stromdao-stromdao-default/api/timedb/",
+    "host": "timedb.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "results",
+            "url": "https://timedb.p.rapidapi.com/results",
+            "description": "Returns latest results for a query associated to a given `webhookId`.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "webhookId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "0x12345"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/results\"\nquerystring = {\"webhookId\": webhookid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "webhook",
+            "url": "https://timedb.p.rapidapi.com/webhook",
+            "description": "Deletes given webhook by its it.",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "webhookId",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "0x1233456789012345657890"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/webhook\"\nquerystring = {\"webhookId\": webhookid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "webhooks",
+            "url": "https://timedb.p.rapidapi.com/webhooks",
+            "description": "Retrieve a list of existing webhooks.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/webhooks\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "webhookId": "0x1233456789012345657890",
+                    "timestamp": 1665617035215,
+                    "query": "SELECT last(\"power\") as \"active_power\" FROM NAP"
+                },
+                {
+                    "webhookId": "0x97261dD5925082B38fE83803d199fe72E16AbB09",
+                    "timestamp": 1665617171574,
+                    "query": "SELECT last(\"phase1Power\") as \"phase1Power\" FROM NAP"
+                }
+            ],
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "webhook",
+            "url": "https://timedb.p.rapidapi.com/webhook",
+            "description": "Sets a webhook sent each time given query result changes. New query result is posted as payload to webhook url. Query gets evaluated asynchronous to write operation. Default check interval for new results is 15 minutes.\n\nResult includes field `webhookId` which might be used to update an existing Webhook.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/webhook\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "results": [
+                    {
+                        "time": "2022-10-12T23:25:56.454Z",
+                        "phase1Power": 166770
+                    }
+                ],
+                "resultId": "0x52Fd1905Ea6BC1f0ae0C29132d7B8c83e14F1F35",
+                "webhookId": "0x97261dD5925082B38fE83803d199fe72E16AbB09"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "content-length": "183",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Wed, 12 Oct 2022 23:26:11 GMT",
+                "server": "RapidAPI-1.2.8",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-rate-limit-limit": "30",
+                "x-rate-limit-remaining": "27",
+                "x-rate-limit-reset": "1665617199934",
+                "x-request-id": "70a6ac1b-74a4-4dc1-baff-8447813f2746"
+            },
+            "schema": {}
+        },
+        {
+            "name": "measurements",
+            "url": "https://timedb.p.rapidapi.com/measurements",
+            "description": "Retrieve list of Measurements in TimeDB",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/measurements\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "provision",
+            "url": "https://timedb.p.rapidapi.com/manage",
+            "description": "**Runs provisioning on database(s) causing downsampling of data. Provides connection and retention information for account as a result**\n\nMust be run after new measurements or fields are added to datasets (e.q. if new sensor is providing data or additional fields should be stored for existing sensor/measurement).",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/manage\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "connect": {
+                    "host": "timedb.corrently.cloud",
+                    "port": 443,
+                    "protocol": "https",
+                    "username": "user_USERNAME",
+                    "password": "PASSWORD",
+                    "database": "td_DBNAME",
+                    "influxVersion": "influx 1.8 (compatible)"
+                },
+                "databases": {
+                    "td_DBNAME": {
+                        "retention": "1d",
+                        "resolution": "raw",
+                        "permissions": "ALL"
+                    },
+                    "td_DBNAME_90d": {
+                        "retention": "90d",
+                        "resolution": "15m",
+                        "permissions": "READ"
+                    },
+                    "td_DBNAME_1y": {
+                        "retention": "365d",
+                        "resolution": "1h",
+                        "permissions": "READ"
+                    },
+                    "td_DBNAME_10y": {
+                        "retention": "3650d",
+                        "resolution": "1d",
+                        "permissions": "READ"
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "connect": {
+                        "type": "object",
+                        "properties": {
+                            "host": {
+                                "type": "string"
+                            },
+                            "port": {
+                                "type": "integer"
+                            },
+                            "protocol": {
+                                "type": "string"
+                            },
+                            "username": {
+                                "type": "string"
+                            },
+                            "password": {
+                                "type": "string"
+                            },
+                            "database": {
+                                "type": "string"
+                            },
+                            "influxVersion": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "databases": {
+                        "type": "object",
+                        "properties": {
+                            "td_DBNAME": {
+                                "type": "object",
+                                "properties": {
+                                    "retention": {
+                                        "type": "string"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    },
+                                    "permissions": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "td_DBNAME_90d": {
+                                "type": "object",
+                                "properties": {
+                                    "retention": {
+                                        "type": "string"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    },
+                                    "permissions": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "td_DBNAME_1y": {
+                                "type": "object",
+                                "properties": {
+                                    "retention": {
+                                        "type": "string"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    },
+                                    "permissions": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "td_DBNAME_10y": {
+                                "type": "object",
+                                "properties": {
+                                    "retention": {
+                                        "type": "string"
+                                    },
+                                    "resolution": {
+                                        "type": "string"
+                                    },
+                                    "permissions": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "writeMeasurement",
+            "url": "https://timedb.p.rapidapi.com/writeMeasurement",
+            "description": "writeMeasurement functions similarly to `writePoints`, but it automatically fills in the measurement value for all points for you.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/writeMeasurement\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "measurement": "test_times",
+                "points": [
+                    {
+                        "tags": {
+                            "host": "box1.example.com"
+                        },
+                        "fields": {
+                            "cpu": 20,
+                            "mem": 40
+                        }
+                    }
+                ]
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "content-length": "105",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 08 Oct 2022 22:38:51 GMT",
+                "server": "RapidAPI-1.2.8",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-rate-limit-limit": "30",
+                "x-rate-limit-remaining": "29",
+                "x-rate-limit-reset": "1665268750588",
+                "x-request-id": "8c5d8b66-de5d-4a81-a98a-07f27caa8c4d"
+            },
+            "schema": {}
+        },
+        {
+            "name": "query",
+            "url": "https://timedb.p.rapidapi.com/query",
+            "description": "InfluxDB Query (v1.8)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "select * from test_times"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "database",
+                    "type": "STRING",
+                    "description": "A list of retention policy specific databases could be retrieved using the `manage` endpoint. ",
+                    "default": "td_0A6BbF0441_90d"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/query\"\nquerystring = {\"database\": database, \"query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": [
+                {
+                    "time": "2022-10-08T00:49:31.463Z",
+                    "cpu": 20,
+                    "host": "test.example.com",
+                    "mem": 40
+                },
+                {
+                    "time": "2022-10-08T00:49:37.365Z",
+                    "cpu": 20,
+                    "host": "test.example.com",
+                    "mem": 40
+                }
+            ],
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "content-length": "161",
+                "content-type": "application/json; charset=utf-8",
+                "date": "Sat, 08 Oct 2022 00:53:01 GMT",
+                "server": "RapidAPI-1.2.8",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8",
+                "x-rate-limit-limit": "30",
+                "x-rate-limit-remaining": "29",
+                "x-rate-limit-reset": "1665190405661",
+                "x-request-id": "9043976a-6943-40e3-8386-d3a88d91408c"
+            },
+            "schema": {}
+        },
+        {
+            "name": "query",
+            "url": "https://timedb.p.rapidapi.com/query",
+            "description": "Alter/Modify query InfluxDB 1.8",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/query\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "webhook",
+            "url": "https://timedb.p.rapidapi.com/webhook",
+            "description": "Sets a webhook sent each time given query result changes. New query result is posted as payload to webhook url. Query gets evaluated asynchronous to write operation. Default check interval for new results is 15 minutes.\n\nResult includes field `webhookId` which might be used to update an existing Webhook.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/webhook\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/webhook\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "writeMeasurement",
+            "url": "https://timedb.p.rapidapi.com/writeMeasurement",
+            "description": "writeMeasurement functions similarly to `writePoints`, but it automatically fills in the measurement value for all points for you.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/writeMeasurement\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/writeMeasurement\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "query",
+            "url": "https://timedb.p.rapidapi.com/query",
+            "description": "Alter/Modify query InfluxDB 1.8",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://timedb.p.rapidapi.com/query\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"timedb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

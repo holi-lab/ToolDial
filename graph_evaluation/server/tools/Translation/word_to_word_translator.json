@@ -1,0 +1,88 @@
+{
+    "tool_name":"Word to Word Translator",
+    "tool_description":"World fastest word to word translator for multilingual search engines and other NLP purposes",
+    "title":"Word to Word Translator",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/bacloud22/api/word-to-word-translator1/",
+    "host":"word-to-word-translator1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Word translation",
+            "url":"https://word-to-word-translator1.p.rapidapi.com/api/translate",
+            "description":"`translate` is the core API of our service.\n\nNote that `translate` is not suited for sentences or longer texts. There are way better services for that (like Google translation API etc)'. Also note that: \n\n> This is to be used as *a multilingual search engine or depending on your wishes, other natural language processing purposes and not for mere translation*.\n\nAlthough you can do so, because translation is the core of this, **it is very very approximate**.\n\nA `cat` might be translated to other contextual terms in other languages as: `[\"animal\", \"mammal\", \"domestic\"]`. This approximate translation is in fact blazingly fast, and paradoxically more suited for search engines.\n\nFinally, You maybe guessed that `target` can be an array, indeed, and the form to provide multiple targets is simply adding multiple `target` parameters.\n\nLike the following:\n\n```\n curl --get -G 'https://YourWord2WordTranslator@RapidAPI/api/translate?' \\\n              -d word=science \\\n              -d target=en \\\n              -d target=fr \\\n              -d target=bg \\\n              -d source=en \\\n              -d limit=10 \\\n              -d score=0.5\n```",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":10
+                },
+                {
+                    "name":"source",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"en"
+                },
+                {
+                    "name":"score",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":0.5
+                },
+                {
+                    "name":"word",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"science"
+                },
+                {
+                    "name":"target",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"fr"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://word-to-word-translator1.p.rapidapi.com/api/translate\"\nquerystring = {\"limit\": limit, \"source\": source, \"score\": score, \"word\": word, \"target\": target}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"word-to-word-translator1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"meta",
+            "url":"https://word-to-word-translator1.p.rapidapi.com/api/meta",
+            "description":"`meta` is simply to track of the current information about our back-end.\n\nThe **Word to Word Translator** has been tested in every way possible, although You can expect changes as the API is in active improvement.  This is why you would talk with the `meta` API as your own safe guard.\n\n- You might for instance only request our APIs when all our services are up.\n- You might test again when when we increment our deployment version.\n- You might check again for the current supported languages.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://word-to-word-translator1.p.rapidapi.com/api/meta\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"word-to-word-translator1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Language detection",
+            "url":"https://word-to-word-translator1.p.rapidapi.com/api/detect_language",
+            "description":"`detect_language` is a facilitator API to detect language of texts.\n\nNote that this API is very accurate and at the same time very fast as it relies on state of art machine learning techniques and implementations.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"phrase",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Pourquoi, Te comportes-tu mal, Chougna, devant le monde"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://word-to-word-translator1.p.rapidapi.com/api/detect_language\"\nquerystring = {\"phrase\": phrase}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"word-to-word-translator1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

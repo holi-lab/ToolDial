@@ -1,0 +1,1618 @@
+{
+    "product_id": "api_6f3b8838-592e-4cba-ba86-ac1fa18efb19",
+    "tool_description": "An AI service from Microsoft Azure that enables you to unlock insights from natural language text using sentiment analysis, named entity recognition, language detection, and key phrase extraction in multiple languages",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/microsoft-text-analytics1/",
+    "name": "Microsoft Text Analytics",
+    "title": "Microsoft Text Analytics",
+    "pricing": "FREE",
+    "tool_name": "Microsoft Text Analytics",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 279,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "host": "microsoft-text-analytics1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Entities Recognition General",
+            "url": "https://microsoft-text-analytics1.p.rapidapi.com/entities/recognition/general",
+            "description": "The API returns a list of general named entities (Person, Location, Organization etc) in a given document. General named entities are returned with entity types. See the [Supported languages in Text Analytics API](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages) for the list of enabled languages.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model-version",
+                    "type": "STRING",
+                    "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+                    "default": ""
+                },
+                {
+                    "name": "showStats",
+                    "type": "BOOLEAN",
+                    "description": "(Optional) if set to true, response will contain input and document level statistics.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/entities/recognition/general\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/entities/recognition/general\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "documents": {
+                        "description": "Response by document",
+                        "items": {
+                            "properties": {
+                                "entities": {
+                                    "description": "Recognized entities in the document.",
+                                    "items": {
+                                        "properties": {
+                                            "length": {
+                                                "description": "Length (in Unicode characters) for the entity text.",
+                                                "format": "int32",
+                                                "maximum": 2147483647,
+                                                "minimum": -2147483648,
+                                                "type": "integer"
+                                            },
+                                            "offset": {
+                                                "description": "Start position (in Unicode characters) for the entity text.",
+                                                "format": "int32",
+                                                "maximum": 2147483647,
+                                                "minimum": -2147483648,
+                                                "type": "integer"
+                                            },
+                                            "score": {
+                                                "description": "Confidence score between 0 and 1 of the extracted entity.",
+                                                "format": "double",
+                                                "maximum": 1.7976931348623157e+308,
+                                                "minimum": -1.7976931348623157e+308,
+                                                "type": "number"
+                                            },
+                                            "subtype": {
+                                                "description": "Entity sub type, such as Age/Year/TimeRange etc",
+                                                "type": "string"
+                                            },
+                                            "text": {
+                                                "description": "Entity text as appears in the request.",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "Entity type, such as Person/Location/Org/SSN etc",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "text",
+                                            "type",
+                                            "offset",
+                                            "length",
+                                            "score"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "id": {
+                                    "description": "Unique, non-empty document identifier.",
+                                    "type": "string"
+                                },
+                                "statistics": {
+                                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                                    "properties": {
+                                        "charactersCount": {
+                                            "description": "Number of text elements recognized in the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "transactionsCount": {
+                                            "description": "Number of transactions for the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "charactersCount",
+                                        "transactionsCount"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "entities"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "description": "Errors by document id.",
+                        "items": {
+                            "properties": {
+                                "error": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "Error code.",
+                                            "enum": [
+                                                "invalidRequest",
+                                                "invalidArgument",
+                                                "internalServerError",
+                                                "serviceUnavailable"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ErrorCodeValue"
+                                            }
+                                        },
+                                        "details": {
+                                            "description": "Details about specific errors that led to this reported error.",
+                                            "type": "array"
+                                        },
+                                        "innerError": {
+                                            "properties": {
+                                                "code": {
+                                                    "description": "Error code.",
+                                                    "enum": [
+                                                        "invalidParameterValue",
+                                                        "invalidRequestBodyFormat",
+                                                        "emptyRequest",
+                                                        "missingInputRecords",
+                                                        "invalidDocument",
+                                                        "modelVersionIncorrect",
+                                                        "invalidDocumentBatch",
+                                                        "unsupportedLanguageCode",
+                                                        "invalidCountryHint"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "InnerErrorCodeValue"
+                                                    }
+                                                },
+                                                "details": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Error details.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Error message.",
+                                                    "type": "string"
+                                                },
+                                                "target": {
+                                                    "description": "Error target.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "Error message.",
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "description": "Error target.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Document Id.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "error"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "modelVersion": {
+                        "description": "This field indicates which model is used for scoring.",
+                        "type": "string"
+                    },
+                    "statistics": {
+                        "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+                        "properties": {
+                            "documentsCount": {
+                                "description": "Number of documents submitted in the request.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "erroneousDocumentsCount": {
+                                "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "transactionsCount": {
+                                "description": "Number of transactions for the request.",
+                                "format": "int64",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "type": "integer"
+                            },
+                            "validDocumentsCount": {
+                                "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "documentsCount",
+                            "validDocumentsCount",
+                            "erroneousDocumentsCount",
+                            "transactionsCount"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "documents",
+                    "errors",
+                    "modelVersion"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Entities Linking",
+            "url": "https://microsoft-text-analytics1.p.rapidapi.com/entities/linking",
+            "description": "The API returns a list of recognized entities with links to a well-known knowledge base. See the [Supported languages in Text Analytics API](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages) for the list of enabled languages.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model-version",
+                    "type": "STRING",
+                    "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+                    "default": ""
+                },
+                {
+                    "name": "showStats",
+                    "type": "BOOLEAN",
+                    "description": "(Optional) if set to true, response will contain input and document level statistics.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/entities/linking\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/entities/linking\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "documents": {
+                        "description": "Response by document",
+                        "items": {
+                            "properties": {
+                                "entities": {
+                                    "description": "Recognized well-known entities in the document.",
+                                    "items": {
+                                        "properties": {
+                                            "dataSource": {
+                                                "description": "Data source used to extract entity linking, such as Wiki/Bing etc.",
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "description": "Unique identifier of the recognized entity from the data source.",
+                                                "type": "string"
+                                            },
+                                            "language": {
+                                                "description": "Language used in the data source.",
+                                                "type": "string"
+                                            },
+                                            "matches": {
+                                                "description": "List of instances this entity appears in the text.",
+                                                "items": {
+                                                    "properties": {
+                                                        "length": {
+                                                            "description": "Length (in Unicode characters) for the entity match text.",
+                                                            "format": "int32",
+                                                            "maximum": 2147483647,
+                                                            "minimum": -2147483648,
+                                                            "type": "integer"
+                                                        },
+                                                        "offset": {
+                                                            "description": "Start position (in Unicode characters) for the entity match text.",
+                                                            "format": "int32",
+                                                            "maximum": 2147483647,
+                                                            "minimum": -2147483648,
+                                                            "type": "integer"
+                                                        },
+                                                        "score": {
+                                                            "description": "If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned.",
+                                                            "format": "double",
+                                                            "maximum": 1.7976931348623157e+308,
+                                                            "minimum": -1.7976931348623157e+308,
+                                                            "type": "number"
+                                                        },
+                                                        "text": {
+                                                            "description": "Entity text as appears in the request.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "score",
+                                                        "text",
+                                                        "offset",
+                                                        "length"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "name": {
+                                                "description": "Entity Linking formal name.",
+                                                "type": "string"
+                                            },
+                                            "url": {
+                                                "description": "URL for the entity's page from the data source.",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "name",
+                                            "matches",
+                                            "language",
+                                            "url",
+                                            "dataSource"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "id": {
+                                    "description": "Unique, non-empty document identifier.",
+                                    "type": "string"
+                                },
+                                "statistics": {
+                                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                                    "properties": {
+                                        "charactersCount": {
+                                            "description": "Number of text elements recognized in the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "transactionsCount": {
+                                            "description": "Number of transactions for the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "charactersCount",
+                                        "transactionsCount"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "entities"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "description": "Errors by document id.",
+                        "items": {
+                            "properties": {
+                                "error": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "Error code.",
+                                            "enum": [
+                                                "invalidRequest",
+                                                "invalidArgument",
+                                                "internalServerError",
+                                                "serviceUnavailable"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ErrorCodeValue"
+                                            }
+                                        },
+                                        "details": {
+                                            "description": "Details about specific errors that led to this reported error.",
+                                            "type": "array"
+                                        },
+                                        "innerError": {
+                                            "properties": {
+                                                "code": {
+                                                    "description": "Error code.",
+                                                    "enum": [
+                                                        "invalidParameterValue",
+                                                        "invalidRequestBodyFormat",
+                                                        "emptyRequest",
+                                                        "missingInputRecords",
+                                                        "invalidDocument",
+                                                        "modelVersionIncorrect",
+                                                        "invalidDocumentBatch",
+                                                        "unsupportedLanguageCode",
+                                                        "invalidCountryHint"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "InnerErrorCodeValue"
+                                                    }
+                                                },
+                                                "details": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Error details.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Error message.",
+                                                    "type": "string"
+                                                },
+                                                "target": {
+                                                    "description": "Error target.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "Error message.",
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "description": "Error target.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Document Id.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "error"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "modelVersion": {
+                        "description": "This field indicates which model is used for scoring.",
+                        "type": "string"
+                    },
+                    "statistics": {
+                        "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+                        "properties": {
+                            "documentsCount": {
+                                "description": "Number of documents submitted in the request.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "erroneousDocumentsCount": {
+                                "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "transactionsCount": {
+                                "description": "Number of transactions for the request.",
+                                "format": "int64",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "type": "integer"
+                            },
+                            "validDocumentsCount": {
+                                "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "documentsCount",
+                            "validDocumentsCount",
+                            "erroneousDocumentsCount",
+                            "transactionsCount"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "documents",
+                    "errors",
+                    "modelVersion"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "EntitiesRecognitionPii",
+            "url": "https://microsoft-text-analytics1.p.rapidapi.com/entities/recognition/pii",
+            "description": "The API returns a list of PII entities (\"United States SSN\", \"Drivers license\", \"Credit card number\" etc) in a given document. See the [Supported languages in Text Analytics API](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages) for the list of enabled languages.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model-version",
+                    "type": "STRING",
+                    "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+                    "default": ""
+                },
+                {
+                    "name": "showStats",
+                    "type": "BOOLEAN",
+                    "description": "(Optional) if set to true, response will contain input and document level statistics.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/entities/recognition/pii\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/entities/recognition/pii\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "documents": {
+                        "description": "Response by document",
+                        "items": {
+                            "properties": {
+                                "entities": {
+                                    "description": "Recognized entities in the document.",
+                                    "items": {
+                                        "properties": {
+                                            "length": {
+                                                "description": "Length (in Unicode characters) for the entity text.",
+                                                "format": "int32",
+                                                "maximum": 2147483647,
+                                                "minimum": -2147483648,
+                                                "type": "integer"
+                                            },
+                                            "offset": {
+                                                "description": "Start position (in Unicode characters) for the entity text.",
+                                                "format": "int32",
+                                                "maximum": 2147483647,
+                                                "minimum": -2147483648,
+                                                "type": "integer"
+                                            },
+                                            "score": {
+                                                "description": "Confidence score between 0 and 1 of the extracted entity.",
+                                                "format": "double",
+                                                "maximum": 1.7976931348623157e+308,
+                                                "minimum": -1.7976931348623157e+308,
+                                                "type": "number"
+                                            },
+                                            "subtype": {
+                                                "description": "Entity sub type, such as Age/Year/TimeRange etc",
+                                                "type": "string"
+                                            },
+                                            "text": {
+                                                "description": "Entity text as appears in the request.",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "Entity type, such as Person/Location/Org/SSN etc",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "text",
+                                            "type",
+                                            "offset",
+                                            "length",
+                                            "score"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "id": {
+                                    "description": "Unique, non-empty document identifier.",
+                                    "type": "string"
+                                },
+                                "statistics": {
+                                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                                    "properties": {
+                                        "charactersCount": {
+                                            "description": "Number of text elements recognized in the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "transactionsCount": {
+                                            "description": "Number of transactions for the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "charactersCount",
+                                        "transactionsCount"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "entities"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "description": "Errors by document id.",
+                        "items": {
+                            "properties": {
+                                "error": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "Error code.",
+                                            "enum": [
+                                                "invalidRequest",
+                                                "invalidArgument",
+                                                "internalServerError",
+                                                "serviceUnavailable"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ErrorCodeValue"
+                                            }
+                                        },
+                                        "details": {
+                                            "description": "Details about specific errors that led to this reported error.",
+                                            "type": "array"
+                                        },
+                                        "innerError": {
+                                            "properties": {
+                                                "code": {
+                                                    "description": "Error code.",
+                                                    "enum": [
+                                                        "invalidParameterValue",
+                                                        "invalidRequestBodyFormat",
+                                                        "emptyRequest",
+                                                        "missingInputRecords",
+                                                        "invalidDocument",
+                                                        "modelVersionIncorrect",
+                                                        "invalidDocumentBatch",
+                                                        "unsupportedLanguageCode",
+                                                        "invalidCountryHint"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "InnerErrorCodeValue"
+                                                    }
+                                                },
+                                                "details": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Error details.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Error message.",
+                                                    "type": "string"
+                                                },
+                                                "target": {
+                                                    "description": "Error target.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "Error message.",
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "description": "Error target.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Document Id.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "error"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "modelVersion": {
+                        "description": "This field indicates which model is used for scoring.",
+                        "type": "string"
+                    },
+                    "statistics": {
+                        "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+                        "properties": {
+                            "documentsCount": {
+                                "description": "Number of documents submitted in the request.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "erroneousDocumentsCount": {
+                                "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "transactionsCount": {
+                                "description": "Number of transactions for the request.",
+                                "format": "int64",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "type": "integer"
+                            },
+                            "validDocumentsCount": {
+                                "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "documentsCount",
+                            "validDocumentsCount",
+                            "erroneousDocumentsCount",
+                            "transactionsCount"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "documents",
+                    "errors",
+                    "modelVersion"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Key Phrases",
+            "url": "https://microsoft-text-analytics1.p.rapidapi.com/keyPhrases",
+            "description": "The API returns a list of strings denoting the key talking points in the input text. See the [Supported languages in Text Analytics API](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages) for the list of enabled languages.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model-version",
+                    "type": "STRING",
+                    "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+                    "default": ""
+                },
+                {
+                    "name": "showStats",
+                    "type": "BOOLEAN",
+                    "description": "(Optional) if set to true, response will contain input and document level statistics.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/keyPhrases\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/keyPhrases\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "documents": {
+                        "description": "Response by document",
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "description": "Unique, non-empty document identifier.",
+                                    "type": "string"
+                                },
+                                "keyPhrases": {
+                                    "description": "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "type": "array"
+                                },
+                                "statistics": {
+                                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                                    "properties": {
+                                        "charactersCount": {
+                                            "description": "Number of text elements recognized in the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "transactionsCount": {
+                                            "description": "Number of transactions for the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "charactersCount",
+                                        "transactionsCount"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "keyPhrases"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "description": "Errors by document id.",
+                        "items": {
+                            "properties": {
+                                "error": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "Error code.",
+                                            "enum": [
+                                                "invalidRequest",
+                                                "invalidArgument",
+                                                "internalServerError",
+                                                "serviceUnavailable"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ErrorCodeValue"
+                                            }
+                                        },
+                                        "details": {
+                                            "description": "Details about specific errors that led to this reported error.",
+                                            "type": "array"
+                                        },
+                                        "innerError": {
+                                            "properties": {
+                                                "code": {
+                                                    "description": "Error code.",
+                                                    "enum": [
+                                                        "invalidParameterValue",
+                                                        "invalidRequestBodyFormat",
+                                                        "emptyRequest",
+                                                        "missingInputRecords",
+                                                        "invalidDocument",
+                                                        "modelVersionIncorrect",
+                                                        "invalidDocumentBatch",
+                                                        "unsupportedLanguageCode",
+                                                        "invalidCountryHint"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "InnerErrorCodeValue"
+                                                    }
+                                                },
+                                                "details": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Error details.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Error message.",
+                                                    "type": "string"
+                                                },
+                                                "target": {
+                                                    "description": "Error target.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "Error message.",
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "description": "Error target.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Document Id.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "error"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "modelVersion": {
+                        "description": "This field indicates which model is used for scoring.",
+                        "type": "string"
+                    },
+                    "statistics": {
+                        "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+                        "properties": {
+                            "documentsCount": {
+                                "description": "Number of documents submitted in the request.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "erroneousDocumentsCount": {
+                                "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "transactionsCount": {
+                                "description": "Number of transactions for the request.",
+                                "format": "int64",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "type": "integer"
+                            },
+                            "validDocumentsCount": {
+                                "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "documentsCount",
+                            "validDocumentsCount",
+                            "erroneousDocumentsCount",
+                            "transactionsCount"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "documents",
+                    "errors",
+                    "modelVersion"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Detect Language",
+            "url": "https://microsoft-text-analytics1.p.rapidapi.com/languages",
+            "description": "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "showStats",
+                    "type": "BOOLEAN",
+                    "description": "(Optional) if set to true, response will contain input and document level statistics.",
+                    "default": ""
+                },
+                {
+                    "name": "model-version",
+                    "type": "STRING",
+                    "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/languages\"\nquerystring = {\"showStats\": \"\", \"model-version\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/languages\"\nquerystring = {\"showStats\": \"\", \"model-version\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "documents": {
+                        "description": "Response by document",
+                        "items": {
+                            "properties": {
+                                "detectedLanguages": {
+                                    "description": "A list of extracted languages.",
+                                    "items": {
+                                        "properties": {
+                                            "iso6391Name": {
+                                                "description": "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr).",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "description": "Long name of a detected language (e.g. English, French).",
+                                                "type": "string"
+                                            },
+                                            "score": {
+                                                "description": "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true.",
+                                                "format": "double",
+                                                "maximum": 1.7976931348623157e+308,
+                                                "minimum": -1.7976931348623157e+308,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "name",
+                                            "iso6391Name",
+                                            "score"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "id": {
+                                    "description": "Unique, non-empty document identifier.",
+                                    "type": "string"
+                                },
+                                "statistics": {
+                                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                                    "properties": {
+                                        "charactersCount": {
+                                            "description": "Number of text elements recognized in the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "transactionsCount": {
+                                            "description": "Number of transactions for the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "charactersCount",
+                                        "transactionsCount"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "detectedLanguages"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "description": "Errors by document id.",
+                        "items": {
+                            "properties": {
+                                "error": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "Error code.",
+                                            "enum": [
+                                                "invalidRequest",
+                                                "invalidArgument",
+                                                "internalServerError",
+                                                "serviceUnavailable"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ErrorCodeValue"
+                                            }
+                                        },
+                                        "details": {
+                                            "description": "Details about specific errors that led to this reported error.",
+                                            "type": "array"
+                                        },
+                                        "innerError": {
+                                            "properties": {
+                                                "code": {
+                                                    "description": "Error code.",
+                                                    "enum": [
+                                                        "invalidParameterValue",
+                                                        "invalidRequestBodyFormat",
+                                                        "emptyRequest",
+                                                        "missingInputRecords",
+                                                        "invalidDocument",
+                                                        "modelVersionIncorrect",
+                                                        "invalidDocumentBatch",
+                                                        "unsupportedLanguageCode",
+                                                        "invalidCountryHint"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "InnerErrorCodeValue"
+                                                    }
+                                                },
+                                                "details": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Error details.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Error message.",
+                                                    "type": "string"
+                                                },
+                                                "target": {
+                                                    "description": "Error target.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "Error message.",
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "description": "Error target.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Document Id.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "error"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "modelVersion": {
+                        "description": "This field indicates which model is used for scoring.",
+                        "type": "string"
+                    },
+                    "statistics": {
+                        "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+                        "properties": {
+                            "documentsCount": {
+                                "description": "Number of documents submitted in the request.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "erroneousDocumentsCount": {
+                                "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "transactionsCount": {
+                                "description": "Number of transactions for the request.",
+                                "format": "int64",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "type": "integer"
+                            },
+                            "validDocumentsCount": {
+                                "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "documentsCount",
+                            "validDocumentsCount",
+                            "erroneousDocumentsCount",
+                            "transactionsCount"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "documents",
+                    "errors",
+                    "modelVersion"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Sentiment",
+            "url": "https://microsoft-text-analytics1.p.rapidapi.com/sentiment",
+            "description": "The API returns a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral).In addition, sentence level sentiment predictions are returned. [See the Supported languages in Text Analytics API](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages) for the list of enabled languages.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model-version",
+                    "type": "STRING",
+                    "description": "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+                    "default": ""
+                },
+                {
+                    "name": "showStats",
+                    "type": "BOOLEAN",
+                    "description": "(Optional) if set to true, response will contain input and document level statistics.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/sentiment\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-text-analytics1.p.rapidapi.com/sentiment\"\nquerystring = {\"model-version\": \"\", \"showStats\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-text-analytics1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "properties": {
+                    "documents": {
+                        "description": "Sentiment analysis per document.",
+                        "items": {
+                            "properties": {
+                                "documentScores": {
+                                    "description": "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative.",
+                                    "properties": {
+                                        "negative": {
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        },
+                                        "neutral": {
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        },
+                                        "positive": {
+                                            "format": "double",
+                                            "maximum": 1.7976931348623157e+308,
+                                            "minimum": -1.7976931348623157e+308,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "required": [
+                                        "positive",
+                                        "neutral",
+                                        "negative"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Unique, non-empty document identifier.",
+                                    "type": "string"
+                                },
+                                "sentences": {
+                                    "description": "Sentence level sentiment analysis.",
+                                    "items": {
+                                        "properties": {
+                                            "length": {
+                                                "description": "The length of the sentence by Unicode standard.",
+                                                "format": "int32",
+                                                "maximum": 2147483647,
+                                                "minimum": -2147483648,
+                                                "type": "integer"
+                                            },
+                                            "offset": {
+                                                "description": "The sentence offset from the start of the document.",
+                                                "format": "int32",
+                                                "maximum": 2147483647,
+                                                "minimum": -2147483648,
+                                                "type": "integer"
+                                            },
+                                            "sentiment": {
+                                                "description": "The predicted Sentiment for the sentence.",
+                                                "enum": [
+                                                    "positive",
+                                                    "neutral",
+                                                    "negative"
+                                                ],
+                                                "type": "string",
+                                                "x-ms-enum": {
+                                                    "modelAsString": false,
+                                                    "name": "SentenceSentimentValue"
+                                                }
+                                            },
+                                            "warnings": {
+                                                "description": "The warnings generated for the sentence.",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "required": [
+                                            "sentiment",
+                                            "offset",
+                                            "length"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "sentiment": {
+                                    "description": "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+                                    "enum": [
+                                        "positive",
+                                        "neutral",
+                                        "negative",
+                                        "mixed"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": false,
+                                        "name": "DocumentSentimentValue"
+                                    }
+                                },
+                                "statistics": {
+                                    "description": "if showStats=true was specified in the request this field will contain information about the document payload.",
+                                    "properties": {
+                                        "charactersCount": {
+                                            "description": "Number of text elements recognized in the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        },
+                                        "transactionsCount": {
+                                            "description": "Number of transactions for the document.",
+                                            "format": "int32",
+                                            "maximum": 2147483647,
+                                            "minimum": -2147483648,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "required": [
+                                        "charactersCount",
+                                        "transactionsCount"
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "sentiment",
+                                "documentScores",
+                                "sentences"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "errors": {
+                        "description": "Errors by document id.",
+                        "items": {
+                            "properties": {
+                                "error": {
+                                    "properties": {
+                                        "code": {
+                                            "description": "Error code.",
+                                            "enum": [
+                                                "invalidRequest",
+                                                "invalidArgument",
+                                                "internalServerError",
+                                                "serviceUnavailable"
+                                            ],
+                                            "type": "string",
+                                            "x-ms-enum": {
+                                                "modelAsString": false,
+                                                "name": "ErrorCodeValue"
+                                            }
+                                        },
+                                        "details": {
+                                            "description": "Details about specific errors that led to this reported error.",
+                                            "type": "array"
+                                        },
+                                        "innerError": {
+                                            "properties": {
+                                                "code": {
+                                                    "description": "Error code.",
+                                                    "enum": [
+                                                        "invalidParameterValue",
+                                                        "invalidRequestBodyFormat",
+                                                        "emptyRequest",
+                                                        "missingInputRecords",
+                                                        "invalidDocument",
+                                                        "modelVersionIncorrect",
+                                                        "invalidDocumentBatch",
+                                                        "unsupportedLanguageCode",
+                                                        "invalidCountryHint"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": false,
+                                                        "name": "InnerErrorCodeValue"
+                                                    }
+                                                },
+                                                "details": {
+                                                    "additionalProperties": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": "Error details.",
+                                                    "type": "object"
+                                                },
+                                                "message": {
+                                                    "description": "Error message.",
+                                                    "type": "string"
+                                                },
+                                                "target": {
+                                                    "description": "Error target.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "code",
+                                                "message"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        "message": {
+                                            "description": "Error message.",
+                                            "type": "string"
+                                        },
+                                        "target": {
+                                            "description": "Error target.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "code",
+                                        "message"
+                                    ],
+                                    "type": "object"
+                                },
+                                "id": {
+                                    "description": "Document Id.",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "error"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "modelVersion": {
+                        "description": "This field indicates which model is used for scoring.",
+                        "type": "string"
+                    },
+                    "statistics": {
+                        "description": "if showStats=true was specified in the request this field will contain information about the request payload.",
+                        "properties": {
+                            "documentsCount": {
+                                "description": "Number of documents submitted in the request.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "erroneousDocumentsCount": {
+                                "description": "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            },
+                            "transactionsCount": {
+                                "description": "Number of transactions for the request.",
+                                "format": "int64",
+                                "maximum": 9223372036854776000,
+                                "minimum": -9223372036854776000,
+                                "type": "integer"
+                            },
+                            "validDocumentsCount": {
+                                "description": "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents.",
+                                "format": "int32",
+                                "maximum": 2147483647,
+                                "minimum": -2147483648,
+                                "type": "integer"
+                            }
+                        },
+                        "required": [
+                            "documentsCount",
+                            "validDocumentsCount",
+                            "erroneousDocumentsCount",
+                            "transactionsCount"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "documents",
+                    "errors",
+                    "modelVersion"
+                ],
+                "type": "object"
+            }
+        }
+    ]
+}

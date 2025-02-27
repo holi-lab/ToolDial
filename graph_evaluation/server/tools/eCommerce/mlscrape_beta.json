@@ -1,0 +1,170 @@
+{
+    "tool_name":"MLScrape Beta",
+    "tool_description":"An e-commerce web scraper powered by machine-learning",
+    "title":"MLScrape Beta",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":0,
+        "avgLatency":1120,
+        "avgSuccessRate":0,
+        "popularityScore":0,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/admin-hZKAUjDew/api/mlscrape-beta/",
+    "host":"mlscrape-beta.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Product (Beta)",
+            "url":"https://mlscrape-beta.p.rapidapi.com/product",
+            "description":"**This is an older version of the API - a newer version of this API is available!**\n\n### Overview\n\nThis API returns structured data extracted from a product page, which is specified by a URL. The URL must be valid and begin with \"http\"/\"https\", otherwise an error will be returned (see the section below on errors for more information). The API returns the following set of data:\n\n**Name**: As a string, or null if unavailable.\nE.g \"Triban RC 500 Disk Road Bike\".\n\n**Price**: As a string, or null if unavailable.\nE.g \"£549.99\".\n\n**Main Image URL**: As a string, or null if unavailable\n\n**Specification information**: \nAs an object, with key-value pairs that correspond to the values in the detected specification table.\n\n For example, if the specification table contains a row with \"Brand\" in the first column and \"Triban\" in the second column, then the specification object will contain, ```\"brand\": \"Triban\"```.\n\nIf no specification information is detected on the product page, then the specification object will be an empty object.\n\n**Identifiers**:\nThe identifiers object contains any of the following identifiers if they are detected on the product page: SKU, UPC/EAN, MPN, ISBN. If none of them are detected, then the identifiers object will be empty.\nE.g  \n``` \n       {\n           \"upc\": \"0622356231244\", \n           \"sku\": \"184321572622\"\n       }\n```\n\n### Rotating proxy\nTo enable rotating proxies for your request, add `proxy=enabled` to your API request as a query parameter.\nAny requests with proxies enabled will use up **2 requests** from your API quota.\n\n### Errors\nIf an error occurs while processing your request, one of the following error codes will be returned in an error object:\n\n**1**\n**Invalid URL** - Please ensure that the URL provided is a valid URL, and that it begins with http/https. \n\n**2**\n**Timeout error** - The product page took too long to load.\n\n**3**\n**Failed to load the product page** - The API failed to load the product page. This could be due to a number of reasons, for example, our servers may have been blocked by the owner of the product page.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://www.ebay.co.uk/itm/Shark-Anti-Hair-Wrap-Cordless-Stick-Vacuum-Cleaner-IZ251UKT-Refurbished/184321572622"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"proxy",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"enabled"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://mlscrape-beta.p.rapidapi.com/product\"\nquerystring = {\"url\": url, \"proxy\": proxy}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mlscrape-beta.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "identifiers":{
+                    "upc":"0622356231244"
+                },
+                "image":"https://i.ebayimg.com/images/g/0EQAAOSwGPFePURI/s-l300.jpg",
+                "name":"Shark Anti Hair Wrap Cordless Stick Vacuum Cleaner - IZ251UKT (Refurbished)",
+                "price":"£299.99",
+                "spec":{
+                    "brand":"Shark",
+                    "capacity":"0.7 L",
+                    "cord_type":"Cordless",
+                    "ean":"0622356231244",
+                    "features":"Pet Hair Removal, Multi Surface, Self-propelled, Carpet Cleaning, Compact, Battery Operated, For Pet Hair, Headlight, Removable Brushroll",
+                    "manufacturer_warranty":"1 Year",
+                    "model":"IZ251UKTR",
+                    "runtime":"80 min"
+                }
+            },
+            "headers":{
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-25=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+                "content-type":"application/json",
+                "date":"Wed, 22 Jul 2020 09:04:07 GMT",
+                "server":"RapidAPI-1.1.24",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.1.24",
+                "content-length":"529",
+                "connection":"Close"
+            },
+            "schema":{
+                "properties":{
+                    "error":{
+                        "type":"integer"
+                    },
+                    "identifiers":{
+                        "properties":{
+                            "isbn":{
+                                "type":"string"
+                            },
+                            "sku":{
+                                "type":"string"
+                            },
+                            "upc":{
+                                "type":"string"
+                            }
+                        },
+                        "type":"object"
+                    },
+                    "image":{
+                        "type":[
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "name":{
+                        "type":[
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "price":{
+                        "type":[
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "spec":{
+                        "type":"object"
+                    }
+                },
+                "type":"object"
+            }
+        },
+        {
+            "name":"Product (v1)",
+            "url":"https://mlscrape-beta.p.rapidapi.com/v1/product",
+            "description":"### Overview\n\nThis API returns structured data extracted from a product page, which is specified by a URL. The product page should be the webpage of a specific product on an online shop (rather than, for example, a search results page).  The URL must be valid and begin with \"http\"/\"https\", otherwise an error will be returned (see the section below on errors for more information). The API returns the following set of data:\n\n**Name**: As a string, or null if unavailable.\nE.g \"Triban RC 500 Disk Road Bike\".\n\n**Price**: Broken down into 3 parts: The (ISO 4217) currency code, the textual, and the numeric representation of the price. If the price was not detected, null is returned instead.\nE.g\n``` \n       {\n           \"currency\": \"GBP\",\n           \"text\": \"£549.99\", \n           \"value\": 549.99\n       }\n```\n\n**Main Image URL**: As a string, or null if unavailable\n\n**Description**:\nThe description of the product as a string, or null if unavailable. \n\n**Availability**:\nThe availability status of the product, which is one of the following (or null if undetected):\n- \"In Stock\"\n- \"Discontinued\"\n- \"Limited\" (i.e the store's stock levels for the product are low)\n- \"Out Of Stock\"\n\n**Specification information**: \nAs an object, with key-value pairs that correspond to the values in the detected specification table.\n\n For example, if the specification table contains a row with \"Brand\" in the first column and \"Triban\" in the second column, then the specification object will contain, ```\"brand\": \"Triban\"```.\n\nIf no specification information is detected on the product page, then the specification object will be an empty object.\n\n**Identifiers**:\nThe identifiers object contains any of the following identifiers if they are detected on the product page: SKU, UPC/EAN, MPN, ISBN. If none of them are detected, then the identifiers object will be empty.\nE.g  \n``` \n       {\n           \"upc\": \"0622356231244\", \n           \"sku\": \"184321572622\"\n       }\n```\n\n### Rotating proxy\nTo enable rotating proxies for your request, add `proxy=enabled` to your API request as a query parameter.\nAny requests with proxies enabled will use up **2 requests** from your API quota.\n\n### Errors\nIf an error occurs while processing your request, one of the following error codes will be returned in an error object:\n\n**1**\n**Invalid URL** - Please ensure that the URL provided is a valid URL, and that it begins with http/https. \n\n**2**\n**Timeout error** - The product page took too long to load.\n\n**3**\n**Failed to load the product page** - The API failed to load the product page. This could be due to a number of reasons, for example, our servers may have been blocked by the owner of the product page.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://www.wayfair.co.uk/furniture/pdp/symple-stuff-computer-desk-gcqq1089.html?categoryid=1774332&placement=1&slot=0&sponsoredid=236b65f88a12b28b0088c5f43b5810ecefc4ec3019c83de54c55e18f866ef4e0&_txid=I8yisF82lzO%2FU2gTEDZnAg%3D%3D&isB2b=0&auctionId=2d0e3767-0b0b-43c5-be2e-c13e0fd09d"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"proxy",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"enabled"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://mlscrape-beta.p.rapidapi.com/v1/product\"\nquerystring = {\"proxy\": proxy, \"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mlscrape-beta.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "availability":"In Stock",
+                "description":"The Computer Desk is designed to be a stunning focal point in your contemporary home, office, or study. The simple and stylish piece features uniquely clean lines in a compact size, fits in the corner with room to spare. The computer desk offers a spacious working surface that is suitable for organizing paperwork and using a computer. This piece features a computer case, a storage shelf, and a keyboard tray that helps to keep all your items organized.",
+                "identifiers":{
+                    "sku":"GCQQ1089"
+                },
+                "image":"https://secure.img1-fg.wfcdn.com/im/53490434/compr-r85/9167/91675000/computer-desk.jpg",
+                "name":"Computer Desk",
+                "price":{
+                    "currency":"GBP",
+                    "text":"£65.99",
+                    "value":65.99
+                },
+                "spec":{
+                    "assembly_required":"Yes",
+                    "base_material":"Manufactured Wood",
+                    "cable_management":"No",
+                    "level_of_assembly":"Full Assembly Needed",
+                    "top_material":"Manufactured Wood"
+                }
+            },
+            "headers":{
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3-29=\":443\"; ma=2592000,h3-27=\":443\"; ma=2592000,h3-T050=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"",
+                "content-type":"application/json",
+                "date":"Fri, 14 Aug 2020 13:54:24 GMT",
+                "server":"RapidAPI-1.1.24",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.1.24",
+                "content-length":"888",
+                "connection":"Close"
+            },
+            "schema":{}
+        }
+    ]
+}

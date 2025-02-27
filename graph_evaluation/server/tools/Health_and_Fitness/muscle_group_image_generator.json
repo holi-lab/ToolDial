@@ -1,0 +1,168 @@
+{
+    "tool_name":"Muscle Group Image Generator ",
+    "tool_description":"Generates an anatomical image where the requested muscle groups are highlighted on the body in your color of choice. \nIdeal for Apps and Websites that are centered around sports, exercises, workouts, health and gym. Give your users some visual feedback on what muscle groups they are training by dynamically generating an image that fits perfectly to the current users workout routine.",
+    "title":"Muscle Group Image Generator ",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":747,
+        "avgSuccessRate":98,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/mertronlp/api/muscle-group-image-generator/",
+    "host":"muscle-group-image-generator.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get Base Image",
+            "url":"https://muscle-group-image-generator.p.rapidapi.com/getBaseImage",
+            "description":"Get the base image without any highlighted muscle groups",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"transparentBackground",
+                    "type":"NUMBER",
+                    "description":"Set the image background to transparent with a value of 1. The default is 0 and a white background color.",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://muscle-group-image-generator.p.rapidapi.com/getBaseImage\"\nquerystring = {\"transparentBackground\": transparentbackground}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"muscle-group-image-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get Individual Color Image (Set color for each muscle)",
+            "url":"https://muscle-group-image-generator.p.rapidapi.com/getIndividualColorImage",
+            "description":"Create an image where each muscle can have a different highlight color. Other than in the other endpoints you have to set the colors as hex values.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"muscleGroups",
+                    "type":"STRING",
+                    "description":"A list of the muscle groups separated by comma that should be highlighted. You can see the available muscle groups via the /getMuscleGroups endpoints",
+                    "default":"chest,triceps,shoulders"
+                },
+                {
+                    "name":"colors",
+                    "type":"STRING",
+                    "description":"A list of colors as hex strings that should have a length less or equal than the muscleGroups list. \nIf the length of the colors list is shorter each muscle that have no corresponding color will be highlighted in the last color of the list. Example:\n\nmuscleGroups: biceps,triceps,shoulders\ncolors: f00,0f0\n=> Biceps will be f00 and triceps, shoulders will be 0f0  ",
+                    "default":"ff0000,0f0,00f"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"transparentBackground",
+                    "type":"STRING",
+                    "description":"When set to 1 the background of the image will be transparent. The default value is 0 (white background)",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://muscle-group-image-generator.p.rapidapi.com/getIndividualColorImage\"\nquerystring = {\"transparentBackground\": transparentbackground, \"muscleGroups\": musclegroups, \"colors\": colors}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"muscle-group-image-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get Available Muscle Groups",
+            "url":"https://muscle-group-image-generator.p.rapidapi.com/getMuscleGroups",
+            "description":"Get all available muscle groups as a list",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://muscle-group-image-generator.p.rapidapi.com/getMuscleGroups\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"muscle-group-image-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{
+                "Content-Type":"application/json"
+            },
+            "schema":{
+                "type":"array"
+            }
+        },
+        {
+            "name":"Get Single Color Image (Just primary musclegroups)",
+            "url":"https://muscle-group-image-generator.p.rapidapi.com/getImage",
+            "description":"Get an image where all requested muscleGroups are highlighted.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"muscleGroups",
+                    "type":"STRING",
+                    "description":"A list of musclegroups that should be highlighted. Get a list of possible muscle groups with the /getMuscleGroups endpoint.",
+                    "default":"biceps,chest,hamstring"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"transparentBackground",
+                    "type":"NUMBER",
+                    "description":"When set to 1 the background of the image will be transparent. Default value is 0.",
+                    "default":"0"
+                },
+                {
+                    "name":"color",
+                    "type":"STRING",
+                    "description":"The color that the highlighted musclegroups should have. The value of the parameter should contain the rgb values as a string like \\\\\\\\\\\\\\\"red,green,blue\\\\\\\\\\\\\\\".",
+                    "default":"200,100,80"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://muscle-group-image-generator.p.rapidapi.com/getImage\"\nquerystring = {\"transparentBackground\": transparentbackground, \"muscleGroups\": musclegroups, \"color\": color}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"muscle-group-image-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get Dual Color Image (Primary and secondary musclegroups)",
+            "url":"https://muscle-group-image-generator.p.rapidapi.com/getMulticolorImage",
+            "description":"Get an image where all requested primary and secondary muscleGroups are highlighted in their corresponding color. If you only need one highlight color you can use the \"Get Image\" endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"secondaryMuscleGroups",
+                    "type":"STRING",
+                    "description":"Example: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"biceps,triceps,chest\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\". See possible musclegroups via the /getMuscleGroups endpoint.",
+                    "default":"triceps,shoulders"
+                },
+                {
+                    "name":"primaryColor",
+                    "type":"STRING",
+                    "description":"The color that the highlighted **primary **musclegroups should have. The value of the parameter should contain the rgb values as a string like \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"red,green,blue\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\".",
+                    "default":"240,100,80"
+                },
+                {
+                    "name":"primaryMuscleGroups",
+                    "type":"STRING",
+                    "description":"Example: \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"biceps,triceps,chest\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\". See possible musclegroups via the /getMuscleGroups endpoint.",
+                    "default":"chest"
+                },
+                {
+                    "name":"secondaryColor",
+                    "type":"STRING",
+                    "description":"The color that the highlighted **secondary** musclegroups should have. The value of the parameter should contain the rgb values as a string like \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"red,green,blue\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\".",
+                    "default":"200,100,80"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"transparentBackground",
+                    "type":"NUMBER",
+                    "description":"Make the background transparent when set to 1. The default value is 0.",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://muscle-group-image-generator.p.rapidapi.com/getMulticolorImage\"\nquerystring = {\"secondaryMuscleGroups\": secondarymusclegroups, \"primaryColor\": primarycolor, \"primaryMuscleGroups\": primarymusclegroups, \"transparentBackground\": transparentbackground, \"secondaryColor\": secondarycolor}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"muscle-group-image-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

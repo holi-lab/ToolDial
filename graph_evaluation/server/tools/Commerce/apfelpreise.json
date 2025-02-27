@@ -1,0 +1,65 @@
+{
+    "tool_name":"Apfelpreise",
+    "tool_description":"market data for used apple products",
+    "title":"Apfelpreise",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":0,
+        "avgLatency":7,
+        "avgSuccessRate":0,
+        "popularityScore":0,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/johannes.hinkov/api/apfelpreise/",
+    "host":"apfelpreise.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"price",
+            "url":"https://apfelpreise.p.rapidapi.com/price/{manufacturernumbase64encoded}",
+            "description":"Get latest average price for manufacturer number",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"manufacturerNumBase64Encoded",
+                    "type":"string",
+                    "description":"A manufacturer number of an apple product, base64 encoded, e.g for a Apple MacBook Pro 13\\\\\\\" 2020 with manufacturer number MWP72D/A -> TVdQNzJEL0E=",
+                    "default":"TVdQNzJEL0E="
+                },
+                {
+                    "name":"condition",
+                    "type":"ENUM",
+                    "description":"ENUM, valid values are: USED, NEW, DEFECT, REFURBISHED\n\nNote: Until now in v1, only values USED and REFURBISHED are allowed and give the same results (no distringuish between USED or REFURBISHED, so use any of the two.\nIn a future release, the other values will be also supported.",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://apfelpreise.p.rapidapi.com/price/{manufacturernumbase64encoded}\"\nquerystring = {\"condition\": condition}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apfelpreise.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "maxDate":"2021-06",
+                "lastPrice":1227,
+                "minPrice":1010,
+                "minPriceDate":"2021-04-27",
+                "maxPrice":1227,
+                "maxPriceDate":"2021-06-13"
+            },
+            "headers":{
+                "cache-control":"no-cache, no-store, max-age=0, must-revalidate",
+                "content-type":"application/json",
+                "date":"Sun, 20 Jun 2021 15:36:09 GMT",
+                "expires":"0",
+                "pragma":"no-cache",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=31536000",
+                "x-content-type-options":"nosniff",
+                "x-frame-options":"DENY",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-xss-protection":"1; mode=block",
+                "content-length":"126",
+                "connection":"Close"
+            },
+            "schema":{}
+        }
+    ]
+}

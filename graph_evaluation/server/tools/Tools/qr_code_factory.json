@@ -1,0 +1,392 @@
+{
+    "tool_name": "QR Code Factory",
+    "tool_description": "QR Code Factory is a simple and yet powerful endpoint that allows you to creates an extensive range of QR formats for a wide range of applications such as Text, URL, WhatsApp, WiFi Access, Bitcoin Address, Giroconto, and many more in various image formats, SVG, and ASCII.  Check for the complete documentation available https://www.kodice.one",
+    "title": "QR Code Factory",
+    "pricing": "FREEMIUM",
+    "score": null,
+    "home_url": "https://rapidapi.com/kodice/api/qr-code-factory/",
+    "host": "qr-code-factory.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "list",
+            "url": "https://qr-code-factory.p.rapidapi.com/images/list",
+            "description": "List images stored to be used as Logo or Background",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/images/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "success": "Success",
+                "message": "Listed",
+                "result": {
+                    "count": 2,
+                    "files": [
+                        {
+                            "name": "background.jpg",
+                            "contentType": "image/jpeg",
+                            "size": 23422
+                        },
+                        {
+                            "name": "logo.jpg",
+                            "contentType": "image/jpeg",
+                            "size": 571517
+                        }
+                    ]
+                }
+            },
+            "headers": {},
+            "schema": {
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "string",
+                                "description": "Operation success",
+                                "enum": [
+                                    "Success",
+                                    "Partial",
+                                    "Fail"
+                                ]
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "Operation message"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "message": {},
+                            "result": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "description": "Number of files in the operation"
+                                    },
+                                    "files": {
+                                        "type": "array",
+                                        "description": "List of files in the operation",
+                                        "items": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "description": "File name"
+                                                        }
+                                                    },
+                                                    "x-internal": false
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "contentType": {
+                                                            "type": "string",
+                                                            "description": "File content type"
+                                                        },
+                                                        "size": {
+                                                            "type": "integer",
+                                                            "description": "File size in bytes"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "create",
+            "url": "https://qr-code-factory.p.rapidapi.com/create/static",
+            "description": "Render a QR Code with the payload and format specified",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/create/static\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "image/*": {
+                    "schema": {
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "plain/text": {
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "delete",
+            "url": "https://qr-code-factory.p.rapidapi.com/images/delete",
+            "description": "Delete stored images that you can use as Logo or Backgorund",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "ARRAY",
+                    "description": "Full filename",
+                    "default": "[]"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/images/delete\"\nquerystring = {\"name\": name}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "success": "Success",
+                "message": "File deleted",
+                "result": {
+                    "count": 1,
+                    "files": [
+                        {
+                            "name": "myLogoImage.png",
+                            "success": "Success",
+                            "message": "Accepted"
+                        }
+                    ]
+                }
+            },
+            "headers": {},
+            "schema": {
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "string",
+                                "description": "Operation success",
+                                "enum": [
+                                    "Success",
+                                    "Partial",
+                                    "Fail"
+                                ]
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "Operation message"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "message": {},
+                            "result": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "description": "Number of files in the operation"
+                                    },
+                                    "files": {
+                                        "type": "array",
+                                        "description": "List of files in the operation",
+                                        "items": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "description": "File name"
+                                                        }
+                                                    },
+                                                    "x-internal": false
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "success": {
+                                                            "type": "string",
+                                                            "description": "Operation success",
+                                                            "enum": [
+                                                                "Success",
+                                                                "Fail"
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "Operation message"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "upload",
+            "url": "https://qr-code-factory.p.rapidapi.com/images/upload",
+            "description": "Upload images to storage for use as Logo or Backgorund in QR creation",
+            "method": "PUT",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "filename",
+                    "type": "ARRAY",
+                    "description": "",
+                    "default": "[]"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/images/upload\"\nquerystring = {\"filename\": filename}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "success": "Success",
+                "message": "Files uploaded",
+                "result": {
+                    "count": 2,
+                    "files": [
+                        {
+                            "name": "logo.jpg",
+                            "contentType": "image/jpeg",
+                            "size": 571517,
+                            "success": "Success",
+                            "message": "File uploaded"
+                        },
+                        {
+                            "name": "background.jpg",
+                            "contentType": "image/jpeg",
+                            "size": 23422,
+                            "success": "Success",
+                            "message": "File uploaded"
+                        }
+                    ]
+                }
+            },
+            "headers": {},
+            "schema": {
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "string",
+                                "description": "Operation success",
+                                "enum": [
+                                    "Success",
+                                    "Partial",
+                                    "Fail"
+                                ]
+                            },
+                            "message": {
+                                "type": "string",
+                                "description": "Operation message"
+                            }
+                        }
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "message": {},
+                            "result": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "description": "Number of files in the operation"
+                                    },
+                                    "files": {
+                                        "type": "array",
+                                        "description": "List of files in the operation",
+                                        "items": {
+                                            "allOf": [
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "name": {
+                                                            "type": "string",
+                                                            "description": "File name"
+                                                        }
+                                                    },
+                                                    "x-internal": false
+                                                },
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "contentType": {
+                                                            "type": "string",
+                                                            "description": "File content type"
+                                                        },
+                                                        "size": {
+                                                            "type": "integer",
+                                                            "description": "File size in bytes"
+                                                        },
+                                                        "success": {
+                                                            "type": "string",
+                                                            "description": "Operation success",
+                                                            "enum": [
+                                                                "Success",
+                                                                "Fail"
+                                                            ]
+                                                        },
+                                                        "message": {
+                                                            "type": "string",
+                                                            "description": "Operation message"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "name": "download",
+            "url": "https://qr-code-factory.p.rapidapi.com/images/download",
+            "description": "Download stored image stored previously",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Full filename",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/images/download\"\nquerystring = {\"name\": name}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "create",
+            "url": "https://qr-code-factory.p.rapidapi.com/create/static",
+            "description": "Render a QR Code with the payload and format specified",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/create/static\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://qr-code-factory.p.rapidapi.com/create/static\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"qr-code-factory.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

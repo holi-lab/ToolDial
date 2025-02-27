@@ -1,0 +1,97 @@
+{
+    "tool_name":"DNS Lookup",
+    "tool_description":"DNS Lookup API lets you gather a domain' corresponding IP address/A record, mail server/MX record, DNS servers/NS nameservers, as well as other items like SPF records/TXT records.",
+    "title":"DNS Lookup",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":2343,
+        "avgSuccessRate":100,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/whoisapi/api/dns-lookup/",
+    "host":"whoisapi-dns-lookup-v1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"/whoisserver/DNSService",
+            "url":"https://whoisapi-dns-lookup-v1.p.rapidapi.com/whoisserver/DNSService",
+            "description":"DNS Lookup API",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"DNS type: A, NS, SOA, MX, etc. You can specify multiple comma-separated values, e.g., A,SOA,TXT; all records can be retrieved with type=_all.\nAcceptable values: [A, NS, SOA, MX, etc.](https://dns-lookup.whoisxmlapi.com/api/documentation/making-requests#Supported-DNS-Types)",
+                    "default":"A"
+                },
+                {
+                    "name":"domainname",
+                    "type":"STRING",
+                    "description":"The target domain name.",
+                    "default":"google.com"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"outputFormat",
+                    "type":"STRING",
+                    "description":"Response output format.\nAcceptable values: JSON | XML\nDefault: XML",
+                    "default":"JSON"
+                },
+                {
+                    "name":"callback",
+                    "type":"STRING",
+                    "description":"A javascript function used when outputFormat is JSON; this is an implementation known as JSONP which invokes the callback on the returned response.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://whoisapi-dns-lookup-v1.p.rapidapi.com/whoisserver/DNSService\"\nquerystring = {\"outputFormat\": outputformat, \"type\": type, \"domainname\": domainname}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whoisapi-dns-lookup-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "DNSData":{
+                        "type":"object",
+                        "properties":{
+                            "domainName":{
+                                "type":"string"
+                            },
+                            "types":{
+                                "type":"array",
+                                "items":{
+                                    "type":"integer"
+                                }
+                            },
+                            "dnsTypes":{
+                                "type":"string"
+                            },
+                            "audit":{
+                                "type":"object",
+                                "properties":{
+                                    "createdDate":{
+                                        "type":"string"
+                                    },
+                                    "updatedDate":{
+                                        "type":"string"
+                                    }
+                                }
+                            },
+                            "dnsRecords":{
+                                "type":"array",
+                                "items":{
+                                    "type":"object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

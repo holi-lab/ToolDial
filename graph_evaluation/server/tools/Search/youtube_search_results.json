@@ -1,0 +1,86 @@
+{
+    "tool_name":"YouTube Search Results",
+    "tool_description":"Fetch the YouTube Search Results and the information for each item for a specific search term, without any limits!",
+    "title":"YouTube Search Results",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":5340,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/marindelija/api/youtube-search-results/",
+    "host":"youtube-search-results.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"YouTubeSearchResults",
+            "url":"https://youtube-search-results.p.rapidapi.com/youtube-search/",
+            "description":"Get all the YouTube Search Results Items and their Information! No limits and no Google API Key needed!",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"The URL Encoded search Query",
+                    "default":"justin+bieber"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"next",
+                    "type":"STRING",
+                    "description":"Leave empty if you want the results from the first page.\nUse the value from [nextpageRef] from the previous request (for example first page) to get the next page (for example 2nd page)\nMUST BE URL ENCODED",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://youtube-search-results.p.rapidapi.com/youtube-search/\"\nquerystring = {\"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"youtube-search-results.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{
+                "properties":{
+                    "currentRef":{
+                        "type":"null"
+                    },
+                    "filters":{
+                        "items":{
+                            "properties":{
+                                "active":{
+                                    "type":"boolean"
+                                },
+                                "name":{
+                                    "type":"string"
+                                },
+                                "ref":{
+                                    "type":"null"
+                                }
+                            },
+                            "type":"object"
+                        },
+                        "type":"array"
+                    },
+                    "items":{
+                        "items":{
+                            "type":"object"
+                        },
+                        "type":"array"
+                    },
+                    "nextpageRef":{
+                        "type":"string"
+                    },
+                    "query":{
+                        "type":"string"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "status":{
+                        "type":"boolean"
+                    }
+                },
+                "type":"object"
+            }
+        }
+    ]
+}

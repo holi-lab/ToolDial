@@ -1,0 +1,142 @@
+{
+    "product_id": "api_0270b42d-543e-4f16-8fe1-086b775878ee",
+    "tool_description": "Home Location Register lookup to check the validity and availability of a mobile number worldwide. Cleanup databases or check plausibility synchronously online.  ",
+    "home_url": "https://rapidapi.com/stromdao-stromdao-default/api/hlr-lookup/",
+    "name": "HLR Lookup",
+    "title": "HLR Lookup",
+    "pricing": "FREEMIUM",
+    "tool_name": "HLR Lookup",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 325,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.1,
+        "__typename": "Score"
+    },
+    "host": "hlr-lookup.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "lookup",
+            "url": "https://hlr-lookup.p.rapidapi.com/hlr",
+            "description": "Invokes a realtime Home-Location-Record lookup and provides live mobile phone connectivity and portability data from network operators directly and in real-time. \nThis endpoint is suitable for live traffic in  time-critical applications and if your primary  goal is to identify phone numbers that are  currently reachable (connected) or absent (phone switched off) and distinguish  them from invalid, unknown, or fake phone numbers. \n\nThis endpoint is also suitable to extract the live portability status (MCCMNC) alongside live connectivity information.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "msisdn",
+                    "type": "STRING",
+                    "description": "A mobile phone number (MSISDN) in international format (e.g. +14156226819 or 0014156226819).",
+                    "default": "+491742972060"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://hlr-lookup.p.rapidapi.com/hlr\"\nquerystring = {\"msisdn\": \"+491742972060\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hlr-lookup.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://hlr-lookup.p.rapidapi.com/hlr\"\nquerystring = {\"msisdn\": \"+491742972060\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hlr-lookup.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "A unique identifier for this lookup."
+                    },
+                    "msisdn": {
+                        "type": "string",
+                        "description": "The mobile phone number inspected in this lookup request."
+                    },
+                    "connectivity_status": {
+                        "type": "string",
+                        "description": "Indicates whether number type information was successfully obtained. Can be either CONNECTED, ABSENT, INVALID_MSISDN, or UNDETERMINED."
+                    },
+                    "mccmnc": {
+                        "type": "string",
+                        "description": "A five or six character MCCMNC (mobile country code + mobile network code tuple) identifying the network the mobile phone number currently belongs to."
+                    },
+                    "mcc": {
+                        "type": "string",
+                        "description": "A three character MCC (mobile country code) identifying the country the mobile phone number currently belongs to."
+                    },
+                    "mnc": {
+                        "type": "string",
+                        "description": "A two or three character MNC (mobile network code) identifying the network the mobile phone number currently belongs to."
+                    },
+                    "imsi": {
+                        "type": "string",
+                        "description": "International Mobile Subscriber Identity (IMSI). Unique identification number associated with the SIM card. The availability of the IMSI depends on the mobile network operator."
+                    },
+                    "msin": {
+                        "type": "string",
+                        "description": "The Mobile Subscription Identification Number (MSIN) within the mobile network operator database. The availability of the MSIN depends on the mobile network operator."
+                    },
+                    "msc": {
+                        "type": "string",
+                        "description": "The Mobile Switching Center (MSC) currently serving the subscriber. The availability of the MSC depends on the mobile network operator."
+                    },
+                    "original_network_name": {
+                        "type": "string",
+                        "description": "An arbitrary string in English plain text specifying the original (native) network operator name of the inspected mobile phone number."
+                    },
+                    "original_country_name": {
+                        "type": "string",
+                        "description": "An arbitrary string in English plain text specifying the original country of the inspected mobile phone number."
+                    },
+                    "original_country_code": {
+                        "type": "string",
+                        "description": "A two character ISO country code specifying the original country of the inspected mobile phone number."
+                    },
+                    "original_country_prefix": {
+                        "type": "string",
+                        "description": "The dialling code of the original country of the inspected mobile phone number."
+                    },
+                    "is_ported": {
+                        "type": "boolean",
+                        "description": "Indicates whether the number was ported from its native network to a new operator."
+                    },
+                    "ported_network_name": {
+                        "type": "string",
+                        "description": "Indicates the network operator to which the inspected mobile phone number was ported (if any)."
+                    },
+                    "ported_country_name": {
+                        "type": "string",
+                        "description": "Indicates the country to which the inspected mobile phone number was ported (if any)."
+                    },
+                    "ported_country_code": {
+                        "type": "string",
+                        "description": "A two character ISO country code specifying the country to which the inspected mobile phone number was ported (if any)."
+                    },
+                    "ported_country_prefix": {
+                        "type": "The dialling code of the country to which the inspected mobile phone number was ported (if any)."
+                    },
+                    "is_roaming": {
+                        "type": "boolean",
+                        "description": "Indicates whether the number is currently roaming. The availability of roaming information depends on the mobile network operator."
+                    },
+                    "roaming_network_name": {
+                        "type": "string",
+                        "description": "Indicates the network in which the mobile phone is currently roaming (if any)."
+                    },
+                    "roaming_country_name": {
+                        "type": "string",
+                        "description": "Indicates the country in which the mobile phone is currently roaming (if any)."
+                    },
+                    "roaming_country_code": {
+                        "type": "string",
+                        "description": "A two character ISO country code specifying the country in which the mobile phone is currently roaming (if any)."
+                    },
+                    "roaming_country_prefix": {
+                        "type": "string",
+                        "description": "The dialling code of the country in which the inspected mobile phone number is currently roaming (if any)."
+                    },
+                    "route": {
+                        "type": "string",
+                        "description": "A three character identifier indicating the route used for this lookup request."
+                    },
+                    "data_source": {
+                        "type": "string",
+                        "description": "Indicates the data source used for this request. Can be either LIVE_HLR (live HLR query) or MNP_DB (static mobile number portability database). The latter can only happen on hybrid routes, which fall back to MNP when no HLR connection can be established (IP1 and IP4), or exclusive MNP routes (PTX)."
+                    }
+                }
+            }
+        }
+    ]
+}

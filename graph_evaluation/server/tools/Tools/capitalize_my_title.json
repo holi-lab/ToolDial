@@ -1,0 +1,371 @@
+{
+    "tool_name": "Capitalize My Title",
+    "tool_description": "Capitalize your titles using logic from the leading title capitalization tool.",
+    "title": "Capitalize My Title",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 160,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.5,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/capitalize-my-title-cmt/api/capitalize-my-title/",
+    "host": "capitalize-my-title.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Bulk Title Case",
+            "url": "https://capitalize-my-title.p.rapidapi.com/title",
+            "description": "API endpoint for Capitalize My Title for capitalizing multiple titles at once.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://capitalize-my-title.p.rapidapi.com/title\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"capitalize-my-title.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": 200,
+                "data": [
+                    [
+                        "1",
+                        {
+                            "char-count": 24,
+                            "input": "This is the first title.",
+                            "output": "This Is the First Title.",
+                            "style": "apa",
+                            "sub-style": "title-case",
+                            "word-count": 5
+                        }
+                    ],
+                    [
+                        "2",
+                        {
+                            "char-count": 25,
+                            "input": "this IS the second TiTle.",
+                            "output": "This is the second title.",
+                            "style": "apa",
+                            "sub-style": "sentence-case",
+                            "word-count": 5
+                        }
+                    ],
+                    [
+                        "3",
+                        {
+                            "char-count": 32,
+                            "input": "this is the between third TiTle.",
+                            "output": "This Is the Between Third Title.",
+                            "style": "apa",
+                            "sub-style": "title-case",
+                            "word-count": 6
+                        }
+                    ],
+                    [
+                        "4",
+                        {
+                            "char-count": 45,
+                            "input": "fourth TiTle is between the third and fourth.",
+                            "output": "Fourth Title Is between the Third and Fourth.",
+                            "style": "chicago",
+                            "sub-style": "title-case",
+                            "word-count": 8
+                        }
+                    ]
+                ],
+                "message": "OK",
+                "status": "success"
+            },
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "items": {
+                            "type": "array"
+                        },
+                        "type": "array"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "getTitle",
+            "url": "https://capitalize-my-title.p.rapidapi.com/title/{title}",
+            "description": "API endpoint for Capitalize My Title",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "title",
+                    "type": "string",
+                    "description": "The {title} input is the title that you want to capitalize. Without styles specified, the title will be capitalized using [APA style rules in title case](https://capitalizemytitle.com/#APAStyle).",
+                    "default": "capitalize this title"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://capitalize-my-title.p.rapidapi.com/title/{title}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"capitalize-my-title.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": 200,
+                "data": {
+                    "char-count": 21,
+                    "input": "capitalize this text",
+                    "output": "Capitalize This Text",
+                    "style": "apa",
+                    "sub-style": "title-case",
+                    "word-count": 3
+                },
+                "message": "OK",
+                "status": "success"
+            },
+            "headers": {},
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "properties": {
+                            "char-count": {
+                                "type": "integer"
+                            },
+                            "input": {
+                                "type": "string"
+                            },
+                            "output": {
+                                "type": "string"
+                            },
+                            "style": {
+                                "type": "string"
+                            },
+                            "sub-style": {
+                                "type": "string"
+                            },
+                            "word-count": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "getTitleWithStyleAndSubstyle",
+            "url": "https://capitalize-my-title.p.rapidapi.com/title/{style}/{substyle}/{title}",
+            "description": "API endpoint for Capitalize My Title with style and sub-style",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "title",
+                    "type": "string",
+                    "description": "",
+                    "default": "capitalize this title now"
+                },
+                {
+                    "name": "style",
+                    "type": "STRING",
+                    "description": "The {style} input can be any of the following:\n\n- apa: Capitalize using the APA manual style guidelines.\n- chicago: Capitalize using the Chicago Manual of Style guidelines.\n- ap: Capitalize using the Associated Press Stylebook 2020 (55th edition).\n- mla: Capitalize using the MLA Handbook, 8th edition style rules.\n- nyt: Capitalize with the NY Times style rules.\n- ama: Capitalize using the American Medical Association (AMA) Manual of Style, 11th edition\n- bb: Capitalize using the The Bluebook, 21st edition\n- wikipedia: Capitalize with the Wikipedia style rules.\n- email: Capitalize with standard email style rules.",
+                    "default": "ap"
+                },
+                {
+                    "name": "substyle",
+                    "type": "STRING",
+                    "description": "The {substyle} input can be any of the following:\n\n-  title-case: Capitalize the first letter of important words.\n- sentence-case: Capitalize only the first word of each sentence. [More details](https://capitalizemytitle.com/#WhatiosTitleCase).\n- uppercase: Uppercase all letters.\n- lowercase: Lowercase all letters.\n- first-letter: Capitalize the first letter of every word.\n- alt-case: Capitalize every other letter of your text starting with the first letter being capitalized.\n- toggle-case: Change the case of every letter in your string.",
+                    "default": "title-case"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://capitalize-my-title.p.rapidapi.com/title/{style}/{substyle}/{title}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"capitalize-my-title.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": 200,
+                "data": {
+                    "char-count": 21,
+                    "input": "capitalize this title now",
+                    "output": "Capitalize This Title Now",
+                    "style": "ap",
+                    "sub-style": "title-case",
+                    "word-count": 3
+                },
+                "message": "OK",
+                "status": "success"
+            },
+            "headers": {
+                "content-type": "application/json",
+                "date": "Tue, 15 Sep 2020 22:13:54 GMT",
+                "server": "RapidAPI-1.2.6",
+                "x-rapidapi-mock-response": "true",
+                "x-rapidapi-region": "AWS - us-west-2",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "191",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "properties": {
+                            "char-count": {
+                                "type": "integer"
+                            },
+                            "input": {
+                                "type": "string"
+                            },
+                            "output": {
+                                "type": "string"
+                            },
+                            "style": {
+                                "type": "string"
+                            },
+                            "sub-style": {
+                                "type": "string"
+                            },
+                            "word-count": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "getTitleWithStyle",
+            "url": "https://capitalize-my-title.p.rapidapi.com/title/{style}/{title}",
+            "description": "API endpoint for Capitalize My Title with one style.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "style",
+                    "type": "STRING",
+                    "description": "The {style} input can be any of the following:\n\n- apa: Capitalize using the APA manual style guidelines.\n- chicago: Capitalize using the Chicago Manual of Style guidelines.\n- ap: Capitalize using the Associated Press Stylebook 2020 (55th edition).\n- mla: Capitalize using the MLA Handbook, 8th edition style rules.\n- nyt: Capitalize with the NY Times style rules.\n- ama: Capitalize using the American Medical Association (AMA) Manual of Style, 11th edition\n- bb: Capitalize using the The Bluebook, 21st edition\n- wikipedia: Capitalize with the Wikipedia style rules.\n- email: Capitalize with standard email style rules.\n-  title-case: Capitalize the first letter of important words.\n- sentence-case: Capitalize only the first word of each sentence. [More details](https://capitalizemytitle.com/#WhatiosTitleCase).\n- uppercase: Uppercase all letters.\n- lowercase: Lowercase all letters.\n- first-letter: Capitalize the first letter of every word.\n- alt-case: Capitalize every other letter of your text starting with the first letter being capitalized.\n- toggle-case: Change the case of every letter in your string.",
+                    "default": "ap"
+                },
+                {
+                    "name": "title",
+                    "type": "string",
+                    "description": "The {title} input is the title that you want to capitalize.",
+                    "default": "capitalize this title now"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://capitalize-my-title.p.rapidapi.com/title/{style}/{title}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"capitalize-my-title.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "code": 200,
+                "data": {
+                    "char-count": 21,
+                    "input": "capitalize this title now",
+                    "output": "Capitalize This Title Now",
+                    "style": "ap",
+                    "sub-style": "title-case",
+                    "word-count": 3
+                },
+                "message": "OK",
+                "status": "success"
+            },
+            "headers": {
+                "content-type": "application/json",
+                "date": "Tue, 15 Sep 2020 22:13:54 GMT",
+                "server": "RapidAPI-1.2.6",
+                "x-rapidapi-mock-response": "true",
+                "x-rapidapi-region": "AWS - us-west-2",
+                "x-rapidapi-version": "1.2.6",
+                "content-length": "191",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "properties": {
+                            "char-count": {
+                                "type": "integer"
+                            },
+                            "input": {
+                                "type": "string"
+                            },
+                            "output": {
+                                "type": "string"
+                            },
+                            "style": {
+                                "type": "string"
+                            },
+                            "sub-style": {
+                                "type": "string"
+                            },
+                            "word-count": {
+                                "type": "integer"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Bulk Title Case",
+            "url": "https://capitalize-my-title.p.rapidapi.com/title",
+            "description": "API endpoint for Capitalize My Title for capitalizing multiple titles at once.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://capitalize-my-title.p.rapidapi.com/title\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"capitalize-my-title.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://capitalize-my-title.p.rapidapi.com/title\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"capitalize-my-title.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "items": {
+                            "type": "array"
+                        },
+                        "type": "array"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

@@ -1,0 +1,526 @@
+{
+    "product_id": "api_05393c78-f8ed-4bdd-8ff1-5ecad60f8804",
+    "tool_description": "Get daily and historical futures prices for 26 major financial assets and their monthly futures contracts. Lithium, WTI Oil, Brent Crude, Wheat, etc.",
+    "home_url": "https://rapidapi.com/phil-andrews/api/futures/",
+    "name": "Futures",
+    "title": "Futures",
+    "pricing": "FREEMIUM",
+    "tool_name": "Futures",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 559,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "host": "futures.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Days From Date",
+            "url": "https://futures.p.rapidapi.com/days-from",
+            "description": "This endpoint returns futures contracts for the date falling on the number of days from the date you specified. This is useful for getting contracts closest to a date without having to determine the last date the contract was traded.\n\nConsider wanting contracts for WTI Crude that were traded 30 days before Christmas 2021, with Thanksgiving in the US being November 25, which date were contracts last traded? Specifying the dateFrom parameter as \"2021-12-25\" and the daysFrom parameter as 30 removes the guess work and gives the contract less-than-or-equal-to 30 days from the <dateFrom> parameter.\n\nUse the optional <month> parameter to get a specific month contract.\n\nUse the optional <inPast> parameter to specify if <daysFrom> should be added or subtracted from <dateFrom>. Setting <inPast> to false will result in contracts that fall after the given date. Default is true.\n\n**\u2734 Return Limited: 100 Objects\n\u2734 Oldest Date: 2010-01-01**\n\n*This endpoint will only return 100 objects per request. Use the <offset> parameter to paginate results.*",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "symbol",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "CL"
+                },
+                {
+                    "name": "daysFrom",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "30"
+                },
+                {
+                    "name": "dateFrom",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2021-12-25"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "month",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "7"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "json"
+                },
+                {
+                    "name": "inPast",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": "true"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/days-from\"\nquerystring = {\"month\": \"7\", \"offset\": \"\", \"format\": \"json\", \"inPast\": \"true\", \"symbol\": \"CL\", \"daysFrom\": \"30\", \"dateFrom\": \"2021-12-25\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/days-from\"\nquerystring = {\"month\": \"7\", \"offset\": \"\", \"format\": \"json\", \"inPast\": \"true\", \"symbol\": \"CL\", \"daysFrom\": \"30\", \"dateFrom\": \"2021-12-25\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Time Series",
+            "url": "https://futures.p.rapidapi.com/time-series",
+            "description": "This endpoint returns futures contracts over a specified date range for a given symbol. Use this endpoint for historical data.\n\nThe <to> parameter is optional. Not specifying this parameter will return all contracts between the given <from> parameter and the latest available date.\n\nUse the optional <month> parameter to get a specific month contract over the given period of time.\n\n**\u2734 Return Limited: 100 Objects\n\u2734 Oldest Date: 2010-01-01**\n\n*This endpoint will only return 100 objects per request. Use the <offset> parameter to paginate results.*",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2022-01-28"
+                },
+                {
+                    "name": "symbol",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "CL"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2022-01-30"
+                },
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "json"
+                },
+                {
+                    "name": "month",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "8"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/time-series\"\nquerystring = {\"offset\": \"\", \"to\": \"2022-01-30\", \"from\": \"2022-01-28\", \"format\": \"json\", \"month\": \"8\", \"symbol\": \"CL\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/time-series\"\nquerystring = {\"offset\": \"\", \"to\": \"2022-01-30\", \"from\": \"2022-01-28\", \"format\": \"json\", \"month\": \"8\", \"symbol\": \"CL\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Supported Assets",
+            "url": "https://futures.p.rapidapi.com/symbols",
+            "description": "This endpoint returns all symbols supported by the * last *and* time-series *endpoint.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/symbols\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/symbols\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": [
+                {
+                    "symbol": "ZR",
+                    "name": "Rough Rice",
+                    "exchange": "CBOT",
+                    "slug": "rough-rice",
+                    "contract_size": 2000,
+                    "contract_unit": "hundredweights",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "MW",
+                    "name": "Hard Red Spring Wheat",
+                    "exchange": "MGEX",
+                    "slug": "hard-red-spring-wheat",
+                    "contract_size": 5000,
+                    "contract_unit": "bushels",
+                    "currency": "USD",
+                    "earliest_available_date": "1976-04-09"
+                },
+                {
+                    "symbol": "LS",
+                    "name": "Lumber",
+                    "exchange": "CME",
+                    "slug": "lumber",
+                    "contract_size": 110000,
+                    "contract_unit": "board feet",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "HG",
+                    "name": "Copper",
+                    "exchange": "COMEX",
+                    "slug": "copper",
+                    "contract_size": 25000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1959-07-01"
+                },
+                {
+                    "symbol": "PL",
+                    "name": "Platinum",
+                    "exchange": "NYMEX",
+                    "slug": "platinum",
+                    "contract_size": 50,
+                    "contract_unit": "troy ounces",
+                    "currency": "USD",
+                    "earliest_available_date": "1969-01-02"
+                },
+                {
+                    "symbol": "RS",
+                    "name": "Canola",
+                    "exchange": "ICEUS",
+                    "slug": "canola",
+                    "contract_size": 20,
+                    "contract_unit": "tons",
+                    "currency": "CAD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "USRS",
+                    "name": "US Hot Rolled Steel - Midwest",
+                    "exchange": "CME",
+                    "slug": "us-hot-rolled-steel-midwest",
+                    "contract_size": 20,
+                    "contract_unit": "short tons",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "GC",
+                    "name": "Gold",
+                    "exchange": "COMEX",
+                    "slug": "gold",
+                    "contract_size": 100,
+                    "contract_unit": "troy ounces",
+                    "currency": "USD",
+                    "earliest_available_date": "1974-12-31"
+                },
+                {
+                    "symbol": "AL",
+                    "name": "Aluminum",
+                    "exchange": "CME",
+                    "slug": "aluminum",
+                    "contract_size": 25,
+                    "contract_unit": "metric tons",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "HO",
+                    "name": "Ultra-Low Sulphur Diesel",
+                    "exchange": "NYMEX",
+                    "slug": "ultra-low-sulphur-diesel",
+                    "contract_size": 42000,
+                    "contract_unit": "gallons",
+                    "currency": "USD",
+                    "earliest_available_date": "1979-03-06"
+                },
+                {
+                    "symbol": "RB",
+                    "name": "RBOB Gasoline",
+                    "exchange": "NYMEX",
+                    "slug": "rbob-gasoline",
+                    "contract_size": 42000,
+                    "contract_unit": "gallons",
+                    "currency": "USD",
+                    "earliest_available_date": "1995-07-02"
+                },
+                {
+                    "symbol": "DX",
+                    "name": "US Dollar Index",
+                    "exchange": "ICEUS",
+                    "slug": "us-dollar-index",
+                    "contract_size": 1000,
+                    "contract_unit": "index value",
+                    "currency": "USD",
+                    "earliest_available_date": "1998-03-19"
+                },
+                {
+                    "symbol": "ZS",
+                    "name": "Soybeans",
+                    "exchange": "CBOT",
+                    "slug": "soybeans",
+                    "contract_size": 5000,
+                    "contract_unit": "bushels",
+                    "currency": "USD",
+                    "earliest_available_date": "1969-12-05"
+                },
+                {
+                    "symbol": "SI",
+                    "name": "Silver",
+                    "exchange": "COMEX",
+                    "slug": "silver",
+                    "contract_size": 5000,
+                    "contract_unit": "troy ounces",
+                    "currency": "USD",
+                    "earliest_available_date": "1963-06-13"
+                },
+                {
+                    "symbol": "NG",
+                    "name": "Natural Gas (US)",
+                    "exchange": "NYMEX",
+                    "slug": "natural-gas-us",
+                    "contract_size": 10000,
+                    "contract_unit": "MMBtu",
+                    "currency": "USD",
+                    "earliest_available_date": "1990-04-03"
+                },
+                {
+                    "symbol": "LE",
+                    "name": "Live Cattle",
+                    "exchange": "CME",
+                    "slug": "live-cattle",
+                    "contract_size": 40000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1964-11-20"
+                },
+                {
+                    "symbol": "CL",
+                    "name": "WTI Crude Oil",
+                    "exchange": "NYMEX",
+                    "slug": "wti-crude-oil",
+                    "contract_size": 1000,
+                    "contract_unit": "barrels",
+                    "currency": "USD",
+                    "earliest_available_date": "1983-03-30"
+                },
+                {
+                    "symbol": "GF",
+                    "name": "Feeder Cattle",
+                    "exchange": "CME",
+                    "slug": "feeder-cattle",
+                    "contract_size": 50000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1989-04-11"
+                },
+                {
+                    "symbol": "ZO",
+                    "name": "Oats",
+                    "exchange": "CBOT",
+                    "slug": "oats",
+                    "contract_size": 5000,
+                    "contract_unit": "bushels",
+                    "currency": "USD",
+                    "earliest_available_date": "2006-04-21"
+                },
+                {
+                    "symbol": "LTHM",
+                    "name": "Lithium Hydroxide",
+                    "exchange": "CME",
+                    "slug": "lithium-hydroxide",
+                    "contract_size": 1000,
+                    "contract_unit": "kilograms",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "ZC",
+                    "name": "Corn",
+                    "exchange": "CBOT",
+                    "slug": "corn",
+                    "contract_size": 5000,
+                    "contract_unit": "bushels",
+                    "currency": "USD",
+                    "earliest_available_date": "1959-07-01"
+                },
+                {
+                    "symbol": "BB",
+                    "name": "Brent Crude Oil",
+                    "exchange": "ICEUS",
+                    "slug": "brent-crude-oil",
+                    "contract_size": 1000,
+                    "contract_unit": "barrels",
+                    "currency": "USD",
+                    "earliest_available_date": "1993-03-17"
+                },
+                {
+                    "symbol": "CO",
+                    "name": "Cobalt",
+                    "exchange": "CME",
+                    "slug": "cobalt",
+                    "contract_size": 2204,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "DF",
+                    "name": "Non-Fat Dry Milk",
+                    "exchange": "CME",
+                    "slug": "non-fat-dry-milk",
+                    "contract_size": 44000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                },
+                {
+                    "symbol": "CT",
+                    "name": "Cotton",
+                    "exchange": "ICE",
+                    "slug": "cotton",
+                    "contract_size": 50000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1970-12-10"
+                },
+                {
+                    "symbol": "TTF",
+                    "name": "Dutch TTF Natural Gas",
+                    "exchange": "ICEUS",
+                    "slug": "dutch-ttf-natural-gas",
+                    "contract_size": 1,
+                    "contract_unit": "MW",
+                    "currency": "EUR",
+                    "earliest_available_date": "2022-08-17"
+                },
+                {
+                    "symbol": "CC",
+                    "name": "Cocoa",
+                    "exchange": "ICEUS",
+                    "slug": "cocoa",
+                    "contract_size": 10,
+                    "contract_unit": "tons",
+                    "currency": "USD",
+                    "earliest_available_date": "1969-10-01"
+                },
+                {
+                    "symbol": "KC",
+                    "name": "Coffee",
+                    "exchange": "ICEUS",
+                    "slug": "coffee",
+                    "contract_size": 37500,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1973-08-07"
+                },
+                {
+                    "symbol": "OJ",
+                    "name": "Orange Juice",
+                    "exchange": "ICEUS",
+                    "slug": "orange-juice",
+                    "contract_size": 15000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1967-02-01"
+                },
+                {
+                    "symbol": "ERS",
+                    "name": "North European Hot-Rolled Coil Steel",
+                    "exchange": "CME",
+                    "slug": "north-european-hot-rolled-coil-steel",
+                    "contract_size": 20,
+                    "contract_unit": "metric tons",
+                    "currency": "EUR",
+                    "earliest_available_date": "2022-08-22"
+                },
+                {
+                    "symbol": "SB",
+                    "name": "Sugar",
+                    "exchange": "ICEUS",
+                    "slug": "sugar",
+                    "contract_size": 112000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "1962-11-29"
+                },
+                {
+                    "symbol": "ZW",
+                    "name": "Wheat",
+                    "exchange": "CBOT",
+                    "slug": "wheat",
+                    "contract_size": 5000,
+                    "contract_unit": "bushels",
+                    "currency": "USD",
+                    "earliest_available_date": "1959-07-01"
+                },
+                {
+                    "symbol": "PA",
+                    "name": "Palladium",
+                    "exchange": "NYMEX",
+                    "slug": "palladium",
+                    "contract_size": 100,
+                    "contract_unit": "troy ounces",
+                    "currency": "USD",
+                    "earliest_available_date": "1969-01-02"
+                },
+                {
+                    "symbol": "HE",
+                    "name": "Lean Hogs",
+                    "exchange": "CME",
+                    "slug": "lean-hogs",
+                    "contract_size": 40000,
+                    "contract_unit": "pounds",
+                    "currency": "USD",
+                    "earliest_available_date": "2022-06-29"
+                }
+            ]
+        },
+        {
+            "name": "Latest Contracts for Symbol",
+            "url": "https://futures.p.rapidapi.com/last",
+            "description": "This endpoint returns each of the latest futures contracts for a given symbol for the next twelve months.\n\nUse the optional *<month>* parameter to return the latest contract for a given month.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "symbol",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "CL"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "month",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/last\"\nquerystring = {\"symbol\": \"CL\", \"month\": \"7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://futures.p.rapidapi.com/last\"\nquerystring = {\"symbol\": \"CL\", \"month\": \"7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"futures.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "metadata": {
+                    "symbol": "CL",
+                    "name": "WTI Crude Oil",
+                    "exchange": "NYMEX",
+                    "currency": "USD",
+                    "contract_size": 1000,
+                    "contract_unit": "barrels"
+                },
+                "data": [
+                    {
+                        "date": "2023-06-15",
+                        "symbol": "CL",
+                        "month": 7,
+                        "year": 2023,
+                        "last": 68.87,
+                        "open": 69.51,
+                        "high": 70.64,
+                        "low": 68.26,
+                        "change": 0.0201,
+                        "change_p": -0.0112
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {}
+        }
+    ],
+    "standardized_name": "futures"
+}

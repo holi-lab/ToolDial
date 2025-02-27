@@ -1,0 +1,152 @@
+{
+    "tool_name":"MyMemory - Translation Memory",
+    "tool_description":"Get a better translation! MyMemory is the world's largest Translation Memory that contains billions of words translated by professional translators. MyMemory will give you ModernMT machine translation  if a human translation is not available.",
+    "title":"MyMemory - Translation Memory",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":417,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/translated/api/mymemory-translation-memory/",
+    "host":"translated-mymemory---translation-memory.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"search translations",
+            "url":"https://translated-mymemory---translation-memory.p.rapidapi.com/get",
+            "description":"This API gets a list of translation from the translation memory ranked by quality and similarity (what we call match). MyMemory will check if a sentence has been already translated in the private TM specified. If we don't find it in the private TM of the translator, we search it in the public TMs (shared among all the translators). Again, if we don't have this translation we ask MT providers to generate it.  In order to get the best from MyMemory, it is highly recommended to use different keys for each translators and also different keys for different topics (as a real Translation Memory).",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"langpair",
+                    "type":"STRING",
+                    "description":"The language pair. Two ISO-631 language codes, separated by |.\nMyMemory support over 80 languages but some combinations may contains no data. Nepali into Vietnamese?",
+                    "default":"en|it"
+                },
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"the text you want to translate. Normally a sentence.",
+                    "default":"Hello World!"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"onlyprivate",
+                    "type":"STRING",
+                    "description":"If a key has been specified, only private matches will be returned. 0 (disabled: default) | 1 (enabled)",
+                    "default":"0"
+                },
+                {
+                    "name":"mt",
+                    "type":"STRING",
+                    "description":"Enables MT in results: 0 (disabled) | 1 (enabled: default)",
+                    "default":"1"
+                },
+                {
+                    "name":"de",
+                    "type":"STRING",
+                    "description":"A valid email (recommended for CAT tools and high volume usage)",
+                    "default":"a@b.c"
+                },
+                {
+                    "name":"key",
+                    "type":"STRING",
+                    "description":"Gives access to private memories and customized API limits",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://translated-mymemory---translation-memory.p.rapidapi.com/get\"\nquerystring = {\"onlyprivate\": onlyprivate, \"mt\": mt, \"de\": de, \"langpair\": langpair, \"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"translated-mymemory---translation-memory.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "matches":[
+                    {
+                        "create-date":"",
+                        "created-by":"",
+                        "id":"",
+                        "last-update-date":"",
+                        "last-updated-by":"",
+                        "match":"",
+                        "quality":"",
+                        "reference":"",
+                        "segment":"",
+                        "subject":"",
+                        "translation":"",
+                        "usage-count":""
+                    }
+                ],
+                "responseData":{
+                    "translatedText":""
+                },
+                "responseDetails":"",
+                "responseStatus":""
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "matches":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "create-date":{
+                                    "type":"string"
+                                },
+                                "created-by":{
+                                    "type":"string"
+                                },
+                                "id":{
+                                    "type":"string"
+                                },
+                                "last-update-date":{
+                                    "type":"string"
+                                },
+                                "last-updated-by":{
+                                    "type":"string"
+                                },
+                                "match":{
+                                    "type":"string"
+                                },
+                                "quality":{
+                                    "type":"string"
+                                },
+                                "reference":{
+                                    "type":"string"
+                                },
+                                "segment":{
+                                    "type":"string"
+                                },
+                                "subject":{
+                                    "type":"string"
+                                },
+                                "translation":{
+                                    "type":"string"
+                                },
+                                "usage-count":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "responseData":{
+                        "type":"object",
+                        "properties":{
+                            "translatedText":{
+                                "type":"string"
+                            }
+                        }
+                    },
+                    "responseDetails":{
+                        "type":"string"
+                    },
+                    "responseStatus":{
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    ]
+}

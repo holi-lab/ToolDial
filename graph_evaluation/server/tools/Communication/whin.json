@@ -1,0 +1,410 @@
+{
+    "tool_name": "whin",
+    "tool_description": "Send and receive any message type to your WhatsApp, or to whatsapp groups with a shared gateway.",
+    "title": "whin",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 99,
+        "avgLatency": 415,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/inutil-inutil-default/api/whin2/",
+    "host": "whin2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "send to groups",
+            "url": "https://whin2.p.rapidapi.com/send2group",
+            "description": "This endpoint will send a message to a whatsapp group. You need the group-id to route the message. Check this [video](https://youtu.be/wD0DWoua0L4) lo learn how to use it.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "Enter the group identification (gid) provided by whin when you requested a group. Check the [video](https://youtu.be/wD0DWoua0L4) to learn how to get it.",
+                    "default": "120363027787407242"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/send2group\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "send",
+            "url": "https://whin2.p.rapidapi.com/send",
+            "description": "It will send  you a whatsapp. Learn how to use this endpoint: a text on this [video](https://youtu.be/MqAbY6Gu8yM), or this one for [media](https://youtu.be/qq3prJTVMRg) file types.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/send\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "personal listener",
+            "url": "https://whin2.p.rapidapi.com/webhk",
+            "description": "The response is an url that you have to use as a webhook destination at the origin service. The content sent to it will be routed as a message to a whatsapp group owned by the user, or to the user.\nLearn use-cases on these videos: [grafana alerts](https://youtu.be/RvVgg0qwNDk),[Shelly notifications](https://youtu.be/B6MLlBUkyvo), [synology notifications](https://youtu.be/zeAJNuXYqH4).",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "Each whatsapp group will have its own webhook address; set the group-id on this field to get a unique valid url and deliver webhooks as messages on each whatsapp group. Learn how to get a valid value [here](https://rapidapi.com/inutil-inutil-default/api/whin2/tutorials/how-to-use-the-groups-category-to-send-and-receive-whatsapps-to%2Ffrom-groups%3F-1).",
+                    "default": "1234567890123"
+                },
+                {
+                    "name": "origin",
+                    "type": "ENUM",
+                    "description": "This is the service that is sending Webhooks to your whin personal receiver. If the origin service is nos listed you can select `Do not include in request`, or leave the value blank, and whin will do its best to parse the payload received.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/webhk\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "create a group",
+            "url": "https://whin2.p.rapidapi.com/creategroup",
+            "description": "This API will create a group, it will add you, and will promote you to Admin of the group. Check this [video](https://youtu.be/wD0DWoua0L4) to learn how to use it.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/creategroup\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "group invite link",
+            "url": "https://whin2.p.rapidapi.com/getlink",
+            "description": "the endpoint returns an invite link url for a group you own.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "the group id of which you want to get an invite link url",
+                    "default": "98327493279327"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/getlink\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "list groups",
+            "url": "https://whin2.p.rapidapi.com/mygroups",
+            "description": "This endpoint returns a list of the groups you created through whin.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/mygroups\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "hk receiver",
+            "url": "https://whin2.p.rapidapi.com/hk/{user}/{service}",
+            "description": "this endpoint shall be used by the origin services, it's **NOT** to be used on the playground.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "user",
+                    "type": "string",
+                    "description": "",
+                    "default": "rapidapi-username"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "120363044823414490"
+                },
+                {
+                    "name": "service",
+                    "type": "string",
+                    "description": "",
+                    "default": "origin-service"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hk/{user}/{service}\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "hk receiver",
+            "url": "https://whin2.p.rapidapi.com/hk/{user}/{service}",
+            "description": "this endpoint shall be triggered by origin services, it's **NOT** to be used on the playground.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "user",
+                    "type": "string",
+                    "description": "",
+                    "default": "rapidapi-username"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "120363044823414490"
+                },
+                {
+                    "name": "service",
+                    "type": "string",
+                    "description": "",
+                    "default": "origin-service"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hk/{user}/{service}\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "hook receiver",
+            "url": "https://whin2.p.rapidapi.com/hook/{user}",
+            "description": "This endpoint shall be triggered by the webhook origin and is not intended to be used through this frontend.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "user",
+                    "type": "string",
+                    "description": "",
+                    "default": "your-RapidAPI-username"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "120363044823414490"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hook/{user}\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "hook receiver",
+            "url": "https://whin2.p.rapidapi.com/hook/{user}",
+            "description": "This endpoint shall be triggered by the webhook origin and is not intended to be used through this frontend.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "user",
+                    "type": "string",
+                    "description": "",
+                    "default": "your-RapidAPI-username"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "120363044823414490"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hook/{user}\"\nquerystring = {\"gid\": gid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "set url",
+            "url": "https://whin2.p.rapidapi.com/seturl",
+            "description": "Set a whin-receive endpoint. Learn how to use it on this [video](https://youtu.be/8WyG_becZXM). This is the valid url where the whatsapps you send to whin, or are written on a whatsapp group, will be delivered. The url has to be accessible from the internet; this endpoint expects a 200 response from the destination, otherwise it wont be set.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/seturl\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "show url",
+            "url": "https://whin2.p.rapidapi.com/showurl",
+            "description": "This endpoint is used to request the webhook routes created on your account. \nLearn how to use it on this [video](https://youtu.be/8WyG_becZXM)",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/showurl\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "websocket checker",
+            "url": "https://whin2.p.rapidapi.com/wskchk",
+            "description": "Whin-receive (thick-client) websockets checker. \nThis endpoint is **ONLY** used to authorize websocket connections to the backend by thick clients. The Response is a token needed to complete handshaking.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/wskchk\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "signup",
+            "url": "https://whin2.p.rapidapi.com/signup",
+            "description": "This endpoint is **ONLY** used to enter the code you received to signup. Follow this [video](https://youtu.be/uOZ-oH4kP58), or read the [tutorial](https://rapidapi.com/inutil-inutil-default/api/whin2/tutorials/what-to-do-to-start-using-whin%3F-1), to learn how to start using whin.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "code",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "12345"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/signup\"\nquerystring = {\"code\": code}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "delete url",
+            "url": "https://whin2.p.rapidapi.com/delurl",
+            "description": "This endpoint will erase the url you set to receive the whatsapps sent to whin. Learn how to use it on this [video](https://youtu.be/8WyG_becZXM).",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/delurl\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "send to groups",
+            "url": "https://whin2.p.rapidapi.com/send2group",
+            "description": "This endpoint will send a message to a whatsapp group. You need the group-id to route the message. Check this [video](https://youtu.be/wD0DWoua0L4) lo learn how to use it.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "Enter the group identification (gid) provided by whin when you requested a group. Check the [video](https://youtu.be/wD0DWoua0L4) to learn how to get it.",
+                    "default": "120363027787407242"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/send2group\"\nquerystring = {\"gid\": \"120363027787407242\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/send2group\"\nquerystring = {\"gid\": \"120363027787407242\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "send",
+            "url": "https://whin2.p.rapidapi.com/send",
+            "description": "It will send  you a whatsapp. Learn how to use this endpoint: a text on this [video](https://youtu.be/MqAbY6Gu8yM), or this one for [media](https://youtu.be/qq3prJTVMRg) file types.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/send\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "hk receiver",
+            "url": "https://whin2.p.rapidapi.com/hk/rapidapi-username/origin-service",
+            "description": "this endpoint shall be triggered by origin services, it's **NOT** to be used on the playground.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "user",
+                    "type": "string",
+                    "description": "",
+                    "default": "rapidapi-username"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "120363044823414490"
+                },
+                {
+                    "name": "service",
+                    "type": "string",
+                    "description": "",
+                    "default": "origin-service"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hk/rapidapi-username/origin-service\"\nquerystring = {\"gid\": \"120363044823414490\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hk/{user}/{service}\"\nquerystring = {\"gid\": \"120363044823414490\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "hook receiver",
+            "url": "https://whin2.p.rapidapi.com/hook/your-RapidAPI-username",
+            "description": "This endpoint shall be triggered by the webhook origin and is not intended to be used through this frontend.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "user",
+                    "type": "string",
+                    "description": "",
+                    "default": "your-RapidAPI-username"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "gid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "120363044823414490"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hook/your-RapidAPI-username\"\nquerystring = {\"gid\": \"120363044823414490\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/hook/{user}\"\nquerystring = {\"gid\": \"120363044823414490\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "set url",
+            "url": "https://whin2.p.rapidapi.com/seturl",
+            "description": "Set a whin-receive endpoint. Learn how to use it on this [video](https://youtu.be/8WyG_becZXM). This is the valid url where the whatsapps you send to whin, or are written on a whatsapp group, will be delivered. The url has to be accessible from the internet; this endpoint expects a 200 response from the destination, otherwise it wont be set.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/seturl\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://whin2.p.rapidapi.com/seturl\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"whin2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

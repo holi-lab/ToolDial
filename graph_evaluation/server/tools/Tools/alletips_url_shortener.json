@@ -1,0 +1,856 @@
+{
+    "tool_name": "AlleTips URL shortener",
+    "tool_description": "Not just a simple URL shortener, but one with fantastic enhancements",
+    "title": "AlleTips URL shortener",
+    "pricing": "FREEMIUM",
+    "score": null,
+    "home_url": "https://rapidapi.com/IToptimal/api/alletips-url-shortener/",
+    "host": "alletips-url-shortener.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get list of existing links",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/link/",
+            "description": "Returns a list of all short links you created within the defined parameters.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "alle.tips"
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "alle.tips/abcdef"
+                },
+                {
+                    "name": "created",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Shows links that were created at or after this date",
+                    "default": ""
+                },
+                {
+                    "name": "inactive",
+                    "type": "BOOLEAN",
+                    "description": "Shows also deactivated links",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/link/\"\nquerystring = {\"PUBLICKEY\": publickey, \"domain\": domain, \"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create a QR code for a short link",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/qr/",
+            "description": "Creates a QR (quick response) code for a specific shortlink.\nReturns the download url.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "abcd-efgh-1348-abcde"
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "The shortlink you want to create a QR code for (without https://)",
+                    "default": "alle.tips/rapidapi-demo"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "fg",
+                    "type": "STRING",
+                    "description": "Hex-Code for the foreground color.\nDefault: #000000 (black)",
+                    "default": "#000000"
+                },
+                {
+                    "name": "shape",
+                    "type": "ENUM",
+                    "description": "Defines the form of the QR dots.\nDefault: Square",
+                    "default": ""
+                },
+                {
+                    "name": "bg",
+                    "type": "STRING",
+                    "description": "Hex-Code for the background color.\nDefault: #FFFFFF (white)",
+                    "default": "#FFFFFF"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/qr/\"\nquerystring = {\"PUBLICKEY\": publickey, \"link\": link, \"fg\": fg, \"bg\": bg}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "OK",
+                "code": 200,
+                "response": {
+                    "link": "https://api.alle.tips/media/qr-alle.tips-rapidapi-demo.png",
+                    "fg": "#000000",
+                    "bg": "#FFFFFF",
+                    "shape": "round"
+                }
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get click counts per shortlink",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/linkstats/",
+            "description": "Returns a list of your links and the individual click count.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "Limits the results to all links within this campaign.",
+                    "default": ""
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Limits results to links with a enddate lesser or equal to the specified one.",
+                    "default": ""
+                },
+                {
+                    "name": "sort",
+                    "type": "ENUM",
+                    "description": "Orders the shortlinks by creation date.\n(asc = ascending, desc = descending)",
+                    "default": ""
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Limits results to links with a startdate greater or equal to the specified one.",
+                    "default": ""
+                },
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "Limits results to a specific domain (e.g. alle.tips)",
+                    "default": ""
+                },
+                {
+                    "name": "inactive",
+                    "type": "BOOLEAN",
+                    "description": "Returns also stats for inactive links.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Limits the number of returned stats.",
+                    "default": "10"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/linkstats/\"\nquerystring = {\"PUBLICKEY\": publickey, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "OK",
+                "code": 200,
+                "response": [
+                    {
+                        "favorite": 0,
+                        "domain": "alle.tips",
+                        "link": "rapidapi",
+                        "url": "https://www.rapidapi.com",
+                        "title": "Some link description",
+                        "startdate": null,
+                        "enddate": null,
+                        "created": "2022-09-25 19:44:07",
+                        "clicks": "10"
+                    },
+                    {
+                        "favorite": 0,
+                        "domain": "alle.tips",
+                        "link": "rapidapi-demo",
+                        "url": "https://www.rapidapi.com",
+                        "title": "Some link description",
+                        "startdate": null,
+                        "enddate": null,
+                        "created": "2022-09-25 20:10:27",
+                        "clicks": "33"
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get click history for campaign",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/clicks/",
+            "description": "Returns the number of clicks (total, link clicks and QR-clicks) for a specific campaign.\nAdditionally an array with chart data will be returned (x: date, y: total clicks).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "Limits the results to a specific campaign.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Returns events at and after this date.",
+                    "default": ""
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Returns events at and before this date.",
+                    "default": ""
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "Returns values for a specific link.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/clicks/\"\nquerystring = {\"PUBLICKEY\": publickey, \"campaignid\": campaignid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get number of active links",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/linkcount/",
+            "description": "Returns the number of active links for your accounts.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/linkcount/\"\nquerystring = {\"PUBLICKEY\": publickey}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "OK",
+                "code": 200,
+                "response": "3"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get click history",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/clicks/",
+            "description": "Returns the number of clicks (total, link clicks and QR-clicks).\nAdditionally an array with chart data will be returned (x: date, y: total clicks).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Returns events at and before this date.",
+                    "default": ""
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "Returns values for a specific link.",
+                    "default": "alle.tips/rapidapi"
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Returns events at and after this date.",
+                    "default": ""
+                },
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "Limits the results to a specific campaign.",
+                    "default": "abcd-efgh-ijk9"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/clicks/\"\nquerystring = {\"PUBLICKEY\": publickey, \"link\": link, \"campaignid\": campaignid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Retrieve QR code for a shortlink",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/qr/",
+            "description": "Retrieve a QR (quick response) code for your shortlink.\nScans of this code will be counted as regular clicks, but also reported separately.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "Your shortlink to be QRed (without https:// etc.)",
+                    "default": "alle.tips/rapidapi"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/qr/\"\nquerystring = {\"PUBLICKEY\": publickey, \"link\": link}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Update your campaign",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/campaign/",
+            "description": "Edits values of a specific campaign",
+            "method": "PUT",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "abcd-efgh-ijk9"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "The name of your campaign",
+                    "default": ""
+                },
+                {
+                    "name": "active",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines your campaign's start date.",
+                    "default": ""
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines your campaign's enddate.",
+                    "default": ""
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "An internal description about what your campaign is about.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/campaign/\"\nquerystring = {\"PUBLICKEY\": publickey, \"campaignid\": campaignid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create a new campaign",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/campaign/",
+            "description": "Creates a new campaign you can assign links to.\nReturns the campaign-ID.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "Some name for your campaign"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "An explanation what your campaign is about - just internal.",
+                    "default": "Some description"
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines a start date for your campaign",
+                    "default": ""
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines an enddate for your campaign",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/campaign/\"\nquerystring = {\"PUBLICKEY\": publickey, \"description\": description, \"name\": name}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Delete a campaign",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/campaign/",
+            "description": "Deletes an existing campaign. All included links stay active!\nOnly the assignment link <-> campaign gets deleted as well.",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "abcd-efgh-ijjk8"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/campaign/\"\nquerystring = {\"campaignid\": campaignid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get list of existing campaigns",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/campaign/",
+            "description": "Returns a list of all your campaigns (= groups of links).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "nocampaign",
+                    "type": "BOOLEAN",
+                    "description": "Returns also a summary of the shortlinks that haven't been assigned to a campaign.",
+                    "default": ""
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Get all campaigns thats title includes [name]",
+                    "default": "some campaign name"
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Shows all campaigns with a startdate greater or equal this date.",
+                    "default": ""
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Shows all campaigns with an enddate greater or equal this date (and an earlier startdate).",
+                    "default": ""
+                },
+                {
+                    "name": "inactive",
+                    "type": "BOOLEAN",
+                    "description": "Returns also inactive campaigns.\nDefault: only active ones.",
+                    "default": ""
+                },
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "Get all infos for this specific campaign",
+                    "default": "abcd-efgh-ijk2"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Limits the number of results",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/campaign/\"\nquerystring = {\"PUBLICKEY\": publickey, \"name\": name, \"campaignid\": campaignid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Update an existing short link",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/link/",
+            "description": "Edits a previously created short link.\n([domain] AND [link]) OR [shortlink] is required!\n\nYou can edit various elements, but you cannot change the domain name or the short link itself. In case you made a mistake, please delete the old one and create a new shortlink.",
+            "method": "PUT",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Internal description what the link is about - just for you!",
+                    "default": "Just an internal description of your link"
+                },
+                {
+                    "name": "campaignid",
+                    "type": "STRING",
+                    "description": "Assign the short link to a certain campaign.\nCampaign-IDs can be retrieved via GET /campaign/",
+                    "default": "abcd-efgh-ijk1"
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines the date the link is active from.",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "The URL to be shortened",
+                    "default": "https://www.rapidapi.com"
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "The complete short link to be edited",
+                    "default": "rapidurl"
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines the date until the link is active .",
+                    "default": ""
+                },
+                {
+                    "name": "active",
+                    "type": "BOOLEAN",
+                    "description": "Activates or deactivates a short link",
+                    "default": ""
+                },
+                {
+                    "name": "shortlink",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://halle.tips/rapidurl"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/link/\"\nquerystring = {\"PUBLICKEY\": publickey, \"title\": title, \"campaignid\": campaignid, \"url\": url, \"link\": link, \"shortlink\": shortlink}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Delete a short link",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/link/",
+            "description": "Deletes a short link you created previously.\n**([link] AND [domain]) OR [url] is required!**",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "The complete short link",
+                    "default": "alle.tips/rapidapi"
+                },
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "The domain part of the short url, everything before the slash (/), e.g. **alle.tips**/rapidapi",
+                    "default": "alle.tips"
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "The part of the short url after the slash (/), e.g. alle.tips/**rapidapi**",
+                    "default": "rapidapi"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/link/\"\nquerystring = {\"PUBLICKEY\": publickey, \"url\": url, \"domain\": domain, \"link\": link}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Sign-On for RapidAPI",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/rapidsignup/",
+            "description": "In order to use this API properly you need to sign on.\nCreates and returns your public key.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/rapidsignup/\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "OK",
+                "code": 200,
+                "publickey": "c58ce4b3-83c1-4baa-bcda-fdc244ad8b8f"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get list of available domains",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/domains",
+            "description": "Returns a list of domains you can use to shorten your urls.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "favorite",
+                    "type": "BOOLEAN",
+                    "description": "Show default domain for this/your account",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/domains\"\nquerystring = {\"PUBLICKEY\": publickey}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Create a new short link",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/link/",
+            "description": "Shortens your url to a more convenient shorter version",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "PUBLICKEY",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "87cb-09dc7578c76cbcdef-ghij-1234"
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "The URL to be shortened",
+                    "default": "https://www.rapidapi.com"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "Defines the domain name to be used for the shortening.\nGet a list of available domain names via GET /domains/\nDefault: alle.tips",
+                    "default": "alle.tips"
+                },
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Just an internal description just for you...",
+                    "default": "Some link description"
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "The desired shorted version: [domain]/[link]\ne.g. **alle.tips/rapidapi**",
+                    "default": "rapidapi"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/link/\"\nquerystring = {\"PUBLICKEY\": publickey, \"url\": url, \"domain\": domain, \"title\": title, \"link\": link}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "OK",
+                "code": 201,
+                "message": "Successfully created shortlink!",
+                "link": "alle.tips/rapidapi",
+                "fulllink": "https://alle.tips/rapidapi"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Create a QR code for a short link",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/qr/",
+            "description": "Creates a QR (quick response) code for a specific shortlink.\nReturns the download url.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "The shortlink you want to create a QR code for (without https://)",
+                    "default": "alle.tips/rapidapi-demo"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "fg",
+                    "type": "STRING",
+                    "description": "Hex-Code for the foreground color.\nDefault: #000000 (black)",
+                    "default": "#000000"
+                },
+                {
+                    "name": "shape",
+                    "type": "ENUM",
+                    "description": "Defines the form of the QR dots.\nDefault: Square",
+                    "default": ""
+                },
+                {
+                    "name": "bg",
+                    "type": "STRING",
+                    "description": "Hex-Code for the background color.\nDefault: #FFFFFF (white)",
+                    "default": "#FFFFFF"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/qr/\"\nquerystring = {\"link\": \"alle.tips/rapidapi-demo\", \"fg\": \"#000000\", \"shape\": \"\", \"bg\": \"#FFFFFF\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/qr/\"\nquerystring = {\"link\": \"alle.tips/rapidapi-demo\", \"fg\": \"#000000\", \"shape\": \"\", \"bg\": \"#FFFFFF\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Create a new campaign",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/campaign/",
+            "description": "Creates a new campaign you can assign links to.\nReturns the campaign-ID.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "Some name for your campaign"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "An explanation what your campaign is about - just internal.",
+                    "default": "Some description"
+                },
+                {
+                    "name": "startdate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines a start date for your campaign",
+                    "default": ""
+                },
+                {
+                    "name": "enddate",
+                    "type": "DATE (YYYY-MM-DD)",
+                    "description": "Defines an enddate for your campaign",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/campaign/\"\nquerystring = {\"description\": \"Some description\", \"startdate\": \"\", \"name\": \"Some name for your campaign\", \"enddate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/campaign/\"\nquerystring = {\"description\": \"Some description\", \"startdate\": \"\", \"name\": \"Some name for your campaign\", \"enddate\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Sign-On for RapidAPI",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/rapidsignup/",
+            "description": "In order to use this API properly you need to sign on.\nCreates and returns your public key.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/rapidsignup/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/rapidsignup/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Create a new short link",
+            "url": "https://alletips-url-shortener.p.rapidapi.com/link/",
+            "description": "Shortens your url to a more convenient shorter version",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "The URL to be shortened",
+                    "default": "https://www.rapidapi.com"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "domain",
+                    "type": "STRING",
+                    "description": "Defines the domain name to be used for the shortening.\nGet a list of available domain names via GET /domains/\nDefault: alle.tips",
+                    "default": "alle.tips"
+                },
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Just an internal description just for you...",
+                    "default": "Some link description"
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "The desired shorted version: [domain]/[link]\ne.g. **alle.tips/rapidapi**",
+                    "default": "rapidapi"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/link/\"\nquerystring = {\"url\": \"https://www.rapidapi.com\", \"domain\": \"alle.tips\", \"title\": \"Some link description\", \"link\": \"rapidapi\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://alletips-url-shortener.p.rapidapi.com/link/\"\nquerystring = {\"url\": \"https://www.rapidapi.com\", \"domain\": \"alle.tips\", \"title\": \"Some link description\", \"link\": \"rapidapi\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"alletips-url-shortener.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

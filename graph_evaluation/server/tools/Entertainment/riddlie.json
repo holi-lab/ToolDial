@@ -1,0 +1,401 @@
+{
+    "tool_name": "Riddlie ",
+    "tool_description": "API that provides access to a collection of thousands of riddles (and growing). Fetch a random riddle or a riddle of the day. You can build a perfect app to entertain kids and families for dinner times. You can also pull riddles by their ID, difficulty level and keyword of your interest. API also collects feedback such as upvotes, and flags to fine-tune the library of riddles. I will constantly be adding more riddles to the API as I come across them. \nThe Basic plan is completely FREE with a ...",
+    "title": "Riddlie ",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 76,
+        "avgLatency": 2454,
+        "avgSuccessRate": 29,
+        "popularityScore": 2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/kenmak1979/api/riddlie/",
+    "host": "riddlie.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Flag Riddle",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/flag/{id}",
+            "description": "With this endpoint, you can flag a riddle. This helps the API developer to finetune the API for better service in the future.  You can only use four flags sending the number corresponding to the flag type as below:\n\n0: for flagging the riddle as \"Duplicate\"\n1: for flagging the riddle as \"Inappropriate\"\n2: for flagging the riddle as \"Not a Riddle\"\n3: for flagging the riddle as \"Missing Information\"",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "63bdef027183b71946b64ee6"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "flag",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "0"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/flag/{id}\"\nquerystring = {\"flag\": flag}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Update Level",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/level/{id}",
+            "description": "This endpoint enables you to update the level of the Riddle. All the riddles are set to a medium level which is enumerated as \"1\".  You can suggest the level of a riddle by simply calling this endpoint with query parameters \"0\", \"1\", or \"2\". \n\"0\" is Easy\n\"1\" is Medium \n\"2\" is Hard",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "63bdef027183b71946b64ee6"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "level",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/level/{id}\"\nquerystring = {\"level\": level}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Riddle by Keyword",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/bykeyword/{keyword}",
+            "description": "Get one random riddle around a specific subject or keyword. For example, a riddle on a \"cat\".",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "keyword",
+                    "type": "string",
+                    "description": "",
+                    "default": "cat"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/bykeyword/{keyword}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "riddle": {
+                        "type": "string"
+                    },
+                    "answer": {
+                        "type": "string"
+                    },
+                    "upVotes": {
+                        "type": "integer"
+                    },
+                    "difficultyLevel": {
+                        "type": "string"
+                    },
+                    "postedBy": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Riddle by Difficulty Level",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/bylevel/{level}",
+            "description": "Get one random riddle based on the difficulty. For example, by Easy, Medium, Hard.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "level",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "easy"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/bylevel/{level}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Riddle by ID",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/byid/{id}",
+            "description": "Get a riddle by ID.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "63bdef027183b71946b64ee6"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "63bdef0283b194664ee6c121"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/byid/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Delete Riddle (Admin Only)",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/{id}",
+            "description": "This endpoint deletes the specific riddle",
+            "method": "DELETE",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "63bdef027183b71946b64ee61"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.delete(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Update Riddle (Admin Only)",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/{id}",
+            "description": "This endpoint updates the existing riddle. Information should be provided in JSON format.",
+            "method": "PUT",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "63bdef027183b71946b64ee6"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Create New Riddle (Admin Only)",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/",
+            "description": "This endpoint creates a new riddle",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Upvote Riddle",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/upvote/{id}",
+            "description": "Simply calling this endpoint registers a \"like\" to better serve the riddles in the future. There is no response back other than a status message.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "string",
+                    "description": "",
+                    "default": "63bdef027183b71946b64ee6"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/upvote/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Riddle of the Day",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/rod",
+            "description": "With this endpoint, you can request a riddle of the day. Each day API will serve a different riddle with an answer and other details.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/rod\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "riddle": "The more you take, the more you leave behind. ?",
+                "answer": "Footsteps.",
+                "upVotes": 0,
+                "difficultyLevel": "medium",
+                "postedBy": "Riddlie"
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-origin": "*",
+                "content-type": "application/json",
+                "date": "Mon, 09 Jan 2023 18:01:55 GMT",
+                "server": "RapidAPI-1.2.8",
+                "x-rapidapi-mock-response": "true",
+                "x-rapidapi-region": "AWS - us-west-2",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "riddle": {
+                        "type": "string"
+                    },
+                    "answer": {
+                        "type": "string"
+                    },
+                    "upVotes": {
+                        "type": "integer"
+                    },
+                    "difficultyLevel": {
+                        "type": "string"
+                    },
+                    "postedBy": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get Random Riddle",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/random",
+            "description": "This endpoint responds with a new random riddle with an answer and other details.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/random\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "riddle": {
+                        "type": "string"
+                    },
+                    "answer": {
+                        "type": "string"
+                    },
+                    "upVotes": {
+                        "type": "integer"
+                    },
+                    "difficultyLevel": {
+                        "type": "string"
+                    },
+                    "postedBy": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Create New Riddle (Admin Only)",
+            "url": "https://riddlie.p.rapidapi.com/api/v1/riddles/",
+            "description": "This endpoint creates a new riddle",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://riddlie.p.rapidapi.com/api/v1/riddles/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"riddlie.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

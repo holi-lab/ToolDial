@@ -1,0 +1,534 @@
+{
+    "tool_name": "CO2 Offset",
+    "tool_description": "GreenHouseGas/CO2 compensation as a service. Get 1kg/month for free to see how easy it is to implement.",
+    "title": "CO2 Offset",
+    "pricing": "PAID",
+    "score": {
+        "avgServiceLevel": 65,
+        "avgLatency": 2181,
+        "avgSuccessRate": 62,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/stromdao-stromdao-default/api/co2-offset/",
+    "host": "co2-offset.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "List existing Compensations",
+            "url": "https://co2-offset.p.rapidapi.com/compensations",
+            "description": "Returns a list of all existing co2offset certificates linked to account.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://co2-offset.p.rapidapi.com/compensations\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"co2-offset.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Retrieve Compensation",
+            "url": "https://co2-offset.p.rapidapi.com/compensation",
+            "description": "Response contains full compensation details (if exists, and owner is account).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "0xF0F2e446EeD32236EA0c78a6E4a91Ed712654799"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://co2-offset.p.rapidapi.com/compensation\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"co2-offset.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "ancestor": {
+                        "type": "object",
+                        "properties": {
+                            "organization": {
+                                "type": "string"
+                            },
+                            "externalId": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "co2eq": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "sibbling": {
+                        "type": "object",
+                        "properties": {
+                            "goldstandardcredit": {
+                                "type": "object",
+                                "properties": {
+                                    "organization": {
+                                        "type": "string"
+                                    },
+                                    "transaction": {
+                                        "type": "object",
+                                        "properties": {
+                                            "txid": {
+                                                "type": "string"
+                                            },
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "timestamp": {
+                                                "type": "integer"
+                                            },
+                                            "co2eq": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            "plantedtrees": {
+                                "type": "object",
+                                "properties": {
+                                    "actualSincePlanted": {
+                                        "type": "integer"
+                                    },
+                                    "availLifetime": {
+                                        "type": "integer"
+                                    },
+                                    "usedLifetime": {
+                                        "type": "integer"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    },
+                                    "time": {
+                                        "type": "integer"
+                                    },
+                                    "transaction": {
+                                        "type": "object",
+                                        "properties": {
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "txid": {
+                                                "type": "string"
+                                            },
+                                            "co2eq": {
+                                                "type": "integer"
+                                            },
+                                            "time": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "transaction": {
+                        "type": "object",
+                        "properties": {
+                            "tenant": {
+                                "type": "null"
+                            },
+                            "owner": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "externalId": {
+                                "type": "null"
+                            },
+                            "co2eq": {
+                                "type": "integer"
+                            },
+                            "time": {
+                                "type": "integer"
+                            },
+                            "subject": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "domain": {
+                                        "type": "string"
+                                    },
+                                    "proof": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shares": {
+                                "type": "object",
+                                "properties": {
+                                    "goldstandardcredit": {
+                                        "type": "string"
+                                    },
+                                    "plantedtrees": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "seq": {
+                                "type": "integer"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Compensate GHG/CO2",
+            "url": "https://co2-offset.p.rapidapi.com/compensation",
+            "description": "**Compensate given amount of GHG/CO2eq and provides certificate reference as result.**\n\n[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/15081091-09153188-d83e-4c5d-8dd2-e0001ce00582?action=collection%2Ffork&collection-url=entityId%3D15081091-09153188-d83e-4c5d-8dd2-e0001ce00582%26entityType%3Dcollection%26workspaceId%3D81135753-9fec-41b0-9729-da032ac868bd)",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://co2-offset.p.rapidapi.com/compensation\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"co2-offset.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "ancestor": {
+                        "type": "object",
+                        "description": "Parent certificate / offset this compensation is part of.",
+                        "properties": {
+                            "organization": {
+                                "type": "string"
+                            },
+                            "externalId": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "co2eq": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "sibbling": {
+                        "type": "object",
+                        "properties": {
+                            "goldstandardcredit": {
+                                "type": "object",
+                                "properties": {
+                                    "tx": {
+                                        "type": "object",
+                                        "properties": {
+                                            "txid": {
+                                                "type": "string"
+                                            },
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "timestamp": {
+                                                "type": "integer"
+                                            },
+                                            "co2eq": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "plantedtrees": {
+                                "type": "object",
+                                "properties": {
+                                    "actualSincePlanted": {
+                                        "type": "integer"
+                                    },
+                                    "availLifetime": {
+                                        "type": "integer"
+                                    },
+                                    "usedLifetime": {
+                                        "type": "integer"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    },
+                                    "time": {
+                                        "type": "integer"
+                                    },
+                                    "tx": {
+                                        "type": "object",
+                                        "properties": {
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "txid": {
+                                                "type": "string"
+                                            },
+                                            "co2eq": {
+                                                "type": "integer"
+                                            },
+                                            "time": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "transaction": {
+                        "type": "object",
+                        "properties": {
+                            "owner": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "co2eq": {
+                                "type": "integer"
+                            },
+                            "time": {
+                                "type": "integer"
+                            },
+                            "subject": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "domain": {
+                                        "type": "string"
+                                    },
+                                    "proof": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shares": {
+                                "type": "object",
+                                "properties": {
+                                    "goldstandardcredit": {
+                                        "type": "string"
+                                    },
+                                    "plantedtrees": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "seq": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Compensate GHG/CO2",
+            "url": "https://co2-offset.p.rapidapi.com/compensation",
+            "description": "**Compensate given amount of GHG/CO2eq and provides certificate reference as result.**\n\n[![Run in Postman](https://run.pstmn.io/button.svg)](https://god.gw.postman.com/run-collection/15081091-09153188-d83e-4c5d-8dd2-e0001ce00582?action=collection%2Ffork&collection-url=entityId%3D15081091-09153188-d83e-4c5d-8dd2-e0001ce00582%26entityType%3Dcollection%26workspaceId%3D81135753-9fec-41b0-9729-da032ac868bd)",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://co2-offset.p.rapidapi.com/compensation\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"co2-offset.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://co2-offset.p.rapidapi.com/compensation\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"co2-offset.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "ancestor": {
+                        "type": "object",
+                        "description": "Parent certificate / offset this compensation is part of.",
+                        "properties": {
+                            "organization": {
+                                "type": "string"
+                            },
+                            "externalId": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "co2eq": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "sibbling": {
+                        "type": "object",
+                        "properties": {
+                            "goldstandardcredit": {
+                                "type": "object",
+                                "properties": {
+                                    "tx": {
+                                        "type": "object",
+                                        "properties": {
+                                            "txid": {
+                                                "type": "string"
+                                            },
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "timestamp": {
+                                                "type": "integer"
+                                            },
+                                            "co2eq": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "plantedtrees": {
+                                "type": "object",
+                                "properties": {
+                                    "actualSincePlanted": {
+                                        "type": "integer"
+                                    },
+                                    "availLifetime": {
+                                        "type": "integer"
+                                    },
+                                    "usedLifetime": {
+                                        "type": "integer"
+                                    },
+                                    "location": {
+                                        "type": "string"
+                                    },
+                                    "organization": {
+                                        "type": "string"
+                                    },
+                                    "time": {
+                                        "type": "integer"
+                                    },
+                                    "tx": {
+                                        "type": "object",
+                                        "properties": {
+                                            "from": {
+                                                "type": "string"
+                                            },
+                                            "to": {
+                                                "type": "string"
+                                            },
+                                            "txid": {
+                                                "type": "string"
+                                            },
+                                            "co2eq": {
+                                                "type": "integer"
+                                            },
+                                            "time": {
+                                                "type": "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "transaction": {
+                        "type": "object",
+                        "properties": {
+                            "owner": {
+                                "type": "string"
+                            },
+                            "id": {
+                                "type": "string"
+                            },
+                            "co2eq": {
+                                "type": "integer"
+                            },
+                            "time": {
+                                "type": "integer"
+                            },
+                            "subject": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "domain": {
+                                        "type": "string"
+                                    },
+                                    "proof": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "shares": {
+                                "type": "object",
+                                "properties": {
+                                    "goldstandardcredit": {
+                                        "type": "string"
+                                    },
+                                    "plantedtrees": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "seq": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "id": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

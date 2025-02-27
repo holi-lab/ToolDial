@@ -1,0 +1,251 @@
+{
+    "tool_name": "Classifier",
+    "tool_description": "Analyzes sets of occupation-related data such as job title, skills, function or industry, and classifies them in official classification systems as O*NET, ISCO-08, BO&amp;C, ASOC or SSOC 2015, among other standardized classifications available.",
+    "title": "Classifier",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1035,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/janzz-ltd-janzz-ltd-default/api/classifier1/",
+    "host": "classifier1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Job Title Classifier",
+            "url": "https://classifier1.p.rapidapi.com/classifier/classify/",
+            "description": "API endpoint used to classify a single job title or line of text",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "The text to classify",
+                    "default": "test engineer"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "cls_data_",
+                    "type": "STRING",
+                    "description": "\neffect: provide known classification data relating to the input in order to boost search results\n\nmultiple values: repeat parameter for each classification\n\nexample: cls_data_ISCO-08",
+                    "default": ""
+                },
+                {
+                    "name": "want_codes",
+                    "type": "STRING",
+                    "description": "format: classification code, example: ISCO-08\n\nmultiple values: repeat parameter for each classification",
+                    "default": ""
+                },
+                {
+                    "name": "output",
+                    "type": "STRING",
+                    "description": "format: html or empty\n\ndefault value: empty\n\neffect: output as indended html if set to html, otherwise output as json",
+                    "default": ""
+                },
+                {
+                    "name": "detect_langs",
+                    "type": "STRING",
+                    "description": "format: ISO 369-1, 2 character language code, example: de, en, fr, \u2026\ndefault value: empty\n\nmultiple values: repeat parameter\n\neffect: when the source language is not known, use a combination of python langdetect and the concept graph data to detect the input language. If this is used, the detected languages will be returned as _search_lang_ in the output.\n",
+                    "default": "en"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "Format: ISO 369-1, 2 character language code, example: de, en, fr, \u2026\n\n\nEffect: search in this language, output all data in this language",
+                    "default": "en"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/classifier/classify/\"\nquerystring = {\"q\": q, \"detect_langs\": detect_langs, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Typeahead",
+            "url": "https://classifier1.p.rapidapi.com/classifier/typeahead/",
+            "description": "API endpoint to use typeahead for classification labels and concept labels, using the JANZZ classifier, as an alternative to /concepts/ and /labels/",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "Input in the typeahead",
+                    "default": "prod"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "want_codes",
+                    "type": "STRING",
+                    "description": "only return labels from concepts which are classified with this classification, also include the classification values for each returned concept.\n\ndefault value: empty\n\nmultiple values: repeat parameter",
+                    "default": "ISCO-08"
+                },
+                {
+                    "name": "num_cls_label_results",
+                    "type": "STRING",
+                    "description": "return N classification labels which match the typeahead input. These will have a concept id (cid) of 0.",
+                    "default": "5"
+                },
+                {
+                    "name": "num_results",
+                    "type": "STRING",
+                    "description": "return N labels",
+                    "default": "10"
+                },
+                {
+                    "name": "output",
+                    "type": "STRING",
+                    "description": "format: html or empty\n\ndefault value: empty\n\neffect: output as indended html if set to html, otherwise output as json",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/classifier/typeahead/\"\nquerystring = {\"q\": q, \"want_codes\": want_codes, \"num_cls_label_results\": num_cls_label_results, \"num_results\": num_results}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Most Similar",
+            "url": "https://classifier1.p.rapidapi.com/parser/similarity/",
+            "description": "Search for the most similar concepts to the input query in the JANZZ Ontology and sort them according to their semantic similarity.\n\n****************************\ndescription of output fields\n\n\n- results\n    - format: json list\n    - description: all similar concepts, sorted by most-similar first\n    - result format\n        - concept-id\n        - closest matching label\n        - similarity score from 0-1",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "term",
+                    "type": "STRING",
+                    "description": "format: string\n\neffect: search for concepts similar to this free-text string.",
+                    "default": "java coding language"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "2-letter ISO 639-1 language code of the input term\n\nAvailable languages-codes:\n\nEnglish-en, Spanish-es, Norwegian-no,  Arabic-ar, Deutsch-de, Portuguese-pt, French-fr, Italian-it, Chinese-zh and Dutch-nl",
+                    "default": "en"
+                },
+                {
+                    "name": "branch",
+                    "type": "STRING",
+                    "description": "format: string\n\nallowed values: occupation, function, specialization, skill, softskill, industry, education, authorization\n\neffect: the branch to search for similar concepts in.",
+                    "default": "skill"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/parser/similarity/\"\nquerystring = {\"term\": term, \"lang\": lang, \"branch\": branch}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "OJA Classifier",
+            "url": "https://classifier1.p.rapidapi.com/test_classifier/",
+            "description": "Online job advertisement classifier\n\nClassify a job advertisement in multiple international taxonomies, for each of the desired classifications a list will be returned with the codes assigned within the classification ordered by probability, each element will contain a specific code, a concept in the JANZZ Ontology that matches its, the cid of the concept and the score value. \n\nTo see the list of all the available classification please check: https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies\n\n****************************\n\n- The maximum number of codes returned for each classification is 5, however, we do not limit the number of results by a minimum score value, leaving this up to the user to decide.\n\n- Currently, English, Spanish, Norwegian,   Arabic, German,  Dutch, Portuguese, French, Italian and Chinese are supported.\n\n- Input text does not need to be pre-processed or normalized, as it will be tokenized during parsing, so extra newlines, spaces, punctuation, etc. will be removed.\n\n- If the job description it's not empty the language will be automatically detected, if the job description it's empty the title alone it's not enough to recognize the correct language, so the job description language should be pre-specified.\n\n****************************\ndescription of output fields\n\n- classifications\n   - format: JSON object\n    - description: list of all the desired classifications where each one will generate a list with a maximum of 5 elements that correspond to the best classified codes assignable to this combination of job title and description, the list is ordered by the probability of applicability of each code.\n    - each element in the list corresponds to a dictionary:  \n      {'concept':  string , 'code': string, 'cid': string, 'score':  float}\n    - where concept is the term found in the Janzz Ontology that contains this code, code is the value within the classification to which the element of the list belongs, cid is the id associated in the ontology to the concept found and score is the probability of this classification to be correct.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "classifications",
+                    "type": "STRING",
+                    "description": "format: list of strings,\n\neffect: classify and ranks the occupations present in the title and in the text according to these classifications\n\nlist of possible classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default": "'ESC0'"
+                },
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title of the job vacancy",
+                    "default": "Senior Python Developer"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Text from the job description",
+                    "default": "We need individuals who think outside the box, who use cutting-edge ideas and who relish working in a team setting to convert these ideas into game-changing products. As a member of our team, you will design, develop, and demonstrate innovative computing and communications technologies, most of which are patent pending!  Qualifications: Bachelors Degree in: Computer Science, Electrical Engineering, Computer Engineering, Software Development or related field A team leader with exceptional communication skills A expert in client relations Successful candidate will have experience in: One or more programming languages (Java, C, C++, Perl, Python, etc.) Hardware/software interfaces and protocols (low-level device and bus protocols) Linux kernel or drivers projects Systems engineering Reverse engineering"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "2-letter ISO 639-1 language code of the job title, is only required if no job description it\u2019s provided\n\n",
+                    "default": "en"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/test_classifier/\"\nquerystring = {\"classifications\": classifications, \"text\": text, \"title\": title, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Most Similar",
+            "url": "https://classifier1.p.rapidapi.com/parser/similarity/",
+            "description": "Search for the most similar concepts to the input query in the JANZZ Ontology and sort them according to their semantic similarity.\n\n****************************\ndescription of output fields\n\n\n- results\n    - format: json list\n    - description: all similar concepts, sorted by most-similar first\n    - result format\n        - concept-id\n        - closest matching label\n        - similarity score from 0-1",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "term",
+                    "type": "STRING",
+                    "description": "format: string\n\neffect: search for concepts similar to this free-text string.",
+                    "default": "java coding language"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "2-letter ISO 639-1 language code of the input term\n\nAvailable languages-codes:\n\nEnglish-en, Spanish-es, Norwegian-no,  Arabic-ar, Deutsch-de, Portuguese-pt, French-fr, Italian-it, Chinese-zh and Dutch-nl",
+                    "default": "en"
+                },
+                {
+                    "name": "branch",
+                    "type": "STRING",
+                    "description": "format: string\n\nallowed values: occupation, function, specialization, skill, softskill, industry, education, authorization\n\neffect: the branch to search for similar concepts in.",
+                    "default": "skill"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/parser/similarity/\"\nquerystring = {\"term\": \"java coding language\", \"lang\": \"en\", \"branch\": \"skill\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/parser/similarity/\"\nquerystring = {\"term\": \"java coding language\", \"lang\": \"en\", \"branch\": \"skill\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "OJA Classifier",
+            "url": "https://classifier1.p.rapidapi.com/test_classifier/",
+            "description": "Online job advertisement classifier\n\nClassify a job advertisement in multiple international taxonomies, for each of the desired classifications a list will be returned with the codes assigned within the classification ordered by probability, each element will contain a specific code, a concept in the JANZZ Ontology that matches its, the cid of the concept and the score value. \n\nTo see the list of all the available classification please check: https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies\n\n****************************\n\n- The maximum number of codes returned for each classification is 5, however, we do not limit the number of results by a minimum score value, leaving this up to the user to decide.\n\n- Currently, English, Spanish, Norwegian,   Arabic, German,  Dutch, Portuguese, French, Italian and Chinese are supported.\n\n- Input text does not need to be pre-processed or normalized, as it will be tokenized during parsing, so extra newlines, spaces, punctuation, etc. will be removed.\n\n- If the job description it's not empty the language will be automatically detected, if the job description it's empty the title alone it's not enough to recognize the correct language, so the job description language should be pre-specified.\n\n****************************\ndescription of output fields\n\n- classifications\n   - format: JSON object\n    - description: list of all the desired classifications where each one will generate a list with a maximum of 5 elements that correspond to the best classified codes assignable to this combination of job title and description, the list is ordered by the probability of applicability of each code.\n    - each element in the list corresponds to a dictionary:  \n      {'concept':  string , 'code': string, 'cid': string, 'score':  float}\n    - where concept is the term found in the Janzz Ontology that contains this code, code is the value within the classification to which the element of the list belongs, cid is the id associated in the ontology to the concept found and score is the probability of this classification to be correct.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "classifications",
+                    "type": "STRING",
+                    "description": "format: list of strings,\n\neffect: classify and ranks the occupations present in the title and in the text according to these classifications\n\nlist of possible classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default": "'ESC0'"
+                },
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title of the job vacancy",
+                    "default": "Senior Python Developer"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Text from the job description",
+                    "default": "We need individuals who think outside the box, who use cutting-edge ideas and who relish working in a team setting to convert these ideas into game-changing products. As a member of our team, you will design, develop, and demonstrate innovative computing and communications technologies, most of which are patent pending!  Qualifications: Bachelors Degree in: Computer Science, Electrical Engineering, Computer Engineering, Software Development or related field A team leader with exceptional communication skills A expert in client relations Successful candidate will have experience in: One or more programming languages (Java, C, C++, Perl, Python, etc.) Hardware/software interfaces and protocols (low-level device and bus protocols) Linux kernel or drivers projects Systems engineering Reverse engineering"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "2-letter ISO 639-1 language code of the job title, is only required if no job description it\u2019s provided\n\n",
+                    "default": "en"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/test_classifier/\"\nquerystring = {\"classifications\": \"'ESC0'\", \"text\": \"We need individuals who think outside the box, who use cutting-edge ideas and who relish working in a team setting to convert these ideas into game-changing products. As a member of our team, you will design, develop, and demonstrate innovative computing and communications technologies, most of which are patent pending!  Qualifications: Bachelors Degree in: Computer Science, Electrical Engineering, Computer Engineering, Software Development or related field A team leader with exceptional communication skills A expert in client relations Successful candidate will have experience in: One or more programming languages (Java, C, C++, Perl, Python, etc.) Hardware/software interfaces and protocols (low-level device and bus protocols) Linux kernel or drivers projects Systems engineering Reverse engineering\", \"title\": \"Senior Python Developer\", \"lang\": \"en\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://classifier1.p.rapidapi.com/test_classifier/\"\nquerystring = {\"classifications\": \"'ESC0'\", \"text\": \"We need individuals who think outside the box, who use cutting-edge ideas and who relish working in a team setting to convert these ideas into game-changing products. As a member of our team, you will design, develop, and demonstrate innovative computing and communications technologies, most of which are patent pending!  Qualifications: Bachelors Degree in: Computer Science, Electrical Engineering, Computer Engineering, Software Development or related field A team leader with exceptional communication skills A expert in client relations Successful candidate will have experience in: One or more programming languages (Java, C, C++, Perl, Python, etc.) Hardware/software interfaces and protocols (low-level device and bus protocols) Linux kernel or drivers projects Systems engineering Reverse engineering\", \"title\": \"Senior Python Developer\", \"lang\": \"en\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"classifier1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

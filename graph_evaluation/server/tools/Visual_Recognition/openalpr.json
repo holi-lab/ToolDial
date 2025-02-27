@@ -1,0 +1,366 @@
+{
+    "tool_name": "OpenALPR",
+    "tool_description": "The OpenALPR Cloud API is a web-based service that analyzes images for license plates as well as vehicle information such as make, model, and color. The Cloud API service is easy to integrate into your application via a web-based REST service. When you send image data to the OpenALPR API, we process that data and return JSON data describing the license plate and vehicle.",
+    "title": "OpenALPR",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 929,
+        "avgSuccessRate": 96,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/matthill5/api/openalpr/",
+    "host": "openalpr.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Recognize URL",
+            "url": "https://openalpr.p.rapidapi.com/recognize_url",
+            "description": "Send an image for OpenALPR to analyze and provide metadata back The image is sent as a URL. The OpenALPR service will download the image and process it",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image_url",
+                    "type": "STRING",
+                    "description": "A URL to an image that you wish to analyze",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Defines the training data used by OpenALPR. \u201cus\u201d analyzes North-American style plates. \u201ceu\u201d analyzes European-style plates.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "prewarp",
+                    "type": "STRING",
+                    "description": "Prewarp configuration is used to calibrate the analyses for the angle of a particular camera. More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration",
+                    "default": ""
+                },
+                {
+                    "name": "return_image",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the image you uploaded will be encoded in base64 and sent back along with the response",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Corresponds to a US state or EU country code used by OpenALPR pattern recognition. For example, using \u201cmd\u201d matches US plates against the Maryland plate patterns. Using \u201cfr\u201d matches European plates against the French plate patterns.",
+                    "default": ""
+                },
+                {
+                    "name": "recognize_vehicle",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the vehicle will also be recognized in the image This requires an additional credit per request",
+                    "default": ""
+                },
+                {
+                    "name": "topn",
+                    "type": "NUMBER",
+                    "description": "The number of results you would like to be returned for plate candidates and vehicle classifications",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize_url\"\nquerystring = {\"image_url\": image_url, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Config",
+            "url": "https://openalpr.p.rapidapi.com/config",
+            "description": "Get a list of available results for plate and vehicle recognition",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/config\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Recognize Bytes",
+            "url": "https://openalpr.p.rapidapi.com/recognize_bytes",
+            "description": "Send an image for OpenALPR to analyze and provide metadata back The image is sent as a URL. The OpenALPR service will download the image and process it",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image_bytes",
+                    "type": "STRING",
+                    "description": "The image file that you wish to analyze encoded in base64",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Defines the training data used by OpenALPR. \u201cus\u201d analyzes North-American style plates. \u201ceu\u201d analyzes European-style plates.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "recognize_vehicle",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the vehicle will also be recognized in the image This requires an additional credit per request",
+                    "default": ""
+                },
+                {
+                    "name": "prewarp",
+                    "type": "STRING",
+                    "description": "Prewarp configuration is used to calibrate the analyses for the angle of a particular camera. More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration",
+                    "default": ""
+                },
+                {
+                    "name": "return_image",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the image you uploaded will be encoded in base64 and sent back along with the response",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Corresponds to a US state or EU country code used by OpenALPR pattern recognition. For example, using \u201cmd\u201d matches US plates against the Maryland plate patterns. Using \u201cfr\u201d matches European plates against the French plate patterns.",
+                    "default": ""
+                },
+                {
+                    "name": "topn",
+                    "type": "NUMBER",
+                    "description": "The number of results you would like to be returned for plate candidates and vehicle classifications",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize_bytes\"\nquerystring = {\"image_bytes\": image_bytes, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Recognize",
+            "url": "https://openalpr.p.rapidapi.com/recognize",
+            "description": "Send an image for OpenALPR to analyze and provide metadata back The image is sent as a file using a form data POST",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The image file that you wish to analyze",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Defines the training data used by OpenALPR. \u201cus\u201d analyzes North-American style plates. \u201ceu\u201d analyzes European-style plates.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Corresponds to a US state or EU country code used by OpenALPR pattern recognition. For example, using \u201cmd\u201d matches US plates against the Maryland plate patterns. Using \u201cfr\u201d matches European plates against the French plate patterns.",
+                    "default": ""
+                },
+                {
+                    "name": "recognize_vehicle",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the vehicle will also be recognized in the image This requires an additional credit per request",
+                    "default": ""
+                },
+                {
+                    "name": "prewarp",
+                    "type": "STRING",
+                    "description": "Prewarp configuration is used to calibrate the analyses for the angle of a particular camera. More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration",
+                    "default": ""
+                },
+                {
+                    "name": "return_image",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the image you uploaded will be encoded in base64 and sent back along with the response",
+                    "default": ""
+                },
+                {
+                    "name": "topn",
+                    "type": "NUMBER",
+                    "description": "The number of results you would like to be returned for plate candidates and vehicle classifications",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize\"\nquerystring = {\"image\": image, \"country\": country}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Recognize URL",
+            "url": "https://openalpr.p.rapidapi.com/recognize_url",
+            "description": "Send an image for OpenALPR to analyze and provide metadata back The image is sent as a URL. The OpenALPR service will download the image and process it",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image_url",
+                    "type": "STRING",
+                    "description": "A URL to an image that you wish to analyze",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Defines the training data used by OpenALPR. \u201cus\u201d analyzes North-American style plates. \u201ceu\u201d analyzes European-style plates.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "prewarp",
+                    "type": "STRING",
+                    "description": "Prewarp configuration is used to calibrate the analyses for the angle of a particular camera. More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration",
+                    "default": ""
+                },
+                {
+                    "name": "return_image",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the image you uploaded will be encoded in base64 and sent back along with the response",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Corresponds to a US state or EU country code used by OpenALPR pattern recognition. For example, using \u201cmd\u201d matches US plates against the Maryland plate patterns. Using \u201cfr\u201d matches European plates against the French plate patterns.",
+                    "default": ""
+                },
+                {
+                    "name": "recognize_vehicle",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the vehicle will also be recognized in the image This requires an additional credit per request",
+                    "default": ""
+                },
+                {
+                    "name": "topn",
+                    "type": "NUMBER",
+                    "description": "The number of results you would like to be returned for plate candidates and vehicle classifications",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize_url\"\nquerystring = {\"image_url\": \"\", \"prewarp\": \"\", \"return_image\": \"\", \"state\": \"\", \"recognize_vehicle\": \"\", \"country\": \"\", \"topn\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize_url\"\nquerystring = {\"image_url\": \"\", \"prewarp\": \"\", \"return_image\": \"\", \"state\": \"\", \"recognize_vehicle\": \"\", \"country\": \"\", \"topn\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Recognize Bytes",
+            "url": "https://openalpr.p.rapidapi.com/recognize_bytes",
+            "description": "Send an image for OpenALPR to analyze and provide metadata back The image is sent as a URL. The OpenALPR service will download the image and process it",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image_bytes",
+                    "type": "STRING",
+                    "description": "The image file that you wish to analyze encoded in base64",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Defines the training data used by OpenALPR. \u201cus\u201d analyzes North-American style plates. \u201ceu\u201d analyzes European-style plates.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "recognize_vehicle",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the vehicle will also be recognized in the image This requires an additional credit per request",
+                    "default": ""
+                },
+                {
+                    "name": "prewarp",
+                    "type": "STRING",
+                    "description": "Prewarp configuration is used to calibrate the analyses for the angle of a particular camera. More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration",
+                    "default": ""
+                },
+                {
+                    "name": "return_image",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the image you uploaded will be encoded in base64 and sent back along with the response",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Corresponds to a US state or EU country code used by OpenALPR pattern recognition. For example, using \u201cmd\u201d matches US plates against the Maryland plate patterns. Using \u201cfr\u201d matches European plates against the French plate patterns.",
+                    "default": ""
+                },
+                {
+                    "name": "topn",
+                    "type": "NUMBER",
+                    "description": "The number of results you would like to be returned for plate candidates and vehicle classifications",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize_bytes\"\nquerystring = {\"image_bytes\": \"\", \"recognize_vehicle\": \"\", \"prewarp\": \"\", \"return_image\": \"\", \"state\": \"\", \"topn\": \"\", \"country\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize_bytes\"\nquerystring = {\"image_bytes\": \"\", \"recognize_vehicle\": \"\", \"prewarp\": \"\", \"return_image\": \"\", \"state\": \"\", \"topn\": \"\", \"country\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Recognize",
+            "url": "https://openalpr.p.rapidapi.com/recognize",
+            "description": "Send an image for OpenALPR to analyze and provide metadata back The image is sent as a file using a form data POST",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The image file that you wish to analyze",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "Defines the training data used by OpenALPR. \u201cus\u201d analyzes North-American style plates. \u201ceu\u201d analyzes European-style plates.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "Corresponds to a US state or EU country code used by OpenALPR pattern recognition. For example, using \u201cmd\u201d matches US plates against the Maryland plate patterns. Using \u201cfr\u201d matches European plates against the French plate patterns.",
+                    "default": ""
+                },
+                {
+                    "name": "recognize_vehicle",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the vehicle will also be recognized in the image This requires an additional credit per request",
+                    "default": ""
+                },
+                {
+                    "name": "prewarp",
+                    "type": "STRING",
+                    "description": "Prewarp configuration is used to calibrate the analyses for the angle of a particular camera. More information is available here http://doc.openalpr.com/accuracy_improvements.html#calibration",
+                    "default": ""
+                },
+                {
+                    "name": "return_image",
+                    "type": "NUMBER",
+                    "description": "If set to 1, the image you uploaded will be encoded in base64 and sent back along with the response",
+                    "default": ""
+                },
+                {
+                    "name": "topn",
+                    "type": "NUMBER",
+                    "description": "The number of results you would like to be returned for plate candidates and vehicle classifications",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize\"\nquerystring = {\"image\": \"\", \"state\": \"\", \"recognize_vehicle\": \"\", \"country\": \"\", \"prewarp\": \"\", \"return_image\": \"\", \"topn\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://openalpr.p.rapidapi.com/recognize\"\nquerystring = {\"image\": \"\", \"state\": \"\", \"recognize_vehicle\": \"\", \"country\": \"\", \"prewarp\": \"\", \"return_image\": \"\", \"topn\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"openalpr.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

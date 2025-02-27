@@ -1,0 +1,75 @@
+{
+    "tool_name":"Greenlight",
+    "tool_description":"BUY/SELL signals and trends from a range of popular technical indicators (24 total)",
+    "title":"Greenlight",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":50,
+        "avgLatency":527,
+        "avgSuccessRate":50,
+        "popularityScore":8.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/XCram/api/greenlight3/",
+    "host":"greenlight3.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get Signals",
+            "url":"https://greenlight3.p.rapidapi.com/signals",
+            "description":"**Provides BUY/SELL signals and trends for BTC/USDT, ETH/USDT, TRX/USDT 1 hour timeframe.**\n- Types of signals: BUY, SELL, HOLD\n- Types of trends: UP, DOWN, FLAT\n**Use telegram bot for extended functionality**\nAny pair, 6 different timeframes, indicator settings and much more:\nhttps://t.me/crypto_greenlight_bot?start=CEB66C31",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"coin",
+                    "type":"STRING",
+                    "description":"BTC, ETH or TRX",
+                    "default":"BTC"
+                },
+                {
+                    "name":"exchange",
+                    "type":"STRING",
+                    "description":"Binance, Bybit, Huobi, Kucoin, Coinex, MXC, Gate",
+                    "default":"Bybit"
+                },
+                {
+                    "name":"market_type",
+                    "type":"STRING",
+                    "description":"SPOT or FUTURES",
+                    "default":"SPOT"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://greenlight3.p.rapidapi.com/signals\"\nquerystring = {\"coin\": coin, \"exchange\": exchange, \"market_type\": market_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"greenlight3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "detail":"",
+                "data":{},
+                "time":""
+            },
+            "headers":{},
+            "schema":{
+                "title":"SignalsOut",
+                "required":[
+                    "detail",
+                    "data",
+                    "time"
+                ],
+                "type":"object",
+                "properties":{
+                    "detail":{
+                        "title":"Detail",
+                        "type":"string"
+                    },
+                    "data":{
+                        "title":"Data",
+                        "type":"object"
+                    },
+                    "time":{
+                        "title":"Time",
+                        "type":"string"
+                    }
+                }
+            }
+        }
+    ]
+}

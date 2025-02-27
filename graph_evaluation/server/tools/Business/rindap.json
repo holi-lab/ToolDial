@@ -1,0 +1,87 @@
+{
+    "product_id": "api_e2720146-8158-49c6-aa20-7596f9cb16b2",
+    "tool_description": "The smarter way to automate business processes: RESTful API that orchestrates your workflows without the need for complex integration projects or high-cost off-the-shelf software programmes",
+    "home_url": "https://rapidapi.com/rindap-the-smarter-alternative-for-bpm-rindap-the-smarter-alternative-for-bpm-default/api/rindap/",
+    "name": "Rindap",
+    "title": "Rindap",
+    "pricing": "FREEMIUM",
+    "tool_name": "Rindap",
+    "score": null,
+    "host": "rindap.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "CREATE Workspace",
+            "url": "https://rindap.p.rapidapi.com/Workspaces",
+            "description": "create a workspace",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://rindap.p.rapidapi.com/Workspaces\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"rindap.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://rindap.p.rapidapi.com/Workspaces\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"rindap.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "CREATE Integration",
+            "url": "https://rindap.p.rapidapi.com/Integrations",
+            "description": "linking your rapidapi account to Rindap",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "AuthToken",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "your rindap auth token"
+                },
+                {
+                    "name": "AccountSid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "your rindap account sid"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://rindap.p.rapidapi.com/Integrations\"\nquerystring = {\"AuthToken\": \"your rindap auth token\", \"AccountSid\": \"your rindap account sid\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"rindap.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://rindap.p.rapidapi.com/Integrations\"\nquerystring = {\"AuthToken\": \"your rindap auth token\", \"AccountSid\": \"your rindap account sid\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"rindap.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "CREATE Task",
+            "url": "https://rindap.p.rapidapi.com/Workspaces/WSXXXXXXXXXXXX/Tasks",
+            "description": "You can create a task by simply providing the Task Attributes and the Workflow for the task\n\n### Query Parameters \nParameter | Type | Default | Description\n--------- | ------- | ------- | -----------\nWorkspaceSID | String | '' | The SID of the Workspace in which the Task is created\nWorkflowSID | String | '' | The SID of the Workflow that you would like Task to be handled by \nAttributes | String | '' | A URL-encoded JSON string with the attributes of the new task. This value is passed to the Workflow's `assignment_callback_url` when the Task is assigned to a Worker.\nTimeout | Integer | '' | (Optional) (Max=34560) (Min=1) Timeout value in minutes, for the Task to be closed after, if the Task assignment_status is not `completed` or `cancelled` at the time of control.Task will be \"cancelled\" with reason \"Task TTL Exceeded\"\n\n### Task Properties\n\n* **sid** - The unique string that we created to identify the Task resource.\n* **account_sid** - The SID of the Account that created the Task resource.\n* **workspace_sid** - The SID of the Workspace that contains the Task\n* **workflow_sid** - The SID of the Workflow that is controlling the Task\n* **workflow_friendly_name** - The friendly name of the Workflow that is controlling the Task\n* **initial_attributes** - A JSON String for the attributes of the task. This value cannot be changed, for showing the original state of the Task\n* **attributes** - A JSON String for the attributes of the task. This field can be updated throughout the Lifecycle of the Task and will be used for evaluating filters of the Task's Workflow\n* **assignment_status** - The current status of the Task's assignment. Can be: pending, awaiting_reservation,reserved, postponed, accepted, cancelled or completed.\n* **task_queue_sid** - The SID of the TaskQueue that the Task was last sent to\n* **task_queue_sid_friendly_name** - The friendly name of the TaskQueue that the Task was last sent to\n* **age** - The number of seconds since the Task was created.\n* **step_history** - A JSON Array of JSON Objects, showing the steps which were selected for the Task throughout its lifecycle. The JSON Objects hold the Step Id and the Date it was selected for the Task\n* **task_queue_history** - A JSON Array of JSON Objects, showing the Task Queues to which the Task was sent, \nthroughout its lifecyle. The JSON Objects hold the Task Queue SID, Task Queue friendly name and the Date \n* **last_charge_date** - The date The Task was last charged\n* **next_charge_date** - The date The Task will be charged again, If It has not ended Its lifecycle\n* **total_cost** - The total cost of charges for The Task so far\n* **forked_from** - The SID of the Parent Task , if this Task is forked from another Task. For more information , see [Task Forking](https://rindap.com/task-forking/)\n* **postponed_till** - The date and time in GMT, till the task is postponed , valid when The Task AssignmentStatus is `postponed`.\n* **postponing_reason** - The explanation of the reason for postponing , valid when The Task AssignmentStatus is `postponed`.\n* **loop_retries_left** - The number of retries left for the current Loop Filter in the Workflow, valid when The Task AssignmentStatus is `postponed`. For more information, see [Workflow Configuration](https://rindap.com/workflow/).\n* **date_created** - The date and time in GMT when the resource was created, specified in ISO 8601 format.\n* **date_updated** - The date and time in GMT when the resource was last updated, specified in ISO 8601 format.\n* **url** - The absolute URL of the resource\n* **links** - The URLs of related resources.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "WorkflowSid",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "WFXXXXXXXXXXXXXXXX"
+                },
+                {
+                    "name": "Attributes",
+                    "type": "OBJECT",
+                    "description": "",
+                    "default": "{\"aaaa\":\"bbbbbbb\",\"ccc\":44}"
+                },
+                {
+                    "name": "WorkspaceSid",
+                    "type": "string",
+                    "description": "",
+                    "default": "WSXXXXXXXXXXXX"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Timeout",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "10"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://rindap.p.rapidapi.com/Workspaces/WSXXXXXXXXXXXX/Tasks\"\nquerystring = {\"WorkflowSid\": \"WFXXXXXXXXXXXXXXXX\", \"Attributes\": \"{\\\"aaaa\\\":\\\"bbbbbbb\\\",\\\"ccc\\\":44}\", \"Timeout\": \"10\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"rindap.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://rindap.p.rapidapi.com/Workspaces/{workspacesid}/Tasks\"\nquerystring = {\"WorkflowSid\": \"WFXXXXXXXXXXXXXXXX\", \"Attributes\": \"{\\\"aaaa\\\":\\\"bbbbbbb\\\",\\\"ccc\\\":44}\", \"Timeout\": \"10\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"rindap.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

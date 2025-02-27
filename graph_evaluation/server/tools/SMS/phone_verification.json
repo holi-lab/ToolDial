@@ -1,0 +1,662 @@
+{
+    "tool_name": "Phone verification",
+    "tool_description": "Validate any phone number across the USA, in bulk or single. Use free and forever.",
+    "title": "Phone verification",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 500,
+        "avgSuccessRate": 1,
+        "popularityScore": 0.1,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/accuratecheckr/api/phone-verification3/",
+    "host": "phone-verification3.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Download Verification Results",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/file/downloadFile/{filename}",
+            "description": "This endpoint returns the result file to be downloaded.\n\nPass name of file to be downloaded as path param. Result file name is always in format {filename}_output.xlsx Replace {filename} with the name returned from upload file call.\n\nTo download the file with angular follow sample code here\n\nhttps://stackoverflow.com/questions/40240796/angular-2-best-approach-to-use-filesaver-js",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "fileName",
+                    "type": "STRING",
+                    "description": "Name of file to be downloaded. Result file name is always in format {filename}_output.xlsx Replace {filename} with the name returned from upload file call.",
+                    "default": "filename_output.xlsx"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "Bearer <access_token>. You get the \"access_token\" as response of login. Use it in header.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/file/downloadFile/{filename}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Verify Single Number",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/validation/verifyNumber",
+            "description": "Get the details of phone number supplied in the query param. Do not forget to pass Authorization header with your access_token. \n\nHint - access_token are returned as part of login api call.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "Bearer <access_token>. You get the \"access_token\" as response of login. Use it in header.",
+                    "default": "Bearer <your_access_token>"
+                },
+                {
+                    "name": "number",
+                    "type": "STRING",
+                    "description": "Phone/mobile number to get details for.",
+                    "default": "1234567891"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/validation/verifyNumber\"\nquerystring = {\"Authorization\": authorization, \"number\": number}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": [
+                    {
+                        "areaCode": 0,
+                        "exchange": 0,
+                        "thousand": "",
+                        "country": "",
+                        "city": "",
+                        "county": "",
+                        "zip": "",
+                        "company": "",
+                        "state": "",
+                        "ocn": "",
+                        "area": "",
+                        "internationalFormat": "",
+                        "nationalFormat": "",
+                        "numberType": "",
+                        "isValid": true,
+                        "rawInput": ""
+                    }
+                ],
+                "status": "",
+                "statusCode": 0
+            },
+            "headers": {},
+            "schema": {
+                "description": "",
+                "properties": {
+                    "data": {
+                        "items": {
+                            "properties": {
+                                "area": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "areaCode": {
+                                    "type": "number"
+                                },
+                                "city": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "company": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "country": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "county": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "exchange": {
+                                    "type": "number"
+                                },
+                                "internationalFormat": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "isValid": {
+                                    "type": "boolean"
+                                },
+                                "nationalFormat": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "numberType": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "ocn": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "rawInput": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "state": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "thousand": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                },
+                                "zip": {
+                                    "minLength": 1,
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "areaCode",
+                                "exchange",
+                                "thousand",
+                                "country",
+                                "city",
+                                "county",
+                                "zip",
+                                "company",
+                                "state",
+                                "ocn",
+                                "area",
+                                "internationalFormat",
+                                "nationalFormat",
+                                "numberType",
+                                "isValid",
+                                "rawInput"
+                            ]
+                        },
+                        "minItems": 1,
+                        "type": "array",
+                        "uniqueItems": true
+                    },
+                    "message": {},
+                    "requestChecksum": {},
+                    "status": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "data",
+                    "status",
+                    "statusCode"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Upload File with Phone Numbers For Verification",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/file/uploadFile",
+            "description": "Upload file with phone numbers for bulk verification. \n\nThere are 3 steps in bulk verification\n\n1. Upload file with phone numbers\n2. Check processing status of file\n3. Download results when completed",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "content-type",
+                    "type": "STRING",
+                    "description": "should be multipart/form-data",
+                    "default": "multipart/form-data"
+                },
+                {
+                    "name": "docType",
+                    "type": "STRING",
+                    "description": "keep this as 'bulkData'",
+                    "default": "bulkData"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "Bearer <access_token>. You get the \"access_token\" as response of login. Use it in header.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/file/uploadFile\"\nquerystring = {\"content-type\": content_type, \"docType\": doctype}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "fileName": "",
+                    "fileDownloadUri": "",
+                    "fileType": "",
+                    "size": 0,
+                    "originalFileName": ""
+                },
+                "status": "",
+                "statusCode": 0
+            },
+            "headers": {},
+            "schema": {
+                "description": "",
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "fileDownloadUri": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "fileName": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "fileType": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "originalFileName": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "size": {
+                                "type": "number"
+                            }
+                        },
+                        "required": [
+                            "fileName",
+                            "fileDownloadUri",
+                            "fileType",
+                            "size",
+                            "originalFileName"
+                        ],
+                        "type": "object"
+                    },
+                    "message": {},
+                    "requestChecksum": {},
+                    "status": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "data",
+                    "status",
+                    "statusCode"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Signup to Accuratecheckr",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/signup",
+            "description": "Signup to create a user account in Accuratecheckr",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "content-type",
+                    "type": "STRING",
+                    "description": "Content type should be application/json",
+                    "default": "application/json"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/signup\"\nquerystring = {\"content-type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "id": 0,
+                "firstName": "",
+                "lastName": "",
+                "email": "",
+                "sex": "",
+                "password": "",
+                "dob": "",
+                "createdDate": "",
+                "createdBy": 0,
+                "updatedDate": "",
+                "updatedBy": 0
+            },
+            "headers": {},
+            "schema": {
+                "description": "",
+                "properties": {
+                    "createdBy": {
+                        "type": "number"
+                    },
+                    "createdDate": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "dob": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "email": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "firstName": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "id": {
+                        "description": "Unique id of user",
+                        "type": "number"
+                    },
+                    "lastName": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "password": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "sex": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "updatedBy": {
+                        "type": "number"
+                    },
+                    "updatedDate": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "sex",
+                    "password",
+                    "dob",
+                    "createdDate",
+                    "createdBy",
+                    "updatedDate",
+                    "updatedBy"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Login to Accuratecheckr",
+            "url": "https://phone-verification3.p.rapidapi.com/",
+            "description": "Get access token from accuratecheckr.com for registered user and use this token in all future request.\n\nSuccessful execution of this methos returns bearer \"access_token\", which will be used in every API call in future.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "Basic authorization header. Contact admin@accuratecheckr.com to get your key. The space between word Basic and authorization key is important.",
+                    "default": "Basic <authorization_key>"
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "Password of registered user",
+                    "default": "welcome123"
+                },
+                {
+                    "name": "grant_type",
+                    "type": "STRING",
+                    "description": "put the string \"password\"",
+                    "default": "password"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "email used when registering the user on accuratecheckr.com in api \"/api/v1/signup\"",
+                    "default": "tommorris@gmail.com"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/\"\nquerystring = {\"Authorization\": authorization, \"password\": password, \"grant_type\": grant_type, \"username\": username}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "access_token": "",
+                "token_type": "",
+                "refresh_token": "",
+                "expires_in": 0,
+                "scope": "",
+                "jti": ""
+            },
+            "headers": {},
+            "schema": {
+                "description": "",
+                "properties": {
+                    "access_token": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "expires_in": {
+                        "type": "number"
+                    },
+                    "jti": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "refresh_token": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "scope": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "access_token",
+                    "token_type",
+                    "refresh_token",
+                    "expires_in",
+                    "scope",
+                    "jti"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get Processing Status of File",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/documentProcess/getProcessingStatus",
+            "description": "This endpoint gives you status of file uploaded for verification.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Authorization",
+                    "type": "STRING",
+                    "description": "Bearer <access_token>. You get the \"access_token\" as response of login. Use it in header.",
+                    "default": "Bearer <your_access_token>"
+                },
+                {
+                    "name": "fileName",
+                    "type": "STRING",
+                    "description": "file name received in response of upload file call. ",
+                    "default": "MzFqDXKCSfYTexv.xlsx"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/documentProcess/getProcessingStatus\"\nquerystring = {\"Authorization\": authorization, \"fileName\": filename}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "id": 0,
+                    "createdDate": "",
+                    "status": "",
+                    "processStartTime": "",
+                    "processEndTime": "",
+                    "estimatedCreditRequired": 0
+                },
+                "status": "",
+                "statusCode": 0
+            },
+            "headers": {},
+            "schema": {
+                "description": "",
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "createdDate": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "estimatedCreditRequired": {
+                                "description": "Shows credit spent in processing the file",
+                                "type": "number"
+                            },
+                            "failedReason": {},
+                            "id": {
+                                "type": "number"
+                            },
+                            "output_document_id": {},
+                            "processEndTime": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "processStartTime": {
+                                "minLength": 1,
+                                "type": "string"
+                            },
+                            "status": {
+                                "description": "Shows the current status of processing",
+                                "minLength": 1,
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "id",
+                            "createdDate",
+                            "status",
+                            "processStartTime",
+                            "processEndTime",
+                            "estimatedCreditRequired"
+                        ],
+                        "type": "object"
+                    },
+                    "message": {},
+                    "requestChecksum": {},
+                    "status": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "statusCode": {
+                        "type": "number"
+                    }
+                },
+                "required": [
+                    "data",
+                    "status",
+                    "statusCode"
+                ],
+                "type": "object"
+            }
+        },
+        {
+            "name": "Upload File with Phone Numbers For Verification",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/file/uploadFile",
+            "description": "Upload file with phone numbers for bulk verification. \n\nThere are 3 steps in bulk verification\n\n1. Upload file with phone numbers\n2. Check processing status of file\n3. Download results when completed",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "docType",
+                    "type": "STRING",
+                    "description": "keep this as 'bulkData'",
+                    "default": "bulkData"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/file/uploadFile\"\nquerystring = {\"docType\": \"bulkData\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/file/uploadFile\"\nquerystring = {\"docType\": \"bulkData\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Signup to Accuratecheckr",
+            "url": "https://phone-verification3.p.rapidapi.com/api/v1/signup",
+            "description": "Signup to create a user account in Accuratecheckr",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/signup\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/api/v1/signup\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Login to Accuratecheckr",
+            "url": "https://phone-verification3.p.rapidapi.com/",
+            "description": "Get access token from accuratecheckr.com for registered user and use this token in all future request.\n\nSuccessful execution of this methos returns bearer \"access_token\", which will be used in every API call in future.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "Password of registered user",
+                    "default": "welcome123"
+                },
+                {
+                    "name": "grant_type",
+                    "type": "STRING",
+                    "description": "put the string \"password\"",
+                    "default": "password"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "email used when registering the user on accuratecheckr.com in api \"/api/v1/signup\"",
+                    "default": "tommorris@gmail.com"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/\"\nquerystring = {\"password\": \"welcome123\", \"grant_type\": \"password\", \"username\": \"tommorris@gmail.com\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://phone-verification3.p.rapidapi.com/\"\nquerystring = {\"password\": \"welcome123\", \"grant_type\": \"password\", \"username\": \"tommorris@gmail.com\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"phone-verification3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "description": "",
+                "properties": {
+                    "access_token": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "expires_in": {
+                        "type": "number"
+                    },
+                    "jti": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "refresh_token": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "scope": {
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "token_type": {
+                        "minLength": 1,
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "access_token",
+                    "token_type",
+                    "refresh_token",
+                    "expires_in",
+                    "scope",
+                    "jti"
+                ],
+                "type": "object"
+            }
+        }
+    ]
+}

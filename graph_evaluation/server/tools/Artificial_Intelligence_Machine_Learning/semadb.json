@@ -1,0 +1,104 @@
+{
+    "product_id": "api_2e9ad348-2ce8-4b4f-a2d7-71293b7a6f9d",
+    "tool_description": "No fuss vector database for AI",
+    "home_url": "https://rapidapi.com/semafind-semadb/api/semadb/",
+    "name": "SemaDB",
+    "title": "SemaDB",
+    "pricing": "FREEMIUM",
+    "tool_name": "SemaDB",
+    "score": {
+        "avgServiceLevel": 98,
+        "avgLatency": 132,
+        "avgSuccessRate": 86,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "host": "semadb.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "SearchPoint",
+            "url": "https://semadb.p.rapidapi.com/collections/{collectionId}/points/search",
+            "description": "Perform similarity search on points in a collection. The search is performed using a vector, which is a mathematical representation of the point. The vector must have the same number of dimensions as the vectors in the collection. The search returns the most similar points to the vector, along with the distance between the vector and the points.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "collectionId",
+                    "type": "STRING",
+                    "description": "The unique identifier of the collection",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://semadb.p.rapidapi.com/collections/{collectionId}/points/search\"\nquerystring = {\"collectionId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"semadb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://semadb.p.rapidapi.com/collections/{collectionId}/points/search\"\nquerystring = {\"collectionId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"semadb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "points": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "format": "uuid"
+                                },
+                                "distance": {
+                                    "type": "number",
+                                    "description": "Distance between the vector and the point",
+                                    "examples": [
+                                        4.2
+                                    ]
+                                },
+                                "metadata": {
+                                    "type": "object",
+                                    "description": "JSON serialisable point metadata",
+                                    "examples": [
+                                        {
+                                            "externalId": 42
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "InsertPoint",
+            "url": "https://semadb.p.rapidapi.com/collections/{collectionId}/points",
+            "description": "This endpoint assumes all points to be inserted are new points and does not check for duplication. It is important to ensure consistency of the database you do not insert duplicate points. If you are unsure if a point exists, you can leave the id field blank and the database will assign a new id. *For cosine distance, you must normalise the vectors prior to inserting them.*",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "collectionId",
+                    "type": "STRING",
+                    "description": "The unique identifier of the collection",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://semadb.p.rapidapi.com/collections/{collectionId}/points\"\nquerystring = {\"collectionId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"semadb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://semadb.p.rapidapi.com/collections/{collectionId}/points\"\nquerystring = {\"collectionId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"semadb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "CreateCollection",
+            "url": "https://semadb.p.rapidapi.com/collections",
+            "description": "Creates a new collection if it does not already exist. The maximum number of collections per user is restricted based on the plan. Before you can insert and search points, you must create a collection.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://semadb.p.rapidapi.com/collections\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"semadb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://semadb.p.rapidapi.com/collections\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"semadb.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

@@ -1,0 +1,98 @@
+{
+    "tool_name":"Job Salary Data",
+    "tool_description":"Extremely Fast and Simple API to get Job Salary/Pay Estimations from all major publishers - Payscale, Glassdoor, ZipRecruiter and many others, all in a single API.",
+    "title":"Job Salary Data",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":450,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/letscrape-6bRBa3QguO5/api/job-salary-data/",
+    "host":"job-salary-data.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Job Salary",
+            "url":"https://job-salary-data.p.rapidapi.com/job-salary",
+            "description":"Get estimated job salaries/pay by job title and location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"job_title",
+                    "type":"STRING",
+                    "description":"Job title for which to get salary estimation",
+                    "default":"nodejs developer"
+                },
+                {
+                    "name":"location",
+                    "type":"STRING",
+                    "description":"Free-text location/area in which to get salary estimation",
+                    "default":"new york, usa"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"radius",
+                    "type":"STRING",
+                    "description":"Search radius in km (measured from *location*).\nDefault: `200`.",
+                    "default":"200"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://job-salary-data.p.rapidapi.com/job-salary\"\nquerystring = {\"job_title\": job_title, \"radius\": radius, \"location\": location}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"job-salary-data.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "request_id":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "location":{
+                                    "type":"string"
+                                },
+                                "job_title":{
+                                    "type":"string"
+                                },
+                                "publisher_name":{
+                                    "type":"string"
+                                },
+                                "publisher_link":{
+                                    "type":"string"
+                                },
+                                "min_salary":{
+                                    "type":"integer"
+                                },
+                                "max_salary":{
+                                    "type":"integer"
+                                },
+                                "median_pay":{
+                                    "type":"integer"
+                                },
+                                "salary_period":{
+                                    "type":"string"
+                                },
+                                "salary_currency":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

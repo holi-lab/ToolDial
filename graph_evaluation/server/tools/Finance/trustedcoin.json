@@ -1,0 +1,131 @@
+{
+    "product_id": "53aa5a7ce4b07e1f4ebec0b2",
+    "tool_description": "Trusted Coin is a Bitcoin transaction cosigning service. Users of this API can create M-of-N multisignature P2SH addresses (where Trusted Coin acts as one of the cosigners). The policy logic Trusted Coin should apply when deciding if to cosign (and thus approve) individual transactions is user configurable. Via this mechanism higher-level services can be built including wallet protection schemes and escrow.",
+    "home_url": "https://rapidapi.com/jseims/api/trustedcoin/",
+    "name": "TrustedCoin",
+    "title": "TrustedCoin",
+    "pricing": "FREE",
+    "tool_name": "TrustedCoin",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 585,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.1,
+        "__typename": "Score"
+    },
+    "host": "jseims-trustedcoin.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/1/cosigner/<script_hash_address>",
+            "url": "https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>",
+            "description": "",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/1/cosigner",
+            "url": "https://jseims-trustedcoin.p.rapidapi.com/1/cosigner",
+            "description": "Creates a cosigner enforcing a particular policy.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "primary_key",
+                    "type": "STRING",
+                    "description": "The first key in the M-of-N policy. This is a public key that corresponds to a private key that you control. This must be sent in hex-encoded SEC format (compressed and uncompressed varieties are both supported). Note: bitcoin addresses are not public keys - they are hashes of public keys. If you are using bitcoin-qt, you can use the \"validateaddress\" command line option to determine the public key associated with an address managed by your wallet. Example: 0345fb7c9a8eb70e9c83d5695cf6d93c5453ed83456badf166ebb77bf8b923e74f",
+                    "default": ""
+                },
+                {
+                    "name": "policy",
+                    "type": "STRING",
+                    "description": "The policy the cosigner should apply when deciding to sign a transaction or not. See the policy section for more information.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "secondary_key",
+                    "type": "STRING",
+                    "description": "The second public key in the M-of-N policy. If provided, the P2SH multisignature requirement will be 2-of-3, otherwise it will be 2-of-2. The format of this key is the same as primary_key.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner\"\nquerystring = {\"primary_key\": \"\", \"secondary_key\": \"\", \"policy\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner\"\nquerystring = {\"primary_key\": \"\", \"secondary_key\": \"\", \"policy\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/1/cosigner/<script_hash_address>/send_start",
+            "url": "https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>/send_start",
+            "description": "",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "script_hash_address",
+                    "type": "STRING",
+                    "description": "An address previously created using POST /1/cosigner. Example: 3QJmV3qfvL9SuYo34YihAf3sRCW3qSinyC",
+                    "default": ""
+                },
+                {
+                    "name": "output_address",
+                    "type": "STRING",
+                    "description": "Where funds are to be sent. Example: 1GtpSrGhRGY5kkrNz4RykoqRQoJuG2L6DS",
+                    "default": ""
+                },
+                {
+                    "name": "amount",
+                    "type": "NUMBER",
+                    "description": "The amount in satoshi to send to the output_address. Example: 15000000   (0.15 BTC)",
+                    "default": ""
+                },
+                {
+                    "name": "fee",
+                    "type": "NUMBER",
+                    "description": "The miner fee to award with this transaction. Defaults to 50000 if not specified. Example: 10000   (0.0001 BTC)",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>/send_start\"\nquerystring = {\"script_hash_address\": \"\", \"output_address\": \"\", \"amount\": \"\", \"fee\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>/send_start\"\nquerystring = {\"script_hash_address\": \"\", \"output_address\": \"\", \"amount\": \"\", \"fee\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/1/cosigner/<script_hash_address>/send_finish",
+            "url": "https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>/send_finish",
+            "description": "",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "partial_transaction",
+                    "type": "STRING",
+                    "description": "A hex-encoded partially signed transaction. Example: 0100000001b7e397c96d33e9984ffae8bce49d....8852ecea4754a6c88ac00000000",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "callback_url",
+                    "type": "STRING",
+                    "description": "When the transaction is broadcast or is rejected due to policy, a post will be made to this URL. See below for details regarding the format of this post. Example: https://www.example.com/transaction_status.php",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>/send_finish\"\nquerystring = {\"partial_transaction\": \"\", \"callback_url\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://jseims-trustedcoin.p.rapidapi.com/1/cosigner/<script_hash_address>/send_finish\"\nquerystring = {\"partial_transaction\": \"\", \"callback_url\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"jseims-trustedcoin.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "trustedcoin"
+}

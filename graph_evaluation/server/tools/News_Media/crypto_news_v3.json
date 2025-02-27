@@ -1,0 +1,129 @@
+{
+    "product_id": "api_0350d804-215e-4a70-b213-511649be931d",
+    "tool_description": "Get the latest crypto news incl. sentiment analysis and keyword extraction",
+    "home_url": "https://rapidapi.com/Oliviervha/api/crypto-news11/",
+    "name": "Crypto News_v3",
+    "title": "Crypto News",
+    "pricing": "FREEMIUM",
+    "tool_name": "Crypto News_v3",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1627,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "host": "crypto-news11.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Latest articles",
+            "url": "https://crypto-news11.p.rapidapi.com/cryptonews/bitcoin",
+            "description": "This endpoint provides the latest crypto news articles scraped from the web  incl. sentiment analysis ([textblob](https://textblob.readthedocs.io/en/dev/quickstart.html)) and keyword extraction ([Yake](http://yake.inesctec.pt/)). \n\nFor historical cryptonews data check out our open source dataset on [Kaggle](https://www.kaggle.com/oliviervha/crypto-news)\n\nParameters:\n- **[REQUIRED] subject** e.g. bitcoin, altcoin, ethereum, nft, blockchain, defi\n- **[OPTIONAL] last_n_hours**: Only news articles from the last *n* hours are provided (default: 24).\n- **[OPTIONAL] max_articles**: Maximum number of articles in response (default:100, max:100)\n- **[OPTIONAL] top_n_keywords**: Number of keywords to extract from article (default:10)\n\nCurrently news is scraped from:\n- [CryptoNews](cryptonews.com)\n- [CoinTelegraph](https://cointelegraph.com/)\n- [CryptoPotato](https://cryptopotato.com/)\n\nIf you have suggestions for more sources to add, please get in contact.\n\nMore information:\n- Get the [historical Crypto News dataset](https://www.kaggle.com/oliviervha/crypto-news) from Kaggle!\n- Click [here](https://app.swaggerhub.com/apis-docs/CryptoAdvisor/CryptoNews/1.0.0#/developers/cryptonews) for the API Swagger documentation.\n- Keep up-to-date with our [CryptoNews+ Twitter](https://twitter.com/cryptonews_plus) account!",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject",
+                    "type": "string",
+                    "description": "",
+                    "default": "bitcoin"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "top_n_keywords",
+                    "type": "NUMBER",
+                    "description": "Number of keywords to be extracted from the article",
+                    "default": "10"
+                },
+                {
+                    "name": "max_articles",
+                    "type": "NUMBER",
+                    "description": "The maximum number of articles in response (default:100,max:100).",
+                    "default": "10"
+                },
+                {
+                    "name": "last_n_hours",
+                    "type": "NUMBER",
+                    "description": "Crypto articles from the last *n* hours (default: 24 hrs)",
+                    "default": "48"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://crypto-news11.p.rapidapi.com/cryptonews/bitcoin\"\nquerystring = {\"top_n_keywords\": \"10\", \"max_articles\": \"10\", \"last_n_hours\": \"48\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"crypto-news11.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://crypto-news11.p.rapidapi.com/cryptonews/{subject}\"\nquerystring = {\"top_n_keywords\": \"10\", \"max_articles\": \"10\", \"last_n_hours\": \"48\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"crypto-news11.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Latest tweets",
+            "url": "https://crypto-news11.p.rapidapi.com/cryptotweets",
+            "description": "This endpoint provides the latest crypto news tweets incl. sentiment analysis ([textblob](https://textblob.readthedocs.io/en/dev/quickstart.html)) and keyword extraction ([Yake](http://yake.inesctec.pt/)). \n\nParameters:\n- **[OPTIONAL] last_n_hours**: Only tweets from the last *n* hours are provided (default: 12).\n- **[OPTIONAL] max_articles**: Maximum number of tweets in response (default:100, max:100)\n- **[OPTIONAL] top_n_keywords**: Number of keywords to extract form tweet (default:10)\n\nCurrently, we make use of the following sources:\n- [@BTCTN](https://twitter.com/BTCTN) \n- [@CryptoBoomNews](https://twitter.com/CryptoBoomNews)\n- [@cryptocom](https://twitter.com/cryptocom)\n- [@Crypto_Potato](https://twitter.com/crypto_potato)\n\nIf you have any suggestions for twitter accounts to add, please get in touch.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "top_n_keywords",
+                    "type": "NUMBER",
+                    "description": "The number of keywords extracted from the article.",
+                    "default": "10"
+                },
+                {
+                    "name": "max_tweets",
+                    "type": "NUMBER",
+                    "description": "Maximum number of tweets in response (default:100, max:100)",
+                    "default": "10"
+                },
+                {
+                    "name": "last_n_hours",
+                    "type": "NUMBER",
+                    "description": "Parameter to get crypto tweets for the last *n* hours (default: 12)",
+                    "default": "4"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://crypto-news11.p.rapidapi.com/cryptotweets\"\nquerystring = {\"top_n_keywords\": \"10\", \"max_tweets\": \"10\", \"last_n_hours\": \"4\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"crypto-news11.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://crypto-news11.p.rapidapi.com/cryptotweets\"\nquerystring = {\"top_n_keywords\": \"10\", \"max_tweets\": \"10\", \"last_n_hours\": \"4\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"crypto-news11.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "tweets": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "datetime": {
+                                    "type": "string"
+                                },
+                                "hashtags": {
+                                    "type": "array"
+                                },
+                                "sentiment": {
+                                    "type": "object",
+                                    "properties": {
+                                        "class": {
+                                            "type": "string"
+                                        },
+                                        "polarity": {
+                                            "type": "number"
+                                        },
+                                        "subjectivity": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "source": {
+                                    "type": "string"
+                                },
+                                "text": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "crypto_news_v3"
+}

@@ -1,0 +1,46 @@
+{
+    "product_id": "api_07213ab9-768a-42c6-b417-dfee281215f6",
+    "tool_description": "Running posture analysis API. Analyze cadence, stride, vertical bounce, and more just from a video of a person running.",
+    "home_url": "https://rapidapi.com/lyubo.raykov/api/bform-running/",
+    "name": "bform running",
+    "title": "bform running",
+    "pricing": "FREEMIUM",
+    "tool_name": "bform running",
+    "score": null,
+    "host": "bform-running.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Analyse Running Posture",
+            "url": "https://bform-running.p.rapidapi.com/analysis/running",
+            "description": "Submit a video for analysis.\nGet a json response with the assessments of the person's running posture and, if chosen to, pose estimates for each analyzed video frame.\n**Note** Do not use the \"Test Endpoint feature. It doesn't support the correct body `Content-Type` type - `multipart/form-data`. The video body parameter name should be `video.`\n\n## Example curl\nExample request can be found [here](https://pastebin.com/xgCYg49E)\n\n## Requirements\n - max video size is 50MB\n - the runner must be seen either from their left or right side. Back side support is coming soon.\n - the runner must be seen during the whole duration of the video. Users should crop it if otherwise.\n\n## Performance\nExpect the endpoint to take 2-3s for each second of video. A good timeout would be 60s.\n\n## Response fields\n\n### `assessments`\nArray of objects each containing an assessment for a trait.\nEach assessment contains:\n - `id`: string UUID of the assessment\n - `score`: integer, one of 0, 1 or 2.\n    - 0 - poor score\n    - 1 - adequate score\n    - 2 - excellent score\n - `trait` - string representing which trait is assessed. One of: `Running Cadence`, `Arm Swing`, `Arm Elbow Angle`, `Foot Strike`, `Stride`, `Vertical Bounce`, `Head Position`, `Hip Extension`\n - `value` - string with different underlying format depending on the trait as follows:\n    - `Running Cadence` - integer - the number of steps per minute\n    - `Arm Swing` - float - the median angle of swing in the shoulder\n    - `Arm Elbow Angle` - float - the median angle in the runner's elbow\n    - `Foot Strike` - one of `heel`, `mid foot`, `forefoot`, indicating which part of the foot touches the ground first\n    - `Stride` - one of `over`, `slightOver`, `normal`, indicating whether the runner is overstriding\n    - `Vertical Bounce` - integer - indicates how much the person's body is moving vertically. Since the actual length can not be determined just from video, the result is given as percent of torso length\n    - `Head Position` - one of `down`, `slightDown`, `neutral`\n    - `Hip Extension` - float - median degrees of hip extension\n - `slug` - short description of the evaluated trait, e.g. \"Your arms are at 74 degrees at the elbow\".\n - `description` - long description of the assessment. Contains an opinionated result of the runner's form. e.g. for value 2 for Arm Swing: `That's excellent and means you have great running dynamics.`\n\n### `totalScore`\nInteger between 0 and 100 scoring the runner's score based on the platform's opinion.\n\n### `estimates`\nArray of objects, each containing a 25-point pose estimate for a given video frame.\nEach object contains:\n - `time` - double - the time in the video of the frame\n - `estimate` - object\n   - `points`: object, each key is a point. One of: nose, leftEye, rightEye, leftEar, rightEar, leftShoulder, rightShoulder, leftElbow, rightElbow, leftWrist, rightWrist, leftHip, rightHip, leftKnee, rightKnee, leftAnkle, rightAnkle\n     - each point contains a `position` array. The first item is the `x` coordinate and the second - the `y`",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "video",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "assessmentType",
+                    "type": "STRING",
+                    "description": "Can be one of 'side' or 'back'. Tells the API about the angle at which  the video is filmed.",
+                    "default": "side"
+                },
+                {
+                    "name": "includePoseEstimates",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://bform-running.p.rapidapi.com/analysis/running\"\nquerystring = {\"video\": \"\", \"assessmentType\": \"side\", \"includePoseEstimates\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bform-running.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bform-running.p.rapidapi.com/analysis/running\"\nquerystring = {\"video\": \"\", \"assessmentType\": \"side\", \"includePoseEstimates\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bform-running.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

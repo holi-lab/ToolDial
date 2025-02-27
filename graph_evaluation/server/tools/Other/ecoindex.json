@@ -1,0 +1,522 @@
+{
+    "product_id": "api_08cfbe4b-334d-4d4d-a7a8-4019130b71af",
+    "tool_description": "This API provides an easy way to analyze websites with Ecoindex. You have the ability to:\n\n- Make a page analysis\n- Define screen resolution\n- Save results to a DB\n- Retrieve results\n- Limit the number of request per day for a given host\n\nThis API is built on top of ecoindex-python with FastAPI",
+    "home_url": "https://rapidapi.com/cnumr-cnumr-default/api/ecoindex/",
+    "name": "Ecoindex",
+    "title": "Ecoindex",
+    "pricing": "FREE",
+    "tool_name": "Ecoindex",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 134,
+        "avgSuccessRate": 23,
+        "popularityScore": 2.3,
+        "__typename": "Score"
+    },
+    "host": "ecoindex.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get_healthcheck_health_get",
+            "url": "https://ecoindex.p.rapidapi.com/health",
+            "description": "Check health status of components of the API (database...)",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/health\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/health\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": {
+                "database": true,
+                "workers": {
+                    "healthy": true,
+                    "workers": [
+                        {
+                            "name": "celery@cc8ab2376bfc",
+                            "healthy": true
+                        }
+                    ]
+                }
+            },
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "database": {
+                        "title": "Status of database",
+                        "type": "boolean"
+                    },
+                    "workers": {
+                        "allOf": [
+                            {
+                                "properties": {
+                                    "healthy": {
+                                        "title": "Set to true if all workers are healthy, false if one of them is down",
+                                        "type": "boolean"
+                                    },
+                                    "workers": {
+                                        "items": {
+                                            "properties": {
+                                                "healthy": {
+                                                    "title": "Set to true if the worker is healthy, else false",
+                                                    "type": "boolean"
+                                                },
+                                                "name": {
+                                                    "title": "Name of the worker",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "name",
+                                                "healthy"
+                                            ],
+                                            "title": "WorkerHealth",
+                                            "type": "object"
+                                        },
+                                        "title": "List of all current known workers",
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "healthy",
+                                    "workers"
+                                ],
+                                "title": "WorkersHealth",
+                                "type": "object"
+                            }
+                        ],
+                        "title": "Status of the queue task broker"
+                    }
+                },
+                "required": [
+                    "database",
+                    "workers"
+                ],
+                "title": "ApiHealth",
+                "type": "object"
+            }
+        },
+        {
+            "name": "Get_host_list__version__hosts_get",
+            "url": "https://ecoindex.p.rapidapi.com/v1/hosts",
+            "description": "This returns a list of hosts that ran an ecoindex analysis order by most request made",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "version",
+                    "type": "OBJECT",
+                    "description": "Engine version used to run the analysis (v0 or v1)",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "Filter by partial host name",
+                    "default": ""
+                },
+                {
+                    "name": "date_from",
+                    "type": "STRING",
+                    "description": "Start date of the filter elements (example: 2020-01-01)",
+                    "default": ""
+                },
+                {
+                    "name": "size",
+                    "type": "NUMBER",
+                    "description": "Number of elements per page",
+                    "default": 50
+                },
+                {
+                    "name": "date_to",
+                    "type": "STRING",
+                    "description": "End date of the filter elements  (example: 2020-01-01)",
+                    "default": ""
+                },
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "Page number",
+                    "default": 1
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/hosts\"\nquerystring = {\"q\": \"\", \"date_from\": \"\", \"size\": 50, \"date_to\": \"\", \"page\": 1}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/{version}/hosts\"\nquerystring = {\"q\": \"\", \"date_from\": \"\", \"size\": 50, \"date_to\": \"\", \"page\": 1}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "date_from"
+                        ],
+                        "msg": "invalid date format",
+                        "type": "value_error.date"
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "date_to"
+                        ],
+                        "msg": "invalid date format",
+                        "type": "value_error.date"
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get_screenshot__version__ecoindexes__id__screenshot_get",
+            "url": "https://ecoindex.p.rapidapi.com/v1/ecoindexes/{id}/screenshot",
+            "description": "This returns the screenshot of the webpage analysis if it exists",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "version",
+                    "type": "OBJECT",
+                    "description": "Engine version used to run the analysis (v0 or v1)",
+                    "default": "v1"
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/ecoindexes/{id}/screenshot\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/{version}/ecoindexes/{id}/screenshot\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "path",
+                            "id"
+                        ],
+                        "msg": "value is not a valid uuid",
+                        "type": "type_error.uuid"
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get_ecoindex_analysis_list__version__ecoindexes_get",
+            "url": "https://ecoindex.p.rapidapi.com/v1/ecoindexes",
+            "description": "This returns a list of ecoindex analysis corresponding to query filters and the given version engine. The results are ordered by ascending date",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "version",
+                    "type": "OBJECT",
+                    "description": "Engine version used to run the analysis (v0 or v1)",
+                    "default": "v1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "size",
+                    "type": "NUMBER",
+                    "description": "Number of elements per page",
+                    "default": 50
+                },
+                {
+                    "name": "host",
+                    "type": "STRING",
+                    "description": "Host name you want to filter",
+                    "default": ""
+                },
+                {
+                    "name": "date_from",
+                    "type": "STRING",
+                    "description": "Start date of the filter elements (example: 2020-01-01)",
+                    "default": ""
+                },
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "Page number",
+                    "default": 1
+                },
+                {
+                    "name": "date_to",
+                    "type": "STRING",
+                    "description": "End date of the filter elements  (example: 2020-01-01)",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/ecoindexes\"\nquerystring = {\"size\": 50, \"host\": \"\", \"date_from\": \"\", \"page\": 1, \"date_to\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/{version}/ecoindexes\"\nquerystring = {\"size\": 50, \"host\": \"\", \"date_from\": \"\", \"page\": 1, \"date_to\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "date_from"
+                        ],
+                        "msg": "invalid date format",
+                        "type": "value_error.date"
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "date_to"
+                        ],
+                        "msg": "invalid date format",
+                        "type": "value_error.date"
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get_ecoindex_analysis_by_id__version__ecoindexes__id__get",
+            "url": "https://ecoindex.p.rapidapi.com/v1/ecoindexes/{id}",
+            "description": "This returns an ecoindex given by its unique identifier",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "version",
+                    "type": "OBJECT",
+                    "description": "Engine version used to run the analysis (v0 or v1)",
+                    "default": "v1"
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/ecoindexes/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/{version}/ecoindexes/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "path",
+                            "id"
+                        ],
+                        "msg": "value is not a valid uuid",
+                        "type": "type_error.uuid"
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get_ecoindex_analysis_task_by_id_v1_tasks_ecoindexes__id__get",
+            "url": "https://ecoindex.p.rapidapi.com/v1/tasks/ecoindexes/{id}",
+            "description": "This returns an ecoindex given by its unique identifier",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/tasks/ecoindexes/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/tasks/ecoindexes/{id}\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "path",
+                            "id"
+                        ],
+                        "msg": "value is not a valid uuid",
+                        "type": "type_error.uuid"
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "ecoindex_result": {
+                        "allOf": [
+                            {
+                                "properties": {
+                                    "detail": {
+                                        "allOf": [
+                                            {
+                                                "properties": {
+                                                    "date": {
+                                                        "description": "Date of the analysis",
+                                                        "format": "date-time",
+                                                        "title": "Analysis datetime",
+                                                        "type": "string"
+                                                    },
+                                                    "ecoindex_version": {
+                                                        "default": "5.3.0",
+                                                        "description": "Is the version of the ecoindex used to compute the score",
+                                                        "title": "Ecoindex version",
+                                                        "type": "string"
+                                                    },
+                                                    "ges": {
+                                                        "description": "Is the equivalent of greenhouse gases emission (in `gCO2e`) of the page",
+                                                        "minimum": 0,
+                                                        "title": "Ecoindex GES equivalent",
+                                                        "type": "number"
+                                                    },
+                                                    "grade": {
+                                                        "description": "Is the corresponding ecoindex grade of the page (from A to G)",
+                                                        "title": "Ecoindex grade",
+                                                        "type": "string"
+                                                    },
+                                                    "height": {
+                                                        "description": "Height of the simulated window in pixel",
+                                                        "title": "Page Height",
+                                                        "type": "integer"
+                                                    },
+                                                    "nodes": {
+                                                        "description": "Is the number of the DOM elements in the page",
+                                                        "minimum": 0,
+                                                        "title": "Page nodes",
+                                                        "type": "integer"
+                                                    },
+                                                    "page_type": {
+                                                        "description": "Is the type of the page, based ton the [opengraph type tag](https://ogp.me/#types)",
+                                                        "title": "Page type",
+                                                        "type": "string"
+                                                    },
+                                                    "requests": {
+                                                        "description": "Is the number of external requests made by the page",
+                                                        "minimum": 0,
+                                                        "title": "Page requests",
+                                                        "type": "integer"
+                                                    },
+                                                    "score": {
+                                                        "description": "Is the corresponding ecoindex score of the page (0 to 100)",
+                                                        "maximum": 100,
+                                                        "minimum": 0,
+                                                        "title": "Ecoindex score",
+                                                        "type": "number"
+                                                    },
+                                                    "size": {
+                                                        "description": "Is the size of the page and of the downloaded elements of the page in KB",
+                                                        "minimum": 0,
+                                                        "title": "Page size",
+                                                        "type": "number"
+                                                    },
+                                                    "url": {
+                                                        "description": "Url of the analysed page",
+                                                        "format": "uri",
+                                                        "maxLength": 2083,
+                                                        "minLength": 1,
+                                                        "title": "Page url",
+                                                        "type": "string"
+                                                    },
+                                                    "water": {
+                                                        "description": "Is the equivalent water consumption (in `cl`) of the page",
+                                                        "minimum": 0,
+                                                        "title": "Ecoindex Water equivalent",
+                                                        "type": "number"
+                                                    },
+                                                    "width": {
+                                                        "description": "Width of the simulated window in pixel",
+                                                        "title": "Page Width",
+                                                        "type": "integer"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "size",
+                                                    "nodes",
+                                                    "requests"
+                                                ],
+                                                "title": "Result",
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "title": "Result of the ecoindex analysis once it was successfuly completed"
+                                    },
+                                    "error": {
+                                        "allOf": [
+                                            {
+                                                "properties": {
+                                                    "detail": {
+                                                        "title": "Detail object of the raised exception"
+                                                    },
+                                                    "exception": {
+                                                        "title": "Name of the exception that was raised",
+                                                        "type": "string"
+                                                    },
+                                                    "message": {
+                                                        "title": "Message of the exception",
+                                                        "type": "string"
+                                                    },
+                                                    "status_code": {
+                                                        "title": "Corresponding original HTTP status code sended by the API",
+                                                        "type": "integer"
+                                                    },
+                                                    "url": {
+                                                        "format": "uri",
+                                                        "maxLength": 65536,
+                                                        "minLength": 1,
+                                                        "title": "URL of the analyzed web page",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "exception",
+                                                    "message"
+                                                ],
+                                                "title": "QueueTaskError",
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "title": "Detail of the ecoindex error if it is not successful"
+                                    },
+                                    "status": {
+                                        "description": "While the task is pending or the analysis is running, it is null. But once the analysis is complete, it should return SUCCESS or FAILURE.",
+                                        "title": "Status of the ecoindex analysis.",
+                                        "type": "string"
+                                    }
+                                },
+                                "title": "QueueTaskResult",
+                                "type": "object"
+                            }
+                        ],
+                        "title": "Result of the Ecoindex analysis"
+                    },
+                    "id": {
+                        "title": "Identifier of the current. This identifier will become the identifier of the analysis",
+                        "type": "string"
+                    },
+                    "status": {
+                        "title": "Status of the current task. Can be PENDING, FAILURE, SUCCESS",
+                        "type": "string"
+                    },
+                    "task_error": {
+                        "title": "Detail of the error encountered by the task in case of Failure"
+                    }
+                },
+                "required": [
+                    "id",
+                    "status"
+                ],
+                "title": "QueueTaskApi",
+                "type": "object"
+            }
+        },
+        {
+            "name": "Add_new_ecoindex_analysis_task_to_the_waiting_queue_v1_tasks_ecoindexes_post",
+            "url": "https://ecoindex.p.rapidapi.com/v1/tasks/ecoindexes",
+            "description": "This submits a ecoindex analysis task to the engine",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/tasks/ecoindexes\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ecoindex.p.rapidapi.com/v1/tasks/ecoindexes\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ecoindex.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "ecoindex"
+}

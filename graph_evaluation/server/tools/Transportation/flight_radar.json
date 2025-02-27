@@ -1,0 +1,295 @@
+{
+    "tool_name":"Flight Radar",
+    "tool_description":"The world's most popular flight tracker API which helps you to create Flight tracker application, such as : flightradar24.com",
+    "title":"Flight Radar",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1666,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/flight-radar1/",
+    "host":"flight-radar1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"flights/list-in-boundary",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/list-in-boundary",
+            "description":"Helps to list flights, aircrafts in a GEO bounding box, and display them on a map",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"bl_lng",
+                    "type":"NUMBER",
+                    "description":"The bottom left longitude of the bounding box",
+                    "default":"100.641975"
+                },
+                {
+                    "name":"tr_lat",
+                    "type":"NUMBER",
+                    "description":"The top right latitude of the bounding box",
+                    "default":"13.771029"
+                },
+                {
+                    "name":"bl_lat",
+                    "type":"NUMBER",
+                    "description":"The bottom left latitude of the bounding box",
+                    "default":"13.607884"
+                },
+                {
+                    "name":"tr_lng",
+                    "type":"NUMBER",
+                    "description":"The top right longitude of the bounding box",
+                    "default":"100.861566"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"The value of 'Code' field returned in .../aircrafts/list endpoint",
+                    "default":""
+                },
+                {
+                    "name":"speed",
+                    "type":"STRING",
+                    "description":"Filter by speed. The format is min,max . Ex : 0,460",
+                    "default":""
+                },
+                {
+                    "name":"airline",
+                    "type":"STRING",
+                    "description":"The value of 'ICAO' field returned in .../airlines/list endpoint",
+                    "default":""
+                },
+                {
+                    "name":"altitude",
+                    "type":"STRING",
+                    "description":"Filter by altitude. The format is min,max . Ex : 0,48000",
+                    "default":""
+                },
+                {
+                    "name":"airport",
+                    "type":"STRING",
+                    "description":"The value of 'icao' field returned in .../airports/list endpoint",
+                    "default":""
+                },
+                {
+                    "name":"reg",
+                    "type":"STRING",
+                    "description":"Registration Ex : D-AIHV",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"The number of flights per response (max 300)",
+                    "default":"300"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/list-in-boundary\"\nquerystring = {\"limit\": limit, \"bl_lng\": bl_lng, \"tr_lat\": tr_lat, \"bl_lat\": bl_lat, \"tr_lng\": tr_lng}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"aircrafts/list",
+            "url":"https://flight-radar1.p.rapidapi.com/aircrafts/list",
+            "description":"List available aircrafts",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/aircrafts/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"flights/list-by-airline",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/list-by-airline",
+            "description":"List flights by airline",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"airline",
+                    "type":"STRING",
+                    "description":"The value of 'icao' field returned in .../airlines/list or .../flights/detail endpoint\nThe value of 'operator' field returned in .../flights/search endpoint\n",
+                    "default":"AXM"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/list-by-airline\"\nquerystring = {\"airline\": airline}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"flights/get-playback",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/get-playback",
+            "description":"Get history traveling data of specific flight",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"flightId",
+                    "type":"STRING",
+                    "description":"Value of 'id' OR 'identification/id' field returned in .../flights/detail or .../flights/get-more-info endpoint",
+                    "default":"2b5accad"
+                },
+                {
+                    "name":"timestamp",
+                    "type":"NUMBER",
+                    "description":"Value of 'departure' field returned in .../flights/detail OR .../flights/get-more-info endpoint",
+                    "default":"1648874400"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/get-playback\"\nquerystring = {\"flightId\": flightid, \"timestamp\": timestamp}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"flights/get-more-info",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/get-more-info",
+            "description":"Get more information of specific aircraft, flight, airline, etc...",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"The value of registration (if fetchBy is 'reg') or default (if fetchBy is 'flight') field returned in .../flights/detail",
+                    "default":"FD3210"
+                },
+                {
+                    "name":"fetchBy",
+                    "type":"STRING",
+                    "description":"One of the following : reg|flight\n* reg is used to get specific aircraft info, flight is used to get specific flight or airline info",
+                    "default":"flight"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"100"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/get-more-info\"\nquerystring = {\"query\": query, \"fetchBy\": fetchby, \"page\": page, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"flights/detail",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/detail",
+            "description":"Get detailed information of specific flight",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"flight",
+                    "type":"STRING",
+                    "description":"The value of id, flight_id field returned in .../flights/list-in-boundary or .../flights/list-most-tracked endpoint",
+                    "default":"2b5ae17f"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/detail\"\nquerystring = {\"flight\": flight}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"flights/list-most-tracked",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/list-most-tracked",
+            "description":"Return the most tracked flights around the world",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/list-most-tracked\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"flights/search",
+            "url":"https://flight-radar1.p.rapidapi.com/flights/search",
+            "description":"Search for specific flight",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Aircraft number, flight code, airline code, etc...",
+                    "default":"FD3210"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"The number of items per response (max 25)",
+                    "default":"25"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/flights/search\"\nquerystring = {\"query\": query, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"airlines/get-logos",
+            "url":"https://flight-radar1.p.rapidapi.com/airlines/get-logos",
+            "description":"Get logos of airlines",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/airlines/get-logos\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"airlines/list",
+            "url":"https://flight-radar1.p.rapidapi.com/airlines/list",
+            "description":"List all airlines around the world",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/airlines/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"airports/list",
+            "url":"https://flight-radar1.p.rapidapi.com/airports/list",
+            "description":"List all airports around the world",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://flight-radar1.p.rapidapi.com/airports/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"flight-radar1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

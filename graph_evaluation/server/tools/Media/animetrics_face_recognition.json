@@ -1,0 +1,717 @@
+{
+    "tool_name": "Animetrics Face Recognition",
+    "tool_description": "The Animetrics Face Recognition API can be used to find human faces, detect feature points, correct for off angle photographs, and ultimately perform facial recognition.  Information on facial features, including ears, nose, eyebrows, lips, chin are returned as coordinates on the image. The Animetrics Face Recognition API will also detect and return the gender and orientation, or \"pose\" of faces along 3 axes.\r\n\r\nA special capability called \"SetPose\" is also available which allows the face to be re-rendered at a desired pose that is different than the captured pose. I.e. as if the photo was taken with respect to any desired angle relative to the camera.  This is typically used when the facial photo is captured off angle and a zero-corrected fully frontal image (0 degrees pitch, yaw, and roll) is required.\r\n\r\nDetected facial features may be corrected or modified to improve the final results of subsequent steps. For example, an eye in the picture may be hidden or obscured; requesting just eye feature points, manually correcting their locations, and feeding this data into a more detailed request will help improve the accuracy of additional feature point and pose detection.",
+    "title": "Animetrics Face Recognition",
+    "pricing": "FREEMIUM",
+    "score": null,
+    "home_url": "https://rapidapi.com/animetrics/api/animetrics-face-recognition/",
+    "host": "animetrics.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Assign Face to Subject",
+            "url": "https://animetrics.p.rapidapi.com/assign_face_to_subject",
+            "description": "Assign Face ID to a Subject ID. This operation will change the Subject ID associated with an individual Face ID. The Face ID that is required should be taken from the response of a previous enrollment. Assigning a Face ID to a new Subject ID who belongs to more than one gallery will affect that Subject's identity in each gallery. This operation might be used if several pictures of an individual are enrolled and then later it is found out that one of these pictures was in fact someone else.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject_id",
+                    "type": "STRING",
+                    "description": "unique subject ID to replace that of a previous enrollment",
+                    "default": ""
+                },
+                {
+                    "name": "face_id",
+                    "type": "STRING",
+                    "description": "face ID from the response of a previous enrollment",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/assign_face_to_subject\"\nquerystring = {\"subject_id\": subject_id, \"face_id\": face_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/detect",
+            "url": "https://animetrics.p.rapidapi.com/v2/detect",
+            "description": "Finds either face information (a bounding box around faces), face + eye information including eye centers and possibly eye corners (eye corners should not be relied on to be present in every response), or full feature information including eyebrows, eye corners, nose, chin, lips, and ears for each face. Intended for faster detection and pre-processing of images. The output face or eye coordinates of this function may be modified and sent to Detect Features. Coordinates all begin at the top left of the image. The image_id returned by this function is a reference to a temporarily cached image that can be passed to Detect Features, Enroll, or Find operations. All binary images supplied to this function are stored for later use by Enroll and Find operations. Images are deleted after 5 hours.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "selector",
+                    "type": "STRING",
+                    "description": "return information on all faces in the image (default \"FACE\"), all faces + eyes (\"EYES\"), all faces + eyes + features (\"FULL\"), or all faces + eyes + features + setpose (\"SETPOSE\") for all faces (see sample response below), attributes such as gender will also be returned for all requests except for the FACE selector",
+                    "default": "FACE, EYES, FULL, SETPOSE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "(optional, required if url omitted) jpg or png multipart image stream containing one face",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "image url containing possible face or faces for detection",
+                    "default": "http://example.com/some_image.jpg"
+                },
+                {
+                    "name": "minHeadScale",
+                    "type": "STRING",
+                    "description": "ratio of smallest considered head size to the shortest image dimension. Value must be a float > 0.015 (1:64) and <= 0.5 (1:2), default 0.125 (1:8)",
+                    "default": "(optional) 0.125"
+                },
+                {
+                    "name": "symmetricFill",
+                    "type": "BOOLEAN",
+                    "description": "(optional if selector == SETPOSE) fills occluded facets, (true | false, default false)",
+                    "default": "(optional if selector == SETPOSE)"
+                },
+                {
+                    "name": "setPitch",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the pitch (up/down) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": "(optional if selector == SETPOSE)"
+                },
+                {
+                    "name": "setYaw",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the yaw (left/right) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": "(optional if selector == SETPOSE)"
+                },
+                {
+                    "name": "setRoll",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the roll (tilt) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": "(optional if selector == SETPOSE)"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/detect\"\nquerystring = {\"url\": url, \"minHeadScale\": minheadscale, \"symmetricFill\": symmetricfill, \"setPitch\": setpitch, \"setYaw\": setyaw, \"setRoll\": setroll, \"selector\": selector}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/detect_features",
+            "url": "https://animetrics.p.rapidapi.com/v2/detect_features",
+            "description": "Finds either eye information, full feature information, or full features + \"Setpose\" for one face in a picture. Face bounding box or eye center coordinates must be supplied, and may be taken from the output of basic Detect. \"Setpose\" is a returned image which contains a frontal view of a face which has been zero-corrected for pitch, yaw, and roll (like a mug shot). Intended for more detailed detection than basic Detect. Since this function takes the face bounding box or eye coordinates, corrections may be made on the values output from Detect. The image_id returned by this function is a reference to a temporarily cached image that can be passed back to other Detect Features calls, or Enroll or Find calls. Setpose images are returned as URLs which are made private through obfuscation. Setpose image urls expire after 20 minutes. All binary images supplied to this function are stored for later use by Enroll and Find operations. Images are deleted after 5 hours.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "selector",
+                    "type": "STRING",
+                    "description": "(EYES | FULL | SETPOSE) - return information on one face + eyes in the image (default \"EYES\"), full features (\"FULL\") for one face, or full features + set pose (\"SETPOSE\")",
+                    "default": "EYES, FULL, SETPOSE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "topLeftX",
+                    "type": "NUMBER",
+                    "description": "X-Coordinate for top left corner of face. May be modified from basic Detect output.",
+                    "default": ""
+                },
+                {
+                    "name": "topLeftY",
+                    "type": "NUMBER",
+                    "description": "Y-Coordinate for top left corner of face. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "Height of face. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "leftEyeCenterY",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) Y-Coordinate for the left eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "rightEyeCenterX",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) X-Coordinate for the right eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "rightEyeCenterY",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) Y-Coordinate for the right eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "symmetricFill",
+                    "type": "BOOLEAN",
+                    "description": "(optional if selector == SETPOSE) fills occluded facets, (true | false, default false)",
+                    "default": ""
+                },
+                {
+                    "name": "setPitch",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the pitch (up/down) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": ""
+                },
+                {
+                    "name": "setYaw",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the yaw (left/right) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": ""
+                },
+                {
+                    "name": "setRoll",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the roll (tilt) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "(optional, required if image and image_id omitted) image url containing possible face or faces for detection",
+                    "default": "http://example.com/some_image.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "(optional, required if url or image_id omitted) jpg or png multipart image stream containing one face",
+                    "default": ""
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "Width of face. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "leftEyeCenterX",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) X-Coordinate for the left eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "image_id",
+                    "type": "STRING",
+                    "description": "(optional, required if url and image omitted) an image ID that was returned from a basic detect operation",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/detect_features\"\nquerystring = {\"selector\": selector, \"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/remove_from_gallery",
+            "url": "https://animetrics.p.rapidapi.com/v2/remove_from_gallery",
+            "description": "Removes an already enrolled Subject from an existing Gallery. If this is the only subject in that Gallery, the Gallery will be deleted. If the Subject exists in no other Galleries, he will be deleted from the Face Recognition System.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject_id",
+                    "type": "STRING",
+                    "description": "The ID used to previously enroll some person (\"subject\")",
+                    "default": ""
+                },
+                {
+                    "name": "gallery_id",
+                    "type": "STRING",
+                    "description": "A unique ID indicating the collection from which the subject should be removed. If the subject exists in no other galleries, the biometric template will be removed from the Facial Recognition System and subsequent Add To Gallery operations for this subject will fail.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/remove_from_gallery\"\nquerystring = {\"subject_id\": subject_id, \"gallery_id\": gallery_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/usage",
+            "url": "https://animetrics.p.rapidapi.com/v2/usage",
+            "description": "Retrieve your current daily and monthly count of function calls made to the api. Total, billable, detect, enroll and recognize counts are displayed.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/usage\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/view_gallery",
+            "url": "https://animetrics.p.rapidapi.com/v2/view_gallery",
+            "description": "View the subject ids that have been enrolled in a specific gallery.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "gallery_id",
+                    "type": "STRING",
+                    "description": "A unique ID indicating the gallery to query.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/view_gallery\"\nquerystring = {\"gallery_id\": gallery_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/view_subject",
+            "url": "https://animetrics.p.rapidapi.com/v2/view_subject",
+            "description": "View the face ids that have been enrolled in a specific subject.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject_id",
+                    "type": "STRING",
+                    "description": "unique subject ID that matches one or more previous enrollments",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/view_subject\"\nquerystring = {\"subject_id\": subject_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/add_to_gallery",
+            "url": "https://animetrics.p.rapidapi.com/v2/add_to_gallery",
+            "description": "Adds an already enrolled Subject into an existing or uncreated Gallery. Galleries that don't exist will automatically be created.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject_id",
+                    "type": "STRING",
+                    "description": "The ID used to previously enroll some person (\"subject\")",
+                    "default": ""
+                },
+                {
+                    "name": "gallery_id",
+                    "type": "STRING",
+                    "description": "A unique ID indicating the collection to which the subject should be added. If this gallery doesn't exist, it will be created.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/add_to_gallery\"\nquerystring = {\"subject_id\": subject_id, \"gallery_id\": gallery_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/assign_face_to_subject",
+            "url": "https://animetrics.p.rapidapi.com/v2/assign_face_to_subject",
+            "description": "Assign Face ID to a Subject ID. This operation will change the Subject ID associated with an individual Face ID. The Face ID that is required should be taken from the response of a previous enrollment. Assigning a Face ID to a new Subject ID who belongs to more than one gallery will affect that Subject's identity in each gallery. This operation might be used if several pictures of an individual are enrolled and then later it is found out that one of these pictures was in fact someone else.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "face_id",
+                    "type": "STRING",
+                    "description": "face ID from the response of a previous enrollment",
+                    "default": ""
+                },
+                {
+                    "name": "subject_id",
+                    "type": "STRING",
+                    "description": "unique subject ID to replace that of a previous enrollment",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/assign_face_to_subject\"\nquerystring = {\"face_id\": face_id, \"subject_id\": subject_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Verify",
+            "url": "https://animetrics.p.rapidapi.com/verify",
+            "description": "Verify if an unknown face (or collection of faces of an unknown individual) has the same identity as a claimed target. A similarity score is returned, and is optimized for discriminating the target subject from other individuals. Note that there must be at least two faces of the target subject enrolled.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject_id_of_target",
+                    "type": "STRING",
+                    "description": "A unique subject ID of the known person (must have at least 2 faces enrolled)",
+                    "default": "jayRyan"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "subject_id_of_unknown",
+                    "type": "STRING",
+                    "description": "A unique subject ID of the person who's identity is to be verified",
+                    "default": "John_Doe"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/verify\"\nquerystring = {\"subject_id_of_unknown\": subject_id_of_unknown, \"subject_id_of_target\": subject_id_of_target}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "View Subject",
+            "url": "https://animetrics.p.rapidapi.com/view_subject",
+            "description": "View the face ids that have been enrolled in a specific subject.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "subject_id",
+                    "type": "STRING",
+                    "description": "unique subject ID that matches one or more previous enrollments",
+                    "default": "John_Doe"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/view_subject\"\nquerystring = {\"subject_id\": subject_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Delete Face",
+            "url": "https://animetrics.p.rapidapi.com/delete_face",
+            "description": "Delete a Face from a known Subject. This operation will only delete the individual Face that is associated with an enrollment transaction for a Subject. The Face ID that is required should be taken from the response of a previous enrollment. Deleteing a Face from a Subject who belongs to more than one gallery will affect that Subject's identity in each gallery. This operation might be used if several pictures of an individual are enrolled and then later it is found out that one of these pictures was in fact someone else who's identity is unknown.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "face_id",
+                    "type": "STRING",
+                    "description": "face ID from the response of a previous enrollment",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/delete_face\"\nquerystring = {\"face_id\": face_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/delete_face",
+            "url": "https://animetrics.p.rapidapi.com/v2/delete_face",
+            "description": "Delete a Face from a known Subject. This operation will only delete the individual Face that is associated with an enrollment transaction for a Subject. The Face ID that is required should be taken from the response of a previous enrollment. Deleteing a Face from a Subject who belongs to more than one gallery will affect that Subject's identity in each gallery. This operation might be used if several pictures of an individual are enrolled and then later it is found out that one of these pictures was in fact someone else who's identity is unknown.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "face_id",
+                    "type": "STRING",
+                    "description": "Delete a Face from a known Subject. This operation will only delete the individual Face that is associated with an enrollment transaction for a Subject. The Face ID that is required should be taken from the response of a previous enrollment. Deleteing a Face from a Subject who belongs to more than one gallery will affect that Subject's identity in each gallery. This operation might be used if several pictures of an individual are enrolled and then later it is found out that one of these pictures was in fact someone else who's identity is unknown.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/delete_face\"\nquerystring = {\"face_id\": face_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "/v2/detect",
+            "url": "https://animetrics.p.rapidapi.com/v2/detect",
+            "description": "Finds either face information (a bounding box around faces), face + eye information including eye centers and possibly eye corners (eye corners should not be relied on to be present in every response), or full feature information including eyebrows, eye corners, nose, chin, lips, and ears for each face. Intended for faster detection and pre-processing of images. The output face or eye coordinates of this function may be modified and sent to Detect Features. Coordinates all begin at the top left of the image. The image_id returned by this function is a reference to a temporarily cached image that can be passed to Detect Features, Enroll, or Find operations. All binary images supplied to this function are stored for later use by Enroll and Find operations. Images are deleted after 5 hours.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "selector",
+                    "type": "STRING",
+                    "description": "return information on all faces in the image (default \"FACE\"), all faces + eyes (\"EYES\"), all faces + eyes + features (\"FULL\"), or all faces + eyes + features + setpose (\"SETPOSE\") for all faces (see sample response below), attributes such as gender will also be returned for all requests except for the FACE selector",
+                    "default": "FACE, EYES, FULL, SETPOSE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "(optional, required if url omitted) jpg or png multipart image stream containing one face",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "image url containing possible face or faces for detection",
+                    "default": "http://example.com/some_image.jpg"
+                },
+                {
+                    "name": "minHeadScale",
+                    "type": "STRING",
+                    "description": "ratio of smallest considered head size to the shortest image dimension. Value must be a float > 0.015 (1:64) and <= 0.5 (1:2), default 0.125 (1:8)",
+                    "default": "(optional) 0.125"
+                },
+                {
+                    "name": "symmetricFill",
+                    "type": "BOOLEAN",
+                    "description": "(optional if selector == SETPOSE) fills occluded facets, (true | false, default false)",
+                    "default": "(optional if selector == SETPOSE)"
+                },
+                {
+                    "name": "setPitch",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the pitch (up/down) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": "(optional if selector == SETPOSE)"
+                },
+                {
+                    "name": "setYaw",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the yaw (left/right) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": "(optional if selector == SETPOSE)"
+                },
+                {
+                    "name": "setRoll",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the roll (tilt) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": "(optional if selector == SETPOSE)"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/detect\"\nquerystring = {\"image\": \"\", \"url\": \"http://example.com/some_image.jpg\", \"minHeadScale\": \"(optional) 0.125\", \"symmetricFill\": \"(optional if selector == SETPOSE)\", \"setPitch\": \"(optional if selector == SETPOSE)\", \"setYaw\": \"(optional if selector == SETPOSE)\", \"setRoll\": \"(optional if selector == SETPOSE)\", \"selector\": \"FACE, EYES, FULL, SETPOSE\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/detect\"\nquerystring = {\"image\": \"\", \"url\": \"http://example.com/some_image.jpg\", \"minHeadScale\": \"(optional) 0.125\", \"symmetricFill\": \"(optional if selector == SETPOSE)\", \"setPitch\": \"(optional if selector == SETPOSE)\", \"setYaw\": \"(optional if selector == SETPOSE)\", \"setRoll\": \"(optional if selector == SETPOSE)\", \"selector\": \"FACE, EYES, FULL, SETPOSE\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "/v2/detect_features",
+            "url": "https://animetrics.p.rapidapi.com/v2/detect_features",
+            "description": "Finds either eye information, full feature information, or full features + \"Setpose\" for one face in a picture. Face bounding box or eye center coordinates must be supplied, and may be taken from the output of basic Detect. \"Setpose\" is a returned image which contains a frontal view of a face which has been zero-corrected for pitch, yaw, and roll (like a mug shot). Intended for more detailed detection than basic Detect. Since this function takes the face bounding box or eye coordinates, corrections may be made on the values output from Detect. The image_id returned by this function is a reference to a temporarily cached image that can be passed back to other Detect Features calls, or Enroll or Find calls. Setpose images are returned as URLs which are made private through obfuscation. Setpose image urls expire after 20 minutes. All binary images supplied to this function are stored for later use by Enroll and Find operations. Images are deleted after 5 hours.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "selector",
+                    "type": "STRING",
+                    "description": "(EYES | FULL | SETPOSE) - return information on one face + eyes in the image (default \"EYES\"), full features (\"FULL\") for one face, or full features + set pose (\"SETPOSE\")",
+                    "default": "EYES, FULL, SETPOSE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "topLeftX",
+                    "type": "NUMBER",
+                    "description": "X-Coordinate for top left corner of face. May be modified from basic Detect output.",
+                    "default": ""
+                },
+                {
+                    "name": "topLeftY",
+                    "type": "NUMBER",
+                    "description": "Y-Coordinate for top left corner of face. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "Height of face. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "leftEyeCenterY",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) Y-Coordinate for the left eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "rightEyeCenterX",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) X-Coordinate for the right eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "rightEyeCenterY",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) Y-Coordinate for the right eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "symmetricFill",
+                    "type": "BOOLEAN",
+                    "description": "(optional if selector == SETPOSE) fills occluded facets, (true | false, default false)",
+                    "default": ""
+                },
+                {
+                    "name": "setPitch",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the pitch (up/down) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": ""
+                },
+                {
+                    "name": "setYaw",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the yaw (left/right) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": ""
+                },
+                {
+                    "name": "setRoll",
+                    "type": "STRING",
+                    "description": "(optional if selector == SETPOSE) set the roll (tilt) output for the SetPose rendering, (range -90 to 90, default 0)",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "(optional, required if image and image_id omitted) image url containing possible face or faces for detection",
+                    "default": "http://example.com/some_image.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "(optional, required if url or image_id omitted) jpg or png multipart image stream containing one face",
+                    "default": ""
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "Width of face. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "leftEyeCenterX",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) X-Coordinate for the left eye center. May be modified from basic Detect output",
+                    "default": ""
+                },
+                {
+                    "name": "image_id",
+                    "type": "STRING",
+                    "description": "(optional, required if url and image omitted) an image ID that was returned from a basic detect operation",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/detect_features\"\nquerystring = {\"selector\": \"EYES, FULL, SETPOSE\", \"topLeftX\": \"\", \"topLeftY\": \"\", \"height\": \"\", \"leftEyeCenterY\": \"\", \"rightEyeCenterX\": \"\", \"rightEyeCenterY\": \"\", \"symmetricFill\": \"\", \"setPitch\": \"\", \"setYaw\": \"\", \"setRoll\": \"\", \"url\": \"http://example.com/some_image.jpg\", \"image\": \"\", \"width\": \"\", \"leftEyeCenterX\": \"\", \"image_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/v2/detect_features\"\nquerystring = {\"selector\": \"EYES, FULL, SETPOSE\", \"topLeftX\": \"\", \"topLeftY\": \"\", \"height\": \"\", \"leftEyeCenterY\": \"\", \"rightEyeCenterX\": \"\", \"rightEyeCenterY\": \"\", \"symmetricFill\": \"\", \"setPitch\": \"\", \"setYaw\": \"\", \"setRoll\": \"\", \"url\": \"http://example.com/some_image.jpg\", \"image\": \"\", \"width\": \"\", \"leftEyeCenterX\": \"\", \"image_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Detect",
+            "url": "https://animetrics.p.rapidapi.com/detect",
+            "description": "Finds either face information (a bounding box around faces), face + eye information including eye centers and possibly eye corners (eye corners should not be relied on to be present in every response), or full feature information including eyebrows, eye corners, nose, chin, lips, and ears for each face. Intended for faster detection and pre-processing of images. The output face or eye coordinates of this function may be modified and sent to Detect Features. Coordinates all begin at the top left of the image. The image_id returned by this function is a reference to a temporarily cached image that can be passed to Detect Features, Enroll, or Find operations.  All binary images supplied to this function are stored for later use by Enroll and Find operations. Images are deleted after 5 hours.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "selector",
+                    "type": "STRING",
+                    "description": "return information on all faces in the image (\"FACE\" - default), all faces + eyes (\"EYES\"), or full features (\"FULL\") for all faces (see sample response for features)",
+                    "default": "FACE, EYES, FULL"
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "image url containing possible face or faces for detection",
+                    "default": "http://example.com/some_image.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "(optional, required if url omitted) jpg or png multipart image stream containing one face of this person",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/detect\"\nquerystring = {\"selector\": \"FACE, EYES, FULL\", \"url\": \"http://example.com/some_image.jpg\", \"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/detect\"\nquerystring = {\"selector\": \"FACE, EYES, FULL\", \"url\": \"http://example.com/some_image.jpg\", \"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Detect Features",
+            "url": "https://animetrics.p.rapidapi.com/detect_features",
+            "description": "Finds either eye information, full feature information, or full features + \"Setpose\" for one face in a picture. Face bounding box or eye center coordinates must be supplied, and may be taken from the output of basic Detect. \"Setpose\" is a returned image which contains a frontal view of a face which has been zero-corrected for pitch, yaw, and roll (like a mug shot). Intended for more detailed detection than basic Detect. Since this function takes the face bounding box or eye coordinates, corrections may be made on the values output from Detect. The image_id returned by this function is a reference to a temporarily cached image that can be passed back to other Detect Features calls, or Enroll or Find calls.  Setpose images are returned as URLs which are made private through obfuscation. Setpose image urls expire after 20 minutes.  All binary images supplied to this function are stored for later use by Enroll and Find operations. Images are deleted after 5 hours.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "topLeftX",
+                    "type": "NUMBER",
+                    "description": "X-Coordinate for top left corner of face. May be modified from basic Detect output.",
+                    "default": "105"
+                },
+                {
+                    "name": "topLeftY",
+                    "type": "NUMBER",
+                    "description": "Y-Coordinate for top left corner of face. May be modified from basic Detect output.",
+                    "default": "188"
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "Width of face. May be modified from basic Detect output.",
+                    "default": "123"
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "Height of face. May be modified from basic Detect output.",
+                    "default": "123"
+                },
+                {
+                    "name": "leftEyeCenterX",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) X-Coordinate for the left eye center. May be modified from basic Detect output.",
+                    "default": "139.817"
+                },
+                {
+                    "name": "leftEyeCenterY",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) Y-Coordinate for the left eye center. May be modified from basic Detect output.",
+                    "default": "160.727"
+                },
+                {
+                    "name": "rightEyeCenterX",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) X-Coordinate for the right eye center. May be modified from basic Detect output.",
+                    "default": "198.365"
+                },
+                {
+                    "name": "rightEyeCenterY",
+                    "type": "NUMBER",
+                    "description": "(required if face coordinates/dimensions omitted) Y-Coordinate for the right eye center. May be modified from basic Detect output.",
+                    "default": "164.909"
+                },
+                {
+                    "name": "selector",
+                    "type": "STRING",
+                    "description": "return information on one face + eyes in the image (\"EYES\" - default), full features (\"FULL\") for one face, or full features + set pose (\"SETPOSE\")",
+                    "default": "EYES, FULL, SETPOSE"
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "image url containing possible face or faces for detection",
+                    "default": "http://example.com/some_image.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "(optional, required if url and image_id omitted) jpg or png multipart image stream containing one face of this person",
+                    "default": ""
+                },
+                {
+                    "name": "image_id",
+                    "type": "STRING",
+                    "description": "(optional, required if url and image omitted) an image ID that was returned from a basic detect operation",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/detect_features\"\nquerystring = {\"topLeftX\": \"105\", \"topLeftY\": \"188\", \"width\": \"123\", \"height\": \"123\", \"leftEyeCenterX\": \"139.817\", \"leftEyeCenterY\": \"160.727\", \"rightEyeCenterX\": \"198.365\", \"rightEyeCenterY\": \"164.909\", \"selector\": \"EYES, FULL, SETPOSE\", \"url\": \"http://example.com/some_image.jpg\", \"image\": \"\", \"image_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://animetrics.p.rapidapi.com/detect_features\"\nquerystring = {\"topLeftX\": \"105\", \"topLeftY\": \"188\", \"width\": \"123\", \"height\": \"123\", \"leftEyeCenterX\": \"139.817\", \"leftEyeCenterY\": \"160.727\", \"rightEyeCenterX\": \"198.365\", \"rightEyeCenterY\": \"164.909\", \"selector\": \"EYES, FULL, SETPOSE\", \"url\": \"http://example.com/some_image.jpg\", \"image\": \"\", \"image_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"animetrics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

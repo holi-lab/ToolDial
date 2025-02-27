@@ -1,0 +1,186 @@
+{
+    "tool_name":"TrueWay Places",
+    "tool_description":"Search for places. Provides detailed information for over 100 million places and points of interest.",
+    "title":"TrueWay Places",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":276,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/trueway/api/trueway-places/",
+    "host":"trueway-places.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"FindPlacesNearby",
+            "url":"https://trueway-places.p.rapidapi.com/FindPlacesNearby",
+            "description":"Search for nearby places",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"location",
+                    "type":"STRING",
+                    "description":"The latitude/longitude around which to retrieve places",
+                    "default":"37.783366,-122.402325"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"The language in which to return results",
+                    "default":"en"
+                },
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"The distance (in meters) within which to return results. Max = 10000 m",
+                    "default":"180"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"The type of places that are returned",
+                    "default":"cafe"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://trueway-places.p.rapidapi.com/FindPlacesNearby\"\nquerystring = {\"location\": location, \"language\": language, \"radius\": radius, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"trueway-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "results":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string"
+                                },
+                                "name":{
+                                    "type":"string"
+                                },
+                                "address":{
+                                    "type":"string"
+                                },
+                                "phone_number":{
+                                    "type":"string"
+                                },
+                                "website":{
+                                    "type":"string"
+                                },
+                                "location":{
+                                    "type":"object",
+                                    "properties":{
+                                        "lat":{
+                                            "type":"number"
+                                        },
+                                        "lng":{
+                                            "type":"number"
+                                        }
+                                    }
+                                },
+                                "types":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"string"
+                                    }
+                                },
+                                "distance":{
+                                    "type":"integer"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"FindPlaceByText",
+            "url":"https://trueway-places.p.rapidapi.com/FindPlaceByText",
+            "description":"Search for places by text string",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"text",
+                    "type":"STRING",
+                    "description":"A text string on which to search",
+                    "default":"Children's Creativity Museum"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"The language in which to return results",
+                    "default":"en"
+                },
+                {
+                    "name":"bounds",
+                    "type":"STRING",
+                    "description":"Rectangular bounds (south,west,north,east)",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://trueway-places.p.rapidapi.com/FindPlaceByText\"\nquerystring = {\"text\": text, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"trueway-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "results":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "id":{
+                                    "type":"string"
+                                },
+                                "name":{
+                                    "type":"string"
+                                },
+                                "address":{
+                                    "type":"string"
+                                },
+                                "phone_number":{
+                                    "type":"string"
+                                },
+                                "website":{
+                                    "type":"string"
+                                },
+                                "location":{
+                                    "type":"object",
+                                    "properties":{
+                                        "lat":{
+                                            "type":"number"
+                                        },
+                                        "lng":{
+                                            "type":"number"
+                                        }
+                                    }
+                                },
+                                "types":{
+                                    "type":"array",
+                                    "items":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

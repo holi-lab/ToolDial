@@ -1,0 +1,197 @@
+{
+    "tool_name": "NSFW",
+    "tool_description": "This API processes images and detects sexual content in them, marking the images as Safe For Work (SFW) or Not Safe For Work (NSFW).  [![Examples](https://img.shields.io/badge/View%20examples-gray?logo=gitlab&style=flat)](https://gitlab.com/api4ai/examples/nsfw) [![API4AI](https://img.shields.io/badge/api4.ai%20platform-fee33c?logo=icloud&flat&logoColor=black)](https://api4.ai/apis/nsfw?utm_source=nsfw_rapidapi&utm_medium=endpoints&utm_campaign=rapidapi) [![Telegram](https://img.shields.io/ba...",
+    "title": "NSFW",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1042,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/api4ai-api4ai-default/api/nsfw3/",
+    "host": "nsfw3.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Analyse image and return results",
+            "url": "https://nsfw3.p.rapidapi.com/v1/results",
+            "description": "Performs actual image analysis and responds with results.\n\nImage must be a regular JPEG or PNG image (with or without transparency) or PDF file.\nUsually such images have extensions: `.jpg`, `.jpeg`, `.png`, `.pdf`. In case of PDF\neach page will be converted to PNG image and processed separately.\nThe service checks input file by MIME type and accepts the following types:\n\n* `image/jpeg`\n* `image/png`\n* `application/pdf`\n\nThe size of image file must be less than `16Mb`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Note: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": "https://storage.googleapis.com/api4ai-static/samples/nsfw-1.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Note: Use this form data field if you want to pass image as a binary file. If you want to pass image as a link to a public web resource, please, use another field named `url`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://nsfw3.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nsfw3.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "md5": {
+                                    "type": "string"
+                                },
+                                "entities": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "kind": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "classes": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nsfw": {
+                                                        "type": "number"
+                                                    },
+                                                    "sfw": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get version",
+            "url": "https://nsfw3.p.rapidapi.com/v1/version",
+            "description": "Returns an actual version of the service in format `vX.Y.Z` where X is the version of API.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://nsfw3.p.rapidapi.com/v1/version\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"nsfw3.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": "text example!",
+            "headers": {
+                "Content-Type": "text/plain; charset=utf-8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Analyse image and return results",
+            "url": "https://nsfw3.p.rapidapi.com/v1/results",
+            "description": "Performs actual image analysis and responds with results.\n\nImage must be a regular JPEG or PNG image (with or without transparency) or PDF file.\nUsually such images have extensions: `.jpg`, `.jpeg`, `.png`, `.pdf`. In case of PDF\neach page will be converted to PNG image and processed separately.\nThe service checks input file by MIME type and accepts the following types:\n\n* `image/jpeg`\n* `image/png`\n* `application/pdf`\n\nThe size of image file must be less than `16Mb`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Note: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": "https://storage.googleapis.com/api4ai-static/samples/nsfw-1.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Note: Use this form data field if you want to pass image as a binary file. If you want to pass image as a link to a public web resource, please, use another field named `url`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://nsfw3.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": \"https://storage.googleapis.com/api4ai-static/samples/nsfw-1.jpg\", \"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nsfw3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://nsfw3.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": \"https://storage.googleapis.com/api4ai-static/samples/nsfw-1.jpg\", \"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"nsfw3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "md5": {
+                                    "type": "string"
+                                },
+                                "entities": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "kind": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "classes": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "nsfw": {
+                                                        "type": "number"
+                                                    },
+                                                    "sfw": {
+                                                        "type": "number"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

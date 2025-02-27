@@ -1,0 +1,559 @@
+{
+    "product_id": "api_b280d559-cca4-49f1-9f7e-505dca1507e9",
+    "tool_description": "Integrate E-Signature in your app just 10 minutes\nSee the tutorial: https://www.youtube.com/watch?v=9Ti3H73YhWs",
+    "home_url": "https://rapidapi.com/ndigiorgio/api/signfree-api-s/",
+    "name": "SignFree API's",
+    "title": "SignFree API's",
+    "pricing": "FREEMIUM",
+    "tool_name": "SignFree API's",
+    "score": {
+        "avgServiceLevel": 82,
+        "avgLatency": 37533,
+        "avgSuccessRate": 60,
+        "popularityScore": 9,
+        "__typename": "Score"
+    },
+    "host": "signfree-api-s.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Sign Document using base64 (CreateEnvelope)",
+            "url": "https://signfree-api-s.p.rapidapi.com/v1/uploadDocument",
+            "description": "Create an Envelope by uploading a document in base64 (json). You don't know how to convert a file tobase64? You can use this website for example https://base64.guru/converter/encode/pdf",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://signfree-api-s.p.rapidapi.com/v1/uploadDocument\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"signfree-api-s.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://signfree-api-s.p.rapidapi.com/v1/uploadDocument\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"signfree-api-s.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "SignDocument using multipart request (CreateEnvelope )",
+            "url": "https://signfree-api-s.p.rapidapi.com/v1/uploadDocumentMultipart",
+            "description": "Create an Envelope by uploading a document in binary format (multipart)",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "data",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "{     \"owner\": {         \"email\": \"test@signfree.io\"     },     \"workflowConfiguration\": {         \"selfsign\": true     } }"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://signfree-api-s.p.rapidapi.com/v1/uploadDocumentMultipart\"\nquerystring = {\"file\": \"\", \"data\": \"{     \\\"owner\\\": {         \\\"email\\\": \\\"test@signfree.io\\\"     },     \\\"workflowConfiguration\\\": {         \\\"selfsign\\\": true     } }\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"signfree-api-s.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://signfree-api-s.p.rapidapi.com/v1/uploadDocumentMultipart\"\nquerystring = {\"file\": \"\", \"data\": \"{     \\\"owner\\\": {         \\\"email\\\": \\\"test@signfree.io\\\"     },     \\\"workflowConfiguration\\\": {         \\\"selfsign\\\": true     } }\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"signfree-api-s.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "creationDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "lastUpdatedDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "reminder": {
+                        "type": "object",
+                        "properties": {
+                            "reminderExpirationInMinutes": {
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": -2147483648,
+                                "maximum": 2147483647
+                            },
+                            "reminderTimeInMinutes": {
+                                "type": "integer",
+                                "format": "int32",
+                                "minimum": -2147483648,
+                                "maximum": 2147483647
+                            }
+                        }
+                    },
+                    "owner": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "phoneUpdateDate": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "type": {
+                                "enum": [
+                                    "TO",
+                                    "CC",
+                                    "BCC"
+                                ],
+                                "type": "string"
+                            },
+                            "hasSigned": {
+                                "type": "boolean"
+                            },
+                            "actorId": {
+                                "type": "string"
+                            },
+                            "firstName": {
+                                "type": "string"
+                            },
+                            "lastName": {
+                                "type": "string"
+                            },
+                            "email": {
+                                "type": "string"
+                            },
+                            "phone": {
+                                "type": "string"
+                            },
+                            "companyName": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "recipients": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "phoneUpdateDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "TO",
+                                        "CC",
+                                        "BCC"
+                                    ],
+                                    "type": "string"
+                                },
+                                "hasSigned": {
+                                    "type": "boolean"
+                                },
+                                "actorId": {
+                                    "type": "string"
+                                },
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "companyName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "approvers": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "phoneUpdateDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "type": {
+                                    "enum": [
+                                        "TO",
+                                        "CC",
+                                        "BCC"
+                                    ],
+                                    "type": "string"
+                                },
+                                "hasSigned": {
+                                    "type": "boolean"
+                                },
+                                "actorId": {
+                                    "type": "string"
+                                },
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                },
+                                "email": {
+                                    "type": "string"
+                                },
+                                "phone": {
+                                    "type": "string"
+                                },
+                                "companyName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "notificationChannels": {
+                        "type": "array",
+                        "items": {
+                            "enum": [
+                                "EMAIL",
+                                "SMS",
+                                "WHATSAPP"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "signatureBy": {
+                        "type": "array",
+                        "items": {
+                            "enum": [
+                                "EMAIL",
+                                "SMS",
+                                "WHATSAPP"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "redirection": {
+                        "type": "object",
+                        "properties": {
+                            "backButtonUrl": {
+                                "type": "string",
+                                "format": "uri"
+                            },
+                            "returnUrl": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "callback": {
+                        "type": "object",
+                        "properties": {
+                            "statusCallback": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "branding": {
+                        "type": "object",
+                        "properties": {
+                            "brandLogoUrl": {
+                                "type": "string",
+                                "format": "uri"
+                            },
+                            "brandPrimaryColorHex": {
+                                "type": "string",
+                                "format": "uri"
+                            },
+                            "brandSecondaryColorHex": {
+                                "type": "string",
+                                "format": "uri"
+                            }
+                        }
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "validation": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "errorMessage": {
+                                    "type": "string"
+                                },
+                                "pageNumber": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "minimum": -2147483648,
+                                    "maximum": 2147483647
+                                },
+                                "type": {
+                                    "enum": [
+                                        "Signature",
+                                        "Text"
+                                    ],
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "workflowConfiguration": {
+                        "type": "object",
+                        "properties": {
+                            "selfsign": {
+                                "type": "boolean"
+                            },
+                            "selfapprove": {
+                                "type": "boolean"
+                            },
+                            "requestsignature": {
+                                "type": "boolean"
+                            },
+                            "requestSignature": {
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "notificationConfiguration": {
+                        "type": "object",
+                        "properties": {
+                            "emailRequestBody": {
+                                "type": "string"
+                            },
+                            "emailRequestSubject": {
+                                "type": "string"
+                            },
+                            "smsRequestBody": {
+                                "type": "string"
+                            },
+                            "emailApproveBody": {
+                                "type": "string"
+                            },
+                            "emailApproveSubject": {
+                                "type": "string"
+                            },
+                            "smsApproveBody": {
+                                "type": "string"
+                            },
+                            "emailSignedBody": {
+                                "type": "string"
+                            },
+                            "emailSignedSubject": {
+                                "type": "string"
+                            },
+                            "smsSignedBody": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "status": {
+                        "enum": [
+                            "CREATED",
+                            "SENT",
+                            "SIGNED",
+                            "PARTIALLY_SIGNED",
+                            "DELETED",
+                            "TOAPPROVE",
+                            "REVOKED"
+                        ],
+                        "type": "string"
+                    },
+                    "auditTrails": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "documentReferenceId": {
+                                    "type": "string"
+                                },
+                                "timestamp": {
+                                    "type": "string"
+                                },
+                                "documentFingerprint": {
+                                    "type": "string"
+                                },
+                                "recipientEmail": {
+                                    "type": "string"
+                                },
+                                "fileName": {
+                                    "type": "string"
+                                },
+                                "recipientId": {
+                                    "type": "string"
+                                },
+                                "signedDocumentReferenceId": {
+                                    "type": "string"
+                                },
+                                "recipientPhone": {
+                                    "type": "string"
+                                },
+                                "urlPath": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "signedDocuments": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "expirationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "height": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "minimum": -3.402823669209385e+38,
+                                    "maximum": 3.402823669209385e+38
+                                },
+                                "width": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "minimum": -3.402823669209385e+38,
+                                    "maximum": 3.402823669209385e+38
+                                },
+                                "type": {
+                                    "enum": [
+                                        "ORIGINAL",
+                                        "SIGNED"
+                                    ],
+                                    "type": "string"
+                                },
+                                "contentBase64": {
+                                    "type": "string"
+                                },
+                                "tokenExpired": {
+                                    "type": "boolean"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "content": {
+                                    "type": "string"
+                                },
+                                "sasToken": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "format": {
+                                    "type": "string"
+                                },
+                                "urlPath": {
+                                    "type": "string"
+                                },
+                                "signUrl": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "channel": {
+                        "enum": [
+                            "unknown",
+                            "website",
+                            "outlook",
+                            "google",
+                            "web",
+                            "api"
+                        ],
+                        "type": "string"
+                    },
+                    "marketingOptIn": {
+                        "type": "boolean"
+                    },
+                    "documents": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "expirationDate": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                },
+                                "height": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "minimum": -3.402823669209385e+38,
+                                    "maximum": 3.402823669209385e+38
+                                },
+                                "width": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "minimum": -3.402823669209385e+38,
+                                    "maximum": 3.402823669209385e+38
+                                },
+                                "type": {
+                                    "enum": [
+                                        "ORIGINAL",
+                                        "SIGNED"
+                                    ],
+                                    "type": "string"
+                                },
+                                "contentBase64": {
+                                    "type": "string"
+                                },
+                                "tokenExpired": {
+                                    "type": "boolean"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "content": {
+                                    "type": "string"
+                                },
+                                "sasToken": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "format": {
+                                    "type": "string"
+                                },
+                                "urlPath": {
+                                    "type": "string"
+                                },
+                                "signUrl": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "verification": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "string"
+                            },
+                            "httpCode": {
+                                "type": "string"
+                            },
+                            "message": {
+                                "type": "string"
+                            },
+                            "sid": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

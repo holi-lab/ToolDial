@@ -1,0 +1,221 @@
+{
+    "tool_name":"MapFanAPI - Map",
+    "tool_description":"MapFan API の地図APIです。スクロール地図に必要なWMTS形式の地図画像や、指定された緯度経度・サイズ・縮尺の静止画地図画像を提供します。",
+    "title":"MapFanAPI - Map",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":168,
+        "avgSuccessRate":100,
+        "popularityScore":9.5,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/geotechnologies12-geotechnologies-default/api/mapfanapi-map/",
+    "host":"mapfanapi-map.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"map",
+            "url":"https://mapfanapi-map.p.rapidapi.com/map",
+            "description":"## 地図画像取得\nWMTS形式の地図画像を提供します。\n`tilematrix`, `tilerow`, `tilecol` で指定した位置の地図画像を返します。\n\n本エンドポイントを用いてスクロール地図機能を実装する方法につきましては、 [こちらのチュートリアル](https://rapidapi.com/ja/geotechnologies12-geotechnologies-default/api/mapfanapi-map/tutorials/leaflet%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%AB%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BCurl%E3%81%AB%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%83%98%E3%83%83%E3%83%80%E3%83%BC%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B%EF%BC%88rapidapi%E3%81%AEmap%E3%82%A8%E3%83%B3%E3%83%89%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%81%AE%E5%88%A9%E7%94%A8%EF%BC%89) をご確認ください。",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tilerow",
+                    "type":"NUMBER",
+                    "description":"### WMTSタイル番号（緯度方向）\n地図取得位置の緯度をWMTSタイル番号に変換した値",
+                    "default":"25806"
+                },
+                {
+                    "name":"tilematrix",
+                    "type":"STRING",
+                    "description":"### タイルマトリックス\n\n#### 記述形式\n`[EPSGコード]:[スケール値]`\n\n|項目|値|\n|---|---|\n|EPSGコード|EPSG:3857<br>EPSG:900913<br>のいずれか|\n|スケール|6 ～ 21<br>のいずれか|",
+                    "default":"EPSG:3857:16"
+                },
+                {
+                    "name":"tilecol",
+                    "type":"NUMBER",
+                    "description":"### WMTSタイル番号（経度方向）\n地図取得位置の経度をWMTSタイル番号に変換した値",
+                    "default":"58211"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"rotationangle",
+                    "type":"NUMBER",
+                    "description":"### 角度パラメータ\n注記文字列を指定した角度に傾けた画像が返されます。\n\n#### 範囲\n|範囲|値|\n|---|---|\n|最小|0（北上）|\n|最大|359|\n\n#### デフォルト\n`0`\n\n#### 注記\n- 整数のみ指定可能です。\n- 時計回りに増加します。",
+                    "default":""
+                },
+                {
+                    "name":"mapstyle",
+                    "type":"STRING",
+                    "description":"### 地図デザイン指定用パラメータ\n\n#### 記述形式\n`[デザイン]_[注記サイズ]`\n|デザイン|値|\n|---|---|\n|標準|std|\n|グレースケール|gray|\n|RPG風地図|rpg|\n|古地図風地図|antique|\n|道路強調地図|hlightroad|\n|鉄道強調地図|hlightrail|\n|印刷用白黒デザイン|monochrome|\n|おもてなしマップ|tourism|\n\n|注記サイズ|値|\n|---|---|\n|中|pc|\n|大|sp|\n\n#### デフォルト\n`std_pc`\n\n#### 注記\n詳細は、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"landmarkicon",
+                    "type":"ENUM",
+                    "description":"### ランドマークアイコンの表示/非表示指定パラメータ\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`\n\n#### 注記\nmapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』 をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"resolution",
+                    "type":"ENUM",
+                    "description":"### 解像度パラメータ\n解像度に2を指定した場合、標準の2倍のサイズの画像が返され、4を指定した場合、標準の4倍のサイズの画像が返されます。\n\n|解像度|値|画像サイズ|\n|---|---|---|\n|標準|1|256×256|\n|2倍|2|512×512|\n|4倍|4|1024×1024|\n\n#### デフォルト\n`1`",
+                    "default":""
+                },
+                {
+                    "name":"contour",
+                    "type":"ENUM",
+                    "description":"### 等高線の表示/非表示指定パラメータ\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`on`\n\n#### 注記\nmapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"bldgname",
+                    "type":"ENUM",
+                    "description":"### ビル名の表示/非表示指定パラメータ\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`\n\n#### 注記\n- mapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。\n- ビル名称は、スケールが19以上の場合のみ描画されます。",
+                    "default":""
+                },
+                {
+                    "name":"logo",
+                    "type":"ENUM",
+                    "description":"### ブランドロゴの表示/非表示指定パラメータ\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`\n\n#### 注記\nmapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"target",
+                    "type":"ENUM",
+                    "description":"### 地図の表示内容\n|表示内容|値|\n|---|---|\n|背景のみを表示|1|\n|注記のみを表示|2|\n|背景 + 注記を表示|3|\n\n#### デフォルト\n`3`",
+                    "default":""
+                },
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"### 出力する画像形式\n\n|画像形式|値|\n|---|---|\n|png|image/png|\n|jpeg|image/jpeg|\n\n#### デフォルト\n`image/png`",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://mapfanapi-map.p.rapidapi.com/map\"\nquerystring = {\"tilerow\": tilerow, \"tilematrix\": tilematrix, \"tilecol\": tilecol}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mapfanapi-map.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"mapimage",
+            "url":"https://mapfanapi-map.p.rapidapi.com/mapimage",
+            "description":"## サイズ指定地図画像取得\n指定された緯度経度、サイズ、縮尺の地図画像を提供します。\n`size`, `lonlat`, `scale` で指定した画像サイズ、位置、スケールの地図画像を返します。\nresolutionで解像度に2を指定した場合、sizeで指定した画像サイズの2倍の画像サイズで返されます。",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lonlat",
+                    "type":"STRING",
+                    "description":"### 中心緯度経度\n\n#### 記述形式\n`経度,緯度`\n\n#### 記述例\n`139.767231,35.681196`\n\n#### 範囲\n|範囲|値|\n|---|---|\n|最小|経度 120, 緯度20|\n|最大|経度 155, 緯度46|\n\n#### 注記\n緯度経度の測地系は、世界測地系（JGD2011）となります。",
+                    "default":"139.767231,35.681196"
+                },
+                {
+                    "name":"scale",
+                    "type":"NUMBER",
+                    "description":"### 地図縮尺\n\n#### 範囲\n|範囲|値|\n|---|---|\n|最小|6|\n|最大|21|",
+                    "default":"16"
+                },
+                {
+                    "name":"size",
+                    "type":"STRING",
+                    "description":"### 画像サイズ\n\n#### 記述形式\n`[画像幅（ピクセル値）],[画像高さ（ピクセル値）]`\n\n#### 記述例\n`320,240`\n\n#### 範囲\n|範囲|サイズ|\n|---|---|\n|最小値|1px, 1px|\n|最大値|2048px, 2048px|",
+                    "default":"320,240"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"icon",
+                    "type":"STRING",
+                    "description":"### アイコン設定\n\n#### 記述形式\n`[アイコン定義#1]|[アイコン定義#2]|…|[アイコン定義#n]`\n\n#### 記述形式（アイコン定義）\n`[アイコン種別コード],[経度の値],[緯度の値]`\n\n#### 記述例\n`1,139.7672,35.6811|102,139.7671,35.6799`\n\n#### 範囲\n|n（アイコン定義の件数）|値|\n|---|---|\n|最大|50|\n\n|経度、緯度|値|\n|---|---|\n|最小|経度120, 緯度20|\n|最大|経度155, 緯度46|\n\n#### 注記\n- scaler・centericonがonの場合、表示されるスケーラ・中心点アイコンもそれぞれアイコン定義として件数にカウントされます。\n- アイコン種別コードの設定値については、付則. アイコン種別一覧を参照。",
+                    "default":""
+                },
+                {
+                    "name":"centericon",
+                    "type":"ENUM",
+                    "description":"### 中心点アイコン表示\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`",
+                    "default":""
+                },
+                {
+                    "name":"logo",
+                    "type":"ENUM",
+                    "description":"### ブランドロゴの表示/非表示指定パラメータ\n\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`\n\n#### 注記\nmapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"landmarkicon",
+                    "type":"ENUM",
+                    "description":"### ランドマークアイコンの表示/非表示指定パラメータ\n\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`\n\n#### 注記\nmapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"### 出力する画像形式\n|画像形式|値|\n|---|---|\n|png|image/png|\n|jpeg|image/jpeg|\n\n#### デフォルト\n`image/png`",
+                    "default":""
+                },
+                {
+                    "name":"resolution",
+                    "type":"ENUM",
+                    "description":"### 解像度パラメータ\n解像度に2を指定した場合、標準の2倍のサイズの画像が返されます。\n\n|解像度|値|\n|---|---|\n|標準|1|\n|2倍|2|\n\n#### デフォルト\n`1`",
+                    "default":""
+                },
+                {
+                    "name":"rotationangle",
+                    "type":"NUMBER",
+                    "description":"### 角度パラメータ\n地図を指定した角度に傾けた画像が返されます。\n\n#### 範囲\n|範囲|値|\n|---|---|\n|最小|0（北上）|\n|最大|359|\n\n#### デフォルト\n`0`\n\n#### 注記\n- 整数のみ指定可能です。\n- 時計回りに増加します。",
+                    "default":""
+                },
+                {
+                    "name":"routeresultid",
+                    "type":"STRING",
+                    "description":"### ルート結果ID\n指定したルート結果IDに紐付くルートを表示します。\nルート結果IDはルート検索APIで取得します。",
+                    "default":""
+                },
+                {
+                    "name":"routeicon",
+                    "type":"ENUM",
+                    "description":"### ルートアイコン種別\n|設定|値|\n|---|---|\n|ルートアイコンを表示しない|0|\n|標準のルートアイコンを表示する|1|\n\n#### デフォルト\n`1`",
+                    "default":""
+                },
+                {
+                    "name":"scaler",
+                    "type":"ENUM",
+                    "description":"### スケーラ表示\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`",
+                    "default":""
+                },
+                {
+                    "name":"bldgname",
+                    "type":"ENUM",
+                    "description":"### ビル名の表示/非表示指定パラメータ\n\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`off`\n\n#### 注記\n- mapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。\n- ビル名称は、スケールが19以上の場合のみ描画されます。",
+                    "default":""
+                },
+                {
+                    "name":"contour",
+                    "type":"ENUM",
+                    "description":"### 等高線の表示/非表示指定パラメータ\n\n|表示設定|値|\n|---|---|\n|非表示|off|\n|表示|on|\n\n#### デフォルト\n`on`\n\n#### 注記\nmapstyleパラメータの一部の値を指定した場合に本パラメータを on を指定すると、`[E03004] map parameter error (invalid combination)`が返却されます。\nmapstyleと他パラメータの指定可否の組み合わせは、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                },
+                {
+                    "name":"target",
+                    "type":"ENUM",
+                    "description":"### 地図の表示内容\n|表示内容|値|\n|---|---|\n|背景のみを表示|1|\n|注記のみを表示|2|\n|背景 + 注記を表示|3|\n\n#### デフォルト\n`3`",
+                    "default":""
+                },
+                {
+                    "name":"mapstyle",
+                    "type":"STRING",
+                    "description":"### 地図デザイン指定用パラメータ\n\n#### 記述形式\n`[デザイン]_[注記サイズ]`\n\n|デザイン|値|\n|---|---|\n|標準|std|\n|グレースケール|gray|\n|RPG風地図|rpg|\n|古地図風地図|antique|\n|道路強調地図|hlightroad|\n|鉄道強調地図|hlightrail|\n|印刷用白黒デザイン|monochrome|\n|おもてなしマップ|tourism|\n\n|注記サイズ|値|\n|---|---|\n|中|pc|\n|大|sp|\n\n#### デフォルト\n`std_pc`\n\n#### 注記\n詳細は、『API仕様書：MapFanAPI_地図デザイン設定方法と表示イメージ』をご確認ください。",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://mapfanapi-map.p.rapidapi.com/mapimage\"\nquerystring = {\"lonlat\": lonlat, \"scale\": scale, \"size\": size}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mapfanapi-map.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

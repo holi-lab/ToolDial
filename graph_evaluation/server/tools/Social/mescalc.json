@@ -1,0 +1,96 @@
+{
+    "tool_name":"MESCALC",
+    "tool_description":"Calculates Misinformation Exposure Score for Twitter accounts",
+    "title":"MESCALC",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":300,
+        "avgSuccessRate":79,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/mescalcapi-mescalcapi-default/api/mescalc/",
+    "host":"mescalc.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"get_misinformation_score_account__twitter_account__get",
+            "url":"https://mescalc.p.rapidapi.com/account/{twitter_account}",
+            "description":"Retrieve account misinformation score by Twitter ID",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"twitter_account",
+                    "type":"OBJECT",
+                    "description":"",
+                    "default":"{}"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://mescalc.p.rapidapi.com/account/{twitter_account}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"mescalc.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "twitter_user_id":10765432100123458000,
+                "twitter_screen_name":"ExampleHandle",
+                "following":[]
+            },
+            "headers":{},
+            "schema":{
+                "title":"TwitterAccountScore",
+                "required":[
+                    "twitter_screen_name",
+                    "is_elite",
+                    "num_following"
+                ],
+                "type":"object",
+                "properties":{
+                    "twitter_id":{
+                        "title":"Twitter Id",
+                        "type":"integer",
+                        "description":"Twitter ID uniquely identifying Twitter Account"
+                    },
+                    "twitter_screen_name":{
+                        "title":"Twitter Screen Name",
+                        "type":"string",
+                        "description":"Twitter account name (handle)"
+                    },
+                    "falsity_score":{
+                        "title":"Falsity Score",
+                        "type":"number",
+                        "description":"Falsity calculated based on fact-checked statements"
+                    },
+                    "is_elite":{
+                        "title":"Is Elite",
+                        "type":"boolean",
+                        "description":"Indication if the account is considered \"elite\""
+                    },
+                    "misinfo_exposure_score":{
+                        "title":"Misinfo Exposure Score",
+                        "type":"number",
+                        "description":"Indication of exposure to misinformation"
+                    },
+                    "misinfo_exposure_score_weighted_numtweets":{
+                        "title":"Misinfo Exposure Score Weighted Numtweets",
+                        "type":"number",
+                        "description":"Weighted indication of exposure to misinformation"
+                    },
+                    "following":{
+                        "title":"Following",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        },
+                        "description":"List of elites screen names account is following",
+                        "default":[]
+                    },
+                    "num_following":{
+                        "title":"Num Following",
+                        "type":"integer",
+                        "description":"Number of followed accounts"
+                    }
+                },
+                "description":"Extended information about Twitter account, along with its score"
+            }
+        }
+    ]
+}

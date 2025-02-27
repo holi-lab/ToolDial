@@ -1,0 +1,180 @@
+{
+    "tool_name": "AI Cartoon Generator",
+    "tool_description": "AI Cartoon Generator utilizes the technology of generative models to automatically generate cartoon-style images in different styles. This technology can create cartoonized images with the same resolution as the input image and specific cartoon styles, and supports users to choose from a variety of cartoon styles. It is worth mentioning that even for the same image and style, each generated image is unique. The tool provides users with dozens of cartoon style options to choose from.",
+    "title": "AI Cartoon Generator",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 811,
+        "avgSuccessRate": 96,
+        "popularityScore": 9.3,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/ailabapi-ailabapi-default/api/ai-cartoon-generator/",
+    "host": "ai-cartoon-generator.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Query asynchronous task results",
+            "url": "https://ai-cartoon-generator.p.rapidapi.com/image/get_async_job_result",
+            "description": "For asynchronous interface, after calling the interface, if the real result is not returned; you need to keep the request_id returned by the asynchronous interface and then request this interface to get the real result.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "job_id",
+                    "type": "STRING",
+                    "description": "Task id\uff1a`request_id`",
+                    "default": ""
+                },
+                {
+                    "name": "type",
+                    "type": "ENUM",
+                    "description": "Asynchronous task type.\n- `GENERATE_CARTOONIZED_IMAGE`: AI Cartoon Generator.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ai-cartoon-generator.p.rapidapi.com/image/get_async_job_result\"\nquerystring = {\"job_id\": job_id, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ai-cartoon-generator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "request_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Request ID."
+                },
+                "log_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Log ID."
+                },
+                "error_code": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_code_str": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_msg": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Message."
+                },
+                "data": {
+                    "type": "object",
+                    "required": false,
+                    "description": "The content of the result data returned.",
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "required": false,
+                            "example": "PROCESS_SUCCESS",
+                            "enum": {
+                                "QUEUING": "The task is queued.",
+                                "PROCESSING": "Asynchronous processing.",
+                                "PROCESS_SUCCESS": "Processing was successful.",
+                                "PROCESS_FAILED": "Processing failed.",
+                                "TIMEOUT_FAILED": "The task timeout did not complete.",
+                                "LIMIT_RETRY_FAILED": "Exceeded maximum number of retries for processing failures."
+                            },
+                            "description": "Asynchronous task status."
+                        },
+                        "result_url": {
+                            "type": "string",
+                            "required": false,
+                            "example": "https://www.ailabtools.com/image1.png",
+                            "description": "Result URL address. Note: The URL address is a temporary address, valid for 24 hours, and will not be accessible after the expiration date."
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "AI Cartoon Generator",
+            "url": "https://ai-cartoon-generator.p.rapidapi.com/image/effects/generate_cartoonized_image",
+            "description": "This interface will monitor whether the processing is completed within a certain period of time, and if the processing is completed the real processing result will be returned directly; conversely, the user needs to use the request_id returned by this interface to call the [Query Asynchronous Task Results](https://rapidapi.com/ailabapi-ailabapi-default/api/ai-cartoon-generator/) interface to get the real result.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "- **Image format**: `JPEG` `PNG` `JPG` `BMP` `WEBP`\n- **Image size**: No more than 10 MB.\n- Can support any resolution output, to ensure the generation quality, it is recommended that the image resolution does not exceed 1280x720px.",
+                    "default": ""
+                },
+                {
+                    "name": "type",
+                    "type": "ENUM",
+                    "description": "Style. \n## The range of values is as follows:\n### DEFAULT\n- **`default`**: Auto\n### Male photo\n- **`boy-0`**: Basic I\n- **`boy-1`**: Literary I\n- **`boy-2`**: Literary II\n- **`boy-3`**: Sports\n- **`boy-4`**: Beautification\n- **`boy-5`**: Mature and steady\n- **`boy-6`**: Ink wash painting\n- **`boy-7`**: Oil painting\n- **`boy-8`**: Detail enhancement\n- **`boy-9`**: Sunny boy\n- **`boy-10`**: Skin beautification\n- **`boy-11`**: Face slimming\n- **`boy-12`**: Aestheticism\n- **`boy-13`**: Violet\n- **`boy-14`**: Marvel\n- **`boy-15`**: Makoto Shinkai\n- **`boy-16`**: Zelda\n- **`boy-17`**: Genshin Impact\n- **`boy-18`**: Japanese kimono\n- **`boy-19`**: Saint Seiya\n- **`boy-20`**: Chinese Hanfu\n- **`boy-21`**: Yoshihiro Togashi\n- **`boy-22`**: Akira Toriyama\n- **`boy-23`**: One Piece\n- **`boy-24`**: Smile I\n- **`boy-25`**: Smile II\n- **`boy-26`**: Basic II\n- **`boy-27`**: Big eyes\n### Male group photo\n- **`boys-0`**: Basic I\n- **`boys-1`**: Basic II\n### Photos of women\n- **`girl-0`**: Sweet\n- **`girl-1`**: Loli\n- **`girl-2`**: Beautification I\n- **`girl-3`**: Beautification + Big eyes\n- **`girl-4`**: Beautification + Smile\n- **`girl-5`**: Beautification II\n- **`girl-6`**: Gaming\n- **`girl-7`**: Anime, comics and games (ACG)\n- **`girl-8`**: ACG + Big eyes\n- **`girl-9`**: ACG + Smile\n- **`girl-10`**: ACG + Big eyes + Smile\n- **`girl-11`**: Detail enhancement I\n- **`girl-12`**: Color sketch\n- **`girl-13`**: Pure\n- **`girl-14`**: Detail enhancement II\n- **`girl-15`**: Genshin Impact\n- **`girl-16`**: Zelda\n- **`girl-17`**: Oil painting\n- **`girl-18`**: Makoto Shinkai\n- **`girl-19`**: The Snow Queen\n- **`girl-20`**: Alice in Wonderland\n- **`girl-21`**: Work attire\n- **`girl-22`**: Retro girl\n- **`girl-23`**: Chinese Hanfu\n- **`girl-24`**: Violet\n- **`girl-25`**: Elf\n- **`girl-26`**: Saint Seiya\n- **`girl-27`**: Wuxia\n### Group photo of women\n- **`girls-0`**: Basic\n- **`girls-1`**: Chinese Hanfu\n- **`girls-2`**: Beautification\n- **`girls-3`**: Detail enhancement\n### Group photo of multiple people\n- **`people-0`**: Basic I\n- **`people-1`**: Basic II\n- **`people-2`**: Basic III\n### Animals\n- **`pet-0`**: Basic I\n- **`pet-1`**: Basic II\n- **`pet-2`**: Basic III\n### Landscapes\n- **`scene-0`**: Basic\n- **`scene-1`**: Ed Mell\n- **`scene-2`**: Jessica Rossier\n- **`scene-3`**: Violet\n- **`scene-4`**: Ian McQue\n- **`scene-5`**: Alice in Wonderland",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ai-cartoon-generator.p.rapidapi.com/image/effects/generate_cartoonized_image\"\nquerystring = {\"image\": image, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ai-cartoon-generator.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {
+                "request_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Request ID."
+                },
+                "log_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Log ID."
+                },
+                "error_code": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_code_str": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_msg": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Message."
+                }
+            }
+        },
+        {
+            "name": "AI Cartoon Generator",
+            "url": "https://ai-cartoon-generator.p.rapidapi.com/image/effects/generate_cartoonized_image",
+            "description": "This interface will monitor whether the processing is completed within a certain period of time, and if the processing is completed the real processing result will be returned directly; conversely, the user needs to use the request_id returned by this interface to call the [Query Asynchronous Task Results](https://rapidapi.com/ailabapi-ailabapi-default/api/ai-cartoon-generator/) interface to get the real result.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "- **Image format**: `JPEG` `PNG` `JPG` `BMP` `WEBP`\n- **Image size**: No more than 10 MB.\n- Can support any resolution output, to ensure the generation quality, it is recommended that the image resolution does not exceed 1280x720px.",
+                    "default": ""
+                },
+                {
+                    "name": "type",
+                    "type": "ENUM",
+                    "description": "Style. \n## The range of values is as follows:\n### DEFAULT\n- **`default`**: Auto\n### Male photo\n- **`boy-0`**: Basic I\n- **`boy-1`**: Literary I\n- **`boy-2`**: Literary II\n- **`boy-3`**: Sports\n- **`boy-4`**: Beautification\n- **`boy-5`**: Mature and steady\n- **`boy-6`**: Ink wash painting\n- **`boy-7`**: Oil painting\n- **`boy-8`**: Detail enhancement\n- **`boy-9`**: Sunny boy\n- **`boy-10`**: Skin beautification\n- **`boy-11`**: Face slimming\n- **`boy-12`**: Aestheticism\n- **`boy-13`**: Violet\n- **`boy-14`**: Marvel\n- **`boy-15`**: Makoto Shinkai\n- **`boy-16`**: Zelda\n- **`boy-17`**: Genshin Impact\n- **`boy-18`**: Japanese kimono\n- **`boy-19`**: Saint Seiya\n- **`boy-20`**: Chinese Hanfu\n- **`boy-21`**: Yoshihiro Togashi\n- **`boy-22`**: Akira Toriyama\n- **`boy-23`**: One Piece\n- **`boy-24`**: Smile I\n- **`boy-25`**: Smile II\n- **`boy-26`**: Basic II\n- **`boy-27`**: Big eyes\n### Male group photo\n- **`boys-0`**: Basic I\n- **`boys-1`**: Basic II\n### Photos of women\n- **`girl-0`**: Sweet\n- **`girl-1`**: Loli\n- **`girl-2`**: Beautification I\n- **`girl-3`**: Beautification + Big eyes\n- **`girl-4`**: Beautification + Smile\n- **`girl-5`**: Beautification II\n- **`girl-6`**: Gaming\n- **`girl-7`**: Anime, comics and games (ACG)\n- **`girl-8`**: ACG + Big eyes\n- **`girl-9`**: ACG + Smile\n- **`girl-10`**: ACG + Big eyes + Smile\n- **`girl-11`**: Detail enhancement I\n- **`girl-12`**: Color sketch\n- **`girl-13`**: Pure\n- **`girl-14`**: Detail enhancement II\n- **`girl-15`**: Genshin Impact\n- **`girl-16`**: Zelda\n- **`girl-17`**: Oil painting\n- **`girl-18`**: Makoto Shinkai\n- **`girl-19`**: The Snow Queen\n- **`girl-20`**: Alice in Wonderland\n- **`girl-21`**: Work attire\n- **`girl-22`**: Retro girl\n- **`girl-23`**: Chinese Hanfu\n- **`girl-24`**: Violet\n- **`girl-25`**: Elf\n- **`girl-26`**: Saint Seiya\n- **`girl-27`**: Wuxia\n### Group photo of women\n- **`girls-0`**: Basic\n- **`girls-1`**: Chinese Hanfu\n- **`girls-2`**: Beautification\n- **`girls-3`**: Detail enhancement\n### Group photo of multiple people\n- **`people-0`**: Basic I\n- **`people-1`**: Basic II\n- **`people-2`**: Basic III\n### Animals\n- **`pet-0`**: Basic I\n- **`pet-1`**: Basic II\n- **`pet-2`**: Basic III\n### Landscapes\n- **`scene-0`**: Basic\n- **`scene-1`**: Ed Mell\n- **`scene-2`**: Jessica Rossier\n- **`scene-3`**: Violet\n- **`scene-4`**: Ian McQue\n- **`scene-5`**: Alice in Wonderland",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ai-cartoon-generator.p.rapidapi.com/image/effects/generate_cartoonized_image\"\nquerystring = {\"image\": \"\", \"type\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ai-cartoon-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ai-cartoon-generator.p.rapidapi.com/image/effects/generate_cartoonized_image\"\nquerystring = {\"image\": \"\", \"type\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ai-cartoon-generator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

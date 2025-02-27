@@ -1,0 +1,705 @@
+{
+    "tool_name":"Indonesian Postal Code List and Search",
+    "tool_description":"An API to pull data of Indonesian postal code by Province, City / District, Sub District,  and village.",
+    "title":"Indonesian Postal Code List and Search",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/althea-solution-althea-solution-default/api/indonesian-postal-code-list-and-search/",
+    "host":"indonesian-postal-code-list-and-search.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Postal Code by Province (slug)",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/provinsi/{province_slug}",
+            "description":"Get list of area and postal code by Province.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"province_slug",
+                    "type":"string",
+                    "description":"",
+                    "default":"aceh"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"perPage",
+                    "type":"NUMBER",
+                    "description":"Default max result per page, max 25",
+                    "default":"25"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"Page number of the result",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/provinsi/{province_slug}\"\nquerystring = {\"perPage\": perpage, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "page":1,
+                "perPage":25,
+                "totlaItems":6464,
+                "totalPages":259,
+                "data":[
+                    {
+                        "province_code":11,
+                        "province_slug":"aceh",
+                        "city_slug":"pidie-jaya-aceh",
+                        "sub_district":"BANDAR BARU",
+                        "sub_district_slug":"bandar-baru-pidie-jaya-aceh",
+                        "village_name":"ABAH LUENG",
+                        "village_slug":"abah-lueng-bandar-baru-pidie-jaya-aceh",
+                        "postal_code":"24184"
+                    },
+                    {
+                        "province_code":11,
+                        "province_slug":"aceh",
+                        "city_slug":"simeulue-aceh",
+                        "sub_district":"TEUPAH TENGAH",
+                        "sub_district_slug":"teupah-tengah-simeulue-aceh",
+                        "village_name":"ABAIL",
+                        "village_slug":"abail-teupah-tengah-simeulue-aceh",
+                        "postal_code":"23891"
+                    }
+                ]
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control":"max-age=3600",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b9ac3a8ea74c41-SIN",
+                "content-length":"6450",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 12:40:49 GMT",
+                "etag":"W/\"1932-HeNIeNtzaL9layYxt63kRwl8ihg\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=ydStSfJY7iSGGHyyIuwMprAdlrojcKOhd4ZsMzcYfIceb0n09B9Tnwr0I9I2cbatYFgnC2PWyGD12SKFsymK%2Fmh3cplNf3rdi5pgzi6dJrPHZERmcY08lrJmaceZcxi6O6duIbwP32t8CH8%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "success":{
+                        "type":"boolean"
+                    },
+                    "page":{
+                        "type":"integer"
+                    },
+                    "perPage":{
+                        "type":"integer"
+                    },
+                    "totlaItems":{
+                        "type":"integer"
+                    },
+                    "totalPages":{
+                        "type":"integer"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "province_code":{
+                                    "type":"integer"
+                                },
+                                "province_slug":{
+                                    "type":"string"
+                                },
+                                "city_slug":{
+                                    "type":"string"
+                                },
+                                "sub_district":{
+                                    "type":"string"
+                                },
+                                "sub_district_slug":{
+                                    "type":"string"
+                                },
+                                "village_name":{
+                                    "type":"string"
+                                },
+                                "village_slug":{
+                                    "type":"string"
+                                },
+                                "postal_code":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Search Data by Query",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/search",
+            "description":"You can query data from our database by some keyword such as:\n\n- Province Name (Provinsi)\n- City Name (Kota / Kabupaten)\n- Sub District Name (Kecamatan)\n- Urban Name (Kelurahan/Desa)\n-  Postal Code (Kode Pos)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"keyword",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"pekanbaru"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"perPage",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"25"
+                },
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/search\"\nquerystring = {\"perPage\": perpage, \"keyword\": keyword, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "page":1,
+                "perPage":25,
+                "totlaItems":58,
+                "totalPages":3,
+                "data":[
+                    {
+                        "province_code":14,
+                        "province_slug":"riau",
+                        "city_slug":"pekanbaru-riau",
+                        "sub_district":"PAYUNG SEKAKI",
+                        "sub_district_slug":"payung-sekaki-pekanbaru-riau",
+                        "village_name":"AIR HITAM",
+                        "village_slug":"air-hitam-payung-sekaki-pekanbaru-riau",
+                        "postal_code":"28292"
+                    },
+                    {
+                        "province_code":14,
+                        "province_slug":"riau",
+                        "city_slug":"pekanbaru-riau",
+                        "sub_district":"SAIL",
+                        "sub_district_slug":"sail-pekanbaru-riau",
+                        "village_name":"CINTA RAJA",
+                        "village_slug":"cinta-raja-sail-pekanbaru-riau",
+                        "postal_code":"28131"
+                    }
+                ]
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control":"max-age=3600",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b9c7acaef918c6-SIN",
+                "content-length":"6507",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 12:59:34 GMT",
+                "etag":"W/\"196b-ieQwaq7HSuWa26lvA1s42dloT9o\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=VQAazVfqgkGXZAmbLs8nL1Kr3Fr8io06r%2FuhxWPlroHn%2FpwSbQgNJ8UzGP8mJhytWkgwtrpZmNFYRBQ6Idgjysrww9VWraQUYqKn5P9I%2F0FxW14cP8nhWXKAMAO5XXSbomllsuOknnSUwrg%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "success":{
+                        "type":"boolean"
+                    },
+                    "page":{
+                        "type":"integer"
+                    },
+                    "perPage":{
+                        "type":"integer"
+                    },
+                    "totlaItems":{
+                        "type":"integer"
+                    },
+                    "totalPages":{
+                        "type":"integer"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "province_code":{
+                                    "type":"integer"
+                                },
+                                "province_slug":{
+                                    "type":"string"
+                                },
+                                "city_slug":{
+                                    "type":"string"
+                                },
+                                "sub_district":{
+                                    "type":"string"
+                                },
+                                "sub_district_slug":{
+                                    "type":"string"
+                                },
+                                "village_name":{
+                                    "type":"string"
+                                },
+                                "village_slug":{
+                                    "type":"string"
+                                },
+                                "postal_code":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Get Postal Code Information",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/{postal_code}",
+            "description":"Get details from some postal code, sometime some postal code used by one or more urban / village",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"postal_code",
+                    "type":"string",
+                    "description":"",
+                    "default":"39152"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"perPage",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"25"
+                },
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/{postal_code}\"\nquerystring = {\"perPage\": perpage, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "page":1,
+                "perPage":25,
+                "totlaItems":22,
+                "totalPages":1,
+                "data":[
+                    {
+                        "province_code":17,
+                        "province_slug":"bengkulu",
+                        "city_slug":"rejang-lebong-bengkulu",
+                        "sub_district":"BERMANI ULU RAYA",
+                        "sub_district_slug":"bermani-ulu-raya-rejang-lebong-bengkulu",
+                        "village_name":"AIR BENING",
+                        "village_slug":"air-bening-bermani-ulu-raya-rejang-lebong-bengkulu",
+                        "postal_code":"39152"
+                    },
+                    {
+                        "province_code":17,
+                        "province_slug":"bengkulu",
+                        "city_slug":"rejang-lebong-bengkulu",
+                        "sub_district":"BERMANI ULU",
+                        "sub_district_slug":"bermani-ulu-rejang-lebong-bengkulu",
+                        "village_name":"AIR MUNDU",
+                        "village_slug":"air-mundu-bermani-ulu-rejang-lebong-bengkulu",
+                        "postal_code":"39152"
+                    }
+                ]
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "apicache-store":"memory",
+                "apicache-version":"1.6.3",
+                "cache-control":"max-age=3592",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b9c07f8b2891b3-SIN",
+                "content-length":"6604",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 12:54:39 GMT",
+                "etag":"W/\"19cc-sGVIWKlVytx0sr1/taTn8JMU2sI\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Fz5LrxbjaaFvZNeAYGFtQ6kIcEOkLLsoa35aPHKFdAhXYffkkdxe2ucSaTf6IZSodoLViKGJvz4MCZSp6YTE0juoLVfcngGbNnM1E4RQOXb470lcEb6rrx%2F6VJg3rg03w6vs%2BHSadSlwnzg%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{}
+        },
+        {
+            "name":"Postal Code by Urban (Kelurahan / Desa)",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/kelurahan/{urban_slug}",
+            "description":"Get postal code from an urban / village (Kelurahan/Desa)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"urban_slug",
+                    "type":"string",
+                    "description":"",
+                    "default":"air-bening-bermani-ulu-raya-rejang-lebong-bengkulu"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/kelurahan/{urban_slug}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "data":{
+                    "province_code":17,
+                    "province_slug":"bengkulu",
+                    "city_slug":"rejang-lebong-bengkulu",
+                    "sub_district":"BERMANI ULU RAYA",
+                    "sub_district_slug":"bermani-ulu-raya-rejang-lebong-bengkulu",
+                    "village_name":"AIR BENING",
+                    "village_slug":"air-bening-bermani-ulu-raya-rejang-lebong-bengkulu",
+                    "postal_code":"39152"
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control":"max-age=3600",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b9be13b8b39f98-SIN",
+                "content-length":"322",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 12:53:00 GMT",
+                "etag":"W/\"142-EnLGugNX5+oeghIyp7uK4vQnF6c\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=lS%2FnjKVqeXx1tRpcoaMbgxmZZplL9qLBokkYfhjEjFh98%2Bm7f4Na6DtHv4Y2%2BlBFw1X1dQFu3JvH2Njd2dgTZX6YEX5AQL8dHTSlz3hrYhcS9H5fvt5sY2EOD5XnGAC8J%2BFQpeAJe2nBz4M%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{}
+        },
+        {
+            "name":"Postal Code by Sub District (Kecamatan)",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/kecamatan/{sub_district_slug}",
+            "description":"Get postal code from selected Sub District (Kecamatan)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"sub_district_slug",
+                    "type":"string",
+                    "description":"",
+                    "default":"bermani-ulu-raya-rejang-lebong-bengkulu"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"perPage",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"25"
+                },
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/kecamatan/{sub_district_slug}\"\nquerystring = {\"perPage\": perpage, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "page":1,
+                "perPage":25,
+                "totlaItems":10,
+                "totalPages":1,
+                "data":[
+                    {
+                        "province_code":17,
+                        "province_slug":"bengkulu",
+                        "city_slug":"rejang-lebong-bengkulu",
+                        "sub_district":"BERMANI ULU RAYA",
+                        "sub_district_slug":"bermani-ulu-raya-rejang-lebong-bengkulu",
+                        "village_name":"AIR BENING",
+                        "village_slug":"air-bening-bermani-ulu-raya-rejang-lebong-bengkulu",
+                        "postal_code":"39152"
+                    },
+                    {
+                        "province_code":17,
+                        "province_slug":"bengkulu",
+                        "city_slug":"rejang-lebong-bengkulu",
+                        "sub_district":"BERMANI ULU RAYA",
+                        "sub_district_slug":"bermani-ulu-raya-rejang-lebong-bengkulu",
+                        "village_name":"BABAKAN BARU",
+                        "village_slug":"babakan-baru-bermani-ulu-raya-rejang-lebong-bengkulu",
+                        "postal_code":"39152"
+                    }
+                ]
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control":"max-age=3600",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b9b9a06a0991c0-SIN",
+                "content-length":"3152",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 12:49:58 GMT",
+                "etag":"W/\"c50-4fCN143W4ODab8oAns/6g3vQd+4\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=qWFKKmhGYukyQ8KGJb8f%2FUf3s5n1pC8KL0afOliwzZX8e5FKz2O9tYTzuYHhcGk1T8ssLr0U8pej9qGDFVyN5IlxgFepwitfUM2JaM7srn7llKNHDkHYAZ2JX6pyJkE31kJZDtwIYQqusPQ%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "success":{
+                        "type":"boolean"
+                    },
+                    "page":{
+                        "type":"integer"
+                    },
+                    "perPage":{
+                        "type":"integer"
+                    },
+                    "totlaItems":{
+                        "type":"integer"
+                    },
+                    "totalPages":{
+                        "type":"integer"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "province_code":{
+                                    "type":"integer"
+                                },
+                                "province_slug":{
+                                    "type":"string"
+                                },
+                                "city_slug":{
+                                    "type":"string"
+                                },
+                                "sub_district":{
+                                    "type":"string"
+                                },
+                                "sub_district_slug":{
+                                    "type":"string"
+                                },
+                                "village_name":{
+                                    "type":"string"
+                                },
+                                "village_slug":{
+                                    "type":"string"
+                                },
+                                "postal_code":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Postal Code by City (slug)",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/kota/{city_slug}",
+            "description":"get postal code list from area on selected city",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"city_slug",
+                    "type":"string",
+                    "description":"",
+                    "default":"rejang-lebong-bengkulu"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1"
+                },
+                {
+                    "name":"perPage",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"25"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/kodepos/kota/{city_slug}\"\nquerystring = {\"page\": page, \"perPage\": perpage}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control":"max-age=3600",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b9b5661ebc8938-SIN",
+                "content-length":"7367",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 12:47:05 GMT",
+                "etag":"W/\"1cc7-gnbEeCvqubYhxEVeNqyqUKQAdrg\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=mKEQPP1qSwDPb%2FAx6jCxQfjMKFa7NufWrgYY3B2IfNRjBGVVfzSWEP7II6IOY5%2FmYSAl%2BZ9ZawLJf1%2BHQn%2FE0GQAhOEKCmMEqXTpP676SoRWJ9Pmc5zF0X2C4YiU%2FfKD9iO4bYNFJ2x%2Fb9M%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "success":{
+                        "type":"boolean"
+                    },
+                    "page":{
+                        "type":"integer"
+                    },
+                    "perPage":{
+                        "type":"integer"
+                    },
+                    "totlaItems":{
+                        "type":"integer"
+                    },
+                    "totalPages":{
+                        "type":"integer"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "province_code":{
+                                    "type":"integer"
+                                },
+                                "province_slug":{
+                                    "type":"string"
+                                },
+                                "city_slug":{
+                                    "type":"string"
+                                },
+                                "sub_district":{
+                                    "type":"string"
+                                },
+                                "sub_district_slug":{
+                                    "type":"string"
+                                },
+                                "village_name":{
+                                    "type":"string"
+                                },
+                                "village_slug":{
+                                    "type":"string"
+                                },
+                                "postal_code":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"List Indonesian Province",
+            "url":"https://indonesian-postal-code-list-and-search.p.rapidapi.com/provinsi",
+            "description":"This list will be used ond another endpoint to take postal code by province name",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://indonesian-postal-code-list-and-search.p.rapidapi.com/provinsi\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"indonesian-postal-code-list-and-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "success":true,
+                "data":[
+                    {
+                        "province_name":"ACEH",
+                        "province_slug":"aceh"
+                    },
+                    {
+                        "province_name":"SUMATERA UTARA",
+                        "province_slug":"sumatera-utara"
+                    },
+                    {
+                        "province_name":"SUMATERA BARAT",
+                        "province_slug":"sumatera-barat"
+                    }
+                ]
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cache-control":"max-age=3600",
+                "cf-cache-status":"DYNAMIC",
+                "cf-ray":"74b77c86bb0348f4-SIN",
+                "content-length":"2279",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Fri, 16 Sep 2022 06:18:44 GMT",
+                "etag":"W/\"8e7-YfF2akpuC+/47nc3JOZ8eH5YO6Y\"",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=fk7UG8BHjv3N8ZpKydAHl6eekS3QncItZMbck%2Bbq7E0hssURJtDMw3ZqwUCaeHgBQGPicCU41ZIvDNL1J%2BfTTh%2BMSPrH8NE796iLlwdyi%2BLvyPRRSr5hJBqjqV4iEOdoW8B2VAOD1%2FRXU3c%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "vary":"Origin",
+                "x-powered-by":"Express",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "success":{
+                        "type":"boolean"
+                    },
+                    "data":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "province_name":{
+                                    "type":"string"
+                                },
+                                "province_slug":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

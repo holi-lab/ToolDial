@@ -1,0 +1,468 @@
+{
+    "product_id": "53aa60efe4b0a9b1348dbd26",
+    "tool_description": "Creating, signing and managing a contract becomes as simple as sending an email.",
+    "home_url": "https://rapidapi.com/ContractLive/api/contract-live/",
+    "name": "Contract Live",
+    "title": "Contract Live",
+    "pricing": "FREE",
+    "tool_name": "Contract Live",
+    "score": null,
+    "host": "contractlive.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Create Negotiation",
+            "url": "https://contractlive.p.rapidapi.com/negotiation",
+            "description": "Create a new negotiation. See Readme, for more details about negotiations.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title of the new negotiation",
+                    "default": "HR contract"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Description of the new negotiation",
+                    "default": "This is an HR contract"
+                },
+                {
+                    "name": "contentType",
+                    "type": "STRING",
+                    "description": "Type of content HTML, WORD or PDF",
+                    "default": "HTML"
+                },
+                {
+                    "name": "isEditable",
+                    "type": "BOOLEAN",
+                    "description": "Is the negotiation editable?",
+                    "default": "checked"
+                },
+                {
+                    "name": "content",
+                    "type": "BINARY",
+                    "description": "Content of the negotiation, either a PDF/WORD/HTML file content",
+                    "default": "<html><body>contract content</body></html>"
+                },
+                {
+                    "name": "thirdParties",
+                    "type": "STRING",
+                    "description": "Emails for one third party, as a JSON array, call several times to add more third party",
+                    "default": "['partner@organization.org', 'otherpartner@organization.org']"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "tags",
+                    "type": "STRING",
+                    "description": "Tag, call several times to add as many tags",
+                    "default": "important"
+                },
+                {
+                    "name": "invitationSubject",
+                    "type": "STRING",
+                    "description": "Email's subject for third parties",
+                    "default": "Hello from other company"
+                },
+                {
+                    "name": "invitationContent",
+                    "type": "STRING",
+                    "description": "Email's content for third parties",
+                    "default": "Please sign this contract I'm sending you"
+                },
+                {
+                    "name": "colleagues",
+                    "type": "STRING",
+                    "description": "Emails for colleagues, call several times to add as many emails",
+                    "default": "coworker@corp.com"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation\"\nquerystring = {\"title\": \"HR contract\", \"description\": \"This is an HR contract\", \"tags\": \"important\", \"contentType\": \"HTML\", \"isEditable\": \"checked\", \"content\": \"<html><body>contract content</body></html>\", \"invitationSubject\": \"Hello from other company\", \"invitationContent\": \"Please sign this contract I'm sending you\", \"colleagues\": \"coworker@corp.com\", \"thirdParties\": \"['partner@organization.org', 'otherpartner@organization.org']\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation\"\nquerystring = {\"title\": \"HR contract\", \"description\": \"This is an HR contract\", \"tags\": \"important\", \"contentType\": \"HTML\", \"isEditable\": \"checked\", \"content\": \"<html><body>contract content</body></html>\", \"invitationSubject\": \"Hello from other company\", \"invitationContent\": \"Please sign this contract I'm sending you\", \"colleagues\": \"coworker@corp.com\", \"thirdParties\": \"['partner@organization.org', 'otherpartner@organization.org']\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Create Negotiation Attachment",
+            "url": "https://contractlive.p.rapidapi.com/negotiation/{negotiationUid}/attachment",
+            "description": "Create an attachment file linked to a negotiation",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "fileName",
+                    "type": "STRING",
+                    "description": "File name",
+                    "default": "InternetInvoice.pdf"
+                },
+                {
+                    "name": "content",
+                    "type": "BINARY",
+                    "description": "File content",
+                    "default": ""
+                },
+                {
+                    "name": "negotiationuid",
+                    "type": "STRING",
+                    "description": "Unique ID of negotiation",
+                    "default": "negotiation_e98Aaar"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Attachment name",
+                    "default": "Proof of address"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Attachment description",
+                    "default": "Internet invoice as a proof of address"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/{negotiationUid}/attachment\"\nquerystring = {\"name\": \"Proof of address\", \"fileName\": \"InternetInvoice.pdf\", \"description\": \"Internet invoice as a proof of address\", \"content\": \"\", \"negotiationuid\": \"negotiation_e98Aaar\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/{negotiationUid}/attachment\"\nquerystring = {\"name\": \"Proof of address\", \"fileName\": \"InternetInvoice.pdf\", \"description\": \"Internet invoice as a proof of address\", \"content\": \"\", \"negotiationuid\": \"negotiation_e98Aaar\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Create Template",
+            "url": "https://contractlive.p.rapidapi.com/template",
+            "description": "Create a new template. See Readme, for more details about templates.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title of the template",
+                    "default": "HR contract"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Description of the template",
+                    "default": "This is an HR contract"
+                },
+                {
+                    "name": "tags",
+                    "type": "STRING",
+                    "description": "Tag, call several times to add as many tags",
+                    "default": "important"
+                },
+                {
+                    "name": "isAutomatic",
+                    "type": "BOOLEAN",
+                    "description": "Does the template contain variables?",
+                    "default": ""
+                },
+                {
+                    "name": "contentType",
+                    "type": "STRING",
+                    "description": "Type of content HTML, WORD",
+                    "default": "HTML"
+                },
+                {
+                    "name": "content",
+                    "type": "BINARY",
+                    "description": "Content of the template, either a HTML/WORD file content",
+                    "default": "<html><body>template content</body></html>"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "invitationSubject",
+                    "type": "STRING",
+                    "description": "Email's subject for third parties",
+                    "default": "Hello from other company"
+                },
+                {
+                    "name": "invitationContent",
+                    "type": "STRING",
+                    "description": "Email's content for third parties",
+                    "default": "Please sign this contract I'm sending you"
+                },
+                {
+                    "name": "colleagues",
+                    "type": "STRING",
+                    "description": "Emails for colleagues, call several times to add as many emails",
+                    "default": "coworker@corp.com"
+                },
+                {
+                    "name": "thirdParties",
+                    "type": "STRING",
+                    "description": "Emails for one third party, as a JSON array, call several times to add more third party",
+                    "default": "['partner@organization.org', 'otherpartner@organization.org']"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/template\"\nquerystring = {\"title\": \"HR contract\", \"description\": \"This is an HR contract\", \"tags\": \"important\", \"isAutomatic\": \"\", \"contentType\": \"HTML\", \"content\": \"<html><body>template content</body></html>\", \"invitationSubject\": \"Hello from other company\", \"invitationContent\": \"Please sign this contract I'm sending you\", \"colleagues\": \"coworker@corp.com\", \"thirdParties\": \"['partner@organization.org', 'otherpartner@organization.org']\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/template\"\nquerystring = {\"title\": \"HR contract\", \"description\": \"This is an HR contract\", \"tags\": \"important\", \"isAutomatic\": \"\", \"contentType\": \"HTML\", \"content\": \"<html><body>template content</body></html>\", \"invitationSubject\": \"Hello from other company\", \"invitationContent\": \"Please sign this contract I'm sending you\", \"colleagues\": \"coworker@corp.com\", \"thirdParties\": \"['partner@organization.org', 'otherpartner@organization.org']\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Update Negotiation Attachment",
+            "url": "https://contractlive.p.rapidapi.com/negotiation/{negotiationUid}/attachment/attachment_eaoch6",
+            "description": "Update an attachment file linked to a negotiation",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "fileName",
+                    "type": "STRING",
+                    "description": "File name",
+                    "default": "InternetInvoice.pdf"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Attachment description",
+                    "default": "Internet invoice as a proof of address"
+                },
+                {
+                    "name": "content",
+                    "type": "BINARY",
+                    "description": "File content",
+                    "default": ""
+                },
+                {
+                    "name": "negotiationuid",
+                    "type": "STRING",
+                    "description": "Negotiation unique ID",
+                    "default": "negotiation_98heoae"
+                },
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Attachment unique ID",
+                    "default": "attachment_eaoch6"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Attachment name",
+                    "default": "Proof of address"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/{negotiationUid}/attachment/attachment_eaoch6\"\nquerystring = {\"name\": \"Proof of address\", \"fileName\": \"InternetInvoice.pdf\", \"description\": \"Internet invoice as a proof of address\", \"content\": \"\", \"negotiationuid\": \"negotiation_98heoae\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/{negotiationUid}/attachment/{uid}\"\nquerystring = {\"name\": \"Proof of address\", \"fileName\": \"InternetInvoice.pdf\", \"description\": \"Internet invoice as a proof of address\", \"content\": \"\", \"negotiationuid\": \"negotiation_98heoae\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Update Negotiation",
+            "url": "https://contractlive.p.rapidapi.com/negotiation/negotiation_MxxtcG",
+            "description": "Update a negotiation. If an optional parameter is not set, the current value doesn't change (except for tags).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Unique ID",
+                    "default": "negotiation_MxxtcG"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title",
+                    "default": "HR contract"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Description",
+                    "default": "This is a HR contract"
+                },
+                {
+                    "name": "tags",
+                    "type": "STRING",
+                    "description": "Tag, call several times to add as many tags. If the parameter is not set, all tags are removed.",
+                    "default": "important"
+                },
+                {
+                    "name": "isEditable",
+                    "type": "BOOLEAN",
+                    "description": "Change the editable status. This doesn't work if third parties are already in negotiation.",
+                    "default": "checked"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/negotiation_MxxtcG\"\nquerystring = {\"title\": \"HR contract\", \"description\": \"This is a HR contract\", \"tags\": \"important\", \"isEditable\": \"checked\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/{uid}\"\nquerystring = {\"title\": \"HR contract\", \"description\": \"This is a HR contract\", \"tags\": \"important\", \"isEditable\": \"checked\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Update Template",
+            "url": "https://contractlive.p.rapidapi.com/template/template_MxatcZ",
+            "description": "Update a template. If an optional parameter is not set, the current value doesn't change (except for tags).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "tags",
+                    "type": "STRING",
+                    "description": "Tag, call several times to add as many tags. If the parameter is not set, all tags are removed.",
+                    "default": "important"
+                },
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Unique ID",
+                    "default": "template_MxatcZ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title of the template",
+                    "default": "HR contact"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Description of the template",
+                    "default": "HR contact for valuable employee"
+                },
+                {
+                    "name": "isAutomatic",
+                    "type": "BOOLEAN",
+                    "description": "Does the template contain variables?",
+                    "default": ""
+                },
+                {
+                    "name": "content",
+                    "type": "BINARY",
+                    "description": "Content of the template, either a HTML/WORD file content",
+                    "default": "<html><body>template content</body></html>"
+                },
+                {
+                    "name": "contentType",
+                    "type": "STRING",
+                    "description": "Type of content HTML, WORD",
+                    "default": "HTML"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/template/template_MxatcZ\"\nquerystring = {\"title\": \"HR contact\", \"description\": \"HR contact for valuable employee\", \"tags\": \"important\", \"isAutomatic\": \"\", \"content\": \"<html><body>template content</body></html>\", \"contentType\": \"HTML\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/template/{uid}\"\nquerystring = {\"title\": \"HR contact\", \"description\": \"HR contact for valuable employee\", \"tags\": \"important\", \"isAutomatic\": \"\", \"content\": \"<html><body>template content</body></html>\", \"contentType\": \"HTML\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Use Template",
+            "url": "https://contractlive.p.rapidapi.com/template/template_MxatcZ/use",
+            "description": "Use a template to create a new negotiation.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Unique ID",
+                    "default": "template_MxatcZ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "invitationSubject",
+                    "type": "STRING",
+                    "description": "Email's subject for third parties",
+                    "default": "Hello from other company"
+                },
+                {
+                    "name": "invitationContent",
+                    "type": "STRING",
+                    "description": "Email's content for third parties",
+                    "default": "Please sign this contract I'm sending you"
+                },
+                {
+                    "name": "colleagues",
+                    "type": "STRING",
+                    "description": "Emails for colleagues, call several times to add as many emails",
+                    "default": "coworker@corp.com"
+                },
+                {
+                    "name": "thirdParties",
+                    "type": "STRING",
+                    "description": "Emails for third parties, call several times to add as many emails",
+                    "default": "partner@organization.org"
+                },
+                {
+                    "name": "title",
+                    "type": "STRING",
+                    "description": "Title of the new negotiation, use the template one by default",
+                    "default": "HR contract"
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "Description of the new negotiation, use the template one by default",
+                    "default": "This is an HR contract"
+                },
+                {
+                    "name": "tags",
+                    "type": "STRING",
+                    "description": "Tag, call several times to add as many tags, use the template one by default",
+                    "default": "important"
+                },
+                {
+                    "name": "isEditable",
+                    "type": "BOOLEAN",
+                    "description": "Is the negotiation is Editable? True by default",
+                    "default": "checked"
+                },
+                {
+                    "name": "variables",
+                    "type": "STRING",
+                    "description": "Dictionary of variables if the template is automatic. Key: variable key. Value: value to replace in the template content.",
+                    "default": "{\"nameofemployee5cc4d\": \"Charles Xavier\", \"postalcoded63f6\": \"9999\"}"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/template/template_MxatcZ/use\"\nquerystring = {\"invitationSubject\": \"Hello from other company\", \"invitationContent\": \"Please sign this contract I'm sending you\", \"colleagues\": \"coworker@corp.com\", \"thirdParties\": \"partner@organization.org\", \"title\": \"HR contract\", \"description\": \"This is an HR contract\", \"tags\": \"important\", \"isEditable\": \"checked\", \"variables\": \"{\\\"nameofemployee5cc4d\\\": \\\"Charles Xavier\\\", \\\"postalcoded63f6\\\": \\\"9999\\\"}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/template/{uid}/use\"\nquerystring = {\"invitationSubject\": \"Hello from other company\", \"invitationContent\": \"Please sign this contract I'm sending you\", \"colleagues\": \"coworker@corp.com\", \"thirdParties\": \"partner@organization.org\", \"title\": \"HR contract\", \"description\": \"This is an HR contract\", \"tags\": \"important\", \"isEditable\": \"checked\", \"variables\": \"{\\\"nameofemployee5cc4d\\\": \\\"Charles Xavier\\\", \\\"postalcoded63f6\\\": \\\"9999\\\"}\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Create Negotiation Activity",
+            "url": "https://contractlive.p.rapidapi.com/negotiation/negotiation_98h8hEH/activity",
+            "description": "",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "activity type (COMMENT)",
+                    "default": "COMMENT"
+                },
+                {
+                    "name": "data",
+                    "type": "STRING",
+                    "description": "JSON object of the activity data",
+                    "default": "{ 'text' : 'This is my comment' }"
+                },
+                {
+                    "name": "uid",
+                    "type": "STRING",
+                    "description": "Negotiation uid to put the activity into",
+                    "default": "negotiation_98h8hEH"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/negotiation_98h8hEH/activity\"\nquerystring = {\"type\": \"COMMENT\", \"data\": \"{ 'text' : 'This is my comment' }\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://contractlive.p.rapidapi.com/negotiation/{uid}/activity\"\nquerystring = {\"type\": \"COMMENT\", \"data\": \"{ 'text' : 'This is my comment' }\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"contractlive.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

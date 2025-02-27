@@ -1,0 +1,1017 @@
+{
+    "product_id": "api_bfab5f18-bcc1-4f7e-8b5d-bc9b30dd4d8c",
+    "tool_description": "This API helps to query for football, cricket, basketball, tennis, hockey matches, leagues, news, etc... to create a sporting site/application such as livescore.com",
+    "home_url": "https://rapidapi.com/apidojo/api/livescore6/",
+    "name": "LiveScore_v2",
+    "title": "LiveScore",
+    "pricing": "FREEMIUM",
+    "tool_name": "LiveScore_v2",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 2499,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "livescore6.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "matches/v2/detail (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/detail",
+            "description": "Get detail information of a match\n*The default timezone currently is UTC+7",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live endpoints",
+                    "default": "315868"
+                },
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Timezone",
+                    "type": "NUMBER",
+                    "description": "One of the following : -11|-10|-9.5|-9|-8.5|-8|-7|-6|-5|-4.5|-4|-3.5|-3|-2.5|-2|-1|0|1|2|3|3.5|4|4.5|5|5.5|5.75|6|6.5|6.75|7|7.5|8|8.5|8.75|9|9.5|9.75|10|10.5|11|11.5|12|12.5|12.75|13|13.75|14",
+                    "default": "-7"
+                },
+                {
+                    "name": "LiveTable",
+                    "type": "BOOLEAN",
+                    "description": "true|false - Whether or not include live table relating to current match",
+                    "default": "false"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/detail\"\nquerystring = {\"Timezone\": \"-7\", \"Eid\": \"315868\", \"LiveTable\": \"false\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/detail\"\nquerystring = {\"Timezone\": \"-7\", \"Eid\": \"315868\", \"LiveTable\": \"false\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "news/v2/list-by-sport",
+            "url": "https://livescore6.p.rapidapi.com/news/v2/list-by-sport",
+            "description": "List news relating to a specific sport by category",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "The value of categories -> id JSON object returned in .../news/v2/list endpoint",
+                    "default": "2021020913321150030"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "For paging purpose",
+                    "default": "1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/v2/list-by-sport\"\nquerystring = {\"category\": \"2021020913321150030\", \"page\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/v2/list-by-sport\"\nquerystring = {\"category\": \"2021020913321150030\", \"page\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/list-live",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/list-live",
+            "description": "List available live matches at request time\n* Base for Img field is https://lsm-static-prod.livescore.com/medium . Ex : https://lsm-static-prod.livescore.com/medium/enet/9906.png",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Timezone",
+                    "type": "NUMBER",
+                    "description": "One of the following : -11|-10|-9.5|-9|-8.5|-8|-7|-6|-5|-4.5|-4|-3.5|-3|-2.5|-2|-1|0|1|2|3|3.5|4|4.5|5|5.5|5.75|6|6.5|6.75|7|7.5|8|8.5|8.75|9|9.5|9.75|10|10.5|11|11.5|12|12.5|12.75|13|13.75|14",
+                    "default": "-7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/list-live\"\nquerystring = {\"Category\": \"soccer\", \"Timezone\": \"-7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/list-live\"\nquerystring = {\"Category\": \"soccer\", \"Timezone\": \"-7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-innings",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-innings",
+            "description": "Get innings of a match (for \"cricket\" as category)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "723844"
+                },
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "cricket"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-innings\"\nquerystring = {\"Eid\": \"723844\", \"Category\": \"cricket\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-innings\"\nquerystring = {\"Eid\": \"723844\", \"Category\": \"cricket\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-h2h",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-h2h",
+            "description": "Get head to head information in the past",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-h2h\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-h2h\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-table",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-table",
+            "description": "Get table",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-table\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-table\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-scoreboard",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-scoreboard",
+            "description": "Get scoreboard of a match",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                },
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-scoreboard\"\nquerystring = {\"Eid\": \"702093\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-scoreboard\"\nquerystring = {\"Eid\": \"702093\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-info",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-info",
+            "description": "Get where the match takes place",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-info\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-info\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "teams/get-team-stats",
+            "url": "https://livescore6.p.rapidapi.com/teams/get-team-stats",
+            "description": "Get team statistics relating to a competition",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ID",
+                    "type": "NUMBER",
+                    "description": "The value of ID field returned in .../competitions/detail, .../matches/v2/list-by-date, .../matches/v2/list-by-league, .../matches/v2/list-live \nOR Tid field returned in  ../get-table endpoint",
+                    "default": "3339"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "CompId",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "65"
+                },
+                {
+                    "name": "Stype",
+                    "type": "STRING",
+                    "description": "One of the following : cm-Season|ts-Tournament",
+                    "default": "cm"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/get-team-stats\"\nquerystring = {\"CompId\": \"65\", \"Stype\": \"cm\", \"ID\": \"3339\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/get-team-stats\"\nquerystring = {\"CompId\": \"65\", \"Stype\": \"cm\", \"ID\": \"3339\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "teams/get-player-stats",
+            "url": "https://livescore6.p.rapidapi.com/teams/get-player-stats",
+            "description": "Get players statistics relating to a competition",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ID",
+                    "type": "NUMBER",
+                    "description": "The value of ID field returned in .../competitions/detail, .../matches/v2/list-by-date, .../matches/v2/list-by-league, .../matches/v2/list-live \nOR Tid field returned in  ../get-table endpoint",
+                    "default": "3339"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Type",
+                    "type": "NUMBER",
+                    "description": "One of the following : 1-Goals|3-Assists|8-Shots on target|4-Red cards|6-Yellow cards",
+                    "default": ""
+                },
+                {
+                    "name": "Stype",
+                    "type": "STRING",
+                    "description": "One of the following : cm-Season|ts-Tournament",
+                    "default": "cm"
+                },
+                {
+                    "name": "CompId",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "65"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/get-player-stats\"\nquerystring = {\"Type\": \"\", \"ID\": \"3339\", \"Stype\": \"cm\", \"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/get-player-stats\"\nquerystring = {\"Type\": \"\", \"ID\": \"3339\", \"Stype\": \"cm\", \"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "teams/get-table",
+            "url": "https://livescore6.p.rapidapi.com/teams/get-table",
+            "description": "Get table of a team",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ID",
+                    "type": "NUMBER",
+                    "description": "The value of ID field returned in .../competitions/detail, .../matches/v2/list-by-date, .../matches/v2/list-by-league, .../matches/v2/list-live \nOR Tid field returned in  ../get-table endpoint",
+                    "default": "3339"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Type",
+                    "type": "STRING",
+                    "description": "One of the following : full|short",
+                    "default": "short"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/get-table\"\nquerystring = {\"Type\": \"short\", \"ID\": \"3339\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/get-table\"\nquerystring = {\"Type\": \"short\", \"ID\": \"3339\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "teams/detail",
+            "url": "https://livescore6.p.rapidapi.com/teams/detail",
+            "description": "Get team information, recent and up coming matches",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ID",
+                    "type": "NUMBER",
+                    "description": "The value of ID field returned in .../competitions/detail, .../matches/v2/list-by-date, .../matches/v2/list-by-league, .../matches/v2/list-live \nOR Tid field returned in  ../get-table endpoint",
+                    "default": "3339"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/detail\"\nquerystring = {\"ID\": \"3339\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/teams/detail\"\nquerystring = {\"ID\": \"3339\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "competitions/get-team-stats",
+            "url": "https://livescore6.p.rapidapi.com/competitions/get-team-stats",
+            "description": "Get teams statistics in a competition",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "CompId",
+                    "type": "NUMBER",
+                    "description": "The value of Stages -> CompId field returned in .../leagues/v2/list or .../leagues/v2/get-table or .../matches/v2/list-by-date or .../matches/v2/list-by-league or .../matches/v2/list-live endpoint",
+                    "default": "65"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Type",
+                    "type": "NUMBER",
+                    "description": "One of the following : 10-goals scored|7-Goals conceded|1-Average possession|21-Shots on target|22-Total shots|16-Red cards|23-Yellow cards",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/get-team-stats\"\nquerystring = {\"Type\": \"\", \"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/get-team-stats\"\nquerystring = {\"Type\": \"\", \"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "competitions/get-player-stats",
+            "url": "https://livescore6.p.rapidapi.com/competitions/get-player-stats",
+            "description": "Get players statistics in a competition",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "CompId",
+                    "type": "NUMBER",
+                    "description": "The value of Stages -> CompId field returned in .../leagues/v2/list or .../leagues/v2/get-table or .../matches/v2/list-by-date or .../matches/v2/list-by-league or .../matches/v2/list-live endpoint",
+                    "default": "65"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Type",
+                    "type": "NUMBER",
+                    "description": "One of the following : 1-Goals|3-Assists|8-Shots on target|4-Red cards|6-Yellow cards",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/get-player-stats\"\nquerystring = {\"CompId\": \"65\", \"Type\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/get-player-stats\"\nquerystring = {\"CompId\": \"65\", \"Type\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "competitions/get-table",
+            "url": "https://livescore6.p.rapidapi.com/competitions/get-table",
+            "description": "Get table relating to a competition",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "CompId",
+                    "type": "NUMBER",
+                    "description": "The value of Stages -> CompId field returned in .../leagues/v2/list or .../leagues/v2/get-table or .../matches/v2/list-by-date or .../matches/v2/list-by-league or .../matches/v2/list-live endpoint",
+                    "default": "65"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/get-table\"\nquerystring = {\"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/get-table\"\nquerystring = {\"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "competitions/detail",
+            "url": "https://livescore6.p.rapidapi.com/competitions/detail",
+            "description": "Get competition information, recent and up coming matches",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "CompId",
+                    "type": "NUMBER",
+                    "description": "The value of Stages -> CompId field returned in .../leagues/v2/list or .../leagues/v2/get-table or .../matches/v2/list-by-date or .../matches/v2/list-by-league or .../matches/v2/list-live endpoint",
+                    "default": "65"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Timezone",
+                    "type": "NUMBER",
+                    "description": "One of the following : -11|-10|-9.5|-9|-8.5|-8|-7|-6|-5|-4.5|-4|-3.5|-3|-2.5|-2|-1|0|1|2|3|3.5|4|4.5|5|5.5|5.75|6|6.5|6.75|7|7.5|8|8.5|8.75|9|9.5|9.75|10|10.5|11|11.5|12|12.5|12.75|13|13.75|14",
+                    "default": "-7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/detail\"\nquerystring = {\"Timezone\": \"-7\", \"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/competitions/detail\"\nquerystring = {\"Timezone\": \"-7\", \"CompId\": \"65\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "matches/list-by-league (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/matches/list-by-league",
+            "description": "List all matches by specific league",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "league",
+                    "type": "STRING",
+                    "description": "The value of Ccd field at top level that responded in leagues/list API",
+                    "default": "england"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/list-by-league\"\nquerystring = {\"category\": \"soccer\", \"league\": \"england\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/list-by-league\"\nquerystring = {\"category\": \"soccer\", \"league\": \"england\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "matches/get-table (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/matches/get-table",
+            "description": "Get table of related match",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "p",
+                    "type": "STRING",
+                    "description": "The value of Stages/Events/IDs/p field responded in .../matches/list-by-league or .../matches/list-by-date or .../matches/list-live endpoint",
+                    "default": "1"
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "The value of Stages/Events/IDs/ID field responded in .../matches/list-by-league or .../matches/list-by-date or .../matches/list-live endpoint",
+                    "default": "3065852"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/get-table\"\nquerystring = {\"p\": \"1\", \"category\": \"soccer\", \"id\": \"3065852\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/get-table\"\nquerystring = {\"p\": \"1\", \"category\": \"soccer\", \"id\": \"3065852\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "matches/v2/list-by-date",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/list-by-date",
+            "description": "List all matches by specific date\n* Base for Img field is https://lsm-static-prod.livescore.com/medium . Ex : https://lsm-static-prod.livescore.com/medium/enet/9906.png",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Date",
+                    "type": "STRING",
+                    "description": "The date string with following format yyyyMMdd",
+                    "default": "20201028"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Timezone",
+                    "type": "NUMBER",
+                    "description": "One of the following : -11|-10|-9.5|-9|-8.5|-8|-7|-6|-5|-4.5|-4|-3.5|-3|-2.5|-2|-1|0|1|2|3|3.5|4|4.5|5|5.5|5.75|6|6.5|6.75|7|7.5|8|8.5|8.75|9|9.5|9.75|10|10.5|11|11.5|12|12.5|12.75|13|13.75|14",
+                    "default": "-7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/list-by-date\"\nquerystring = {\"Category\": \"soccer\", \"Date\": \"20201028\", \"Timezone\": \"-7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/list-by-date\"\nquerystring = {\"Category\": \"soccer\", \"Date\": \"20201028\", \"Timezone\": \"-7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/detail (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/matches/detail",
+            "description": "Get detail information of a match",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "The value of Stages/Events/IDs/ID field responded in .../matches/list-by-league or .../matches/list-by-date or .../matches/list-live endpoint",
+                    "default": "922226"
+                },
+                {
+                    "name": "p",
+                    "type": "NUMBER",
+                    "description": "The value of Stages/Events/IDs/p field responded in .../matches/list-by-league or .../matches/list-by-date or .../matches/list-live endpoint",
+                    "default": "5"
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/detail\"\nquerystring = {\"id\": \"922226\", \"p\": \"5\", \"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/detail\"\nquerystring = {\"id\": \"922226\", \"p\": \"5\", \"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "matches/v2/get-lineups",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-lineups",
+            "description": "Get match line-ups",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                },
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-lineups\"\nquerystring = {\"Eid\": \"702093\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-lineups\"\nquerystring = {\"Eid\": \"702093\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "news/list (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/news/list",
+            "description": "List all news of specific category",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "key",
+                    "type": "STRING",
+                    "description": "Pass empty for init request, or value of key field returned right in this API to load the next records",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/list\"\nquerystring = {\"category\": \"soccer\", \"key\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/list\"\nquerystring = {\"category\": \"soccer\", \"key\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "news/v2/list",
+            "url": "https://livescore6.p.rapidapi.com/news/v2/list",
+            "description": "List latest news relating to all sports at once",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/v2/list\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/v2/list\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "news/v2/detail",
+            "url": "https://livescore6.p.rapidapi.com/news/v2/detail",
+            "description": "Get news content",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "The value of articles -> id field returned in .../news/v2/list or .../news/v2/list-by-sport",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/v2/detail\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/news/v2/detail\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/list-by-league",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/list-by-league",
+            "description": "List all matches by specific league and table\n* Base for Img field is https://lsm-static-prod.livescore.com/medium . Ex : https://lsm-static-prod.livescore.com/medium/enet/9906.png",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Ccd",
+                    "type": "STRING",
+                    "description": "The value of Ccd field that responded in .../leagues/v2/list or .../matches/v2/list-by-date endpoints.",
+                    "default": "champions-league"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Scd",
+                    "type": "STRING",
+                    "description": "The value of Scd field that responded in .../leagues/v2/list or .../matches/v2/list-by-date endpoints.",
+                    "default": "group-b"
+                },
+                {
+                    "name": "Timezone",
+                    "type": "NUMBER",
+                    "description": "One of the following : -11|-10|-9.5|-9|-8.5|-8|-7|-6|-5|-4.5|-4|-3.5|-3|-2.5|-2|-1|0|1|2|3|3.5|4|4.5|5|5.5|5.75|6|6.5|6.75|7|7.5|8|8.5|8.75|9|9.5|9.75|10|10.5|11|11.5|12|12.5|12.75|13|13.75|14",
+                    "default": "-7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/list-by-league\"\nquerystring = {\"Category\": \"soccer\", \"Scd\": \"group-b\", \"Ccd\": \"champions-league\", \"Timezone\": \"-7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/list-by-league\"\nquerystring = {\"Category\": \"soccer\", \"Scd\": \"group-b\", \"Ccd\": \"champions-league\", \"Timezone\": \"-7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/list-live (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/matches/list-live",
+            "description": "List available live matches at request time",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/list-live\"\nquerystring = {\"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/list-live\"\nquerystring = {\"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "matches/list-by-date (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/matches/list-by-date",
+            "description": "List all matches by specific date",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "The date string with following format yyyy-MM-dd",
+                    "default": "2019-08-04"
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/list-by-date\"\nquerystring = {\"date\": \"2019-08-04\", \"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/list-by-date\"\nquerystring = {\"date\": \"2019-08-04\", \"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "matches/v2/get-pregame-form",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-pregame-form",
+            "description": "Get pregame form of competitors",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-pregame-form\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-pregame-form\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-statistics",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-statistics",
+            "description": "Get statistics of a match",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-statistics\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-statistics\"\nquerystring = {\"Category\": \"soccer\", \"Eid\": \"702093\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-commentary",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-commentary",
+            "description": "Get comments in a match",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702193"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-commentary\"\nquerystring = {\"Eid\": \"702193\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-commentary\"\nquerystring = {\"Eid\": \"702193\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "leagues/list (Deprecated)",
+            "url": "https://livescore6.p.rapidapi.com/leagues/list",
+            "description": "List all leagues by category (football, cricket, basketball, tennis, hockey)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/leagues/list\"\nquerystring = {\"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/leagues/list\"\nquerystring = {\"category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "leagues/v2/list",
+            "url": "https://livescore6.p.rapidapi.com/leagues/v2/list",
+            "description": "List all leagues by category (football, cricket, basketball, tennis, hockey)\n* Base for Img field is https://lsm-static-prod.livescore.com/medium . Ex : https://lsm-static-prod.livescore.com/medium/enet/9906.png",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/leagues/v2/list\"\nquerystring = {\"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/leagues/v2/list\"\nquerystring = {\"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "leagues/v2/get-table",
+            "url": "https://livescore6.p.rapidapi.com/leagues/v2/get-table",
+            "description": "Get table league by category (football, cricket, basketball, tennis, hockey) and competition\n* Base for Img field is https://lsm-static-prod.livescore.com/medium . Ex : https://lsm-static-prod.livescore.com/medium/enet/9906.png",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Ccd",
+                    "type": "STRING",
+                    "description": "The value of Ccd field returned in .../leagues/v2/list endpoint",
+                    "default": "england"
+                },
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                },
+                {
+                    "name": "Scd",
+                    "type": "STRING",
+                    "description": "The value of Scd field returned in .../leagues/v2/list endpoint",
+                    "default": "premier-league"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/leagues/v2/get-table\"\nquerystring = {\"Ccd\": \"england\", \"Category\": \"soccer\", \"Scd\": \"premier-league\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/leagues/v2/get-table\"\nquerystring = {\"Ccd\": \"england\", \"Category\": \"soccer\", \"Scd\": \"premier-league\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "matches/v2/get-incidents",
+            "url": "https://livescore6.p.rapidapi.com/matches/v2/get-incidents",
+            "description": "Get incidents in a match",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "Eid",
+                    "type": "NUMBER",
+                    "description": "The value of Eid field returned in .../matches/v2/list-by-league or .../matches/v2/list-by-date or .../matches/v2/list-live or .../competitions/detail endpoint",
+                    "default": "702093"
+                },
+                {
+                    "name": "Category",
+                    "type": "STRING",
+                    "description": "One of the followings : soccer|cricket|basketball|tennis|hockey",
+                    "default": "soccer"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-incidents\"\nquerystring = {\"Eid\": \"702093\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://livescore6.p.rapidapi.com/matches/v2/get-incidents\"\nquerystring = {\"Eid\": \"702093\", \"Category\": \"soccer\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"livescore6.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ],
+    "standardized_name": "livescore_v2"
+}

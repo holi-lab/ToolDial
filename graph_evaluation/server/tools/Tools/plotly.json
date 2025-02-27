@@ -1,0 +1,69 @@
+{
+    "product_id": "53aa5750e4b051a76d240dd1",
+    "tool_description": "Scientific graphing and plotting libraries for making interactive, web-ready, publication-quality graphs. \r\n\r\nYour data and graphs are always together. This means you can code, analyze, store, share, and collaborate in Plotly. Available for Python, R, MATLAB, Arduino, REST, Julia, and Perl.",
+    "home_url": "https://rapidapi.com/plotly/api/plotly-1/",
+    "name": "Plotly",
+    "title": "Plotly",
+    "pricing": "FREE",
+    "tool_name": "Plotly",
+    "score": null,
+    "host": "plotly-plotly.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Graph Response",
+            "url": "https://plotly-plotly.p.rapidapi.com/",
+            "description": "Make graphs in your browser! Send data to your Plotly account and receive a url where you can visit and share you graph! See https://plot.ly/api/rest for more details.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "un",
+                    "type": "STRING",
+                    "description": "Plotly username",
+                    "default": "anna.lyst"
+                },
+                {
+                    "name": "api_key",
+                    "type": "STRING",
+                    "description": "API key. Generated from a apimkacct POST or available in a user's settings pane.",
+                    "default": ""
+                },
+                {
+                    "name": "origin",
+                    "type": "STRING",
+                    "description": "\"plot\", \"style\", or \"layout\".",
+                    "default": "plot"
+                },
+                {
+                    "name": "platform",
+                    "type": "STRING",
+                    "description": "Language or platform that the client is making the request from.",
+                    "default": "python"
+                },
+                {
+                    "name": "version",
+                    "type": "STRING",
+                    "description": "Version of the API client code. This parameter may be used to issue a warning response to users that are using an out-of-date client library.",
+                    "default": "0.2"
+                },
+                {
+                    "name": "args",
+                    "type": "STRING",
+                    "description": "Data and/or styling argument. The structure of args depends on the value of origin. If origin=plot: Either args=[x1, y1[, ..., xn, yn]] where xi, yi are arrays of numbers or strings or args=[data1[, ... datan]] where datai is a JSON object with at least the names x, y, or z but may contain more styling and chart-type data. See the examples below for many examples.  If origin=style: args=[style1[,style2, ...]] where stylei is a JSON object that customizes the style of the i'th trace. It is identical to the datai object used in origin=plot except that it doesn't contain the data key-value pairs x, y, or z.  If origin=layout: args=layout where layout is an object that customizes the style of the layout, the axes, and the legend.",
+                    "default": "[{\"x\": [0, 1, 2], \"y\": [3, 1, 6], \"name\": \"Experimental\", \"marker\": {\"symbol\": \"square\", \"color\": \"purple\"}}, {\"x\": [1, 2, 3], \"y\": [3, 4, 5], \"name\": \"Control\"}]"
+                },
+                {
+                    "name": "kwargs",
+                    "type": "STRING",
+                    "description": "Options as a key-value JSON object.  key\tvalue filename  required  Name of the plot in your plotly account. Use / to specify directories. If a directory path does not exist it will be created. Example Values  {\"filename\": \"plot from api\"}, {\"filename\": \"data/temperature vs humidity\"}  fileopt  required  \"new\", \"overwrite\", \"append\", or \"extend\" See below for an illustrative example of these values. style  optional  The trace-style object as described above and in the examples. The style object is applied to every single trace (default) or to the traces specified in the optional traces key-value pair. Example Values  Apply style to all traces, e.g. make every trace a bar type: {\"style\":{\"type\": \"bar\"}}  Apply style to select traces by index, e.g. make traces 0, 1, and 5 a bar type plot: {\"style\": {\"type\": \"bar\"},\"traces\": [0,1,5]}  Apply style to select traces by name, e.g. make the traces titled \"experimental\" and \"control\" a bar type: {\"style\": [{\"name\": \"experiment\", \"type\": \"bar\"},{\"name\": \"control\", \"type\": \"bar\"}]} traces  optionally used with style  traces specifies the indices that the style object should be applied to. layout  a key-value paired object that describes the layout of the plot. See below for an example that specifies all available key-value pairs.  Example Values  {\"title\": \"my plot title\", \"xaxis\": {\"name\": \"Time (ms)\"}, \"yaxis\": {\"name\": \"Voltage (mV)\"}} world_readable  optional (default: true)  If true: graph is viewable by anyone who has the link and in the owner's plotly account. If false: graph is only viewable in the owner's plotly account.",
+                    "default": "kwargs={     \"filename\": \"plot from api\",     \"fileopt\": \"overwrite\",     \"style\": {         \"type\": \"bar\"     },     \"traces\": [0,3,5],     \"layout\": {         \"title\": \"experimental data\"     },     \"world_readable\": true }"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://plotly-plotly.p.rapidapi.com/\"\nquerystring = {\"un\": \"anna.lyst\", \"api_key\": \"\", \"origin\": \"plot\", \"platform\": \"python\", \"version\": \"0.2\", \"args\": \"[{\\\"x\\\": [0, 1, 2], \\\"y\\\": [3, 1, 6], \\\"name\\\": \\\"Experimental\\\", \\\"marker\\\": {\\\"symbol\\\": \\\"square\\\", \\\"color\\\": \\\"purple\\\"}}, {\\\"x\\\": [1, 2, 3], \\\"y\\\": [3, 4, 5], \\\"name\\\": \\\"Control\\\"}]\", \"kwargs\": \"kwargs={     \\\"filename\\\": \\\"plot from api\\\",     \\\"fileopt\\\": \\\"overwrite\\\",     \\\"style\\\": {         \\\"type\\\": \\\"bar\\\"     },     \\\"traces\\\": [0,3,5],     \\\"layout\\\": {         \\\"title\\\": \\\"experimental data\\\"     },     \\\"world_readable\\\": true }\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"plotly-plotly.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://plotly-plotly.p.rapidapi.com/\"\nquerystring = {\"un\": \"anna.lyst\", \"api_key\": \"\", \"origin\": \"plot\", \"platform\": \"python\", \"version\": \"0.2\", \"args\": \"[{\\\"x\\\": [0, 1, 2], \\\"y\\\": [3, 1, 6], \\\"name\\\": \\\"Experimental\\\", \\\"marker\\\": {\\\"symbol\\\": \\\"square\\\", \\\"color\\\": \\\"purple\\\"}}, {\\\"x\\\": [1, 2, 3], \\\"y\\\": [3, 4, 5], \\\"name\\\": \\\"Control\\\"}]\", \"kwargs\": \"kwargs={     \\\"filename\\\": \\\"plot from api\\\",     \\\"fileopt\\\": \\\"overwrite\\\",     \\\"style\\\": {         \\\"type\\\": \\\"bar\\\"     },     \\\"traces\\\": [0,3,5],     \\\"layout\\\": {         \\\"title\\\": \\\"experimental data\\\"     },     \\\"world_readable\\\": true }\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"plotly-plotly.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

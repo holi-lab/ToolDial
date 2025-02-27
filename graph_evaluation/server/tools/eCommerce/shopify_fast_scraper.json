@@ -1,0 +1,90 @@
+{
+    "tool_name":"Shopify Fast Scraper",
+    "tool_description":"Get the JSON product, collection or full shop simply from the online shopify url (and fast).",
+    "title":"Shopify Fast Scraper",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":189,
+        "avgSuccessRate":100,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/ardechoft-inc-ardechoft-inc-default/api/shopify-fast-scraper/",
+    "host":"shopify-fast-scraper.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get the store's products",
+            "url":"https://shopify-fast-scraper.p.rapidapi.com/store",
+            "description":"Return the Shopify store as a JSON object from the online url of the store. The collections are returned and each collection contains the products linked to the collection. Pages of five collections are returned at a time else the JSON object gets really big. If no page is passed as parameter the first one is retrieved (page 0). Each query will return the current_page, the page_start and page_end.\n\nIf a collection has more than 500 products, only the url of the products are returned and not the full products data. For each product url the endpoint /product can then be used with the product url in order to get the full product data.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://shop.flipperzero.one/"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"groupByCollection",
+                    "type":"BOOLEAN",
+                    "description":"It is true by default, the products are returned per collection. If products are not part of a collection they will not be returned. By setting groupByCollection to false, you will get a page of 30 products, incrementing the page number will get you the other products, once you receive an empty array as products, it means there are no more page available.",
+                    "default":"true"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://shopify-fast-scraper.p.rapidapi.com/store\"\nquerystring = {\"groupByCollection\": groupbycollection, \"url\": url, \"page\": page}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"shopify-fast-scraper.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get the collection's products",
+            "url":"https://shopify-fast-scraper.p.rapidapi.com/collection",
+            "description":"Return the Shopify collection as a JSON object from the online url of the collection. All the products of the collection are also returned.\n\nIf a collection has more than 500 products, only the url of the products are returned and not the full products data. For each product url the endpoint /product can then be used with the product url in order to get the full product data.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://shop.flipperzero.one/collections/flipper-zero-accessories"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://shopify-fast-scraper.p.rapidapi.com/collection\"\nquerystring = {\"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"shopify-fast-scraper.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Product",
+            "url":"https://shopify-fast-scraper.p.rapidapi.com/product",
+            "description":"Return the Shopify product as a JSON object from the online url of the product.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"https://shop.flipperzero.one/collections/all/products/flipper-zero"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://shopify-fast-scraper.p.rapidapi.com/product\"\nquerystring = {\"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"shopify-fast-scraper.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "tool_name": "Song Finder",
+    "tool_description": "Simple API for searching audio with broken metadata in media services. Posted task will convert your audio, with broken metadata, into a media service link. Currently only Spotify media service is supported.",
+    "title": "Song Finder",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 0,
+        "avgLatency": 127258,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.1,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/schednie/api/song-finder1/",
+    "host": "song-finder1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "getRescueTaskUsingGET",
+            "url": "https://song-finder1.p.rapidapi.com/task/{taskid}",
+            "description": "Gets result of posted task",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "taskId",
+                    "type": "STRING",
+                    "description": "ID of posted task",
+                    "default": "cd28ad1f-f931-4aeb-9499-ea3b0a85f5c6"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://song-finder1.p.rapidapi.com/task/{taskid}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"song-finder1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "error": "",
+                "rescueTaskStatus": "COMPLETED",
+                "rescuedAudio": {
+                    "author": "",
+                    "mediaService": "SPOTIFY",
+                    "rescuedUrl": "",
+                    "title": ""
+                }
+            },
+            "headers": {
+                "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+                "content-type": "application/json",
+                "date": "Sun, 07 Jun 2020 08:56:46 GMT",
+                "expires": "0",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.1.13",
+                "x-content-type-options": "nosniff",
+                "x-frame-options": "DENY",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.1.13",
+                "x-xss-protection": "1; mode=block",
+                "content-length": "232",
+                "connection": "Close"
+            },
+            "schema": {
+                "properties": {
+                    "error": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "format": "uuid",
+                        "type": "string"
+                    },
+                    "rescueTaskStatus": {
+                        "enum": [
+                            "COMPLETED",
+                            "PROCESSING",
+                            "FAILED"
+                        ],
+                        "type": "string"
+                    },
+                    "rescuedAudio": {
+                        "properties": {
+                            "author": {
+                                "type": "string"
+                            },
+                            "mediaService": {
+                                "enum": [
+                                    "SPOTIFY",
+                                    "YOUTUBE"
+                                ],
+                                "type": "string"
+                            },
+                            "rescuedUrl": {
+                                "type": "string"
+                            },
+                            "title": {
+                                "type": "string"
+                            }
+                        },
+                        "title": "RescuedAudioDto",
+                        "type": "object"
+                    }
+                },
+                "title": "RescueTaskDto",
+                "type": "object"
+            }
+        },
+        {
+            "name": "createRescueTaskUsingPOST",
+            "url": "https://song-finder1.p.rapidapi.com/task",
+            "description": "Creates a new task.\nRecieves a JSON with one attribute 'contentBase64' - audio file bytes encoded in base64 format.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "mediaService",
+                    "type": "STRING",
+                    "description": "Media service to search in. Currently SPOTIFY is only supported. TBD",
+                    "default": "SPOTIFY"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://song-finder1.p.rapidapi.com/task\"\nquerystring = {\"mediaService\": \"SPOTIFY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"song-finder1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://song-finder1.p.rapidapi.com/task\"\nquerystring = {\"mediaService\": \"SPOTIFY\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"song-finder1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

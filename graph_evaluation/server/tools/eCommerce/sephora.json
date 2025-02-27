@@ -1,0 +1,934 @@
+{
+    "tool_name":"Sephora",
+    "tool_description":"Help to query for skincare, makeup shopping, hybrid products, hair products, fragrance, etc... as on sephora.com",
+    "title":"Sephora",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":99,
+        "avgLatency":2284,
+        "avgSuccessRate":99,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/sephora/",
+    "host":"sephora.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"us/products/v2/detail",
+            "url":"https://sephora.p.rapidapi.com/us/products/v2/detail",
+            "description":"Get details of product by id",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"productId",
+                    "type":"STRING",
+                    "description":"The value of productId returned in .../products/list or .../products/search endpoint",
+                    "default":"P442563"
+                },
+                {
+                    "name":"preferedSku",
+                    "type":"STRING",
+                    "description":"The value of skuId field returned in .../products/list or .../products/search endpoint",
+                    "default":"2210607"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/us/products/v2/detail\"\nquerystring = {\"productId\": productid, \"preferedSku\": preferedsku}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"us/products/v2/search",
+            "url":"https://sephora.p.rapidapi.com/us/products/v2/search",
+            "description":"Search products by term or phrase with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"Any term or phrase to search for relating products",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"60"
+                },
+                {
+                    "name":"ref",
+                    "type":"STRING",
+                    "description":"The value of refinementValue fields returned right in this endpoint. Pass this parameter several times for multiple filters. Ex : ...&ref=filters[Brand]=Shark Beauty&ref=filters[Brand]=ghd&...",
+                    "default":""
+                },
+                {
+                    "name":"currentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following : P&#95;BEST&#95;SELLING:0|P&#95;BEST&#95;SELLING:1|P&#95;PROD&#95;NAME:0|P&#95;PROD&#95;NAME:1|P&#95;NEW:1|P&#95;NEW:0|P&#95;START&#95;DATE:1|P&#95;START&#95;DATE:0|P&#95;RATING:0|P&#95;RATING:1|P&#95;SEPH&#95;EXCLUSIVE:1|P&#95;SEPH&#95;EXCLUSIVE:0|price:1|price:00 or 1 value means asc or desc\n",
+                    "default":""
+                },
+                {
+                    "name":"pl",
+                    "type":"NUMBER",
+                    "description":"Filter by min price. Check \\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                },
+                {
+                    "name":"node",
+                    "type":"STRING",
+                    "description":"The value of categoryId returned in .../categories/list or .../categories/list-root",
+                    "default":""
+                },
+                {
+                    "name":"ph",
+                    "type":"NUMBER",
+                    "description":"Filter by max price. Check \\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/us/products/v2/search\"\nquerystring = {\"pageSize\": pagesize, \"currentPage\": currentpage, \"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"us/products/v2/list",
+            "url":"https://sephora.p.rapidapi.com/us/products/v2/list",
+            "description":"List products with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"categoryId",
+                    "type":"STRING",
+                    "description":"The value of categoryId returned in .../categories/list or .../categories/list-root",
+                    "default":"cat1080037"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"ref",
+                    "type":"STRING",
+                    "description":"The value of refinementValue fields returned right in this endpoint. Pass this parameter several times for multiple filters. Ex : ...&ref=filters[Brand]=Shark Beauty&ref=filters[Brand]=ghd&...",
+                    "default":""
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"60"
+                },
+                {
+                    "name":"currentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following : P&#95;BEST&#95;SELLING:0|P&#95;BEST&#95;SELLING:1|P&#95;PROD&#95;NAME:0|P&#95;PROD&#95;NAME:1|P&#95;NEW:1|P&#95;NEW:0|P&#95;START&#95;DATE:1|P&#95;START&#95;DATE:0|P&#95;RATING:0|P&#95;RATING:1|P&#95;SEPH&#95;EXCLUSIVE:1|P&#95;SEPH&#95;EXCLUSIVE:0|price:1|price:0\n0 or 1 value means asc or desc",
+                    "default":""
+                },
+                {
+                    "name":"ph",
+                    "type":"NUMBER",
+                    "description":"Filter by max price. Check \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                },
+                {
+                    "name":"pl",
+                    "type":"NUMBER",
+                    "description":"Filter by min price. Check \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/us/products/v2/list\"\nquerystring = {\"pageSize\": pagesize, \"categoryId\": categoryid, \"currentPage\": currentpage}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"reviews/list",
+            "url":"https://sephora.p.rapidapi.com/reviews/list",
+            "description":"List reviews relating to specific product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ProductId",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"P454378"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"RatingValue",
+                    "type":"NUMBER",
+                    "description":"Filter by rating score from 1 to 5",
+                    "default":""
+                },
+                {
+                    "name":"Offset",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"0"
+                },
+                {
+                    "name":"Limit",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"60"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/reviews/list\"\nquerystring = {\"ProductId\": productid, \"Offset\": offset, \"Limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/check-availability",
+            "url":"https://sephora.p.rapidapi.com/products/check-availability",
+            "description":"Check availability of specific product around a location",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"Latitude of GEO location to search for nearest stocked stores",
+                    "default":"33.9733"
+                },
+                {
+                    "name":"skuId",
+                    "type":"STRING",
+                    "description":"The value of skuId field returned in .../products/list or .../products/search endpoint",
+                    "default":"2210607"
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"Longitude of GEO location to search for nearest stocked stores",
+                    "default":"-118.2487"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"The radious around the GEO location to search for stores",
+                    "default":"25"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/check-availability\"\nquerystring = {\"latitude\": latitude, \"skuId\": skuid, \"longitude\": longitude, \"radius\": radius}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/search-by-barcode",
+            "url":"https://sephora.p.rapidapi.com/products/search-by-barcode",
+            "description":"Search product by barcode (UPC)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"upccode",
+                    "type":"STRING",
+                    "description":"The scanned code (UPC)",
+                    "default":"00725272730706"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/search-by-barcode\"\nquerystring = {\"upccode\": upccode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/search (Deprecated)",
+            "url":"https://sephora.p.rapidapi.com/products/search",
+            "description":"Search products by term or phrase with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"Any term or phrase to search for relating products",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following : P&#95;BEST&#95;SELLING:0|P&#95;BEST&#95;SELLING:1|P&#95;PROD&#95;NAME:0|P&#95;PROD&#95;NAME:1|P&#95;NEW:1|P&#95;NEW:0|P&#95;START&#95;DATE:1|P&#95;START&#95;DATE:0|P&#95;RATING:0|P&#95;RATING:1|P&#95;SEPH&#95;EXCLUSIVE:1|P&#95;SEPH&#95;EXCLUSIVE:0|price:1|price:00 or 1 value means asc or desc\n",
+                    "default":""
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"60"
+                },
+                {
+                    "name":"pl",
+                    "type":"NUMBER",
+                    "description":"Filter by min price. Check \\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                },
+                {
+                    "name":"ref",
+                    "type":"STRING",
+                    "description":"The value of refinementValueId fields returned right in this endpoint. Pass this parameter several times for multiple filters. Ex : ...&ref=21972988&ref=5024296&...",
+                    "default":""
+                },
+                {
+                    "name":"currentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"node",
+                    "type":"STRING",
+                    "description":"The value of categoryId returned in .../categories/list or .../categories/list-root",
+                    "default":""
+                },
+                {
+                    "name":"ph",
+                    "type":"NUMBER",
+                    "description":"Filter by max price. Check \\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/search\"\nquerystring = {\"pageSize\": pagesize, \"currentPage\": currentpage, \"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/list (Deprecated)",
+            "url":"https://sephora.p.rapidapi.com/products/list",
+            "description":"List products with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"categoryId",
+                    "type":"STRING",
+                    "description":"The value of categoryId returned in .../categories/list or .../categories/list-root",
+                    "default":"cat150006"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"currentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"ref",
+                    "type":"STRING",
+                    "description":"The value of refinementValueId fields returned right in this endpoint. Pass this parameter several times for multiple filters. Ex : ...&ref=21972988&ref=5024296&...",
+                    "default":""
+                },
+                {
+                    "name":"pl",
+                    "type":"NUMBER",
+                    "description":"Filter by min price. Check \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                },
+                {
+                    "name":"ph",
+                    "type":"NUMBER",
+                    "description":"Filter by max price. Check \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"price range\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" under refinements JSON object for suitable price range.",
+                    "default":""
+                },
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following : P&#95;BEST&#95;SELLING:0|P&#95;BEST&#95;SELLING:1|P&#95;PROD&#95;NAME:0|P&#95;PROD&#95;NAME:1|P&#95;NEW:1|P&#95;NEW:0|P&#95;START&#95;DATE:1|P&#95;START&#95;DATE:0|P&#95;RATING:0|P&#95;RATING:1|P&#95;SEPH&#95;EXCLUSIVE:1|P&#95;SEPH&#95;EXCLUSIVE:0|price:1|price:0\n0 or 1 value means asc or desc",
+                    "default":""
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"60"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/list\"\nquerystring = {\"currentPage\": currentpage, \"categoryId\": categoryid, \"pageSize\": pagesize}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/list",
+            "url":"https://sephora.p.rapidapi.com/categories/list",
+            "description":"List categories and its recursive.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"categoryId",
+                    "type":"STRING",
+                    "description":"The value of categoryId returned right in this endpoint or .../categories/list-root endpoint",
+                    "default":"cat150006"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/categories/list\"\nquerystring = {\"categoryId\": categoryid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"reviews/v2/list",
+            "url":"https://sephora.p.rapidapi.com/reviews/v2/list",
+            "description":"List reviews related to a product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../products/v2/list endpoint.",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"sort",
+                    "type":"STRING",
+                    "description":"One of the following : recent|-recent",
+                    "default":"recent"
+                },
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"The number of items per response for paging purpose",
+                    "default":"10"
+                },
+                {
+                    "name":"number",
+                    "type":"NUMBER",
+                    "description":"The page index for paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"native",
+                    "type":"BOOLEAN",
+                    "description":"true - Exclude Sephora US reviews",
+                    "default":""
+                },
+                {
+                    "name":"variants",
+                    "type":"NUMBER",
+                    "description":"The value of variant -> data -> id field returned right in this endpoint. To filter reviews related to specific product variant.",
+                    "default":""
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/reviews/v2/list\"\nquerystring = {\"id\": id, \"country\": country, \"sort\": sort, \"size\": size, \"number\": number, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/detail",
+            "url":"https://sephora.p.rapidapi.com/products/v2/detail",
+            "description":"Get detailed information of a product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../products/v2/list endpoint.",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/v2/detail\"\nquerystring = {\"country\": country, \"id\": id, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/list",
+            "url":"https://sephora.p.rapidapi.com/products/v2/list",
+            "description":"List products with options and filters",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"number",
+                    "type":"NUMBER",
+                    "description":"The page index for paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Search product by term. Ex : bikini top",
+                    "default":""
+                },
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"The number of items per response for paging purpose",
+                    "default":"30"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"sort",
+                    "type":"STRING",
+                    "description":"One of the following : relevance|sales|published_at|rating|price|-price",
+                    "default":"sales"
+                },
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"The value of \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\" field returned in .../brands/v2/list. Separated by comma for multiple options. Ex : 266,2636",
+                    "default":""
+                },
+                {
+                    "name":"product_group",
+                    "type":"STRING",
+                    "description":"One of the following : new-arrivals|bestsellers",
+                    "default":""
+                },
+                {
+                    "name":"min_price",
+                    "type":"NUMBER",
+                    "description":"Filter products by price",
+                    "default":""
+                },
+                {
+                    "name":"others",
+                    "type":"STRING",
+                    "description":"Support only value : on_sale",
+                    "default":""
+                },
+                {
+                    "name":"category",
+                    "type":"STRING",
+                    "description":"The value of \\\\\\\"id\\\\\\\" field returned in .../categories/v2/list endpoint. Separated by comma for multiple options. Ex : 801,805",
+                    "default":""
+                },
+                {
+                    "name":"max_price",
+                    "type":"NUMBER",
+                    "description":"Filter products by price",
+                    "default":""
+                },
+                {
+                    "name":"root_brand",
+                    "type":"STRING",
+                    "description":"The value of \\\\\\\\\\\\\\\"slug-url\\\\\\\\\\\\\\\" field returned in .../brands/v2/list endpoint. Ex : aerin",
+                    "default":""
+                },
+                {
+                    "name":"root_category",
+                    "type":"STRING",
+                    "description":"The value of \\\\\\\\\\\\\\\"slug-url\\\\\\\\\\\\\\\" field returned in .../categories/v2/list. Ex : makeup",
+                    "default":""
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                },
+                {
+                    "name":"filter_type",
+                    "type":"STRING",
+                    "description":"Filter products by types, the format is {id of filter-type}_{id of filter-value} returned in  .../products/v2/get-filters endpoint. Separated by comma for multiple options. Ex : 41_684,41_686,38_714,38_504",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/v2/list\"\nquerystring = {\"number\": number, \"size\": size, \"country\": country, \"sort\": sort, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/v2/list",
+            "url":"https://sephora.p.rapidapi.com/categories/v2/list",
+            "description":"List categories",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"The number of items per response for paging purpose",
+                    "default":"100"
+                },
+                {
+                    "name":"number",
+                    "type":"NUMBER",
+                    "description":"The page index for paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/categories/v2/list\"\nquerystring = {\"country\": country, \"size\": size, \"number\": number, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"brands/v2/list",
+            "url":"https://sephora.p.rapidapi.com/brands/v2/list",
+            "description":"List brands",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"The number of items per response for paging purpose",
+                    "default":"100"
+                },
+                {
+                    "name":"number",
+                    "type":"NUMBER",
+                    "description":"The page index for paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/brands/v2/list\"\nquerystring = {\"size\": size, \"number\": number, \"country\": country, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"v2/auto-complete",
+            "url":"https://sephora.p.rapidapi.com/v2/auto-complete",
+            "description":"Get suggestions by term or phrase",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Any term or phrase that you are familiar with",
+                    "default":"eyeshadows"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/v2/auto-complete\"\nquerystring = {\"query\": query, \"country\": country, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stores/list",
+            "url":"https://sephora.p.rapidapi.com/stores/list",
+            "description":"List nearest stores around a GEO location",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"Longitude of GEO location to search for nearest stores",
+                    "default":"-118.2487"
+                },
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"Latitude of GEO location to search for nearest stores",
+                    "default":"33.9733"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"radius",
+                    "type":"NUMBER",
+                    "description":"Radius to look for around stores",
+                    "default":"25"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/stores/list\"\nquerystring = {\"radius\": radius, \"longitude\": longitude, \"latitude\": latitude}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"auto-complete",
+            "url":"https://sephora.p.rapidapi.com/auto-complete",
+            "description":"Get suggestions by term or phrase",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"Any term or phrase that you are familiar with",
+                    "default":"eyeshadows"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/auto-complete\"\nquerystring = {\"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/search-by-barcode",
+            "url":"https://sephora.p.rapidapi.com/products/v2/search-by-barcode",
+            "description":"Search product by upc",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"upcs",
+                    "type":"STRING",
+                    "description":"The UPC barcode",
+                    "default":"3378872105602"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/v2/search-by-barcode\"\nquerystring = {\"country\": country, \"upcs\": upcs, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/detail (Deprecated)",
+            "url":"https://sephora.p.rapidapi.com/products/detail",
+            "description":"Get details of product by id",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"productId",
+                    "type":"STRING",
+                    "description":"The value of productId returned in .../products/list or .../products/search endpoint",
+                    "default":"P442563"
+                },
+                {
+                    "name":"preferedSku",
+                    "type":"STRING",
+                    "description":"The value of skuId field returned in .../products/list or .../products/search endpoint",
+                    "default":"2210607"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/detail\"\nquerystring = {\"productId\": productid, \"preferedSku\": preferedsku}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/list-root (Deprecated)",
+            "url":"https://sephora.p.rapidapi.com/categories/list-root",
+            "description":"List top root categories",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/categories/list-root\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/v2/list-root",
+            "url":"https://sephora.p.rapidapi.com/categories/v2/list-root",
+            "description":"List top root categories",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/categories/v2/list-root\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/get-filters",
+            "url":"https://sephora.p.rapidapi.com/products/v2/get-filters",
+            "description":"Generate the filter panel dynamically",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"category",
+                    "type":"STRING",
+                    "description":"The value of \\\\\\\"id\\\\\\\" field returned in .../categories/v2/list endpoint. Separated by comma for multiple options. Ex : 801,805",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"One of the following : HK|AU|BN|ID|MY|NZ|PH|SG|TW|TH",
+                    "default":"SG"
+                },
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"The value of \\\\\\\\\\\\\\\"id\\\\\\\\\\\\\\\" field returned in .../brands/v2/list. Separated by comma for multiple options. Ex : 266,2636",
+                    "default":""
+                },
+                {
+                    "name":"others",
+                    "type":"STRING",
+                    "description":"Support only value : on_sale",
+                    "default":""
+                },
+                {
+                    "name":"max_price",
+                    "type":"NUMBER",
+                    "description":"Filter products by price",
+                    "default":""
+                },
+                {
+                    "name":"search",
+                    "type":"STRING",
+                    "description":"Search product by term. Ex : bikini top",
+                    "default":""
+                },
+                {
+                    "name":"product_group",
+                    "type":"STRING",
+                    "description":"One of the following : new-arrivals|bestsellers",
+                    "default":""
+                },
+                {
+                    "name":"min_price",
+                    "type":"NUMBER",
+                    "description":"Filter products by price",
+                    "default":""
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"One of the following and need to be pair with country parameter properly: en-HK|zh-HK|en-AU|en-BN|id-ID|en-ID|en-MY|en-NZ|en-PH|en-SG|en-TW|zh-TW|th-TH|en-TH",
+                    "default":"en-SG"
+                },
+                {
+                    "name":"filter_type",
+                    "type":"STRING",
+                    "description":"Filter products by types, the format is {id of filter-type}_{id of filter-value} returned in  .../products/v2/get-filters endpoint. Separated by comma for multiple options. Ex : 41_684,41_686,38_714,38_504",
+                    "default":""
+                },
+                {
+                    "name":"root_brand",
+                    "type":"STRING",
+                    "description":"Either root_brand or root_category is required. The value of \\\"slug-url\\\" field returned in .../brands/v2/list endpoint. Ex : aerin",
+                    "default":"aerin"
+                },
+                {
+                    "name":"root_category",
+                    "type":"STRING",
+                    "description":"Either root_brand or root_category is required. The value of \\\"slug-url\\\" field returned in .../categories/v2/list. Ex : makeup",
+                    "default":"makeup"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sephora.p.rapidapi.com/products/v2/get-filters\"\nquerystring = {\"country\": country, \"language\": language, \"root_brand\": root_brand, \"root_category\": root_category}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sephora.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

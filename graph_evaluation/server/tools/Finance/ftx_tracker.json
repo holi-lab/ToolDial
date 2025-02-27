@@ -1,0 +1,161 @@
+{
+    "tool_name": "ftx tracker",
+    "tool_description": "APR or carry trades (spot-future) and delta neutral future-perp ",
+    "title": "ftx tracker",
+    "pricing": "FREEMIUM",
+    "score": null,
+    "home_url": "https://rapidapi.com/iposignal-iposignal-default/api/ftx-tracker1/",
+    "host": "ftx-tracker1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Add readonly FTX key and value for tracking",
+            "url": "https://ftx-tracker1.p.rapidapi.com/adduser",
+            "description": "Add user details (all optional): \nFTX_readonly_key, \nFTX_readonly_value, \nsolana_address, \nterra_address, \ncelsius_address. \n\nBy adding any these entries the bot will start tracking your portfolio value with 10 min interval.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/adduser\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Stats: MSE and MAE linear regression and correlation for funding rate (T=0) vs. future funding rate (T+x days).",
+            "url": "https://ftx-tracker1.p.rapidapi.com/stats",
+            "description": "Correlation and linear regression analysis of the funding rate at any particular moment in time (day 0) with the future funding rate (day x, where x is larger than 0). This data shows how long a measured funding rate has influence on the funding rate before the correlation drops of to zero and it is random once again. For regression, mean squared error (MSE) and mean absolute error (MAE) are used. The starting point of the MAE is the slope and intercept obtained from the MSE. MAE does not necessarily find an absolute minimum, but can find a local minimum. By starting with the MSE as input for the MSE, the likelihood however greatly increases to find the absolute minimum error.\n\n**Note**\n\nSo far I observed that the MSE slope is on average higher than the MAE slope for the same day. Since MSE squares the error, big deviations from expected funding rate dominate the error term and thus the resulting slope and intercept value. Apparently there  have been more 'outliers' to the upside, since the MSE slope is higher then the MAE slope.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/stats\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get all FTX borrow rates",
+            "url": "https://ftx-tracker1.p.rapidapi.com/template",
+            "description": "Get the borrow rates from FTX API. The borrow rates is what you pay to hold a net short balance on an asset.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/template\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get all FTX trading pairs",
+            "url": "https://ftx-tracker1.p.rapidapi.com/quotelist",
+            "description": "Direct request to the ftx api that returns all the listed pairs. Basic options are spots (usd/usdt), perp (perpetual future), normal future (f.e. 1231; future expiring december 31,  or each quartile last friday), move (contract for difference daily), Bull/Bear (3x) and more exotic options such as betting on bolsonaro next presidency.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/quotelist\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get my portfolio historic performance",
+            "url": "https://ftx-tracker1.p.rapidapi.com/myBalances",
+            "description": "Returns your portfolio value (timestamp,  1 FTX account per user for now). If you add your FTX API  in /adduser the bot will start tracking your portfolio value here.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/myBalances\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Get all ticker future-perpetual pair returns",
+            "url": "https://ftx-tracker1.p.rapidapi.com/futperp",
+            "description": "Get the return including leverage of the optimal long short future perpetual or vice versa of all trading pairs.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/futperp\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get all ticker carry returns",
+            "url": "https://ftx-tracker1.p.rapidapi.com/carry",
+            "description": "Get the annual non-compounded return of carry trades, e.g. future-spot pairs. A long carry trade would sell the future (which is at a premium to the spot due to the opportunity value of getting selling leverage) and buy the spot.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/carry\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "All info per ticker used for return calculations",
+            "url": "https://ftx-tracker1.p.rapidapi.com/breakdown/{ticker}",
+            "description": "Search for an individual ticker with: /breakdown/ticker f.e. /breakdown/BTC \nOutput is shows API information found from FTX regarding the futures, spot data and calculation of APR/APY for the Carry and FutPerp returns.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "ticker",
+                    "type": "string",
+                    "description": "",
+                    "default": "BTC"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/breakdown/{ticker}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Check last update for fundrate database",
+            "url": "https://ftx-tracker1.p.rapidapi.com/database_stats",
+            "description": "The bot runs every 10 min. If the bot is up to date, the funding rate time in UTC should be displayed.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/database_stats\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Add readonly FTX key and value for tracking",
+            "url": "https://ftx-tracker1.p.rapidapi.com/adduser",
+            "description": "Add user details (all optional): \nFTX_readonly_key, \nFTX_readonly_value, \nsolana_address, \nterra_address, \ncelsius_address. \n\nBy adding any these entries the bot will start tracking your portfolio value with 10 min interval.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/adduser\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ftx-tracker1.p.rapidapi.com/adduser\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ftx-tracker1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

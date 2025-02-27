@@ -1,0 +1,113 @@
+{
+    "tool_name":"DefiMercury",
+    "tool_description":"Powerful APIs for Defi Development",
+    "title":"DefiMercury",
+    "pricing":"FREE",
+    "score":null,
+    "home_url":"https://rapidapi.com/DefiMercury/api/defimercury/",
+    "host":"defimercury.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Chains",
+            "url":"https://defimercury.p.rapidapi.com/chains",
+            "description":"Get all chains supported by us with the projects.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://defimercury.p.rapidapi.com/chains\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"defimercury.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Projects",
+            "url":"https://defimercury.p.rapidapi.com/projects",
+            "description":"Get all projects currently supported by us with their chains",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://defimercury.p.rapidapi.com/projects\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"defimercury.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Pool",
+            "url":"https://defimercury.p.rapidapi.com/pool",
+            "description":"Data on a pool.\n\n**underlyingTokens**: An array of underlying token strings.\n\n**rewardTokens**: An array of reward token strings.\n\n**updatedTimestamp**: The Unix timestamp (in seconds) when the information about the liquidity pool was last updated.\n\n**pool**: The address of the liquidity pool on the Ethereum blockchain, in hexadecimal format (with a \"0x\" prefix) with chain.\n\n**chain**: The blockchain network where the liquidity pool is deployed (e.g., \"ethereum\", \"polygon\", \"fantom\").\n\n**symbol**: The symbol of the liquidity pool token.\n\n**tvlUsd**: The total value locked (TVL) in the liquidity pool, in USD.\n\n**apyBase**: The annual percentage yield (APY) for the underlying token(s) in the liquidity pool, expressed as a decimal.\n\n**apyReward**: The APY for the reward token(s) in the liquidity pool, expressed as a decimal.\n\n**apyTotal**: The total APY for the liquidity pool, including both underlying and reward tokens, expressed as a decimal.\n\n**url**: A link to the interface for the liquidity pool.\n\n**apyBaseBorrow**: The APY for borrowing the underlying token(s) in the liquidity pool, expressed as a decimal.\n\n**totalSupplyUsd**: The total value (in USD) of the liquidity pool token(s) in circulation.\n\n**totalBorrowUsd**: The total value (in USD) of the underlying token(s) that have been borrowed from the liquidity pool.\n\n**dailyAvgTvl**: The daily average TVL in the liquidity pool in USD.\n\n**dailyAvgApyBase**: The daily average APY for the underlying token(s) in the liquidity pool, expressed as a decimal.\n\n**dailyAvgApyReward**: The daily average APY for the reward token(s) in the liquidity pool, expressed as a decimal.\n\n**dailyAvgApyTotal**: The daily average total APY for the liquidity pool, including both underlying and reward tokens, expressed as a decimal.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"poolAddress",
+                    "type":"STRING",
+                    "description":"The address of the liquidity pool, in hexadecimal format (with a 0x prefix) with chain separated by -",
+                    "default":"0x4d5f47fa6a74757f35c14fd3a6ef8e3c9bc514e8-ethereum"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://defimercury.p.rapidapi.com/pool\"\nquerystring = {\"poolAddress\": pooladdress}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"defimercury.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Pools",
+            "url":"https://defimercury.p.rapidapi.com/pools",
+            "description":"Fetch collection of pools.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"showZeroTVL",
+                    "type":"BOOLEAN",
+                    "description":"This parameter is a boolean value that determines whether or not to show liquidity pools with zero total value locked (TVL). If set to true, then all liquidity pools will be displayed, regardless of whether they have TVL or not. If set to false, then only liquidity pools with non-zero TVL will be displayed.",
+                    "default":"false"
+                },
+                {
+                    "name":"project",
+                    "type":"STRING",
+                    "description":"This parameter specifies the name of the project. It is used to filter the results and only show liquidity pools that belong to this particular project.",
+                    "default":"aave-v3"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"This parameter specifies the page number of the results. The API returns results in pages, with each page containing a specified number of liquidity pools. This parameter is used to navigate between pages and retrieve more results.",
+                    "default":"1"
+                },
+                {
+                    "name":"minAPY",
+                    "type":"NUMBER",
+                    "description":"This parameter is used to filter the results by the minimum annual percentage yield (APY) for the liquidity pools. Only liquidity pools with APY greater than or equal to the specified value will be returned.",
+                    "default":"0.1"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"This parameter specifies the number of liquidity pools to return per page. The API will return up to this number of liquidity pools per page. \n20 by default\n50 is the max limit.",
+                    "default":"20"
+                },
+                {
+                    "name":"minTVL",
+                    "type":"NUMBER",
+                    "description":"This parameter is used to filter the results by the minimum total value locked. Only liquidity pools with TVL greater than or equal to the specified value will be returned.",
+                    "default":"1"
+                },
+                {
+                    "name":"chain",
+                    "type":"STRING",
+                    "description":"This parameter is used to filter the results by the blockchain network on which the liquidity pools are deployed. ",
+                    "default":"ethereum"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://defimercury.p.rapidapi.com/pools\"\nquerystring = {\"showZeroTVL\": showzerotvl, \"project\": project, \"page\": page, \"minAPY\": minapy, \"limit\": limit, \"minTVL\": mintvl, \"chain\": chain}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"defimercury.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

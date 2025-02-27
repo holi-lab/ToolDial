@@ -1,0 +1,700 @@
+{
+    "tool_name": "PixelStix",
+    "tool_description": "PixelStix is a suite of technologies for locating and interacting with physical objects.",
+    "title": "PixelStix",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 270,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/pixelstixlabs-pixelstixlabs-default/api/pixelstix/",
+    "host": "pixelstix.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "PixelStix Meta",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/public/object_voices/{pixelstix_code}",
+            "description": "This endpoint will retrieve the meta information for a given PixelStix code and any Maps/Galleries it may be associated with if the PixelStix is of type 'PREMIUM'",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "pixelstix_code",
+                    "type": "string",
+                    "description": "",
+                    "default": "BAAA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/public/object_voices/{pixelstix_code}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "object_voice": {
+                        "account": null,
+                        "account_id": -1,
+                        "alias": "test",
+                        "category": "STANDARD",
+                        "clears_remaining": 999,
+                        "code": "BAAA",
+                        "created": "2017-10-14 00:24:44",
+                        "first_assigned": "2018-12-26 15:59:12",
+                        "geo_fixed": 0,
+                        "last_assigned": "2020-05-11 08:20:13",
+                        "lat": 13.1337,
+                        "lon": 13.1337,
+                        "mimetype": "",
+                        "parent_code": null,
+                        "scans": 215,
+                        "tag": [],
+                        "visibility": "Public",
+                        "web_location": []
+                    }
+                },
+                "message": "PixelStix successfully loaded.",
+                "result": 1
+            },
+            "headers": {
+                "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+                "content-type": "application/json",
+                "date": "Sun, 31 Jan 2021 06:54:43 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.7",
+                "x-powered-by": "PHP/7.0.28",
+                "x-rapidapi-region": "AWS - us-east-1",
+                "x-rapidapi-version": "1.2.7",
+                "content-length": "431",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Log in",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/login",
+            "description": "User key and password is received and compared against registered PixelStix users. If successful a JWT token is returned that will need to be used in all non-public requests to the API",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "password"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "user"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/login\"\nquerystring = {\"password\": password, \"username\": username}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "account_id": 1843,
+                        "created": "2021-01-29 18:17:59",
+                        "fcm_token": null,
+                        "last_active": "2021-01-29 18:17:59",
+                        "role": "User",
+                        "username": "user"
+                    },
+                    "jwt": "<use-this-jwt-token-for-all-api-requests>"
+                },
+                "message": "Account successfully authenticated.",
+                "result": 1
+            },
+            "headers": {
+                "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+                "content-type": "application/json",
+                "date": "Fri, 29 Jan 2021 18:21:50 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.7",
+                "set-cookie": [
+                    "jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MTE5NDQ1MTAsImp0aSI6Ik9waFUxXC9wU001R29obzFjK05HdGRidEVLTHhRQzF4MUdDSVZxN2RBUlhvPSIsImlzcyI6Imh0dHBzOlwvXC9hcGkucGl4ZWxzdGl4LmNvbVwvYXBpXC92MlwvbG9naW4iLCJuYmYiOjE2MTE5NDQ1MTAsImV4cCI6MTc2OTYyNDUxMCwiZGF0YSI6eyJpZCI6IjE4NDMiLCJhY2NvdW50X2lkIjoiMTg0MyIsInVzZXJuYW1lIjoidXNlciIsInJvbGUiOiJVc2VyIn19.wVOPfmVnxrU6kWff-BHGbKu206lj9JI8mnrtrt61KjJrT0YGbOWWmTeldsPPnusn4Mt_eTyn8-rpgrU7kH6MQg; Path=/"
+                ],
+                "x-powered-by": "PHP/7.0.28",
+                "x-rapidapi-region": "AWS - us-east-1",
+                "x-rapidapi-version": "1.2.7",
+                "content-length": "657",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Register",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/register",
+            "description": "Endpoint enables a new account (defined by user/pass) to be registerd in the PixelStix system.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "user2"
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "password"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/register\"\nquerystring = {\"username\": username, \"password\": password}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "account_id": 1844,
+                        "created": "2021-01-29 18:32:29",
+                        "fcm_token": null,
+                        "last_active": "2021-01-29 18:32:29",
+                        "role": "User",
+                        "username": "user2"
+                    },
+                    "jwt": "<use-this-jwt-token-for-all-api-requests>"
+                },
+                "message": "Your account has been created successfully.",
+                "result": 1
+            },
+            "headers": {
+                "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+                "content-type": "application/json",
+                "date": "Fri, 29 Jan 2021 18:32:29 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.7",
+                "set-cookie": [
+                    "jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE2MTE5NDUxNDksImp0aSI6IkJOZGJ6dFpTNzVcL2NSaEVlRE95Q3ZKSnNWRXRzR3FtU1wvMG9SRDBhYVpUTT0iLCJpc3MiOiJodHRwczpcL1wvYXBpLnBpeGVsc3RpeC5jb21cL2FwaVwvdjJcL2xvZ2luIiwibmJmIjoxNjExOTQ1MTQ5LCJleHAiOjE3Njk2MjUxNDksImRhdGEiOnsiaWQiOiIxODQ0IiwiYWNjb3VudF9pZCI6IjE4NDQiLCJ1c2VybmFtZSI6InVzZXIyIiwicm9sZSI6IlVzZXIifX0.p06oX4xkJDqVcm2KJo5YVBKPpm1975pZ_s9VN5tS41y3ZhIf_0gA7BncLYTCmrunBF3KqxrFFa6E6yuMrn8rPQ; Path=/"
+                ],
+                "x-powered-by": "PHP/7.0.28",
+                "x-rapidapi-region": "AWS - us-east-1",
+                "x-rapidapi-version": "1.2.7",
+                "content-length": "669",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "PixelStix Map Meta",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/public/tags/tag_name/{pixelstix_map_name}",
+            "description": "A PixelStix Map is a collection of PREMIUM PixelStix that have been assigned latitude and longitude coordinates. A PREMIUM PixelStix can belong to multiple Maps and is also known as a Gallery.\n\nThis endpoint will retrieve information about your particular Map/Gallery. The name used in the endpoint is the same name that you will see in the list of galleries when using the PixelStix app.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "pixelstix_map_name",
+                    "type": "string",
+                    "description": "",
+                    "default": "morningbreath"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/public/tags/tag_name/{pixelstix_map_name}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "object_voice": [
+                        {
+                            "account": {
+                                "account_id": 157,
+                                "created": "2019-07-07 09:24:52",
+                                "last_active": "2019-12-05 13:49:54",
+                                "role": "User",
+                                "username": "shine"
+                            },
+                            "account_id": 157,
+                            "alias": "Morning Breath 2015",
+                            "category": "PREMIUM",
+                            "clears_remaining": 1,
+                            "code": "9M9tQJGxqzbiJdhn9cifbJ6WjB7rQ1",
+                            "created": "2019-06-19 12:23:03",
+                            "first_assigned": "2019-09-05 15:50:50",
+                            "geo_fixed": 1,
+                            "last_assigned": "2019-09-05 15:50:50",
+                            "lat": 27.7708966,
+                            "lon": -82.6612626,
+                            "mimetype": "text/html",
+                            "parent_code": null,
+                            "scans": 112,
+                            "tag": [
+                                {
+                                    "badge": {
+                                        "badges_id": 5,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/558870246082215946/unknown.png"
+                                    },
+                                    "badges_id": 5,
+                                    "object_voice_count": 131,
+                                    "popularity": 19005,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 19005,
+                                    "tag_name": "spfl-murals",
+                                    "tags_id": 10
+                                },
+                                {
+                                    "badge": {
+                                        "badges_id": 4,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/633854715511177236/unknown.png"
+                                    },
+                                    "badges_id": 4,
+                                    "object_voice_count": 93,
+                                    "popularity": 15680,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 15680,
+                                    "tag_name": "shine",
+                                    "tags_id": 14
+                                },
+                                {
+                                    "badge": {
+                                        "badges_id": 97,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/620304340791328778/unknown.png"
+                                    },
+                                    "badges_id": 97,
+                                    "object_voice_count": 2,
+                                    "popularity": 279,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 279,
+                                    "tag_name": "morningbreath",
+                                    "tags_id": 98
+                                }
+                            ],
+                            "visibility": "Public",
+                            "web_location": [
+                                {
+                                    "code": "9M9tQJGxqzbiJdhn9cifbJ6WjB7rQ1",
+                                    "location": "http://shineonstpete.com/portfolio/morning-breath/",
+                                    "tags_id": null,
+                                    "thumbnail_default": "https://content.pixelstix.com/util/url_thumbnail/screenshots/9M9tQJGxqzbiJdhn9cifbJ6WjB7rQ1.png",
+                                    "type": "text/html"
+                                }
+                            ]
+                        },
+                        {
+                            "account": {
+                                "account_id": 157,
+                                "created": "2019-07-07 09:24:52",
+                                "last_active": "2019-12-05 13:49:54",
+                                "role": "User",
+                                "username": "shine"
+                            },
+                            "account_id": 157,
+                            "alias": "Morning Breath 2019",
+                            "category": "PREMIUM",
+                            "clears_remaining": 1,
+                            "code": "Bl549cqBuoDU7hxff9jajOno0OgJH8",
+                            "created": "2019-06-19 12:23:03",
+                            "first_assigned": "2019-10-20 22:33:46",
+                            "geo_fixed": 1,
+                            "last_assigned": "2019-10-20 22:33:46",
+                            "lat": 27.7744295,
+                            "lon": -82.6471293,
+                            "mimetype": "text/html",
+                            "parent_code": null,
+                            "scans": 167,
+                            "tag": [
+                                {
+                                    "badge": {
+                                        "badges_id": 5,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/558870246082215946/unknown.png"
+                                    },
+                                    "badges_id": 5,
+                                    "object_voice_count": 131,
+                                    "popularity": 19005,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 19005,
+                                    "tag_name": "spfl-murals",
+                                    "tags_id": 10
+                                },
+                                {
+                                    "badge": {
+                                        "badges_id": 4,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/633854715511177236/unknown.png"
+                                    },
+                                    "badges_id": 4,
+                                    "object_voice_count": 93,
+                                    "popularity": 15680,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 15680,
+                                    "tag_name": "shine",
+                                    "tags_id": 14
+                                },
+                                {
+                                    "badge": {
+                                        "badges_id": 78,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/583765770518003782/unknown.png"
+                                    },
+                                    "badges_id": 78,
+                                    "object_voice_count": 17,
+                                    "popularity": 1610,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 1610,
+                                    "tag_name": "spfl-lettering",
+                                    "tags_id": 77
+                                },
+                                {
+                                    "badge": {
+                                        "badges_id": 97,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/620304340791328778/unknown.png"
+                                    },
+                                    "badges_id": 97,
+                                    "object_voice_count": 2,
+                                    "popularity": 279,
+                                    "public": 1,
+                                    "remote_content_access": "yes",
+                                    "scans": 279,
+                                    "tag_name": "morningbreath",
+                                    "tags_id": 98
+                                },
+                                {
+                                    "badge": {
+                                        "badges_id": 135,
+                                        "primary_url": "https://cdn.discordapp.com/attachments/529300531831898113/633861913603866634/shine_2019.png"
+                                    },
+                                    "badges_id": 135,
+                                    "object_voice_count": 22,
+                                    "popularity": 3460,
+                                    "public": 0,
+                                    "remote_content_access": "yes",
+                                    "scans": 3460,
+                                    "tag_name": "shine_2019",
+                                    "tags_id": 135
+                                }
+                            ],
+                            "visibility": "Public",
+                            "web_location": [
+                                {
+                                    "code": "Bl549cqBuoDU7hxff9jajOno0OgJH8",
+                                    "location": "https://stpeteartsalliance.org/morning-breath/",
+                                    "tags_id": null,
+                                    "thumbnail_default": "https://content.pixelstix.com/util/url_thumbnail/screenshots/Bl549cqBuoDU7hxff9jajOno0OgJH8.png",
+                                    "type": "text/html"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "message": "PixelStix found for this tag.",
+                "result": 1
+            },
+            "headers": {
+                "cache-control": "no-store, no-cache, must-revalidate, max-age=0, post-check=0, pre-check=0",
+                "content-type": "application/json",
+                "date": "Sun, 31 Jan 2021 06:52:59 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.7",
+                "x-powered-by": "PHP/7.0.28",
+                "x-rapidapi-region": "AWS - us-east-1",
+                "x-rapidapi-version": "1.2.7",
+                "content-length": "3949",
+                "connection": "Close"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Add To Account Map",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/accounts/current/username_tag/object_voices/{pixelstix_code}",
+            "description": "Every account in PixelStix has a map that can contain the locations of any number of premium pixelstix. This endpoint allows for the assignment of  a pixelstix to the account map associated with the JWT token.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "pixelstix_code",
+                    "type": "string",
+                    "description": "",
+                    "default": "BAAA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/accounts/current/username_tag/object_voices/{pixelstix_code}\"\nquerystring = {\"jwt\": jwt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Assign",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/object_voices/{pixelstix_code}/web_locations",
+            "description": "Assigns content to an pixelstix. \n\nThe pixelstix being assigned content *must* be owned by the account associated with the provided JWT token unless the pixelstix is yet unclaimed by any account. In that instance it will be claimed and then assigned the content.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "text/html"
+                },
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/x-www-form-urlencoded"
+                },
+                {
+                    "name": "pixelstix_code",
+                    "type": "string",
+                    "description": "",
+                    "default": "BAAA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://vimeo.com/495518878/ab3ddb80dc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/object_voices/{pixelstix_code}/web_locations\"\nquerystring = {\"jwt\": jwt, \"location\": location, \"type\": type, \"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Update - Coming Soon",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/object_voices/{pixelstix_code}",
+            "description": "Not yet supported.\n\nThis endpoint is used to update a pixelstix's attributes",
+            "method": "PATCH",
+            "required_parameters": [
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "pixelstix_code",
+                    "type": "string",
+                    "description": "",
+                    "default": "BAAA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/object_voices/{pixelstix_code}\"\nquerystring = {\"jwt\": jwt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.patch(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Update Account Info - Coming Soon",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/accounts/current",
+            "description": "Not currently supported. \n\nThis endpoint allows the user/password credentials associated with the JWT token to be modified.",
+            "method": "PATCH",
+            "required_parameters": [
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "user",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/accounts/current\"\nquerystring = {\"jwt\": jwt, \"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.patch(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get Last N Days Scan Counts For Tag",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/analytics/tags/{map_id}/recent_days_scans",
+            "description": "Gets the number of scans over the last N days, per day",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "days",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2"
+                },
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "map_id",
+                    "type": "string",
+                    "description": "",
+                    "default": "14"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/analytics/tags/{map_id}/recent_days_scans\"\nquerystring = {\"days\": days, \"jwt\": jwt}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Log in",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/login",
+            "description": "User key and password is received and compared against registered PixelStix users. If successful a JWT token is returned that will need to be used in all non-public requests to the API",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "password"
+                },
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "user"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/login\"\nquerystring = {\"password\": \"password\", \"username\": \"user\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/login\"\nquerystring = {\"password\": \"password\", \"username\": \"user\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Register",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/register",
+            "description": "Endpoint enables a new account (defined by user/pass) to be registerd in the PixelStix system.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "username",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "user2"
+                },
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "password"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/register\"\nquerystring = {\"username\": \"user2\", \"password\": \"password\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/register\"\nquerystring = {\"username\": \"user2\", \"password\": \"password\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Add To Account Map",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/accounts/current/username_tag/object_voices/BAAA",
+            "description": "Every account in PixelStix has a map that can contain the locations of any number of premium pixelstix. This endpoint allows for the assignment of  a pixelstix to the account map associated with the JWT token.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "pixelstix_code",
+                    "type": "string",
+                    "description": "",
+                    "default": "BAAA"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/accounts/current/username_tag/object_voices/BAAA\"\nquerystring = {\"jwt\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/accounts/current/username_tag/object_voices/{pixelstix_code}\"\nquerystring = {\"jwt\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Assign",
+            "url": "https://pixelstix.p.rapidapi.com/api/v2/object_voices/BAAA/web_locations",
+            "description": "Assigns content to an pixelstix. \n\nThe pixelstix being assigned content *must* be owned by the account associated with the provided JWT token unless the pixelstix is yet unclaimed by any account. In that instance it will be claimed and then assigned the content.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "jwt",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "text/html"
+                },
+                {
+                    "name": "pixelstix_code",
+                    "type": "string",
+                    "description": "",
+                    "default": "BAAA"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "https://vimeo.com/495518878/ab3ddb80dc"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/object_voices/BAAA/web_locations\"\nquerystring = {\"jwt\": \"\", \"location\": \"https://vimeo.com/495518878/ab3ddb80dc\", \"type\": \"text/html\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://pixelstix.p.rapidapi.com/api/v2/object_voices/{pixelstix_code}/web_locations\"\nquerystring = {\"jwt\": \"\", \"location\": \"https://vimeo.com/495518878/ab3ddb80dc\", \"type\": \"text/html\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"pixelstix.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

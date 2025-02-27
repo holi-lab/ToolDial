@@ -1,0 +1,300 @@
+{
+    "tool_name":"NAVITIME Geocoding",
+    "tool_description":"Return address informations including longitude/latitude and a postal code, by specifying keywords or a postal code. \nWe also provide Reverse geocoding function, which converts from longitude/latitude into address informations.",
+    "title":"NAVITIME Geocoding",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":207,
+        "avgSuccessRate":86,
+        "popularityScore":9.6,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/navitimejapan-navitimejapan/api/navitime-geocoding/",
+    "host":"navitime-geocoding.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"datum_conversion",
+            "url":"https://navitime-geocoding.p.rapidapi.com/datum_conversion",
+            "description":"緯度経度の測地系(日本測地系/世界測地系)を変換します。",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"coord",
+                    "type":"STRING",
+                    "description":"Latitude and longitude before conversion.\nSupport millisecond and degree indication.",
+                    "default":"35.624822,139.742121"
+                },
+                {
+                    "name":"after_datum",
+                    "type":"STRING",
+                    "description":"Geodetic system after conversion.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/datum_conversion\"\nquerystring = {\"coord\": coord, \"after_datum\": after_datum}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address_inclusion",
+            "url":"https://navitime-geocoding.p.rapidapi.com/address_inclusion",
+            "description":"緯度経度が住所コードの範囲内に含まれているかを判定します。",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"code",
+                    "type":"STRING",
+                    "description":"Address Code.\nCan be specified multiple times, separated by a period.",
+                    "default":"13"
+                },
+                {
+                    "name":"coord",
+                    "type":"STRING",
+                    "description":"Latitude and longitude.",
+                    "default":"35.664159,139.718117"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"datum",
+                    "type":"STRING",
+                    "description":"Geodetic system of latitude and longitude.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/address_inclusion\"\nquerystring = {\"code\": code, \"coord\": coord, \"datum\": datum}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address_reverse_geocoding",
+            "url":"https://navitime-geocoding.p.rapidapi.com/address/reverse_geocoding",
+            "description":"逆ジオコーディング\n緯度経度を指定して住所情報を取得します。",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"coord",
+                    "type":"STRING",
+                    "description":"Latitude and longitude.",
+                    "default":"35.624822,139.742121"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"datum",
+                    "type":"STRING",
+                    "description":"Geodetic system of latitude and longitude.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                },
+                {
+                    "name":"coord_unit",
+                    "type":"STRING",
+                    "description":"The unit of latitude and longitude included in the output data.\n(degree: decimal system of degrees (default), millisec: milliseconds)",
+                    "default":"degree"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/address/reverse_geocoding\"\nquerystring = {\"datum\": datum, \"coord_unit\": coord_unit, \"coord\": coord}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address",
+            "url":"https://navitime-geocoding.p.rapidapi.com/address",
+            "description":"Return address information such as a postal code or latitude/longitude from free keyword of request parameters.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"coord_unit",
+                    "type":"STRING",
+                    "description":"The unit of latitude and longitude included in the output data.\n(degree: decimal system of degrees (default), millisec: milliseconds)",
+                    "default":"degree"
+                },
+                {
+                    "name":"datum",
+                    "type":"STRING",
+                    "description":"Geodetic system of latitude and longitude.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                },
+                {
+                    "name":"kana_row",
+                    "type":"STRING",
+                    "description":"Output result filter (consonants).\nOnly addresses in the response that begin with the letter on the specified line will be returned.\n\nAvailable only when 'code' is specified.",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limits the number of response data. (Minimum value: 1, Maximum value: 100, Default value: 10)",
+                    "default":"10"
+                },
+                {
+                    "name":"level_from",
+                    "type":"NUMBER",
+                    "description":"Minimum address level.\n(Minimum value: 1, Maximum value: 7)\nNarrow down to only addresses up to a specified address level\n　1: Prefecture\n　2: City, ward, town or village\n　3: Large sections\n　4: Small sections\n　5: Block\n　6: Land number\n　7: Branch number",
+                    "default":""
+                },
+                {
+                    "name":"level_to",
+                    "type":"NUMBER",
+                    "description":"Maximum address level.\n(Minimum value: 1, Maximum value: 7)\nNarrow down to only addresses up to a specified address level\n　1: Prefecture\n　2: City, ward, town or village\n　3: Large sections\n　4: Small sections\n　5: Block\n　6: Land number\n　7: Branch number",
+                    "default":""
+                },
+                {
+                    "name":"word",
+                    "type":"STRING",
+                    "description":"Search word.\n\nYou cannot be used in combination with 'code'.\nPlease be sure to specify either 'word' or 'code'.",
+                    "default":"代々木"
+                },
+                {
+                    "name":"code",
+                    "type":"STRING",
+                    "description":"Address code.\n\nYou cannot be used in combination with 'word'.\nPlease be sure to specify either 'word' or 'code'.",
+                    "default":""
+                },
+                {
+                    "name":"sort",
+                    "type":"STRING",
+                    "description":"Sorting order of addresses.\n(lexical: lexical order, level_asc: address level ascending order, code_asc: address code ascending order (default))",
+                    "default":"code_asc"
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"Skips a given number of first data.\n(Minimum value: 0, Maximum value: 2000, Default value: 0)",
+                    "default":"0"
+                },
+                {
+                    "name":"address_filter",
+                    "type":"STRING",
+                    "description":"Address filter.\n\nYou can use this when you want to get a specific address code.\nIf you prefix the address code with a '-', you can exclude the relevant address from the response.\n\nAvailable only when 'word' is specified.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/address\"\nquerystring = {\"coord_unit\": coord_unit, \"datum\": datum, \"limit\": limit, \"word\": word, \"sort\": sort, \"offset\": offset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address_code",
+            "url":"https://navitime-geocoding.p.rapidapi.com/address/code",
+            "description":"Return address information from address code of request parameters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"code",
+                    "type":"STRING",
+                    "description":"Address Code.\nCan be specified multiple times, separated by a period.",
+                    "default":"13101001"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"coord_unit",
+                    "type":"STRING",
+                    "description":"The unit of latitude and longitude included in the output data.\n(degree: decimal system of degrees (default), millisec: milliseconds)",
+                    "default":"degree"
+                },
+                {
+                    "name":"datum",
+                    "type":"STRING",
+                    "description":"Geodetic system of latitude and longitude.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/address/code\"\nquerystring = {\"coord_unit\": coord_unit, \"code\": code, \"datum\": datum}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address_postal_code",
+            "url":"https://navitime-geocoding.p.rapidapi.com/address/postal_code",
+            "description":"Return address information from postal code of request parameters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"postal_code",
+                    "type":"STRING",
+                    "description":"Postal code string (Minimum: 3 digits, Maximum: 7 digits)",
+                    "default":"1510053"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"datum",
+                    "type":"STRING",
+                    "description":"Geodetic system of latitude and longitude.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"Skips a given number of first data.\n(Minimum value: 0, Maximum value: 2000, Default value: 0)",
+                    "default":"0"
+                },
+                {
+                    "name":"coord_unit",
+                    "type":"STRING",
+                    "description":"The unit of latitude and longitude included in the output data.\n(degree: decimal system of degrees (default), millisec: milliseconds)",
+                    "default":"degree"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limits the number of response data. (Minimum value: 1, Maximum value: 100, Default value: 10)",
+                    "default":"10"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/address/postal_code\"\nquerystring = {\"datum\": datum, \"offset\": offset, \"coord_unit\": coord_unit, \"limit\": limit, \"postal_code\": postal_code}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address_autocomplete",
+            "url":"https://navitime-geocoding.p.rapidapi.com/address/autocomplete",
+            "description":"Return address predictions from the specified keyword of request parameters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"word",
+                    "type":"STRING",
+                    "description":"Address string (Minimum: 2 characters, Maximum: 50 characters).\n\nIf a string of 51 or more characters is entered, the 51st and subsequent characters will be deleted and searched.\nArabic and Chinese numerals are searched as they are.",
+                    "default":"とうk"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"datum",
+                    "type":"STRING",
+                    "description":"Geodetic system of latitude and longitude.\n(wgs84: World Geodetic System (default), tokyo: Old Japan Geodetic System)",
+                    "default":"wgs84"
+                },
+                {
+                    "name":"coord_unit",
+                    "type":"STRING",
+                    "description":"The unit of latitude and longitude included in the output data.\n(degree: decimal system of degrees (default), millisec: milliseconds)",
+                    "default":"degree"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://navitime-geocoding.p.rapidapi.com/address/autocomplete\"\nquerystring = {\"datum\": datum, \"word\": word, \"coord_unit\": coord_unit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"navitime-geocoding.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

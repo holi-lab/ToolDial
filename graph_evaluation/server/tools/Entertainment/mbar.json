@@ -1,0 +1,188 @@
+{
+    "product_id": "53aa3c88e4b00287471a0ec2",
+    "tool_description": "mbar offers a free, read only REST API for access to its programme data, including event, artist and club series information",
+    "home_url": "https://rapidapi.com/mikaraunio/api/mbar/",
+    "name": "mbar",
+    "title": "mbar",
+    "pricing": "FREE",
+    "tool_name": "mbar",
+    "score": {
+        "avgServiceLevel": 0,
+        "avgLatency": 10797,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.1,
+        "__typename": "Score"
+    },
+    "host": "mikaraunio-mbar.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Event",
+            "url": "https://mikaraunio-mbar.p.rapidapi.com/event/",
+            "description": "Can be ordered by start time, descending; and various fields can be filtered",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "the name of the event",
+                    "default": ""
+                },
+                {
+                    "name": "club",
+                    "type": "STRING",
+                    "description": "the id of the club series the event belongs to.",
+                    "default": ""
+                },
+                {
+                    "name": "club__name",
+                    "type": "STRING",
+                    "description": "the name of the club series the event belongs to.",
+                    "default": ""
+                },
+                {
+                    "name": "start_time",
+                    "type": "STRING",
+                    "description": "the event's start time, in YYYY-MM-DD HH:MM[:ss[.uuuuuu]] format.",
+                    "default": ""
+                },
+                {
+                    "name": "end_time",
+                    "type": "STRING",
+                    "description": "the event's end time, in YYYY-MM-DD HH:MM[:ss[.uuuuuu]] format.",
+                    "default": ""
+                },
+                {
+                    "name": "time_modified",
+                    "type": "STRING",
+                    "description": "the timestamp of the last modification, in YYYY-MM-DD HH:MM[:ss[.uuuuuu]] format.",
+                    "default": ""
+                },
+                {
+                    "name": "datefilter",
+                    "type": "STRING",
+                    "description": "ongoing \u2014 ongoing events, next \u2014 next events, including any ongoing ones., upcoming \u2014 upcoming events, excluding any ongoing ones.today \u2014 all events happening today (day changes at 4 in the morning).tomorrow \u2014 all events happening tomorrow (day changes at 4 in the morning).",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mikaraunio-mbar.p.rapidapi.com/event/\"\nquerystring = {\"name\": \"\", \"club\": \"\", \"club__name\": \"\", \"start_time\": \"\", \"end_time\": \"\", \"time_modified\": \"\", \"datefilter\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mikaraunio-mbar.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mikaraunio-mbar.p.rapidapi.com/event/\"\nquerystring = {\"name\": \"\", \"club\": \"\", \"club__name\": \"\", \"start_time\": \"\", \"end_time\": \"\", \"time_modified\": \"\", \"datefilter\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mikaraunio-mbar.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Club Series",
+            "url": "https://mikaraunio-mbar.p.rapidapi.com/club/",
+            "description": "",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "resource_uri",
+                    "type": "STRING",
+                    "description": "the URI of this club series resource.",
+                    "default": ""
+                },
+                {
+                    "name": "resource_webpage_uri",
+                    "type": "STRING",
+                    "description": "the URI of this club series webpage on mbar's site.",
+                    "default": ""
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "the club series' name.",
+                    "default": ""
+                },
+                {
+                    "name": "lead",
+                    "type": "STRING",
+                    "description": "club series description lead.",
+                    "default": ""
+                },
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "club series description body.",
+                    "default": ""
+                },
+                {
+                    "name": "picture_uri",
+                    "type": "STRING",
+                    "description": "club series picture URI.",
+                    "default": ""
+                },
+                {
+                    "name": "picture_caption",
+                    "type": "STRING",
+                    "description": "club series picture caption.",
+                    "default": ""
+                },
+                {
+                    "name": "hosts",
+                    "type": "STRING",
+                    "description": "a list of objects representing the artists hosts hosting this club series, each with the following fields: full_name \u2014 the artist's name, with affiliation. resource_uri \u2014 the URI of the artist resource.",
+                    "default": ""
+                },
+                {
+                    "name": "events",
+                    "type": "STRING",
+                    "description": "a list of objects representing the events in this club series, each with the following fields: name \u2014 the name of the event. start_time \u2014 event start time and date in ISO 8601 format, Helsinki local time. end_time \u2014 event end time and date in ISO 8601 format, Helsinki local time. resource_uri \u2014 the URI of the event resource.",
+                    "default": ""
+                },
+                {
+                    "name": "extrainfo_urls",
+                    "type": "STRING",
+                    "description": "a list of objects representing URLs pointing to extra info about the club series, each with the following fields: address \u2014 URL address. description \u2014 URL description. type \u2014 URL type (Facebook, homepage, ...)",
+                    "default": ""
+                },
+                {
+                    "name": "time_modified",
+                    "type": "STRING",
+                    "description": "the timestamp of the last modification.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mikaraunio-mbar.p.rapidapi.com/club/\"\nquerystring = {\"resource_uri\": \"\", \"resource_webpage_uri\": \"\", \"name\": \"\", \"lead\": \"\", \"description\": \"\", \"picture_uri\": \"\", \"picture_caption\": \"\", \"hosts\": \"\", \"events\": \"\", \"extrainfo_urls\": \"\", \"time_modified\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mikaraunio-mbar.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mikaraunio-mbar.p.rapidapi.com/club/\"\nquerystring = {\"resource_uri\": \"\", \"resource_webpage_uri\": \"\", \"name\": \"\", \"lead\": \"\", \"description\": \"\", \"picture_uri\": \"\", \"picture_caption\": \"\", \"hosts\": \"\", \"events\": \"\", \"extrainfo_urls\": \"\", \"time_modified\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mikaraunio-mbar.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Artist",
+            "url": "https://mikaraunio-mbar.p.rapidapi.com/artist/",
+            "description": "",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "the name of the artist.",
+                    "default": ""
+                },
+                {
+                    "name": "time_modified",
+                    "type": "STRING",
+                    "description": "the timestamp of the last modification, in YYYY-MM-DD HH:MM[:ss[.uuuuuu]] format.",
+                    "default": ""
+                },
+                {
+                    "name": "extra_info",
+                    "type": "STRING",
+                    "description": "extra info such as artist affiliation or country of origin.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://mikaraunio-mbar.p.rapidapi.com/artist/\"\nquerystring = {\"name\": \"\", \"time_modified\": \"\", \"extra_info\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mikaraunio-mbar.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://mikaraunio-mbar.p.rapidapi.com/artist/\"\nquerystring = {\"name\": \"\", \"time_modified\": \"\", \"extra_info\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"mikaraunio-mbar.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ],
+    "standardized_name": "mbar"
+}

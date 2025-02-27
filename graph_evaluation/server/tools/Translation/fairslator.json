@@ -1,0 +1,218 @@
+{
+    "product_id": "api_ef8645c6-77a3-41b7-9c05-ced4889a91d1",
+    "tool_description": "Rewrites texts into different genders or forms of address. This is the API behind Fairslator, a popular tool for removing bias from machine translation.",
+    "home_url": "https://rapidapi.com/lexiconista/api/fairslator/",
+    "name": "Fairslator",
+    "title": "Fairslator",
+    "pricing": "FREEMIUM",
+    "tool_name": "Fairslator",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 6258,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.3,
+        "__typename": "Score"
+    },
+    "host": "fairslator.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/rewrite",
+            "url": "https://fairslator.p.rapidapi.com/rewrite",
+            "description": "Rewrite a text into a different gender or form of address.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://fairslator.p.rapidapi.com/rewrite\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"fairslator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://fairslator.p.rapidapi.com/rewrite\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"fairslator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "success": {
+                        "type": "boolean",
+                        "const": true
+                    },
+                    "originalText": {
+                        "type": "string",
+                        "description": "The text you have requested to rewrite is repeated here for your convenience."
+                    },
+                    "firstPerson": {
+                        "type": "string",
+                        "description": "The contents of the secondPerson field from your request is repeated here for your convenience."
+                    },
+                    "thirdPersons": {
+                        "type": "object",
+                        "description": "The contents of the thirdPersons field from your request is repeated here for your convenience.",
+                        "patternProperties": {
+                            "^.+$": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "rewrittenText": {
+                        "type": "string",
+                        "description": "This is the result you want: the rewritten text."
+                    }
+                }
+            }
+        },
+        {
+            "name": "/analyze",
+            "url": "https://fairslator.p.rapidapi.com/analyze",
+            "description": "Find out the gender and form of address of people mentioned in the text.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://fairslator.p.rapidapi.com/analyze\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"fairslator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://fairslator.p.rapidapi.com/analyze\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"fairslator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "required": [
+                        "success",
+                        "text"
+                    ],
+                    "success": {
+                        "type": "boolean",
+                        "const": true
+                    },
+                    "sourceText": {
+                        "type": "string",
+                        "description": "The source text (if any), repeated in the response for your convenience."
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "The analyzed text, repeated in the response for your convenience."
+                    },
+                    "firstPerson": {
+                        "type": "object",
+                        "description": "Contains properties of the person (or persons) to which the text refers in the first person (using pronouns such as 'I' and 'we'), if any.",
+                        "properties": {
+                            "keyword": {
+                                "type": "string",
+                                "description": "A keyword, usually a noun, taken from the text (or from the source text if supplied) which represents this person."
+                            },
+                            "gender": {
+                                "type": "string",
+                                "enum": [
+                                    "m",
+                                    "f"
+                                ],
+                                "description": "The person's (or persons') gender: 'm' for male, 'f' for female."
+                            },
+                            "number": {
+                                "type": "string",
+                                "enum": [
+                                    "s",
+                                    "p"
+                                ],
+                                "description": "The person's (or persons') number: 's' for singular, 'p' for plural."
+                            },
+                            "genderFreedom": {
+                                "type": "string",
+                                "pattern": "^[mfb]*$",
+                                "description": "Genders the person (or persons) can be rewritten into: 'm' for male, 'f' for female, 'b' for gender-neutral."
+                            },
+                            "numberFreedom": {
+                                "type": "string",
+                                "pattern": "^[sp]*$",
+                                "description": "Numbers the person (or persons) can be rewritten into: 's' for singular, 'p' for plural."
+                            }
+                        }
+                    },
+                    "secondPerson": {
+                        "type": "object",
+                        "description": "Contains properties of the person (or persons) to which the text refers in the second person (using pronouns such as 'you'), if any.",
+                        "properties": {
+                            "keyword": {
+                                "type": "string",
+                                "description": "A keyword, usually a noun, taken from the text (or from the source text if supplied) which represents this person."
+                            },
+                            "gender": {
+                                "type": "string",
+                                "enum": [
+                                    "m",
+                                    "f"
+                                ],
+                                "description": "The person's (or persons') gender: 'm' for male, 'f' for female."
+                            },
+                            "register": {
+                                "type": "string",
+                                "enum": [
+                                    "v",
+                                    "t"
+                                ],
+                                "description": "The register in which the person (or persons) is (or are) being addressed: 'v' for formal, 't' for informal."
+                            },
+                            "number": {
+                                "type": "string",
+                                "enum": [
+                                    "s",
+                                    "p"
+                                ],
+                                "description": "The person's (or persons') number: 's' for singular, 'p' for plural."
+                            },
+                            "genderFreedom": {
+                                "type": "string",
+                                "pattern": "^[mfb]*$",
+                                "description": "Genders the person (or persons) can be rewritten into: 'm' for male, 'f' for female, 'b' for gender-neutral."
+                            },
+                            "registerFreedom": {
+                                "type": "string",
+                                "pattern": "^[vt]*$",
+                                "description": "Registers the person (or persons) can be rewritten into: 'v' for formal, 't' for informal."
+                            },
+                            "numberFreedom": {
+                                "type": "string",
+                                "pattern": "^[sp]*$",
+                                "description": "Numbers the person (or persons) can be rewritten into: 's' for singular, 'p' for plural."
+                            }
+                        }
+                    },
+                    "thirdPersons": {
+                        "type": "array",
+                        "description": "An array of objects which represent people mentioned in the text in the third person.",
+                        "items": {
+                            "description": "Contains properties of the person (or persons) to which the text refers in the third person (using nouns, and pronouns such as 'he', 'she' 'they').",
+                            "properties": {
+                                "keyword": {
+                                    "type": "string",
+                                    "description": "A keyword, usually a noun, taken from the text (or from the source text if supplied) which represents this person."
+                                },
+                                "gender": {
+                                    "type": "string",
+                                    "enum": [
+                                        "m",
+                                        "f"
+                                    ],
+                                    "description": "The person's (or persons') gender: 'm' for male, 'f' for female."
+                                },
+                                "number": {
+                                    "type": "string",
+                                    "enum": [
+                                        "s",
+                                        "p"
+                                    ],
+                                    "description": "The person's (or persons') number: 's' for singular, 'p' for plural."
+                                },
+                                "genderFreedom": {
+                                    "type": "string",
+                                    "pattern": "^[mfb]*$",
+                                    "description": "Genders the person (or persons) can be rewritten into: 'm' for male, 'f' for female, 'b' for gender-neutral."
+                                },
+                                "numberFreedom": {
+                                    "type": "string",
+                                    "pattern": "^[sp]*$",
+                                    "description": "Numbers the person (or persons) can be rewritten into: 's' for singular, 'p' for plural."
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

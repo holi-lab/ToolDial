@@ -1,0 +1,201 @@
+{
+    "tool_name":"Linguatools English Collocations",
+    "tool_description":"Looks up a word in a dictionary and returns all collocations ",
+    "title":"Linguatools English Collocations",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":62,
+        "avgSuccessRate":100,
+        "popularityScore":9.6,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/petapro/api/linguatools-english-collocations/",
+    "host":"linguatools-english-collocations.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"collocations v2 ( + pos)",
+            "url":"https://linguatools-english-collocations.p.rapidapi.com/bolls/v2",
+            "description":"looks up collocations\nnew version in 2022: considers the part of speech of the query; some relation names changed",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"language ISO 639-1 code for English",
+                    "default":"en"
+                },
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"any word (case insensitive)",
+                    "default":"smoke"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"max_results",
+                    "type":"NUMBER",
+                    "description":"limit the number of results",
+                    "default":"25"
+                },
+                {
+                    "name":"relation",
+                    "type":"STRING",
+                    "description":"One of the following relations (case sensitive): \nV:obj:N \nV:prep:N \nV:obj1+2:N \nV:obj+prep:N \nV:subj:N \nV:sc:Vinf (~~V:sc:V~~)\nN:mod:Adj (~~N:mod:A~~)\nN:prep:N \nN:nn:N \nV:mod:Adv (~~V:mod:A~~ )\nAdj:mod:Adv (~~A:mod:A~~)\n",
+                    "default":""
+                },
+                {
+                    "name":"min_sig",
+                    "type":"STRING",
+                    "description":"any number as the minimum significance (optional). Will return only collocations with significance >= min_sig",
+                    "default":""
+                },
+                {
+                    "name":"pos",
+                    "type":"STRING",
+                    "description":"One of the following Part Of Speech (case sensitive): \nV\nVinf\nN\nAdj\nAdv",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://linguatools-english-collocations.p.rapidapi.com/bolls/v2\"\nquerystring = {\"max_results\": max_results, \"lang\": lang, \"query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"linguatools-english-collocations.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "id":1058213,
+                "collocation":"to smoke pipe",
+                "relation":"V:obj:N",
+                "basisword":"smoke",
+                "examples":[
+                    "Breakfast was over , and a number were <b>smoking</b> <b>pipes</b> .",
+                    "The tramp was sitting outside , <b>smoking</b> a <b>pipe</b> .",
+                    "The old man was standing outside , <b>smoking</b> a <b>pipe</b> ."
+                ]
+            },
+            "headers":{
+                "cache-control":"max-age=0, private, must-revalidate",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Mon, 12 Oct 2020 12:28:19 GMT",
+                "etag":"W/\"1a0270a4caabdb00361ce84b178ddc9d\"",
+                "server":"RapidAPI-1.2.6",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.2.6",
+                "x-request-id":"a7327767-1f80-4b6f-9243-51d77b5bd141",
+                "x-runtime":"1.813100",
+                "content-length":"8971",
+                "connection":"Close"
+            },
+            "schema":{
+                "items":{
+                    "properties":{
+                        "basisword":{
+                            "type":"string"
+                        },
+                        "collocation":{
+                            "type":"string"
+                        },
+                        "examples":{
+                            "type":"array"
+                        },
+                        "id":{
+                            "type":"integer"
+                        },
+                        "relation":{
+                            "type":"string"
+                        }
+                    },
+                    "type":"object"
+                },
+                "type":"array"
+            }
+        },
+        {
+            "name":"collocations",
+            "url":"https://linguatools-english-collocations.p.rapidapi.com/bolls/",
+            "description":"looks up collocations",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"language ISO 639-1 code for English",
+                    "default":"en"
+                },
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"any word (case insensitive)",
+                    "default":"smoke"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"max_results",
+                    "type":"NUMBER",
+                    "description":"limit the number of results",
+                    "default":"25"
+                },
+                {
+                    "name":"relation",
+                    "type":"STRING",
+                    "description":"One of the following relations (case sensitive, optional): V:obj:N V:prep:N V:obj1+2:N V:obj+prep:N V:subj:N V:sc:V N:mod:A N:prep:N N:nn:N V:mod:A A:mod:A",
+                    "default":""
+                },
+                {
+                    "name":"min_sig",
+                    "type":"STRING",
+                    "description":"any number as the minimum significance (optional). Will return only collocations with significance >= min_sig",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://linguatools-english-collocations.p.rapidapi.com/bolls/\"\nquerystring = {\"max_results\": max_results, \"lang\": lang, \"query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"linguatools-english-collocations.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "id":1058213,
+                "collocation":"to smoke pipe",
+                "relation":"V:obj:N",
+                "basisword":"smoke",
+                "examples":[
+                    "Breakfast was over , and a number were <b>smoking</b> <b>pipes</b> .",
+                    "The tramp was sitting outside , <b>smoking</b> a <b>pipe</b> .",
+                    "The old man was standing outside , <b>smoking</b> a <b>pipe</b> ."
+                ]
+            },
+            "headers":{
+                "cache-control":"max-age=0, private, must-revalidate",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Mon, 12 Oct 2020 12:28:19 GMT",
+                "etag":"W/\"1a0270a4caabdb00361ce84b178ddc9d\"",
+                "server":"RapidAPI-1.2.6",
+                "x-rapidapi-region":"AWS - eu-central-1",
+                "x-rapidapi-version":"1.2.6",
+                "x-request-id":"a7327767-1f80-4b6f-9243-51d77b5bd141",
+                "x-runtime":"1.813100",
+                "content-length":"8971",
+                "connection":"Close"
+            },
+            "schema":{
+                "items":{
+                    "properties":{
+                        "basisword":{
+                            "type":"string"
+                        },
+                        "collocation":{
+                            "type":"string"
+                        },
+                        "examples":{
+                            "type":"array"
+                        },
+                        "id":{
+                            "type":"integer"
+                        },
+                        "relation":{
+                            "type":"string"
+                        }
+                    },
+                    "type":"object"
+                },
+                "type":"array"
+            }
+        }
+    ]
+}

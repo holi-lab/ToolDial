@@ -1,0 +1,238 @@
+{
+    "tool_name":"Places in radius",
+    "tool_description":"API for retrieving places &amp; facilities data for given origin, distance and list of facility types.",
+    "title":"Places in radius",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":7,
+        "avgSuccessRate":100,
+        "popularityScore":8.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/mateuszpoland6/api/places-in-radius/",
+    "host":"places-in-radius.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"places_in_radius",
+            "url":"https://places-in-radius.p.rapidapi.com/places_in_radius",
+            "description":"This endpoint returns list of locations that meet following criteria:\n- are within defined radius from starting point (radius is in meters), which is a set of coordinates specified in\nformat: starting_point=54.373639725729085,18.61484334290751 (lat, lng)\n- belong to defined categories (eg. 'grocery_store', 'supermarket', 'pharmacy')\n\nReponse contains following data:\n- place_id (Google place ID - unique identifier assigned to each place on Google Maps)\n- name (location name)\n- location data (tuple of coordinates)\n- type of the place\n- distance data tuple, which contains walking and driving time to location from starting point",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"location_types",
+                    "type":"STRING",
+                    "description":"List of location types.\n\nExample locations:\ngrocery_store\nsupermarket\nstore\nrestaurant\nrailway_station\nbus_station\ngym",
+                    "default":"supermarket,restaurant"
+                },
+                {
+                    "name":"distance",
+                    "type":"STRING",
+                    "description":"Distance from origin (starting_point) in **meters**\n\nExample: 1000 means 1km or ~0.621371 mile\n",
+                    "default":"1000"
+                },
+                {
+                    "name":"starting_point",
+                    "type":"STRING",
+                    "description":"Starting point coordinates (latitude,longitude)\nThese are example valid coordinates:\n\n37.81995483709157,-122.47833251953125 (Golden Gate Bridge)\n36.16644125323845,-115.14111136959748 (Somewhere in Downtown Las Vegas)\n\n",
+                    "default":"54.373639725729085,18.61484334290751"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://places-in-radius.p.rapidapi.com/places_in_radius\"\nquerystring = {\"location_types\": location_types, \"distance\": distance, \"starting_point\": starting_point}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"places-in-radius.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "id":"da51b6fd-810e-4409-b773-33810718cebf",
+                    "place_id":"ChIJIZy5FHHDyIARvQMJ9Q00Vo0",
+                    "name":"Family Food Mart",
+                    "location":{
+                        "lat":36.166148,
+                        "lng":-115.1337765
+                    },
+                    "type":"supermarket,restaurant",
+                    "distance_data":[
+                        {
+                            "mode":"driving",
+                            "distance":"0.9 km",
+                            "duration":"2 mins"
+                        },
+                        {
+                            "mode":"walking",
+                            "distance":"0.9 km",
+                            "duration":"11 mins"
+                        }
+                    ],
+                    "details":[
+                        {
+                            "phone":"(702) 388-1174",
+                            "email":""
+                        }
+                    ]
+                },
+                {
+                    "id":"937a1ff3-172a-488e-9b13-12aa3e776502",
+                    "place_id":"ChIJCRfy63_DyIAR0H135E9EceQ",
+                    "name":"The Market",
+                    "location":{
+                        "lat":36.164455,
+                        "lng":-115.1295398
+                    },
+                    "type":"supermarket,restaurant",
+                    "distance_data":[
+                        {
+                            "mode":"driving",
+                            "distance":"1.3 km",
+                            "duration":"3 mins"
+                        },
+                        {
+                            "mode":"walking",
+                            "distance":"1.3 km",
+                            "duration":"16 mins"
+                        }
+                    ],
+                    "details":[
+                        {
+                            "phone":"(702) 586-3407",
+                            "email":""
+                        }
+                    ]
+                },
+                {
+                    "id":"c58632da-b6bc-450c-b2d9-d48c623deedf",
+                    "place_id":"ChIJg2UzhSjDyIARnltPOxt6CWI",
+                    "name":"SRL Sublimación",
+                    "location":{
+                        "lat":36.1719581,
+                        "lng":-115.1399266
+                    },
+                    "type":"supermarket,restaurant",
+                    "distance_data":[
+                        {
+                            "mode":"driving",
+                            "distance":"0.8 km",
+                            "duration":"3 mins"
+                        },
+                        {
+                            "mode":"walking",
+                            "distance":"0.8 km",
+                            "duration":"10 mins"
+                        }
+                    ],
+                    "details":[
+                        {
+                            "phone":"",
+                            "email":""
+                        }
+                    ]
+                },
+                {
+                    "id":"b28addf4-8fa1-40d9-82c8-2c1ad3c9684a",
+                    "place_id":"ChIJxU-wInDDyIARkppKDJCQ8O8",
+                    "name":"Fremont Market",
+                    "location":{
+                        "lat":36.1645,
+                        "lng":-115.130446
+                    },
+                    "type":"supermarket,restaurant",
+                    "distance_data":[
+                        {
+                            "mode":"driving",
+                            "distance":"1.2 km",
+                            "duration":"3 mins"
+                        },
+                        {
+                            "mode":"walking",
+                            "distance":"1.2 km",
+                            "duration":"15 mins"
+                        }
+                    ],
+                    "details":[
+                        {
+                            "phone":"(702) 387-0000",
+                            "email":""
+                        }
+                    ]
+                }
+            ],
+            "headers":{
+                "Content-Type":"application/json"
+            },
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "id":{
+                            "type":"string"
+                        },
+                        "place_id":{
+                            "type":"string"
+                        },
+                        "name":{
+                            "type":"string"
+                        },
+                        "location":{
+                            "type":"object",
+                            "properties":{
+                                "lat":{
+                                    "type":"number"
+                                },
+                                "lng":{
+                                    "type":"number"
+                                }
+                            }
+                        },
+                        "type":{
+                            "type":"string"
+                        },
+                        "distance_data":{
+                            "type":"array",
+                            "items":{
+                                "type":"object",
+                                "properties":{
+                                    "mode":{
+                                        "type":"string"
+                                    },
+                                    "distance":{
+                                        "type":"string"
+                                    },
+                                    "duration":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        },
+                        "details":{
+                            "type":"array",
+                            "items":{
+                                "type":"object",
+                                "properties":{
+                                    "phone":{
+                                        "type":"string"
+                                    },
+                                    "email":{
+                                        "type":"string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"openapi_openapi_json_get",
+            "url":"https://places-in-radius.p.rapidapi.com/openapi.json",
+            "description":" ",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://places-in-radius.p.rapidapi.com/openapi.json\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"places-in-radius.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

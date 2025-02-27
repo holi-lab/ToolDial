@@ -1,0 +1,353 @@
+{
+    "product_id": "api_2fc1902a-2b02-495a-b2cc-be64b6717709",
+    "tool_description": "The Geocoding service finds addresses, businesses, and places around the world. You can convert an address to a location (forward geocoding) or a location to an address (reverse geocoding). The service provides suggested address names for partial address and place names. You can also geocode many addresses at one time with batch geocoding.",
+    "home_url": "https://rapidapi.com/hhkaos-k7FZoeGRL/api/arcgis-platform-geocoding/",
+    "name": "ArcGIS Platform Geocoding",
+    "title": "ArcGIS Platform Geocoding",
+    "pricing": "FREE",
+    "tool_name": "ArcGIS Platform Geocoding",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 333,
+        "avgSuccessRate": 100,
+        "popularityScore": 8.1,
+        "__typename": "Score"
+    },
+    "host": "arcgis-platform-geocoding.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Bulk geocoding",
+            "url": "https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/geocodeAddresses",
+            "description": "Geocode an entire list of addresses in one request using the geocodeAddresses operation. Geocoding many addresses at once is also known as batch or bulk geocoding.\n\n![bulk geocoding](https://developers.arcgis.com/rest/geocode/api-reference/GUID-FD609701-B9B5-49DB-BFD9-A936280A09C6-web.png)\n\n[API reference `geocodeAddresses` operation](https://developers.arcgis.com/rest/geocode/api-reference/geocoding-geocode-addresses.htm)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "addresses",
+                    "type": "STRING",
+                    "description": "A record set representing the addresses to be geocoded. Each record must include an OBJECTID attribute with a unique value as well as values for the address fields supported by the service.",
+                    "default": "%7B%20%22records%22%3A%20%5B%20%7B%20%22attributes%22%3A%20%7B%20%22OBJECTID%22%3A%201%2C%20%22Address%22%3A%20%22380%20New%20York%20St%22%2C%20%22Neighborhood%22%3A%20%22%22%2C%20%22City%22%3A%20%22Redlands%22%2C%20%22Subregion%22%3A%20%22%22%2C%20%22Region%22%3A%20%22CA%22%20%7D%20%7D%2C%20%7B%20%22attributes%22%3A%20%7B%20%22OBJECTID%22%3A%202%2C%20%22Address%22%3A%20%221%20World%20Way%22%2C%20%22Neighborhood%22%3A%20%22%22%2C%20%22City%22%3A%20%22Los%20Angeles%22%2C%20%22Subregion%22%3A%20%22%22%2C%20%22Region%22%3A%20%22CA%22%20%7D%20%7D%20%5D%20%7D"
+                },
+                {
+                    "name": "f",
+                    "type": "STRING",
+                    "description": "(Required) Format of the response: json, pjson, html, ...",
+                    "default": "pjson"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "(Required) How to create an API key: https://youtu.be/Q1x4NZPK8Ws",
+                    "default": "{{API key}}"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "matchOutOfRange",
+                    "type": "STRING",
+                    "description": "A Boolean which specifies if StreetAddress matches should be returned even when the input house number is outside of the house number range defined for the input street. Out-of-range matches have Addr_type=StreetAddressExt. The geometry of such matches is a point corresponding to the end of the street segment where the range value is closest to the input house number. If matchOutOfRange is not specified in a request, its value is set to true by default.",
+                    "default": "false"
+                },
+                {
+                    "name": "preferredLabelValues",
+                    "type": "STRING",
+                    "description": "Allows simple configuration of output fields returned in a response from the ArcGIS World Geocoding Service by specifying which address component values should be included in output fields. Supports a single value as input. If the parameter is blank or excluded from a request then default address label formats will be used.",
+                    "default": "localCity"
+                },
+                {
+                    "name": "outFields",
+                    "type": "STRING",
+                    "description": "The list of fields to be returned within the attributes object of the geocodeAddresses response. Descriptions for each of these fields are available in the Service output topic.",
+                    "default": "AddNum,StAddr,City"
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "A place or address type that can be used to filter geocodeAddresses results. The parameter supports input of single category values or multiple comma-separated values. See Category filtering for complete details about the category parameter.",
+                    "default": "Address"
+                },
+                {
+                    "name": "locationType",
+                    "type": "STRING",
+                    "description": "Specifies if the output geometry of PointAddress and Subaddress matches should be the rooftop point or street entrance location. Valid values are rooftop and street. The default value is rooftop.",
+                    "default": "street"
+                },
+                {
+                    "name": "searchExtent",
+                    "type": "STRING",
+                    "description": "A set of bounding box coordinates that limit the search area to a specific region. This is especially useful for applications in which a user will search for places and addresses within the current map extent. Helper to get search extent with https://arcgis-js-api-extent-helper.gavinr.com/",
+                    "default": "-104,35.6,-94.32,41"
+                },
+                {
+                    "name": "sourceCountry",
+                    "type": "STRING",
+                    "description": "A value representing the country. When a value is passed for this parameter, all of the addresses in the input table are sent to the specified country to be geocoded. For example, if sourceCountry=USA is passed with a batch request, it is assumed that all of the addresses in the table are in the United States, so only matching addresses in USA are returned. Using this parameter can increase batch geocoding performance when all addresses are within a single country.",
+                    "default": "USA"
+                },
+                {
+                    "name": "outSR",
+                    "type": "NUMBER",
+                    "description": "The spatial reference of the x/y coordinates returned by a geocode request. This is useful for applications using a map with a spatial reference different than that of the geocode service.",
+                    "default": 102100
+                },
+                {
+                    "name": "langCode",
+                    "type": "STRING",
+                    "description": "Sets the language in which reverse-geocoded addresses are returned. Addresses in many countries are available in more than one language; in these cases the langCode parameter can be used to specify which language should be used for addresses returned by the reverseGeocode operation. This is useful for ensuring that addresses are returned in the expected language. For example, a web application could be designed to get the browser language and pass it as the langCode parameter value in a reverseGeocode request.",
+                    "default": "fr"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/geocodeAddresses\"\nquerystring = {\"matchOutOfRange\": \"false\", \"preferredLabelValues\": \"localCity\", \"outFields\": \"AddNum,StAddr,City\", \"category\": \"Address\", \"locationType\": \"street\", \"searchExtent\": \"-104,35.6,-94.32,41\", \"sourceCountry\": \"USA\", \"addresses\": \"%7B%20%22records%22%3A%20%5B%20%7B%20%22attributes%22%3A%20%7B%20%22OBJECTID%22%3A%201%2C%20%22Address%22%3A%20%22380%20New%20York%20St%22%2C%20%22Neighborhood%22%3A%20%22%22%2C%20%22City%22%3A%20%22Redlands%22%2C%20%22Subregion%22%3A%20%22%22%2C%20%22Region%22%3A%20%22CA%22%20%7D%20%7D%2C%20%7B%20%22attributes%22%3A%20%7B%20%22OBJECTID%22%3A%202%2C%20%22Address%22%3A%20%221%20World%20Way%22%2C%20%22Neighborhood%22%3A%20%22%22%2C%20%22City%22%3A%20%22Los%20Angeles%22%2C%20%22Subregion%22%3A%20%22%22%2C%20%22Region%22%3A%20%22CA%22%20%7D%20%7D%20%5D%20%7D\", \"f\": \"pjson\", \"outSR\": 102100, \"token\": \"{{API key}}\", \"langCode\": \"fr\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arcgis-platform-geocoding.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/geocodeAddresses\"\nquerystring = {\"matchOutOfRange\": \"false\", \"preferredLabelValues\": \"localCity\", \"outFields\": \"AddNum,StAddr,City\", \"category\": \"Address\", \"locationType\": \"street\", \"searchExtent\": \"-104,35.6,-94.32,41\", \"sourceCountry\": \"USA\", \"addresses\": \"%7B%20%22records%22%3A%20%5B%20%7B%20%22attributes%22%3A%20%7B%20%22OBJECTID%22%3A%201%2C%20%22Address%22%3A%20%22380%20New%20York%20St%22%2C%20%22Neighborhood%22%3A%20%22%22%2C%20%22City%22%3A%20%22Redlands%22%2C%20%22Subregion%22%3A%20%22%22%2C%20%22Region%22%3A%20%22CA%22%20%7D%20%7D%2C%20%7B%20%22attributes%22%3A%20%7B%20%22OBJECTID%22%3A%202%2C%20%22Address%22%3A%20%221%20World%20Way%22%2C%20%22Neighborhood%22%3A%20%22%22%2C%20%22City%22%3A%20%22Los%20Angeles%22%2C%20%22Subregion%22%3A%20%22%22%2C%20%22Region%22%3A%20%22CA%22%20%7D%20%7D%20%5D%20%7D\", \"f\": \"pjson\", \"outSR\": 102100, \"token\": \"{{API key}}\", \"langCode\": \"fr\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arcgis-platform-geocoding.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Autocomplete suggestions",
+            "url": "https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/suggest",
+            "description": "The ArcGIS World Geocoding Service includes a method that allows character-by-character autocomplete suggestions to be generated for user input in a client application. This capability facilitates the interactive search user experience by reducing the number of characters that need to be typed before a suggested match is obtained. The idea is that a client application can provide a list of suggestions that is updated with each character entered by a user until the place they are looking for is returned in the list.\n\n![Autocomplete diagram](https://developers.arcgis.com/rest/geocode/api-reference/GUID-9A754AFE-8154-46C3-8A31-3566963F971E-web.png)\n\n[API reference `suggest` operation](https://developers.arcgis.com/rest/geocode/api-reference/geocoding-suggest.htm)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "(Required) The input text entered by a user, which is used by the suggest operation to generate a list of possible matches.",
+                    "default": "starbu"
+                },
+                {
+                    "name": "f",
+                    "type": "STRING",
+                    "description": "(Required) Format of the response: json or pjson",
+                    "default": "pjson"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "searchExtent",
+                    "type": "STRING",
+                    "description": "A set of bounding box coordinates that limit the search area for suggestions to a specific region. This is especially useful for applications in which a user will search for places and addresses within the current map extent. Helper to get search extent with https://arcgis-js-api-extent-helper.gavinr.com/",
+                    "default": "-104,35.6,-94.32,41"
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "A place or address type that can be used to filter suggest results. The parameter supports input of single category values or multiple comma-separated values. The category parameter must be passed in a request with the text parameter. See Category filtering for complete details about the category parameter.",
+                    "default": "Address,Postal"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "Limits the returned suggestions to values in a particular country. Valid 2- and 3-character country code values for each country are available in Geocode coverage.",
+                    "default": "USA"
+                },
+                {
+                    "name": "preferredLabelValues",
+                    "type": "STRING",
+                    "description": "Allows simple configuration of suggestion labels returned in a response from the ArcGIS World Geocoding Service by specifying which address component values should be included in the label. If the parameter is blank or excluded from a request then default address formats are used.",
+                    "default": "postalCity"
+                },
+                {
+                    "name": "maxSuggestions",
+                    "type": "NUMBER",
+                    "description": "The maximum number of suggestions returned by a suggest response, up to the maximum number allowed by the service. Currently, the ArcGIS World Geocoding Service allows up to 15 suggestions to be returned. If maxSuggestions is not included in the suggest request, the default value is 5.\n\n",
+                    "default": 10
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "Defines an origin point that is used to prefer or boost geocoding candidates based on their proximity to the location. Candidates near the location are prioritized relative to those further away. This is useful in mobile applications where a user wants to search for places in the vicinity of their current GPS location, or in mapping applications where users want to search for places near the center of the map.",
+                    "default": "-117.196,34.056"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/suggest\"\nquerystring = {\"searchExtent\": \"-104,35.6,-94.32,41\", \"category\": \"Address,Postal\", \"text\": \"starbu\", \"countryCode\": \"USA\", \"preferredLabelValues\": \"postalCity\", \"maxSuggestions\": 10, \"location\": \"-117.196,34.056\", \"f\": \"pjson\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arcgis-platform-geocoding.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/suggest\"\nquerystring = {\"searchExtent\": \"-104,35.6,-94.32,41\", \"category\": \"Address,Postal\", \"text\": \"starbu\", \"countryCode\": \"USA\", \"preferredLabelValues\": \"postalCity\", \"maxSuggestions\": 10, \"location\": \"-117.196,34.056\", \"f\": \"pjson\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arcgis-platform-geocoding.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "code": 499,
+                    "message": "Token Required",
+                    "details": []
+                }
+            },
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "Search address",
+            "url": "https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates",
+            "description": "The findAddressCandidates operation geocodes one location per request; the input address can be combined into a single input field or divided among multiple parameters.\n\n![geoceode screenshot](https://developers.arcgis.com/rest/geocode/api-reference/GUID-F2F78690-5FB5-4BF1-8633-26BF184C45A9-web.png)\n\n[API reference for `findAddressCandidates` operation](https://developers.arcgis.com/rest/geocode/api-reference/geocoding-find-address-candidates.htm)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "f",
+                    "type": "STRING",
+                    "description": "Search for an address, POI category, intersection, etc.",
+                    "default": "json"
+                },
+                {
+                    "name": "token",
+                    "type": "STRING",
+                    "description": "(Required) Format of the response: json, pjson, html, ...",
+                    "default": "{{API key}}"
+                },
+                {
+                    "name": "searchExtent",
+                    "type": "STRING",
+                    "description": "The list of fields to be returned within the attributes object of the response. Descriptions for each of these fields are available in the Output fields section of this document. Helper to get search extent with https://arcgis-js-api-extent-helper.gavinr.com/",
+                    "default": "%7B%0A%20%20%22spatialReference%22%3A%20%7B%0A%20%20%20%20%22wkid%22%3A%204326%0A%20%20%7D%2C%0A%20%20%22xmin%22%3A%202.0239333156489683%2C%0A%20%20%22ymin%22%3A%2041.33418375384584%2C%0A%20%20%22xmax%22%3A%202.287605190648613%2C%0A%20%20%22ymax%22%3A%2041.440306977522305%0A%7D"
+                },
+                {
+                    "name": "singleLine",
+                    "type": "STRING",
+                    "description": "Specifies whether the results of the operation will be persisted",
+                    "default": "balmes con diagonal, barcelona"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "magicKey",
+                    "type": "STRING",
+                    "description": "Defines an origin point that is used to prefer or boost geocoding candidates based on their proximity to the location. Candidates near the location are prioritized relative to those further away. This is useful in mobile applications where a user wants to search for places in the vicinity of their current GPS location, or in mapping applications where users want to search for places near the center of the map.",
+                    "default": "JS91CYhQDS5vDPhvSMyGZby0YFbaUDoaM5bHMoFF"
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "A place or address type that can be used to filter findAddressCandidates results. The parameter supports input of single category values or multiple comma-separated values. The category parameter can be passed in a request with the SingleLine or address parameters. It can also be passed in a request on its own without the singleline or address parameters. See Category filtering for complete details about the category parameter.",
+                    "default": "-117.196,34.056"
+                },
+                {
+                    "name": "address2",
+                    "type": "STRING",
+                    "description": "A string that represents the third line of a street address. This can include street name/house number, building name, place name, or subunit.",
+                    "default": "Beetham Tower"
+                },
+                {
+                    "name": "region",
+                    "type": "STRING",
+                    "description": "The standard postal code for an address, typically, a 3\u20136-digit alphanumeric code.",
+                    "default": "Florida"
+                },
+                {
+                    "name": "outFields",
+                    "type": "STRING",
+                    "description": "A string that represents the first line of a street address. In most cases this field will be used for street name and house number input, but it can also be used to input building name or place name.",
+                    "default": "*"
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "The spatial reference of the x/y coordinates returned by a geocode request. This is useful for applications using a map with a spatial reference different than that of the geocode service.",
+                    "default": "Address"
+                },
+                {
+                    "name": "postal",
+                    "type": "NUMBER",
+                    "description": "A postal code extension, such as the United States Postal Service ZIP+4 code, provides finer resolution or higher accuracy when also passing postal.",
+                    "default": 92373
+                },
+                {
+                    "name": "preferredLabelValues",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "postalCity"
+                },
+                {
+                    "name": "sourceCountry",
+                    "type": "STRING",
+                    "description": "Allows simple configuration of output fields returned in a response from the ArcGIS World Geocoding Service by specifying which address component values should be included in output fields. Supports a single value or a comma-delimited collection of values as input. If the parameter is blank or excluded from a request then default address label formats will be used.\n\n",
+                    "default": "USA"
+                },
+                {
+                    "name": "countryCode",
+                    "type": "STRING",
+                    "description": "The findAddressCandidates operation retrieves results quicker when you pass in valid SingleLine and magicKey values than when you don't pass in magicKey. However, to get these advantages, you need to make a prior request to suggest, which provides a magicKey. This may or may not be relevant to your workflow.",
+                    "default": "USA"
+                },
+                {
+                    "name": "neighborhood",
+                    "type": "STRING",
+                    "description": "The next largest administrative division associated with an address, typically, a city or municipality. A city is a subdivision of a subregion or a region.",
+                    "default": "Herrera"
+                },
+                {
+                    "name": "outSR",
+                    "type": "NUMBER",
+                    "description": "The maximum number of locations to be returned by a search, up to the maximum number allowed by the service. If not specified, then all matching candidates up to the service maximum are returned.",
+                    "default": 102100
+                },
+                {
+                    "name": "maxLocations",
+                    "type": "NUMBER",
+                    "description": "A Boolean which specifies if StreetAddress matches should be returned even when the input house number is outside of the house number range defined for the input street. Out-of-range matches have Addr_type=StreetAddressExt. The geometry of such matches is a point corresponding to the end of the street segment where the range value is closest to the input house number. If matchOutOfRange is not specified in a request, its value is set to true by default.",
+                    "default": 10
+                },
+                {
+                    "name": "subregion",
+                    "type": "STRING",
+                    "description": "The largest administrative division associated with an address, typically, a state or province.",
+                    "default": "Vienne"
+                },
+                {
+                    "name": "forStorage",
+                    "type": "STRING",
+                    "description": "Get search extent with https://arcgis-js-api-extent-helper.gavinr.com/",
+                    "default": "true"
+                },
+                {
+                    "name": "address3",
+                    "type": "STRING",
+                    "description": "The smallest administrative division associated with an address, typically, a neighborhood or a section of a larger populated place. A neighborhood is a subdivision of a city.",
+                    "default": "Suite 4208"
+                },
+                {
+                    "name": "langCode",
+                    "type": "STRING",
+                    "description": "Limits the candidates returned by the findAddressCandidates operation to the specified country or countries. For example, if sourceCountry=USA is included in the request, it is assumed that the address is in the United States, so only matching addresses in USA are returned. Using this parameter prevents potential unexpected results in other countries for ambiguous searches.",
+                    "default": "fr"
+                },
+                {
+                    "name": "locationType",
+                    "type": "STRING",
+                    "description": "Sets the language in which geocode results are returned. Addresses and places in many countries are available in more than one language; in these cases the langCode parameter can be used to specify which language should be used for results returned by the findAddressCandidates operation. This is useful for ensuring that results are returned in the expected language. For example, a web application could be designed to get the browser language and pass it as the langCode parameter value in a findAddressCandidates request.",
+                    "default": "street"
+                },
+                {
+                    "name": "matchOutOfRange",
+                    "type": "STRING",
+                    "description": "Specifies if the output geometry of PointAddress and Subaddress matches should be the rooftop point or street entrance location. Valid values are rooftop and street. The default value is rooftop.",
+                    "default": "false"
+                },
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "description": "The next largest administrative division associated with an address. Depending on the country, a subregion can represent a county, state, or province.",
+                    "default": "Los Angeles"
+                },
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "A string that represents the second line of a street address. This can include street name/house number, building name, place name, or subunit.",
+                    "default": "Avenida Revolucion 8208"
+                },
+                {
+                    "name": "postalExt",
+                    "type": "NUMBER",
+                    "description": "A value representing the country. Providing this value increases geocoding speed. Acceptable values include the full country name in English or the official language of the country, the 2-character country code, or the 3-character country code. A list of supported countries and codes is available in the Geocode coverage topic.",
+                    "default": 1112
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates\"\nquerystring = {\"magicKey\": \"JS91CYhQDS5vDPhvSMyGZby0YFbaUDoaM5bHMoFF\", \"location\": \"-117.196,34.056\", \"address2\": \"Beetham Tower\", \"region\": \"Florida\", \"outFields\": \"*\", \"category\": \"Address\", \"postal\": 92373, \"f\": \"json\", \"preferredLabelValues\": \"postalCity\", \"sourceCountry\": \"USA\", \"countryCode\": \"USA\", \"token\": \"{{API key}}\", \"neighborhood\": \"Herrera\", \"outSR\": 102100, \"maxLocations\": 10, \"subregion\": \"Vienne\", \"forStorage\": \"true\", \"address3\": \"Suite 4208\", \"searchExtent\": \"%7B%0A%20%20%22spatialReference%22%3A%20%7B%0A%20%20%20%20%22wkid%22%3A%204326%0A%20%20%7D%2C%0A%20%20%22xmin%22%3A%202.0239333156489683%2C%0A%20%20%22ymin%22%3A%2041.33418375384584%2C%0A%20%20%22xmax%22%3A%202.287605190648613%2C%0A%20%20%22ymax%22%3A%2041.440306977522305%0A%7D\", \"langCode\": \"fr\", \"locationType\": \"street\", \"matchOutOfRange\": \"false\", \"city\": \"Los Angeles\", \"singleLine\": \"balmes con diagonal, barcelona\", \"address\": \"Avenida Revolucion 8208\", \"postalExt\": 1112}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arcgis-platform-geocoding.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://arcgis-platform-geocoding.p.rapidapi.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates\"\nquerystring = {\"magicKey\": \"JS91CYhQDS5vDPhvSMyGZby0YFbaUDoaM5bHMoFF\", \"location\": \"-117.196,34.056\", \"address2\": \"Beetham Tower\", \"region\": \"Florida\", \"outFields\": \"*\", \"category\": \"Address\", \"postal\": 92373, \"f\": \"json\", \"preferredLabelValues\": \"postalCity\", \"sourceCountry\": \"USA\", \"countryCode\": \"USA\", \"token\": \"{{API key}}\", \"neighborhood\": \"Herrera\", \"outSR\": 102100, \"maxLocations\": 10, \"subregion\": \"Vienne\", \"forStorage\": \"true\", \"address3\": \"Suite 4208\", \"searchExtent\": \"%7B%0A%20%20%22spatialReference%22%3A%20%7B%0A%20%20%20%20%22wkid%22%3A%204326%0A%20%20%7D%2C%0A%20%20%22xmin%22%3A%202.0239333156489683%2C%0A%20%20%22ymin%22%3A%2041.33418375384584%2C%0A%20%20%22xmax%22%3A%202.287605190648613%2C%0A%20%20%22ymax%22%3A%2041.440306977522305%0A%7D\", \"langCode\": \"fr\", \"locationType\": \"street\", \"matchOutOfRange\": \"false\", \"city\": \"Los Angeles\", \"singleLine\": \"balmes con diagonal, barcelona\", \"address\": \"Avenida Revolucion 8208\", \"postalExt\": 1112}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arcgis-platform-geocoding.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": {
+                    "code": 498,
+                    "message": "Invalid Token",
+                    "details": []
+                }
+            },
+            "statuscode": 200,
+            "schema": {}
+        }
+    ],
+    "standardized_name": "arcgis_platform_geocoding"
+}

@@ -1,0 +1,137 @@
+{
+    "product_id": "api_80b5609b-b6b4-4aff-a824-f9381f781377",
+    "tool_description": "Flight data API for travel, hospitality, or aviation applications, researchers, small teams, and individual developers.",
+    "home_url": "https://rapidapi.com/aedbx-aedbx/api/aerodatabox/",
+    "name": "AeroDataBox",
+    "title": "AeroDataBox",
+    "pricing": "PAID",
+    "tool_name": "AeroDataBox",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 380,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "aerodatabox.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "(BETA) Aircraft image recognition",
+            "url": "https://aerodatabox.p.rapidapi.com/aircrafts/recognize/beta",
+            "description": "**What aircrafts are depicted on this photo?**\n\nThis endpoint recognizes aircrafts on uploaded image and returns information about all detected aircrafts. It is based on computer vision technology and therefore results may be imprecise. It relies on detecting aircrafts' registrations and, once detected, attempting to match these registration with records in aircrafts database.\n\nReturns: Data about found and recognized aircrafts.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "photo",
+                    "type": "BINARY",
+                    "description": "Image containing aircraft. It should be image-type file (JPEG, PNG or BMP).  To improve results:  ensure that aircraft registration is as much as possible visible on the image; other inscriptions are visible as least as possible or absent on the image (although algorithm strives to filter these out as much as possible, false results are still possible).",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://aerodatabox.p.rapidapi.com/aircrafts/recognize/beta\"\nquerystring = {\"photo\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aerodatabox.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://aerodatabox.p.rapidapi.com/aircrafts/recognize/beta\"\nquerystring = {\"photo\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aerodatabox.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "OK-KFN": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "reg": {
+                                "type": "string"
+                            },
+                            "active": {
+                                "type": "boolean"
+                            },
+                            "serial": {
+                                "type": "string"
+                            },
+                            "hexIcao": {
+                                "type": "string"
+                            },
+                            "airlineId": {
+                                "type": "string"
+                            },
+                            "airlineName": {
+                                "type": "string"
+                            },
+                            "iataCodeShort": {
+                                "type": "string"
+                            },
+                            "iataCodeLong": {
+                                "type": "string"
+                            },
+                            "model": {
+                                "type": "string"
+                            },
+                            "modelCode": {
+                                "type": "string"
+                            },
+                            "rolloutDate": {
+                                "type": "string"
+                            },
+                            "firstFlightDate": {
+                                "type": "string"
+                            },
+                            "deliveryDate": {
+                                "type": "string"
+                            },
+                            "registrationDate": {
+                                "type": "string"
+                            },
+                            "typeName": {
+                                "type": "string"
+                            },
+                            "numEngines": {
+                                "type": "integer"
+                            },
+                            "engineType": {
+                                "type": "string"
+                            },
+                            "isFreighter": {
+                                "type": "boolean"
+                            },
+                            "ageYears": {
+                                "type": "number"
+                            },
+                            "verified": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Create web-hook subscription",
+            "url": "https://aerodatabox.p.rapidapi.com/subscriptions/webhook/{subjectType}/KL1395",
+            "description": "Creates a webhook subscription on a subject (e.g. flight by number or by airport code). Returns information about the created subscription. Subscription ID contained in it can be used to refresh or remove it.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "subjectType",
+                    "type": "ENUM",
+                    "description": "Subject type",
+                    "default": ""
+                },
+                {
+                    "name": "subjectId",
+                    "type": "string",
+                    "description": "Subject ID. If `subjectType` is:\n- `FlightByNumber`, then this field must be a flight number (with or without spaces, IATA or ICAO, any case formats are acceptable, e.g. KL1395, Klm 1395);\n- `FlightByAirportIcao`, then this field must be a 4-character ICAO-code of the airport where flights are operated (e.g.: EHAM, KLAX, UUEE, etc.).",
+                    "default": "KL1395"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://aerodatabox.p.rapidapi.com/subscriptions/webhook/{subjectType}/KL1395\"\nquerystring = {\"subjectType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aerodatabox.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://aerodatabox.p.rapidapi.com/subscriptions/webhook/{subjectType}/{subjectid}\"\nquerystring = {\"subjectType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aerodatabox.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

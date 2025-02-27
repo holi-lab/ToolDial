@@ -1,0 +1,799 @@
+{
+    "tool_name": "Microsoft Translator Text",
+    "tool_description": "An AI service from Microsoft Azure that enables you to easily conduct real-time text translation.",
+    "title": "Microsoft Translator Text",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 94,
+        "avgLatency": 776,
+        "avgSuccessRate": 90,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/microsoft-translator-text/",
+    "host": "microsoft-translator-text.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Languages",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/languages",
+            "description": "Gets the set of languages currently supported by other operations of the Translator Text API.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Accept-Language",
+                    "type": "STRING",
+                    "description": "The language to use for user interface strings. Some of the fields in the response are names of languages or names of regions. Use this parameter to define the language in which these names are returned. The language is specified by providing a well-formed BCP 47 language tag. For instance, use the value `fr` to request names in French or use the value `zh-Hant` to request names in Chinese Traditional. Names are provided in the English language when a target language is not specified or when localization is not available.",
+                    "default": ""
+                },
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                },
+                {
+                    "name": "scope",
+                    "type": "STRING",
+                    "description": "A comma-separated list of names defining the group of languages to return. Allowed group names are- `translation`, `transliteration` and `dictionary`. If no scope is given, then all groups are returned, which is equivalent to passing `scope=translation,transliteration,dictionary`. To decide which set of supported languages is appropriate for your scenario, see the description of the response object.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/languages\"\nquerystring = {\"api-version\": api_version}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Transliterate",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/transliterate",
+            "description": "Converts the text of a language in one script into another type of script. Example- \nJapanese script \"\u3053\u3093\u306b\u3061\u306f\"\nSame word in Latin script \"konnichiha\"",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                },
+                {
+                    "name": "toScript",
+                    "type": "STRING",
+                    "description": "Specifies the output script. Lookup supported languages using the `transliteration` scope, to find output scripts available for the selected combination of input language and input script.\n",
+                    "default": ""
+                },
+                {
+                    "name": "fromScript",
+                    "type": "STRING",
+                    "description": "Specifies the script used by the input text. Lookup supported languages using the `transliteration` scope, to find input scripts available for the selected language.\n",
+                    "default": ""
+                },
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "Specifies the language of the text to convert from one script to another. Possible languages are listed in the `transliteration` scope obtained by querying the service for its supported languages.\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/transliterate\"\nquerystring = {\"api-version\": api_version, \"toScript\": toscript, \"fromScript\": fromscript, \"language\": language}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Translate",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/translate",
+            "description": "Translates text into one or more languages.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "ARRAY",
+                    "description": "Specifies the language of the output text. Find which languages are available to translate to by using the languages method. For example, use `to=de` to translate to German.\n  It's possible to translate to multiple languages simultaneously by repeating the `to` parameter in the query string. For example, use `to=de&to=it` to translate to German and Italian in the same request.\n",
+                    "default": ""
+                },
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                },
+                {
+                    "name": "includeAlignment",
+                    "type": "BOOLEAN",
+                    "description": "Specifies whether to include alignment projection from source text to translated text. Possible values are- `true` or `false` (default).\n",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Specifies the language of the input text. Find which languages are available to translate from by using the languages method. If the `from` parameter is not specified, automatic language detection is applied to determine the source language.\n",
+                    "default": ""
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "A string specifying the category (domain) of the translation. This parameter retrieves translations from a customized system built with Custom Translator. Default value is `general`.\n",
+                    "default": ""
+                },
+                {
+                    "name": "toScript",
+                    "type": "ARRAY",
+                    "description": "Specifies the script of the translated text. Supported scripts are available from the languages method",
+                    "default": ""
+                },
+                {
+                    "name": "profanityMarker",
+                    "type": "STRING",
+                    "description": "Specifies how profanities should be marked in translations. Possible values are- `Asterisk` (default) or `Tag`.\n",
+                    "default": ""
+                },
+                {
+                    "name": "profanityAction",
+                    "type": "STRING",
+                    "description": "Specifies how profanities should be treated in translations. Possible values are: `NoAction` (default), `Marked` or `Deleted`.\n### Handling Profanity\nNormally the Translator service will retain profanity that is present in the source in the translation. The degree of profanity and the context that makes words profane differ between cultures, and as a result the degree of profanity in the target language may be amplified or reduced.\n\nIf you want to avoid getting profanity in the translation, regardless of the presence of profanity in the source text, you can use the profanity filtering option. The option allows you to choose whether you want to see profanity deleted, whether you want to mark profanities with appropriate tags (giving you the option to add your own post-processing), or you want no action taken. The accepted values of `ProfanityAction` are `Deleted`, `Marked` and `NoAction` (default).\n\n| ProfanityAction | Action                                                                    |\n| ----------      | ----------                                                                |\n| `NoAction`      | This is the default behavior. Profanity will pass from source to target.  |\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a jackass.                           |\n|                 |                                                                           |\n| `Deleted`       | Profane words will be removed from the output without replacement.        |\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a.                                   |\n| `Marked`        | Profane words are replaced by a marker in the output. The marker depends on the `ProfanityMarker` parameter.\n|                 | For `ProfanityMarker=Asterisk`, profane words are replaced with `***`     |\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a ***.                               |\n|                 | For `ProfanityMarker=Tag`, profane words are surrounded by XML tags <profanity> and </profanity>\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a <profanity>jackass</profanity>.\n",
+                    "default": "NoAction"
+                },
+                {
+                    "name": "fromScript",
+                    "type": "STRING",
+                    "description": "Specifies the script of the input text. Supported scripts are available from the languages method",
+                    "default": ""
+                },
+                {
+                    "name": "includeSentenceLength",
+                    "type": "BOOLEAN",
+                    "description": "Specifies whether to include sentence boundaries for the input text and the translated text. Possible values are- `true` or `false` (default).\n",
+                    "default": ""
+                },
+                {
+                    "name": "textType",
+                    "type": "STRING",
+                    "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, complete HTML element. Possible values are `plain` (default) or `html`\n",
+                    "default": "plain"
+                },
+                {
+                    "name": "suggestedFrom",
+                    "type": "STRING",
+                    "description": "Specifies a fallback language if the language of the input text can't be identified. Language auto-detection is applied when the `from` parameter is omitted. If detection fails, the `suggestedFrom` language will be assumed.\n",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/translate\"\nquerystring = {\"to\": to, \"api-version\": api_version, \"profanityAction\": profanityaction, \"textType\": texttype}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Detect",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/Detect",
+            "description": "Identifies the language of a string of text.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Detect\"\nquerystring = {\"api-version\": api_version}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Break Sentence",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/BreakSentence",
+            "description": "Identifies the position of sentence boundaries in a piece of text.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                },
+                {
+                    "name": "Script",
+                    "type": "STRING",
+                    "description": "Script identifier of the script used by the input text. If a script is not specified, the default script of the language will be assumed.",
+                    "default": ""
+                },
+                {
+                    "name": "Language",
+                    "type": "STRING",
+                    "description": "Language tag of the language of the input text. If not specified, Translator will apply automatic language detection.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/BreakSentence\"\nquerystring = {\"api-version\": api_version}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Dictionary Lookup",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/Dictionary/Lookup",
+            "description": "Provides alternative translations for a word and a small number of idiomatic phrases. Each translation has a `part-of-speech` and a list of `back-translations`. The back-translations enable a user to understand the translation in context. The Dictionary Example operation allows further drill down to see example uses of each translation pair.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Specifies the language of the output text. The target language must be one of the supported languages included in the `dictionary` scope of the Languages resource.",
+                    "default": ""
+                },
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Specifies the language of the input text. The source language must be one of the supported languages included in the `dictionary` scope.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Dictionary/Lookup\"\nquerystring = {\"to\": to, \"api-version\": api_version, \"from\": is_from}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Dictionary Examples",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/Dictionary/Examples",
+            "description": "Provides examples that show how terms in the dictionary are used in context. This operation is used in tandem with `Dictionary lookup`.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Specifies the language of the output text. The target language must be one of the supported languages included in the `dictionary` scope.",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Specifies the language of the input text. The source language must be one of the supported languages included in the `dictionary` scope.",
+                    "default": ""
+                },
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "X-ClientTraceId",
+                    "type": "STRING",
+                    "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Dictionary/Examples\"\nquerystring = {\"to\": to, \"from\": is_from, \"api-version\": api_version}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Transliterate",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/transliterate",
+            "description": "Converts the text of a language in one script into another type of script. Example- \nJapanese script \"\u3053\u3093\u306b\u3061\u306f\"\nSame word in Latin script \"konnichiha\"",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                },
+                {
+                    "name": "toScript",
+                    "type": "STRING",
+                    "description": "Specifies the output script. Lookup supported languages using the `transliteration` scope, to find output scripts available for the selected combination of input language and input script.\n",
+                    "default": ""
+                },
+                {
+                    "name": "fromScript",
+                    "type": "STRING",
+                    "description": "Specifies the script used by the input text. Lookup supported languages using the `transliteration` scope, to find input scripts available for the selected language.\n",
+                    "default": ""
+                },
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "Specifies the language of the text to convert from one script to another. Possible languages are listed in the `transliteration` scope obtained by querying the service for its supported languages.\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/transliterate\"\nquerystring = {\"api-version\": \"3.0\", \"toScript\": \"\", \"fromScript\": \"\", \"language\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/transliterate\"\nquerystring = {\"api-version\": \"3.0\", \"toScript\": \"\", \"fromScript\": \"\", \"language\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Example of a successful transliterate request",
+                "items": {
+                    "properties": {
+                        "script": {
+                            "type": "string"
+                        },
+                        "text": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Translate",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/translate",
+            "description": "Translates text into one or more languages.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "ARRAY",
+                    "description": "Specifies the language of the output text. Find which languages are available to translate to by using the languages method. For example, use `to=de` to translate to German.\n  It's possible to translate to multiple languages simultaneously by repeating the `to` parameter in the query string. For example, use `to=de&to=it` to translate to German and Italian in the same request.\n",
+                    "default": ""
+                },
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "includeAlignment",
+                    "type": "BOOLEAN",
+                    "description": "Specifies whether to include alignment projection from source text to translated text. Possible values are- `true` or `false` (default).\n",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Specifies the language of the input text. Find which languages are available to translate from by using the languages method. If the `from` parameter is not specified, automatic language detection is applied to determine the source language.\n",
+                    "default": ""
+                },
+                {
+                    "name": "category",
+                    "type": "STRING",
+                    "description": "A string specifying the category (domain) of the translation. This parameter retrieves translations from a customized system built with Custom Translator. Default value is `general`.\n",
+                    "default": ""
+                },
+                {
+                    "name": "toScript",
+                    "type": "ARRAY",
+                    "description": "Specifies the script of the translated text. Supported scripts are available from the languages method",
+                    "default": ""
+                },
+                {
+                    "name": "profanityMarker",
+                    "type": "STRING",
+                    "description": "Specifies how profanities should be marked in translations. Possible values are- `Asterisk` (default) or `Tag`.\n",
+                    "default": ""
+                },
+                {
+                    "name": "profanityAction",
+                    "type": "STRING",
+                    "description": "Specifies how profanities should be treated in translations. Possible values are: `NoAction` (default), `Marked` or `Deleted`.\n### Handling Profanity\nNormally the Translator service will retain profanity that is present in the source in the translation. The degree of profanity and the context that makes words profane differ between cultures, and as a result the degree of profanity in the target language may be amplified or reduced.\n\nIf you want to avoid getting profanity in the translation, regardless of the presence of profanity in the source text, you can use the profanity filtering option. The option allows you to choose whether you want to see profanity deleted, whether you want to mark profanities with appropriate tags (giving you the option to add your own post-processing), or you want no action taken. The accepted values of `ProfanityAction` are `Deleted`, `Marked` and `NoAction` (default).\n\n| ProfanityAction | Action                                                                    |\n| ----------      | ----------                                                                |\n| `NoAction`      | This is the default behavior. Profanity will pass from source to target.  |\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a jackass.                           |\n|                 |                                                                           |\n| `Deleted`       | Profane words will be removed from the output without replacement.        |\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a.                                   |\n| `Marked`        | Profane words are replaced by a marker in the output. The marker depends on the `ProfanityMarker` parameter.\n|                 | For `ProfanityMarker=Asterisk`, profane words are replaced with `***`     |\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a ***.                               |\n|                 | For `ProfanityMarker=Tag`, profane words are surrounded by XML tags <profanity> and </profanity>\n|                 | Example Source (Japanese)- \u5f7c\u306f\u30b8\u30e3\u30c3\u30ab\u30b9\u3067\u3059\u3002                           |\n|                 | Example Translation (English)- He is a <profanity>jackass</profanity>.\n",
+                    "default": "NoAction"
+                },
+                {
+                    "name": "fromScript",
+                    "type": "STRING",
+                    "description": "Specifies the script of the input text. Supported scripts are available from the languages method",
+                    "default": ""
+                },
+                {
+                    "name": "includeSentenceLength",
+                    "type": "BOOLEAN",
+                    "description": "Specifies whether to include sentence boundaries for the input text and the translated text. Possible values are- `true` or `false` (default).\n",
+                    "default": ""
+                },
+                {
+                    "name": "textType",
+                    "type": "STRING",
+                    "description": "Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, complete HTML element. Possible values are `plain` (default) or `html`\n",
+                    "default": "plain"
+                },
+                {
+                    "name": "suggestedFrom",
+                    "type": "STRING",
+                    "description": "Specifies a fallback language if the language of the input text can't be identified. Language auto-detection is applied when the `from` parameter is omitted. If detection fails, the `suggestedFrom` language will be assumed.\n",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/translate\"\nquerystring = {\"includeAlignment\": \"\", \"from\": \"\", \"category\": \"\", \"to\": \"\", \"toScript\": \"\", \"api-version\": \"3.0\", \"profanityMarker\": \"\", \"profanityAction\": \"NoAction\", \"fromScript\": \"\", \"includeSentenceLength\": \"\", \"textType\": \"plain\", \"suggestedFrom\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/translate\"\nquerystring = {\"includeAlignment\": \"\", \"from\": \"\", \"category\": \"\", \"to\": \"\", \"toScript\": \"\", \"api-version\": \"3.0\", \"profanityMarker\": \"\", \"profanityAction\": \"NoAction\", \"fromScript\": \"\", \"includeSentenceLength\": \"\", \"textType\": \"plain\", \"suggestedFrom\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Example of a successful translate request, including all optional parameters.",
+                "items": {
+                    "properties": {
+                        "detectedLanguage": {
+                            "properties": {
+                                "language": {
+                                    "type": "string"
+                                },
+                                "score": {
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "translations": {
+                            "items": {
+                                "properties": {
+                                    "alignment": {
+                                        "properties": {
+                                            "proj": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "sentLen": {
+                                        "properties": {
+                                            "srcSentLen": {
+                                                "items": {
+                                                    "properties": {
+                                                        "integer": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "array"
+                                            },
+                                            "transSentLen": {
+                                                "items": {
+                                                    "properties": {
+                                                        "integer": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "text": {
+                                        "type": "string"
+                                    },
+                                    "to": {
+                                        "type": "string"
+                                    },
+                                    "transliteration": {
+                                        "properties": {
+                                            "script": {
+                                                "type": "string"
+                                            },
+                                            "text": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Detect",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/Detect",
+            "description": "Identifies the language of a string of text.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Detect\"\nquerystring = {\"api-version\": \"3.0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Detect\"\nquerystring = {\"api-version\": \"3.0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Example of a successful detect request",
+                "items": {
+                    "properties": {
+                        "text": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Break Sentence",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/BreakSentence",
+            "description": "Identifies the position of sentence boundaries in a piece of text.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "Script",
+                    "type": "STRING",
+                    "description": "Script identifier of the script used by the input text. If a script is not specified, the default script of the language will be assumed.",
+                    "default": ""
+                },
+                {
+                    "name": "Language",
+                    "type": "STRING",
+                    "description": "Language tag of the language of the input text. If not specified, Translator will apply automatic language detection.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/BreakSentence\"\nquerystring = {\"Script\": \"\", \"api-version\": \"3.0\", \"Language\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/BreakSentence\"\nquerystring = {\"Script\": \"\", \"api-version\": \"3.0\", \"Language\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Example of a successful break sentence request",
+                "items": {
+                    "properties": {
+                        "sentLen": {
+                            "items": {
+                                "type": "integer"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Dictionary Lookup",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/Dictionary/Lookup",
+            "description": "Provides alternative translations for a word and a small number of idiomatic phrases. Each translation has a `part-of-speech` and a list of `back-translations`. The back-translations enable a user to understand the translation in context. The Dictionary Example operation allows further drill down to see example uses of each translation pair.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Specifies the language of the output text. The target language must be one of the supported languages included in the `dictionary` scope of the Languages resource.",
+                    "default": ""
+                },
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Specifies the language of the input text. The source language must be one of the supported languages included in the `dictionary` scope.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Dictionary/Lookup\"\nquerystring = {\"to\": \"\", \"api-version\": \"3.0\", \"from\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Dictionary/Lookup\"\nquerystring = {\"to\": \"\", \"api-version\": \"3.0\", \"from\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Example of a successful dictionary lookup request",
+                "items": {
+                    "properties": {
+                        "displaySource": {
+                            "type": "string"
+                        },
+                        "normalizedSource": {
+                            "type": "string"
+                        },
+                        "translations": {
+                            "items": {
+                                "properties": {
+                                    "backTranslations": {
+                                        "items": {
+                                            "properties": {
+                                                "displayText": {
+                                                    "type": "string"
+                                                },
+                                                "frequencyCount": {
+                                                    "type": "integer"
+                                                },
+                                                "normalizedText": {
+                                                    "type": "string"
+                                                },
+                                                "numExamples": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "confidence": {
+                                        "type": "number"
+                                    },
+                                    "displayTarget": {
+                                        "type": "string"
+                                    },
+                                    "normalizedTarget": {
+                                        "type": "string"
+                                    },
+                                    "posTag": {
+                                        "type": "string"
+                                    },
+                                    "prefixWord": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        },
+        {
+            "name": "Dictionary Examples",
+            "url": "https://microsoft-translator-text.p.rapidapi.com/Dictionary/Examples",
+            "description": "Provides examples that show how terms in the dictionary are used in context. This operation is used in tandem with `Dictionary lookup`.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Specifies the language of the output text. The target language must be one of the supported languages included in the `dictionary` scope.",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Specifies the language of the input text. The source language must be one of the supported languages included in the `dictionary` scope.",
+                    "default": ""
+                },
+                {
+                    "name": "api-version",
+                    "type": "STRING",
+                    "description": "Version of the API requested by the client. Value must be **3.0**.",
+                    "default": "3.0"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Dictionary/Examples\"\nquerystring = {\"to\": \"\", \"from\": \"\", \"api-version\": \"3.0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-translator-text.p.rapidapi.com/Dictionary/Examples\"\nquerystring = {\"to\": \"\", \"from\": \"\", \"api-version\": \"3.0\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-translator-text.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Example of a successful dictionary example request",
+                "items": {
+                    "properties": {
+                        "examples": {
+                            "items": {
+                                "properties": {
+                                    "sourcePrefix": {
+                                        "type": "string"
+                                    },
+                                    "sourceSuffix": {
+                                        "type": "string"
+                                    },
+                                    "sourceTerm": {
+                                        "type": "string"
+                                    },
+                                    "targetPrefix": {
+                                        "type": "string"
+                                    },
+                                    "targetSuffix": {
+                                        "type": "string"
+                                    },
+                                    "targetTerm": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "normalizedSource": {
+                            "type": "string"
+                        },
+                        "normalizedTarget": {
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "type": "array"
+            }
+        }
+    ]
+}

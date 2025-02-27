@@ -1,0 +1,221 @@
+{
+    "product_id": "api_2c6f4ae3-539e-40ce-ac12-1d85ec8acc2d",
+    "tool_description": "Plate Recognizer ALPR decodes license plate, vehicle make, model, color and other attributes in 90+ countries.",
+    "home_url": "https://rapidapi.com/plate-recognizer-alpr-plate-recognizer-alpr-default/api/plate-recognizer-snapshot/",
+    "name": "Plate Recognizer Snapshot",
+    "title": "Plate Recognizer Snapshot",
+    "pricing": "FREEMIUM",
+    "tool_name": "Plate Recognizer Snapshot",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 565,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "plate-recognizer-snapshot.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Read Number Plates from an Image",
+            "url": "https://plate-recognizer-snapshot.p.rapidapi.com/plate-reader/",
+            "description": "This Snapshot API endpoint reads all license plates from an image.\n\nIf you need to detect vehicles and decode license plates from a live camera or video feed, consider using [Plate Recognizer Stream](https://platerecognizer.com/stream/?utm_source=rapidapi&utm_medium=website). [Contact us](https://platerecognizer.com/contact?utm_source=rapidapi&utm_medium=website) to request a Free Trial of Stream.\n\nIf you need to blur license plates, consider using [Plate Recognizer Blur](https://platerecognizer.com/blur/?utm_source=rapidapi&utm_medium=website).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "upload",
+                    "type": "BINARY",
+                    "description": "The file to be uploaded. The parameter can either be the **file bytes** (using Content-Type multipart/form-data) OR a **base64** encoded image.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "timestamp",
+                    "type": "STRING",
+                    "description": "[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) timestamp. For example, `2019-08-19T13:11:25`. The timestamp has to be in UTC.",
+                    "default": ""
+                },
+                {
+                    "name": "regions",
+                    "type": "STRING",
+                    "description": "Match the license plate pattern of a specific region or [regions](https://docs.platerecognizer.com/#countries). This parameter can be used **multiple times** to specify more than one region. \n\nThe regions parameter is used as a guide and the template will be ignored if the prediction differs too much from it. It works this way because we want to still be able to read plates from foreign vehicles. The system may sometimes mistake a local vehicle for a foreign one.",
+                    "default": ""
+                },
+                {
+                    "name": "mmc",
+                    "type": "STRING",
+                    "description": "Predict vehicle make, model, orientation and color. This feature is available for an [additional fee](https://platerecognizer.com/pricing?utm_source=rapidapi&utm_medium=website). Set parameter to true (mmc=true) if you have this feature enabled/purchased to get vehicle make, model and color. Possible values are `true `or `false`.",
+                    "default": ""
+                },
+                {
+                    "name": "config",
+                    "type": "STRING",
+                    "description": " A JSON value to change the engine configuration. It can include the following values:\n\n- `{\"region\":\"strict\"}`: Only accept the results that exactly match the templates of the specified region. For example, if the license plate of a region is 3 letters and 3 numbers, the value abc1234 will be discarded. For regions with vanity license plates (e.g. in us-ca), we do not recommend the use of Strict Mode. Otherwise, the engine will discard the vanity plates.\n\n- `{\"threshold_d\":0.2, \"threshold_o\":0.6}`: By default the engine will use those thresholds to filter the detection and OCR results. Anything below that will be discarded. You can set different values.\n\n- `{\"mode\":\"fast\"}`: The number of detection steps is always 1. On average it gives a 30% speed-up. May result in lower accuracy when using images with small vehicles.\n\n- `{\"mode\":\"redaction\"}`: Used for license plate redaction. It includes more candidates during the plate detection step. This configuration will miss fewer plates but will increase the number of false positives (objects that are not license plates).\n\n- `{\"detection_rule\":\"strict\"}`: The license plates that are detected outside a vehicle will be discarded.\n",
+                    "default": ""
+                },
+                {
+                    "name": "camera_id",
+                    "type": "STRING",
+                    "description": "Unique camera identifier.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://plate-recognizer-snapshot.p.rapidapi.com/plate-reader/\"\nquerystring = {\"timestamp\": \"\", \"regions\": \"\", \"upload\": \"\", \"mmc\": \"\", \"config\": \"\", \"camera_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"plate-recognizer-snapshot.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://plate-recognizer-snapshot.p.rapidapi.com/plate-reader/\"\nquerystring = {\"timestamp\": \"\", \"regions\": \"\", \"upload\": \"\", \"mmc\": \"\", \"config\": \"\", \"camera_id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"plate-recognizer-snapshot.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "processing_time": {
+                        "type": "number"
+                    },
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "box": {
+                                    "type": "object",
+                                    "properties": {
+                                        "xmin": {
+                                            "type": "integer"
+                                        },
+                                        "ymin": {
+                                            "type": "integer"
+                                        },
+                                        "xmax": {
+                                            "type": "integer"
+                                        },
+                                        "ymax": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                },
+                                "plate": {
+                                    "type": "string"
+                                },
+                                "region": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "score": {
+                                            "type": "number"
+                                        }
+                                    }
+                                },
+                                "vehicle": {
+                                    "type": "object",
+                                    "properties": {
+                                        "score": {
+                                            "type": "number"
+                                        },
+                                        "type": {
+                                            "type": "string"
+                                        },
+                                        "box": {
+                                            "type": "object",
+                                            "properties": {
+                                                "xmin": {
+                                                    "type": "integer"
+                                                },
+                                                "ymin": {
+                                                    "type": "integer"
+                                                },
+                                                "xmax": {
+                                                    "type": "integer"
+                                                },
+                                                "ymax": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "score": {
+                                    "type": "number"
+                                },
+                                "candidates": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "score": {
+                                                "type": "number"
+                                            },
+                                            "plate": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "dscore": {
+                                    "type": "number"
+                                },
+                                "model_make": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "make": {
+                                                "type": "string"
+                                            },
+                                            "model": {
+                                                "type": "string"
+                                            },
+                                            "score": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "color": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "color": {
+                                                "type": "string"
+                                            },
+                                            "score": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "orientation": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "orientation": {
+                                                "type": "string"
+                                            },
+                                            "score": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "filename": {
+                        "type": "string"
+                    },
+                    "version": {
+                        "type": "integer"
+                    },
+                    "camera_id": {
+                        "type": "null"
+                    },
+                    "timestamp": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

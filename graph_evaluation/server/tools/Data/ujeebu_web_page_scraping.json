@@ -1,0 +1,92 @@
+{
+    "tool_name":"Ujeebu Web Page Scraping",
+    "tool_description":"Scrape web pages, generate screenshots or turn them into PDF, without worrying about proxy rotation, headless browser management or JavaScript execution.",
+    "title":"Ujeebu Web Page Scraping",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1714,
+        "avgSuccessRate":100,
+        "popularityScore":8.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/lexper/api/ujeebu-web-page-scraping/",
+    "host":"ujeebu-web-page-scraping.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"/v1.1/scrape",
+            "url":"https://ujeebu-web-page-scraping.p.rapidapi.com/v1.1/scrape",
+            "description":"Returns the html source of a rendered web page. Generates PDF or Screenshot of a web page.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"URL to scrape",
+                    "default":"https://techcrunch.com/2022/09/30/how-volvo-is-leaning-on-software-to-drive-its-next-great-safety-revolution/"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"response_type",
+                    "type":"STRING",
+                    "description":"The response returned by the endpoint depends on the 'response_type' and 'json' parameters. Response can be either a byte array in the case of 'pdf' and 'screenshot', text when response_type='raw' or 'html' (default), or JSON when json=1. response_type possible values are as follows:\n- 'html': returns the html code of the page . If js = 1 it will first execute JavaScript.\n- 'raw': returns the source html (or file content if URL is not an HTML page) as is from the URL without running JavaScript. js=1 is ignored.\n- 'pdf': converts page to the PDF format and returns the PDF binary data.\nIf the json parameter is set to 'true' a JSON response is returned with the base64 encoded value of the pdf file.\n- 'screenshot': produces a screenshot of the URL in PNG format and returns the binary data. If screenshot_fullpage is set to 'true', takes a screenshot of the full page. If set to 'false', takes a screenshot of the visible viewport only. If the json parameter is set to 'true', a JSON response is returned with the base64 encoded value of the image file.\n",
+                    "default":"html"
+                },
+                {
+                    "name":"js",
+                    "type":"BOOLEAN",
+                    "description":"indicates whether to execute JavaScript or not. Default =0",
+                    "default":"false"
+                },
+                {
+                    "name":"block_ads",
+                    "type":"BOOLEAN",
+                    "description":"whether to block ads or not",
+                    "default":"true"
+                },
+                {
+                    "name":"json",
+                    "type":"BOOLEAN",
+                    "description":"when set to true, returns a JSON response instead of raw content as specified by 'response_type'. Default = 0.",
+                    "default":"false"
+                },
+                {
+                    "name":"useragent",
+                    "type":"STRING",
+                    "description":"The Scrape API will by default send its own user agent header (Chrome's headless browser header), but if you want to use a different user agent you need to set parameter 'useragent'",
+                    "default":"Mozilla/5.0 (Windows NT 10.0; Trident/7.0; rv:11.0) like Gecko"
+                },
+                {
+                    "name":"window_width",
+                    "type":"NUMBER",
+                    "description":"indicates browser viewport width.",
+                    "default":"1366"
+                },
+                {
+                    "name":"screenshot_fullpage",
+                    "type":"BOOLEAN",
+                    "description":"when 'content_type' is 'screenshot', whether to take a screenshot of the full page or just the visible viewport",
+                    "default":"false"
+                },
+                {
+                    "name":"window_height",
+                    "type":"NUMBER",
+                    "description":"browser viewport height",
+                    "default":"768"
+                },
+                {
+                    "name":"device",
+                    "type":"STRING",
+                    "description":"indicates type of device to use to render page. Possible values: 'desktop', 'mobile'. Default='desktop'",
+                    "default":"desktop"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ujeebu-web-page-scraping.p.rapidapi.com/v1.1/scrape\"\nquerystring = {\"response_type\": response_type, \"js\": js, \"url\": url, \"block_ads\": block_ads, \"json\": json, \"useragent\": useragent, \"window_width\": window_width, \"screenshot_fullpage\": screenshot_fullpage, \"window_height\": window_height, \"device\": device}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ujeebu-web-page-scraping.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

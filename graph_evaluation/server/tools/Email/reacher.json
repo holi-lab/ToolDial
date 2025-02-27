@@ -1,0 +1,259 @@
+{
+    "product_id": "api_5fced9a1-07d3-4846-a9ee-501a70374da2",
+    "tool_description": "Reacher backend OpenAPIv3 specification.",
+    "home_url": "https://rapidapi.com/reacher1/api/reacher1/",
+    "name": "Reacher",
+    "title": "Reacher",
+    "pricing": "FREEMIUM",
+    "tool_name": "Reacher",
+    "score": null,
+    "host": "reacher1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "post-check-email",
+            "url": "https://reacher1.p.rapidapi.com/check_email",
+            "description": "Perform a full verification of an email address.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://reacher1.p.rapidapi.com/check_email\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"reacher1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://reacher1.p.rapidapi.com/check_email\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"reacher1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "description": "The verification result of an email.",
+                "properties": {
+                    "input": {
+                        "description": "The input email address.",
+                        "format": "email",
+                        "type": "string"
+                    },
+                    "is_reachable": {
+                        "description": "An enum to describe how confident we are that the recipient address is real: `safe`, `risky`, `invalid` and `unknown`. Check our FAQ to know the meanings of the 4 possibilities: https://www.notion.so/reacherhq/Reacher-FAQ-389d6f51a53749f29d914239613c64eb.",
+                        "enum": [
+                            "invalid",
+                            "unknown",
+                            "safe",
+                            "risky"
+                        ],
+                        "title": "Reachable",
+                        "type": "string"
+                    },
+                    "misc": {
+                        "description": "Miscellaneous information about the email account.",
+                        "oneOf": [
+                            {
+                                "description": "Miscellaneous information about the email account.",
+                                "properties": {
+                                    "is_disposable": {
+                                        "description": "Is the address provided by a known disposable email address provider?",
+                                        "type": "boolean"
+                                    },
+                                    "is_role_account": {
+                                        "description": "Is this email a role-based account?",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "is_disposable",
+                                    "is_role_account"
+                                ],
+                                "title": "MiscDetails",
+                                "type": "object"
+                            },
+                            {
+                                "description": "Object describing an error happening during the misc, MX, or SMTP verifications.",
+                                "properties": {
+                                    "message": {
+                                        "description": "A human-readable description of the error.",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "description": "An error type.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "message"
+                                ],
+                                "title": "Error",
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "mx": {
+                        "description": "Information gathered from querying the MX records of the mail server.",
+                        "oneOf": [
+                            {
+                                "description": "Object holding the MX details of the mail server.",
+                                "properties": {
+                                    "accepts_mail": {
+                                        "description": "Does the server accept mails?",
+                                        "type": "boolean"
+                                    },
+                                    "records": {
+                                        "description": "The list of FQDN (Fully Qualified Domain Names) of the mail server.",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "accepts_mail",
+                                    "records"
+                                ],
+                                "title": "MxDetails",
+                                "type": "object"
+                            },
+                            {
+                                "description": "Object describing an error happening during the misc, MX, or SMTP verifications.",
+                                "properties": {
+                                    "message": {
+                                        "description": "A human-readable description of the error.",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "description": "An error type.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "message"
+                                ],
+                                "title": "Error",
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "smtp": {
+                        "description": "Verifications performed by connecting to the mail server via SMTP.",
+                        "oneOf": [
+                            {
+                                "description": "Verifications performed by connecting to the mail server via SMTP.",
+                                "properties": {
+                                    "can_connect_smtp": {
+                                        "description": "Can the mail exchanger of the email address domain be contacted successfully?",
+                                        "type": "boolean"
+                                    },
+                                    "has_full_inbox": {
+                                        "description": "Is the inbox of this mailbox full?",
+                                        "type": "boolean"
+                                    },
+                                    "is_catch_all": {
+                                        "description": "Is this email address a catch-all address?",
+                                        "type": "boolean"
+                                    },
+                                    "is_deliverable": {
+                                        "description": "Is an email sent to this address deliverable?",
+                                        "type": "boolean"
+                                    },
+                                    "is_disabled": {
+                                        "description": "Has this email address been disabled by the email provider?",
+                                        "type": "boolean"
+                                    }
+                                },
+                                "required": [
+                                    "can_connect_smtp",
+                                    "has_full_inbox",
+                                    "is_catch_all",
+                                    "is_deliverable",
+                                    "is_disabled"
+                                ],
+                                "title": "SmtpDetails",
+                                "type": "object"
+                            },
+                            {
+                                "description": "Object describing an error happening during the misc, MX, or SMTP verifications.",
+                                "properties": {
+                                    "message": {
+                                        "description": "A human-readable description of the error.",
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "description": "An error type.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "message"
+                                ],
+                                "title": "Error",
+                                "type": "object"
+                            }
+                        ]
+                    },
+                    "syntax": {
+                        "description": "Syntax validation of an email address.",
+                        "properties": {
+                            "domain": {
+                                "description": "The domain name of the email, i.e. the part after the \"@\" symbol.",
+                                "type": "string"
+                            },
+                            "is_valid_syntax": {
+                                "description": "Is the address syntactically valid?",
+                                "type": "boolean"
+                            },
+                            "username": {
+                                "description": "The username of the email, i.e. the part before the \"@\" symbol.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "domain",
+                            "is_valid_syntax",
+                            "username"
+                        ],
+                        "title": "SyntaxDetails",
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "input",
+                    "misc",
+                    "mx",
+                    "smtp",
+                    "syntax",
+                    "is_reachable"
+                ],
+                "title": "CheckEmailOutput",
+                "type": "object",
+                "x-examples": {
+                    "Example with test@gmail.com": {
+                        "input": "test@gmail.com",
+                        "is_reachable": "invalid",
+                        "misc": {
+                            "is_disposable": false,
+                            "is_role_account": true
+                        },
+                        "mx": {
+                            "accepts_mail": true,
+                            "records": [
+                                "alt4.gmail-smtp-in.l.google.com.",
+                                "alt2.gmail-smtp-in.l.google.com.",
+                                "alt3.gmail-smtp-in.l.google.com.",
+                                "gmail-smtp-in.l.google.com.",
+                                "alt1.gmail-smtp-in.l.google.com."
+                            ]
+                        },
+                        "smtp": {
+                            "can_connect_smtp": true,
+                            "has_full_inbox": false,
+                            "is_catch_all": false,
+                            "is_deliverable": false,
+                            "is_disabled": false
+                        },
+                        "syntax": {
+                            "domain": "gmail.com",
+                            "is_valid_syntax": true,
+                            "username": "test"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,104 @@
+{
+    "product_id": "53aa6086e4b0f2c975471665",
+    "tool_description": "Full-Text RSS can extract article content from a web page and transform partial web feeds into full-text feeds.\r\n\r\nGet results in RSS or JSON.\r\n\r\nYou can use our hosted service via Mashape (test for free) and you can also visit our site to buy our self-hosted version.",
+    "home_url": "https://rapidapi.com/fivefilters/api/full-text-rss/",
+    "name": "Full-Text RSS",
+    "title": "Full-Text RSS",
+    "pricing": "FREEMIUM",
+    "tool_name": "Full-Text RSS",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 915,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.8,
+        "__typename": "Score"
+    },
+    "host": "full-text-rss.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Extract Article",
+            "url": "https://full-text-rss.p.rapidapi.com/extract.php",
+            "description": "Extract article from a web page. Outputs JSON containing the full content extracted from the input URL or the input HTML.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "The URL to extract content from. It should point to a standard HTML page. You can omit the 'http://' prefix if you like.",
+                    "default": "chomsky.info/articles/20131105.htm"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "xss",
+                    "type": "STRING",
+                    "description": "Use this to enable/disable XSS filtering. It is enabled by default, but if your application/framework/CMS already filters HTML for XSS vulnerabilities, you can disable XSS filtering here. Note: when enabled this will remove certain elements you may want to preserve, such as iframes.",
+                    "default": "1"
+                },
+                {
+                    "name": "content",
+                    "type": "STRING",
+                    "description": "If set to 0, the extracted content will not be included in the output. Set to 'html' or 'text' for plain text output (wrapped at 70 chars). 'text0' to disable forced text wrapping. 'text##' to wrap after ## characters, e.g. 'text80'.",
+                    "default": "1"
+                },
+                {
+                    "name": "inputhtml",
+                    "type": "STRING",
+                    "description": "If you already have the HTML, you can pass it here. We will not make any HTTP requests for the content if this parameter is used. Note: The input HTML should be UTF-8 encoded. And you will still need to give us the URL associated with the content (the URL may determine how the content is extracted, if we have extraction rules associated with it).",
+                    "default": "<html><head><title>Example</title><body><article itemprop=\"articleBody\"><p>Test</p></article></body></html>"
+                },
+                {
+                    "name": "parser",
+                    "type": "STRING",
+                    "description": "The default parser is HTML5-PHP, an HTML5 parser implemented in PHP. You can also use libxml, which is faster but often worse at parsing modern HTML. Use this parameter to explicitly request 'html5php' or 'libxml'.",
+                    "default": ""
+                },
+                {
+                    "name": "links",
+                    "type": "STRING",
+                    "description": "Links can either be preserved (default), made into footnotes, or removed. None of these options affect the link text, only the hyperlink itself. Valid values: 'preserve', 'remove', 'footnotes'.",
+                    "default": "remove"
+                },
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "Language detection. If you'd like Full-Text RSS to find the language of the articles it processes, you can use one of the following values: 0 - Ignore language; 1 - Use article metadata (e.g. HTML lang attribute) (default value); 2 - As above, but guess the language if it's not specified; 3 - Always guess the language, whether it's specified or not.",
+                    "default": "2"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://full-text-rss.p.rapidapi.com/extract.php\"\nquerystring = {\"url\": \"chomsky.info/articles/20131105.htm\", \"xss\": \"1\", \"content\": \"1\", \"inputhtml\": \"<html><head><title>Example</title><body><article itemprop=\\\"articleBody\\\"><p>Test</p></article></body></html>\", \"parser\": \"\", \"links\": \"remove\", \"lang\": \"2\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"full-text-rss.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://full-text-rss.p.rapidapi.com/extract.php\"\nquerystring = {\"url\": \"chomsky.info/articles/20131105.htm\", \"xss\": \"1\", \"content\": \"1\", \"inputhtml\": \"<html><head><title>Example</title><body><article itemprop=\\\"articleBody\\\"><p>Test</p></article></body></html>\", \"parser\": \"\", \"links\": \"remove\", \"lang\": \"2\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"full-text-rss.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string"
+                    },
+                    "excerpt": {
+                        "type": "string"
+                    },
+                    "date": {
+                        "type": "null"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "language": {
+                        "type": "string"
+                    },
+                    "url": {
+                        "type": "string"
+                    },
+                    "effective_url": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

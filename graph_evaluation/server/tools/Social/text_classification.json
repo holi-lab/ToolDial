@@ -1,0 +1,86 @@
+{
+    "tool_name":"Text Classification",
+    "tool_description":"Automatic multilingual text classification according to pre-established categories defined in a model. The algorithm used combines statistic classification with rule-based filtering, which allows to obtain a high degree of precision for very different environments. Three models available: IPTC (International Press Telecommunications Council standard), EuroVocs and Corporate Reputation model. Languages covered are Spanish, English, French, Italian, Portuguese and Catalan.",
+    "title":"Text Classification",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":142,
+        "avgSuccessRate":100,
+        "popularityScore":8.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/MeaningCloud/api/text-classification/",
+    "host":"text-classification.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"class-2.0",
+            "url":"https://text-classification.p.rapidapi.com/class-2.0",
+            "description":"Automatic classification of multilingual texts",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"model",
+                    "type":"STRING",
+                    "description":"Classification model to use. It will define into which categories the text may be classified. Possilbe values are: IPTC_es, IPTC_en, IPTC_ca, IPTC_pt, IPTC_it, IPTC_fr, EUROVOC_es_ca, BusinessRep_es, BusinessRepShort_es",
+                    "default":"IPTC_en"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"abstract",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"The 85th Academy Awards review"
+                },
+                {
+                    "name":"expand_hierarchy",
+                    "type":"ENUM",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"of",
+                    "type":"STRING",
+                    "description":"Output formatl, xml or json",
+                    "default":"json"
+                },
+                {
+                    "name":"txt",
+                    "type":"STRING",
+                    "description":"Input text. It can be plain text, HTML or XML, always using UTF-8 encoding. (Required if 'doc' and 'url' are empty)",
+                    "default":"The 85th Academy Awards ceremony took place February 24, 2013."
+                },
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"URL with the content to classify. Currently only non-authenticated HTTP and FTP are supported. The content types supported for URL contents can be found at https://textalytics.com/core/supported-formats. (Required if 'txt' and 'doc' are empty)",
+                    "default":"null"
+                },
+                {
+                    "name":"title",
+                    "type":"STRING",
+                    "description":"Descriptive title of the content. It is an optional field, and it can be plain text, HTML or XML, always using UTF-8 encoding. The terms relevant for the classification process found in the title will have more influence in the classification than if they were in the text.",
+                    "default":"null"
+                },
+                {
+                    "name":"verbose",
+                    "type":"STRING",
+                    "description":"Verbose mode. Shows additional information about the classification.",
+                    "default":"n"
+                },
+                {
+                    "name":"categories",
+                    "type":"STRING",
+                    "description":"List of prefixes of the code of the categories to which the classification is limited. Each value will be separated by '|'. All the categories that do not start with any of the prefixes specified in the list will not be taken account in the classification. For example, if only a clasification within the human interest category, the prefix used would be 0800.",
+                    "default":"0800"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://text-classification.p.rapidapi.com/class-2.0\"\nquerystring = {\"abstract\": abstract, \"of\": of, \"model\": model, \"txt\": txt, \"url\": url, \"title\": title, \"verbose\": verbose, \"categories\": categories}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"text-classification.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

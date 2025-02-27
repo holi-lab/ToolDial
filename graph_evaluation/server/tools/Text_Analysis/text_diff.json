@@ -1,0 +1,108 @@
+{
+    "product_id": "api_f6ca8475-c820-4294-8384-d5a034b9b91c",
+    "tool_description": "Compare 2 strings/texts and determine the differences between them. The API provides both an easy to process json version to work with and a pre-rendered result for html and cli output.",
+    "home_url": "https://rapidapi.com/softwarepinguin/api/text-diff/",
+    "name": "Text Diff",
+    "title": "Text Diff",
+    "pricing": "FREEMIUM",
+    "tool_name": "Text Diff",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 311,
+        "avgSuccessRate": 96,
+        "popularityScore": 9.6,
+        "__typename": "Score"
+    },
+    "host": "text-diff.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Compare Texts",
+            "url": "https://text-diff.p.rapidapi.com/diff",
+            "description": "Compare 2 strings/texts and get the differences between them.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://text-diff.p.rapidapi.com/diff\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"text-diff.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://text-diff.p.rapidapi.com/diff\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"text-diff.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "x-examples": {
+                    "example-1": {
+                        "diffs": [
+                            {
+                                "type": "eq",
+                                "text": "Lorem ipsum "
+                            },
+                            {
+                                "type": "del",
+                                "text": "d"
+                            },
+                            {
+                                "type": "add",
+                                "text": "D"
+                            },
+                            {
+                                "type": "eq",
+                                "text": "olor "
+                            },
+                            {
+                                "type": "del",
+                                "text": "sit "
+                            },
+                            {
+                                "type": "eq",
+                                "text": "amet"
+                            }
+                        ],
+                        "html": "<span>Lorem ipsum </span><del style=\"background:#ffe6e6;\">d</del><ins style=\"background:#e6ffe6;\">D</ins><span>olor </span><del style=\"background:#ffe6e6;\">sit </del><span>amet</span>",
+                        "cli": "TG9yZW0gaXBzdW0gG1szMW1kG1swbRtbMzJtRBtbMG1vbG9yIBtbMzFtc2l0IBtbMG1hbWV0"
+                    }
+                },
+                "properties": {
+                    "diffs": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 1,
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 3,
+                                    "enum": [
+                                        "eq",
+                                        "del",
+                                        "add"
+                                    ]
+                                },
+                                "text": {
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            },
+                            "required": [
+                                "type",
+                                "text"
+                            ]
+                        }
+                    },
+                    "html": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "cli": {
+                        "type": "string",
+                        "minLength": 1,
+                        "description": "base64 encoded string for colored cli output"
+                    }
+                },
+                "required": [
+                    "diffs"
+                ]
+            }
+        }
+    ]
+}

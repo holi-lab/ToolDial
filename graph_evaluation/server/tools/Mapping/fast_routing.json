@@ -1,0 +1,116 @@
+{
+    "tool_name":"Fast Routing",
+    "tool_description":"Fast Routing API including turn-by-turn directions with worldwide coverage and high availability. Online demo: https://fast-routing-api.demo.routingapi.net/",
+    "title":"Fast Routing",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":143,
+        "avgSuccessRate":100,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/Routing/api/fast-routing/",
+    "host":"fast-routing.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get Route",
+            "url":"https://fast-routing.p.rapidapi.com/route/v1/driving/{coordinates}",
+            "description":"Get a driving route for cars (with turn-by-turn directions) by submitting (at least) a start- and endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"coordinates",
+                    "type":"string",
+                    "description":"At least two coordinates as start and endpoint of route, defined by longitude and latitude.\nRequired format: {longitude},{latitude};{longitude},{latitude}\nAlternatively a polyline or polyline6 as input allowed.",
+                    "default":"-74.0060152,40.7127281;-77.0501718249326,38.88933725"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"continue_straight",
+                    "type":"ENUM",
+                    "description":"Forces the route to keep going straight at waypoints constraining uturns there even if it would be faster. Default is `default`, which translates to `true`.",
+                    "default":""
+                },
+                {
+                    "name":"waypoints",
+                    "type":"STRING",
+                    "description":"Example: `{index};{index};{index}`. Treats input coordinates indicated by given indices as waypoints in returned Match object. Default is to treat all input coordinates as waypoints.",
+                    "default":""
+                },
+                {
+                    "name":"alternatives",
+                    "type":"STRING",
+                    "description":"Show alternative routes? Either `true`, `false` (default) or a number [1,..,n] (of alternative routes to show if available).",
+                    "default":""
+                },
+                {
+                    "name":"annotations",
+                    "type":"STRING",
+                    "description":"Either `true` , `false` (default), `nodes` , `distance` , `duration` , `datasources` , `weight` , `speed`. Defines if additional data for each coordinate should be returned.",
+                    "default":""
+                },
+                {
+                    "name":"geometries",
+                    "type":"ENUM",
+                    "description":"Either `polyline` (default), `polyline6` or `geojson`. Returned route geometry format (influences overview and per step).",
+                    "default":""
+                },
+                {
+                    "name":"exclude",
+                    "type":"ENUM",
+                    "description":"Example: `{class}`. Type of step to be avoided on route. Can be either `motorway`, `ferry` or `toll`.",
+                    "default":""
+                },
+                {
+                    "name":"bearings",
+                    "type":"STRING",
+                    "description":"Value: `{bearing};{bearing}[;{bearing} ...]`. Limits the search to segments with given bearing in degrees towards true north in clockwise direction for each waypoint defined in coordinates.",
+                    "default":""
+                },
+                {
+                    "name":"skip_waypoints",
+                    "type":"ENUM",
+                    "description":"Default is `false`. Removes waypoints from the response. Waypoints are still calculated, but not serialized. Could be useful in case you are interested in some other part of response and do not want to transfer waste data.",
+                    "default":""
+                },
+                {
+                    "name":"snapping",
+                    "type":"ENUM",
+                    "description":"`Default` snapping avoids is_startpoint edges, `any` will snap to any edge in the graph.",
+                    "default":""
+                },
+                {
+                    "name":"approaches",
+                    "type":"STRING",
+                    "description":"Value: `{approach};{approach}[;{approach} ...]`. Keep waypoints on curb side for each waypoint defined in coordinates path paramter.",
+                    "default":""
+                },
+                {
+                    "name":"overview",
+                    "type":"ENUM",
+                    "description":"Add overview geometry either `full` or  `simplified` according to highest zoom level it could be displayed on a map, or not at all (`false`). Default is `simplified`.",
+                    "default":""
+                },
+                {
+                    "name":"radiuses",
+                    "type":"STRING",
+                    "description":"Values: `{radius};{radius}[;{radius} ...]`. Limits the search to given radius in meters. Set one radius for each waypoint defined in coordinates path parameter.",
+                    "default":""
+                },
+                {
+                    "name":"steps",
+                    "type":"ENUM",
+                    "description":"Get turn-by-turn direction information. Default is `false`.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://fast-routing.p.rapidapi.com/route/v1/driving/{coordinates}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fast-routing.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

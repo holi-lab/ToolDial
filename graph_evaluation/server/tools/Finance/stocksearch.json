@@ -1,0 +1,298 @@
+{
+    "tool_name":"StockSearch",
+    "tool_description":"Search for stocks by name, ticker symbol, or description",
+    "title":"StockSearch",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":99,
+        "avgLatency":662,
+        "avgSuccessRate":97,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/synfron/api/stocksearch/",
+    "host":"stocksearch.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Company Profile",
+            "url":"https://stocksearch.p.rapidapi.com/api/stocks/{symbol}",
+            "description":"Get a company profile containing information such as a description, sector, address, etc.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"symbol",
+                    "type":"string",
+                    "description":"",
+                    "default":"AAPL"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://stocksearch.p.rapidapi.com/api/stocks/{symbol}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stocksearch.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "name":"Apple Inc",
+                "symbol":"AAPL",
+                "region":"US",
+                "securityType":"Stock",
+                "bio":"Apple Inc. is a multinational corporation that designs, manufactures, and sells smartphones, laptops, tablets, wearables, and accessories. Apple also licenses its intellectual property and provides services such as Apple Arcade, a game subscription service; Apple Music, which provides users with a curated listening experience with on-demand radio stations; Apple News+, a subscription news and magazine service; Apple TV+, which provides exclusive original content; Apple Card, a co-branded credit card; and Apple Pay, a cashless payment service. Consumers, small and midsized businesses, education, enterprise, and government are all served by the company. It uses the App Store to distribute third-party applications for its products.",
+                "otherNames":[
+                    "APPLE COMPUTER INC"
+                ],
+                "address1":"One Apple Park Way",
+                "address2":null,
+                "city":"Cupertino",
+                "state":"CA",
+                "zip":"95014",
+                "country":"United States",
+                "phone":"408 996 1010",
+                "sector":"Technology",
+                "industry":"Consumer Electronics",
+                "website":"https://www.apple.com"
+            },
+            "headers":{
+                "content-type":"application/json; charset=utf-8",
+                "date":"Sun, 20 Jun 2021 08:58:59 GMT",
+                "server":"RapidAPI-1.2.8",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8",
+                "content-length":"420",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "name":{
+                            "type":"string"
+                        },
+                        "symbol":{
+                            "type":"string"
+                        },
+                        "region":{
+                            "type":"string"
+                        },
+                        "securityType":{
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Query Stocks V2",
+            "url":"https://stocksearch.p.rapidapi.com/api/v2/stocks",
+            "description":"Search stocks by name, symbol, or related item.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Search keywords",
+                    "default":"pizza hut"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"searchMetadata",
+                    "type":"BOOLEAN",
+                    "description":"Search the company's description or related items",
+                    "default":"true"
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"Pagination offset from the previous set of results. For example, if `offset=5`, the results set will start at the 6th item from the total results. Note, 200 is the max number of results that will be returned in total.",
+                    "default":"0"
+                },
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"Max number of results to get in one response. (Max value: 20)",
+                    "default":"5"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stocksearch.p.rapidapi.com/api/v2/stocks\"\nquerystring = {\"searchMetadata\": searchmetadata, \"query\": query, \"offset\": offset, \"size\": size}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stocksearch.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "results":[
+                    {
+                        "name":"Yum Brands Inc.",
+                        "symbol":"YUM",
+                        "shortBio":"Brands, Inc. develops, runs, and franchises quick service restaurants around the world through its subsidiaries.",
+                        "region":"US",
+                        "securityType":"Stock"
+                    },
+                    {
+                        "name":"Yum China Holdings Inc",
+                        "symbol":"YUMC",
+                        "shortBio":"Yum China Holdings, Inc. is a Chinese restaurant company that owns, operates, and franchises restaurants.",
+                        "region":"US",
+                        "securityType":"Stock"
+                    },
+                    {
+                        "name":"Dominos Pizza Inc",
+                        "symbol":"DPZ",
+                        "shortBio":"Domino's Pizza, Inc. operates as a pizza company in the United States and globally through its subsidiaries.",
+                        "region":"US",
+                        "securityType":"Stock"
+                    },
+                    {
+                        "name":"Hut 8 Mining Corp",
+                        "symbol":"HUT",
+                        "shortBio":"In North America, Hut 8 Mining Corp. is a cryptocurrency mining corporation.",
+                        "region":"US",
+                        "securityType":"Stock"
+                    },
+                    {
+                        "name":"BJ`s Restaurant Inc.",
+                        "symbol":"BJRI",
+                        "shortBio":"In the United States, BJ's Establishments, Inc. owns and operates casual dining restaurants.",
+                        "region":"US",
+                        "securityType":"Stock"
+                    }
+                ],
+                "total":200
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "api-supported-versions":"1, 2",
+                "connection":"keep-alive",
+                "content-length":"1001",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Sat, 28 May 2022 21:48:50 GMT",
+                "server":"RapidAPI-1.2.8",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "results":{
+                        "type":"array",
+                        "items":{
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "type":"string"
+                                },
+                                "symbol":{
+                                    "type":"string"
+                                },
+                                "shortBio":{
+                                    "type":"string"
+                                },
+                                "region":{
+                                    "type":"string"
+                                },
+                                "securityType":{
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    },
+                    "total":{
+                        "type":"integer"
+                    }
+                }
+            }
+        },
+        {
+            "name":"Query Stocks",
+            "url":"https://stocksearch.p.rapidapi.com/api/stocks",
+            "description":"Search stocks by name or symbol",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"query",
+                    "type":"STRING",
+                    "description":"Full or partial ticker symbol or company name",
+                    "default":"Apple"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"Number of results to return (max: 20)",
+                    "default":"5"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://stocksearch.p.rapidapi.com/api/stocks\"\nquerystring = {\"size\": size, \"query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stocksearch.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                {
+                    "name":"Apple Inc",
+                    "symbol":"AAPL",
+                    "shortBio":"Apple Inc. is a multinational corporation that designs, manufactures, and sells smartphones, laptops, tablets, wearables, and accessories.",
+                    "region":"US",
+                    "securityType":"Stock"
+                },
+                {
+                    "name":"Apple Hospitality REIT Inc",
+                    "symbol":"APLE",
+                    "shortBio":"Apple Hospitality REIT, Inc. (NYSE: APLE) controls one of the largest and most diverse portfolios of luxury, rooms-focused hotels in the United States.",
+                    "region":"US",
+                    "securityType":"Stock"
+                },
+                {
+                    "name":"Applovin Corp - Class A",
+                    "symbol":"APP",
+                    "shortBio":"AppLovin Corporation is a software-based platform that helps mobile app developers better sell and monetize their apps in the United States and around the world.",
+                    "region":"US",
+                    "securityType":"Stock"
+                },
+                {
+                    "name":"Maui Land & Pineapple Co., Inc.",
+                    "symbol":"MLP",
+                    "shortBio":"Maui Land & Pineapple Company, Inc. develops, manages, and sells residential, resort, commercial, agricultural, and industrial real estate in the United States through its subsidiaries.",
+                    "region":"US",
+                    "securityType":"Stock"
+                },
+                {
+                    "name":"Pineapple Energy Inc",
+                    "symbol":"PEGY",
+                    "shortBio":"Through its subsidiaries, Communications Systems, Inc. delivers technological solutions and infrastructure to the commercial, healthcare, financial, and education markets.",
+                    "region":"US",
+                    "securityType":"Stock"
+                }
+            ],
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "api-supported-versions":"1, 2",
+                "connection":"keep-alive",
+                "content-length":"1309",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Sat, 28 May 2022 20:34:27 GMT",
+                "server":"RapidAPI-1.2.8",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.2.8"
+            },
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "name":{
+                            "type":"string"
+                        },
+                        "symbol":{
+                            "type":"string"
+                        },
+                        "shortBio":{
+                            "type":"string"
+                        },
+                        "region":{
+                            "type":"string"
+                        },
+                        "securityType":{
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

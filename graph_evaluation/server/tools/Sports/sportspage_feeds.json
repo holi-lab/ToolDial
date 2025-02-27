@@ -1,0 +1,194 @@
+{
+    "tool_name":"Sportspage Feeds",
+    "tool_description":"Real-time scores, schedules, and betting odds for US leagues.  Unbeatable value.  Documentation: https://sportspagefeeds.com/documentation",
+    "title":"Sportspage Feeds",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":113,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/SportspageFeeds/api/sportspage-feeds/",
+    "host":"sportspage-feeds.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Teams",
+            "url":"https://sportspage-feeds.p.rapidapi.com/teams",
+            "description":"Returns a list of teams within a specified league, conference, or division.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"league",
+                    "type":"STRING",
+                    "description":"A valid league code (i.e., NFL, NBA, MLB, NHL, NCAAF, or NCAAB)",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"conference",
+                    "type":"STRING",
+                    "description":"A conference within the specified league",
+                    "default":""
+                },
+                {
+                    "name":"division",
+                    "type":"STRING",
+                    "description":"A division within the specified conference",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sportspage-feeds.p.rapidapi.com/teams\"\nquerystring = {\"league\": league}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sportspage-feeds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Game By ID",
+            "url":"https://sportspage-feeds.p.rapidapi.com/gameById",
+            "description":"Returns a specific game based on its ID.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"gameId",
+                    "type":"STRING",
+                    "description":"A unique game identifier",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sportspage-feeds.p.rapidapi.com/gameById\"\nquerystring = {\"gameId\": gameid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sportspage-feeds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Games",
+            "url":"https://sportspage-feeds.p.rapidapi.com/games",
+            "description":"Returns a list of games.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"odds",
+                    "type":"STRING",
+                    "description":"A comma-separated filter to select games with one or more of the following odds types: \\\\\\\\\\\\\\\"spread\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"moneyline\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"total\\\\\\\\\\\\\\\", or \\\\\\\\\\\\\\\"any\\\\\\\\\\\\\\\"",
+                    "default":""
+                },
+                {
+                    "name":"team",
+                    "type":"STRING",
+                    "description":"A team participating in one or more games",
+                    "default":""
+                },
+                {
+                    "name":"division",
+                    "type":"STRING",
+                    "description":"A division within the specified conference",
+                    "default":""
+                },
+                {
+                    "name":"date",
+                    "type":"STRING",
+                    "description":"One or two (comma-separated) YYYY-MM-DD- or ISO-formatted dates",
+                    "default":""
+                },
+                {
+                    "name":"skip",
+                    "type":"STRING",
+                    "description":"The number of game results to skip, which is required to access results beyond the first 100",
+                    "default":""
+                },
+                {
+                    "name":"status",
+                    "type":"STRING",
+                    "description":"A valid status of one of the following: \\\\\\\\\\\\\\\"scheduled\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"in progress\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"final\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\"canceled\\\\\\\\\\\\\\\", or \\\\\\\\\\\\\\\"delayed\\\\\\\\\\\\\\\"",
+                    "default":""
+                },
+                {
+                    "name":"league",
+                    "type":"STRING",
+                    "description":"A valid league code (i.e., NFL, NBA, MLB, NHL, NCAAF, or NCAAB)",
+                    "default":""
+                },
+                {
+                    "name":"conference",
+                    "type":"STRING",
+                    "description":"A conference within the specified league",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sportspage-feeds.p.rapidapi.com/games\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sportspage-feeds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Conferences",
+            "url":"https://sportspage-feeds.p.rapidapi.com/conferences",
+            "description":"Returns a list of conferences and divisions within the specified league. Use this endpoint to obtain conference and division names to be used as parameters for other requests.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"league",
+                    "type":"STRING",
+                    "description":"A valid league code (i.e., NFL, NBA, MLB, NHL, NCAAF, or NCAAB)",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sportspage-feeds.p.rapidapi.com/conferences\"\nquerystring = {\"league\": league}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sportspage-feeds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Odds",
+            "url":"https://sportspage-feeds.p.rapidapi.com/odds",
+            "description":"Returns the odds history for a game by type.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"gameId",
+                    "type":"STRING",
+                    "description":"A unique game identifier",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"An odds type of one of the following: \\\\\\\"spread\\\\\\\", \\\\\\\"moneyline\\\\\\\", \\\\\\\"total\\\\\\\", or \\\\\\\"any\\\\\\\"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sportspage-feeds.p.rapidapi.com/odds\"\nquerystring = {\"gameId\": gameid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sportspage-feeds.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

@@ -1,0 +1,255 @@
+{
+    "product_id": "api_e6141a29-69de-4eb2-ab60-2cf4b439b0e6",
+    "tool_description": "Live news from 8000+ sources, with keywords, locations, and sentiments. ML and NLP insights.",
+    "home_url": "https://rapidapi.com/Togotis/api/tidalwaves-news-analytics2/",
+    "name": "TidalWaves News Analytics",
+    "title": "TidalWaves News Analytics",
+    "pricing": "FREEMIUM",
+    "tool_name": "TidalWaves News Analytics",
+    "score": {
+        "avgServiceLevel": 0,
+        "avgLatency": 318,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "tidalwaves-news-analytics2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Search for articles",
+            "url": "https://tidalwaves-news-analytics2.p.rapidapi.com/articles",
+            "description": "More in-depth article search, allowing queries and relationship matching. Provide a JSON body with your search queries.\n\n**Possible parameters:**\n\n`title`, `url`, and `source`: Object containing your search `query` and whether the matches should be `exact`.\n\n**Example:** `{ \"title\": { \"query\": \"brexit\", \"exact\": true } }`\n\nRelationship filtering for `stories`, `keywords` and `locations`: Object containing the `ids` you want to look for, and whether each article should `matchAll` passed ids.\n\n**Example:** `{ \"keywords\": { \"ids\": [1, 2, 3], \"matchAll\": true } }`",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://tidalwaves-news-analytics2.p.rapidapi.com/articles\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tidalwaves-news-analytics2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tidalwaves-news-analytics2.p.rapidapi.com/articles\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tidalwaves-news-analytics2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "items": {
+                            "properties": {
+                                "batch_id": {
+                                    "type": "integer"
+                                },
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "source": {
+                                    "type": "string"
+                                },
+                                "story_id": {
+                                    "type": "null"
+                                },
+                                "timestamp": {
+                                    "type": "string"
+                                },
+                                "title": {
+                                    "type": "string"
+                                },
+                                "tone": {
+                                    "type": "number"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Search for keywords",
+            "url": "https://tidalwaves-news-analytics2.p.rapidapi.com/keywords",
+            "description": "More in-depth keyword search, allowing relationship matching. Provide a JSON body with your search queries.\n\n**Possible parameters:**\n\nRelationship filtering for `articles` and `stories`: Object containing the `ids` you want to look for, and whether each article should `matchAll` passed ids.\n\n**Example:** `{ \"articles\": { \"ids\": [1, 2, 3], \"matchAll\": false } }`",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "Search query string.",
+                    "default": "brexit"
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Number of rows to return.",
+                    "default": 10
+                },
+                {
+                    "name": "orderDir",
+                    "type": "STRING",
+                    "description": "Row ordering direction. Either \"asc\" or \"desc\".",
+                    "default": "asc"
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "Category filter. Available categories: \"themes\", \"people\", \"orgs\", and \"misc\".",
+                    "default": "misc"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of rows to offset by.",
+                    "default": 100
+                },
+                {
+                    "name": "orderBy",
+                    "type": "STRING",
+                    "description": "Row ordering. Available columns: \"label\", \"article_count\".",
+                    "default": "label"
+                },
+                {
+                    "name": "exact",
+                    "type": "STRING",
+                    "description": "Flag to match for exact query string, or allow partial matching.",
+                    "default": true
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://tidalwaves-news-analytics2.p.rapidapi.com/keywords\"\nquerystring = {\"query\": \"brexit\", \"limit\": 10, \"orderDir\": \"asc\", \"type\": \"misc\", \"offset\": 100, \"orderBy\": \"label\", \"exact\": true}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tidalwaves-news-analytics2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tidalwaves-news-analytics2.p.rapidapi.com/keywords\"\nquerystring = {\"query\": \"brexit\", \"limit\": 10, \"orderDir\": \"asc\", \"type\": \"misc\", \"offset\": 100, \"orderBy\": \"label\", \"exact\": true}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tidalwaves-news-analytics2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "items": {
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "label": {
+                                    "type": "string"
+                                },
+                                "type": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "Search for locations",
+            "url": "https://tidalwaves-news-analytics2.p.rapidapi.com/locations",
+            "description": "More in-depth location search, allowing relationship matching. Provide a JSON body with your search queries.\n\n**Possible parameters:**\n\nRelationship filtering for `articles` and `stories`: Object containing the `ids` you want to look for, and whether each article should `matchAll` passed ids.\n\n**Example:** `{ \"articles\": { \"ids\": [1, 2, 3], \"matchAll\": false } }`",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "orderDir",
+                    "type": "STRING",
+                    "description": "Row ordering direction. Either \"asc\" or \"desc\".",
+                    "default": "asc"
+                },
+                {
+                    "name": "exact",
+                    "type": "STRING",
+                    "description": "Flag to match for exact query string, or allow partial matching.",
+                    "default": true
+                },
+                {
+                    "name": "orderBy",
+                    "type": "STRING",
+                    "description": "Row ordering. Available columns: \"country_code\", \"tag\", \"lat\", \"long\".",
+                    "default": "tag"
+                },
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "Search query string.",
+                    "default": "eng"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Number of rows to offset by.",
+                    "default": 100
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Number of rows to return.",
+                    "default": 10
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "ISO 3306 Alpha-2 country code filter.",
+                    "default": "GB"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://tidalwaves-news-analytics2.p.rapidapi.com/locations\"\nquerystring = {\"orderDir\": \"asc\", \"exact\": true, \"orderBy\": \"tag\", \"query\": \"eng\", \"offset\": 100, \"limit\": 10, \"country\": \"GB\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tidalwaves-news-analytics2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tidalwaves-news-analytics2.p.rapidapi.com/locations\"\nquerystring = {\"orderDir\": \"asc\", \"exact\": true, \"orderBy\": \"tag\", \"query\": \"eng\", \"offset\": 100, \"limit\": 10, \"country\": \"GB\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tidalwaves-news-analytics2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "data": {
+                        "items": {
+                            "properties": {
+                                "country_code": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "lat": {
+                                    "type": "number"
+                                },
+                                "long": {
+                                    "type": "number"
+                                },
+                                "tag": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "limit": {
+                        "type": "integer"
+                    },
+                    "offset": {
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

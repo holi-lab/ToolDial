@@ -1,0 +1,411 @@
+{
+    "product_id": "api_a87d7db8-8113-4de0-acc1-0ca518e12de9",
+    "tool_description": "Mutual Fund Statement Parser. Parse CAS into JSON/XML. Robust API to Read CAS Statements from NSDL, CDSL, CAMS, Karvy. CAS(Consolidated Account Statement).  Schedule a Call - https://calendly.com/sameer_kumar/cas-parser-1-1-with-sameer",
+    "home_url": "https://rapidapi.com/sameer.kumar/api/cas-parser-cams-amp-karvy-pdf-statements/",
+    "name": "CAS Parser - CAMS &amp; Karvy PDF Statements",
+    "title": "CAS Parser - CAMS & Karvy PDF Statements",
+    "pricing": "FREEMIUM",
+    "tool_name": "CAS Parser - CAMS &amp; Karvy PDF Statements",
+    "score": {
+        "avgServiceLevel": 80,
+        "avgLatency": 2169,
+        "avgSuccessRate": 75,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "host": "cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Auto-Detect eCAS Statement",
+            "url": "https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/auto_detect_cas/parse",
+            "description": "Auto-Detects CAS Statements from CAMS/KFintech, CDSL, NSDL and returns all securities from the CAS PDF.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<< PASSWORD_HERE >>"
+                },
+                {
+                    "name": "pdf_file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "pdf_url",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "<< https://DOMAIN.com/YourCAS.pdf >>"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/auto_detect_cas/parse\"\nquerystring = {\"password\": \"<< PASSWORD_HERE >>\", \"pdf_file\": \"\", \"pdf_url\": \"<< https://DOMAIN.com/YourCAS.pdf >>\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/auto_detect_cas/parse\"\nquerystring = {\"password\": \"<< PASSWORD_HERE >>\", \"pdf_file\": \"\", \"pdf_url\": \"<< https://DOMAIN.com/YourCAS.pdf >>\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "cas_author": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "AccountInfo": {
+                                "type": "object",
+                                "properties": {
+                                    "Accounts": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "AccountClass": {
+                                                    "type": "integer"
+                                                },
+                                                "AccountType": {
+                                                    "type": "string"
+                                                },
+                                                "Value": {
+                                                    "type": "number"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "GrandTotal": {
+                                        "type": "number"
+                                    },
+                                    "TotalAccount": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "CdslInfo": {
+                                "type": "object",
+                                "properties": {
+                                    "Accounts": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "TotalAccount": {
+                                        "type": "integer"
+                                    },
+                                    "TotalValue": {
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "NsdlInfo": {
+                                "type": "object",
+                                "properties": {
+                                    "Accounts": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "Account Status": {
+                                                    "type": "string"
+                                                },
+                                                "BO Sub Type": {
+                                                    "type": "string"
+                                                },
+                                                "BO Type": {
+                                                    "type": "string"
+                                                },
+                                                "BSDA": {
+                                                    "type": "string"
+                                                },
+                                                "ClientId": {
+                                                    "type": "string"
+                                                },
+                                                "DP Name": {
+                                                    "type": "string"
+                                                },
+                                                "DPID": {
+                                                    "type": "string"
+                                                },
+                                                "Email Id": {
+                                                    "type": "string"
+                                                },
+                                                "EquityList": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "Equities": {
+                                                            "type": "array"
+                                                        },
+                                                        "TotalEquity": {
+                                                            "type": "integer"
+                                                        },
+                                                        "TotalValue": {
+                                                            "type": "integer"
+                                                        }
+                                                    }
+                                                },
+                                                "RGESS": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "TotalAccount": {
+                                        "type": "integer"
+                                    },
+                                    "TotalValue": {
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "InvestorInfo": {
+                                "type": "object",
+                                "properties": {
+                                    "Address": {
+                                        "type": "string"
+                                    },
+                                    "Name": {
+                                        "type": "string"
+                                    },
+                                    "PinCode": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "MutualFundFolioInfo": {
+                                "type": "object",
+                                "properties": {
+                                    "TotalAccount": {
+                                        "type": "integer"
+                                    }
+                                }
+                            },
+                            "StatementPeriod": {
+                                "type": "object",
+                                "properties": {
+                                    "From": {
+                                        "type": "string"
+                                    },
+                                    "To": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "msg": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Parse CDSL CAS PDF Statement",
+            "url": "https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/cdsl/parse",
+            "description": "Send PDF Statement with Password as input to the endpoint",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "The password of the PDF, if it is a protected PDF file. Else, you may skip sending this during the API call",
+                    "default": "PASSWORD_HERE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "pdf_file",
+                    "type": "BINARY",
+                    "description": "CDSL Statement only. \n\nMight not work on RapidAPI console, please contact +91 9654837047 or sameer@casparser.in to complete API access",
+                    "default": ""
+                },
+                {
+                    "name": "pdf_url",
+                    "type": "STRING",
+                    "description": "CDSL Statement only.\n\nTo parse a PDF statement, you need to send a public PDF link - \n Share the URL of the PDF in Form Data under the key \"pdf_url\"\n\nContact sameer@casparser.in for any help",
+                    "default": "https://DOMAIN.com/YourCAS.pdf"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/cdsl/parse\"\nquerystring = {\"password\": \"PASSWORD_HERE\", \"pdf_file\": \"\", \"pdf_url\": \"https://DOMAIN.com/YourCAS.pdf\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/cdsl/parse\"\nquerystring = {\"password\": \"PASSWORD_HERE\", \"pdf_file\": \"\", \"pdf_url\": \"https://DOMAIN.com/YourCAS.pdf\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Parse NSDL CAS PDF Statement",
+            "url": "https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/nsdl/parse",
+            "description": "Send PDF Statement with Password as input to the endpoint",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "The password of the PDF, if it is a protected PDF file. Else, you may skip sending this during the API call",
+                    "default": "PASSWORD_HERE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "pdf_url",
+                    "type": "STRING",
+                    "description": "NSDL Statement only. \nTo parse a PDF statement, you need to send a public PDF link - \n Share the URL of the PDF in Form Data under the key \"pdf_url\"\n\nContact sameer@casparser.in for any help",
+                    "default": "https://DOMAIN.com/YourCAS.pdf"
+                },
+                {
+                    "name": "pdf_file",
+                    "type": "BINARY",
+                    "description": "NSDL PDF only. \nMight not work on RapidAPI console, please contact +91 9654837047 or sameer@casparser.in to get API access",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/nsdl/parse\"\nquerystring = {\"password\": \"PASSWORD_HERE\", \"pdf_url\": \"https://DOMAIN.com/YourCAS.pdf\", \"pdf_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/nsdl/parse\"\nquerystring = {\"password\": \"PASSWORD_HERE\", \"pdf_url\": \"https://DOMAIN.com/YourCAS.pdf\", \"pdf_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Parse CAMS/Karvy/KFintech CAS PDF Statement",
+            "url": "https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/cams_karvy/parse",
+            "description": "Send PDF Statement with Password as input to the endpoint",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "password",
+                    "type": "STRING",
+                    "description": "The password of the PDF, if it is a protected PDF file. Else, you may skip sending this during the API call",
+                    "default": "PASSWORD_HERE"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "pdf_url",
+                    "type": "STRING",
+                    "description": "To parse a PDF statement, you need to send a public PDF link - \n Share the URL of the PDF in Form Data under the key \"pdf_url\"\n\nContact sameer@casparser.in for any help",
+                    "default": "https://DOMAIN.com/YourCAS.pdf"
+                },
+                {
+                    "name": "pdf_file",
+                    "type": "BINARY",
+                    "description": "Might not work on RapidAPI console, please contact +91 9654837047 or sam@sameerkumar.website to complete API access",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/cams_karvy/parse\"\nquerystring = {\"password\": \"PASSWORD_HERE\", \"pdf_url\": \"https://DOMAIN.com/YourCAS.pdf\", \"pdf_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com/cams_karvy/parse\"\nquerystring = {\"password\": \"PASSWORD_HERE\", \"pdf_url\": \"https://DOMAIN.com/YourCAS.pdf\", \"pdf_file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"cas-parser-cams-amp-karvy-pdf-statements.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "data": {
+                        "properties": {
+                            "fund_list": {
+                                "items": {
+                                    "properties": {
+                                        "advisor_code": {
+                                            "type": "string"
+                                        },
+                                        "folio": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "pan": {
+                                            "type": "string"
+                                        },
+                                        "registrar": {
+                                            "type": "string"
+                                        },
+                                        "rta_code": {
+                                            "type": "string"
+                                        },
+                                        "transaction_count": {
+                                            "type": "integer"
+                                        },
+                                        "transactions": {
+                                            "items": {
+                                                "properties": {
+                                                    "amount": {
+                                                        "type": "string"
+                                                    },
+                                                    "balance": {
+                                                        "type": "string"
+                                                    },
+                                                    "date": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "dividend_rate": {
+                                                        "type": "null"
+                                                    },
+                                                    "is_dividend_applicable": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_valid_transaction": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "price": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "units": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "investor_data": {
+                                "properties": {
+                                    "complete_address": {
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "contact_number": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "end_date": {
+                                        "type": "string"
+                                    },
+                                    "full_name": {
+                                        "type": "string"
+                                    },
+                                    "start_date": {
+                                        "type": "string"
+                                    },
+                                    "statement_date_range": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

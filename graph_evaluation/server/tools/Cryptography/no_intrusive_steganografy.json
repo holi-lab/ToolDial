@@ -1,0 +1,171 @@
+{
+    "product_id": "api_845139f8-2ac1-415f-b4e1-e5edb8c847cc",
+    "tool_description": "No Intrusive steganografy",
+    "home_url": "https://rapidapi.com/sachadee/api/no-intrusive-steganografy/",
+    "name": "No Intrusive steganografy",
+    "title": "No Intrusive steganografy",
+    "pricing": "FREEMIUM",
+    "tool_name": "No Intrusive steganografy",
+    "score": null,
+    "host": "no-intrusive-steganografy.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get user Ref IDs",
+            "url": "https://no-intrusive-steganografy.p.rapidapi.com/getuserallref/",
+            "description": "Get the reference IDs for each message in a specific image!",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "messageName",
+                    "type": "STRING",
+                    "description": "The username toget all ref:image to retrive the message in an image ",
+                    "default": "messageName"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://no-intrusive-steganografy.p.rapidapi.com/getuserallref/\"\nquerystring = {\"messageName\": \"messageName\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"no-intrusive-steganografy.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://no-intrusive-steganografy.p.rapidapi.com/getuserallref/\"\nquerystring = {\"messageName\": \"messageName\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"no-intrusive-steganografy.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "all_ref_id": {
+                        "type": "array"
+                    },
+                    "time": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Bind and crypt a message to an image",
+            "url": "https://no-intrusive-steganografy.p.rapidapi.com/messinimage/",
+            "description": "Bind and crypt a message to an image without modifying the image!",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "message",
+                    "type": "STRING",
+                    "description": "Your message to bind to the image! The message size cannot be bigger then the image width*image height *3",
+                    "default": "Message to bind"
+                },
+                {
+                    "name": "messageName",
+                    "type": "STRING",
+                    "description": "A name or id for the message! You can use this name or Id for various message so you can classify your messages.",
+                    "default": "a name or id for the message"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The image ",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "authorizedUsers",
+                    "type": "STRING",
+                    "description": "You can define any other authorized users to access this message for example: an email, an ID or a name! this value can then be used in the getmess request and will be allowed toget the message! This should be passed as  string with comma separator if more as one user: **user1@gmail.co,user2','user3**",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://no-intrusive-steganografy.p.rapidapi.com/messinimage/\"\nquerystring = {\"message\": \"Message to bind\", \"messageName\": \"a name or id for the message\", \"image\": \"\", \"authorizedUsers\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"no-intrusive-steganografy.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://no-intrusive-steganografy.p.rapidapi.com/messinimage/\"\nquerystring = {\"message\": \"Message to bind\", \"messageName\": \"a name or id for the message\", \"image\": \"\", \"authorizedUsers\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"no-intrusive-steganografy.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "messageName": {
+                        "type": "string"
+                    },
+                    "authorizedUsers": {
+                        "type": "array"
+                    },
+                    "user_ref_img": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "encrypted_message_size": {
+                        "type": "integer"
+                    },
+                    "user_auth_value": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get the message binded to an image",
+            "url": "https://no-intrusive-steganografy.p.rapidapi.com/getmess/",
+            "description": "Get the hided /crypted message binded to a specific image",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "messageName",
+                    "type": "STRING",
+                    "description": "the username",
+                    "default": "id/name of this message"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The image containing the message",
+                    "default": ""
+                },
+                {
+                    "name": "user_ref_img",
+                    "type": "STRING",
+                    "description": "When creating an crypted message binded toan image you will get a reference ID for the message! This reference is connected to a user ID defined in the body and the image that will be used to generate the message true a specific algorythm!",
+                    "default": "Ref ID"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "authorizedUser",
+                    "type": "STRING",
+                    "description": "The name of an authorized user to get the message, the credentials in the header must be the same base64 as the one created when creating the message",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://no-intrusive-steganografy.p.rapidapi.com/getmess/\"\nquerystring = {\"messageName\": \"id/name of this message\", \"image\": \"\", \"user_ref_img\": \"Ref ID\", \"authorizedUser\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"no-intrusive-steganografy.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://no-intrusive-steganografy.p.rapidapi.com/getmess/\"\nquerystring = {\"messageName\": \"id/name of this message\", \"image\": \"\", \"user_ref_img\": \"Ref ID\", \"authorizedUser\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"no-intrusive-steganografy.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "user_ref_img": {
+                        "type": "string"
+                    },
+                    "image": {
+                        "type": "string"
+                    },
+                    "decryptedMessage": {
+                        "type": "string"
+                    },
+                    "time": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

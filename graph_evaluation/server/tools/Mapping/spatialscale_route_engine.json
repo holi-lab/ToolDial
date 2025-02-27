@@ -1,0 +1,98 @@
+{
+    "product_id": "api_9ba6a876-1ac9-4737-83e3-3eb87eb4e419",
+    "tool_description": "The SpatialScale Route Engine provides turn by turn route directions, isochrone/travel time area generation,  and map matching web services covering Noth America.",
+    "home_url": "https://rapidapi.com/jp-9KMsPQ0Kc/api/spatialscale-route-engine/",
+    "name": "SpatialScale Route Engine",
+    "title": "SpatialScale Route Engine",
+    "pricing": "FREEMIUM",
+    "tool_name": "SpatialScale Route Engine",
+    "score": {
+        "avgServiceLevel": 33,
+        "avgLatency": 510,
+        "avgSuccessRate": 0,
+        "popularityScore": 0.1,
+        "__typename": "Score"
+    },
+    "host": "spatialscale-route-engine.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Route",
+            "url": "https://spatialscale-route-engine.p.rapidapi.com/v1/route_engine/route",
+            "description": "Given a list of locations, the route service provides details about the trip,\nincluding locations, a summary with basic information about the entire trip, and a list of legs.\n\n**Locations**\n\nYou specify locations as an ordered list of two or more locations within a JSON array. Locations are visited in the order specified.\n\nA location must include a latitude and longitude in decimal degrees. The coordinates can come from many input sources, such as a GPS location, a point or a click on a map, a geocoding service, and so on.\n\nTo build a route, you need to specify two `break` locations. In addition, you can include `through`, `via` or `break_through` locations to influence the route path.\n\n<div class=\"tg-wrap\">\n<table>\n<thead>\n<tr>\n    <th style=\"min-width: 128px;\">Location parameters</th>\n    <th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n    <td><code>lat</code></td>\n    <td>\nLatitude of the location in degrees. This is assumed to be both the routing location and the display location if no <code>display_lat</code> and <code>display_lon</code> are provided.\n    </td>\n</tr>\n<tr>\n    <td><code>lon</code></td>\n    <td>\nLongitude of the location in degrees. This is assumed to be both the routing location and the display location if no <code>display_lat</code> and <code>display_lon</code> are provided.\n    </td>\n</tr>\n<tr>\n    <td><code>type</code></td>\n    <td>\n\tType of location, either <code>break</code>, <code>through</code>, <code>via</code> or <code>break_through</code>. Each type controls two characteristics: whether or not to allow a u-turn at the location and whether or not to generate guidance/legs at the location. A <code>break</code> is a location at which we allows u-turns and generate legs and arrival/departure maneuvers. A <code>through</code> location is a location at which we neither allow u-turns nor generate legs or arrival/departure maneuvers. A <code>via</code> location is a location at which we allow u-turns but do not generate legs or arrival/departure maneuvers. A <code>break_through</code> location is a location at which we do not allow u-turns but do generate legs and arrival/departure maneuvers. If no type is provided, the type is assumed to be a <code>break</code>. The types of the first and last locations are ignored and are treated as breaks.\n    </td>\n</tr>\n</tbody>\n</table>\n</div>\n\n**Costing models**\n\nThe routing service uses dynamic, run-time costing to generate the route path. The route request must include the name of the costing model and can include optional parameters available for the chosen costing model.\n\n<div class=\"tg-wrap\">\n<table>\n<thead>\n<tr>\n    <th style=\"min-width: 128px;\">Costing model</th>\n    <th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n    <td><code>auto</code></td>\n    <td>\n\tStandard costing for driving routes by car, motorcycle, truck, and so on that obeys automobile driving rules, such as access and turn restrictions. <code>Auto</code> provides a short time path (though not guaranteed to be shortest time) and uses intersection costing to minimize turns and maneuvers or road name changes. Routes also tend to favor highways and higher classification roads, such as motorways and trunks.\n    </td>\n</tr>\n<tr>\n    <td><code>bicycle</code></td>\n    <td>\n\tStandard costing for travel by bicycle, with a slight preference for using <a href=\"http://wiki.openstreetmap.org/wiki/Key:cycleway\" target=\"_blank\">cycleways</a> or roads with bicycle lanes. Bicycle routes follow regular roads when needed, but avoid roads without bicycle access.\n    </td>\n</tr>\n<tr>\n    <td><code>bus</code></td>\n    <td>\n\tStandard costing for bus routes. Bus costing inherits the auto costing behaviors, but checks for bus access on the roads.\n    </td>\n</tr>\n</tbody>\n</table>\n</div>\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "payload",
+                    "type": "STRING",
+                    "description": "Location information",
+                    "default": "{\n    \"locations\": [\n        {\"lat\": 42.358528, \"lon\": -83.271400},\n        {\"lat\": 42.996613, \"lon\": -78.749855}\n    ],\n    \"costing\": \"auto\",\n    \"units\": \"miles\",\n    \"id\": \"my_work_route\"\n}\n"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://spatialscale-route-engine.p.rapidapi.com/v1/route_engine/route\"\nquerystring = {\"payload\": \"{\\n    \\\"locations\\\": [\\n        {\\\"lat\\\": 42.358528, \\\"lon\\\": -83.271400},\\n        {\\\"lat\\\": 42.996613, \\\"lon\\\": -78.749855}\\n    ],\\n    \\\"costing\\\": \\\"auto\\\",\\n    \\\"units\\\": \\\"miles\\\",\\n    \\\"id\\\": \\\"my_work_route\\\"\\n}\\n\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"spatialscale-route-engine.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://spatialscale-route-engine.p.rapidapi.com/v1/route_engine/route\"\nquerystring = {\"payload\": \"{\\n    \\\"locations\\\": [\\n        {\\\"lat\\\": 42.358528, \\\"lon\\\": -83.271400},\\n        {\\\"lat\\\": 42.996613, \\\"lon\\\": -78.749855}\\n    ],\\n    \\\"costing\\\": \\\"auto\\\",\\n    \\\"units\\\": \\\"miles\\\",\\n    \\\"id\\\": \\\"my_work_route\\\"\\n}\\n\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"spatialscale-route-engine.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Get Isochrone",
+            "url": "https://spatialscale-route-engine.p.rapidapi.com/v1/route_engine/isochrone",
+            "description": "The isochrone service computes areas that are reachable within specified time intervals from a location,\nand returns the reachable regions as contours of polygons or lines that you can display on a map.\n\n**Costing parameters**\n\nThe isochrone service uses the auto, bicycle, pedestrian, and multimodal costing models available in the Turn-by-Turn service.\nRefer to the route costing models and costing options documentation for more on how to specify this input.\n\n**Other request parameters**\n\n<div class=\"tg-wrap\">\n<table>\n<thead>\n<tr>\n    <th style=\"min-width: 128px;\">Parameter</th>\n    <th>Description</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n    <td><code>date_time</code></td>\n    <td>\n        The local date and time at the location. These parameters apply only for multimodal requests and are not used with other costing methods.\n        <ul>\n            <li><code>type</code></li>\n            <ul>\n                <li>0 - Current departure time for multimodal requests.</li>\n                <li>1 - Specified departure time for multimodal requests.</li>\n                <li>2 - Specified arrival time. Note: This is not yet implemented.</li>\n            </ul>\n            <li><code>value</code> - the date and time specified in ISO 8601 format (YYYY-MM-DDThh:mm) in the local time zone of departure or arrival. For example, \"2016-07-03T08:06\".\n            </li>\n        </ul>\n    </td>\n</tr>\n<tr>\n    <td><code>id</code></td>\n    <td>\n        Name of the isochrone request. If <code>id</code> is specified, the name is returned with the response.\n    </td>\n</tr>\n<tr>\n    <td><code>contours</code></td>\n    <td>\n        A JSON array of contour objects with the time in minutes or distance in kilometers and color to use for each isochrone contour. You can specify up to four contours (by default).\n        <ul>\n            <li><code>time</code> - A floating point value specifying the time in minutes for the contour.\n            </li>\n            <li><code>distance</code> - A floating point value specifying the distance in kilometers for the contour.\n            </li>\n            <li><code>color</code> -The color for the output of the contour. Specify it as a Hex value, but without the <code>#</code>, such as <code>\"color\":\"ff0000\"</code> for red. If no color is specified, the isochrone service will assign a default color to the output.\n            </li>\n        </ul>\n        You can only specify one metric per contour, i.e. time or distance.\n    </td>\n</tr>\n<tr>\n    <td><code>polygons</code></td>\n    <td>\n        A Boolean value to determine whether to return geojson polygons or linestrings as the contours. The default is <code>false</code>, which returns lines; when <code>true</code>, polygons are returned. Note: When <code>polygons</code> is <code>true</code>, any contour that forms a ring is returned as a polygon.\n    </td>\n</tr>\n<tr>\n    <td><code>generalize</code></td>\n    <td>\n        A floating point value in meters used as the tolerance for Douglas-Peucker generalization. Note: Generalization of contours can lead to self-intersections, as well as intersections of adjacent contours.\n    </td>\n</tr>\n</tbody>\n</table>\n</div>\n",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "payload",
+                    "type": "STRING",
+                    "description": "Location information",
+                    "default": "{\"locations\":[{\"lat\":40.744014,\"lon\":-73.990508}],\"costing\":\"pedestrian\",\"contours\":[{\"time\":15.0,\"color\":\"ff0000\"}]}"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "Result identifier",
+                    "default": "Walk_From_Office"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://spatialscale-route-engine.p.rapidapi.com/v1/route_engine/isochrone\"\nquerystring = {\"payload\": \"{\\\"locations\\\":[{\\\"lat\\\":40.744014,\\\"lon\\\":-73.990508}],\\\"costing\\\":\\\"pedestrian\\\",\\\"contours\\\":[{\\\"time\\\":15.0,\\\"color\\\":\\\"ff0000\\\"}]}\", \"id\": \"Walk_From_Office\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"spatialscale-route-engine.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://spatialscale-route-engine.p.rapidapi.com/v1/route_engine/isochrone\"\nquerystring = {\"payload\": \"{\\\"locations\\\":[{\\\"lat\\\":40.744014,\\\"lon\\\":-73.990508}],\\\"costing\\\":\\\"pedestrian\\\",\\\"contours\\\":[{\\\"time\\\":15.0,\\\"color\\\":\\\"ff0000\\\"}]}\", \"id\": \"Walk_From_Office\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"spatialscale-route-engine.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "FeatureCollection",
+                "required": [
+                    "features"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "Id",
+                        "type": "string"
+                    },
+                    "type": {
+                        "title": "Type",
+                        "type": "string",
+                        "default": "FeatureCollection"
+                    },
+                    "bbox": {
+                        "title": "Bbox",
+                        "type": "array",
+                        "items": {
+                            "type": "number"
+                        }
+                    },
+                    "features": {
+                        "title": "Features",
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "spatialscale_route_engine"
+}

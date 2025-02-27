@@ -1,0 +1,213 @@
+{
+    "tool_name":"HM - Hennes Mauritz",
+    "tool_description":"H&M API helps to query for all information about regions, categories, products, etc... as on official websites",
+    "title":"HM - Hennes Mauritz",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1394,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/hm-hennes-mauritz/",
+    "host":"apidojo-hm-hennes-mauritz-v1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"products/detail",
+            "url":"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/detail",
+            "description":"Get detail information of product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The country code that is gotten from /regions/list endpoint",
+                    "default":"us"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"The language code that is gotten from /regions/list endpoint",
+                    "default":"en"
+                },
+                {
+                    "name":"productcode",
+                    "type":"STRING",
+                    "description":"The value of articles/code json object returned in /products/list endpoint",
+                    "default":"0839915011"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/detail\"\nquerystring = {\"country\": country, \"lang\": lang, \"productcode\": productcode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apidojo-hm-hennes-mauritz-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/list",
+            "url":"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/categories/list",
+            "description":"List all categories from H&M",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The country code that is gotten from /regions/list endpoint",
+                    "default":"us"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"The language code that is gotten from /regions/list endpoint",
+                    "default":"en"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/categories/list\"\nquerystring = {\"country\": country, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apidojo-hm-hennes-mauritz-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/list",
+            "url":"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/list",
+            "description":"List products from H&M with options to sort, filter, or search for products by name",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"The language code that is gotten from /regions/list endpoint",
+                    "default":"en"
+                },
+                {
+                    "name":"currentpage",
+                    "type":"NUMBER",
+                    "description":"The page index to get data, start from 0",
+                    "default":"0"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The country code that is gotten from /regions/list endpoint",
+                    "default":"us"
+                },
+                {
+                    "name":"pagesize",
+                    "type":"NUMBER",
+                    "description":"The number of records to return in each page",
+                    "default":"30"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"qualities",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"qualities\\\", pass this param multiple times to filter by multiple qualities",
+                    "default":""
+                },
+                {
+                    "name":"fits",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"fits\\\", pass this param multiple times to filter by multiple fits",
+                    "default":""
+                },
+                {
+                    "name":"categories",
+                    "type":"STRING",
+                    "description":"It is tagCodes field gotten from /categories/list endpoint, pass this param multiple times to filter by multiple categories",
+                    "default":"men_all"
+                },
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following ascPrice|descPrice|stock|newProduct, default is stock",
+                    "default":""
+                },
+                {
+                    "name":"collection",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"collection\\\", pass this param multiple times to filter by multiple collection",
+                    "default":""
+                },
+                {
+                    "name":"sizes",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"sizes\\\", pass this param multiple times to filter by multiple sizes",
+                    "default":""
+                },
+                {
+                    "name":"colorWithNames",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"colorWithNames\\\", pass this param multiple times to filter by multiple colors",
+                    "default":""
+                },
+                {
+                    "name":"contexts",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"contexts\\\", pass this param multiple times to filter by multiple contexts",
+                    "default":""
+                },
+                {
+                    "name":"functions",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"functions\\\", pass this param multiple times to filter by multiple functions",
+                    "default":""
+                },
+                {
+                    "name":"concepts",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"concepts\\\", pass this param multiple times to filter by multiple concepts",
+                    "default":"H&M MAN"
+                },
+                {
+                    "name":"descriptiveLengths",
+                    "type":"STRING",
+                    "description":"Look for the value in \\\"facets\\\" object with \\\"code\\\": \\\"descriptiveLengths\\\", pass this param multiple times to filter by multiple lengths",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/list\"\nquerystring = {\"lang\": lang, \"categories\": categories, \"currentpage\": currentpage, \"concepts\": concepts, \"country\": country, \"pagesize\": pagesize}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apidojo-hm-hennes-mauritz-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/search-by-barcode",
+            "url":"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/search-by-barcode",
+            "description":"Search product by barcode",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"gtinCodes",
+                    "type":"STRING",
+                    "description":"The scanned code",
+                    "default":"00725272730706"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"The country code",
+                    "default":"us"
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"The language code",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://apidojo-hm-hennes-mauritz-v1.p.rapidapi.com/products/search-by-barcode\"\nquerystring = {\"country\": country, \"gtinCodes\": gtincodes, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"apidojo-hm-hennes-mauritz-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

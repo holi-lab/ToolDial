@@ -1,0 +1,571 @@
+{
+    "product_id": "api_18adcbdf-0d8c-48ce-9ab7-1932277dfcca",
+    "tool_description": "Extract data from cash receipts.  Supports PDF files and JPG images.",
+    "home_url": "https://rapidapi.com/astor-ai-astor-ai-default/api/receipt-image-parser/",
+    "name": "Receipt image parser",
+    "title": "Receipt image parser",
+    "pricing": "FREEMIUM",
+    "tool_name": "Receipt image parser",
+    "score": null,
+    "host": "receipt-image-parser.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/v1/tag-receipt",
+            "url": "https://receipt-image-parser.p.rapidapi.com/v1/tag-receipt",
+            "description": "\nThe format of this API might seem a bit complex and even arbitrary, and that is because it has been designed for certain user interface models. However, to not get lost in some of the complex corner cases, you can follow this simple receipt:\n```\n\n  {\n\n    \"accRef\": \"9aba0ed9-2f3b-4673-b86e-802acf030ef5\",\n\n    \"accounted\": {\n\n      \"tag\": \"ValidatedWaitingConfirm\"\n\n    },\n\n    // usually the same as accRef, unless multiple pictures\n\n    // are taken of the same receipt/invoice.\n\n    \"accImage\": \"9aba0ed9-2f3b-4673-b86e-802acf030ef5\",\n\n    \"accounting\": [\n\n        yourUpdatedAccountingResults,\n\n        yourUpdatedPostingResultsList,\n\n        {\n\n          \"attendees\": []\n\n        }\n\n    ]\n\n  }\n\n```\n\n  1. Make a copy of the SendPhotoResponse received when analyzing an image/PDF.\n  2. In your user interface, update the `AccountingResults` (`result`\n     field) with the Totals, VAT, VAT breakdown, date, time,\n     organization number, credit card information etc. that the user\n     enters in your UI.\n  3. Try to remove extra array entries in `AccountingResults`, except for\n     the `VATBreakdowns` array which can contain multiple entries (it's a\n     logical bug in the v1 API here as it is perfectly legal to have\n     multiple VAT breakdowns - one per VAT rate in the country. We will\n     fix that in v2).\n  4. Now update the `[PostingResult]` with the posting that the user actually did.\n\nThe changes to `AccountingResults` indicate what was wrong during data extraction from the image or PDF. The changes to the `[PostingResult]` list indicate how the accounting was supposed to be done.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "user",
+                    "type": "STRING",
+                    "description": "A reference to the user who interacts with the system. The system will model the choices this user prefers and take this into account for future calls into the API.",
+                    "default": ""
+                },
+                {
+                    "name": "config",
+                    "type": "STRING",
+                    "description": "The configuration to use.  This includes the machine learning model as well as other parameters.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://receipt-image-parser.p.rapidapi.com/v1/tag-receipt\"\nquerystring = {\"user\": \"\", \"config\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"receipt-image-parser.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://receipt-image-parser.p.rapidapi.com/v1/tag-receipt\"\nquerystring = {\"user\": \"\", \"config\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"receipt-image-parser.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#"
+            }
+        },
+        {
+            "name": "/v1/send-photo-mime",
+            "url": "https://receipt-image-parser.p.rapidapi.com/v1/send-photo-mime",
+            "description": "Analyze a photo",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "Contents of JPG or PDF file.",
+                    "default": ""
+                },
+                {
+                    "name": "this",
+                    "type": "STRING",
+                    "description": "Unique reference for this image to be used in subsequent calls. ",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "lastResult",
+                    "type": "STRING",
+                    "description": "The result from invocation of this endpoint with a related image of the same receipt, invoice or voucher.  The server will join the information in the previous invocation with the current image.  If possible, provide both this parameter and the lastfile parameter.",
+                    "default": ""
+                },
+                {
+                    "name": "taxNumber",
+                    "type": "STRING",
+                    "description": "The tax number of the company",
+                    "default": ""
+                },
+                {
+                    "name": "companyName",
+                    "type": "STRING",
+                    "description": "The name of the company",
+                    "default": ""
+                },
+                {
+                    "name": "lastfile",
+                    "type": "STRING",
+                    "description": "Reference to a previous image capturing the same receipt, invoice or voucher.",
+                    "default": ""
+                },
+                {
+                    "name": "user",
+                    "type": "STRING",
+                    "description": "A reference to the user taking the picture.",
+                    "default": ""
+                },
+                {
+                    "name": "config",
+                    "type": "STRING",
+                    "description": "The configuration to use.  This refers to the machine learning model as well as other parameters that should be used.",
+                    "default": ""
+                },
+                {
+                    "name": "orgNumber",
+                    "type": "STRING",
+                    "description": "The organization number (company number) for the company.",
+                    "default": ""
+                },
+                {
+                    "name": "cards",
+                    "type": "ARRAY",
+                    "description": "The known cards (credit card, debit card) the user owns. These are used to do correct accounting.",
+                    "default": [
+                        {
+                            "LastDigits": "12345",
+                            "Owner": "CorporateOwner",
+                            "OwnerName": "James Smith",
+                            "Type": "VisaCard"
+                        }
+                    ]
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://receipt-image-parser.p.rapidapi.com/v1/send-photo-mime\"\nquerystring = {\"file\": \"\", \"lastResult\": \"\", \"taxNumber\": \"\", \"this\": \"\", \"companyName\": \"\", \"lastfile\": \"\", \"user\": \"\", \"config\": \"\", \"orgNumber\": \"\", \"cards\": [{\"LastDigits\": \"12345\", \"Owner\": \"CorporateOwner\", \"OwnerName\": \"James Smith\", \"Type\": \"VisaCard\"}]}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"receipt-image-parser.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://receipt-image-parser.p.rapidapi.com/v1/send-photo-mime\"\nquerystring = {\"file\": \"\", \"lastResult\": \"\", \"taxNumber\": \"\", \"this\": \"\", \"companyName\": \"\", \"lastfile\": \"\", \"user\": \"\", \"config\": \"\", \"orgNumber\": \"\", \"cards\": [{\"LastDigits\": \"12345\", \"Owner\": \"CorporateOwner\", \"OwnerName\": \"James Smith\", \"Type\": \"VisaCard\"}]}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"receipt-image-parser.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "This is the main object returned when analyzing an image or PDF.\n### `result`\nThe `result` part of this object consists of information extracted from the image or PDF, such as the total, dates, invoice details, VAT breakdowns etc.\n### `posting`\nThe `posting` part of this object is a suggested transaction you can put in a general ledger.\nThe array entries in `posting` are individual lines in a transaction, and the sum of debet (`Left` amounts), and the sum of credit (`Right` amounts) should ideally be equal.\nHowever, sometimes we will guess that the voucher *should have VAT* for example, but no VAT was found on the voucher.  In cases like these, you might see an incomplete transaction that is not valid, and the best course of action is that an accountant looks at the voucher and either finds the missing data, or corrects the suggested transaction.",
+                "properties": {
+                    "posting": {
+                        "items": {
+                            "description": "A `PostingResult` represents a line in a transaction in a ledger. It consists of a combination of an account, and either a debet, or a credit amount.",
+                            "properties": {
+                                "AccountName": {
+                                    "description": "The name of the account from the chart of accounts for the company. This field is optional.",
+                                    "type": "string"
+                                },
+                                "AccountNumber": {
+                                    "description": "The account number from the chart of accounts for the company. In Sweden, this is a 4-digit number.",
+                                    "type": "number"
+                                },
+                                "DebetCredit": {
+                                    "default": {
+                                        "Left": 0
+                                    },
+                                    "description": "The DebetCredit field indicates whether the line in the transaction is a debet or a credit.  If it is `debet`,  then it is a `Left` value (think of it as the left part of the word `DebetCredit`).  If it is a `credit`, then it is a `Right` value (the right part of the word `DebetCredit`). So `DebetCredit: { Left : 1}` is 1 debet, while `DebetCredit: { Right: 1}` is 1 credit.",
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "Left": {
+                                                    "description": "The debit amount",
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "Left"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "Right": {
+                                                    "description": "The credit amount",
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "required": [
+                                                "Right"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    ],
+                                    "type": "object"
+                                }
+                            },
+                            "required": [
+                                "AccountNumber",
+                                "DebetCredit"
+                            ],
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "result": {
+                        "properties": {
+                            "Costs": {
+                                "description": "Various standard costs or fees extracted from invoices.",
+                                "items": {
+                                    "items": {
+                                        "description": "A cost is some type of standard part of an invoice or receipt, for example interest, late fees, rounding, etc. The type of cost is given by the type field.",
+                                        "properties": {
+                                            "Amount": {
+                                                "description": "The amount for the cost.  The amount is usually positive, but it can be negative, for example for rounding.",
+                                                "properties": {
+                                                    "amount": {
+                                                        "description": "The amount",
+                                                        "type": "number"
+                                                    },
+                                                    "strength": {
+                                                        "description": "The certainty of the amount",
+                                                        "enum": [
+                                                            "High",
+                                                            "Med",
+                                                            "Low"
+                                                        ],
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "Type": {
+                                                "description": "A specific standard cost.",
+                                                "enum": [
+                                                    "LatePaymentFee",
+                                                    "Rounding"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            },
+                            "Currency": {
+                                "description": "The currency in order of probability.",
+                                "items": {
+                                    "default": "SEK",
+                                    "description": "A currency description.  The types marked (**) are not fully supported.",
+                                    "enum": [
+                                        "AUD **",
+                                        "AED",
+                                        "ARS",
+                                        "BRL **",
+                                        "CAD",
+                                        "CHF",
+                                        "CNY",
+                                        "CZK",
+                                        "DKK",
+                                        "EUR",
+                                        "GBP",
+                                        "HKD **",
+                                        "HUF",
+                                        "IDR **",
+                                        "INR",
+                                        "ISK",
+                                        "JPY",
+                                        "KRW **",
+                                        "MAD **",
+                                        "MXN **",
+                                        "NOK",
+                                        "NZD **",
+                                        "PHP",
+                                        "PLN",
+                                        "RSD",
+                                        "RUB **",
+                                        "SAR **",
+                                        "SEK",
+                                        "SGD **",
+                                        "THB",
+                                        "TRY",
+                                        "UAH",
+                                        "USD",
+                                        "VND",
+                                        "ZAR"
+                                    ],
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "Date": {
+                                "description": "The day of the transaction in order of  probability.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "Id": {
+                                "description": "The receipt identifier in order of probability.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "InvoiceInfo": {
+                                "description": "Information extracted from invoices.",
+                                "items": {
+                                    "description": "Contains invoice-specific fields that are extracted from an image.",
+                                    "properties": {
+                                        "BankAccount": {
+                                            "description": "Bank account information for payment of the invoice",
+                                            "properties": {
+                                                "Info": {
+                                                    "description": "The bank account number for the given type of bank account.",
+                                                    "type": "string"
+                                                },
+                                                "Type": {
+                                                    "default": "Bankgiro",
+                                                    "description": "The type of the bank account",
+                                                    "enum": [
+                                                        "Bankgiro",
+                                                        "Plusgiro",
+                                                        "IBAN"
+                                                    ],
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "InvoiceDate": {
+                                            "description": "The issuing date for the invoice. If this field is empty, the AccountingResults.Date field can be used. This field will not be populated unless evidence is found that it's the invoice date.",
+                                            "type": "string"
+                                        },
+                                        "InvoiceRef": {
+                                            "description": "An invoice reference or invoice id.",
+                                            "type": "string"
+                                        },
+                                        "PaymentDueDate": {
+                                            "description": "The payment date for the invoice.  If this field is empty, the AccountingResults.Date field can be used. This field will not be populated unless evidence is found that it's the payment date.",
+                                            "type": "string"
+                                        },
+                                        "PaymentRefNumber": {
+                                            "description": "A payment reference number.  In Sweden this is the \"OCR number\". In Norway this is the \"KID number\".",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "Nets": {
+                                "description": "The potential 'nets' in order of probability. Prefer using VATBreakdowns if available as it contains sets of data.",
+                                "items": {
+                                    "properties": {
+                                        "amount": {
+                                            "description": "The amount",
+                                            "type": "number"
+                                        },
+                                        "strength": {
+                                            "description": "The certainty of the amount",
+                                            "enum": [
+                                                "High",
+                                                "Med",
+                                                "Low"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "OrgInfo": {
+                                "description": "Organization information in order of probability.",
+                                "items": {
+                                    "properties": {
+                                        "Address": {
+                                            "properties": {
+                                                "PostalCode": {
+                                                    "description": "The postal code (and sometimes postal area).",
+                                                    "type": "string"
+                                                },
+                                                "StreetAddress": {
+                                                    "description": "The street address for the address.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "Id": {
+                                            "description": "Organization number",
+                                            "type": "string"
+                                        },
+                                        "Jurisdiction": {
+                                            "default": "SE",
+                                            "description": "The name of a jurisdiction. When used in OrgInfo, it means the jurisdiction of the business organization id.",
+                                            "enum": [
+                                                "AE",
+                                                "DK",
+                                                "FI",
+                                                "GB",
+                                                "IE",
+                                                "NO",
+                                                "SE"
+                                            ],
+                                            "type": "string"
+                                        },
+                                        "Name": {
+                                            "description": "The organization name",
+                                            "type": "string"
+                                        },
+                                        "PhoneNumber": {
+                                            "description": "The organization's phone number",
+                                            "type": "string"
+                                        },
+                                        "PostAddress": {
+                                            "properties": {
+                                                "PostalCode": {
+                                                    "description": "The postal code (and sometimes postal area).",
+                                                    "type": "string"
+                                                },
+                                                "StreetAddress": {
+                                                    "description": "The street address for the address.",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "required": [
+                                        "Id"
+                                    ],
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "Payment": {
+                                "description": "Last digits for the card, or payment type",
+                                "items": {
+                                    "oneOf": [
+                                        {
+                                            "properties": {
+                                                "CashPayment": {
+                                                    "default": true,
+                                                    "type": "boolean"
+                                                }
+                                            },
+                                            "required": [
+                                                "CashPayment"
+                                            ],
+                                            "type": "object"
+                                        },
+                                        {
+                                            "properties": {
+                                                "CardPayment": {
+                                                    "properties": {
+                                                        "LastDigits": {
+                                                            "type": "string"
+                                                        },
+                                                        "Owner": {
+                                                            "description": "The type of owner for a payment card",
+                                                            "enum": [
+                                                                "CorporateOwner",
+                                                                "PrivateOwner",
+                                                                "UnknownOwner"
+                                                            ],
+                                                            "type": "string"
+                                                        },
+                                                        "OwnerName": {
+                                                            "type": "string"
+                                                        },
+                                                        "Type": {
+                                                            "description": "The type of a payment card",
+                                                            "enum": [
+                                                                "VisaCard",
+                                                                "MasterCard",
+                                                                "AmericanExpress",
+                                                                "UnknownCard"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": true,
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "required": [
+                                                "CardPayment"
+                                            ],
+                                            "type": "object"
+                                        }
+                                    ]
+                                },
+                                "type": "array"
+                            },
+                            "Time": {
+                                "description": "The time of the transaction in order of probability.",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "type": "array"
+                            },
+                            "Totals": {
+                                "description": "The potential 'totals' in order of probability. Prefer using VATBreakdowns if available as it contains sets of data.",
+                                "items": {
+                                    "properties": {
+                                        "amount": {
+                                            "description": "The amount",
+                                            "type": "number"
+                                        },
+                                        "strength": {
+                                            "description": "The certainty of the amount",
+                                            "enum": [
+                                                "High",
+                                                "Med",
+                                                "Low"
+                                            ],
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "VATBreakdowns": {
+                                "description": "VAT breakdowns (total, net, vat-amount) in order of probability.",
+                                "items": {
+                                    "properties": {
+                                        "Net": {
+                                            "description": "The net amount",
+                                            "type": "number"
+                                        },
+                                        "Total": {
+                                            "description": "The total amount",
+                                            "type": "number"
+                                        },
+                                        "VAT": {
+                                            "properties": {
+                                                "Amount": {
+                                                    "description": "The amount",
+                                                    "type": "number"
+                                                },
+                                                "Percent": {
+                                                    "description": "The percent",
+                                                    "maximum": 100,
+                                                    "minimum": 0,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "VATTotals": {
+                                "description": "The potential VAT totals in order of   probability. Prefer using VATBreakdowns if available as it contains sets of data.",
+                                "items": {
+                                    "properties": {
+                                        "Amount": {
+                                            "description": "The amount",
+                                            "type": "number"
+                                        },
+                                        "Percent": {
+                                            "description": "The percent",
+                                            "maximum": 100,
+                                            "minimum": 0,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "Totals",
+                            "Nets",
+                            "VATTotals",
+                            "VATBreakdowns",
+                            "Date",
+                            "Time",
+                            "Id",
+                            "OrgInfo",
+                            "Payment",
+                            "Currency"
+                        ],
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

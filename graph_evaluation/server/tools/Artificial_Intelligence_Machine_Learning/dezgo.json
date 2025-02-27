@@ -1,0 +1,1029 @@
+{
+    "tool_name": "Dezgo",
+    "tool_description": "\ud83e\ude84 Provides easy&fast access to text2image / image2image / inpainting AI. (57 models across Stable Diffusion 1.x/2.x and finetuned models)",
+    "title": "Dezgo",
+    "pricing": "PAID",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 3790,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/dezgo/api/dezgo/",
+    "host": "dezgo.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/upscale",
+            "url": "https://dezgo.p.rapidapi.com/upscale",
+            "description": "Upscale an image by a factor of 2\nThis AI attempts to preserve contrasted edges and details as much as possible, producing a sharper image than simple interpolation methods. The result is returned as \"image/png\".\n\nThe following parameters influence the request cost: `image`\n(see the \"About\" section for more details)\n\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The image to upscale\r\n\r\n**Constraints:**\r\n- Image size: `8 - 2048` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/upscale\"\nquerystring = {\"image\": image}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/image2image",
+            "url": "https://dezgo.p.rapidapi.com/image2image",
+            "description": "Edit an existing image to fit a given text description\n\n\nThe following parameters influence the request cost: `init_image`, `steps`, `upscale`\n(see the \"About\" section for more details)\n\nLicense: CreativeML Open RAIL-M (https://dezgo.com/license.txt)\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Describe how the final image should look like\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ"
+                },
+                {
+                    "name": "init_image",
+                    "type": "BINARY",
+                    "description": "Upload the original image to be modified.\r\nSupports PNG/JPEG files, up to a maximum of 1024x1024. Dimensions should be divisible by 8. The image is resized automatically if necessary.\r\n\r\n**Constraints:**\r\n- Image size: `8 - 1024` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "upscale",
+                    "type": "NUMBER",
+                    "description": "Upscale the image by this factor using the Real-ESRGAN model. Currently only a factor of 2 is supported.\r\n\r\n**Constraints:**\r\n- Range: `1 - 2`\r\n",
+                    "default": "1"
+                },
+                {
+                    "name": "seed",
+                    "type": "NUMBER",
+                    "description": "Unique image seed number. If not provided, the image will be random.\r\nAn unsigned 32-bit integer seed used to control the generator randomness.\nReusing the same seed with the same parameters will produce the same image.\nReusing the same seed with slightly different parameters tends to produce variations of the same composition ;\nyou can use this to experiment with the impact of different parameters.\n\nIf you instructed the API to choose a random seed, it can be retrieved from the response header `x-input-seed`\r\n\r\n**Constraints:**\r\n- Range: `0 - 4294967295`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "steps",
+                    "type": "NUMBER",
+                    "description": "Number of sampling steps. More steps = more details but also longer computation time.\r\nMore steps may improve quality under some circumstances and refine details, but it will take longer and be more expensive.\nFewer will result in lower quality images but is quicker and cheaper to process.\r\n\r\n**Constraints:**\r\n- Range: `10 - 150`\r\n",
+                    "default": "30"
+                },
+                {
+                    "name": "sampler",
+                    "type": "STRING",
+                    "description": "Defines the sampling method used to generate the image.\r\nThe best samplers for low step counts tend to be `dpm`, `euler` and `euler_a`.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `ddim`\r\n  - `dpm`\r\n  - `euler`\r\n  - `euler_a`\r\n  - `k_lms`\r\n  - `pndm`\r\n",
+                    "default": "euler_a"
+                },
+                {
+                    "name": "negative_prompt",
+                    "type": "STRING",
+                    "description": "Describe what you DON'T want in the generated image\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft"
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "The AI used to generate the image.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `abyss_orange_mix_2`\r\n  - `analog_diffusion`\r\n  - `anything_3_0`\r\n  - `anything_4_0`\r\n  - `basil_mix`\r\n  - `blood_orange_mix`\r\n  - `deliberate`\r\n  - `dh_classicanime`\r\n  - `disco_diffusion_style`\r\n  - `double_exposure_diffusion`\r\n  - `dreamshaper`\r\n  - `duchaiten_anime`\r\n  - `duchaiten_darkside`\r\n  - `duchaiten_dreamworld`\r\n  - `eimis_anime_diffusion_1`\r\n  - `ely_orange_mix`\r\n  - `emoji_diffusion`\r\n  - `epic_diffusion_1`\r\n  - `epic_diffusion_1_1`\r\n  - `foto_assisted_diffusion`\r\n  - `future_diffusion`\r\n  - `hasdx`\r\n  - `iconsmi_appiconsmodelforsd`\r\n  - `inkpunk_diffusion`\r\n  - `lowpoly_world`\r\n  - `openjourney`\r\n  - `openjourney_2`\r\n  - `openniji`\r\n  - `paint_journey_2_768px`\r\n  - `papercut`\r\n  - `pastel_mix`\r\n  - `portrait_plus`\r\n  - `realistic_vision_1_3`\r\n  - `redshift_diffusion`\r\n  - `redshift_diffusion_768px`\r\n  - `something_2`\r\n  - `stable_diffusion_fluidart`\r\n  - `stable_diffusion_papercut`\r\n  - `stable_diffusion_voxelart`\r\n  - `stablediffusion_1_4`\r\n  - `stablediffusion_1_5`\r\n  - `stablediffusion_2_0_512px`\r\n  - `stablediffusion_2_0_768px`\r\n  - `stablediffusion_2_1_512px`\r\n  - `stablediffusion_2_1_768px`\r\n  - `steampunk_diffusion`\r\n  - `synthwavepunk_v2`\r\n  - `texture_diffusion`\r\n  - `trinart_2_0`\r\n  - `tshirt_diffusion`\r\n  - `vectorartz_diffusion`\r\n  - `vintedois_diffusion_v0_1`\r\n  - `vox_2`\r\n  - `waifudiffusion_1_3`\r\n  - `waifudiffusion_1_4`\r\n",
+                    "default": "epic_diffusion_1_1"
+                },
+                {
+                    "name": "strength",
+                    "type": "NUMBER",
+                    "description": "How strongly the original image should be altered (from subtle to drastic changes)\r\nFrom 0.0 to 1.0\r\n\r\n**Constraints:**\r\n- Range: `0 - 1`\r\n",
+                    "default": "0.8"
+                },
+                {
+                    "name": "guidance",
+                    "type": "NUMBER",
+                    "description": "Adjusts how much the AI tries to fit the prompt (higher = stricter, lower = more freedom).\r\nHigher values means that the AI will try harder to match the text, but extreme values may produce more artifacts.\nLower values means that the AI is allowed more creative freedom in the interpretation of the text.\r\n\r\n**Constraints:**\r\n- Range: `-20 - 20`\r\n",
+                    "default": "7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/image2image\"\nquerystring = {\"upscale\": upscale, \"prompt\": prompt, \"steps\": steps, \"init_image\": init_image, \"sampler\": sampler, \"negative_prompt\": negative_prompt, \"model\": model, \"strength\": strength, \"guidance\": guidance}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/inpainting",
+            "url": "https://dezgo.p.rapidapi.com/inpainting",
+            "description": "Modify a part of an image (using a mask) to fit a given text description\n\n\nThe following parameters influence the request cost: `init_image`, `steps`, `upscale`\n(see the \"About\" section for more details)\n\nLicense: CreativeML Open RAIL-M (https://dezgo.com/license.txt)\n\r\n\r\n**Global Constraints:**\r\n- Images must be of the same size: `init_image` and `mask_image`\r\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Describe how the final image should look like\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ"
+                },
+                {
+                    "name": "mask_image",
+                    "type": "BINARY",
+                    "description": "\r\nA black and white mask that defines the parts of the image to modify.\nShould be the same size as init_image.\n\nWhite pixels = modified ; Black pixels = unchanged\r\n\r\n**Constraints:**\r\n- Image size: `8 - 1024` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "init_image",
+                    "type": "BINARY",
+                    "description": "Upload the original image to be modified.\r\nSupports PNG/JPEG files, up to a maximum of 1024x1024. Dimensions should be divisible by 8. The image is resized automatically if necessary.\r\n\r\n**Constraints:**\r\n- Image size: `8 - 1024` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "upscale",
+                    "type": "NUMBER",
+                    "description": "Upscale the image by this factor using the Real-ESRGAN model. Currently only a factor of 2 is supported.\r\n\r\n**Constraints:**\r\n- Range: `1 - 2`\r\n",
+                    "default": "1"
+                },
+                {
+                    "name": "negative_prompt",
+                    "type": "STRING",
+                    "description": "Describe what you DON'T want in the generated image\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft"
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "The AI used to generate the image.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `stablediffusion_inpaint_1`\r\n  - `stablediffusion_inpaint_2`\r\n",
+                    "default": "stablediffusion_inpaint_1"
+                },
+                {
+                    "name": "steps",
+                    "type": "NUMBER",
+                    "description": "Number of sampling steps. More steps = more details but also longer computation time.\r\nMore steps may improve quality under some circumstances and refine details, but it will take longer and be more expensive.\nFewer will result in lower quality images but is quicker and cheaper to process.\r\n\r\n**Constraints:**\r\n- Range: `10 - 150`\r\n",
+                    "default": "30"
+                },
+                {
+                    "name": "guidance",
+                    "type": "NUMBER",
+                    "description": "Adjusts how much the AI tries to fit the prompt (higher = stricter, lower = more freedom).\r\nHigher values means that the AI will try harder to match the text, but extreme values may produce more artifacts.\nLower values means that the AI is allowed more creative freedom in the interpretation of the text.\r\n\r\n**Constraints:**\r\n- Range: `-20 - 20`\r\n",
+                    "default": "7"
+                },
+                {
+                    "name": "seed",
+                    "type": "NUMBER",
+                    "description": "Unique image seed number. If not provided, the image will be random.\r\nAn unsigned 32-bit integer seed used to control the generator randomness.\nReusing the same seed with the same parameters will produce the same image.\nReusing the same seed with slightly different parameters tends to produce variations of the same composition ;\nyou can use this to experiment with the impact of different parameters.\n\nIf you instructed the API to choose a random seed, it can be retrieved from the response header `x-input-seed`\r\n\r\n**Constraints:**\r\n- Range: `0 - 4294967295`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "sampler",
+                    "type": "STRING",
+                    "description": "Defines the sampling method used to generate the image.\r\nThe best samplers for low step counts tend to be `dpm`, `euler` and `euler_a`.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `ddim`\r\n  - `dpm`\r\n  - `euler`\r\n  - `euler_a`\r\n  - `k_lms`\r\n  - `pndm`\r\n",
+                    "default": "euler_a"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/inpainting\"\nquerystring = {\"upscale\": upscale, \"negative_prompt\": negative_prompt, \"prompt\": prompt, \"model\": model, \"steps\": steps, \"mask_image\": mask_image, \"init_image\": init_image, \"guidance\": guidance, \"sampler\": sampler}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/text2image",
+            "url": "https://dezgo.p.rapidapi.com/text2image",
+            "description": "Generate an image from a text description\nThe result is returned as \"image/png\".\n\nThe following parameters influence the request cost: `width`, `height`, `steps`, `upscale`\n(see the \"About\" section for more details)\n\nLicense: CreativeML Open RAIL-M (https://dezgo.com/license.txt)\n\r\n\r\n**Global Constraints:**\r\n- Auto resolution: if not provided, fields `width` and `height` are automatically set to the model's native resolution.\r\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Describe how the final image should look like\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "seed",
+                    "type": "NUMBER",
+                    "description": "Unique image seed number. If not provided, the image will be random.\r\nAn unsigned 32-bit integer seed used to control the generator randomness.\nReusing the same seed with the same parameters will produce the same image.\nReusing the same seed with slightly different parameters tends to produce variations of the same composition ;\nyou can use this to experiment with the impact of different parameters.\n\nIf you instructed the API to choose a random seed, it can be retrieved from the response header `x-input-seed`\r\n\r\n**Constraints:**\r\n- Range: `0 - 4294967295`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "guidance",
+                    "type": "NUMBER",
+                    "description": "Adjusts how much the AI tries to fit the prompt (higher = stricter, lower = more freedom).\r\nHigher values means that the AI will try harder to match the text, but extreme values may produce more artifacts.\nLower values means that the AI is allowed more creative freedom in the interpretation of the text.\r\n\r\n**Constraints:**\r\n- Range: `-20 - 20`\r\n",
+                    "default": "7"
+                },
+                {
+                    "name": "steps",
+                    "type": "NUMBER",
+                    "description": "Number of sampling steps. More steps = more details but also longer computation time.\r\nMore steps may improve quality under some circumstances and refine details, but it will take longer and be more expensive.\nFewer will result in lower quality images but is quicker and cheaper to process.\r\n\r\n**Constraints:**\r\n- Range: `10 - 150`\r\n",
+                    "default": "30"
+                },
+                {
+                    "name": "sampler",
+                    "type": "STRING",
+                    "description": "Defines the sampling method used to generate the image.\r\nThe best samplers for low step counts tend to be `dpm`, `euler` and `euler_a`.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `ddim`\r\n  - `dpm`\r\n  - `euler`\r\n  - `euler_a`\r\n  - `k_lms`\r\n  - `pndm`\r\n",
+                    "default": "euler_a"
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "The image width in pixels.\r\nMust be divisible by 8 (auto-adjusted to the lowest multiple)\r\n\r\n**Constraints:**\r\n- Range: `320 - 1024`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "upscale",
+                    "type": "NUMBER",
+                    "description": "Upscale the image by this factor using the Real-ESRGAN model. Currently only a factor of 2 is supported.\r\n\r\n**Constraints:**\r\n- Range: `1 - 2`\r\n",
+                    "default": "1"
+                },
+                {
+                    "name": "negative_prompt",
+                    "type": "STRING",
+                    "description": "Describe what you DON'T want in the generated image\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft"
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "The image height in pixels.\r\nMust be divisible by 8 (auto-adjusted to the lowest multiple)\r\n\r\n**Constraints:**\r\n- Range: `320 - 1024`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "The AI used to generate the image.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `abyss_orange_mix_2`\r\n  - `analog_diffusion`\r\n  - `anything_3_0`\r\n  - `anything_4_0`\r\n  - `basil_mix`\r\n  - `blood_orange_mix`\r\n  - `deliberate`\r\n  - `dh_classicanime`\r\n  - `disco_diffusion_style`\r\n  - `double_exposure_diffusion`\r\n  - `dreamshaper`\r\n  - `duchaiten_anime`\r\n  - `duchaiten_darkside`\r\n  - `duchaiten_dreamworld`\r\n  - `eimis_anime_diffusion_1`\r\n  - `ely_orange_mix`\r\n  - `emoji_diffusion`\r\n  - `epic_diffusion_1`\r\n  - `epic_diffusion_1_1`\r\n  - `foto_assisted_diffusion`\r\n  - `future_diffusion`\r\n  - `hasdx`\r\n  - `iconsmi_appiconsmodelforsd`\r\n  - `inkpunk_diffusion`\r\n  - `lowpoly_world`\r\n  - `openjourney`\r\n  - `openjourney_2`\r\n  - `openniji`\r\n  - `paint_journey_2_768px`\r\n  - `papercut`\r\n  - `pastel_mix`\r\n  - `portrait_plus`\r\n  - `realistic_vision_1_3`\r\n  - `redshift_diffusion`\r\n  - `redshift_diffusion_768px`\r\n  - `something_2`\r\n  - `stable_diffusion_fluidart`\r\n  - `stable_diffusion_papercut`\r\n  - `stable_diffusion_voxelart`\r\n  - `stablediffusion_1_4`\r\n  - `stablediffusion_1_5`\r\n  - `stablediffusion_2_0_512px`\r\n  - `stablediffusion_2_0_768px`\r\n  - `stablediffusion_2_1_512px`\r\n  - `stablediffusion_2_1_768px`\r\n  - `steampunk_diffusion`\r\n  - `synthwavepunk_v2`\r\n  - `texture_diffusion`\r\n  - `trinart_2_0`\r\n  - `tshirt_diffusion`\r\n  - `vectorartz_diffusion`\r\n  - `vintedois_diffusion_v0_1`\r\n  - `vox_2`\r\n  - `waifudiffusion_1_3`\r\n  - `waifudiffusion_1_4`\r\n",
+                    "default": "epic_diffusion_1_1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/text2image\"\nquerystring = {\"prompt\": prompt, \"guidance\": guidance, \"steps\": steps, \"sampler\": sampler, \"upscale\": upscale, \"negative_prompt\": negative_prompt, \"model\": model}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/info",
+            "url": "https://dezgo.p.rapidapi.com/info",
+            "description": "Get information about the Dezgo API (such as available models).",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/info\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "name": "",
+                "version": "",
+                "models": [
+                    {
+                        "id": "",
+                        "name": "",
+                        "nativeResolution": {
+                            "width": 0,
+                            "height": 0
+                        },
+                        "triggers": [],
+                        "functions": [],
+                        "categories": [],
+                        "license": "",
+                        "description": ""
+                    }
+                ],
+                "paymentMethods": [
+                    {
+                        "id": "",
+                        "name": "",
+                        "min": 0,
+                        "max": 0
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "version": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "models": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Unique identifier of the model (used to specify the model in the API)"
+                                },
+                                "name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Human readable name of the model"
+                                },
+                                "nativeResolution": {
+                                    "type": "object",
+                                    "properties": {
+                                        "width": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "minimum": -2147483648,
+                                            "maximum": 2147483647
+                                        },
+                                        "height": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "minimum": -2147483648,
+                                            "maximum": 2147483647
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "triggers": {
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "If set, indicates that the model was trained to react to these specific trigger prompts (for example with Dreambooth finetuning).\r\nPrepend your prompt with one of these triggers to use this model's specific behavior."
+                                },
+                                "functions": {
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "The set of functions that this model can perform."
+                                },
+                                "categories": {
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "The categories of the model"
+                                },
+                                "license": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "The license of the model"
+                                },
+                                "description": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Human readable description of the model"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "description": "Information about the available models"
+                    },
+                    "paymentMethods": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "min": {
+                                    "type": "number",
+                                    "description": "Payment range",
+                                    "format": "double",
+                                    "minimum": -1.7976931348623157e+308,
+                                    "maximum": 1.7976931348623157e+308
+                                },
+                                "max": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "minimum": -1.7976931348623157e+308,
+                                    "maximum": 1.7976931348623157e+308
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "description": "Information about the available payment methods"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Describe global information about the Dezgo API."
+            }
+        },
+        {
+            "name": "/info",
+            "url": "https://dezgo.p.rapidapi.com/info",
+            "description": "Get information about the Dezgo API (such as available models).",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/info\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "name": "",
+                "version": "",
+                "models": [
+                    {
+                        "id": "",
+                        "name": "",
+                        "nativeResolution": {
+                            "width": 0,
+                            "height": 0
+                        },
+                        "triggers": [],
+                        "functions": [],
+                        "categories": [],
+                        "license": "",
+                        "description": ""
+                    }
+                ],
+                "paymentMethods": [
+                    {
+                        "id": "",
+                        "name": "",
+                        "min": 0,
+                        "max": 0
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "version": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "models": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Unique identifier of the model (used to specify the model in the API)"
+                                },
+                                "name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Human readable name of the model"
+                                },
+                                "nativeResolution": {
+                                    "type": "object",
+                                    "properties": {
+                                        "width": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "minimum": -2147483648,
+                                            "maximum": 2147483647
+                                        },
+                                        "height": {
+                                            "type": "integer",
+                                            "format": "int32",
+                                            "minimum": -2147483648,
+                                            "maximum": 2147483647
+                                        }
+                                    },
+                                    "additionalProperties": false
+                                },
+                                "triggers": {
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "If set, indicates that the model was trained to react to these specific trigger prompts (for example with Dreambooth finetuning).\r\nPrepend your prompt with one of these triggers to use this model's specific behavior."
+                                },
+                                "functions": {
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "The set of functions that this model can perform."
+                                },
+                                "categories": {
+                                    "type": [
+                                        "array",
+                                        "null"
+                                    ],
+                                    "items": {
+                                        "type": "string"
+                                    },
+                                    "description": "The categories of the model"
+                                },
+                                "license": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "The license of the model"
+                                },
+                                "description": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "description": "Human readable description of the model"
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "description": "Information about the available models"
+                    },
+                    "paymentMethods": {
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "name": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ]
+                                },
+                                "min": {
+                                    "type": "number",
+                                    "description": "Payment range",
+                                    "format": "double",
+                                    "minimum": -1.7976931348623157e+308,
+                                    "maximum": 1.7976931348623157e+308
+                                },
+                                "max": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "minimum": -1.7976931348623157e+308,
+                                    "maximum": 1.7976931348623157e+308
+                                }
+                            },
+                            "additionalProperties": false
+                        },
+                        "description": "Information about the available payment methods"
+                    }
+                },
+                "additionalProperties": false,
+                "description": "Describe global information about the Dezgo API."
+            }
+        },
+        {
+            "name": "/upscale",
+            "url": "https://dezgo.p.rapidapi.com/upscale",
+            "description": "Upscale an image by a factor of 2\nThis AI attempts to preserve contrasted edges and details as much as possible, producing a sharper image than simple interpolation methods. The result is returned as \"image/png\".\n\nThe following parameters influence the request cost: `image`\n(see the \"About\" section for more details)\n\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "The image to upscale\r\n\r\n**Constraints:**\r\n- Image size: `8 - 2048` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/upscale\"\nquerystring = {\"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/upscale\"\nquerystring = {\"image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/image2image",
+            "url": "https://dezgo.p.rapidapi.com/image2image",
+            "description": "Edit an existing image to fit a given text description\n\n\nThe following parameters influence the request cost: `init_image`, `steps`, `upscale`\n(see the \"About\" section for more details)\n\nLicense: CreativeML Open RAIL-M (https://dezgo.com/license.txt)\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Describe how the final image should look like\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ"
+                },
+                {
+                    "name": "init_image",
+                    "type": "BINARY",
+                    "description": "Upload the original image to be modified.\r\nSupports PNG/JPEG files, up to a maximum of 1024x1024. Dimensions should be divisible by 8. The image is resized automatically if necessary.\r\n\r\n**Constraints:**\r\n- Image size: `8 - 1024` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "upscale",
+                    "type": "NUMBER",
+                    "description": "Upscale the image by this factor using the Real-ESRGAN model. Currently only a factor of 2 is supported.\r\n\r\n**Constraints:**\r\n- Range: `1 - 2`\r\n",
+                    "default": "1"
+                },
+                {
+                    "name": "seed",
+                    "type": "NUMBER",
+                    "description": "Unique image seed number. If not provided, the image will be random.\r\nAn unsigned 32-bit integer seed used to control the generator randomness.\nReusing the same seed with the same parameters will produce the same image.\nReusing the same seed with slightly different parameters tends to produce variations of the same composition ;\nyou can use this to experiment with the impact of different parameters.\n\nIf you instructed the API to choose a random seed, it can be retrieved from the response header `x-input-seed`\r\n\r\n**Constraints:**\r\n- Range: `0 - 4294967295`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "steps",
+                    "type": "NUMBER",
+                    "description": "Number of sampling steps. More steps = more details but also longer computation time.\r\nMore steps may improve quality under some circumstances and refine details, but it will take longer and be more expensive.\nFewer will result in lower quality images but is quicker and cheaper to process.\r\n\r\n**Constraints:**\r\n- Range: `10 - 150`\r\n",
+                    "default": "30"
+                },
+                {
+                    "name": "sampler",
+                    "type": "STRING",
+                    "description": "Defines the sampling method used to generate the image.\r\nThe best samplers for low step counts tend to be `dpm`, `euler` and `euler_a`.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `ddim`\r\n  - `dpm`\r\n  - `euler`\r\n  - `euler_a`\r\n  - `k_lms`\r\n  - `pndm`\r\n",
+                    "default": "euler_a"
+                },
+                {
+                    "name": "negative_prompt",
+                    "type": "STRING",
+                    "description": "Describe what you DON'T want in the generated image\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft"
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "The AI used to generate the image.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `abyss_orange_mix_2`\r\n  - `analog_diffusion`\r\n  - `anything_3_0`\r\n  - `anything_4_0`\r\n  - `basil_mix`\r\n  - `blood_orange_mix`\r\n  - `deliberate`\r\n  - `dh_classicanime`\r\n  - `disco_diffusion_style`\r\n  - `double_exposure_diffusion`\r\n  - `dreamshaper`\r\n  - `duchaiten_anime`\r\n  - `duchaiten_darkside`\r\n  - `duchaiten_dreamworld`\r\n  - `eimis_anime_diffusion_1`\r\n  - `ely_orange_mix`\r\n  - `emoji_diffusion`\r\n  - `epic_diffusion_1`\r\n  - `epic_diffusion_1_1`\r\n  - `foto_assisted_diffusion`\r\n  - `future_diffusion`\r\n  - `hasdx`\r\n  - `iconsmi_appiconsmodelforsd`\r\n  - `inkpunk_diffusion`\r\n  - `lowpoly_world`\r\n  - `openjourney`\r\n  - `openjourney_2`\r\n  - `openniji`\r\n  - `paint_journey_2_768px`\r\n  - `papercut`\r\n  - `pastel_mix`\r\n  - `portrait_plus`\r\n  - `realistic_vision_1_3`\r\n  - `redshift_diffusion`\r\n  - `redshift_diffusion_768px`\r\n  - `something_2`\r\n  - `stable_diffusion_fluidart`\r\n  - `stable_diffusion_papercut`\r\n  - `stable_diffusion_voxelart`\r\n  - `stablediffusion_1_4`\r\n  - `stablediffusion_1_5`\r\n  - `stablediffusion_2_0_512px`\r\n  - `stablediffusion_2_0_768px`\r\n  - `stablediffusion_2_1_512px`\r\n  - `stablediffusion_2_1_768px`\r\n  - `steampunk_diffusion`\r\n  - `synthwavepunk_v2`\r\n  - `texture_diffusion`\r\n  - `trinart_2_0`\r\n  - `tshirt_diffusion`\r\n  - `vectorartz_diffusion`\r\n  - `vintedois_diffusion_v0_1`\r\n  - `vox_2`\r\n  - `waifudiffusion_1_3`\r\n  - `waifudiffusion_1_4`\r\n",
+                    "default": "epic_diffusion_1_1"
+                },
+                {
+                    "name": "strength",
+                    "type": "NUMBER",
+                    "description": "How strongly the original image should be altered (from subtle to drastic changes)\r\nFrom 0.0 to 1.0\r\n\r\n**Constraints:**\r\n- Range: `0 - 1`\r\n",
+                    "default": "0.8"
+                },
+                {
+                    "name": "guidance",
+                    "type": "NUMBER",
+                    "description": "Adjusts how much the AI tries to fit the prompt (higher = stricter, lower = more freedom).\r\nHigher values means that the AI will try harder to match the text, but extreme values may produce more artifacts.\nLower values means that the AI is allowed more creative freedom in the interpretation of the text.\r\n\r\n**Constraints:**\r\n- Range: `-20 - 20`\r\n",
+                    "default": "7"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/image2image\"\nquerystring = {\"upscale\": \"1\", \"prompt\": \"an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ\", \"seed\": \"\", \"steps\": \"30\", \"init_image\": \"\", \"sampler\": \"euler_a\", \"negative_prompt\": \"ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft\", \"model\": \"epic_diffusion_1_1\", \"strength\": \"0.8\", \"guidance\": \"7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/image2image\"\nquerystring = {\"upscale\": \"1\", \"prompt\": \"an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ\", \"seed\": \"\", \"steps\": \"30\", \"init_image\": \"\", \"sampler\": \"euler_a\", \"negative_prompt\": \"ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft\", \"model\": \"epic_diffusion_1_1\", \"strength\": \"0.8\", \"guidance\": \"7\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/inpainting",
+            "url": "https://dezgo.p.rapidapi.com/inpainting",
+            "description": "Modify a part of an image (using a mask) to fit a given text description\n\n\nThe following parameters influence the request cost: `init_image`, `steps`, `upscale`\n(see the \"About\" section for more details)\n\nLicense: CreativeML Open RAIL-M (https://dezgo.com/license.txt)\n\r\n\r\n**Global Constraints:**\r\n- Images must be of the same size: `init_image` and `mask_image`\r\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Describe how the final image should look like\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ"
+                },
+                {
+                    "name": "mask_image",
+                    "type": "BINARY",
+                    "description": "\r\nA black and white mask that defines the parts of the image to modify.\nShould be the same size as init_image.\n\nWhite pixels = modified ; Black pixels = unchanged\r\n\r\n**Constraints:**\r\n- Image size: `8 - 1024` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "init_image",
+                    "type": "BINARY",
+                    "description": "Upload the original image to be modified.\r\nSupports PNG/JPEG files, up to a maximum of 1024x1024. Dimensions should be divisible by 8. The image is resized automatically if necessary.\r\n\r\n**Constraints:**\r\n- Image size: `8 - 1024` pixels on either side (auto-resized)\r\n",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "upscale",
+                    "type": "NUMBER",
+                    "description": "Upscale the image by this factor using the Real-ESRGAN model. Currently only a factor of 2 is supported.\r\n\r\n**Constraints:**\r\n- Range: `1 - 2`\r\n",
+                    "default": "1"
+                },
+                {
+                    "name": "negative_prompt",
+                    "type": "STRING",
+                    "description": "Describe what you DON'T want in the generated image\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft"
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "The AI used to generate the image.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `stablediffusion_inpaint_1`\r\n  - `stablediffusion_inpaint_2`\r\n",
+                    "default": "stablediffusion_inpaint_1"
+                },
+                {
+                    "name": "steps",
+                    "type": "NUMBER",
+                    "description": "Number of sampling steps. More steps = more details but also longer computation time.\r\nMore steps may improve quality under some circumstances and refine details, but it will take longer and be more expensive.\nFewer will result in lower quality images but is quicker and cheaper to process.\r\n\r\n**Constraints:**\r\n- Range: `10 - 150`\r\n",
+                    "default": "30"
+                },
+                {
+                    "name": "guidance",
+                    "type": "NUMBER",
+                    "description": "Adjusts how much the AI tries to fit the prompt (higher = stricter, lower = more freedom).\r\nHigher values means that the AI will try harder to match the text, but extreme values may produce more artifacts.\nLower values means that the AI is allowed more creative freedom in the interpretation of the text.\r\n\r\n**Constraints:**\r\n- Range: `-20 - 20`\r\n",
+                    "default": "7"
+                },
+                {
+                    "name": "seed",
+                    "type": "NUMBER",
+                    "description": "Unique image seed number. If not provided, the image will be random.\r\nAn unsigned 32-bit integer seed used to control the generator randomness.\nReusing the same seed with the same parameters will produce the same image.\nReusing the same seed with slightly different parameters tends to produce variations of the same composition ;\nyou can use this to experiment with the impact of different parameters.\n\nIf you instructed the API to choose a random seed, it can be retrieved from the response header `x-input-seed`\r\n\r\n**Constraints:**\r\n- Range: `0 - 4294967295`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "sampler",
+                    "type": "STRING",
+                    "description": "Defines the sampling method used to generate the image.\r\nThe best samplers for low step counts tend to be `dpm`, `euler` and `euler_a`.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `ddim`\r\n  - `dpm`\r\n  - `euler`\r\n  - `euler_a`\r\n  - `k_lms`\r\n  - `pndm`\r\n",
+                    "default": "euler_a"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/inpainting\"\nquerystring = {\"upscale\": \"1\", \"negative_prompt\": \"ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft\", \"prompt\": \"an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ\", \"model\": \"stablediffusion_inpaint_1\", \"steps\": \"30\", \"mask_image\": \"\", \"init_image\": \"\", \"guidance\": \"7\", \"seed\": \"\", \"sampler\": \"euler_a\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/inpainting\"\nquerystring = {\"upscale\": \"1\", \"negative_prompt\": \"ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft\", \"prompt\": \"an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ\", \"model\": \"stablediffusion_inpaint_1\", \"steps\": \"30\", \"mask_image\": \"\", \"init_image\": \"\", \"guidance\": \"7\", \"seed\": \"\", \"sampler\": \"euler_a\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/text2image",
+            "url": "https://dezgo.p.rapidapi.com/text2image",
+            "description": "Generate an image from a text description\nThe result is returned as \"image/png\".\n\nThe following parameters influence the request cost: `width`, `height`, `steps`, `upscale`\n(see the \"About\" section for more details)\n\nLicense: CreativeML Open RAIL-M (https://dezgo.com/license.txt)\n\r\n\r\n**Global Constraints:**\r\n- Auto resolution: if not provided, fields `width` and `height` are automatically set to the model's native resolution.\r\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Describe how the final image should look like\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "seed",
+                    "type": "NUMBER",
+                    "description": "Unique image seed number. If not provided, the image will be random.\r\nAn unsigned 32-bit integer seed used to control the generator randomness.\nReusing the same seed with the same parameters will produce the same image.\nReusing the same seed with slightly different parameters tends to produce variations of the same composition ;\nyou can use this to experiment with the impact of different parameters.\n\nIf you instructed the API to choose a random seed, it can be retrieved from the response header `x-input-seed`\r\n\r\n**Constraints:**\r\n- Range: `0 - 4294967295`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "guidance",
+                    "type": "NUMBER",
+                    "description": "Adjusts how much the AI tries to fit the prompt (higher = stricter, lower = more freedom).\r\nHigher values means that the AI will try harder to match the text, but extreme values may produce more artifacts.\nLower values means that the AI is allowed more creative freedom in the interpretation of the text.\r\n\r\n**Constraints:**\r\n- Range: `-20 - 20`\r\n",
+                    "default": "7"
+                },
+                {
+                    "name": "steps",
+                    "type": "NUMBER",
+                    "description": "Number of sampling steps. More steps = more details but also longer computation time.\r\nMore steps may improve quality under some circumstances and refine details, but it will take longer and be more expensive.\nFewer will result in lower quality images but is quicker and cheaper to process.\r\n\r\n**Constraints:**\r\n- Range: `10 - 150`\r\n",
+                    "default": "30"
+                },
+                {
+                    "name": "sampler",
+                    "type": "STRING",
+                    "description": "Defines the sampling method used to generate the image.\r\nThe best samplers for low step counts tend to be `dpm`, `euler` and `euler_a`.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `ddim`\r\n  - `dpm`\r\n  - `euler`\r\n  - `euler_a`\r\n  - `k_lms`\r\n  - `pndm`\r\n",
+                    "default": "euler_a"
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "The image width in pixels.\r\nMust be divisible by 8 (auto-adjusted to the lowest multiple)\r\n\r\n**Constraints:**\r\n- Range: `320 - 1024`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "upscale",
+                    "type": "NUMBER",
+                    "description": "Upscale the image by this factor using the Real-ESRGAN model. Currently only a factor of 2 is supported.\r\n\r\n**Constraints:**\r\n- Range: `1 - 2`\r\n",
+                    "default": "1"
+                },
+                {
+                    "name": "negative_prompt",
+                    "type": "STRING",
+                    "description": "Describe what you DON'T want in the generated image\r\n\r\n**Constraints:**\r\n- Text length: `0 - 1000` characters\r\n",
+                    "default": "ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft"
+                },
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "The image height in pixels.\r\nMust be divisible by 8 (auto-adjusted to the lowest multiple)\r\n\r\n**Constraints:**\r\n- Range: `320 - 1024`\r\n",
+                    "default": ""
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "The AI used to generate the image.\r\n\r\n**Constraints:**\r\n- Enum:\r\n  - `abyss_orange_mix_2`\r\n  - `analog_diffusion`\r\n  - `anything_3_0`\r\n  - `anything_4_0`\r\n  - `basil_mix`\r\n  - `blood_orange_mix`\r\n  - `deliberate`\r\n  - `dh_classicanime`\r\n  - `disco_diffusion_style`\r\n  - `double_exposure_diffusion`\r\n  - `dreamshaper`\r\n  - `duchaiten_anime`\r\n  - `duchaiten_darkside`\r\n  - `duchaiten_dreamworld`\r\n  - `eimis_anime_diffusion_1`\r\n  - `ely_orange_mix`\r\n  - `emoji_diffusion`\r\n  - `epic_diffusion_1`\r\n  - `epic_diffusion_1_1`\r\n  - `foto_assisted_diffusion`\r\n  - `future_diffusion`\r\n  - `hasdx`\r\n  - `iconsmi_appiconsmodelforsd`\r\n  - `inkpunk_diffusion`\r\n  - `lowpoly_world`\r\n  - `openjourney`\r\n  - `openjourney_2`\r\n  - `openniji`\r\n  - `paint_journey_2_768px`\r\n  - `papercut`\r\n  - `pastel_mix`\r\n  - `portrait_plus`\r\n  - `realistic_vision_1_3`\r\n  - `redshift_diffusion`\r\n  - `redshift_diffusion_768px`\r\n  - `something_2`\r\n  - `stable_diffusion_fluidart`\r\n  - `stable_diffusion_papercut`\r\n  - `stable_diffusion_voxelart`\r\n  - `stablediffusion_1_4`\r\n  - `stablediffusion_1_5`\r\n  - `stablediffusion_2_0_512px`\r\n  - `stablediffusion_2_0_768px`\r\n  - `stablediffusion_2_1_512px`\r\n  - `stablediffusion_2_1_768px`\r\n  - `steampunk_diffusion`\r\n  - `synthwavepunk_v2`\r\n  - `texture_diffusion`\r\n  - `trinart_2_0`\r\n  - `tshirt_diffusion`\r\n  - `vectorartz_diffusion`\r\n  - `vintedois_diffusion_v0_1`\r\n  - `vox_2`\r\n  - `waifudiffusion_1_3`\r\n  - `waifudiffusion_1_4`\r\n",
+                    "default": "epic_diffusion_1_1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/text2image\"\nquerystring = {\"prompt\": \"an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ\", \"seed\": \"\", \"guidance\": \"7\", \"steps\": \"30\", \"sampler\": \"euler_a\", \"width\": \"\", \"upscale\": \"1\", \"negative_prompt\": \"ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft\", \"height\": \"\", \"model\": \"epic_diffusion_1_1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://dezgo.p.rapidapi.com/text2image\"\nquerystring = {\"prompt\": \"an astronaut riding a horse, digital art, epic lighting, highly-detailed masterpiece trending HQ\", \"seed\": \"\", \"guidance\": \"7\", \"steps\": \"30\", \"sampler\": \"euler_a\", \"width\": \"\", \"upscale\": \"1\", \"negative_prompt\": \"ugly, tiling, poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, disfigured, deformed, body out of frame, blurry, bad anatomy, blurred, watermark, grainy, signature, cut off, draft\", \"height\": \"\", \"model\": \"epic_diffusion_1_1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dezgo.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

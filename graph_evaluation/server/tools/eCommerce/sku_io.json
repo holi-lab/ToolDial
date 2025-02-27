@@ -1,0 +1,151 @@
+{
+    "tool_name":"Sku IO",
+    "tool_description":"eCommerce Data Scraping: Products, Variations, Stock, Quantity, Pricing, Catalogs, Search pages, etc. Work with Amazon, eBay, Walmart and hundreds of other retailers!",
+    "title":"Sku IO",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":14,
+        "avgLatency":201,
+        "avgSuccessRate":14,
+        "popularityScore":2.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/a.rachitskiy/api/sku-io/",
+    "host":"sku-io.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Request results for the tasks",
+            "url":"https://sku-io.p.rapidapi.com/result/{id}",
+            "description":"Use this call to retrieve results from the requests (getItems, getSearch, getProduct)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"string",
+                    "description":"Id that was returned from making request calls",
+                    "default":"45d1528-8983-40d8-b24a-e3a5665531b8"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sku-io.p.rapidapi.com/result/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sku-io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Request list of items for specific search keyword from the store",
+            "url":"https://sku-io.p.rapidapi.com/request",
+            "description":"Retrieve list of items for any search keyword.\n\nSupported stores and their respective codes can be [checked using this api call](https://whichstore.skuio.com/v1/store?url=http://amazon.com).\n\nInformation returned: list of products, next page url, list of child categories, list of root categories.\n\nProducts usually have this information (sometimes there are extra data as well, depends on the store):** title, image, price, url**",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"function",
+                    "type":"STRING",
+                    "description":"Function used to make the request. For this call only getItems is available. ",
+                    "default":"getSearch"
+                },
+                {
+                    "name":"store",
+                    "type":"STRING",
+                    "description":"Store code, see a list of supported stores [here](https://skugrid.com/remoteApi/?supportedStores)",
+                    "default":"AMAZON"
+                },
+                {
+                    "name":"param",
+                    "type":"STRING",
+                    "description":"Keyword that will be used to perform the search",
+                    "default":"Pet Food"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sku-io.p.rapidapi.com/request\"\nquerystring = {\"function\": function, \"store\": store, \"param\": param}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sku-io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "data":{
+                    "id":"b9f9e512-975f-4ae6-9244-55c19acea4eb",
+                    "status":"in-progress",
+                    "value":null
+                }
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Request full product information",
+            "url":"https://sku-io.p.rapidapi.com/request",
+            "description":"Request a product information (title, description, prices, stock, variations, etc.) for the url or for the sku. \n\nSupported stores and their respective codes can be [checked using this api call](https://whichstore.skuio.com/v1/store?url=http://amazon.com).\n\nDepending on the store some extra information can be returned, but the basic information is always returned, it includes, but not limited to:\n\ntitle\ndescription\nimages\nproduct_id\npriceList\nstockAvailability\noffers (if more than one)\nshippingCost\nshippingDays (# of days before the product is shipped)\nvariations (if present)\nfeatures\nspecifications",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"param",
+                    "type":"STRING",
+                    "description":"it can be a sku or full url",
+                    "default":"B07MWSTLY6"
+                },
+                {
+                    "name":"store",
+                    "type":"STRING",
+                    "description":"Store code, see a list of supported stores [here](https://skugrid.com/remoteApi/?supportedStores)",
+                    "default":"AMAZON"
+                },
+                {
+                    "name":"function",
+                    "type":"STRING",
+                    "description":"Function used to make the request. For this call only getProduct is available. ",
+                    "default":"getProduct"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sku-io.p.rapidapi.com/request\"\nquerystring = {\"param\": param, \"store\": store, \"function\": function}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sku-io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "data":{
+                    "id":"b9f9e512-975f-4ae6-9244-55c19acea4eb",
+                    "status":"in-progress",
+                    "value":null
+                }
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Request list of items from specific page of store's catalog",
+            "url":"https://sku-io.p.rapidapi.com/request",
+            "description":"Retrieve list of items from any catalog url of the store.\n\nSupported stores and their respective codes can be [checked using this api call](https://whichstore.skuio.com/v1/store?url=http://amazon.com).\n\nInformation returned: list of products, next page url, list of child categories, list of root categories.\n\nProducts usually have this information (sometimes there are extra data as well, depends on the store):** title, image, price, url**",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"function",
+                    "type":"STRING",
+                    "description":"Function used to make the request. For this call only getItems is available. ",
+                    "default":"getItems"
+                },
+                {
+                    "name":"store",
+                    "type":"STRING",
+                    "description":"Store code, see a list of supported stores [here](https://skugrid.com/remoteApi/?supportedStores)",
+                    "default":"AMAZON"
+                },
+                {
+                    "name":"param",
+                    "type":"STRING",
+                    "description":"Url that points to a specific catalog page of the store",
+                    "default":"https://www.amazon.com/b/?node=2975525011"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sku-io.p.rapidapi.com/request\"\nquerystring = {\"function\": function, \"store\": store, \"param\": param}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sku-io.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "data":{
+                    "id":"b9f9e512-975f-4ae6-9244-55c19acea4eb",
+                    "status":"in-progress",
+                    "value":null
+                }
+            },
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

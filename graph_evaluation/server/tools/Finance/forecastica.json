@@ -1,0 +1,127 @@
+{
+    "tool_name":"Forecastica",
+    "tool_description":"Gain access to 5 years of historical stock price data and 30 day stock price forecasts powered by AI that are based on our proprietary machine learning and neural networks algorithm. Our stock symbol database includes roughly 200,000 stock symbols (largest stock database on RapidAPI) spanning 92 of the most well known global stock exchanges in the world . Each forecast day also includes a buy, hold and sell trading signal that is based on our proprietary trading signal machine learning algori...",
+    "title":"Forecastica",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":307,
+        "avgSuccessRate":100,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/jcentricity/api/forecastica/",
+    "host":"forecastica.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get Stock Forecast API",
+            "url":"https://forecastica.p.rapidapi.com/api/forecasts/{symbol_name_exchange_symbol}",
+            "description":"The Forecastica stock forecasts API utilizes AI and our proprietary machine learning and neural network algorithm to generate 30 day stock forecasts for roughly 200,000 stock symbols that belong to 92 of the most well-known exchanges in the world that span the United States (around 15,000 symbols in total for NYSE, NASDAQ), Europe and Asia.  Each forecast includes open, close, low and high stock prices.   In addition, each forecast include a fap value which is the average of the open, close, low and high price and the fapPct which is a percentage value that represents a predicted percentage change in the predicted stock price from the day before to the next day.   In addition, each forecasting day includes a buy, hold and sell trading signal that is based on our proprietary machine learning trading algorithm.  Our trading signal is based on mathematically predicted turning points (relative minimum or maximum value of stock quotes vs. time)\n\nOur proprietary model is based on machine learning and neural networks. Simply put, our stock forecasts are driven by pattern recognition that enables the model to identify stock-purchasing trends. It then provides an objective recommendation on what action to take with any given stock!\n\nOur software will help you to hear the pulse of the stock market and get recommendations for the best BUY/SELL/HOLD moments!\n\nIf you get zero results for the given stock symbol use the /exchanges/{EXCHANGE-SYMBOL}/stocks API to lookup the symbol for the given exchange because the symbol may have changed over time as a result you will need to use the most up to date symbol for the company.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"SYMBOL_NAME-EXCHANGE_SYMBOL",
+                    "type":"string",
+                    "description":"Consists of two parts: {SYMBOLNAME}-{EXCHANGE_SYMBOL}, then you can use, for example, MSFT.O-NASDAQ ",
+                    "default":"MSFT.O-NASDAQ"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://forecastica.p.rapidapi.com/api/forecasts/{symbol_name_exchange_symbol}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"forecastica.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Get Historical Stock Prices API",
+            "url":"https://forecastica.p.rapidapi.com/api/eod/{symbol_name_exchange_symbol}",
+            "description":"The Forecastica historical stock price API provides 5 years of historical end of day data for roughly 200,000 stock symbols that belong to 92 of the most well-known exchanges in the world and that span the United States (around 15,000 symbols in total for NYSE, NASDAQ), Europe and Asia. Each end of day stock price includes the open, close, low and high stock prices.   \n\nUse the ticker code to get the data for any company. For example, MSFT.O-NASDAQ consists of two parts separated by a dash: {SYMBOL_NAME}-{EXCHANGE_SYMBOL}\n\nTo and From date must be in the following format YYYY-MM-DD\n\nIf you get zero results for the given stock symbol use the /exchanges/{EXCHANGE-SYMBOL}/stocks API to lookup the symbol for the given exchange because the symbol may have changed over time as a result you will need to use the most up to date symbol for the company.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"SYMBOL_NAME-EXCHANGE_SYMBOL",
+                    "type":"string",
+                    "description":"Consists of two parts: {SYMBOLNAME}-{EXCHANGE_SYMBOL}, then you can use, for example, MSFT.O-NASDAQ ",
+                    "default":"MSFT.O-NASDAQ"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"X-RapidAPI-Key",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"X-RapidAPI-Host",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"fromDate",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2008-01-01"
+                },
+                {
+                    "name":"toDate",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2023-01-01"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://forecastica.p.rapidapi.com/api/eod/{symbol_name_exchange_symbol}\"\nquerystring = {\"fromDate\": fromdate, \"toDate\": todate}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"forecastica.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Get Stock Symbols By Exchange API",
+            "url":"https://forecastica.p.rapidapi.com/api/exchanges/{exchange_symbol}/stocks",
+            "description":"The Forecastica APIs cover roughly 200,000 stock symbols which include 92 of the most well-known exchanges in the world that span the United States (around 15,000 symbols in total for NYSE, NASDAQ), Europe and Asia. This endpoint will return a valid list of stock symbols for the given stock exchange that can be leveraged for stock forecast and historical stock prices endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"EXCHANGE_SYMBOL",
+                    "type":"string",
+                    "description":"",
+                    "default":"NASDAQ"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://forecastica.p.rapidapi.com/api/exchanges/{exchange_symbol}/stocks\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"forecastica.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Get List of Exchanges API",
+            "url":"https://forecastica.p.rapidapi.com/api/exchanges",
+            "description":"Forecastica APIs cover roughly 200,000 stock symbols which include 92 of the most well-known exchanges in the world spanning the United States (around 15,000 symbols in total for NYSE, NASDAQ), Europe and Asia.  This endpoint will return a list of exchanges and its corresponding market symbol code needed for stock symbol queries.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://forecastica.p.rapidapi.com/api/exchanges\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"forecastica.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

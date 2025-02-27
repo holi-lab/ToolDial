@@ -1,0 +1,839 @@
+{
+    "tool_name":"Airbnb listings",
+    "tool_description":"Join the over 300 users/customers and access all Airbnb data updated daily.\nGet Airbnb listings details, future prices and availability, reviews, and more using listing IDs, geo coordinates or \"market\". \nData analytics endpoints are also available to get detailed info around all airbnb accomodations.\nWe guarantee a 24-hour response time for all inquiries. If a feature you need is not there please contact us and we will evaluate if it is possible to fullfill your needs.\n\nWhile our data are not...",
+    "title":"Airbnb listings",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":67,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/insidebnb-team-insidebnb-team-default/api/airbnb-listings/",
+    "host":"airbnb-listings.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Listing reviews",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingReviews",
+            "description":"Return up to 20 reviews after the specified datetime. Each reviews contains those fields: review_id, comments, response, date_time, language, rating: 5, guest_id. Available only for properties. Available only for the properties whose prices or availability have been requested via API at least one time in the past and at least 5 hours before actual time.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id",
+                    "default":"619966061834034729"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"date_time",
+                    "type":"STRING",
+                    "description":"the month",
+                    "default":"2023-01-11 10:52:50"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingReviews\"\nquerystring = {\"id\": id, \"date_time\": date_time}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Room prices and Availability by lat lng",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/avgRoomPricesByLatLng",
+            "description":"Retrieve Rooms average Price, average price of available rooms only, availability percent and number of processed rooms in a range from a given geographical point. Max range is 20000 meters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"the year",
+                    "default":"2024"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"latitude",
+                    "default":"28.0852473"
+                },
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"longitude",
+                    "default":"-16.7349705"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/avgRoomPricesByLatLng\"\nquerystring = {\"year\": year, \"lat\": lat, \"lng\": lng}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Rooms Prices and Availability by administrative divisions",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/avgRoomPricesByAdmins",
+            "description":"Retrieve average rooms Price, average price of available rooms only, availability percent and number of processed rooms in an geographical administrative division. Geographic area names can be found from \"Get administrative divisions\" endpoint. admin* parameters are optional but to use admin2, admin1 is required, to use admin 3, admin2 and admin1 are required and so on. Not respecting this requirement could give you unwanted results (ie rooms with cities with the same name but in different countries).",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country_code",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IT"
+                },
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"2024"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"admin1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Lazio"
+                },
+                {
+                    "name":"admin2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Citta metropolitana di Roma Capitale"
+                },
+                {
+                    "name":"admin4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Municipio Roma I"
+                },
+                {
+                    "name":"place",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Trastevere"
+                },
+                {
+                    "name":"admin3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Roma"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/avgRoomPricesByAdmins\"\nquerystring = {\"country_code\": country_code, \"year\": year, \"admin1\": admin1, \"admin2\": admin2, \"admin4\": admin4, \"place\": place, \"admin3\": admin3}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listings by market",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingsByMarket",
+            "description":"Retrieve listings ids and last updated dates for prices, availability and ratings in the specified market. Returns 50 results. Can be filtered on bedrooms and max guest capacity",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"market",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Tenerife"
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"index to start from",
+                    "default":"0"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"NUMBER",
+                    "description":"Max guest the listing can accomodate",
+                    "default":"2"
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"number of bedrooms",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingsByMarket\"\nquerystring = {\"maxGuestCapacity\": maxguestcapacity, \"market\": market, \"bedrooms\": bedrooms, \"offset\": offset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listings by lat lng",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingsByLatLng",
+            "description":"Retrieve listings ids, distance from starting point and last updated dates for prices, availability and ratings in a range from a given geographical point. Returns 50 results. Can be filtered on bedrooms and max guest capacity",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"latitude",
+                    "default":"28.0852473"
+                },
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"longitude",
+                    "default":"-16.7349705"
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"index to start from",
+                    "default":"0"
+                },
+                {
+                    "name":"range",
+                    "type":"NUMBER",
+                    "description":"range in meters from latitude and longitude point",
+                    "default":"500"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"number of bedrooms",
+                    "default":"1"
+                },
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"NUMBER",
+                    "description":"Max guest the listing can accomodate",
+                    "default":"2"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingsByLatLng\"\nquerystring = {\"lat\": lat, \"lng\": lng, \"offset\": offset, \"bedrooms\": bedrooms, \"range\": range, \"maxGuestCapacity\": maxguestcapacity}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Count listings by market",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/countByMarket",
+            "description":"Retrieve listings count in the specified market. Can be filtered on bedrooms and max guest capacity",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"market",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Tenerife"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"Number of bedrooms",
+                    "default":"1"
+                },
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"NUMBER",
+                    "description":"Max guest the listing can accomodate",
+                    "default":"2"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/countByMarket\"\nquerystring = {\"market\": market, \"bedrooms\": bedrooms, \"maxGuestCapacity\": maxguestcapacity}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listings by administrative divisions",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingsByGeoRef",
+            "description":"Retrieve listings ids and last updated dates for prices, availability and ratings in the specified geographic area. Geocrafic area names can be found from \"Get administrative divisions\" endpoint. admin* parameters are optional but to use admin2, admin1 is required, to use admin 3, admin2 and admin1 are required and so on. Not respecting this requirement could give you unwanted results (ie listings with cities with the same name but in different countries). Returns 50 results. Can be filtered on bedrooms and max guest capacity",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"offset",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"0"
+                },
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IT"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"admin3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Roma"
+                },
+                {
+                    "name":"admin1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Lazio"
+                },
+                {
+                    "name":"admin4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Municipio Roma I"
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2"
+                },
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"4"
+                },
+                {
+                    "name":"place",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Borgo"
+                },
+                {
+                    "name":"admin2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Citta metropolitana di Roma Capitale"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingsByGeoRef\"\nquerystring = {\"offset\": offset, \"state\": state, \"admin3\": admin3, \"admin1\": admin1, \"admin4\": admin4, \"bedrooms\": bedrooms, \"maxGuestCapacity\": maxguestcapacity, \"place\": place, \"admin2\": admin2}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Count  listings by lat lng",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/countByLatLng",
+            "description":"Retrieve listings count in a range from a given geographical point. Can be filtered on bedrooms and max guest capacity",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"longitude",
+                    "default":"-16.7349705"
+                },
+                {
+                    "name":"range",
+                    "type":"NUMBER",
+                    "description":"range in meters from latitude and longitude point",
+                    "default":"500"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"latitude",
+                    "default":"28.0852473"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"NUMBER",
+                    "description":"Max guest the listing can accomodate",
+                    "default":"2"
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/countByLatLng\"\nquerystring = {\"lng\": lng, \"maxGuestCapacity\": maxguestcapacity, \"range\": range, \"bedrooms\": bedrooms, \"lat\": lat}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Count Listings by administrative divisions",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/countByGeoRef",
+            "description":"Retrieve listings count in the specified geographic area. Geocrafic area names can be found from \"Get administrative divisions\" endpoint. admin* parameters are optional but to use admin2, admin1 is required, to use admin 3, admin2 and admin1 are required and so on. Not respecting this requirement could give you unwanted results (ie listings with cities with the same name but in different countries). Can be filtered on bedrooms and max guest capacity",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"state",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IT"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"admin1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Lazio"
+                },
+                {
+                    "name":"admin2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Citta metropolitana di Roma Capitale"
+                },
+                {
+                    "name":"admin3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Roma"
+                },
+                {
+                    "name":"place",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Borgo"
+                },
+                {
+                    "name":"admin4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Municipio Roma I"
+                },
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"4"
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/countByGeoRef\"\nquerystring = {\"admin1\": admin1, \"state\": state, \"admin2\": admin2, \"admin3\": admin3, \"place\": place, \"admin4\": admin4, \"maxGuestCapacity\": maxguestcapacity, \"bedrooms\": bedrooms}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing Details",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listing",
+            "description":"Retrieve listing details.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing Id",
+                    "default":"619966061834034729"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listing\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing Prices Full",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingPricesFull",
+            "description":"Retrieve listing prices for the next 12 months",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id\n",
+                    "default":"619966061834034729"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingPricesFull\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing Availability Full",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull",
+            "description":"Retrieve listing availability and stay length rules for the next 12 months\n**Note**: The fact the available field is true does not means that the listing can be booked. It only tells indicates that it is not taken. To confirm if it is really available for stay you must verify all previous and following day rules for stay length are respected.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id\n",
+                    "default":"619966061834034729"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingAvailabilityFull\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing Availability",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingavailability",
+            "description":"Retrieve listing availability and stay length rules for the requested month.\n**Note**: The fact the available field is true does not means that the listing can be booked. It only tells indicates that it is not taken. To confirm if it is really available for stay you must verify all previous and following day rules for stay length are respected.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"the year",
+                    "default":"2024"
+                },
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id\n",
+                    "default":"619966061834034729"
+                },
+                {
+                    "name":"month",
+                    "type":"NUMBER",
+                    "description":"the month",
+                    "default":"1"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingavailability\"\nquerystring = {\"year\": year, \"id\": id, \"month\": month}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing status Full",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingStatusFull",
+            "description":"Retrieve the calculated status (available/not available for stay) for the next 12 months of a listing based on previous and following days stay rules.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id",
+                    "default":"619966061834034729"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingStatusFull\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing Prices",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingPrices",
+            "description":"Retrieve listing prices for the requested month",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id\n",
+                    "default":"619966061834034729"
+                },
+                {
+                    "name":"month",
+                    "type":"STRING",
+                    "description":"the month",
+                    "default":"1"
+                },
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"the year",
+                    "default":"2024"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingPrices\"\nquerystring = {\"id\": id, \"month\": month, \"year\": year}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Listing status",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/listingstatus",
+            "description":"Retrieve the calculated status (available/not available for stay) of a listing based on previous and following days stay rules.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"the listing id",
+                    "default":"619966061834034729"
+                },
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"the year",
+                    "default":"2024"
+                },
+                {
+                    "name":"month",
+                    "type":"NUMBER",
+                    "description":"the month",
+                    "default":"1"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/listingstatus\"\nquerystring = {\"id\": id, \"year\": year, \"month\": month}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Prices and Availability by administrative divisions",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/avgPricesByAdmins",
+            "description":"Retrieve average Price, average price of available properties only, availability percent and number of processed properties in an geographical administrative division. Geographic area names can be found from \"Get administrative divisions\" endpoint. admin* parameters are optional but to use admin2, admin1 is required, to use admin 3, admin2 and admin1 are required and so on. Not respecting this requirement could give you unwanted results (ie listings with cities with the same name but in different countries). Can be filtered on bedrooms and max guest capacity.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"month",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1"
+                },
+                {
+                    "name":"country_code",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IT"
+                },
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"2024"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"admin3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Roma"
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2"
+                },
+                {
+                    "name":"admin1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Lazio"
+                },
+                {
+                    "name":"admin2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Citta metropolitana di Roma Capitale"
+                },
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"4"
+                },
+                {
+                    "name":"place",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Trastevere"
+                },
+                {
+                    "name":"admin4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Municipio Roma I"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/avgPricesByAdmins\"\nquerystring = {\"admin3\": admin3, \"bedrooms\": bedrooms, \"month\": month, \"country_code\": country_code, \"year\": year, \"admin1\": admin1, \"admin2\": admin2, \"maxGuestCapacity\": maxguestcapacity, \"place\": place, \"admin4\": admin4}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get administrative divisions",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/getadmins",
+            "description":"Retrieve geographical admin names to be used in Listing by georef endpoint. admin* parameters are optional but to use admin2, admin1 is required, to use admin 3, admin2 and admin1 are required and so on. Not respecting this requirement could give you unwanted results (ie cities with the same name but in different countries). Returns 50 results",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"countrycode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"IT"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"admin2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"RM"
+                },
+                {
+                    "name":"admin1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"07"
+                },
+                {
+                    "name":"admin4",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"05809101"
+                },
+                {
+                    "name":"admin3",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"058091"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/getadmins\"\nquerystring = {\"admin2\": admin2, \"admin1\": admin1, \"admin4\": admin4, \"countrycode\": countrycode, \"admin3\": admin3}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Prices and Availability by lat lng",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/avgPricesByLatLng",
+            "description":"Retrieve average Price, average price of available properties only, availability percent and number of processed properties in a range from a given geographical point. Max range is 20000 meters. Can be filtered on bedrooms and max guest capacity.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"the year",
+                    "default":"2024"
+                },
+                {
+                    "name":"lat",
+                    "type":"NUMBER",
+                    "description":"latitude",
+                    "default":"28.0852473"
+                },
+                {
+                    "name":"lng",
+                    "type":"NUMBER",
+                    "description":"longitude",
+                    "default":"-16.7349705"
+                },
+                {
+                    "name":"range",
+                    "type":"NUMBER",
+                    "description":"range in meters from latitude and longitude point",
+                    "default":"500"
+                },
+                {
+                    "name":"month",
+                    "type":"STRING",
+                    "description":"the month",
+                    "default":"1"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"number of bedrooms",
+                    "default":"1"
+                },
+                {
+                    "name":"maxGuestCapacity",
+                    "type":"NUMBER",
+                    "description":"Max guest the listing can accomodate",
+                    "default":"2"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/avgPricesByLatLng\"\nquerystring = {\"year\": year, \"lat\": lat, \"lng\": lng, \"range\": range, \"month\": month, \"bedrooms\": bedrooms, \"maxGuestCapacity\": maxguestcapacity}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Amenities",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/amenities",
+            "description":"Retrieves amenities ids And descriptions. Returns 50 results",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"index to start from",
+                    "default":"0"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/amenities\"\nquerystring = {\"offset\": offset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Markets",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2/markets",
+            "description":"Retrieve Market names to be used in Listing by market endpoint. Returns 50 results",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"index to start from",
+                    "default":"0"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2/markets\"\nquerystring = {\"offset\": offset}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Connect test",
+            "url":"https://airbnb-listings.p.rapidapi.com/v2",
+            "description":"No parameters needed. Useful to test connectivity and authentication",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://airbnb-listings.p.rapidapi.com/v2\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"airbnb-listings.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

@@ -1,0 +1,157 @@
+{
+    "product_id": "api_3a17114c-b0c6-427a-bd5f-c0a831a4152e",
+    "tool_description": "APITemplate.io is the newest API-based platform designed to give you two powerful APIs for your media content generation \u2014 Image and PDF",
+    "home_url": "https://rapidapi.com/hello-iEOCpTC18/api/apitemplateio/",
+    "name": "APITemplateio",
+    "title": "APITemplateio",
+    "pricing": "FREE",
+    "tool_name": "APITemplateio",
+    "score": null,
+    "host": "apitemplateio.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "create-image",
+            "url": "https://apitemplateio.p.rapidapi.com/v2/create-image",
+            "description": "This endpoint creates a JPEG file(along with PNG) with JSON data and your template\n",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "template_id",
+                    "type": "STRING",
+                    "description": "Your template id, it can be obtained in the web console",
+                    "default": "00377b2b1e0ee394"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://apitemplateio.p.rapidapi.com/v2/create-image\"\nquerystring = {\"template_id\": \"00377b2b1e0ee394\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"apitemplateio.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://apitemplateio.p.rapidapi.com/v2/create-image\"\nquerystring = {\"template_id\": \"00377b2b1e0ee394\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"apitemplateio.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Status"
+                    },
+                    "download_url": {
+                        "type": "string",
+                        "description": "Download URL"
+                    },
+                    "download_url_png": {
+                        "type": "string",
+                        "description": "Download URL PNG"
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "description": "Template ID"
+                    },
+                    "transaction_ref": {
+                        "type": "string",
+                        "description": "Transaction reference"
+                    }
+                }
+            }
+        },
+        {
+            "name": "create-pdf",
+            "url": "https://apitemplateio.p.rapidapi.com/v2/create-pdf",
+            "description": "This endpoint creates a PDF file with JSON data and your template. We support synchoronus and asynchronous PDF generation.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "template_id",
+                    "type": "STRING",
+                    "description": "Your template id, it can be obtained in the web console(Manage Templates)",
+                    "default": "00377b2b1e0ee394"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "output_html",
+                    "type": "STRING",
+                    "description": "- Either `1` or `0`(Default).\n- To enable output of html content, set the value to `1` and it will return in the JSON response as html_url field (as a URL)\n",
+                    "default": "0"
+                },
+                {
+                    "name": "async",
+                    "type": "STRING",
+                    "description": "- Either `1` or `0`(Default).  `0` is synchronous call(default), `1` is asynchronous call\n- To generate PDF asynchronously, set the value to `1` and the API call returns immediately. Once the PDF document is generated, we will make a HTTP/HTTPS GET to your URL(webhook_url) and will retry for 3 times before giving up.\n- If `async` is set to `1`, then `webhook_url` is mandatory\n",
+                    "default": "0"
+                },
+                {
+                    "name": "export_type",
+                    "type": "STRING",
+                    "description": "- Either `file` or `json`(Default).\n  - The option `json` returns a JSON object, and the output PDF is stored on a CDN.\n  - The option `file` returns binary data of the generated PDF(Secure and completely private) and the response HTTP header Content-Disposition is set to attachment. It has a file size limit of 6MB.\n",
+                    "default": "json"
+                },
+                {
+                    "name": "webhook_url",
+                    "type": "STRING",
+                    "description": "- It is the URL of your webhook URL, it starts with http:// or https:// and has to be urlencoded.\n- If `async` is set to `1`, then you have to specify the `webhook_url`.\n\n\n#### Webhook call back\n\nOnce the PDF is generated, we will initiate a HTTP/HTTPS GET call to the following URL:\n\nhttps://`[yourwebserver.com]`?&primary_url=`[primary_url]`&transaction_ref=`[transaction_ref]`\n\n- `[yourwebserver.com]` is your web services to handle the callback, which is also the `webhook_url`\n- `[primary_url]` is the URL to the PDF document\n- `[transaction_ref]` is the transaction reference number\n\n***The following is a sample Webhook call back to your server***\n\nhttps://yourwebserver.com?&primary_url=https%3A%2F%2Fpub-cdn.apitemplate.io%2F2021%2F06%2Fb692183d-46d7-3213-891a-460a5814ad3f.pdf&transaction_ref=b692183d-46d7-3213-891a-460a5814ad3f\n",
+                    "default": "https://yourwebserver.com"
+                },
+                {
+                    "name": "output_format",
+                    "type": "STRING",
+                    "description": "- Either `pdf`(Default) or `html`.\n- It's generating PDF by default. However, you can specify output_format=html to generate only HTML(It will return in the JSON response as download_url field as a URL).\n",
+                    "default": "pdf"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://apitemplateio.p.rapidapi.com/v2/create-pdf\"\nquerystring = {\"output_html\": \"0\", \"async\": \"0\", \"export_type\": \"json\", \"webhook_url\": \"https://yourwebserver.com\", \"template_id\": \"00377b2b1e0ee394\", \"output_format\": \"pdf\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"apitemplateio.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://apitemplateio.p.rapidapi.com/v2/create-pdf\"\nquerystring = {\"output_html\": \"0\", \"async\": \"0\", \"export_type\": \"json\", \"webhook_url\": \"https://yourwebserver.com\", \"template_id\": \"00377b2b1e0ee394\", \"output_format\": \"pdf\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"apitemplateio.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Status"
+                    },
+                    "download_url": {
+                        "type": "string",
+                        "description": "Download URL"
+                    },
+                    "template_id": {
+                        "type": "string",
+                        "description": "Template ID"
+                    },
+                    "transaction_ref": {
+                        "type": "string",
+                        "description": "Transaction reference"
+                    }
+                }
+            }
+        },
+        {
+            "name": "merge-pdfs",
+            "url": "https://apitemplateio.p.rapidapi.com/merge-pdfs",
+            "description": "This endpoint merges multiple PDF URLs",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://apitemplateio.p.rapidapi.com/merge-pdfs\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"apitemplateio.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://apitemplateio.p.rapidapi.com/merge-pdfs\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"apitemplateio.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Status"
+                    },
+                    "primary_url": {
+                        "type": "string",
+                        "description": "Generated PDF document"
+                    },
+                    "transaction_ref": {
+                        "type": "string",
+                        "description": "Transaction reference"
+                    }
+                }
+            }
+        }
+    ]
+}

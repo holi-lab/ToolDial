@@ -1,0 +1,360 @@
+{
+    "tool_name": "Screening and Matching Resumes",
+    "tool_description": "For Recruters that want to go faster in their resumes screening process, and for recrutees that are interested in checking if their profile match a certain job offer",
+    "title": "Screening and Matching Resumes",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 92,
+        "avgLatency": 6021,
+        "avgSuccessRate": 65,
+        "popularityScore": 9.1,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/volkeno-volkeno-default/api/screening-and-matching-resumes/",
+    "host": "screening-and-matching-resumes.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/sourcingResume",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/sourcingResume",
+            "description": " ",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/sourcingResume\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "get": {
+                        "type": "string"
+                    },
+                    "parameters": {
+                        "type": "array"
+                    },
+                    "errors": {
+                        "type": "array"
+                    },
+                    "results": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ScreeningOffer",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOffer",
+            "description": "Endpoint to upload a file and compute cosine similarity with each file in the dataset",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "The file to upload",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOffer\"\nquerystring = {\"file\": file}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "top_10_files": [],
+                "matching_score": []
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "top_10_files": {
+                        "type": "array",
+                        "description": "A list of the top 10 similar files",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "matching_score": {
+                        "type": "array",
+                        "description": "A list of the  the top 10 files and their matching scores with respect to the provided file",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ResumeScreeningLink",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreeningLink",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "resume",
+                    "type": "BINARY",
+                    "description": "The resume file to upload",
+                    "default": ""
+                },
+                {
+                    "name": "job_offer_link",
+                    "type": "STRING",
+                    "description": "The link to the job offer page",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreeningLink\"\nquerystring = {\"resume\": resume, \"job_offer_link\": job_offer_link}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "resume_category_link": "",
+                "matching_score_link": 0
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "resume_category_link": {
+                        "type": "string",
+                        "description": "category of the resume"
+                    },
+                    "matching_score_link": {
+                        "type": "number",
+                        "description": "The matching score between file and given Link "
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ScreeningOfferLink",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOfferLink",
+            "description": "Extract the job offer text from a given job offer link, and calculate the cosine similarity between the job offer text and the text of resumes stored in a CSV file.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "job_offer_link",
+                    "type": "STRING",
+                    "description": "The link to the job offer page",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOfferLink\"\nquerystring = {\"job_offer_link\": job_offer_link}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "top_matches_files": [
+                    {
+                        "filename": "",
+                        "similarity": 0
+                    }
+                ]
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "top_matches_files": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "filename": {
+                                    "type": "string"
+                                },
+                                "similarity": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "minimum": -3.402823669209385e+38,
+                                    "maximum": 3.402823669209385e+38
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ResumeScreening",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreening",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "job_offer",
+                    "type": "BINARY",
+                    "description": "The job offer file to upload",
+                    "default": ""
+                },
+                {
+                    "name": "resume",
+                    "type": "BINARY",
+                    "description": "The resume file to upload",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreening\"\nquerystring = {\"job_offer\": job_offer, \"resume\": resume}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "resume_category_file": "",
+                "matching score_file": 0
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "resume_category_file": {
+                        "type": "string",
+                        "description": "The category of the uploaded resume"
+                    },
+                    "matching score_file": {
+                        "type": "number",
+                        "description": "The cosine similarity between the uploaded resume and job offer"
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ScreeningOffer",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOffer",
+            "description": "Endpoint to upload a file and compute cosine similarity with each file in the dataset",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "The file to upload",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOffer\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOffer\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/ResumeScreeningLink",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreeningLink",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "resume",
+                    "type": "BINARY",
+                    "description": "The resume file to upload",
+                    "default": ""
+                },
+                {
+                    "name": "job_offer_link",
+                    "type": "STRING",
+                    "description": "The link to the job offer page",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreeningLink\"\nquerystring = {\"resume\": \"\", \"job_offer_link\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreeningLink\"\nquerystring = {\"resume\": \"\", \"job_offer_link\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "resume_category_link": {
+                        "type": "string",
+                        "description": "category of the resume"
+                    },
+                    "matching_score_link": {
+                        "type": "number",
+                        "description": "The matching score between file and given Link "
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ScreeningOfferLink",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOfferLink",
+            "description": "Extract the job offer text from a given job offer link, and calculate the cosine similarity between the job offer text and the text of resumes stored in a CSV file.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "job_offer_link",
+                    "type": "STRING",
+                    "description": "The link to the job offer page",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOfferLink\"\nquerystring = {\"job_offer_link\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ScreeningOfferLink\"\nquerystring = {\"job_offer_link\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "top_matches_files": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "filename": {
+                                    "type": "string"
+                                },
+                                "similarity": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "minimum": -3.402823669209385e+38,
+                                    "maximum": 3.402823669209385e+38
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "/ResumeScreening",
+            "url": "https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreening",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "job_offer",
+                    "type": "BINARY",
+                    "description": "The job offer file to upload",
+                    "default": ""
+                },
+                {
+                    "name": "resume",
+                    "type": "BINARY",
+                    "description": "The resume file to upload",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreening\"\nquerystring = {\"job_offer\": \"\", \"resume\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://screening-and-matching-resumes.p.rapidapi.com/ResumeScreening\"\nquerystring = {\"job_offer\": \"\", \"resume\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"screening-and-matching-resumes.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "resume_category_file": {
+                        "type": "string",
+                        "description": "The category of the uploaded resume"
+                    },
+                    "matching score_file": {
+                        "type": "number",
+                        "description": "The cosine similarity between the uploaded resume and job offer"
+                    }
+                }
+            }
+        }
+    ]
+}

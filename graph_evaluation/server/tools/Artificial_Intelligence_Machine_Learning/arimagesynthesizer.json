@@ -1,0 +1,225 @@
+{
+    "tool_name": "ARImageSynthesizer",
+    "tool_description": "Text to image generator.",
+    "title": "ARImageSynthesizer",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1857,
+        "avgSuccessRate": 95,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/ArdicAITeam/api/arimagesynthesizer/",
+    "host": "arimagesynthesizer.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Generate Image",
+            "url": "https://arimagesynthesizer.p.rapidapi.com/generate",
+            "description": "Add prompts to queue for image generation. Returned string can be used later to retrieve generated image.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "Unique ID for easier retrieval and storage. ",
+                    "default": "12345"
+                },
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Prompt from which the image will be generated. Also used in image to image generation.",
+                    "default": "dolar, y\u00fczde, lira, rezerv, para"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "768"
+                },
+                {
+                    "name": "inferenceSteps",
+                    "type": "NUMBER",
+                    "description": "Number of steps to infer with the model. Higher steps increase detail in favor of realism.",
+                    "default": "50"
+                },
+                {
+                    "name": "guidanceScale",
+                    "type": "NUMBER",
+                    "description": "This refers to the scale that the model attempts to follow when generating output based on the given prompt. Lower means less.",
+                    "default": "7.5"
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "768"
+                },
+                {
+                    "name": "negativePrompt",
+                    "type": "STRING",
+                    "description": "Negative prompt which the model will try to not include in the final image.",
+                    "default": ""
+                },
+                {
+                    "name": "style",
+                    "type": "STRING",
+                    "description": "In which style the image will be generated. ",
+                    "default": ""
+                },
+                {
+                    "name": "init_image",
+                    "type": "STRING",
+                    "description": "Base64 encoded JPEG file for image to image generation.",
+                    "default": ""
+                },
+                {
+                    "name": "img2img_strength",
+                    "type": "NUMBER",
+                    "description": "This refers to the degree to which the generated image will be influenced by the init_image parameter during the image-to-image generation process. Lower means more.",
+                    "default": "0.75"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://arimagesynthesizer.p.rapidapi.com/generate\"\nquerystring = {\"id\": id, \"height\": height, \"prompt\": prompt, \"inferenceSteps\": inferencesteps, \"guidanceScale\": guidancescale, \"width\": width, \"img2img_strength\": img2img_strength}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"arimagesynthesizer.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Get Image",
+            "url": "https://arimagesynthesizer.p.rapidapi.com/get",
+            "description": "Retrieve generated image with given `hash`.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "hash",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "returnType",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "image"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://arimagesynthesizer.p.rapidapi.com/get\"\nquerystring = {\"returnType\": returntype, \"hash\": hash}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"arimagesynthesizer.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "My Images",
+            "url": "https://arimagesynthesizer.p.rapidapi.com/my_images",
+            "description": "Get all generated images' information in a JSON response. Images can be accessed at `/get` endpoint with the given hash.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://arimagesynthesizer.p.rapidapi.com/my_images\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"arimagesynthesizer.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "My Images by ID",
+            "url": "https://arimagesynthesizer.p.rapidapi.com/my_images_by_id",
+            "description": "Similar to `/my_images` endpoint, returns generated images' information in a JSON response filtered by given `id`.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "uniqueID",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://arimagesynthesizer.p.rapidapi.com/my_images_by_id\"\nquerystring = {\"uniqueID\": uniqueid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"arimagesynthesizer.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Generate Image",
+            "url": "https://arimagesynthesizer.p.rapidapi.com/generate",
+            "description": "Add prompts to queue for image generation. Returned string can be used later to retrieve generated image.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "Unique ID for easier retrieval and storage. ",
+                    "default": "12345"
+                },
+                {
+                    "name": "prompt",
+                    "type": "STRING",
+                    "description": "Prompt from which the image will be generated. Also used in image to image generation.",
+                    "default": "dolar, y\u00fczde, lira, rezerv, para"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "height",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "768"
+                },
+                {
+                    "name": "inferenceSteps",
+                    "type": "NUMBER",
+                    "description": "Number of steps to infer with the model. Higher steps increase detail in favor of realism.",
+                    "default": "50"
+                },
+                {
+                    "name": "guidanceScale",
+                    "type": "NUMBER",
+                    "description": "This refers to the scale that the model attempts to follow when generating output based on the given prompt. Lower means less.",
+                    "default": "7.5"
+                },
+                {
+                    "name": "width",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": "768"
+                },
+                {
+                    "name": "negativePrompt",
+                    "type": "STRING",
+                    "description": "Negative prompt which the model will try to not include in the final image.",
+                    "default": ""
+                },
+                {
+                    "name": "style",
+                    "type": "STRING",
+                    "description": "In which style the image will be generated. ",
+                    "default": ""
+                },
+                {
+                    "name": "init_image",
+                    "type": "STRING",
+                    "description": "Base64 encoded JPEG file for image to image generation.",
+                    "default": ""
+                },
+                {
+                    "name": "img2img_strength",
+                    "type": "NUMBER",
+                    "description": "This refers to the degree to which the generated image will be influenced by the init_image parameter during the image-to-image generation process. Lower means more.",
+                    "default": "0.75"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://arimagesynthesizer.p.rapidapi.com/generate\"\nquerystring = {\"id\": \"12345\", \"height\": \"768\", \"prompt\": \"dolar, y\u00fczde, lira, rezerv, para\", \"inferenceSteps\": \"50\", \"guidanceScale\": \"7.5\", \"width\": \"768\", \"negativePrompt\": \"\", \"style\": \"\", \"init_image\": \"\", \"img2img_strength\": \"0.75\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arimagesynthesizer.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://arimagesynthesizer.p.rapidapi.com/generate\"\nquerystring = {\"id\": \"12345\", \"height\": \"768\", \"prompt\": \"dolar, y\u00fczde, lira, rezerv, para\", \"inferenceSteps\": \"50\", \"guidanceScale\": \"7.5\", \"width\": \"768\", \"negativePrompt\": \"\", \"style\": \"\", \"init_image\": \"\", \"img2img_strength\": \"0.75\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"arimagesynthesizer.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

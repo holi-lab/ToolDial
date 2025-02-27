@@ -1,0 +1,99 @@
+{
+    "product_id": "53aa5b6de4b05961403415dd",
+    "tool_description": "Dandelion API is a set of semantic APIs to extract meaning and insights from texts in several languages (Italian, English, French, German and Portuguese). \r\nIt's optimized to perform text mining and text analytics for short texts, such as tweets and other social media. \r\nDandelion API extracts entities (such as persons, places and events), categorizes and classifies documents in user-defined categories, augments the text with tags and links to external knowledge graphs and more. \r\n\r\nDandelion API easily scales to support billions of queries per day and can be adapted on demand to support custom and user-defined vocabularies. Additional languages are available on demand.",
+    "home_url": "https://rapidapi.com/dandelion/api/semantic-text-analysis-1/",
+    "name": "Semantic-Text-Analysis",
+    "title": "Semantic-Text-Analysis",
+    "pricing": "FREEMIUM",
+    "tool_name": "Semantic-Text-Analysis",
+    "score": null,
+    "host": "dandelion-datatxt.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Entity Extraction API",
+            "url": "https://dandelion-datatxt.p.rapidapi.com/nex/v1/",
+            "description": "The Entity Extraction API is a named entity extraction & linking API that performs greatly even on short texts, something that many other similar services cannot do. With this API you will be able to automatically tag your texts, extract Wikipedia entities and enrich your data.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "lang",
+                    "type": "STRING",
+                    "description": "The language of the text to be annotated; currently English, French, German, Italian and Portuguese are supported. Leave this parameter out to let the Entity Extraction API automatically detect the language for you. [de | en | fr | it | pt | auto]",
+                    "default": "en"
+                },
+                {
+                    "name": "min_length",
+                    "type": "STRING",
+                    "description": "Removes from the output entities having a spot shorter than the specified minimum length. [2 .. +inf]",
+                    "default": "2"
+                },
+                {
+                    "name": "include",
+                    "type": "STRING",
+                    "description": "Returns more information on annotated entities. \"types\": adds type information from DBpedia. Types are extracted from the DBpedia of the language specified by the lang parameter. Please notice that different DBpedia instances may contain different types for the same resource. \"categories\": adds category information from DBpedia/Wikipedia. \"abstract\": adds the text of the Wikipedia abstract. \"image\": adds a link to an image depicting the tagged entity, as well as a link to the image thumbnail, served by Wikimedia. Please check the licensing terms of each image on Wikimedia before using it in your app. \"lod\": adds links to equivalent (sameAs) entities in Linked Open Data repositories or other websites. It currently only supports DBpedia and Wikipedia. \"alternate_labels\": adds some other names used when referring to the entity.",
+                    "default": "types, categories, abstract, lod, image, alternate_labels"
+                },
+                {
+                    "name": "social.hashtag",
+                    "type": "BOOLEAN",
+                    "description": "Enables special hashtag parsing to correctly analyze tweets and facebook posts.",
+                    "default": ""
+                },
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "The text you want to annotate. One of (text|html|url|html_fragment) is mandatory.",
+                    "default": "The doctor says an apple is better than an orange"
+                },
+                {
+                    "name": "min_confidence",
+                    "type": "NUMBER",
+                    "description": "The threshold for the confidence value; entities with a confidence value below this threshold will be discarded. Confidence is a numeric estimation of the quality of the annotation, which ranges between 0 and 1. A higher threshold means you will get less but more precise annotations. A lower value means you will get more annotations but also more erroneous ones.",
+                    "default": "0.6"
+                },
+                {
+                    "name": "social.mention",
+                    "type": "BOOLEAN",
+                    "description": "With this parameter you enable special mention parsing to correctly analyze tweets and facebook posts.",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "This parameter specifies the country which we assume VAT and telephone numbers to be coming from. This is important to get correct results, as different countries may adopt different formats. [AD, AE, AM, AO, AQ, AR, AU, BB, BR, BS, BY, CA, CH, CL, CN, CX, DE, FR, GB, HU, IT, JP, KR, MX, NZ, PG, PL, RE, SE, SG, US, YT, ZW]",
+                    "default": ""
+                },
+                {
+                    "name": "extra_types",
+                    "type": "STRING",
+                    "description": "Returns more information on annotated entities: \"phone\" enables matching of phone numbers; \"vat\" enables matching of VAT IDs (Italian only). Note that these parameters require the country parameter to be set, and VAT IDs will work only for Italy. [phone, vat]",
+                    "default": ""
+                },
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "An URL from which the Entity Extraction API will extract the main content to annotate. The Entity Extraction API will fetch the URL for you, and use an AI algorithm to extract the relevant part of the document to work on; in this case, the main content will also be returned by the API to allow you to properly use the annotation offsets. One of (text|html|url|html_fragment) is mandatory.",
+                    "default": ""
+                },
+                {
+                    "name": "html_fragment",
+                    "type": "STRING",
+                    "description": "An HTML snippet from which the Entity Extraction API will remove all HTML tags before analyzing it. One of (text|html|url|html_fragment) is mandatory.",
+                    "default": ""
+                },
+                {
+                    "name": "html",
+                    "type": "STRING",
+                    "description": "An HTML document from which the Entity Extraction API will extract the main content to annotate, as described in the \"url\" parameter above.  One of (text|html|url|html_fragment) is mandatory.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://dandelion-datatxt.p.rapidapi.com/nex/v1/\"\nquerystring = {\"lang\": \"en\", \"min_length\": \"2\", \"include\": \"types, categories, abstract, lod, image, alternate_labels\", \"social.hashtag\": \"\", \"text\": \"The doctor says an apple is better than an orange\", \"min_confidence\": \"0.6\", \"social.mention\": \"\", \"country\": \"\", \"extra_types\": \"\", \"url\": \"\", \"html_fragment\": \"\", \"html\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dandelion-datatxt.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://dandelion-datatxt.p.rapidapi.com/nex/v1/\"\nquerystring = {\"lang\": \"en\", \"min_length\": \"2\", \"include\": \"types, categories, abstract, lod, image, alternate_labels\", \"social.hashtag\": \"\", \"text\": \"The doctor says an apple is better than an orange\", \"min_confidence\": \"0.6\", \"social.mention\": \"\", \"country\": \"\", \"extra_types\": \"\", \"url\": \"\", \"html_fragment\": \"\", \"html\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"dandelion-datatxt.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

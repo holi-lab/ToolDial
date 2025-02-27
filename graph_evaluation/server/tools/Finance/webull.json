@@ -1,0 +1,1130 @@
+{
+    "tool_name":"Webull",
+    "tool_description":"Query public data for investment products including stocks, fractional shares, options, ETFs, and ADRs as on webull.com",
+    "title":"Webull",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1641,
+        "avgSuccessRate":98,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/webull/",
+    "host":"webull.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"news/list-by-portfolio",
+            "url":"https://webull.p.rapidapi.com/news/list-by-portfolio",
+            "description":"List news by multiple ticker id",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerIds",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc...Separated by comma for multiple tickers",
+                    "default":"913353822,913354090,913256135,913303964"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"currentNewsId",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, the last news id returned right in this endpoint, pass 0 for the first query",
+                    "default":"0"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/news/list-by-portfolio\"\nquerystring = {\"currentNewsId\": currentnewsid, \"pageSize\": pagesize, \"tickerIds\": tickerids}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-ipo-center",
+            "url":"https://webull.p.rapidapi.com/market/get-ipo-center",
+            "description":"Get IPO center information of specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"status",
+                    "type":"STRING",
+                    "description":"One of the following : filing|pricing|buying",
+                    "default":"filing"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-ipo-center\"\nquerystring = {\"regionId\": regionid, \"status\": status}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-top-gainers",
+            "url":"https://webull.p.rapidapi.com/market/get-top-gainers",
+            "description":"Get market top gainers in specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"rankType",
+                    "type":"STRING",
+                    "description":"One of the following : preMarket|afterMarket|5min|1d|5d|1m|3m|52w",
+                    "default":"1d"
+                },
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"direction",
+                    "type":"NUMBER",
+                    "description":"The order direction -1 | 1",
+                    "default":"-1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-top-gainers\"\nquerystring = {\"regionId\": regionid, \"pageSize\": pagesize, \"rankType\": ranktype, \"pageIndex\": pageindex, \"direction\": direction}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-top-active",
+            "url":"https://webull.p.rapidapi.com/market/get-top-active",
+            "description":"Get market top active in specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"rankType",
+                    "type":"STRING",
+                    "description":"One of the following : volume|range|turnoverRatio",
+                    "default":"volume"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"direction",
+                    "type":"NUMBER",
+                    "description":"The order direction -1 | 1",
+                    "default":"-1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-top-active\"\nquerystring = {\"pageIndex\": pageindex, \"rankType\": ranktype, \"pageSize\": pagesize, \"direction\": direction, \"regionId\": regionid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-common-ranking",
+            "url":"https://webull.p.rapidapi.com/market/get-common-ranking",
+            "description":"Get market common ranking in specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"rankType",
+                    "type":"STRING",
+                    "description":"One of the following : hkMainBoard|hkGem|hkStocks|hotStocks",
+                    "default":"hkMainBoard"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-common-ranking\"\nquerystring = {\"regionId\": regionid, \"pageIndex\": pageindex, \"pageSize\": pagesize, \"rankType\": ranktype}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-earnings",
+            "url":"https://webull.p.rapidapi.com/market/get-earnings",
+            "description":"Get market earnings in specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"startDate",
+                    "type":"STRING",
+                    "description":"The format date is yyyy-MM-dd. Ex : 2021-08-10",
+                    "default":""
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-earnings\"\nquerystring = {\"pageIndex\": pageindex, \"pageSize\": pagesize, \"regionId\": regionid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"regions/list",
+            "url":"https://webull.p.rapidapi.com/regions/list",
+            "description":"List all supported regions",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/regions/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-summary",
+            "url":"https://webull.p.rapidapi.com/market/get-summary",
+            "description":"Get market summary at request time for specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-summary\"\nquerystring = {\"regionId\": regionid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-dividends",
+            "url":"https://webull.p.rapidapi.com/market/get-dividends",
+            "description":"Get market dividends in specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"startDate",
+                    "type":"STRING",
+                    "description":"The format date is yyyy-MM-dd. Ex : 2021-08-10",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-dividends\"\nquerystring = {\"regionId\": regionid, \"pageSize\": pagesize, \"pageIndex\": pageindex}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-splits",
+            "url":"https://webull.p.rapidapi.com/market/get-splits",
+            "description":"Get market splits in specific region",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"startDate",
+                    "type":"STRING",
+                    "description":"The format date is yyyy-MM-dd. Ex : 2021-08-10",
+                    "default":""
+                },
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-splits\"\nquerystring = {\"regionId\": regionid, \"pageIndex\": pageindex, \"pageSize\": pagesize}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-realtime-quotes",
+            "url":"https://webull.p.rapidapi.com/market/get-realtime-quotes",
+            "description":"Get multiple stock quotes in real time.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ids",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... Separated by comma for multiple tickers",
+                    "default":"913256135,913303964,913353822,913354090"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-realtime-quotes\"\nquerystring = {\"ids\": ids}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"industries/get-performing-detail",
+            "url":"https://webull.p.rapidapi.com/industries/get-performing-detail",
+            "description":"List industry performing detail",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                },
+                {
+                    "name":"groupId",
+                    "type":"STRING",
+                    "description":"The value of id field returned in .../industries/list-best-performing endpoint",
+                    "default":"601904"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"direction",
+                    "type":"NUMBER",
+                    "description":"The order direction -1(desc) | 1(asc)",
+                    "default":"-1"
+                },
+                {
+                    "name":"industryType",
+                    "type":"STRING",
+                    "description":"One of the following : today|5d|1m|3m",
+                    "default":"today"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/industries/get-performing-detail\"\nquerystring = {\"regionId\": regionid, \"pageSize\": pagesize, \"groupId\": groupid, \"pageIndex\": pageindex, \"direction\": direction, \"industryType\": industrytype}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-charts",
+            "url":"https://webull.p.rapidapi.com/market/get-charts",
+            "description":"Get multiple history pricing  charts",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerIds",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... Separated by comma for multiple tickers",
+                    "default":"913256135,913303964,913353822,913354090"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"count",
+                    "type":"NUMBER",
+                    "description":"The number of items per ticker, for paging purpose. Maximum is 800",
+                    "default":"400"
+                },
+                {
+                    "name":"direction",
+                    "type":"NUMBER",
+                    "description":"The order direction -1(desc) | 1(asc)",
+                    "default":"-1"
+                },
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"The interval of time, one of the following : m1(1 min)|m5(5 mins)|m15(15 mins)|m30(30 mins)|m60(1 hour)|m120(2 hours)|m240(4 hours)|d1(1 day)|w1(1 weekmth1(1 month)|mth3(3 months)|y1(1 year)",
+                    "default":"m5"
+                },
+                {
+                    "name":"timestamp",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, load data before this timestamp (in seconds). Ex : 1629122700",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-charts\"\nquerystring = {\"count\": count, \"direction\": direction, \"type\": type, \"tickerIds\": tickerids}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"market/get-sparks",
+            "url":"https://webull.p.rapidapi.com/market/get-sparks",
+            "description":"Used to draw small charts which often display next to symbols",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ids",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... Separated by comma for multiple tickers",
+                    "default":"913256135,913303964,913353822,913354090"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/market/get-sparks\"\nquerystring = {\"ids\": ids}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"industries/list-best-performing",
+            "url":"https://webull.p.rapidapi.com/industries/list-best-performing",
+            "description":"List best performing industries",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"industryType",
+                    "type":"STRING",
+                    "description":"One of the following : today|5d|1m|3m",
+                    "default":"today"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"direction",
+                    "type":"NUMBER",
+                    "description":"The order direction -1(desc) | 1(asc)",
+                    "default":"-1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/industries/list-best-performing\"\nquerystring = {\"regionId\": regionid, \"industryType\": industrytype, \"pageSize\": pagesize, \"pageIndex\": pageindex, \"direction\": direction}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/search",
+            "url":"https://webull.p.rapidapi.com/stock/search",
+            "description":"Search for stock, index, fund, etc... by terms or phrase",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"keyword",
+                    "type":"STRING",
+                    "description":"Any term or phrase that you are familiar with",
+                    "default":"apple"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/search\"\nquerystring = {\"keyword\": keyword, \"pageIndex\": pageindex, \"pageSize\": pagesize}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-realtime-quote",
+            "url":"https://webull.p.rapidapi.com/stock/get-realtime-quote",
+            "description":"Get stock quote in real time.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-realtime-quote\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-trending-chart",
+            "url":"https://webull.p.rapidapi.com/stock/get-trending-chart",
+            "description":"Get brief pricing history chart in a period of time",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"trendType",
+                    "type":"STRING",
+                    "description":"One of the following : m1|m3|m6|y1|y5|all",
+                    "default":"m1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-trending-chart\"\nquerystring = {\"trendType\": trendtype, \"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-options",
+            "url":"https://webull.p.rapidapi.com/stock/get-options",
+            "description":"Get stock options",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913256135"
+                },
+                {
+                    "name":"unSymbol",
+                    "type":"STRING",
+                    "description":"The symbol relating to tickerId",
+                    "default":"AAPL"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"expireDate",
+                    "type":"STRING",
+                    "description":"The format date is yyyy-MM-dd. Ex : 2021-09-03",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-options\"\nquerystring = {\"tickerId\": tickerid, \"unSymbol\": unsymbol}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-rating-pricing-target",
+            "url":"https://webull.p.rapidapi.com/stock/get-rating-pricing-target",
+            "description":"Get stock rating and pricing target",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-rating-pricing-target\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-short-interest",
+            "url":"https://webull.p.rapidapi.com/stock/get-short-interest",
+            "description":"Get stock short interest",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-short-interest\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-cost-distribution-analysis",
+            "url":"https://webull.p.rapidapi.com/stock/get-cost-distribution-analysis",
+            "description":"Get stock cost distribution and analysis",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-cost-distribution-analysis\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-peers",
+            "url":"https://webull.p.rapidapi.com/stock/get-peers",
+            "description":"Get stock peers or ETF",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"STRING",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913354090"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"NUMBER",
+                    "description":"One of the following : 2 (Peers) | 3 (ETF)",
+                    "default":"2"
+                },
+                {
+                    "name":"hasNum",
+                    "type":"NUMBER",
+                    "description":"The offset for paging purpose",
+                    "default":"0"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"direction",
+                    "type":"NUMBER",
+                    "description":"The order direction -1(desc) | 1(asc)",
+                    "default":"-1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-peers\"\nquerystring = {\"type\": type, \"hasNum\": hasnum, \"tickerId\": tickerid, \"pageSize\": pagesize, \"direction\": direction}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-industry-sector",
+            "url":"https://webull.p.rapidapi.com/stock/get-industry-sector",
+            "description":"Get relating industry sector",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-industry-sector\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-financials",
+            "url":"https://webull.p.rapidapi.com/stock/get-financials",
+            "description":"Get relating company financials",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"fiscalPeriod",
+                    "type":"NUMBER",
+                    "description":"The fiscal period, from 1 to 4",
+                    "default":"3"
+                },
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                },
+                {
+                    "name":"fiscalYear",
+                    "type":"NUMBER",
+                    "description":"The fiscal year",
+                    "default":"2021"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"type",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1 (Annual) | 2 (Quarterly)",
+                    "default":"2"
+                },
+                {
+                    "name":"count",
+                    "type":"NUMBER",
+                    "description":"The number of items returned",
+                    "default":"5"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-financials\"\nquerystring = {\"fiscalPeriod\": fiscalperiod, \"type\": type, \"tickerId\": tickerid, \"count\": count, \"fiscalYear\": fiscalyear}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-company-profile",
+            "url":"https://webull.p.rapidapi.com/stock/get-company-profile",
+            "description":"Get relating company profile",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-company-profile\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-performance",
+            "url":"https://webull.p.rapidapi.com/stock/get-performance",
+            "description":"Get stock fund performance",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913285171"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-performance\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-fund-profile",
+            "url":"https://webull.p.rapidapi.com/stock/get-fund-profile",
+            "description":"Get stock fund profile",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913285171"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-fund-profile\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-asset-allocation",
+            "url":"https://webull.p.rapidapi.com/stock/get-asset-allocation",
+            "description":"Get stock fund asset allocation",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913285171"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-asset-allocation\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-stat",
+            "url":"https://webull.p.rapidapi.com/stock/get-stat",
+            "description":"Get stock statistic",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-stat\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-press-releases",
+            "url":"https://webull.p.rapidapi.com/stock/get-press-releases",
+            "description":"Get press releases",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913256135"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lastAnnouncementId",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, the last announcement Id returned right in this endpoint, leave empty for the first query.",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, the number of items per response",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-press-releases\"\nquerystring = {\"tickerId\": tickerid, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stock/get-dividends-splits",
+            "url":"https://webull.p.rapidapi.com/stock/get-dividends-splits",
+            "description":"Get stock dividends and splits",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913255598"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/stock/get-dividends-splits\"\nquerystring = {\"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"news/search",
+            "url":"https://webull.p.rapidapi.com/news/search",
+            "description":"Search for news by terms or phrase",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"keyword",
+                    "type":"STRING",
+                    "description":"Any term or phrase that you are familiar with",
+                    "default":"apple"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageIndex",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/news/search\"\nquerystring = {\"pageIndex\": pageindex, \"pageSize\": pagesize, \"keyword\": keyword}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"news/list-top",
+            "url":"https://webull.p.rapidapi.com/news/list-top",
+            "description":"List top news",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"currentNewsId",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, the last news id returned right in this endpoint, pass 0 for the first query.",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/news/list-top\"\nquerystring = {\"pageSize\": pagesize, \"currentNewsId\": currentnewsid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"news/list-by-ticker",
+            "url":"https://webull.p.rapidapi.com/news/list-by-ticker",
+            "description":"List news by ticker id",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tickerId",
+                    "type":"NUMBER",
+                    "description":"The value of tickerId field returned in other endpoints, such as .../stock/search or .../market/get-common-ranking or .../market/get-top-active or .../market/get-top-gainers or etc... ",
+                    "default":"913256135"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"currentNewsId",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, the last news id returned right in this endpoint, pass 0 for the first query",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/news/list-by-ticker\"\nquerystring = {\"pageSize\": pagesize, \"currentNewsId\": currentnewsid, \"tickerId\": tickerid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"news/list-flash",
+            "url":"https://webull.p.rapidapi.com/news/list-flash",
+            "description":"List flash 27/4 news",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"currentNewsId",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, the last news id returned right in this endpoint, pass 0 for the first query.",
+                    "default":"0"
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/news/list-flash\"\nquerystring = {\"currentNewsId\": currentnewsid, \"pageSize\": pagesize}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"currencies/list",
+            "url":"https://webull.p.rapidapi.com/currencies/list",
+            "description":"List all global currencies and rates",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"userRegionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"6"
+                },
+                {
+                    "name":"regionId",
+                    "type":"NUMBER",
+                    "description":"The value of id field returned in .../regions/list endpoint",
+                    "default":"1003"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum is 20",
+                    "default":"20"
+                },
+                {
+                    "name":"hasNum",
+                    "type":"NUMBER",
+                    "description":"The offset for paging purpose",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://webull.p.rapidapi.com/currencies/list\"\nquerystring = {\"pageSize\": pagesize, \"hasNum\": hasnum, \"userRegionId\": userregionid, \"regionId\": regionid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webull.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

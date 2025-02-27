@@ -1,0 +1,3257 @@
+{
+    "tool_name": "YNAB - You Need a Budget",
+    "tool_description": "Our API uses a REST based design, leverages the JSON data format, and relies upon HTTPS for transport. We respond with meaningful HTTP response codes and if an error occurs, we include error details in the response body.  API Documentation is at https://api.youneedabudget.com",
+    "title": "YNAB - You Need a Budget",
+    "pricing": "FREE",
+    "score": null,
+    "home_url": "https://rapidapi.com/adamaschulz-P3Yh6GPV-ca/api/ynab-you-need-a-budget/",
+    "host": "ynab-you-need-a-budget.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Importtransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/import",
+            "description": "Imports available transactions on all linked accounts for the given budget.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking \"Import\" on each account in the web application or tapping the \"New Transactions\" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/import\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Createasingletransactionormultipletransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions",
+            "description": "Creates a single transaction or multiple transactions.  If you provide a body containing a `transaction` object, a single transaction will be created and if you provide a body containing a `transactions` array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Listtransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions",
+            "description": "Returns budget transactions",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "budget_id"
+                },
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                },
+                {
+                    "name": "since_date",
+                    "type": "STRING",
+                    "description": "If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).",
+                    "default": "1958-03-24"
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported.",
+                    "default": "uncategorized"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server, \"since_date\": since_date, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Updatemultipletransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions",
+            "description": "Updates multiple transactions, by `id` or `import_id`.",
+            "method": "PATCH",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.patch(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Singletransaction",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/{transaction_id}",
+            "description": "Returns a single transaction",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "transaction_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the transaction",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/{transaction_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Updatesanexistingtransaction",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/{transaction_id}",
+            "description": "Updates a single transaction",
+            "method": "PUT",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "transaction_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the transaction",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/{transaction_id}\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.put(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Bulkcreatetransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/bulk",
+            "description": "Creates multiple transactions.  Although this endpoint is still supported, it is recommended to use 'POST /budgets/{budget_id}/transactions' to create multiple transactions.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/bulk\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Listpayees",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees",
+            "description": "Returns all payees",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listlocationsforapayee",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees/{payee_id}/payee_locations",
+            "description": "Returns all payee locations for a specified payee",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "payee_id",
+                    "type": "STRING",
+                    "description": "(Required) id of payee",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees/{payee_id}/payee_locations\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singleaccount",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts/{account_id}",
+            "description": "Returns a single account",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "account_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the account",
+                    "default": "6107b6d8-6a04-db5d-7c79-badc7137801d"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts/{account_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singlepayee",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees/{payee_id}",
+            "description": "Returns a single payee",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "payee_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the payee",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees/{payee_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listaccounttransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts/{account_id}/transactions",
+            "description": "Returns all transactions for a specified account",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported.",
+                    "default": "uncategorized"
+                },
+                {
+                    "name": "since_date",
+                    "type": "STRING",
+                    "description": "If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).",
+                    "default": "1958-03-24"
+                },
+                {
+                    "name": "account_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the account",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts/{account_id}/transactions\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server, \"type\": type, \"since_date\": since_date}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listpayeetransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees/{payee_id}/transactions",
+            "description": "Returns all transactions for a specified payee",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                },
+                {
+                    "name": "since_date",
+                    "type": "STRING",
+                    "description": "If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).",
+                    "default": "1958-03-24"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported.",
+                    "default": "uncategorized"
+                },
+                {
+                    "name": "payee_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the payee",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payees/{payee_id}/transactions\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server, \"since_date\": since_date, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Accountlist",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts",
+            "description": "Returns all accounts",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Createanewaccount",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts",
+            "description": "Creates a new account",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Singlescheduledtransaction",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}",
+            "description": "Returns a single scheduled transaction",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "scheduled_transaction_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the scheduled transaction",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/scheduled_transactions/{scheduled_transaction_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singlebudget",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}",
+            "description": "Returns a single budget with all related entities.  This resource is effectively a full budget export.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "budget_id"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listscheduledtransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/scheduled_transactions",
+            "description": "Returns all scheduled transactions",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/scheduled_transactions\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listbudgets",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets",
+            "description": "Returns budgets list with summary information",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "include_accounts",
+                    "type": "STRING",
+                    "description": "Whether to include the list of budget accounts",
+                    "default": "false"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets\"\nquerystring = {\"include_accounts\": include_accounts}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Userinfo",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/user",
+            "description": "Returns authenticated user information",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/user\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "BudgetSettings",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/settings",
+            "description": "Returns settings for a budget",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/settings\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singlebudgetmonth",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months/{month}",
+            "description": "Returns a single budget month",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "month",
+                    "type": "STRING",
+                    "description": "(Required) The budget month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC))",
+                    "default": "1958-03-24"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months/{month}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Updateacategoryforaspecificmonth",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months/{month}/categories/{category_id}",
+            "description": "Update a category for a specific month.  Only `budgeted` amount can be updated.",
+            "method": "PATCH",
+            "required_parameters": [
+                {
+                    "name": "Content-Type",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "application/json"
+                },
+                {
+                    "name": "month",
+                    "type": "STRING",
+                    "description": "(Required) The budget month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC))",
+                    "default": "1958-03-24"
+                },
+                {
+                    "name": "category_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the category",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months/{month}/categories/{category_id}\"\nquerystring = {\"Content-Type\": content_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.patch(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singlecategoryforaspecificbudgetmonth",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months/{month}/categories/{category_id}",
+            "description": "Returns a single category for a specific budget month.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "month",
+                    "type": "STRING",
+                    "description": "(Required) The budget month in ISO format (e.g. 2016-12-01) (\"current\" can also be used to specify the current calendar month (UTC))",
+                    "default": "1958-03-24"
+                },
+                {
+                    "name": "category_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the category",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months/{month}/categories/{category_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listcategories",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/categories",
+            "description": "Returns all categories grouped by category group.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "budget_id"
+                },
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/categories\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listbudgetmonths",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months",
+            "description": "Returns all budget months",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/months\"\nquerystring = {\"last_knowledge_of_server\": last_knowledge_of_server}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listcategorytransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/categories/{category_id}/transactions",
+            "description": "Returns all transactions for a specified category",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "since_date",
+                    "type": "STRING",
+                    "description": "If specified, only transactions on or after this date will be included.  The date should be ISO formatted (e.g. 2016-12-30).",
+                    "default": "1958-03-24"
+                },
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "category_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the category",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "last_knowledge_of_server",
+                    "type": "NUMBER",
+                    "description": "The starting server knowledge.  If provided, only entities that have changed since `last_knowledge_of_server` will be included.",
+                    "default": 66354986
+                },
+                {
+                    "name": "type",
+                    "type": "STRING",
+                    "description": "If specified, only transactions of the specified type will be included. \"uncategorized\" and \"unapproved\" are currently supported.",
+                    "default": "uncategorized"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/categories/{category_id}/transactions\"\nquerystring = {\"since_date\": since_date, \"last_knowledge_of_server\": last_knowledge_of_server, \"type\": type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singlecategory",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/categories/{category_id}",
+            "description": "Returns a single category.  Amounts (budgeted, activity, balance, etc.) are specific to the current budget month (UTC).",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "category_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the category",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/categories/{category_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Singlepayeelocation",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payee_locations/{payee_location_id}",
+            "description": "Returns a single payee location",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                },
+                {
+                    "name": "payee_location_id",
+                    "type": "STRING",
+                    "description": "(Required) id of payee location",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payee_locations/{payee_location_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Listpayeelocations",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payee_locations",
+            "description": "Returns all payee locations",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/payee_locations\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "data": {
+                    "account": {
+                        "id": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d",
+                        "name": "minim esse elit amet Excepteur",
+                        "type": "payPal",
+                        "closed": true,
+                        "balance": 0,
+                        "cleared_balance": 0,
+                        "uncleared_balance": 0,
+                        "transfer_payee_id": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2",
+                        "deleted": true,
+                        "note": "pariatur aliqua",
+                        "direct_import_in_error": true
+                    }
+                }
+            },
+            "headers": {},
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Importtransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/transactions/import",
+            "description": "Imports available transactions on all linked accounts for the given budget.  Linked accounts allow transactions to be imported directly from a specified financial institution and this endpoint initiates that import.  Sending a request to this endpoint is the equivalent of clicking \"Import\" on each account in the web application or tapping the \"New Transactions\" banner in the mobile applications.  The response for this endpoint contains the transaction ids that have been imported.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/transactions/import\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/import\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "account": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "6293d5ef-6a9f-17e7-2ee2-c1dda201063d"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "minim esse elit amet Excepteur"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "payPal"
+                                    },
+                                    "on_budget": {},
+                                    "closed": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 11743343
+                                    },
+                                    "cleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": -53896876
+                                    },
+                                    "uncleared_balance": {
+                                        "type": "integer",
+                                        "description": "",
+                                        "default": 20876812
+                                    },
+                                    "transfer_payee_id": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "urn:uuid:971127f2-e33f-a2e7-eee2-6ea282983ac2"
+                                    },
+                                    "deleted": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    },
+                                    "note": {
+                                        "type": "string",
+                                        "description": "",
+                                        "default": "pariatur aliqua"
+                                    },
+                                    "direct_import_linked": {},
+                                    "direct_import_in_error": {
+                                        "type": "boolean",
+                                        "description": "",
+                                        "default": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Createasingletransactionormultipletransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/transactions",
+            "description": "Creates a single transaction or multiple transactions.  If you provide a body containing a `transaction` object, a single transaction will be created and if you provide a body containing a `transactions` array, multiple transactions will be created.  Scheduled transactions cannot be created on this endpoint.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/transactions\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Bulkcreatetransactions",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/transactions/bulk",
+            "description": "Creates multiple transactions.  Although this endpoint is still supported, it is recommended to use 'POST /budgets/{budget_id}/transactions' to create multiple transactions.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget. \"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget).",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/transactions/bulk\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/transactions/bulk\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Createanewaccount",
+            "url": "https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/accounts",
+            "description": "Creates a new account",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "budget_id",
+                    "type": "STRING",
+                    "description": "(Required) The id of the budget (\"last-used\" can be used to specify the last used budget and \"default\" can be used if default budget selection is enabled (see: https://api.youneedabudget.com/#oauth-default-budget)",
+                    "default": "nisi laboris in iru"
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/nisi laboris in iru/accounts\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://ynab-you-need-a-budget.p.rapidapi.com/budgets/{budget_id}/accounts\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"ynab-you-need-a-budget.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

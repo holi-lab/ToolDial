@@ -1,0 +1,442 @@
+{
+    "product_id": "api_60b41971-a6f5-4bb2-994f-cdb5b895095a",
+    "tool_description": "Get company and job information from indeed",
+    "home_url": "https://rapidapi.com/mantiks-mantiks-default/api/indeed12/",
+    "name": "indeed",
+    "title": "indeed",
+    "pricing": "FREEMIUM",
+    "tool_name": "indeed",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 4805,
+        "avgSuccessRate": 93,
+        "popularityScore": 9.6,
+        "__typename": "Score"
+    },
+    "host": "indeed12.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Company jobs",
+            "url": "https://indeed12.p.rapidapi.com/company/Ubisoft/jobs",
+            "description": "Search jobs by company.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "company_id",
+                    "type": "string",
+                    "description": "",
+                    "default": "Ubisoft"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locality",
+                    "type": "ENUM",
+                    "description": "Select the Indeed's country. Each value correspond to a specific indeed subdomain. Default value if missing is 'us'",
+                    "default": ""
+                },
+                {
+                    "name": "start",
+                    "type": "NUMBER",
+                    "description": "Use to control the pagination of results. If omitted return the first page",
+                    "default": "1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/company/Ubisoft/jobs\"\nquerystring = {\"locality\": \"\", \"start\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/company/{company_id}/jobs\"\nquerystring = {\"locality\": \"\", \"start\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Unknown locality ''"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "hits": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "formatted_relative_time": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "link": {
+                                    "type": "string"
+                                },
+                                "locality": {
+                                    "type": "string"
+                                },
+                                "location": {
+                                    "type": "string"
+                                },
+                                "title": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "indeed_final_url": {
+                        "type": "string"
+                    },
+                    "next_start": {
+                        "type": "integer"
+                    },
+                    "prev_start": {
+                        "type": "integer"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Jobs Search",
+            "url": "https://indeed12.p.rapidapi.com/jobs/search",
+            "description": "Search jobs with by query and location.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "query",
+                    "type": "STRING",
+                    "description": "Keyword used to search jobs",
+                    "default": "manager"
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "chicago"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "fromage",
+                    "type": "NUMBER",
+                    "description": "Number of days.\nFilter jobs that was updated between now and **fromage** days.",
+                    "default": "3"
+                },
+                {
+                    "name": "locality",
+                    "type": "ENUM",
+                    "description": "Select the Indeed's country. Each value correspond to a specific indeed subdomain. Default value if missing is 'us'",
+                    "default": ""
+                },
+                {
+                    "name": "page_id",
+                    "type": "NUMBER",
+                    "description": "Use to control the pagination of results. If omitted return the first page",
+                    "default": "2"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/jobs/search\"\nquerystring = {\"fromage\": \"3\", \"locality\": \"\", \"page_id\": \"2\", \"query\": \"manager\", \"location\": \"chicago\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/jobs/search\"\nquerystring = {\"fromage\": \"3\", \"locality\": \"\", \"page_id\": \"2\", \"query\": \"manager\", \"location\": \"chicago\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Unknown locality ''"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "hits": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "company_name": {
+                                    "type": "string"
+                                },
+                                "formatted_relative_time": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "string"
+                                },
+                                "link": {
+                                    "type": "string"
+                                },
+                                "locality": {
+                                    "type": "string"
+                                },
+                                "location": {
+                                    "type": "string"
+                                },
+                                "pub_date_ts_milli": {
+                                    "type": "integer"
+                                },
+                                "title": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "indeed_final_url": {
+                        "type": "string"
+                    },
+                    "next_page_id": {
+                        "type": "integer"
+                    },
+                    "suggest_locality": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Company details",
+            "url": "https://indeed12.p.rapidapi.com/company/Microsoft",
+            "description": "Crawl information for Indeed's Companies.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "company_id",
+                    "type": "string",
+                    "description": "",
+                    "default": "Microsoft"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locality",
+                    "type": "ENUM",
+                    "description": "Select the Indeed's country. Each value correspond to a specific indeed subdomain. Default value if missing is 'us'",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/company/Microsoft\"\nquerystring = {\"locality\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/company/{company_id}\"\nquerystring = {\"locality\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Unknown locality ''"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "company_links": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "text": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "employees": {
+                        "type": "string"
+                    },
+                    "facebookId": {
+                        "type": "string"
+                    },
+                    "founded": {
+                        "type": "integer"
+                    },
+                    "hq_location": {
+                        "type": "string"
+                    },
+                    "indeed_final_url": {
+                        "type": "string"
+                    },
+                    "logo_url": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "rating": {
+                        "type": "number"
+                    },
+                    "revenue": {
+                        "type": "string"
+                    },
+                    "review_count": {
+                        "type": "integer"
+                    },
+                    "sectors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "twitterId": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Company Search",
+            "url": "https://indeed12.p.rapidapi.com/companies/search",
+            "description": "Search companies by name.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "company_name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "Microsoft"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locality",
+                    "type": "ENUM",
+                    "description": "Select the Indeed's country. Each value correspond to a specific indeed subdomain. Default value if missing is 'us'",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/companies/search\"\nquerystring = {\"locality\": \"\", \"company_name\": \"Microsoft\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/companies/search\"\nquerystring = {\"locality\": \"\", \"company_name\": \"Microsoft\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Unknown locality ''"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "count": {
+                        "type": "integer"
+                    },
+                    "hits": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "indeed_absolute_url": {
+                                    "type": "string"
+                                },
+                                "indeed_relative_url": {
+                                    "type": "string"
+                                },
+                                "link": {
+                                    "type": "string"
+                                },
+                                "locality": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "rank": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "indeed_final_url": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Job details",
+            "url": "https://indeed12.p.rapidapi.com/job/b762b8d1132bd276",
+            "description": "Crawl information for Indeed's Job.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "job_id",
+                    "type": "string",
+                    "description": "You can retrieve jobs ids from on jobs searches",
+                    "default": "b762b8d1132bd276"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locality",
+                    "type": "ENUM",
+                    "description": "Default value if missing is 'us'",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/job/b762b8d1132bd276\"\nquerystring = {\"locality\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://indeed12.p.rapidapi.com/job/{job_id}\"\nquerystring = {\"locality\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed12.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "error": "Unknown locality ''"
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "company": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "indeed_absolute_link": {
+                                "type": "string"
+                            },
+                            "indeed_relative_link": {
+                                "type": "string"
+                            },
+                            "link": {
+                                "type": "string"
+                            },
+                            "locality": {
+                                "type": "string"
+                            },
+                            "logo_url": {
+                                "type": "string"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "creation_date": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "indeed_final_url": {
+                        "type": "string"
+                    },
+                    "job_title": {
+                        "type": "string"
+                    },
+                    "job_type": {
+                        "type": "null"
+                    },
+                    "location": {
+                        "type": "string"
+                    },
+                    "salary": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Search",
+            "url": "https://indeed11.p.rapidapi.com/",
+            "description": "Search job postings on Indeed by specifying page, location and search **query.**",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://indeed11.p.rapidapi.com/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed11.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://indeed11.p.rapidapi.com/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"indeed11.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ],
+    "standardized_name": "indeed"
+}

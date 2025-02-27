@@ -1,0 +1,63 @@
+{
+    "product_id": "api_69c3fbea-3391-40fb-ad78-17bd9d8bb08f",
+    "tool_description": "More than just enhancement, Ultra Upscale auto-detects low quality and instantly enhances photo to AI-powered perfection.",
+    "home_url": "https://rapidapi.com/picsart-for-developers-picsart-for-developers-default/api/picsart-photo-enhancement/",
+    "name": "Picsart - Photo Enhancement ",
+    "title": "Picsart - Photo Enhancement ",
+    "pricing": "FREEMIUM",
+    "tool_name": "Picsart - Photo Enhancement ",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 8115,
+        "avgSuccessRate": 55,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "host": "picsart-photo-enhancement.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/upscale/ultra",
+            "url": "https://picsart-photo-enhancement.p.rapidapi.com/upscale/ultra",
+            "description": "**Service Description:** *Upscale Ultra* is a new upscaling technique which does upscaling with noise suppression. It works well on images with faces, small resolution images, stickers and objects with geometric shapes and clear edges. Upscale ultra increases the quality and resolution of low quality photos by leveraging predictive and generative AI technology in order to \"complete\" missing pixels for a best in class smoothing and enhancement effect. It works especially good on small resolution images with faces.\n\n**Limitations:**\n  Images can be upscaled up to 16 times. Supported source image formats are JPG, PNG, TIFF and WEBP. \n\n**Minimums/Maximums:**\n  * Up to 4Mpx (2048x2048) input images\n  * Up to 256Mpx output images\n\n**Examples:**\n  Examples of where the upscale ultra service can be utilized include the following:\n   * Low resolution images\n   * Images that need smoothing\n\n**Options:**\n  This service allows users to choose from *synchronous*, *asynchronous* and *auto-mode* (sync is default) type of processing. The asynchronous service is preferred when processing large final size image files or when using high upscaling factors. When done asynchronously, rather than receiving a URL to the finished image, you will receive a transaction_id to use with the GET method to retrieve the transformed image. Options are detailed below:\n  * **Sync**: issues a synchronous request, response is given when the result is ready. In case of processes which take too long (>55 seconds), the request returns an error after timeout. Based on the estimated (calculated by the algorithm) final size of an image, there is also an auto-switching mechanism which automatically switches the processing mode to the async mode, if the estimated final size of the respective image is larger than 4Mpx.\n  * **Async**: forces an asynchronous request, and the response, which is instantaneous, contains a \"transaction_id\" which is used to poll for the result. For async processing, the request runs in async mode either until it returns a result or stops after 24 hours.\n  * **Auto**: the processing mode decision is made automatically by the service, depending upon image size (estimated final size of an image should exceed 4Mpx to choose async automatically).\n\n  **Source Image:**\n    If you plan to upscale ultra an image several times, we recommend you first upload the source image using the *Upload* method and then use the reference image ID. Otherwise, you can source the image by providing a file or a URL to an online image.\n\n  **Authorization:**\n    Requires an API key to be provided in the **X-Picsart-API-Key** request header.\n\n  **cURL:**\n    Use this file [Upscale-Ultra.sh](https://picsart.io/files/api-samples-curl-Upscale-Ultra.sh) for cURL samples.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "format",
+                    "type": "STRING",
+                    "description": "Optionally select one of the image formats (JPG is default). Options are as follows:\n  * JPG\n  * PNG\n  * WEBP\n",
+                    "default": "JPG"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Source image file (binary). (If this parameter is present, the other image source parameters must be empty.)",
+                    "default": ""
+                },
+                {
+                    "name": "upscale_factor",
+                    "type": "NUMBER",
+                    "description": "Upscale an image with a given upscale factor. The upscale factor increases the image\u2019s resolution without increasing its size. Upscale factor can be between 2 - 16. The default value is 2.\n",
+                    "default": "2"
+                },
+                {
+                    "name": "image_url",
+                    "type": "STRING",
+                    "description": "Source image URL. If this parameter is present, the other image source parameter, image,  must be empty.",
+                    "default": ""
+                },
+                {
+                    "name": "mode",
+                    "type": "STRING",
+                    "description": "Use this query parameter to establish the processing mode. Acceptable values are sync, async and auto (sync is default):\n  * sync: issues a synchronous request, response is given when the result is ready.\n  * async: forces an asynchronous request, the response, which is instantaneous, contains a \\\\\\\"transaction_id\\\\\\\" which is used to poll for the result.\n  * auto: the processing mode decision is made by the service, which depends upon the expected processing time.\n",
+                    "default": "sync"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://picsart-photo-enhancement.p.rapidapi.com/upscale/ultra\"\nquerystring = {\"format\": \"JPG\", \"image\": \"\", \"upscale_factor\": \"2\", \"image_url\": \"\", \"mode\": \"sync\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"picsart-photo-enhancement.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://picsart-photo-enhancement.p.rapidapi.com/upscale/ultra\"\nquerystring = {\"format\": \"JPG\", \"image\": \"\", \"upscale_factor\": \"2\", \"image_url\": \"\", \"mode\": \"sync\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"picsart-photo-enhancement.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

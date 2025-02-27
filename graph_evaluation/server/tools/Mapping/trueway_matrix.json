@@ -1,0 +1,93 @@
+{
+    "tool_name":"TrueWay Matrix",
+    "tool_description":"Calculate distances and durations between a set of origins and destinations.",
+    "title":"TrueWay Matrix",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":255,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/trueway/api/trueway-matrix/",
+    "host":"trueway-matrix.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"CalculateDrivingDistanceMatrix",
+            "url":"https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix",
+            "description":"Calculate distances and durations between a set of origins and destinations.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"origins",
+                    "type":"STRING",
+                    "description":"List of origins described as semicolon-delimited coordinate pairs with latitudes and longitudes. Max: 25",
+                    "default":"40.629041,-74.025606;40.630099,-73.993521;40.644895,-74.013818;40.627177,-73.980853"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"destinations",
+                    "type":"STRING",
+                    "description":"List of destinations described as semicolon-delimited coordinate pairs with latitudes and longitudes. If not specified, an n x n matrix will be generated using the origins. Max: 25",
+                    "default":"40.629041,-74.025606;40.630099,-73.993521;40.644895,-74.013818;40.627177,-73.980853"
+                },
+                {
+                    "name":"start_time",
+                    "type":"STRING",
+                    "description":"Time when travel is expected to start. You can specify the time as an integer in seconds since midnight, January 1, 1970 UTC or you can use \\\"now\\\" to specify the current time.",
+                    "default":""
+                },
+                {
+                    "name":"avoid_tolls",
+                    "type":"BOOLEAN",
+                    "description":"avoid toll roads",
+                    "default":""
+                },
+                {
+                    "name":"avoid_highways",
+                    "type":"BOOLEAN",
+                    "description":"avoid highways",
+                    "default":""
+                },
+                {
+                    "name":"avoid_ferries",
+                    "type":"BOOLEAN",
+                    "description":"avoid ferries",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://trueway-matrix.p.rapidapi.com/CalculateDrivingMatrix\"\nquerystring = {\"origins\": origins, \"destinations\": destinations}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"trueway-matrix.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "distances":{
+                        "type":"array",
+                        "items":{
+                            "type":"array",
+                            "items":{
+                                "type":"integer"
+                            }
+                        }
+                    },
+                    "durations":{
+                        "type":"array",
+                        "items":{
+                            "type":"array",
+                            "items":{
+                                "type":"integer"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

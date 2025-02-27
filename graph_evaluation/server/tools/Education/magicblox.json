@@ -1,0 +1,166 @@
+{
+    "tool_name":"MagicBlox",
+    "tool_description":"Children's Book Library - Thousands of picture books for kids",
+    "title":"MagicBlox",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":764,
+        "avgSuccessRate":100,
+        "popularityScore":8.5,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/superdad-apps-superdad-apps-default/api/magicblox/",
+    "host":"magicblox.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"book",
+            "url":"https://magicblox.p.rapidapi.com/v1/book",
+            "description":"## Two ways to use this endpoint:\n1. Search by category, language, reading level, section, title, author, or any combination of these filters. This will give you a list of books to discover, along with metadata, a cover image for each book, and the book's NID number.\n\n2. Use the NID of a book (with no other parameters) to get the content pages of the book, along with its metadata and cover image. This will only work for a single NID at a time. This is counted as a \"read\" and counts toward your quota. **Important: You must send us your watermark in order to access this content. More information below.**\n\n## Required: Your watermark\nBefore you can see the contents of our books, you must send us an image we can use to watermark each page (usually your company's logo). We do this to protect our content creators. Please send your watermark in .png format to apisupport@magicblox.com. Images should be no more than 100 pixels high and no more than 200 pixels wide and should have a transparent background.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"Accept-Encoding",
+                    "type":"STRING",
+                    "description":"Requests GZIP compression from the CDN by providing 'gzip' as a value. This is strongly recommended for queries and when loading images to decrease loading times and lower bandwidth of book content.",
+                    "default":"gzip"
+                },
+                {
+                    "name":"seed",
+                    "type":"NUMBER",
+                    "description":"Specify a seed (between 1 and1000000) to randomize your results. Results randomized in this way will always return in the same order, so you can paginate (see limit and offset) a randomly ordered set of results without seeing the same book twice or missing a book.",
+                    "default":"853486"
+                },
+                {
+                    "name":"reading_level",
+                    "type":"STRING",
+                    "description":"Returns a specified books section.\n\n**Possible values:**\n- 'Beginner (1 to 6)'\n- 'Intermediate (6 to 9)'\n- 'Advanced (9 to 13)'",
+                    "default":""
+                },
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"Sets to offset of the books returned. Use this in collaboration with the 'limit' parameter to implement pagination.\n\nFor example, if your search results in 100 books, you could retrieve all of them by specifying a limit of 20 and making five queries with offsets 0, 20, 40, 60, and 80.",
+                    "default":"0"
+                },
+                {
+                    "name":"nid",
+                    "type":"NUMBER",
+                    "description":"Use the NID of a book (with no other parameters) to get the content pages of the book, along with its metadata and cover image. This will only work for a single NID at a time. This is counted as a \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"read\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" and counts toward your quota. **Important: You must send us your watermark in order to access this content. More information below.**\n\n### Required: Your watermark\nBut before you can see the contents of our books, you must send us an image we can use to watermark each page (usually your company's logo). We do this to protect our content creators. Please send your watermark in .png format to apisupport@magicblox.com. Images should be no more than 100 pixels high and no more than 200 pixels wide and should have a transparent background.",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"Limits the number of books returned by the query. Use this in collaboration with the 'offset' parameter to implement pagination.\n\nFor example, if your search results in 100 books, you could retrieve all of them by specifying a limit of 20 and making five queries with offsets 0, 20, 40, 60, and 80.",
+                    "default":"20"
+                },
+                {
+                    "name":"author",
+                    "type":"STRING",
+                    "description":"Returns books with authors similar to author param.",
+                    "default":""
+                },
+                {
+                    "name":"section",
+                    "type":"STRING",
+                    "description":"Returns a specified books section.\n\n**Possible values:**\n- 'all'\n- 'award-winning'\n- 'featured'\n- 'most-read'\n- 'recently-added'",
+                    "default":""
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"Restricts results to the specified language.\n\n**Possible values:**\n- 'English'\n- 'Spanish'\n- 'Italian'\n- 'French'\n- 'German'\n- 'Mongolian'\n- 'Portuguese'\n- 'Hebrew'",
+                    "default":""
+                },
+                {
+                    "name":"title",
+                    "type":"STRING",
+                    "description":"Returns books with titles similar to the title param.",
+                    "default":""
+                },
+                {
+                    "name":"category",
+                    "type":"NUMBER",
+                    "description":"Specify a category by tid obtained from the /categories endpoint.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://magicblox.p.rapidapi.com/v1/book\"\nquerystring = {\"Accept-Encoding\": accept_encoding, \"seed\": seed, \"offset\": offset, \"limit\": limit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"magicblox.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"sandbox",
+            "url":"https://magicblox.p.rapidapi.com/v1/sandbox",
+            "description":"An endpoint intended for testing the API. This works exactly like the /book endpoint but without the quota limitations.\n\n## Two ways to use this endpoint:\n1. Search by category, language, reading level, section, title, author, or any combination of these filters. This will give you a list of books to discover, along with metadata, a cover image for each book, and the book's NID number.\n\n2. Use the NID of a book (with no other parameters) to get the content pages of the book, along with its metadata and cover image. This will only work for a single NID at a time.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"title",
+                    "type":"STRING",
+                    "description":"Returns books with titles similar to the title param.",
+                    "default":""
+                },
+                {
+                    "name":"author",
+                    "type":"STRING",
+                    "description":"Returns books with authors similar to author param.",
+                    "default":""
+                },
+                {
+                    "name":"nid",
+                    "type":"NUMBER",
+                    "description":"Use the NID of a book (with no other parameters) to get the content pages of the book, along with its metadata and cover image. This will only work for a single NID at a time.",
+                    "default":""
+                },
+                {
+                    "name":"reading_level",
+                    "type":"STRING",
+                    "description":"Returns a specified books section.\n\n**Possible values:**\n- 'Beginner (1 to 6)'\n- 'Intermediate (6 to 9)'\n- 'Advanced (9 to 13)'",
+                    "default":""
+                },
+                {
+                    "name":"category",
+                    "type":"STRING",
+                    "description":"Specify a category by tid obtained from the /categories endpoint.",
+                    "default":""
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"Restricts results to the specified language.\n\n**Possible values:**\n- 'English'\n- 'Spanish'\n- 'Italian'\n- 'French'\n- 'German'\n- 'Mongolian'\n- 'Portuguese'",
+                    "default":""
+                },
+                {
+                    "name":"section",
+                    "type":"STRING",
+                    "description":"Returns a specified books section.\n\n**Possible values:**\n- 'all'\n- 'award-winning'\n- 'featured'\n- 'most-read'\n- 'recently-added'",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://magicblox.p.rapidapi.com/v1/sandbox\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"magicblox.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories",
+            "url":"https://magicblox.p.rapidapi.com/v1/categories",
+            "description":"Returns an array of possible categories to be used in the book and sandbox endpoints",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://magicblox.p.rapidapi.com/v1/categories\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"magicblox.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

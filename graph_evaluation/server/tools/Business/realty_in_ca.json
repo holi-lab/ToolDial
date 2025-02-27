@@ -1,0 +1,737 @@
+{
+    "tool_name":"Realty in CA",
+    "tool_description":"This API helps to query for residential, commercial listing both for sale and for rent from across Canada to create a real estate site/application such as realtor.ca",
+    "title":"Realty in CA",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":2089,
+        "avgSuccessRate":100,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/realty-in-ca1/",
+    "host":"realty-in-ca1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"locations/v2/auto-complete",
+            "url":"https://realty-in-ca1.p.rapidapi.com/locations/v2/auto-complete",
+            "description":"Get auto complete suggestions by city, ward, street name or an actual address",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"Query",
+                    "type":"STRING",
+                    "description":"City, ward, street name, etc... or an actual address",
+                    "default":"Quebec"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"IncludeLocations",
+                    "type":"BOOLEAN",
+                    "description":"Whether or not include locations",
+                    "default":"true"
+                },
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/locations/v2/auto-complete\"\nquerystring = {\"IncludeLocations\": includelocations, \"CultureId\": cultureid, \"Query\": query}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"keywords/list",
+            "url":"https://realty-in-ca1.p.rapidapi.com/keywords/list",
+            "description":"List all supported tags/keywords for filtering",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/keywords/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"locations/auto-complete",
+            "url":"https://realty-in-ca1.p.rapidapi.com/locations/auto-complete",
+            "description":"Get auto complete suggestions by city, ward, street name",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"Area",
+                    "type":"STRING",
+                    "description":"City, ward, street name, etc...",
+                    "default":"Quebec"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/locations/auto-complete\"\nquerystring = {\"Area\": area, \"CultureId\": cultureid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"agents/detail",
+            "url":"https://realty-in-ca1.p.rapidapi.com/agents/detail",
+            "description":"Get detail information of an agent",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"NUMBER",
+                    "description":"The value of IndividualID field returned in .../agents/list endpoint",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/agents/detail\"\nquerystring = {\"id\": id, \"CultureId\": cultureid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"agents/get-listings",
+            "url":"https://realty-in-ca1.p.rapidapi.com/agents/get-listings",
+            "description":"Get properties listed by agent",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"OrganizationId",
+                    "type":"NUMBER",
+                    "description":"The value of OrganizationID field returned in .../agents/list or .../agents/detail endpoint",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"SortOrder",
+                    "type":"STRING",
+                    "description":"A - ascending | D - descending",
+                    "default":"D"
+                },
+                {
+                    "name":"CurrentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"RecordsPerPage",
+                    "type":"NUMBER",
+                    "description":"Number items returned per request, max 50",
+                    "default":"10"
+                },
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                },
+                {
+                    "name":"SortBy",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Price($)|6-Date|11-Virtual Tour|12-Open Houses|13-More Photos",
+                    "default":"6"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/agents/get-listings\"\nquerystring = {\"SortOrder\": sortorder, \"CurrentPage\": currentpage, \"OrganizationId\": organizationid, \"RecordsPerPage\": recordsperpage, \"CultureId\": cultureid, \"SortBy\": sortby}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"agents/list",
+            "url":"https://realty-in-ca1.p.rapidapi.com/agents/list",
+            "description":"List agents with options and filters",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"RecordsPerPage",
+                    "type":"NUMBER",
+                    "description":"Number items returned per request, max 50",
+                    "default":"10"
+                },
+                {
+                    "name":"Specialties",
+                    "type":"NUMBER",
+                    "description":"One of the following : 2-Residential Property Management|4-Residential Brokerage|8-Residential Development|10-Residential Valuation|12-Residential Financing|14-Residential Leasing|16-Residential Legal|18-Residential Relocation|17-Relocation|28-2nd Home|33-Age Restricted/Active Adult Community Properties|36-Agriculture Land|9-Appraisal|3-Business Brokerage|35-Condos|5-Consulting|7-Development Land|24-Farm/Ranch|32-Golf Community Properties|25-Hospitality|21-Industrial|11-Investment|29-Luxury Homes|23-Multi-Family|22-Office|1-Property Management|26-Recreational|31-Resort Properties|20-Retail|30-Seasonal/Vacation Rentals|27-Waterfront Properties",
+                    "default":""
+                },
+                {
+                    "name":"ProvinceIds",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Alberta|3-British Columbia|8-Manitoba|6-New Brunswick|10-Newfoundland &amp; Labrador|11-Northwest Territories|5-Nova Scotia|9-Nunavut|2-Ontario|12-Prince Edward Island|4-Quebec|7-Saskatchewan|13-Yukon",
+                    "default":""
+                },
+                {
+                    "name":"Designations",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-Accredited Buyer Representative|2-Accredited Buyer Representative Manager|3-At Home With Diversity Certification|4-Accredited Land Consultant|5-Accredited Residential Manager® |6-Associate Reserve Planner|7-Certified Commercial Investment Member|8-Certified International Property Specialist|9-Certified Leasing Officer|10-Certified Manager of Condominiums|11-Certified Property Manager® |12-Certified Real Estate Specialist|13-Certified Real Estate Brokerage Manager|14-Counselor of Real Estate|15-Certified in Real Estate Finance|16-Certified Reserve Planner|17-Certified Residential Specialist® |18-Certified Residential  Underwriter|19-REALTOR e-PRO®|20-Fellow of the Real Estate Institute|21-Fellow of the Real Estate Institute (Appraisal Specialist)|22-Fellow of the Real Estate Institute (Executive)|23-General Accredited Appraiser|24-Graduate REALTOR® Institute|26-Performance Management Network|27-Residential Accredited Appraiser|28-REALTOR® Association Certified Executive|29-Real Estate Professional Assistant|30-Accredited Appraiser Canadian Institute|31-Market Value Appraiser-Residential|33-Accredited Leasing Officer |34-Accredited Mortgage Professional |35-Accredited Senior Appraiser|36-Certified Valuation Analyst|37-Certified Mold Remediation|38-Certified Professional Residential Property Manager|39-Canadian Residential Appraiser|40-Fellows of the Royal Institution of Chartered Surveyors |41-Member, Appraisal Institute|42-Professional Land Economist|43-Real Property Administrator®|44-Society of Industrial and Office REALTORS®|45-Senior Residential Appraiser|46-Canadian Employee Relocation Professional|47-Canadian Employee Relocation Council Relocation Specialist™|48-Relocation Resort Specialist|49-Senior Real Estate Specialist|50-Certified Lease Professional Designation|51-Designated Agency Representatives |52-Distinguished Real Estate Instructor™|53-Unknown|54-Certified Condo Specialist|55-Canadian REALTOR® Association Executive|56-NAR's Green Designation|57-ACCREDITED GREENAGENT® -Residential|58-ACCREDITED GREENBROKER® - Commercial|59-EcoBroker®|60-Transnational Referral Certified|61-Certified Negotiation Expert|62-Member of the Royal Institute of Charter Surveyors|63-Certified Reserve Fund Planner|64-Accredited Staging Professional|65-Resort &amp; Second-Home Property Specialist|66-Short Sales and Foreclose Resource|67-Business Corporation Owned by a Real Estate Broker|68-Canadian Personal Property Appraiser|69-Seller Representative Specialist |70-Accredited Senior Agent|71-Certified Luxury Home Marketing Specialist|72-Royal Institute of Chartered Surveyors|73-Accredited Commercial Professional|74-Master Certified Negotiation Expert|75-Associate of the Canadian Condominium Institute|76-Real Estate Negotiation Expert|77-Military Relocation Professional|78-Pricing Strategy Advisor|79-Accredited Luxury Home Specialist|80-Performance Management Network Designation|81-Certified in Marketing of Real Estate|82-Residential Construction Certified|83-Certified New Home Specialist |84-Chartered Accountant|85-Chartered Professional Accountant|86-Certified General Accountant|87-Certified Management Accountant|88-BoundaryWise|89-Chartered Financial Analyst",
+                    "default":""
+                },
+                {
+                    "name":"SortOrder",
+                    "type":"STRING",
+                    "description":"A - ascending | D - descending",
+                    "default":"A"
+                },
+                {
+                    "name":"CompanyName",
+                    "type":"STRING",
+                    "description":"Search by company name",
+                    "default":""
+                },
+                {
+                    "name":"isCccMember",
+                    "type":"BOOLEAN",
+                    "description":"false|true : REALTORS® that are affiliates of the Canadian Commercial Network",
+                    "default":""
+                },
+                {
+                    "name":"CurrentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"FirstName",
+                    "type":"STRING",
+                    "description":"Search by agent's first name",
+                    "default":""
+                },
+                {
+                    "name":"Languages",
+                    "type":"NUMBER",
+                    "description":"One of the following : 1-English|2-French|3-Chinese (Mandarin)|36-Chinese (Cantonese)|9-Punjabi |23-Hindi|13-Tagalog (Filipino)|11-Arabic |19-Russian|5-German |55-Aboriginal languages|50-Afrikaans|54-Albanian|22-American Sign Language (ASL)|56-Amharic|42-Armenian|106-Assyrian|57-Azeri|58-Bahasa Malaysia|39-Bangla|59-Belorussian|35-Bulgarian|40-Burmese|60-Catalan|105-Chaldean|16-Cree |61-Creole|25-Croatian|26-Czech|27-Danish|43-Dari|12-Dutch |62-Estonian|45-Farsi|51-Finnish|63-Flemish|64-Friesian|65-Galla|66-Gan|67-Georgian|14-Greek |47-Gujarati|68-Hakka|69-Hausa|28-Hebrew|29-Hungarian|70-Icelandic|71-Indonesian|17-Inuktitut (Inuit) |4-Italian |18-Japanese|72-Javanese|73-Jin-yu|74-Kannada|75-Kazakh|76-Kejia|77-Khmer|78-Kiswahili|79-Konkani|20-Korean|80-Kurdish|81-Lao|30-Latvian|53-Lithuanian|82-Luxembourgish|48-Macedonian|83-Malagasy|84-Malay|85-Malayalam|49-Malaysian|31-Maltese|86-Marathi|87-Miny|88-Mongolian|32-Norwegian |89-Pakhto|44-Pashto|24-Persian|6-Polish |8-Portuguese |41-Romanian|33-Serbian|90-Serbo-Croatian|91-Sindhi|92-Sinhala|21-Slovak|52-Slovenian|94-Somali|7-Spanish |95-Sunda|37-Swedish|104-Tajik|46-Tamil|96-Tchi|97-Telugu|98-Thai|99-Tigrinya|34-Turkish|10-Ukrainian |38-Urdu|100-Uzbek|15-Vietnamese |101-Xiang|102-Yiddish|103-Yue",
+                    "default":""
+                },
+                {
+                    "name":"City",
+                    "type":"STRING",
+                    "description":"Search by city name",
+                    "default":""
+                },
+                {
+                    "name":"LastName",
+                    "type":"STRING",
+                    "description":"Search by agent's last name",
+                    "default":""
+                },
+                {
+                    "name":"SortBy",
+                    "type":"NUMBER",
+                    "description":"11-No Preference|3-Last Name|2-First Name|8-City|9-Province",
+                    "default":"11"
+                },
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/agents/list\"\nquerystring = {\"RecordsPerPage\": recordsperpage, \"SortOrder\": sortorder, \"CurrentPage\": currentpage, \"SortBy\": sortby, \"CultureId\": cultureid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/list-commercial",
+            "url":"https://realty-in-ca1.p.rapidapi.com/properties/list-commercial",
+            "description":"List commercial properties both for lease and for sale",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"LatitudeMin",
+                    "type":"NUMBER",
+                    "description":"South West latitude",
+                    "default":"-22.26872153207163"
+                },
+                {
+                    "name":"LongitudeMax",
+                    "type":"NUMBER",
+                    "description":"North East longitude",
+                    "default":"-10.267941690981388"
+                },
+                {
+                    "name":"LatitudeMax",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"81.14747595814636"
+                },
+                {
+                    "name":"LongitudeMin",
+                    "type":"NUMBER",
+                    "description":"South West longitude",
+                    "default":"-136.83037765324116"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"SortOrder",
+                    "type":"STRING",
+                    "description":"A - ascending | D - descending",
+                    "default":"A"
+                },
+                {
+                    "name":"PriceMin",
+                    "type":"NUMBER",
+                    "description":"Filter by min price, applied when TransactionTypeId = 2",
+                    "default":""
+                },
+                {
+                    "name":"UnitRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-1:1|1-0:1+|2-2:2|2-0:2+|3-3:3|3-0:3+|4-4:4|4-0:4+|5-5:5|5-0:5+|….|9-0:9+",
+                    "default":""
+                },
+                {
+                    "name":"BuildingTypeId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-House|2-Duplex|3-Triplex|5-Residential Commercial Mix|6-Mobile Home|12-Special Purpose|14-Other|16-Row / Townhouse|17-Apartment|19-Fourplex|20-Garden Home|26-Modular|27-Manufactured Home/Mobile|28-Commercial Apartment|29-Manufactured Home",
+                    "default":""
+                },
+                {
+                    "name":"PriceMax",
+                    "type":"NUMBER",
+                    "description":"Filter by max price, applied when TransactionTypeId = 2",
+                    "default":""
+                },
+                {
+                    "name":"FarmTypeId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-Animal|2-Boarding|3-Cash Crop|4-Feed Lot|5-Nursery|6-Market Gardening|7-Hobby Farm|8-Vineyard|9-Orchard|10-Greenhouse|12-Mixed",
+                    "default":""
+                },
+                {
+                    "name":"OpenHouseStartDate",
+                    "type":"STRING",
+                    "description":"Format date as MM/dd/yyyy, ex : 03/20/2020",
+                    "default":""
+                },
+                {
+                    "name":"NumberOfDays",
+                    "type":"NUMBER",
+                    "description":"Listed since",
+                    "default":"0"
+                },
+                {
+                    "name":"RecordsPerPage",
+                    "type":"NUMBER",
+                    "description":"Number items returned per request, max 50",
+                    "default":"10"
+                },
+                {
+                    "name":"ConstructionStyleId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-Attached|3-Detached|5-Semi-detached|7-Stacked|9-Link",
+                    "default":""
+                },
+                {
+                    "name":"OpenHouse",
+                    "type":"BOOLEAN",
+                    "description":"false/true (not 0/1). Need to use together with OpenHouseStartDate and OpenHouseEndDate parameters",
+                    "default":""
+                },
+                {
+                    "name":"BedRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-1:1|1-0:1+|2-2:2|2-0:2+|3-3:3|3-0:3+|4-4:4|4-0:4+|5-5:5|5-0:5+",
+                    "default":"0-0"
+                },
+                {
+                    "name":"LandSizeRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-0:1+ acres|2-0:2+ acres|5-0:5+ acres|10-0:10+ acres|50-0:50+ acres|100-0:100+ acres|200-0:200+ acres|300-0:300+ acres|400-0:400+ acres|500-0:500+ acres|1000-0:1000+ acres. Ex : 0-0",
+                    "default":""
+                },
+                {
+                    "name":"BathRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-1:1|1-0:1+|2-2:2|2-0:2+|3-3:3|3-0:3+|4-4:4|4-0:4+|5-5:5|5-0:5+",
+                    "default":"0-0"
+                },
+                {
+                    "name":"CurrentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"OpenHouseEndDate",
+                    "type":"STRING",
+                    "description":"Format date as MM/dd/yyyy, ex : 03/31/2020",
+                    "default":""
+                },
+                {
+                    "name":"ZoningTypeGroupId",
+                    "type":"NUMBER",
+                    "description":"1-Agricultural|2-Commercial Mixed|3-Commercial Office|4-Commercial Retail|5-Industrial|6-Industrial-Heavy|7-Industrial-Light|8-Industrial-Medium|9-Institutional|10-Other|11-Recreational|12-Residential-High Density|13-Residential-Low Density|14-Residential - Medium Density",
+                    "default":""
+                },
+                {
+                    "name":"Keywords",
+                    "type":"STRING",
+                    "description":"Get suitable values from …/keywords/list endpoint, separated by comma for multiple keywords, Ex : Inlaw suite,Income suite",
+                    "default":""
+                },
+                {
+                    "name":"SortBy",
+                    "type":"NUMBER",
+                    "description":"1-Price($)|6-Date|11-Virtual Tour|12-Open Houses|13-More Photos",
+                    "default":"1"
+                },
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                },
+                {
+                    "name":"BuildingSizeRange",
+                    "type":"STRING",
+                    "description":"0-5000:0-5,000 sqft|5001-10000:5,001-10,000 sqft|10001-15000:10,001-15,000 sqft|250001-0:Over 250,000 sqft. Ex : 0-5000",
+                    "default":""
+                },
+                {
+                    "name":"PropertySearchTypeId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-Residential|2-Recreational|3-Condo/Strata|4-Agriculture|5-Parking|6-Vacant Land|8-Multi Family",
+                    "default":""
+                },
+                {
+                    "name":"TransactionTypeId",
+                    "type":"NUMBER",
+                    "description":"2-For sale|3-For lease",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/properties/list-commercial\"\nquerystring = {\"SortOrder\": sortorder, \"LatitudeMin\": latitudemin, \"NumberOfDays\": numberofdays, \"LongitudeMax\": longitudemax, \"RecordsPerPage\": recordsperpage, \"BedRange\": bedrange, \"BathRange\": bathrange, \"CurrentPage\": currentpage, \"LatitudeMax\": latitudemax, \"SortBy\": sortby, \"CultureId\": cultureid, \"LongitudeMin\": longitudemin}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/list-by-mls",
+            "url":"https://realty-in-ca1.p.rapidapi.com/properties/list-by-mls",
+            "description":"List properties by listing ID or MLS number",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"ReferenceNumber",
+                    "type":"STRING",
+                    "description":"List ID or MLS number",
+                    "default":"30794904"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/properties/list-by-mls\"\nquerystring = {\"CultureId\": cultureid, \"ReferenceNumber\": referencenumber}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/detail",
+            "url":"https://realty-in-ca1.p.rapidapi.com/properties/detail",
+            "description":"Get details information of specific property",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"PropertyID",
+                    "type":"STRING",
+                    "description":"The value of Id field from .../list-commercial or .../list-residential endpoints",
+                    "default":"21654700"
+                },
+                {
+                    "name":"ReferenceNumber",
+                    "type":"STRING",
+                    "description":"The value of MlsNumber field from .../list-commercial or .../list-residential endpoints",
+                    "default":"30794904"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                },
+                {
+                    "name":"PreferedMeasurementUnit",
+                    "type":"NUMBER",
+                    "description":"1-Metric|2-Imperial",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/properties/detail\"\nquerystring = {\"PropertyID\": propertyid, \"ReferenceNumber\": referencenumber, \"CultureId\": cultureid, \"PreferedMeasurementUnit\": preferedmeasurementunit}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/list-residential",
+            "url":"https://realty-in-ca1.p.rapidapi.com/properties/list-residential",
+            "description":"List residential properties both for rent and for sale",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"LongitudeMin",
+                    "type":"NUMBER",
+                    "description":"South West longitude",
+                    "default":"-136.83037765324116"
+                },
+                {
+                    "name":"LatitudeMax",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"81.14747595814636"
+                },
+                {
+                    "name":"LatitudeMin",
+                    "type":"NUMBER",
+                    "description":"South West latitude",
+                    "default":"-22.26872153207163"
+                },
+                {
+                    "name":"LongitudeMax",
+                    "type":"NUMBER",
+                    "description":"North East longitude",
+                    "default":"-10.267941690981388"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"SortOrder",
+                    "type":"STRING",
+                    "description":"A - ascending | D - descending",
+                    "default":"A"
+                },
+                {
+                    "name":"ZoningTypeGroupId",
+                    "type":"NUMBER",
+                    "description":"1-Agricultural|2-Commercial Mixed|3-Commercial Office|4-Commercial Retail|5-Industrial|6-Industrial-Heavy|7-Industrial-Light|8-Industrial-Medium|9-Institutional|10-Other|11-Recreational|12-Residential-High Density|13-Residential-Low Density|14-Residential - Medium Density",
+                    "default":""
+                },
+                {
+                    "name":"RecordsPerPage",
+                    "type":"NUMBER",
+                    "description":"Number items returned per request, max 50",
+                    "default":"10"
+                },
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                },
+                {
+                    "name":"ParkingTypeId",
+                    "type":"NUMBER",
+                    "description":"1-Attached garage|2-Integrated garage|3-Detached garage|4-Garage|5-Carport|6-Underground|7-Indoor|8-Open|9-Covered|10-Parking pad|11-Paved Yard|35-Boat House|36-Concrete|37-Heated Garage",
+                    "default":""
+                },
+                {
+                    "name":"CurrentPage",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                },
+                {
+                    "name":"OpenHouseEndDate",
+                    "type":"STRING",
+                    "description":"Format date as MM/dd/yyyy, ex : 03/31/2020",
+                    "default":""
+                },
+                {
+                    "name":"BedRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-1:1|1-0:1+|2-2:2|2-0:2+|3-3:3|3-0:3+|4-4:4|4-0:4+|5-5:5|5-0:5+",
+                    "default":"0-0"
+                },
+                {
+                    "name":"UnitRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-1:1|1-0:1+|2-2:2|2-0:2+|3-3:3|3-0:3+|4-4:4|4-0:4+|5-5:5|5-0:5+|….|9-0:9+",
+                    "default":""
+                },
+                {
+                    "name":"Keywords",
+                    "type":"STRING",
+                    "description":"Get suitable values from …/keywords/list endpoint, separated by comma for multiple keywords, Ex : Inlaw suite,Income suite",
+                    "default":""
+                },
+                {
+                    "name":"PriceMax",
+                    "type":"NUMBER",
+                    "description":"Filter by max price, applied when TransactionTypeId = 2",
+                    "default":""
+                },
+                {
+                    "name":"PriceMin",
+                    "type":"NUMBER",
+                    "description":"Filter by min price, applied when TransactionTypeId = 2",
+                    "default":""
+                },
+                {
+                    "name":"ConstructionStyleId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-Attached|3-Detached|5-Semi-detached|7-Stacked|9-Link",
+                    "default":""
+                },
+                {
+                    "name":"OpenHouse",
+                    "type":"BOOLEAN",
+                    "description":"false/true (not 0/1). Need to use together with OpenHouseStartDate and OpenHouseEndDate parameters",
+                    "default":""
+                },
+                {
+                    "name":"RentMax",
+                    "type":"NUMBER",
+                    "description":"Filter by max price, applied when TransactionTypeId = 3",
+                    "default":""
+                },
+                {
+                    "name":"NumberOfDays",
+                    "type":"NUMBER",
+                    "description":"Listed since",
+                    "default":"0"
+                },
+                {
+                    "name":"TransactionTypeId",
+                    "type":"NUMBER",
+                    "description":"2-For sale|3-For rent",
+                    "default":""
+                },
+                {
+                    "name":"BuildingTypeId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-House|2-Duplex|3-Triplex|5-Residential Commercial Mix|6-Mobile Home|12-Special Purpose|14-Other|16-Row / Townhouse|17-Apartment|19-Fourplex|20-Garden Home|26-Modular|27-Manufactured Home/Mobile|28-Commercial Apartment|29-Manufactured Home",
+                    "default":""
+                },
+                {
+                    "name":"OpenHouseStartDate",
+                    "type":"STRING",
+                    "description":"Format date as MM/dd/yyyy, ex : 03/20/2020",
+                    "default":""
+                },
+                {
+                    "name":"FarmTypeId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-Animal|2-Boarding|3-Cash Crop|4-Feed Lot|5-Nursery|6-Market Gardening|7-Hobby Farm|8-Vineyard|9-Orchard|10-Greenhouse|12-Mixed",
+                    "default":""
+                },
+                {
+                    "name":"SortBy",
+                    "type":"NUMBER",
+                    "description":"1-Price($)|6-Date|11-Virtual Tour|12-Open Houses|13-More Photos",
+                    "default":"1"
+                },
+                {
+                    "name":"BathRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-1:1|1-0:1+|2-2:2|2-0:2+|3-3:3|3-0:3+|4-4:4|4-0:4+|5-5:5|5-0:5+",
+                    "default":"0-0"
+                },
+                {
+                    "name":"PropertySearchTypeId",
+                    "type":"NUMBER",
+                    "description":"0-No Preference|1-Residential|2-Recreational|3-Condo/Strata|4-Agriculture|5-Parking|6-Vacant Land|8-Multi Family",
+                    "default":""
+                },
+                {
+                    "name":"LandSizeRange",
+                    "type":"STRING",
+                    "description":"0-0:Any|1-0:1+ acres|2-0:2+ acres|5-0:5+ acres|10-0:10+ acres|50-0:50+ acres|100-0:100+ acres|200-0:200+ acres|300-0:300+ acres|400-0:400+ acres|500-0:500+ acres|1000-0:1000+ acres. Ex : 0-0",
+                    "default":""
+                },
+                {
+                    "name":"BuildingSizeRange",
+                    "type":"STRING",
+                    "description":"0-5000:0-5,000 sqft|5001-10000:5,001-10,000 sqft|10001-15000:10,001-15,000 sqft|250001-0:Over 250,000 sqft Ex : 0-5000",
+                    "default":""
+                },
+                {
+                    "name":"RentMin",
+                    "type":"STRING",
+                    "description":"Filter by min price, applied when TransactionTypeId = 3",
+                    "default":"0"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/properties/list-residential\"\nquerystring = {\"SortOrder\": sortorder, \"LongitudeMin\": longitudemin, \"LatitudeMax\": latitudemax, \"RecordsPerPage\": recordsperpage, \"CultureId\": cultureid, \"CurrentPage\": currentpage, \"BedRange\": bedrange, \"NumberOfDays\": numberofdays, \"SortBy\": sortby, \"LatitudeMin\": latitudemin, \"BathRange\": bathrange, \"LongitudeMax\": longitudemax, \"RentMin\": rentmin}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"properties/get-statistics",
+            "url":"https://realty-in-ca1.p.rapidapi.com/properties/get-statistics",
+            "description":"Get statistic information of surround area by GEO location",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"Latitude",
+                    "type":"NUMBER",
+                    "description":"Latitude of specific location",
+                    "default":"49.1241922"
+                },
+                {
+                    "name":"Longitude",
+                    "type":"NUMBER",
+                    "description":"Longitude of specific location",
+                    "default":"-85.8230136"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"CultureId",
+                    "type":"NUMBER",
+                    "description":"1 - English|2 - French",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://realty-in-ca1.p.rapidapi.com/properties/get-statistics\"\nquerystring = {\"Latitude\": latitude, \"Longitude\": longitude, \"CultureId\": cultureid}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"realty-in-ca1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

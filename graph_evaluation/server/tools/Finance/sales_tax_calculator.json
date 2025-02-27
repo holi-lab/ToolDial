@@ -1,0 +1,153 @@
+{
+    "tool_name":"Sales Tax Calculator",
+    "tool_description":"Enter your city and zip code below to find the combined sales tax rate for a location. If you’d like to calculate sales tax with product exemptions, sourcing logic, and shipping taxability, use our sales tax API.\n\ntelegram DM: https://t.me/justmobicode",
+    "title":"Sales Tax Calculator",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1332,
+        "avgSuccessRate":100,
+        "popularityScore":8.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/JustMobi/api/sales-tax-calculator2/",
+    "host":"sales-tax-calculator2.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Supported Countries",
+            "url":"https://sales-tax-calculator2.p.rapidapi.com/countries",
+            "description":"Returns a list of supported countries.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://sales-tax-calculator2.p.rapidapi.com/countries\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sales-tax-calculator2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "countries":{
+                    "United States":"US",
+                    "United Kingdom":"GB",
+                    "Austria":"AT",
+                    "Australia":"AU",
+                    "Belgium":"BE",
+                    "Bulgaria":"BG",
+                    "Canada":"CA",
+                    "Cyprus":"CY",
+                    "Czech Republic":"CZ",
+                    "Germany":"DE",
+                    "Denmark":"DK",
+                    "Estonia":"EE",
+                    "Greece":"GR",
+                    "Spain":"ES",
+                    "Finland":"FI",
+                    "France":"FR",
+                    "Croatia":"HR",
+                    "Hungary":"HU",
+                    "Ireland":"IE",
+                    "Italy":"IT",
+                    "Lithuania":"LT",
+                    "Luxembourg":"LU",
+                    "Latvia":"LV",
+                    "Malta":"MT",
+                    "Netherlands":"NL",
+                    "Poland":"PL",
+                    "Portugal":"PT",
+                    "Romania":"RO",
+                    "Sweden":"SE",
+                    "Slovenia":"SI",
+                    "Slovakia":"SK"
+                }
+            },
+            "headers":{
+                "accept-ranges":"bytes",
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "age":"1529",
+                "cache-control":"public, max-age=0, must-revalidate",
+                "content-disposition":"inline",
+                "content-length":"502",
+                "content-type":"application/json",
+                "date":"Sat, 17 Jun 2023 23:08:26 GMT",
+                "etag":"\"7c9051c90ddf1ba8cbef406a6145304f\"",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=63072000; includeSubDomains; preload",
+                "vary":"RSC, Next-Router-State-Tree, Next-Router-Prefetch",
+                "x-matched-path":"/api/countries",
+                "x-rapidapi-region":"AWS - eu-west-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-vercel-cache":"HIT",
+                "x-vercel-id":"dub1::rh45n-1687043306355-4f1d0aacd6c4"
+            },
+            "schema":{}
+        },
+        {
+            "name":"Calculate",
+            "url":"https://sales-tax-calculator2.p.rapidapi.com/tax",
+            "description":"Retrieves tax rates applicable to a specific address. This endpoint accepts address inputs to deliver up-to-date, relevant local tax rates instantly.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"Set to one of the countrie codes listed in Supported Countries.",
+                    "default":"US"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Meridian"
+                },
+                {
+                    "name":"zip",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"83646"
+                },
+                {
+                    "name":"street",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"936 Storey Ave"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://sales-tax-calculator2.p.rapidapi.com/tax\"\nquerystring = {\"country\": country, \"city\": city, \"zip\": zip, \"street\": street}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"sales-tax-calculator2.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "rate":{
+                    "country":"US",
+                    "freight_taxable":false,
+                    "combined_rate":6,
+                    "country_rate":0,
+                    "zip":"83646-1522",
+                    "city":"MERIDIAN",
+                    "city_rate":0,
+                    "combined_district_rate":0,
+                    "county":"ADA",
+                    "county_rate":0,
+                    "state":"ID",
+                    "state_rate":6
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "age":"0",
+                "cache-control":"public, max-age=0, must-revalidate",
+                "content-type":"application/json",
+                "date":"Sat, 17 Jun 2023 22:44:24 GMT",
+                "server":"RapidAPI-1.2.8",
+                "strict-transport-security":"max-age=63072000; includeSubDomains; preload",
+                "vary":"RSC, Next-Router-State-Tree, Next-Router-Prefetch",
+                "x-matched-path":"/api/tax",
+                "x-rapidapi-region":"AWS - eu-west-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-vercel-cache":"MISS",
+                "x-vercel-execution-region":"iad1",
+                "x-vercel-id":"dub1::iad1::cpx6b-1687041862469-dd29b66cf019"
+            },
+            "schema":{}
+        }
+    ]
+}

@@ -1,0 +1,197 @@
+{
+    "tool_name":"Aviation Weather Center",
+    "tool_description":"This API provides official aviation weather data, including SIGMETs, AIRMETs, METARs, TAFs and PIREPs from NOAA, available on aviationweather.gov",
+    "title":"Aviation Weather Center",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":117,
+        "avgSuccessRate":100,
+        "popularityScore":9.6,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/noaa/api/aviation-weather-center/",
+    "host":"aviation-weather-center.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Multiple Stations Info",
+            "url":"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam",
+            "description":"Information about multiple weather reporting stations.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"stationString",
+                    "type":"ARRAY",
+                    "description":"",
+                    "default":"KSFO,KDEN,KJFK"
+                },
+                {
+                    "name":"datasource",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"stations"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam\"\nquerystring = {\"stationString\": stationstring, \"datasource\": datasource}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"aviation-weather-center.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Station Info",
+            "url":"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam",
+            "description":"Information about a weather reporting station.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"datasource",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"stations"
+                },
+                {
+                    "name":"stationString",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"KSFO"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam\"\nquerystring = {\"datasource\": datasource, \"stationString\": stationstring}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"aviation-weather-center.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Most Recent TAFs",
+            "url":"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam",
+            "description":"Obtain the most recent TAFs from the past X hours. If you use the `mostRecent` flag only one TAF is returned. Otherwise, all TAFs from the specified time window will be returned.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"mostRecentForEachStation",
+                    "type":"ENUM",
+                    "description":"Used to get the most recent value for EACH station when multiple stations are specified\n\n- **constraint** - request the most recent for each METAR station in the fastest fashion. Not appropriate for historical data retrieval\n- **postfilter** - post filter results after applying all other constraints\n- **true** - same as 'postfilter' method\n- **false** - don't get the most recent for each METAR station, equivalent to omitting this parameter",
+                    "default":""
+                },
+                {
+                    "name":"datasource",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"tafs"
+                },
+                {
+                    "name":"stationString",
+                    "type":"STRING",
+                    "description":"Specify a station as a four character ICAO code (example: `KSFO`).\nCan specify multiple comma separated stations (example: `KSFO,KSQL,KSNS`).",
+                    "default":"KSFO"
+                },
+                {
+                    "name":"mostRecent",
+                    "type":"BOOLEAN",
+                    "description":"",
+                    "default":"true"
+                },
+                {
+                    "name":"hoursBeforeNow",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1.5"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam\"\nquerystring = {\"datasource\": datasource, \"stationString\": stationstring, \"mostRecent\": mostrecent, \"hoursBeforeNow\": hoursbeforenow}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"aviation-weather-center.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Most Recent METARs",
+            "url":"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam",
+            "description":"Obtain the most recent METARs from the past X hours. If you use the `mostRecent` flag only one METAR is returned. Otherwise, all METARs from the specified time window will be returned.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"datasource",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"metars"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"mostRecentForEachStation",
+                    "type":"ENUM",
+                    "description":"Used to get the most recent value for EACH station when multiple stations are specified\n\n- **constraint** - request the most recent for each METAR station in the fastest fashion. Not appropriate for historical data retrieval\n- **postfilter** - post filter results after applying all other constraints\n- **true** - same as 'postfilter' method\n- **false** - don't get the most recent for each METAR station, equivalent to omitting this parameter",
+                    "default":""
+                },
+                {
+                    "name":"hoursBeforeNow",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1.5"
+                },
+                {
+                    "name":"mostRecent",
+                    "type":"BOOLEAN",
+                    "description":"",
+                    "default":"true"
+                },
+                {
+                    "name":"stationString",
+                    "type":"STRING",
+                    "description":"Specify a station as a four character ICAO code (example: `KSFO`).\nCan specify multiple comma separated stations (example: `KSFO,KSQL,KSNS`).",
+                    "default":"KSQL"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam\"\nquerystring = {\"datasource\": datasource, \"hoursBeforeNow\": hoursbeforenow, \"mostRecent\": mostrecent, \"stationString\": stationstring}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"aviation-weather-center.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"METARs in Time Range",
+            "url":"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam",
+            "description":"Obtain all METARs for a station collected between these start and end times using ISO8601  date/time format, with UTC offset: YYYY-MM-DDThh:mm:ssZ. Please see [W3C date/time formats](http://www.w3.org/TR/NOTE-datetime).",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"datasource",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"metars"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"startTime",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2021-12-15T16:48:35Z"
+                },
+                {
+                    "name":"endTime",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"2021-12-15T18:48:35Z"
+                },
+                {
+                    "name":"stationString",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"KSQL"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://aviation-weather-center.p.rapidapi.com/adds/dataserver_current/httpparam\"\nquerystring = {\"datasource\": datasource, \"startTime\": starttime, \"endTime\": endtime, \"stationString\": stationstring}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"aviation-weather-center.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

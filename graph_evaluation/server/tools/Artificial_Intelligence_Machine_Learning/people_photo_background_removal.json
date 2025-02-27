@@ -1,0 +1,169 @@
+{
+    "tool_name": "People photo background removal",
+    "tool_description": "This API provides people photo segmentation with consequent background removal. [![Examples](https://img.shields.io/badge/View%20examples-gray?logo=gitlab&style=flat)](https://gitlab.com/api4ai/examples/img-bg-removal-people) [![API4AI](https://img.shields.io/badge/api4.ai%20platform-fee33c?logo=icloud&flat&logoColor=black)](https://api4.ai/apis/people-bg-removal?utm_source=img_bg_removal_people_rapidapi&utm_medium=endpoints&utm_campaign=rapidapi) [![Telegram](https://img.shields.io/badge/-Te...",
+    "title": "People photo background removal",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 3168,
+        "avgSuccessRate": 83,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/api4ai-api4ai-default/api/people-photo-background-removal/",
+    "host": "people-photo-background-removal.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Remove background from photo of people and return results",
+            "url": "https://people-photo-background-removal.p.rapidapi.com/v1/results",
+            "description": "Performs actual people photo analysis and responds with results.\n\nImage must be a regular JPEG or PNG image (with or without transparency).\nUsually such images have extensions: `.jpg`, `.jpeg`, `.png`.\nThe service checks input file by MIME type and accepts the following types:\n\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Note: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": "https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-people-2.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Note: Use this form data field if you want to pass image as a binary file. If you want to pass image as a link to a public web resource, please, use another field named `url`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "image-bg",
+                    "type": "BINARY",
+                    "description": "Optional background image.\n\nIf the background image is passed then it's content will be blended below a person image (aligned by the center). The final output image will have the same size as the main input image (not background image!). Meaningless if the mode is `fg-mask`.\n\nNote: Use this optional form data field if you want to pass background image as a binary file. If you want to pass background image as a link to a public web resource, please, use another field named `url-bg`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "url-bg",
+                    "type": "STRING",
+                    "description": "Optional background image.\n\nIf the background image is passed then it's content will be blended below a person image (aligned by the center). The final output image will have the same size as the main input image (not background image!). Meaningless if the mode is `fg-mask`.\n\nNote: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image-bg`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "mode",
+                    "type": "STRING",
+                    "description": "Query parameter `mode` is optional and may be used to choose the format of the output image: foreground (person) mask or foreground  (person) image.\nBy default the service uses `fg-image`.\n\nAvailable modes and expected content of the resulting image:\n* `fg-image` (default) \u2013 the image with the foreground (person). Here the result is a 4-channel (`RGBA`) PNG image where background is transparent. \n    * Areas recognized as foreground will have the same color values at output image as the original input image.\n    * Areas recognized as background will be transparent at output image.\n    * Pixels of output image near the foreground borders may be semi transparent.\n* `fg-mask` \u2013 the mask of foreground (person). In this case the result is a single-channel grayscale PNG image.\n    * Areas recognized as foreground will have white color.\n    * Areas recognized as background will be black at output image.\n    * Pixels of output image near to foreground borders may have gray values: the closer\n     to black, the more likely the pixel is the background.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://people-photo-background-removal.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"people-photo-background-removal.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "key1": "value",
+                "key2": "value"
+            },
+            "headers": {
+                "Content-Type": "application/json"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "results": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "status": {
+                                    "type": "object",
+                                    "properties": {
+                                        "code": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "name": {
+                                    "type": "string"
+                                },
+                                "md5": {
+                                    "type": "string"
+                                },
+                                "entities": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "kind": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "image": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get version",
+            "url": "https://people-photo-background-removal.p.rapidapi.com/v1/version",
+            "description": "Returns an actual version of the service in format `vX.Y.Z` where X is the version of API.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://people-photo-background-removal.p.rapidapi.com/v1/version\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"people-photo-background-removal.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Remove background from photo of people and return results",
+            "url": "https://people-photo-background-removal.p.rapidapi.com/v1/results",
+            "description": "Performs actual people photo analysis and responds with results.\n\nImage must be a regular JPEG or PNG image (with or without transparency).\nUsually such images have extensions: `.jpg`, `.jpeg`, `.png`.\nThe service checks input file by MIME type and accepts the following types:\n\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Note: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": "https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-people-2.jpg"
+                },
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "Note: Use this form data field if you want to pass image as a binary file. If you want to pass image as a link to a public web resource, please, use another field named `url`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "image-bg",
+                    "type": "BINARY",
+                    "description": "Optional background image.\n\nIf the background image is passed then it's content will be blended below a person image (aligned by the center). The final output image will have the same size as the main input image (not background image!). Meaningless if the mode is `fg-mask`.\n\nNote: Use this optional form data field if you want to pass background image as a binary file. If you want to pass background image as a link to a public web resource, please, use another field named `url-bg`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "url-bg",
+                    "type": "STRING",
+                    "description": "Optional background image.\n\nIf the background image is passed then it's content will be blended below a person image (aligned by the center). The final output image will have the same size as the main input image (not background image!). Meaningless if the mode is `fg-mask`.\n\nNote: Use this form data field if you want to pass image as a link to a public web resource. If you want to pass image as a binary file, please, use another field named `image-bg`.\n\nImage must be a regular JPEG or PNG image (with or without transparency). Usually such images have extensions: `.jpg`, `.jpeg`, `.png`. The service checks input file by MIME type and accepts the following types:\n* `image/jpeg`\n* `image/png`\n\nThe size of image file must be less than `16Mb`.",
+                    "default": ""
+                },
+                {
+                    "name": "mode",
+                    "type": "STRING",
+                    "description": "Query parameter `mode` is optional and may be used to choose the format of the output image: foreground (person) mask or foreground  (person) image.\nBy default the service uses `fg-image`.\n\nAvailable modes and expected content of the resulting image:\n* `fg-image` (default) \u2013 the image with the foreground (person). Here the result is a 4-channel (`RGBA`) PNG image where background is transparent. \n    * Areas recognized as foreground will have the same color values at output image as the original input image.\n    * Areas recognized as background will be transparent at output image.\n    * Pixels of output image near the foreground borders may be semi transparent.\n* `fg-mask` \u2013 the mask of foreground (person). In this case the result is a single-channel grayscale PNG image.\n    * Areas recognized as foreground will have white color.\n    * Areas recognized as background will be black at output image.\n    * Pixels of output image near to foreground borders may have gray values: the closer\n     to black, the more likely the pixel is the background.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://people-photo-background-removal.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": \"https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-people-2.jpg\", \"image\": \"\", \"image-bg\": \"\", \"url-bg\": \"\", \"mode\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"people-photo-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://people-photo-background-removal.p.rapidapi.com/v1/results\"\nquerystring = {\"url\": \"https://storage.googleapis.com/api4ai-static/samples/img-bg-removal-people-2.jpg\", \"image\": \"\", \"image-bg\": \"\", \"url-bg\": \"\", \"mode\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"people-photo-background-removal.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

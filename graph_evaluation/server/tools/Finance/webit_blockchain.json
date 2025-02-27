@@ -1,0 +1,496 @@
+{
+    "tool_name": "Webit Blockchain",
+    "tool_description": "Get blockchain data from Ethereum, Polygon, Binance, Solana mainnets, including Ropsten, Rinkey, Goerly, Kovan, Mumbai testnets.",
+    "title": "Webit Blockchain",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 90,
+        "avgLatency": 2919,
+        "avgSuccessRate": 90,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/webit/api/webit-blockchain/",
+    "host": "webit-blockchain.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Get Balance",
+            "url": "https://webit-blockchain.p.rapidapi.com/wallet/balance",
+            "description": "Get balance from any wallet on different blockchains, including Ethereum, Polygon, Binance, Solana mainnets, including Ropsten, Rinkey, Goerly, Kovan, Mumbai testnets.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "address",
+                    "type": "STRING",
+                    "description": "Crypto wallet address to get Balance of.\n\n*Example contains Vitalik Buterin wallet address.*\n*Solana addresses are different from Ethereum fork blockchains, so please try `7xKXtg2CW87d97TXJSDpbD5jBkheTqA83TZRuJosgAsU` instead, with `solana` chain parameter selected.*",
+                    "default": "0xab5801a7d398351b8be11c439e05c5b3259aec9b"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain to get balance from. One same address can have different balances in different blockchains.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `solana`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/wallet/balance\"\nquerystring = {\"address\": address}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "balance": 9223372036854776000,
+                    "formatted": 53.82710722507631,
+                    "prettified": "53.8271 ETH",
+                    "symbol": "ETH"
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-length": "146",
+                "content-type": "application/json",
+                "date": "Tue, 29 Mar 2022 15:26:34 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "balance": {
+                                "type": "integer"
+                            },
+                            "formatted": {
+                                "type": "number"
+                            },
+                            "prettified": {
+                                "type": "string"
+                            },
+                            "symbol": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "message": {
+                        "type": "null"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Call Method (Read-only)",
+            "url": "https://webit-blockchain.p.rapidapi.com/contract/method",
+            "description": "Call read-only methods of smart contracts deployed on different blockchains, including Ethereum, Polygon, Binance mainnets and Ropsten, Rinkey, Goerly, Kovan, Mumbai testnets.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "method",
+                    "type": "STRING",
+                    "description": "The name of the method of the smart contract to be called.",
+                    "default": "getTierPrice"
+                },
+                {
+                    "name": "parameters",
+                    "type": "STRING",
+                    "description": "The JSON array of parameters in the same order as they are defined in the ABI mappings.\n\nUse commas to separate each parameter and \"quotes\" for string parameters.",
+                    "default": "[12]"
+                },
+                {
+                    "name": "contract",
+                    "type": "STRING",
+                    "description": "The address of the smart contract.",
+                    "default": "0xe09b2d3394843E40b837224E22D7C0f4765fA78b"
+                },
+                {
+                    "name": "abi",
+                    "type": "STRING",
+                    "description": "The ABI Json array object containing the mappings of the methods and variables accepted by the contract. Webit allows also both whole contract ABI or specific methods ABI mappings only, for your own convenience.\n\nThe provided ABI allows for calling a method called getTierPrice(uint tier), which retrieves the current price set within a custom smart contract implementation.",
+                    "default": "[{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tier\",\"type\": \"uint256\"}],\"name\": \"getTierPrice\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\":\"function\"}]"
+                },
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain the contract is deployed to.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Wallet address the call request comes from. For publicly accessible methods, this parameter can be ignored.",
+                    "default": "0xab5801a7d398351b8be11c439e05c5b3259aec9b"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/contract/method\"\nquerystring = {\"method\": method, \"from\": is_from, \"parameters\": parameters, \"contract\": contract, \"abi\": abi, \"chain\": chain}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "returned_data": [
+                        "100000000000000000"
+                    ]
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-length": "83",
+                "content-type": "application/json",
+                "date": "Sun, 03 Apr 2022 17:05:48 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Converter",
+            "url": "https://webit-blockchain.p.rapidapi.com/utilities/converter",
+            "description": "Convert ETH, BSC, MATIC, SOL currencies to bigger or smaller units with ease.\n\nSupported currencies:\nETH (Ethereum);\nBSC (Binance);\nMATIC (Polygon);\nSOL (Solana).\n\nETH, BSC and MATIC all share the same units, since Binance and Polygon are L2 fork networks built on top of Ethereum.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "to",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "value",
+                    "type": "NUMBER",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "ENUM",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/utilities/converter\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 111,
+            "body": "",
+            "headers": "",
+            "schema": ""
+        },
+        {
+            "name": "Estimate gas",
+            "url": "https://webit-blockchain.p.rapidapi.com/gas/estimate",
+            "description": "Estimate gas required by send transaction and smart contract method call on multiple blockchains.\n\nSupported blockchains:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "to",
+                    "type": "STRING",
+                    "description": "Target address the action is performed \\\\\\\"to\\\\\\\".\n\nThis can be another wallet address simulating an amount transferring to.",
+                    "default": "0xab5801a7d398351b8be11c439e05c5b3259aec9b"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain to estimage gas price for.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+                    "default": ""
+                },
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Source wallet address the operation is performed \\\\\\\"from\\\\\\\".",
+                    "default": "0xab5801a7d398351b8be11c439e05c5b3259aec9b"
+                },
+                {
+                    "name": "amount",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "100"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/gas/estimate\"\nquerystring = {\"to\": to, \"from\": is_from, \"amount\": amount}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "gas_price": 21000,
+                    "gas_price_hex": "0x5208"
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-length": "87",
+                "content-type": "application/json",
+                "date": "Sun, 03 Apr 2022 00:51:17 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Chain ID",
+            "url": "https://webit-blockchain.p.rapidapi.com/chain/id",
+            "description": "Retrieve Chain ID for the selected blockchain.\n\nSupported blockchains:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `solana`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain to get chain ID of.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `solana`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/chain/id\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "chain_id": 1,
+                    "chain_id_hex": "0x1"
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-length": "78",
+                "content-type": "application/json",
+                "date": "Sat, 02 Apr 2022 13:59:44 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Gas price",
+            "url": "https://webit-blockchain.p.rapidapi.com/gas/price",
+            "description": "Get current gas price with a single API call on multiple chains.\n\nSupported blockchains:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain to get current gas price for.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/gas/price\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "gas_price": 43377651355,
+                    "gas_price_hex": "0xa19826e9b"
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-length": "98",
+                "content-type": "application/json",
+                "date": "Sat, 02 Apr 2022 13:46:54 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Get latest (current) block",
+            "url": "https://webit-blockchain.p.rapidapi.com/block/latest",
+            "description": "Get latest (current) block being currently mined.\n\nSupported blockchains:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `solana`;\n- `polygon-mumbai`.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain to get latest block currently being mined.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `solana`;\n- `polygon-mumbai`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/block/latest\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "block_number": 14490414,
+                    "block_hex": "0xdd1b2e"
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-type": "application/json",
+                "date": "Wed, 30 Mar 2022 23:14:13 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "transfer-encoding": "chunked",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Generate Wallet",
+            "url": "https://webit-blockchain.p.rapidapi.com/wallet/generate",
+            "description": "Generate a new crypto wallet.\n\nSupported blockchains are Ethereum, Polygon, Binance mainnets and Ropsten, Rinkey, Goerly, Kovan, Mumbai testnets.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain to generate wallet for.\n\nGenerated wallet can be used to sign transactions or imported into MetaMask and other wallet applications through the returned `private_key`.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.\n\nIf no parameter is provided, `ethereum` parameter is set to default.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/wallet/generate\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "status": "success",
+                "data": {
+                    "address": "b83f0dded753b43bec7b2f705474200cbd31a2a1",
+                    "private_key": "b240bd95d155c1314de6ebe34a01fa1262340d6f1e508774b643457c5a084fed",
+                    "public_key": "c1f729bd3167257a4cb2e9e1c94c73b9d03993c874bd0bd6117f257307a8b18d39c3dc35eb10916fa7291bf15631c08f0bbeb888faf396a0f487721b0ac31bf4"
+                },
+                "message": null
+            },
+            "headers": {
+                "access-control-allow-credentials": "true",
+                "access-control-allow-headers": "X-Requested-With",
+                "access-control-allow-methods": "GET, POST",
+                "access-control-allow-origin": "*",
+                "cache-control": "no-store, no-cache, must-revalidate",
+                "connection": "keep-alive",
+                "content-length": "322",
+                "content-type": "application/json",
+                "date": "Wed, 30 Mar 2022 23:14:36 GMT",
+                "expires": "Thu, 19 Nov 1981 08:52:00 GMT",
+                "pragma": "no-cache",
+                "server": "RapidAPI-1.2.8",
+                "vary": "Accept-Encoding",
+                "x-powered-by": "PHP/7.4.28, PleskLin",
+                "x-rapidapi-region": "AWS - eu-central-1",
+                "x-rapidapi-version": "1.2.8"
+            },
+            "schema": {}
+        },
+        {
+            "name": "Call Method (Read-only)",
+            "url": "https://webit-blockchain.p.rapidapi.com/contract/method",
+            "description": "Call read-only methods of smart contracts deployed on different blockchains, including Ethereum, Polygon, Binance mainnets and Ropsten, Rinkey, Goerly, Kovan, Mumbai testnets.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "method",
+                    "type": "STRING",
+                    "description": "The name of the method of the smart contract to be called.",
+                    "default": "getTierPrice"
+                },
+                {
+                    "name": "parameters",
+                    "type": "STRING",
+                    "description": "The JSON array of parameters in the same order as they are defined in the ABI mappings.\n\nUse commas to separate each parameter and \"quotes\" for string parameters.",
+                    "default": "[12]"
+                },
+                {
+                    "name": "contract",
+                    "type": "STRING",
+                    "description": "The address of the smart contract.",
+                    "default": "0xe09b2d3394843E40b837224E22D7C0f4765fA78b"
+                },
+                {
+                    "name": "abi",
+                    "type": "STRING",
+                    "description": "The ABI Json array object containing the mappings of the methods and variables accepted by the contract. Webit allows also both whole contract ABI or specific methods ABI mappings only, for your own convenience.\n\nThe provided ABI allows for calling a method called getTierPrice(uint tier), which retrieves the current price set within a custom smart contract implementation.",
+                    "default": "[{\"inputs\": [{\"internalType\": \"uint256\",\"name\": \"tier\",\"type\": \"uint256\"}],\"name\": \"getTierPrice\",\"outputs\": [{\"internalType\": \"uint256\",\"name\": \"\",\"type\": \"uint256\"}],\"stateMutability\": \"view\",\"type\":\"function\"}]"
+                },
+                {
+                    "name": "chain",
+                    "type": "ENUM",
+                    "description": "Blockchain the contract is deployed to.\n\nSupported values:\n- `ethereum`;\n- `binance`;\n- `polygon`;\n- `ethereum-ropsten`;\n- `ethereum-rinkeby`;\n- `ethereum-goerli`;\n- `ethereum-kovan`;\n- `binance-testnet`;\n- `polygon-mumbai`.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "from",
+                    "type": "STRING",
+                    "description": "Wallet address the call request comes from. For publicly accessible methods, this parameter can be ignored.",
+                    "default": "0xab5801a7d398351b8be11c439e05c5b3259aec9b"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/contract/method\"\nquerystring = {\"method\": \"getTierPrice\", \"from\": \"0xab5801a7d398351b8be11c439e05c5b3259aec9b\", \"parameters\": \"[12]\", \"contract\": \"0xe09b2d3394843E40b837224E22D7C0f4765fA78b\", \"abi\": \"[{\\\"inputs\\\": [{\\\"internalType\\\": \\\"uint256\\\",\\\"name\\\": \\\"tier\\\",\\\"type\\\": \\\"uint256\\\"}],\\\"name\\\": \\\"getTierPrice\\\",\\\"outputs\\\": [{\\\"internalType\\\": \\\"uint256\\\",\\\"name\\\": \\\"\\\",\\\"type\\\": \\\"uint256\\\"}],\\\"stateMutability\\\": \\\"view\\\",\\\"type\\\":\\\"function\\\"}]\", \"chain\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://webit-blockchain.p.rapidapi.com/contract/method\"\nquerystring = {\"method\": \"getTierPrice\", \"from\": \"0xab5801a7d398351b8be11c439e05c5b3259aec9b\", \"parameters\": \"[12]\", \"contract\": \"0xe09b2d3394843E40b837224E22D7C0f4765fA78b\", \"abi\": \"[{\\\"inputs\\\": [{\\\"internalType\\\": \\\"uint256\\\",\\\"name\\\": \\\"tier\\\",\\\"type\\\": \\\"uint256\\\"}],\\\"name\\\": \\\"getTierPrice\\\",\\\"outputs\\\": [{\\\"internalType\\\": \\\"uint256\\\",\\\"name\\\": \\\"\\\",\\\"type\\\": \\\"uint256\\\"}],\\\"stateMutability\\\": \\\"view\\\",\\\"type\\\":\\\"function\\\"}]\", \"chain\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"webit-blockchain.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ]
+}

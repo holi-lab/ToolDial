@@ -1,0 +1,534 @@
+{
+    "tool_name":"Target",
+    "tool_description":"Query for stores, categories, products, etc ... as on official websites",
+    "title":"Target",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1291,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/apidojo/api/target1/",
+    "host":"target1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"products/v3/get-details",
+            "url":"https://target1.p.rapidapi.com/products/v3/get-details",
+            "description":"Get detail information of product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tcin",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/v2/list or .../products/search-by-barcode endpoint",
+                    "default":"54191097"
+                },
+                {
+                    "name":"store_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/v3/get-details\"\nquerystring = {\"tcin\": tcin, \"store_id\": store_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/search-by-barcode",
+            "url":"https://target1.p.rapidapi.com/products/search-by-barcode",
+            "description":"Search product by barcode",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"store_id",
+                    "type":"STRING",
+                    "description":"The value of location_id returned in …/stores/list endpoint",
+                    "default":"911"
+                },
+                {
+                    "name":"barcode",
+                    "type":"STRING",
+                    "description":"The barcode ",
+                    "default":"195339816801"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/search-by-barcode\"\nquerystring = {\"store_id\": store_id, \"barcode\": barcode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/list (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/categories/list",
+            "description":"List all root and sub categories",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"category",
+                    "type":"STRING",
+                    "description":"Used to list child categories, you need to parse the value of target field returned right in this endpoint, such as : ...?category=5xtg6",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/categories/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"categories/v2/list",
+            "url":"https://target1.p.rapidapi.com/categories/v2/list",
+            "description":"List all root and sub categories",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"category",
+                    "type":"STRING",
+                    "description":"Used to list child categories, you need to parse the value of target field (taxonomy_nodes->actions->target) OR children->node_id returned right in this endpoint, such as : ...?category=5xtg6",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/categories/v2/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/list",
+            "url":"https://target1.p.rapidapi.com/products/v2/list",
+            "description":"List products in specific store with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"category",
+                    "type":"STRING",
+                    "description":"You need to parse the value of target field returned in .../categories/list endpoint, such as : ...?category=o9rnh. Please notice that do NOT use keyword and category parameters together, keyword  OR category  is required.",
+                    "default":"5xtg6"
+                },
+                {
+                    "name":"store_id",
+                    "type":"STRING",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"0"
+                },
+                {
+                    "name":"faceted_value",
+                    "type":"STRING",
+                    "description":"Look for suitable values returned under facet_list/details/value or facet_list/details/facet_id JSON object, separated by comma for multiple options, such as : 5tal2,q643lesaelr,etc...",
+                    "default":""
+                },
+                {
+                    "name":"sort_by",
+                    "type":"STRING",
+                    "description":"One of the following is allowed relevance|newest|RatingHigh|bestselling|PriceLow|PriceHigh",
+                    "default":"relevance"
+                },
+                {
+                    "name":"keyword",
+                    "type":"STRING",
+                    "description":"Search for products by term or phrase, such as : macbook air. Please notice that do NOT use searchTerm and endecaId parameters together, searchTerm  OR endecaId  is required.",
+                    "default":""
+                },
+                {
+                    "name":"default_purchasability_filter",
+                    "type":"BOOLEAN",
+                    "description":"Filter for purchasable items only",
+                    "default":"true"
+                },
+                {
+                    "name":"count",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum 20 items per page.",
+                    "default":"20"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/v2/list\"\nquerystring = {\"offset\": offset, \"sort_by\": sort_by, \"default_purchasability_filter\": default_purchasability_filter, \"count\": count, \"category\": category, \"store_id\": store_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/list-collection (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/products/list-collection",
+            "description":"List whole collection relating to a product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"store_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                },
+                {
+                    "name":"tcin",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/list endpoint",
+                    "default":"54191097"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/list-collection\"\nquerystring = {\"store_id\": store_id, \"tcin\": tcin}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/list-recommended (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/products/list-recommended",
+            "description":"List more products to consider",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"store_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                },
+                {
+                    "name":"tcins",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/list endpoint",
+                    "default":"54191097"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/list-recommended\"\nquerystring = {\"store_id\": store_id, \"tcins\": tcins}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/list (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/products/list",
+            "description":"List products in specific store with options and filters",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"endecaId",
+                    "type":"STRING",
+                    "description":"You need to parse the value of target field returned in .../categories/list endpoint, such as : ...?category=o9rnh. Please notice that do NOT use searchTerm and endecaId parameters together, searchTerm  OR endecaId  is required.",
+                    "default":"5xtg6"
+                },
+                {
+                    "name":"storeId",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"storeSearch",
+                    "type":"BOOLEAN",
+                    "description":"Only search for In-store products",
+                    "default":"false"
+                },
+                {
+                    "name":"facets",
+                    "type":"STRING",
+                    "description":"Look for suitable values returned under facetView/Entry/ExtendedData/value JSON object, separated by comma for multiple options, such as : 5tal2,q643lesaelr,etc...",
+                    "default":""
+                },
+                {
+                    "name":"searchTerm",
+                    "type":"STRING",
+                    "description":"Search for products by term or phrase, such as : macbook air. Please notice that do NOT use searchTerm and endecaId parameters together, searchTerm  OR endecaId  is required.",
+                    "default":""
+                },
+                {
+                    "name":"pageSize",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum 20 items per page.",
+                    "default":"20"
+                },
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following is allowed relevance|newest|RatingHigh|bestselling|PriceLow|PriceHigh",
+                    "default":"relevance"
+                },
+                {
+                    "name":"pageNumber",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/list\"\nquerystring = {\"endecaId\": endecaid, \"storeSearch\": storesearch, \"storeId\": storeid, \"pageSize\": pagesize, \"sortBy\": sortby, \"pageNumber\": pagenumber}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/list-recommended",
+            "url":"https://target1.p.rapidapi.com/products/v2/list-recommended",
+            "description":"List more products to consider",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"store_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                },
+                {
+                    "name":"tcins",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/list endpoint",
+                    "default":"54191097"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/v2/list-recommended\"\nquerystring = {\"store_id\": store_id, \"tcins\": tcins}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/v2/get-details (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/products/v2/get-details",
+            "description":"Get detail information of product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"store_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                },
+                {
+                    "name":"tcin",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/list endpoint",
+                    "default":"54191097"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/v2/get-details\"\nquerystring = {\"store_id\": store_id, \"tcin\": tcin}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"products/get-details (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/products/get-details",
+            "description":"Get detail information of product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tcin",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/list endpoint",
+                    "default":"54191097"
+                },
+                {
+                    "name":"store_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/products/get-details\"\nquerystring = {\"tcin\": tcin, \"store_id\": store_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"reviews/v2/list",
+            "url":"https://target1.p.rapidapi.com/reviews/v2/list",
+            "description":"List reviews relating to a product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"reviewedId",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/v2/list endpoint",
+                    "default":"82866370"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"sortBy",
+                    "type":"STRING",
+                    "description":"One of the following is allowed most&#95;recent|helpfulness&#95;desc|highest&#95;rating|lowest&#95;rating",
+                    "default":"most_recent"
+                },
+                {
+                    "name":"page",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"0"
+                },
+                {
+                    "name":"hasOnlyPhotos",
+                    "type":"BOOLEAN",
+                    "description":"Only filter for reviews having photos ",
+                    "default":"false"
+                },
+                {
+                    "name":"verifiedOnly",
+                    "type":"BOOLEAN",
+                    "description":"Only filter for verified reviews ",
+                    "default":"false"
+                },
+                {
+                    "name":"ratingFilter",
+                    "type":"STRING",
+                    "description":"One of the following : rating&#95;1|rating&#95;2|...|rating&#95;5. Pass this parameter multiple time to filter by multiple ratings. Ex : ...&ratingFilter=rating&#95;4&ratingFilter=rating&#95;5&...",
+                    "default":""
+                },
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum items per page is 30",
+                    "default":"30"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/reviews/v2/list\"\nquerystring = {\"reviewedId\": reviewedid, \"sortBy\": sortby, \"page\": page, \"hasOnlyPhotos\": hasonlyphotos, \"verifiedOnly\": verifiedonly, \"size\": size}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stores/get-details",
+            "url":"https://target1.p.rapidapi.com/stores/get-details",
+            "description":"Get detail information of specific store",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"location_id",
+                    "type":"NUMBER",
+                    "description":"The value of location_id returned in .../stores/list endpoint",
+                    "default":"911"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/stores/get-details\"\nquerystring = {\"location_id\": location_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"stores/list",
+            "url":"https://target1.p.rapidapi.com/stores/list",
+            "description":"List available nearby store by zipcode, GEO location, or city name. One at a time, do NOT use them together at once.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"zipcode",
+                    "type":"STRING",
+                    "description":"Zip code or postal code of area to look for stores, such as : 10009",
+                    "default":"10009"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"Name of city to look for stores, such as : california",
+                    "default":""
+                },
+                {
+                    "name":"latlng",
+                    "type":"STRING",
+                    "description":"GEO location to look for around stores, such as : 36.839828,-119.727711",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/stores/list\"\nquerystring = {\"zipcode\": zipcode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"auto-complete",
+            "url":"https://target1.p.rapidapi.com/auto-complete",
+            "description":"Get suggestion by term or phrase",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"Any familiar term or phrase  to search for products",
+                    "default":"macbook air"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/auto-complete\"\nquerystring = {\"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"reviews/list (Deprecated)",
+            "url":"https://target1.p.rapidapi.com/reviews/list",
+            "description":"List reviews relating to a product",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"tcin",
+                    "type":"NUMBER",
+                    "description":"The value of tcin field returned in .../products/list endpoint",
+                    "default":"54191097"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"offset",
+                    "type":"NUMBER",
+                    "description":"For paging purpose",
+                    "default":"0"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"For paging purpose, maximum items per page is 30",
+                    "default":"30"
+                },
+                {
+                    "name":"sort",
+                    "type":"STRING",
+                    "description":"One of the following is allowed time&#95;desc|helpfulness&#95;desc|rating&#95;desc|rating&#95;asc",
+                    "default":"time_desc"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://target1.p.rapidapi.com/reviews/list\"\nquerystring = {\"offset\": offset, \"limit\": limit, \"tcin\": tcin, \"sort\": sort}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"target1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

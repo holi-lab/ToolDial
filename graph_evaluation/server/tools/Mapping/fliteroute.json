@@ -1,0 +1,141 @@
+{
+    "tool_name":"fliteROUTE",
+    "tool_description":"The /greatcircle endpoint returns a set of geographic features containing FIR (Flight Information Region) information between any two distinct airport IATA codes.  \n\nThe /routestring endpoints return a set of geographic features containing FIR (Flight Information Region) information for any valid route string. \n\nEach of these endpoints contains an additional Fuel and Time calculator, where the airplane model is taken into account. Along with the existing information, these endpoints will also...",
+    "title":"fliteROUTE",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":0,
+        "avgLatency":61218,
+        "avgSuccessRate":0,
+        "popularityScore":0,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/flitex-flitex-default/api/fliteroute/",
+    "host":"fliteroute.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Decode Route String",
+            "url":"https://fliteroute.p.rapidapi.com/api/decoderoutestring/{routestring}",
+            "description":"Provide an ICAO Format route string. Return the coordinates associated with each of the waypoints.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"routestring",
+                    "type":"string",
+                    "description":"",
+                    "default":"KORD./.4333N/07947W..MIILS..NICSO..GISTI..LESLU..LIZAD..JSY..ARSUK..RESMI.UN491.LASAT..DEVDI..BASGO.Z424.RIXUV..LIMC"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://fliteroute.p.rapidapi.com/api/decoderoutestring/{routestring}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fliteroute.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Fuel, Time, and CO2 Estimates - Route String Distance Calculator",
+            "url":"https://fliteroute.p.rapidapi.com/api/rsfuelandtime/model/{model}/routestring/{routestring}",
+            "description":"Input a valid aircraft ICAO Code ( e.g. **A320**) and a valid Route String. The Route string must contain a valid Origin Airport ICAO Code ( e.g. **KJFK**), at least one waypoint ( e.g. **WAVEY**), and a valid Destination Airport ICAO Code ( e.g. **MKJP**). The origin and destination airport codes must be distinct. Once a request is made, a line will be drawn starting from the origin airport, moving along each waypoint, and then terminating at the destination airport. During this time, the FIR intersections will be calculated. Using Aircraft information, the distance, time, fuel, FIR traversal, and CO2 emissions will be calculated for the climb, cruise, and descent of the flight. \nExample Route String: **KJFK..WAVEY..EMJAY.J174.DIW..DIZNY.AR3.ZQA.Y307.ENAMO..NEFTU.UP525.EMABU.UA301.IMADI..SAVEM..MKJP**\n\nThe response will produce a set of features containing information about each FIR that has been intersected. Additionally, the response will produce data related to the climb (**climbData**) and descent (**descentData**) of the aircraft. \nEach feature will contain:\n- The name of the FIR ( e.g. **KZNY**)\n- The country name ( e.g. **United States**)\n- Distance in km and nm ( e.g. **415.3 km** / **224.2 nm**)\n- Cruise Time in minutes ( e.g. **22**)\n- Fuel consumption in kilograms ( e.g. **797.48**)\n- A numerical sequence number along the route ( e.g. **1**)\n- The geographic coordinates of the line segment  in [longitude, latitude] format ( e.g. **[ -73.78, 40.64], [-73.57, 40.42]** )\n\nThe Climb Data will contain:\n- Fuel used during the climb in kilograms ( e.g. **2937**)\n- CO2 emissions used during the climb in kilograms ( e.g. **9279**)\n- Distance of the climb in km and nm (nautical miles) ( e.g. **624 km** / **337 nm**)\n- Time of the climb in minutes ( e.g. **65**)\n- The FIR in which the climb occurred ( e.g. **KZDC**)\n\nThe Descent Data will contain:\n- Fuel used during the descent in kilograms ( e.g. **74**)\n- CO2 emissions used during the descent in kilograms ( e.g. **233**)\n- Distance of the descent in km and nm (nautical miles) ( e.g. **126 km** / **68 nm**)\n- Time of the descent in minutes ( e.g. **14**)\n- The FIR in which the descent occurred ( e.g. **MKJK**)\n- The FIR in which the cruise finished and the descent began ( e.g. **MUFH**)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"model",
+                    "type":"string",
+                    "description":"",
+                    "default":"A320"
+                },
+                {
+                    "name":"routestring",
+                    "type":"string",
+                    "description":"",
+                    "default":"KJFK..WAVEY..EMJAY.J174.DIW..DIZNY.AR3.ZQA.Y307.ENAMO..NEFTU.UP525.EMABU.UA301.IMADI..SAVEM..MKJP"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://fliteroute.p.rapidapi.com/api/rsfuelandtime/model/{model}/routestring/{routestring}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fliteroute.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Fuel, Time, and CO2 Estimates - Great Circle Distance Calculator",
+            "url":"https://fliteroute.p.rapidapi.com/api/gcfuelandtime/origin/{origin}/dest/{dest}/model/{model}",
+            "description":"Input an Origin Airport IATA code ( e.g. **GVA**), a Destination Airport IATA code ( e.g. **MIA**), and a valid aircraft ICAO code ( e.g. **A320**). The airport codes MUST be distinct and valid 3-letter IATA codes. Once the request is made, a great circle will be drawn between the two airports, while taking the aircraft into account. During this time, the FIR intersections will be calculated. Using Aircraft information, the distance, time, fuel, FIR traversal, and CO2 emissions will be calculated for the climb, cruise, and descent of the flight.\n\nThe response will produce a set of features containing information about each FIR that has been intersected. Additionally, the response will produce data related to the climb (**climbData**) and descent (**descentData**) of the aircraft. \nEach feature will contain:\n- The name of the FIR ( e.g. **KZNY**)\n- The country name ( e.g. **United States**)\n- Distance in km and nm ( e.g. **415.3 km** / **224.2 nm**)\n- Cruise Time in minutes ( e.g. **22**)\n- Fuel consumption in kilograms ( e.g. **797.48**)\n- A numerical sequence number along the route ( e.g. **1**)\n- The geographic coordinates of the line segment  in [longitude, latitude] format ( e.g. **[ -73.78, 40.64], [-73.57, 40.42]** )\n\nThe Climb Data will contain:\n- Fuel used during the climb in kilograms ( e.g. **2937**)\n- CO2 emissions used during the climb in kilograms ( e.g. **9279**)\n- Distance of the climb in km and nm (nautical miles) ( e.g. **624 km** / **337 nm**)\n- Time of the climb in minutes ( e.g. **65**)\n- The FIR in which the climb occurred ( e.g. **KZDC**)\n\nThe Descent Data will contain:\n- Fuel used during the descent in kilograms ( e.g. **74**)\n- CO2 emissions used during the descent in kilograms ( e.g. **233**)\n- Distance of the descent in km and nm (nautical miles) ( e.g. **126 km** / **68 nm**)\n- Time of the descent in minutes ( e.g. **14**)\n- The FIR in which the descent occurred ( e.g. **MKJK**)\n- The FIR in which the cruise finished and the descent began ( e.g. **MUFH**)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"model",
+                    "type":"string",
+                    "description":"",
+                    "default":"A320"
+                },
+                {
+                    "name":"origin",
+                    "type":"string",
+                    "description":"",
+                    "default":"GVA"
+                },
+                {
+                    "name":"dest",
+                    "type":"string",
+                    "description":"",
+                    "default":"MIA"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://fliteroute.p.rapidapi.com/api/gcfuelandtime/origin/{origin}/dest/{dest}/model/{model}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fliteroute.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Route String Distance Calculator",
+            "url":"https://fliteroute.p.rapidapi.com/api/routestring/{routestring}",
+            "description":"Input a valid Route String. The Route string must contain a valid Origin Airport ICAO Code ( e.g. **KJFK**), at least one waypoint ( e.g. **WAVEY**), and a valid Destination Airport ICAO Code ( e.g. **MKJP**). The origin and destination airport codes must be distinct. Once a request is made, a line will be drawn starting from the origin airport, moving along each waypoint, and then terminating at the destination airport. During this time, the FIR intersections will be calculated. \nExample Route String: **KJFK..WAVEY..EMJAY.J174.DIW..DIZNY.AR3.ZQA.Y307.ENAMO..NEFTU.UP525.EMABU.UA301.IMADI..SAVEM..MKJP**\n\nThe response will produce a set of features containing information about each FIR that has been intersected. Each feature will contain:\n- The name of the FIR ( e.g. **KZNY**)\n- The country name ( e.g. **United States**)\n- Distance in km and nm ( e.g. **415.3 km** / **224.2 nm**)\n- A numerical sequence number along the route ( e.g. **1**)\n- The geographic coordinates of the line segment  in [longitude, latitude] format ( e.g. **[ -73.78, 40.64], [-73.57, 40.42]** )\n\nNote: The geographic coordinates are in Decimal Degrees (DD) format. South of the Equator and West of the Prime Meridian are denoted with a minus (-) sign.\n\nPlease note that this route string feature does not yet support SID/STAR waypoints. Please ensure that the non-airport waypoints are either 3 or 5 letters in length, and contain only alphabetic uppercase characters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"routestring",
+                    "type":"string",
+                    "description":"",
+                    "default":"KJFK..WAVEY..EMJAY.J174.DIW..DIZNY.AR3.ZQA.Y307.ENAMO..NEFTU.UP525.EMABU.UA301.IMADI..SAVEM..MKJP"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://fliteroute.p.rapidapi.com/api/routestring/{routestring}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fliteroute.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Great Circle Distance Calculator",
+            "url":"https://fliteroute.p.rapidapi.com/api/greatcircle/origin/{origin}/dest/{dest}",
+            "description":"Input an Origin Airport IATA code ( e.g. **GVA**) and Destination Airport IATA code ( e.g. **MIA**). These airport codes MUST be distinct and valid 3-letter IATA codes. \nOnce the request is made, a great circle will be drawn between the two airports, and the FIR intersections will be calculated. \n\nThe response will produce a set of features containing information about each FIR that has been intersected. Each feature will contain:\n- The name of the FIR ( e.g. **LSAS**)\n- The country name ( e.g. **Switzerland**)\n- Distance in km and nm ( e.g. **4.21 km** / **2.27 nm**)\n- A numerical sequence number along the route ( e.g. **1**)\n- The geographic coordinates of the line segment  in [longitude, latitude] format ( e.g. **[ 6.10, 46.23], [6.07, 46.26]** )\n\nNote: The geographic coordinates are in Decimal Degrees (DD) format. South of the Equator and West of the Prime Meridian are denoted with a minus (-) sign.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"dest",
+                    "type":"string",
+                    "description":"",
+                    "default":"MIA"
+                },
+                {
+                    "name":"origin",
+                    "type":"string",
+                    "description":"",
+                    "default":"JFK"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://fliteroute.p.rapidapi.com/api/greatcircle/origin/{origin}/dest/{dest}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"fliteroute.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

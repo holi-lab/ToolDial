@@ -1,0 +1,70 @@
+{
+    "product_id": "api_817d0c35-a802-44b8-8d02-7d842ef10858",
+    "tool_description": "At the core of the Sendcloud Shipping API is the Parcels resource. Parcels are data objects which can be announced and have a shipping method and shipping label assigned to them. You can also think of parcels as shipments.",
+    "home_url": "https://rapidapi.com/sendcloud-api-sendcloud-api-default/api/parcel3/",
+    "name": "Parcel",
+    "title": "Parcel",
+    "pricing": "FREE",
+    "tool_name": "Parcel",
+    "score": null,
+    "host": "parcel3.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Delete a parcel",
+            "url": "https://parcel3.p.rapidapi.com/parcels/{id}/cancel",
+            "description": "You can use this endpoint to:\n\n1. **Cancel** an announced parcel; or,\n2. **Delete** an unnanounced parcel\n\n### Cancelling a parcel\nWhen you **cancel** a parcel which is already announced (has a shipping label attached to it), you will still be able to find it via the `parcel_id` and the **Get a specific parcel** endpoint. In the Sendcloud panel, it will appear in your **Cancelled labels** overview.\n\n<!-- theme: warning -->\n>After 42 days, it's no longer possible to cancel a parcel, even if it hasn't been shipped.\n\n### Deleting a parcel\nWhen you **delete** a parcel which hasn't been announced, the parcel will be removed from the Sendcloud system and you will no longer be able to locate it via the parcel `id`. You will need to create the parcel again if you want to announce it at a later date.\n\n### Conditions for label cancellation\n\nIt's not always possible to cancel a parcel which is aleady announced. As a result, cancellation is not guaranteed and may be asynchronous depending on the state of the parcel. When you send a cancellation request via this endpoint, the response will indicate the status of the cancellation request.\n\n<!-- theme: info -->\n>Each carrier will have different cancellation deadlines. Some carriers do not accept cancellation requests regardless of whether or not the label is cancelled within the deadline. You can find more information about cancellation deadlines on our <a href=\"https://support.sendcloud.com/hc/en-us/articles/360025143991-How-do-I-cancel-my-shipment-\">**Help Center**.</a>",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "ID of the parcel",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://parcel3.p.rapidapi.com/parcels/{id}/cancel\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parcel3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://parcel3.p.rapidapi.com/parcels/{id}/cancel\"\nquerystring = {\"id\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parcel3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "title": "Cancel Parcel Status Object",
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "message": {
+                        "type": "string",
+                        "minLength": 1
+                    }
+                },
+                "required": [
+                    "status",
+                    "message"
+                ]
+            }
+        },
+        {
+            "name": "Create a parcel",
+            "url": "https://parcel3.p.rapidapi.com/parcels",
+            "description": "This endpoint **creates a parcel** under your API credentials. \n\n- You can choose to **announce the parcel** and create the shipping label at the same time as you create the parcel by providing the parameter `request_label: \"true\"`. \n\n- When `request_label` is `false`, you can create the parcel but it will not be announced. \n\n- You can then request the shipping label at a later date by changing the `request_label` parameter via the [Update a parcel](paths/~1parcels/put) endpoint.\n<!-- theme: warning -->\n>Pay attention to enter the correct `sender_id` if you wish to ship this parcel from a location **other than** your **default** sender address. You can find the `sender_id` for each of the addresses you've saved in your Sendcloud account via the [Get sender addresses](paths/~1user~1addresses~1sender/get) endpoint. \n\n### International parcel creation \n\nIf you want to create a parcel to ship to a destination country outside the EU, it's mandatory to include additional information related to the parcel contents. This allows Sendcloud to automatically generate the required customs documentation based on the international shipping method selected. After the shipping label and associated documents are generated, you can retrieve and download them via the [Parcel documents](paths/~1parcels~1{id}~1documents~1{type}/get) endpoint.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "errors",
+                    "type": "STRING",
+                    "description": "In case if you send a request with request_label: True and request_label_async: False, then you can send a request with the errors=verbose-carrier query string in the URL. If the response of a single parcel or one of the parcels from the batch is failed you\u2019ll receive the carrier\u2019s response with an error description.",
+                    "default": "verbose-carrier"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://parcel3.p.rapidapi.com/parcels\"\nquerystring = {\"errors\": \"verbose-carrier\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parcel3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://parcel3.p.rapidapi.com/parcels\"\nquerystring = {\"errors\": \"verbose-carrier\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parcel3.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

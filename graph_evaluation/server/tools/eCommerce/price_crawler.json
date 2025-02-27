@@ -1,0 +1,118 @@
+{
+    "product_id": "api_ef4a8bec-6bcf-4f65-aa57-4b30630230fb",
+    "tool_description": "Search for low prices for requested page - webShop",
+    "home_url": "https://rapidapi.com/Djomla89/api/price-crawler/",
+    "name": "Price Crawler",
+    "title": "Price Crawler",
+    "pricing": "FREEMIUM",
+    "tool_name": "Price Crawler",
+    "score": null,
+    "host": "price-crawler.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Web Shop Crawler",
+            "url": "https://price-crawler.p.rapidapi.com/",
+            "description": "Get list of products from web shop.\nReturn products details",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "url",
+                    "type": "STRING",
+                    "description": "Url to list of products to be crawled",
+                    "default": "https://www.newegg.com/LED-TV/SubCategory/ID-798?cm_sp=Cat_TV-Video_1-_-VisNav-_-All-LED-TVs_1"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "custom_number_special",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ".open-popup"
+                },
+                {
+                    "name": "maxPrice",
+                    "type": "STRING",
+                    "description": "Maximum price to compare.\nAll product with price less than maxPrice will be returned as response.",
+                    "default": "4000"
+                },
+                {
+                    "name": "decimal_separator",
+                    "type": "STRING",
+                    "description": "Define price decimal separator.\n",
+                    "default": "."
+                },
+                {
+                    "name": "custom_string_promo",
+                    "type": "STRING",
+                    "description": "Css selector for custom value on product list\n\nHow to find this:\n- Locate any custom value you need for single product on webShop\n-- Description\n-- Discount value\n-- EAN code\n- Right-click on that `custom value`\n- Locate `class` attribute and copy value\n- Now define custom value as `custom_textType_NAME`\n-- `custom` is hard-coded value\n-- `textType` can be `string` or `number`\n-- `NAME` can be any unique name \n- This value is 'custom_string_NAME' or `custom_number_NAME' param in API request",
+                    "default": ".item-promo"
+                },
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Css selector for product name.\n\nHow to find this:\n- Locate `name` for single product on webShop\n- Right-click on name\n- Locate `class` attribute and copy value\n- Add `.` ( dot ) as prefix on that value - For example `.product-name` or `.name`\n- This value is 'name' param in API request",
+                    "default": ".item-title"
+                },
+                {
+                    "name": "image",
+                    "type": "STRING",
+                    "description": "Css selector for product name.\n\nHow to find this:\n- Locate `image` for single product on webShop\n- Right-click on image\n- Locate `class` attribute and copy value\n- Add `.` ( dot ) as prefix on that value - For example `.product-image` or `.image`\n- This value is 'image' param in API request\n\nMore about [images](https://www.w3schools.com/html/html_images.asp)",
+                    "default": ".item-img > img"
+                },
+                {
+                    "name": "price",
+                    "type": "STRING",
+                    "description": "Css selector for product price.\n\nHow to find this:\n- Locate price for single product on webShop\n- Right-click on price\n- Locate `class` attribute and copy value\n- Add `.` ( dot ) as prefix on that value - For example `.product-price` or `.total-price`\n- This value is 'price' param in API request\n![](https://ibb.co/DKC4bmF)\n\nMore about CSS attribute\nhttps://www.w3schools.com/html/html_classes.asp",
+                    "default": ".price-current"
+                },
+                {
+                    "name": "link",
+                    "type": "STRING",
+                    "description": "Css selector for product name.\n\nHow to find this:\n- Locate `link` to single product on webShop \n- Right-click on link\n- Locate `class` attribute and copy value\n- Add `.` ( dot ) as prefix on that value - For example `.product-name` or `.name`\n- This value is 'name' param in API request\n\nMore about [links](https://www.w3schools.com/html/html_links.asp)\n",
+                    "default": ".item-img"
+                },
+                {
+                    "name": "number_of_decimals",
+                    "type": "NUMBER",
+                    "description": "Number of decimals which will be used to compare price\nDefault: 2",
+                    "default": "2"
+                },
+                {
+                    "name": "order_by_price",
+                    "type": "NUMBER",
+                    "description": "Order response by price.\nIf enabled, it will return response from lowest price to highest ",
+                    "default": "1"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://price-crawler.p.rapidapi.com/\"\nquerystring = {\"custom_number_special\": \".open-popup\", \"maxPrice\": \"4000\", \"decimal_separator\": \".\", \"url\": \"https://www.newegg.com/LED-TV/SubCategory/ID-798?cm_sp=Cat_TV-Video_1-_-VisNav-_-All-LED-TVs_1\", \"custom_string_promo\": \".item-promo\", \"name\": \".item-title\", \"image\": \".item-img > img\", \"price\": \".price-current\", \"link\": \".item-img\", \"number_of_decimals\": \"2\", \"order_by_price\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"price-crawler.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://price-crawler.p.rapidapi.com/\"\nquerystring = {\"custom_number_special\": \".open-popup\", \"maxPrice\": \"4000\", \"decimal_separator\": \".\", \"url\": \"https://www.newegg.com/LED-TV/SubCategory/ID-798?cm_sp=Cat_TV-Video_1-_-VisNav-_-All-LED-TVs_1\", \"custom_string_promo\": \".item-promo\", \"name\": \".item-title\", \"image\": \".item-img > img\", \"price\": \".price-current\", \"link\": \".item-img\", \"number_of_decimals\": \"2\", \"order_by_price\": \"1\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"price-crawler.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "code": {
+                        "type": "integer"
+                    },
+                    "response": {
+                        "properties": {
+                            "data": {
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "success": {
+                        "type": "boolean"
+                    },
+                    "timestamp": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

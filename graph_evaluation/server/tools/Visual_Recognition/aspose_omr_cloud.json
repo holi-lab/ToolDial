@@ -1,0 +1,235 @@
+{
+    "product_id": "api_ea2a196b-ec5f-4288-a6f2-d4e182bd8c9a",
+    "tool_description": "Aspose.OMR Cloud is a REST API to recognize optical mark from OMR scanned sheet images in the cloud. The API allows capturing human-marked data from document forms such as surveys, questionnaires, multiple-choice examination paper and other tests.",
+    "home_url": "https://rapidapi.com/asposecloud/api/aspose-omr-cloud1/",
+    "name": "Aspose.OMR Cloud",
+    "title": "Aspose.OMR Cloud",
+    "pricing": "FREEMIUM",
+    "tool_name": "Aspose.OMR Cloud",
+    "score": null,
+    "host": "aspose-omr-cloud1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "PostRunOmrTask",
+            "url": "https://aspose-omr-cloud1.p.rapidapi.com/omr/{name}/runOmrTask",
+            "description": " ",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "Name of the file to recognize.",
+                    "default": ""
+                },
+                {
+                    "name": "actionName",
+                    "type": "STRING",
+                    "description": "Action name ['CorrectTemplate', 'FinalizeTemplate', 'RecognizeImage', 'GenerateTemplate']",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "folder",
+                    "type": "STRING",
+                    "description": "Image's folder.",
+                    "default": ""
+                },
+                {
+                    "name": "storage",
+                    "type": "STRING",
+                    "description": "Image's storage.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://aspose-omr-cloud1.p.rapidapi.com/omr/{name}/runOmrTask\"\nquerystring = {\"name\": \"\", \"folder\": \"\", \"storage\": \"\", \"actionName\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aspose-omr-cloud1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://aspose-omr-cloud1.p.rapidapi.com/omr/{name}/runOmrTask\"\nquerystring = {\"name\": \"\", \"folder\": \"\", \"storage\": \"\", \"actionName\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aspose-omr-cloud1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "description": "Represents information about response after OMR.",
+                "additionalProperties": false,
+                "required": [
+                    "ErrorCode"
+                ],
+                "properties": {
+                    "ErrorCode": {
+                        "type": "integer",
+                        "description": "Integer field that indicates whether any critical errors occured during task execution",
+                        "format": "int32",
+                        "minimum": -2147483648,
+                        "maximum": 2147483647
+                    },
+                    "ErrorText": {
+                        "type": "string",
+                        "description": "String description of occured critical error. Empty if no critical errors occured"
+                    },
+                    "Payload": {
+                        "type": "object",
+                        "description": "Represents information about file.",
+                        "additionalProperties": false,
+                        "properties": {
+                            "Result": {
+                                "type": "object",
+                                "description": "Represents information about part of the text.",
+                                "additionalProperties": false,
+                                "required": [
+                                    "ExecutionTime"
+                                ],
+                                "properties": {
+                                    "TemplateId": {
+                                        "type": "string",
+                                        "description": "GUID string that is used to identify template on server\nThis value is assigned after Template Correction and used later in Template Finalization and Image Recognition"
+                                    },
+                                    "ExecutionTime": {
+                                        "type": "number",
+                                        "description": "Indicates how long it took to perform task on server.",
+                                        "format": "double",
+                                        "minimum": -1.7976931348623157e+308,
+                                        "maximum": 1.7976931348623157e+308
+                                    },
+                                    "ResponseFiles": {
+                                        "type": "array",
+                                        "description": "This structure holds array of files returned in response\nType and content of files differes depending on action",
+                                        "items": {
+                                            "type": "object",
+                                            "description": "Represents information about file.",
+                                            "additionalProperties": false,
+                                            "required": [
+                                                "Size"
+                                            ],
+                                            "properties": {
+                                                "Name": {
+                                                    "type": "string",
+                                                    "description": "Name of the file"
+                                                },
+                                                "Size": {
+                                                    "type": "integer",
+                                                    "description": "Size of the image in bytes",
+                                                    "format": "int64",
+                                                    "minimum": -9223372036854776000,
+                                                    "maximum": 9223372036854776000
+                                                },
+                                                "Data": {
+                                                    "type": "string",
+                                                    "description": "File data packed in base64 string",
+                                                    "format": "byte",
+                                                    "pattern": "^[\\w\\d+\\/=]*$"
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "Info": {
+                                        "type": "object",
+                                        "description": "Represents information about OMR result.",
+                                        "additionalProperties": false,
+                                        "required": [
+                                            "ProcessedTasksCount",
+                                            "SuccessfulTasksCount"
+                                        ],
+                                        "properties": {
+                                            "ResponseVersion": {
+                                                "type": "string",
+                                                "description": "String value representing version of the response."
+                                            },
+                                            "ProcessedTasksCount": {
+                                                "type": "integer",
+                                                "description": "Total amount of processed tasks",
+                                                "format": "int32",
+                                                "minimum": -2147483648,
+                                                "maximum": 2147483647
+                                            },
+                                            "SuccessfulTasksCount": {
+                                                "type": "integer",
+                                                "description": "Total amount of successful tasks, i.e. tasks that completed without errors",
+                                                "format": "int32",
+                                                "minimum": -2147483648,
+                                                "maximum": 2147483647
+                                            },
+                                            "Details": {
+                                                "type": "object",
+                                                "description": "Structure that holds additional information regarding performed task.",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "TaskMessages": {
+                                                        "type": "array",
+                                                        "description": "Warnings and other messages regarding task, etc.",
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "TaskResult": {
+                                                        "type": "string",
+                                                        "description": "Indicates if each particular task passed or failed,"
+                                                    },
+                                                    "RecognitionStatistics": {
+                                                        "type": "array",
+                                                        "description": "RecognitionStatistics",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "description": "OMRResponseDetails",
+                                                            "additionalProperties": false,
+                                                            "required": [
+                                                                "RunSeconds"
+                                                            ],
+                                                            "properties": {
+                                                                "Name": {
+                                                                    "type": "string",
+                                                                    "description": "Gets or sets Name"
+                                                                },
+                                                                "TaskMessages": {
+                                                                    "type": "array",
+                                                                    "description": "Warnings and other messages regarding task, etc.",
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "TaskResult": {
+                                                                    "type": "string",
+                                                                    "description": "Indicates if each particular task passed or failed,"
+                                                                },
+                                                                "RunSeconds": {
+                                                                    "type": "number",
+                                                                    "description": "Gets or sets RunSeconds",
+                                                                    "format": "double",
+                                                                    "minimum": -1.7976931348623157e+308,
+                                                                    "maximum": 1.7976931348623157e+308
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "ServerStat": {
+                        "type": "object",
+                        "description": "Represents information about part of the text.",
+                        "additionalProperties": false,
+                        "required": [
+                            "StorageDownloadTime",
+                            "OmrFunctionCallTime"
+                        ],
+                        "properties": {
+                            "StorageDownloadTime": {
+                                "type": "string",
+                                "description": "Get or set StorageDownloadTime",
+                                "format": "time-span"
+                            },
+                            "OmrFunctionCallTime": {
+                                "type": "string",
+                                "description": "Get or set OmrFunctionCallTime",
+                                "format": "time-span"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

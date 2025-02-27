@@ -1,0 +1,353 @@
+{
+    "product_id": "api_ba8e04db-a60f-491c-8801-7b8a0a0426d0",
+    "tool_description": "The API returns the number of days,  hours, working days, working hours, wages, weekend days, and the list of public holidays of the requested date period and country. You can also add any number of working days or working hours to a given date. 50 countries and over 230 regional calendars are supported and we work hard to keep our database up to date by following government announcements regarding public holidays changes. All the calendars can be fully customized from our friendly working da...",
+    "home_url": "https://rapidapi.com/joursouvres-api/api/working-days/",
+    "name": "Working days",
+    "title": "Working days",
+    "pricing": "FREEMIUM",
+    "tool_name": "Working days",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 132,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "working-days.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/1.3/get_info_day",
+            "url": "https://working-days.p.rapidapi.com/1.3/get_info_day",
+            "description": "Get detailed information about a specific day.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "The ISO country code (2 letters).  See <a href=https://api.workingdays.org/1.2/api-countries.php>available countries & configurations</a>",
+                    "default": "US"
+                },
+                {
+                    "name": "date",
+                    "type": "STRING",
+                    "description": "The date to analyze (YYYY-MM-DD)",
+                    "default": "2013-12-31"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "configuration",
+                    "type": "STRING",
+                    "description": "The name of the preset configuration to be used. See <a href=https://api.workingdays.org/1.2/api-countries.php>available countries & configurations</a>",
+                    "default": "Federal holidays"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/get_info_day\"\nquerystring = {\"configuration\": \"Federal holidays\", \"country_code\": \"US\", \"profile_id\": \"\", \"date\": \"2013-12-31\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/get_info_day\"\nquerystring = {\"configuration\": \"Federal holidays\", \"country_code\": \"US\", \"profile_id\": \"\", \"date\": \"2013-12-31\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/1.3/delete_custom_period",
+            "url": "https://working-days.p.rapidapi.com/1.3/delete_custom_period",
+            "description": "Removing a previously defined custom period",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "STRING",
+                    "description": "The start date of the custom period (YYYY-MM-DD)",
+                    "default": "2013-01-01"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "The ID of the calendar we are customizing.",
+                    "default": "CB7EF3"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "end_date",
+                    "type": "STRING",
+                    "description": "The end date of the custom period (YYYY-MM-DD) If omitted, end date will be equal to start date (one day custom period)",
+                    "default": "2013-01-07"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/delete_custom_period\"\nquerystring = {\"start_date\": \"2013-01-01\", \"profile_id\": \"CB7EF3\", \"end_date\": \"2013-01-07\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/delete_custom_period\"\nquerystring = {\"start_date\": \"2013-01-01\", \"profile_id\": \"CB7EF3\", \"end_date\": \"2013-01-07\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "/1.3/analyse",
+            "url": "https://working-days.p.rapidapi.com/1.3/analyse",
+            "description": "Analyse a period (you provide a start_date and an end_date over a given calendar, we respond with the period analysis)",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "STRING",
+                    "description": "The start date (YYYY-MM-DD)",
+                    "default": "2013-01-01"
+                },
+                {
+                    "name": "end_date",
+                    "type": "STRING",
+                    "description": "The end date (YYYY-MM-DD)",
+                    "default": "2013-12-31"
+                },
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "The ISO country code (2 letters).  See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "US"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "end_time",
+                    "type": "STRING",
+                    "description": "The end date's time (24 hours format, like 09:00 or 15:00, but not 3pm).If omitted, default value is 23:59.",
+                    "default": "18:15"
+                },
+                {
+                    "name": "start_time",
+                    "type": "STRING",
+                    "description": "The start date's time (24 hours format, like 09:00 or 15:00, but not 3pm).If omitted, default value is 00:00",
+                    "default": "09:14"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "configuration",
+                    "type": "STRING",
+                    "description": "The name of the preset configuration to be used. See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "Federal holidays"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/analyse\"\nquerystring = {\"start_date\": \"2013-01-01\", \"end_time\": \"18:15\", \"start_time\": \"09:14\", \"end_date\": \"2013-12-31\", \"country_code\": \"US\", \"profile_id\": \"\", \"configuration\": \"Federal holidays\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/analyse\"\nquerystring = {\"start_date\": \"2013-01-01\", \"end_time\": \"18:15\", \"start_time\": \"09:14\", \"end_date\": \"2013-12-31\", \"country_code\": \"US\", \"profile_id\": \"\", \"configuration\": \"Federal holidays\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/1.3/add_working_hours",
+            "url": "https://working-days.p.rapidapi.com/1.3/add_working_hours",
+            "description": "Add an amount of working time to a given start date/time",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "STRING",
+                    "description": "The start date (YYYY-MM-DD)",
+                    "default": "2013-12-31"
+                },
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "The ISO country code (2 letters).  See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "US"
+                },
+                {
+                    "name": "start_time",
+                    "type": "STRING",
+                    "description": "The start time in a 24 hours format with leading zeros.",
+                    "default": "08:15"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "increment_time",
+                    "type": "STRING",
+                    "description": "The amount of working time to be added (or removed) to the start date time. Format H:i. This amount cannot exceed 5000 hours. For example, to add one hour&#58; 1&#58;00. To add 30 hours and 15 minutes&#58; 30:15.  To remove 45 minutes&#58; -0:45",
+                    "default": 1815
+                },
+                {
+                    "name": "configuration",
+                    "type": "STRING",
+                    "description": "The name of the preset configuration to be used. See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "Federal holidays"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/add_working_hours\"\nquerystring = {\"increment_time\": 1815, \"start_date\": \"2013-12-31\", \"configuration\": \"Federal holidays\", \"profile_id\": \"\", \"country_code\": \"US\", \"start_time\": \"08:15\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/add_working_hours\"\nquerystring = {\"increment_time\": 1815, \"start_date\": \"2013-12-31\", \"configuration\": \"Federal holidays\", \"profile_id\": \"\", \"country_code\": \"US\", \"start_time\": \"08:15\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "/1.3/list_non_working_days",
+            "url": "https://working-days.p.rapidapi.com/1.3/list_non_working_days",
+            "description": "List the non working days (weekend days, public holidays and custom dates) between two dates in chronlogical order.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "start_date",
+                    "type": "STRING",
+                    "description": "The start date (YYYY-MM-DD)",
+                    "default": "2013-01-01"
+                },
+                {
+                    "name": "end_date",
+                    "type": "STRING",
+                    "description": "The end date (YYYY-MM-DD)",
+                    "default": "2013-12-31"
+                },
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "The ISO country code (2 letters).  See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "US"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "configuration",
+                    "type": "STRING",
+                    "description": "The name of the preset configuration to be used. See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "Federal holidays"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/list_non_working_days\"\nquerystring = {\"start_date\": \"2013-01-01\", \"end_date\": \"2013-12-31\", \"configuration\": \"Federal holidays\", \"profile_id\": \"\", \"country_code\": \"US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/list_non_working_days\"\nquerystring = {\"start_date\": \"2013-01-01\", \"end_date\": \"2013-12-31\", \"configuration\": \"Federal holidays\", \"profile_id\": \"\", \"country_code\": \"US\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        },
+        {
+            "name": "/1.3/define_custom_period",
+            "url": "https://working-days.p.rapidapi.com/1.3/define_custom_period",
+            "description": "Defining a custom period (typically days of vacations of an employee or days of annual closure of a company) can be done from the working days websites user interface but can also be done programmatically from the API. A typical use case would be to retrieve the vacations of the workers out of the human ressources software and insert them into a custom calendar, then being able to query available working days.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "description",
+                    "type": "STRING",
+                    "description": "A textual description of the custom period (up to 30 caracters)",
+                    "default": "Vacations to Bahamas"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "The ID of the calendar we are customizing.",
+                    "default": "CB7EF3"
+                },
+                {
+                    "name": "start_date",
+                    "type": "STRING",
+                    "description": "The start date of the custom period (YYYY-MM-DD)",
+                    "default": "2013-01-01"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "color",
+                    "type": "STRING",
+                    "description": "The color of custom period when displayed on the calendar. Colors can be useful in order to classify custom periods. Default value is orange.",
+                    "default": "orange"
+                },
+                {
+                    "name": "start_morning",
+                    "type": "BOOLEAN",
+                    "description": "Does the custom period starts in the morning of the start_date? Default value is true. (This parameter can be used if you want to create half day custom periods.)",
+                    "default": true
+                },
+                {
+                    "name": "end_afternoon",
+                    "type": "BOOLEAN",
+                    "description": "Does the custom period ends in the afternoon of the end_date? Default value is true. (This parameter can be used if you want to create half day custom periods.)",
+                    "default": true
+                },
+                {
+                    "name": "end_date",
+                    "type": "STRING",
+                    "description": "The end date of the custom period (YYYY-MM-DD) If omitted, end date will be equal to start date (one day custom period)",
+                    "default": "2013-01-07"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/define_custom_period\"\nquerystring = {\"color\": \"orange\", \"description\": \"Vacations to Bahamas\", \"start_morning\": true, \"profile_id\": \"CB7EF3\", \"end_afternoon\": true, \"start_date\": \"2013-01-01\", \"end_date\": \"2013-01-07\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/define_custom_period\"\nquerystring = {\"color\": \"orange\", \"description\": \"Vacations to Bahamas\", \"start_morning\": true, \"profile_id\": \"CB7EF3\", \"end_afternoon\": true, \"start_date\": \"2013-01-01\", \"end_date\": \"2013-01-07\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "/1.3/add_working_days",
+            "url": "https://working-days.p.rapidapi.com/1.3/add_working_days",
+            "description": "Add (or remove) any number of working days to a date.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "country_code",
+                    "type": "STRING",
+                    "description": "The ISO country code (2 letters).  See <a href=https://api.workingdays.org/api-countries >available countries & configurations</a>",
+                    "default": "US"
+                },
+                {
+                    "name": "start_date",
+                    "type": "STRING",
+                    "description": "The start date (YYYY-MM-DD)",
+                    "default": "2013-12-31"
+                },
+                {
+                    "name": "increment",
+                    "type": "NUMBER",
+                    "description": "The number of working days you want to add to your start date (positive or negative integer but not zero)",
+                    "default": 10
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "include_start",
+                    "type": "BOOLEAN",
+                    "description": "Should the count include the start_date? Default value is true. If you set include_start to false (\"false\" or \"0\"), the count will start at the next working day (or previous working day, if increment is negative)",
+                    "default": true
+                },
+                {
+                    "name": "configuration",
+                    "type": "STRING",
+                    "description": "The name of the preset configuration to be used. See <a href=https://api.workingdays.org/api-countries.php>available countries & configurations</a>",
+                    "default": "Federal holidays"
+                },
+                {
+                    "name": "profile_id",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/add_working_days\"\nquerystring = {\"include_start\": true, \"country_code\": \"US\", \"configuration\": \"Federal holidays\", \"start_date\": \"2013-12-31\", \"profile_id\": \"\", \"increment\": 10}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://working-days.p.rapidapi.com/1.3/add_working_days\"\nquerystring = {\"include_start\": true, \"country_code\": \"US\", \"configuration\": \"Federal holidays\", \"start_date\": \"2013-12-31\", \"profile_id\": \"\", \"increment\": 10}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"working-days.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {}
+        }
+    ],
+    "standardized_name": "working_days"
+}

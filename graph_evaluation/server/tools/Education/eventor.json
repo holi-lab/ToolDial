@@ -1,0 +1,163 @@
+{
+    "tool_name":"eventor",
+    "tool_description":"event management",
+    "title":"eventor",
+    "pricing":"FREE",
+    "score":null,
+    "home_url":"https://rapidapi.com/eventor-eventor-default/api/eventor/",
+    "host":"eventor.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Create Event",
+            "url":"https://eventor.p.rapidapi.com/logEvent",
+            "description":"Create an event\n1)Finds agentId/eventId\n2) Insert record in table=events\n\t[agentId\n\teventId\n\tphoneNum [12]\n              eventInfoStr1 (50)\n\teventInfoStr2 (50)\n              timestamp]\n3) If agent or eventName not found, create them in Agent.eventName tables\n\nEnd point should work with either:\n/logEvent \nor \n/createEventInSql\n\ne.g.\n/createEventInSql?eventName=classes&agent=Sherwood%20Ford&phoneNum=6506900639&eventInfoStr1=Campaign1:CLOSED",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"agent",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Sherwood Ford"
+                },
+                {
+                    "name":"eventInfoStr1",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Campaign1:CLOSED"
+                },
+                {
+                    "name":"phoneNum",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"eventName",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"classes"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"eventInfoStr2",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://eventor.p.rapidapi.com/logEvent\"\nquerystring = {\"agent\": agent, \"eventInfoStr1\": eventinfostr1, \"phoneNum\": phonenum, \"eventName\": eventname}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"eventor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Delete Event",
+            "url":"https://eventor.p.rapidapi.com/deleteEvent",
+            "description":"Finds the events on date=#date\nDeletes the first #deleteNumItems\n\nFor example, if there are 5 events and deleteNumItems=3, then delete first 3 and leave 2\n\n\n/deleteEvent?agent=Sherwood%20Ford&eventName=classes&date=2020-02-17&deleteNumItems=3",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"deleteNumItems",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"3"
+                },
+                {
+                    "name":"date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"eventName",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"classes"
+                },
+                {
+                    "name":"agent",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Sherwood Ford"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://eventor.p.rapidapi.com/deleteEvent\"\nquerystring = {\"eventName\": eventname, \"deleteNumItems\": deletenumitems, \"agent\": agent, \"date\": date}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"eventor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Get Event Count",
+            "url":"https://eventor.p.rapidapi.com/getEventCount",
+            "description":"Count(*) where events.date >=dateFrom and event.date<=dateTo\n\nE.g.\n/getEventCount?agent=Sherewood&eventName=classes&dateFrom=2020-02-17&dateTo=2020-02-27",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"dateTo",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"dateFrom",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"eventName",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"classes"
+                },
+                {
+                    "name":"agent",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Sherwood Ford"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://eventor.p.rapidapi.com/getEventCount\"\nquerystring = {\"eventName\": eventname, \"agent\": agent, \"dateTo\": dateto, \"dateFrom\": datefrom}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"eventor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get Event Data",
+            "url":"https://eventor.p.rapidapi.com/getEventData",
+            "description":"1)Finds agentId/eventId\n2)Searches for all matches\n\n/getEventData\n\ne.g.\n/getEventData?date=2020-02-17&eventName=scheduleCompleteAutoServ",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"eventName",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"scheduleCompleteAutoServ"
+                },
+                {
+                    "name":"date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://eventor.p.rapidapi.com/getEventData\"\nquerystring = {\"eventName\": eventname, \"date\": date}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"eventor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

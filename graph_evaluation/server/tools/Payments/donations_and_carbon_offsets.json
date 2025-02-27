@@ -1,0 +1,273 @@
+{
+    "tool_name": "Donations and Carbon Offsets",
+    "tool_description": "Use the Donations API to easily make charitable contributions through your platform. The API manages the entire donation lifecycle from initial creation to final deposit. All funds are routed through Our Change Foundation to ensure expedient and secure payouts.",
+    "title": "Donations and Carbon Offsets",
+    "pricing": "FREE",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 851,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/sonia-ASELfgMYR/api/donations-and-carbon-offsets/",
+    "host": "donations-and-carbon-offsets.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/api/v1/donations/show",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/show",
+            "description": "Retrieves the details of a donation you've previously made.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "The id of a donation. Ids are returned when a donation is created.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/show\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/donations/index",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/index",
+            "description": "Retrieves a list of donations you've previously made. The donations are returned in order of creation, with the most recent donations appearing first. This endpoint is paginated.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "Which page to return. This endpoint is paginated, and returns maximum 30 donations per page.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/index\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/nonprofits/show",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/nonprofits/show",
+            "description": "Retrieves information for a nonprofit.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "id",
+                    "type": "STRING",
+                    "description": "The id of a nonprofit from the CHANGE network.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/nonprofits/show\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/donations/carbon_calculate",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/carbon_calculate",
+            "description": "Calculates the donation amount (to CarbonFund 501\\(c\\)3) needed to offset a physical shipment. This calculation depends on the weight, primary transportation method, and distance of the shipment. Provide the distance of the shipment using the origin and destination address, or directly with the number of miles. For convenience, this endpoint also returns the id of the nonprofit CarbonFund, for making a subsequent donation to. See the [Carbon offsets guide](/recipes/carbon-offsets/) for more on using this endpoint.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "weight_lb",
+                    "type": "NUMBER",
+                    "description": "The total weight (in pounds) of the shipment.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "transportation_method",
+                    "type": "STRING",
+                    "description": "The primary transportation method of the shipment.",
+                    "default": "air"
+                },
+                {
+                    "name": "distance_mi",
+                    "type": "NUMBER",
+                    "description": "The total distance (in miles) of the shipment. You can use this parameter in place of `origin_address` and `destination_address`.",
+                    "default": ""
+                },
+                {
+                    "name": "destination_address",
+                    "type": "NUMBER",
+                    "description": "The destination zip code (US only) of the shipment. If you send this parameter, also send `origin_address`.",
+                    "default": ""
+                },
+                {
+                    "name": "origin_address",
+                    "type": "NUMBER",
+                    "description": "The origin zip code (US only) of the shipment. If you send this parameter, also send `destination_address`.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/carbon_calculate\"\nquerystring = {\"transportation_method\": transportation_method, \"weight_lb\": weight_lb}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/donations/carbon_stats",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/carbon_stats",
+            "description": "Measures your carbon offset impact in relatable terms. Provide the id of a donation to CarbonFund to see stats about that specific donation. If you omit the donation id, this endpoint returns aggregate stats for all of your CarbonFund donations.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "id",
+                    "type": "NUMBER",
+                    "description": "The id of a donation to the CarbonFund nonprofit. Ids are returned when a donation is created. If an ID is not provided, the total stats for all donations to CarbonFund are returned.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/carbon_stats\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/donations/crypto_calculate",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/crypto_calculate",
+            "description": "Calculates the donation amount (to CarbonFund 501\\(c\\)3) needed to offset a cryptocurrency transaction. For convenience, this endpoint also returns the id of the nonprofit CarbonFund, for making a subsequent donation to. See the [Carbon offsets guide](/recipes/carbon-offsets/) for more on using this endpoint.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "currency",
+                    "type": "STRING",
+                    "description": "The currency of the transaction.",
+                    "default": "eth"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "count",
+                    "type": "NUMBER",
+                    "description": "The number of transactions to offset.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/crypto_calculate\"\nquerystring = {\"currency\": currency}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/donations/create",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/create",
+            "description": "Creates a donation to any nonprofit. CHANGE keeps track of your donations, bills you at the end of the month, and handles the nonprofit payouts for you.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "nonprofit_id",
+                    "type": "STRING",
+                    "description": "The id of a nonprofit from the CHANGE network.",
+                    "default": ""
+                },
+                {
+                    "name": "amount",
+                    "type": "STRING",
+                    "description": "The amount of the donation in cents.",
+                    "default": ""
+                },
+                {
+                    "name": "funding_source",
+                    "type": "STRING",
+                    "description": "Source of the donation funds. If you are collecting payment from your customer for the donation, use `customer`.",
+                    "default": "merchant"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "zip_code",
+                    "type": "STRING",
+                    "description": "The customer's zip code. Provide this to unlock geographic insights.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/create\"\nquerystring = {\"nonprofit_id\": nonprofit_id, \"amount\": amount, \"funding_source\": funding_source}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/nonprofits/list",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/nonprofits/list",
+            "description": "Retrieves a list of nonprofits whose names match the provided name. This endpoint is paginated.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "A string to search.",
+                    "default": ""
+                },
+                {
+                    "name": "page",
+                    "type": "NUMBER",
+                    "description": "The page to return. This endpoint is paginated, and returns up to 30 nonprofits at a time.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/nonprofits/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "/api/v1/donations/create",
+            "url": "https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/create",
+            "description": "Creates a donation to any nonprofit. CHANGE keeps track of your donations, bills you at the end of the month, and handles the nonprofit payouts for you.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "nonprofit_id",
+                    "type": "STRING",
+                    "description": "The id of a nonprofit from the CHANGE network.",
+                    "default": ""
+                },
+                {
+                    "name": "amount",
+                    "type": "STRING",
+                    "description": "The amount of the donation in cents.",
+                    "default": ""
+                },
+                {
+                    "name": "funding_source",
+                    "type": "STRING",
+                    "description": "Source of the donation funds. If you are collecting payment from your customer for the donation, use `customer`.",
+                    "default": "merchant"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "zip_code",
+                    "type": "STRING",
+                    "description": "The customer's zip code. Provide this to unlock geographic insights.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/create\"\nquerystring = {\"zip_code\": \"\", \"nonprofit_id\": \"\", \"amount\": \"\", \"funding_source\": \"merchant\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://donations-and-carbon-offsets.p.rapidapi.com/api/v1/donations/create\"\nquerystring = {\"zip_code\": \"\", \"nonprofit_id\": \"\", \"amount\": \"\", \"funding_source\": \"merchant\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"donations-and-carbon-offsets.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

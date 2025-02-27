@@ -1,0 +1,113 @@
+{
+    "tool_name":"Solcast",
+    "tool_description":"The Solcast API is a solar radiation and solar energy forecasting data service that is designed to be easy to use and to integrate with other systems that are looking for live solar radiation and solar PV energy output data.",
+    "title":"Solcast",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1001,
+        "avgSuccessRate":84,
+        "popularityScore":9.6,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/solcast/api/solcast/",
+    "host":"solcast.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Simple Radiation Forecast",
+            "url":"https://solcast.p.rapidapi.com/radiation/forecasts",
+            "description":"The simple radiation request returns detailed solar radiation data for the next week based only on your latitude and longitude.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"Latitude",
+                    "default":""
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"Longitude",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"Response format: json, csv, xml",
+                    "default":"json"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://solcast.p.rapidapi.com/radiation/forecasts\"\nquerystring = {\"format\": format, \"latitude\": latitude, \"longitude\": longitude}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"solcast.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Simple PV Power Forecast",
+            "url":"https://solcast.p.rapidapi.com/pv_power/forecasts",
+            "description":"The simple PV power request returns a first-guess PV power output forecast, based on your specified latitude and longitude plus some basic PV system characteristics.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"capacity",
+                    "type":"NUMBER",
+                    "description":"The capacity of the system, in Watts.",
+                    "default":"0"
+                },
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"Latitude",
+                    "default":""
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"Longitude",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"azimuth",
+                    "type":"NUMBER",
+                    "description":"The angle (degrees) from true north that the PV system is facing, if tilted.  Must be between -180 and 180.  An azimuth of 0 means the system is facing true north.",
+                    "default":""
+                },
+                {
+                    "name":"install_date",
+                    "type":"STRING",
+                    "description":"The date (YYYYMMMDD) of installation of the PV system.  We use this to estimate your loss factor based on ageing of your system.  If you provide a loss_factor this date will be ignored.",
+                    "default":""
+                },
+                {
+                    "name":"loss_factor",
+                    "type":"STRING",
+                    "description":"A factor by which to reduce your output forecast fom the full capacity based on characteristics of the PV array or inverter.",
+                    "default":""
+                },
+                {
+                    "name":"tilt",
+                    "type":"NUMBER",
+                    "description":"The angle (degrees) that the PV system is tilted off the horizontal.  Must be between 0 and 90. A tilt of 0 means that it is facing directly upwards, and 90 means the system is vertical and facing the horizon.",
+                    "default":"23"
+                },
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"Response format: json, csv, xml",
+                    "default":"json"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://solcast.p.rapidapi.com/pv_power/forecasts\"\nquerystring = {\"tilt\": tilt, \"capacity\": capacity, \"latitude\": latitude, \"longitude\": longitude, \"format\": format}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"solcast.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

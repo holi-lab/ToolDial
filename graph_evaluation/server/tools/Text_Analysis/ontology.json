@@ -1,0 +1,845 @@
+{
+    "tool_name":"Ontology",
+    "tool_description":"Access a the largest multilingual encyclopedic knowledge base in the area of occupation data, in particular, jobs, job classifications, hard and soft skills, training/qualifications, etc. Covering classifications systems like O*Net, ESCO, DISCO II, UK skills taxonomy from Nesta, among others. The Ontology's data is integrated and updated by domain curators on a daily basics. ",
+    "title":"Ontology",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/janzz-ltd-janzz-ltd-default/api/ontology1/",
+    "host":"ontology1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Expand Concept by ID",
+            "url":"https://ontology1.p.rapidapi.com/expand_concept_id",
+            "description":"API endpoint used for creating an expanded query using concept child-parent relationships, synonyms, and “similar” relationships",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"format: numeric id of the concept. The concept must be in one of the allowable branches: occupation, specialization, function, skill",
+                    "default":"200000"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"output_lang",
+                    "type":"STRING",
+                    "description":"format: 2 letter ISO code for language to return the affinity table in\n\ndefault value: de\n\neffect: Return preferred label for results in this language if available.",
+                    "default":"en"
+                },
+                {
+                    "name":"with_cids",
+                    "type":"STRING",
+                    "description":"format: true/false\n\ndefault value: false\n\neffect: include the concept id with every result",
+                    "default":""
+                },
+                {
+                    "name":"levels_up",
+                    "type":"STRING",
+                    "description":"format: integer\n\ndefault value: 1\n\neffect: represents the number of parent levels to go up from given concept",
+                    "default":"1"
+                },
+                {
+                    "name":"exclude_tags",
+                    "type":"STRING",
+                    "description":"format: character\n\ndefault value: empty\n\neffect: exclude labels which have this tag, such as ‘e’.",
+                    "default":""
+                },
+                {
+                    "name":"levels_down",
+                    "type":"STRING",
+                    "description":"format: integer\n\ndefault value: 1\n\neffect represents the number of children levels to go up from given concept",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/expand_concept_id\"\nquerystring = {\"output_lang\": output_lang, \"levels_up\": levels_up, \"id\": id, \"levels_down\": levels_down}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Occupation Suggest",
+            "url":"https://ontology1.p.rapidapi.com/occupation_suggest",
+            "description":"API endpoint used for getting recommended functions, specializations, skills, soft skills for a given occupation",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"relation",
+                    "type":"STRING",
+                    "description":"allowable relations: ‘specialization’, ‘function’, ‘skill’, ‘softskill’\n\ndefault value: none, and nothing is returned. At least one relation must be specified.",
+                    "default":"skill"
+                },
+                {
+                    "name":"occupation",
+                    "type":"STRING",
+                    "description":"The string which must match the concept label in the search_lang",
+                    "default":"carpenter"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"integer representing maximum number of results, from 1 to 50, default: 25",
+                    "default":""
+                },
+                {
+                    "name":"exclude_tags",
+                    "type":"STRING",
+                    "description":"exclude labels which have this tag, such as ‘e’. default: e",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"2 letters ISO 369-1 language code for which to search and return results in, default: en\n",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/occupation_suggest\"\nquerystring = {\"relation\": relation, \"occupation\": occupation, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Concept Detail",
+            "url":"https://ontology1.p.rapidapi.com/concepts/{concept_id}",
+            "description":"Gives the details of a specific Ontology's concept given its concept_id.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"concept_id",
+                    "type":"string",
+                    "description":"The concept_id must be an integer corresponding to the internal ID of the concept, which is returned in the listing call",
+                    "default":"250000"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"format: ISO 3166-1 numeric code. Example: 756 for Switzerland, 040 for Austria, etc.\n\ndefault value: 0 (no preferred country)\n\neffect: Labels with the given country code set on them will be chosen over regular or preffered labels",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, …\n\ndefault value: browser locale\n\neffect: Return preferred label for results in this language if available.",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/concepts/{concept_id}\"\nquerystring = {\"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Concept Relations by Branch",
+            "url":"https://ontology1.p.rapidapi.com/concept_relation_by_branch/",
+            "description":"API endpoint used to explore the relationships in the concept graph when the concept id is not known.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr,\n\ndefault value: browser locale\n\neffect: search for concepts in this language and display preferred label in this language",
+                    "default":"en"
+                },
+                {
+                    "name":"branch",
+                    "type":"STRING",
+                    "description":"format: string of a single branch to find label in.\n\nallowable branches: ‘occupation’, ‘specialization’, ‘function’, ‘skill’, ‘softskill’, ‘education’",
+                    "default":"occupation"
+                },
+                {
+                    "name":"label",
+                    "type":"STRING",
+                    "description":"format: any string which is an exact match for a concept.\n\neffect: if ambiguous labels exist matching this concept, it will return the first matched.\n\nhint: use = before string to avoid normalizing during search to improve performance",
+                    "default":"carpenter"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"output_classifications",
+                    "type":"STRING",
+                    "description":"format: | separated list of classifications\n\neffect: return all classification values related to the concept_id of each returned value\n\nlist of available classifications: [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"include_descendants",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault: false\n\neffect: when set to true, it will return all descendants of the related concepts. Does not apply to child/parent relations.",
+                    "default":""
+                },
+                {
+                    "name":"limit_output_lang",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: Only display concepts having at least one label in the language provided in lang parameter\n",
+                    "default":"en"
+                },
+                {
+                    "name":"include_umbrella",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault: true\n\neffect: when set to false, it will not return any umbrella concepts",
+                    "default":""
+                },
+                {
+                    "name":"num_results",
+                    "type":"STRING",
+                    "description":"format: integer between 0 and 1000\n\ndefault value: 100\n\neffect: maximum number of results to return",
+                    "default":""
+                },
+                {
+                    "name":"relation",
+                    "type":"STRING",
+                    "description":"**child/parent**:\n\nchildren: child concepts\nparents: parent concepts\n\n**by relationship name**:\n\nspecializations: has specialization\nfunctions: has function\nskills: has skill\nsoftskills: has softskill\nskillsonet: has skill O*Net 1,2,3,4,5\nsoftskillsonet: has softskill O*Net 1,2,3,4,5\nskillsonet1: has skill O*Net 1\nskillsonet2: has skill O*Net 2\nskillsonet3: has skill O*Net 3\nskillsonet4: has skill O*Net 4\nskillsonet5: has skill O*Net 5\nsoftskillsonet1: has softskill O*Net 1\nsoftskillsonet2: has softskill O*Net 2\nsoftskillsonet3: has softskill O*Net 3\nsoftskillsonet4: has softskill O*Net 4\nsoftskillsonet5: has softskill O*Net 5\nspecialized: is specialized in\neducation: has education\nsimilar1: same but different\nsimilar2: same but different 2\nsimilar3: same but different 3\nsimilar4: same but different 4\nsimilar5: same but different 5\nsimilar: same but different 1, 2, 3, 4, 5\nnss: not suitable for\nrelated_occupations: special case when on a non-occupation concept, find related occupations\n\neffect:\ndisplay all relationships to the specified concept which use this relationship type\n",
+                    "default":"children"
+                },
+                {
+                    "name":"descendant_levels",
+                    "type":"STRING",
+                    "description":"format: 1,2,3\n\ndefault: -1\n\neffect: when set, include only n levels of descendants, not all. Does not apply to child/parent relations.",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"format: ISO 3166-1 numeric code. Example: 756 for Switzerland, 040 for Austria, etc.\n\ndefault value: 0 (no preferred country)\n\neffect: Labels with the given country code set on them will be chosen over regular or preffered labels",
+                    "default":""
+                },
+                {
+                    "name":"start_at",
+                    "type":"STRING",
+                    "description":"format: integer\n\ndefault value: 0\n\neffect: start at for pagination",
+                    "default":""
+                },
+                {
+                    "name":"child_level",
+                    "type":"STRING",
+                    "description":"format: 1,2,3\n\ndefault: 1\n\neffect: Applies only when relation_type is children, setting to 2 for example will return node.children.children, and no direct children of the current node.",
+                    "default":"2"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/concept_relation_by_branch/\"\nquerystring = {\"lang\": lang, \"limit_output_lang\": limit_output_lang, \"branch\": branch, \"relation\": relation, \"label\": label, \"child_level\": child_level}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Expand Concept by Input",
+            "url":"https://ontology1.p.rapidapi.com/expand_concept",
+            "description":"API endpoint used for creating an expanded query using concept child-parent relationships, synonyms, and “similar” relationships",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"format: string\n\neffect: The string which must match the concept label in the search_lang",
+                    "default":"mechanic"
+                },
+                {
+                    "name":"search_lang",
+                    "type":"STRING",
+                    "description":"format: 2 letter ISO code\n\neffect: language for which to search for q in, or “all” to include all languages\n\ndefault value: all",
+                    "default":"en"
+                },
+                {
+                    "name":"branch",
+                    "type":"STRING",
+                    "description":"format: comma separated list of branches to limit search to.\n\nallowed values: occupation, specialization, function, skill\n\neffect: search for concepts matching q in these branches",
+                    "default":"occupation"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"output_lang",
+                    "type":"STRING",
+                    "description":"format: 2 letter ISO code for language to return the affinity table in\n\ndefault value: de\n\neffect: Return preferred label for results in this language if available.",
+                    "default":"en"
+                },
+                {
+                    "name":"exclude_tags",
+                    "type":"STRING",
+                    "description":"format: character\n\ndefault value: empty\n\neffect: exclude labels which have this tag, such as ‘e’.",
+                    "default":""
+                },
+                {
+                    "name":"levels_up",
+                    "type":"STRING",
+                    "description":"format: integer\n\ndefault value: 1\n\neffect: represents the number of parent levels to go up from given concept",
+                    "default":"1"
+                },
+                {
+                    "name":"with_cids",
+                    "type":"STRING",
+                    "description":"format: true/false\n\ndefault value: false\n\neffect: include the concept id with every result",
+                    "default":""
+                },
+                {
+                    "name":"levels_down",
+                    "type":"STRING",
+                    "description":"format: integer\n\ndefault value: 1\n\neffect represents the number of children levels to go up from given concept",
+                    "default":"2"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/expand_concept\"\nquerystring = {\"output_lang\": output_lang, \"q\": q, \"search_lang\": search_lang, \"levels_up\": levels_up, \"levels_down\": levels_down, \"branch\": branch}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"More Specific",
+            "url":"https://ontology1.p.rapidapi.com/more_specific",
+            "description":"API endpoint used for finding concepts which are more specific than the one provided. This uses only strings to search and it can return duplicate concepts if more than one label exists in child concepts.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"The string which must match the concept label in the search_lang",
+                    "default":"Senior Consulting Ophthalmologist"
+                },
+                {
+                    "name":"branch",
+                    "type":"STRING",
+                    "description":"comma-separated list of branches in which to search for the given term. It is recommended to use a single branch to isolate the concept you are really looking for.\n\nallowable branches: ‘occupation’, ‘specialization’, ‘function’, ‘skill’, ‘softskill’\n\ndefault value: none, and no search is performed. At least one branch must be specified",
+                    "default":"occupation"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"output_lang",
+                    "type":"STRING",
+                    "description":"2 letter ISO code for language to return the affinity table in, default: en",
+                    "default":"en"
+                },
+                {
+                    "name":"exclude_umbrella",
+                    "type":"STRING",
+                    "description":"exclude labels which belong to umbrella terms. default: False",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"integer representing the maximum number of results, from 1 to 50, default: 25",
+                    "default":""
+                },
+                {
+                    "name":"exclude_tags",
+                    "type":"STRING",
+                    "description":"exclude labels which have this tag, such as ‘e’. default: e",
+                    "default":""
+                },
+                {
+                    "name":"levels_down",
+                    "type":"STRING",
+                    "description":"integer representing number of children levels to go down from found concept, from 1 to 3, default: 1",
+                    "default":"2"
+                },
+                {
+                    "name":"search_lang",
+                    "type":"STRING",
+                    "description":"2 letter ISO code for language for which to search in, or “all” to include all languages, default: en",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/more_specific\"\nquerystring = {\"output_lang\": output_lang, \"q\": q, \"branch\": branch, \"levels_down\": levels_down, \"search_lang\": search_lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Classification Details",
+            "url":"https://ontology1.p.rapidapi.com/classification/{cls}/{val}",
+            "description":"API endpoint used for getting classification details",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"val",
+                    "type":"string",
+                    "description":"the classification value",
+                    "default":"15-1133.00"
+                },
+                {
+                    "name":"cls",
+                    "type":"string",
+                    "description":"the classification name, for example, ISCO-08. Any / characters in cls need to be escaped using a double-underscore, __",
+                    "default":"O*Net"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"2 letter ISO code for language for which to search and return results in, default: en",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/classification/{cls}/{val}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Cross Classification",
+            "url":"https://ontology1.p.rapidapi.com/cross_classification/{cls}/{val}/{clsx}",
+            "description":"API endpoint used for returning equivalent classifications",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"cls",
+                    "type":"string",
+                    "description":"The source classification name, for example, ISCO-08. Any / characters in cls need to be escaped using a double-underscore, __",
+                    "default":"O*Net"
+                },
+                {
+                    "name":"clsx",
+                    "type":"string",
+                    "description":"The target classification name, for example, ISCO-08. Any / characters in cls need to be escaped using a double-underscore, __",
+                    "default":"ESCO"
+                },
+                {
+                    "name":"val",
+                    "type":"string",
+                    "description":"The source classification value",
+                    "default":"15-1133.00"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"cls1_lang",
+                    "type":"STRING",
+                    "description":"2 letter ISO code for language for to provide a classification value for cls, default: en",
+                    "default":""
+                },
+                {
+                    "name":"cid_filter_cls",
+                    "type":"STRING",
+                    "description":"only consider concepts also having this classification default: empty",
+                    "default":""
+                },
+                {
+                    "name":"cls2_lang",
+                    "type":"STRING",
+                    "description":"2 letter ISO code for language for to provide a classification value for cls2, default: en",
+                    "default":""
+                },
+                {
+                    "name":"cid_lang",
+                    "type":"STRING",
+                    "description":"2 letter ISO code for language for to provide a best label for returned cids, default: en",
+                    "default":""
+                },
+                {
+                    "name":"cid_filter_val",
+                    "type":"STRING",
+                    "description":"when cid_filter_cls is used, filter concepts having this value for cid_filter_cls. Leave empty to include any value, as long as the cid_filter_cls classification is set. default: empty",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/cross_classification/{cls}/{val}/{clsx}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Concept Relations by ID",
+            "url":"https://ontology1.p.rapidapi.com/concept_relation_by_id/",
+            "description":"API endpoint used to explore the relationships in the concept graph when the concept id is known.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr,\n\ndefault value: browser locale\n\neffect: search for concepts in this language and display preferred label in this language",
+                    "default":"en"
+                },
+                {
+                    "name":"relation",
+                    "type":"STRING",
+                    "description":"**child/parent**:\n\nchildren: child concepts\nparents: parent concepts\n\n**by relationship name**:\n\nspecializations: has specialization\nfunctions: has function\nskills: has skill\nsoftskills: has softskill\nskillsonet: has skill O*Net 1,2,3,4,5\nsoftskillsonet: has softskill O*Net 1,2,3,4,5\nskillsonet1: has skill O*Net 1\nskillsonet2: has skill O*Net 2\nskillsonet3: has skill O*Net 3\nskillsonet4: has skill O*Net 4\nskillsonet5: has skill O*Net 5\nsoftskillsonet1: has softskill O*Net 1\nsoftskillsonet2: has softskill O*Net 2\nsoftskillsonet3: has softskill O*Net 3\nsoftskillsonet4: has softskill O*Net 4\nsoftskillsonet5: has softskill O*Net 5\nspecialized: is specialized in\neducation: has education\nsimilar1: same but different\nsimilar2: same but different 2\nsimilar3: same but different 3\nsimilar4: same but different 4\nsimilar5: same but different 5\nsimilar: same but different 1, 2, 3, 4, 5\nnss: not suitable for\nrelated_occupations: special case when on a non-occupation concept, find related occupations\n\neffect:\ndisplay all relationships to the specified concept which use this relationship type\n",
+                    "default":"children"
+                },
+                {
+                    "name":"concept_id",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"35000"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"include_descendants",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault: false\n\neffect: when set to true, it will return all descendants of the related concepts. Does not apply to child/parent relations.",
+                    "default":""
+                },
+                {
+                    "name":"child_level",
+                    "type":"STRING",
+                    "description":"format: 1,2,3\n\ndefault: 1\n\neffect: Applies only when relation_type is children, setting to 2 for example will return node.children.children, and no direct children of the current node.",
+                    "default":"2"
+                },
+                {
+                    "name":"descendant_levels",
+                    "type":"STRING",
+                    "description":"format: 1,2,3\n\ndefault: -1\n\neffect: when set, include only n levels of descendants, not all. Does not apply to child/parent relations.",
+                    "default":""
+                },
+                {
+                    "name":"start_at",
+                    "type":"STRING",
+                    "description":"format: integer\n\ndefault value: 0\n\neffect: start at for pagination",
+                    "default":""
+                },
+                {
+                    "name":"include_umbrella",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault: true\n\neffect: when set to false, it will not return any umbrella concepts",
+                    "default":""
+                },
+                {
+                    "name":"output_classifications",
+                    "type":"STRING",
+                    "description":"format: | separated list of classifications\n\neffect: return all classification values related to the concept_id of each returned value\n\nlist of available classifications: [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"num_results",
+                    "type":"STRING",
+                    "description":"format: integer between 0 and 1000\n\ndefault value: 100\n\neffect: maximum number of results to return",
+                    "default":""
+                },
+                {
+                    "name":"limit_output_lang",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: Only display concepts having at least one label in the language provided in lang parameter\n",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"format: ISO 3166-1 numeric code. Example: 756 for Switzerland, 040 for Austria, etc.\n\ndefault value: 0 (no preferred country)\n\neffect: Labels with the given country code set on them will be chosen over regular or preffered labels",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/concept_relation_by_id/\"\nquerystring = {\"child_level\": child_level, \"lang\": lang, \"relation\": relation, \"concept_id\": concept_id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Education Level by Classification",
+            "url":"https://ontology1.p.rapidapi.com/education_level/",
+            "description":"This endpoint will return an education level for a given standard classificationon and a clascode or value, where the result will be the result of mapping these to the following educational scale:\n\n0: No qualifications/No A-Level/No International Baccalaureate (IB)/No high school diploma\n1: In training (e.g. school, college, apprenticeship, etc.), On-the-job training, Course, …\n2: A Level/High School Diploma/International Baccalaureate (IB), University studies (not completed), …\n3: Vocational qualification (e.g. Swiss Federal VET Diploma)\n4: Certificate/Credentials/Diploma/Title, Higher vocational degree/Higher technical degree, …\n5: Bachelor’s degree/University primary qualification/Undergraduate degree\n6: Master’s degree/Postgraduate degree\n7: Doctorate/PhD",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"CLASS_ESCO",
+                    "type":"STRING",
+                    "description":"CLASS_{CLASSIFICATION_NAME}\n\nsearch for concepts having a given classification. Use * for the value to indicate all concepts which have that classification name, regardless of the value\n\nexample: ?q=*&CLASS_BIS/AMS=647520 (normally you would set q=* when searching by specific classification ID)\n\nexample: ?q=painter&CLASS_BIS/AMS=*\nlist of available classifications: [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":"*"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"output_lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, …\n\ndefault value: browser locale\n\neffect: Return preferred label for results in this language if available.",
+                    "default":"en"
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"format: ISO 3166-1 numeric code. Example: 756 for Switzerland, 040 for Austria, etc.\n\ndefault value: 0 (no preferred country)\n\neffect: Labels with the given country code set on them will be chosen over regular or preffered labels",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/education_level/\"\nquerystring = {\"CLASS_ESCO\": class_esco, \"output_lang\": output_lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Concept List",
+            "url":"https://ontology1.p.rapidapi.com/concepts",
+            "description":"Get the list of ontology concepts that contains the input text.\n\nIf you would like to convert a given string to specific ontology concepts, you can use the concepts api endpoint which works like the labels search but does not return duplicate concepts. \n\nThere is no guarantee that the entered text will appear in the result (the preferred label of a concept is returned, not the search term entered), therefore this might not be suitable for certain typeahead applications. \n\nWith this tool you can also search in one language and output the results in another language.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"format: any string\n\ndefault value: ‘*’ (search for everything)\n\neffect: performs a search for concepts that have labels which partially match this query string\n",
+                    "default":"carpenter"
+                },
+                {
+                    "name":"branch",
+                    "type":"STRING",
+                    "description":"format: comma separated list of branches to limit search to.\n\nallowable branches: ‘occupation’, ‘specialization’, ‘function’, ‘skill’, ‘softskill’, ‘language’, ‘industry’, ‘contract_type’, ‘education’, ‘education2’, ‘authorization’, ‘filter__xx’ (where xx is the name of the filter, example filter__location_no)\n\ndefault value: none, and no serach is performed. At least one branch must be specified.",
+                    "default":"occupation"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"exclude_nss",
+                    "type":"STRING",
+                    "description":"format: | separated list of “person class” concept labels\n\neffect: does not include concepts in results having a relation “not suitable for” where arg1 matches one of provided concepts.",
+                    "default":""
+                },
+                {
+                    "name":"output_lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, …\n\ndefault value: browser locale\n\neffect: Return preferred label for results in this language if available.",
+                    "default":"en"
+                },
+                {
+                    "name":"best_label",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: if true, return the preferred label of the concept, otherwise return label most closely matching search query",
+                    "default":""
+                },
+                {
+                    "name":"exact_match",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: search for this exact string. When false, search for q",
+                    "default":""
+                },
+                {
+                    "name":"search_lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, … Choose ‘all’ to search in all languages\n\ndefault value: ‘all’\n\neffect: search for concept labels only in this language.",
+                    "default":"en"
+                },
+                {
+                    "name":"normalized",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: normalize the input string, ü->ue, A->a, collapse multiple spaces, etc.",
+                    "default":""
+                },
+                {
+                    "name":"output_classifications",
+                    "type":"STRING",
+                    "description":"format: | separated list of classifications\n\neffect: return all classification values related to the concept_id of each returned value\n\nlist of available classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"CLASS_",
+                    "type":"STRING",
+                    "description":"search for concepts having a given classification. \n\nUse * for the value to indicate all concepts which have that classification name, regardless of the value\n\nexample: ?q=*&CLASS_BIS/AMS=647520 (normally you would set q=* when searching by specific classification ID)\n\nexample: ?q=painter&CLASS_BIS/AMS=*\nlist of available classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"format: ISO 3166-1 numeric code. Example: 756 for Switzerland, 040 for Austria, etc.\n\ndefault value: 0 (no preferred country)\n\neffect: Labels with the given country code set on them will be chosen over regular or preffered labels",
+                    "default":""
+                },
+                {
+                    "name":"override_limit_level",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: when searching in industry or contract type, default searches only 1 level deep. This allows you to remove this limit - for internal use only.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/concepts\"\nquerystring = {\"output_lang\": output_lang, \"search_lang\": search_lang, \"q\": q, \"branch\": branch}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Education Level by ID",
+            "url":"https://ontology1.p.rapidapi.com/education_level/{id}",
+            "description":"This end-point will return the required education level for a given concept id, where the values indicate the following educational scale:\n\n0: No qualifications/No A-Level/No International Baccalaureate (IB)/No high school diploma\n1: In training (e.g. school, college, apprenticeship, etc.), On-the-job training, Course, …\n2: A Level/High School Diploma/International Baccalaureate (IB), University studies (not completed), …\n3: Vocational qualification (e.g. Swiss Federal VET Diploma)\n4: Certificate/Credentials/Diploma/Title, Higher vocational degree/Higher technical degree, …\n5: Bachelor’s degree/University primary qualification/Undergraduate degree\n6: Master’s degree/Postgraduate degree\n7: Doctorate/PhD",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"string",
+                    "description":"The search concept cid",
+                    "default":"57867"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country",
+                    "type":"STRING",
+                    "description":"format: ISO 3166-1 numeric code. Example: 756 for Switzerland, 040 for Austria, etc.\n\ndefault value: 0 (no preferred country)\n\neffect: Labels with the given country code set on them will be chosen over regular or preffered labels",
+                    "default":""
+                },
+                {
+                    "name":"CLASS_",
+                    "type":"STRING",
+                    "description":"CLASS_{CLASSIFICATION_NAME}\n\nsearch for concepts having a given classification. Use * for the value to indicate all concepts which have that classification name, regardless of the value\n\nexample: ?q=*&CLASS_BIS/AMS=647520 (normally you would set q=* when searching by specific classification ID)\n\nexample: ?q=painter&CLASS_BIS/AMS=*\nlist of available classifications: [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"output_lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, …\n\ndefault value: browser locale\n\neffect: Return preferred label for results in this language if available.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/education_level/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Labels List",
+            "url":"https://ontology1.p.rapidapi.com/labels/",
+            "description":"Get the list of ontology labels that contains the input text.\n\nThe input text will always appear in the results, making it suitable for most typeaheads applications.\n\nNormally this would be used in a typeahead to encourage people to enter something which already exists in the ontology.\n\nIt may return duplicate concepts.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"format: any string\n\ndefault value: ‘*’ (search for everything)\n\neffect: performs a search for concepts that have labels which partially match this query string",
+                    "default":"carpenter"
+                },
+                {
+                    "name":"branch",
+                    "type":"STRING",
+                    "description":"format: comma separated list of branches to limit search to.\n\nallowable branches: ‘occupation’, ‘specialization’, ‘function’, ‘skill’, ‘softskill’, ‘language’, ‘industry’, ‘contract_type’, ‘education’, ‘education2’, ‘authorization’, ‘filter__xx’ (where xx is the name of the filter, example filter__location_no\n\ndefault value: none, and no search is performed. At least one branch must be specified.",
+                    "default":"occupation"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"children_of",
+                    "type":"STRING",
+                    "description":"format: any string\ndefault value: none\n\neffect: search under a specific concept. The specific concept must exist with a label matching this value, in the provided branches, in language “lang”.\n\nnotes: This parameter is not compatible with the following branches and will be ignored: education, industry",
+                    "default":""
+                },
+                {
+                    "name":"children_of_relation",
+                    "type":"STRING",
+                    "description":"format: one of: [‘and_descendants’, ‘descendants’, ‘and_children’, ‘children’]\n\ndefault value: descendants\n\neffect: used in conjunction with children_of. After matching concepts in children_of, search for q in the related concepts. and means include also the concept in children_of.",
+                    "default":""
+                },
+                {
+                    "name":"exclude_nss",
+                    "type":"STRING",
+                    "description":"format: | separated list of “person class” concept labels\n\neffect: does not include labels of concepts having a relation “not suitable for” where arg1 matches one of provided concepts.",
+                    "default":""
+                },
+                {
+                    "name":"exclude_tags",
+                    "type":"STRING",
+                    "description":"format: character\n\ndefault value: empty\n\neffect: exclude labels which have this tag, such as ‘e’.",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"format: number of results to return, maximum 500\n\ndefault value: 20",
+                    "default":""
+                },
+                {
+                    "name":"word_breaks",
+                    "type":"STRING",
+                    "description":"format: string of characters, example %20,-*\n\ndefault: ‘*’ - for compatibility, later will be changed to %20 (‘ ‘)\n\neffect: only include labels where q is preceded by a word-break character in this string. ‘*’ allows any preceding characters, so searching for “er” will return “engineer”.",
+                    "default":""
+                },
+                {
+                    "name":"CLASS_",
+                    "type":"STRING",
+                    "description":"search for concepts having a given classification. \n\nUse * for the value to indicate all concepts which have that classification name, regardless of the value\n\nexample: ?q=*&CLASS_BIS/AMS=647520 (normally you would set q=* when searching by specific classification ID)\n\nexample: ?q=painter&CLASS_BIS/AMS=*\nlist of available classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, … Choose ‘all’ to search in all languages\n\ndefault value: ‘all’\n\neffect: search for concept labels only in this language.",
+                    "default":"en"
+                },
+                {
+                    "name":"output_classifications",
+                    "type":"STRING",
+                    "description":"format: | separated list of classifications\n\neffect: return all classification values related to the concept_id of each returned value\n\nlist of available classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"include_umbrella",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault: false\n\neffect: when set to false, it will not return labels of any umbrella concepts",
+                    "default":""
+                },
+                {
+                    "name":"exact_match",
+                    "type":"STRING",
+                    "description":"format: true|false\n\ndefault value: false\n\neffect: search for this exact string. When false, search for q",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/labels/\"\nquerystring = {\"q\": q, \"lang\": lang, \"branch\": branch}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Typeahead",
+            "url":"https://ontology1.p.rapidapi.com/typeahead/",
+            "description":"A more performant version of the labels list endpoint with some limitations. The main differences to /labels/ are:\n\nnot all branches are available\nlang parameter is required\nexclude_tags is not needed because ‘e’ tags are always excluded and not configurable\nexact_match is not possible\nchildren_of and relations is not possible\nword_breaks are not configurable\nexclude_nss is not possible\nthe results do not reflect the current state of the concept graph, they are up to 20 minutes delayed.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"branch",
+                    "type":"STRING",
+                    "description":"format: comma separated list of branches to limit search to.\n\nallowable branches: occupation, function, skill, softskill, education, education level, specialization, language, industry, authorization\n\ndefault value: none, and no serach is performed. At least one branch must be specified.",
+                    "default":"skill"
+                },
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"format: any string\n\ndefault value: ‘*’ (search for everything)\n\neffect: performs a search for concepts that have labels which partially match this query string",
+                    "default":"test"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"output_classifications",
+                    "type":"STRING",
+                    "description":"format: | separated list of classifications\n\neffect: return all classification values related to the concept_id of each returned value\n\nlist of available classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"format: number of results to return, maximum 500\n\ndefault value: 20",
+                    "default":""
+                },
+                {
+                    "name":"CLASS_",
+                    "type":"STRING",
+                    "description":"search for concepts having a given classification. \n\nUse * for the value to indicate all concepts which have that classification name, regardless of the value\n\nexample: ?q=*&CLASS_BIS/AMS=647520 (normally you would set q=* when searching by specific classification ID)\n\nexample: ?q=painter&CLASS_BIS/AMS=*\nlist of available classifications:  [Classifications and Taxonomies](https://www.janzz.jobs/static/doc/apiv1/classifications.html#classifications-and-taxonomies)",
+                    "default":""
+                },
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"format: ISO 369-1, 2 character language code, example: de, en, fr, …\n\ndefault value: None, a language must be specified\n\neffect: search for concept labels only in this language.",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ontology1.p.rapidapi.com/typeahead/\"\nquerystring = {\"branch\": branch, \"lang\": lang, \"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ontology1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

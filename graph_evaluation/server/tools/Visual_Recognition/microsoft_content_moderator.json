@@ -1,0 +1,669 @@
+{
+    "product_id": "api_85ee917d-4672-4af5-8479-c968166d0faa",
+    "tool_description": "An AI service from Microsoft Azure that detects unwanted content",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/microsoft-content-moderator2/",
+    "name": "Microsoft Content Moderator",
+    "title": "Microsoft Content Moderator",
+    "pricing": "FREEMIUM",
+    "tool_name": "Microsoft Content Moderator",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1058,
+        "avgSuccessRate": 81,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "microsoft-content-moderator2.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Screen Text",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/ProcessText/Screen",
+            "description": "Detects profanity in more than 100 languages and match against custom and shared blacklists.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "PII",
+                    "type": "BOOLEAN",
+                    "description": "Detect personal identifiable information.",
+                    "default": ""
+                },
+                {
+                    "name": "autocorrect",
+                    "type": "BOOLEAN",
+                    "description": "Autocorrect text.",
+                    "default": ""
+                },
+                {
+                    "name": "classify",
+                    "type": "BOOLEAN",
+                    "description": "Classify input.",
+                    "default": ""
+                },
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "Language of the text.",
+                    "default": ""
+                },
+                {
+                    "name": "listId",
+                    "type": "STRING",
+                    "description": "The list Id.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessText/Screen\"\nquerystring = {\"PII\": \"\", \"autocorrect\": \"\", \"classify\": \"\", \"language\": \"\", \"listId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessText/Screen\"\nquerystring = {\"PII\": \"\", \"autocorrect\": \"\", \"classify\": \"\", \"language\": \"\", \"listId\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "The response for a Screen text request.",
+                "properties": {
+                    "AutoCorrectedText": {
+                        "description": "The autocorrected text",
+                        "type": "string"
+                    },
+                    "Classification": {
+                        "description": "The classification details of the text.",
+                        "properties": {
+                            "Category1": {
+                                "description": "The category1 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+                                "properties": {
+                                    "Score": {
+                                        "description": "The category1 score.",
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "Category2": {
+                                "description": "The category2 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+                                "properties": {
+                                    "Score": {
+                                        "description": "The category2 score.",
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "Category3": {
+                                "description": "The category3 score details of the text. <a href=\"https://aka.ms/textClassifyCategories\">Click here</a> for more details on category classification.",
+                                "properties": {
+                                    "Score": {
+                                        "description": "The category3 score.",
+                                        "type": "number"
+                                    }
+                                }
+                            },
+                            "ReviewRecommended": {
+                                "description": "The review recommended flag.",
+                                "type": "boolean"
+                            }
+                        }
+                    },
+                    "Language": {
+                        "description": "Language of the input text content.",
+                        "type": "string"
+                    },
+                    "Misrepresentation": {
+                        "description": "The misrepresentation text.",
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "NormalizedText": {
+                        "description": "The normalized text.",
+                        "type": "string"
+                    },
+                    "OriginalText": {
+                        "description": "The original text.",
+                        "type": "string"
+                    },
+                    "PII": {
+                        "description": "Personal Identifier Information details.",
+                        "properties": {
+                            "Address": {
+                                "items": {
+                                    "description": "Address details.",
+                                    "properties": {
+                                        "Index": {
+                                            "description": "Index(Location) of the Address in the input text content.",
+                                            "type": "integer"
+                                        },
+                                        "Text": {
+                                            "description": "Detected Address.",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "array"
+                            },
+                            "Email": {
+                                "items": {
+                                    "description": "Email Address details.",
+                                    "properties": {
+                                        "Detected": {
+                                            "description": "Detected Email Address from the input text content.",
+                                            "type": "string"
+                                        },
+                                        "Index": {
+                                            "description": "Index(Location) of the Email address in the input text content.",
+                                            "type": "integer"
+                                        },
+                                        "SubType": {
+                                            "description": "Subtype of the detected Email Address.",
+                                            "type": "string"
+                                        },
+                                        "Text": {
+                                            "description": "Email Address in the input text content.",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "array"
+                            },
+                            "IPA": {
+                                "items": {
+                                    "description": "IP Address details.",
+                                    "properties": {
+                                        "Index": {
+                                            "description": "Index(Location) of the IP Address in the input text content.",
+                                            "type": "integer"
+                                        },
+                                        "SubType": {
+                                            "description": "Subtype of the detected IP Address.",
+                                            "type": "string"
+                                        },
+                                        "Text": {
+                                            "description": "Detected IP Address.",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "array"
+                            },
+                            "Phone": {
+                                "items": {
+                                    "description": "Phone Property details.",
+                                    "properties": {
+                                        "CountryCode": {
+                                            "description": "CountryCode of the detected Phone number.",
+                                            "type": "string"
+                                        },
+                                        "Index": {
+                                            "description": "Index(Location) of the Phone number in the input text content.",
+                                            "type": "integer"
+                                        },
+                                        "Text": {
+                                            "description": "Detected Phone number.",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "array"
+                            },
+                            "SSN": {
+                                "items": {
+                                    "description": "Detected SSN details.",
+                                    "properties": {
+                                        "Index": {
+                                            "description": "Index(Location) of the SSN in the input text content.",
+                                            "type": "integer"
+                                        },
+                                        "Text": {
+                                            "description": "Detected SSN in the input text content.",
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "type": "array"
+                            }
+                        }
+                    },
+                    "Status": {
+                        "description": "Status properties.",
+                        "properties": {
+                            "Code": {
+                                "description": "Status code.",
+                                "type": "integer"
+                            },
+                            "Description": {
+                                "description": "Status description.",
+                                "type": "string"
+                            },
+                            "Exception": {
+                                "description": "Exception status.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "Terms": {
+                        "items": {
+                            "description": "Detected Terms details.",
+                            "properties": {
+                                "Index": {
+                                    "description": "Index(Location) of the detected profanity term in the input text content.",
+                                    "type": "integer"
+                                },
+                                "ListId": {
+                                    "description": "Matched Terms list Id.",
+                                    "type": "integer"
+                                },
+                                "OriginalIndex": {
+                                    "description": "Original Index(Location) of the detected profanity term in the input text content.",
+                                    "type": "integer"
+                                },
+                                "Term": {
+                                    "description": "Detected profanity term.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "array"
+                    },
+                    "TrackingId": {
+                        "description": "Unique Content Moderator transaction Id.",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Find Faces [URL]",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/FindFaces",
+            "description": "Returns the list of faces found.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "CacheImage",
+                    "type": "BOOLEAN",
+                    "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/FindFaces\"\nquerystring = {\"CacheImage\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/FindFaces\"\nquerystring = {\"CacheImage\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Request object the contains found faces.",
+                "properties": {
+                    "AdvancedInfo": {
+                        "description": "The advanced info.",
+                        "items": {
+                            "description": "The key value pair object properties.",
+                            "properties": {
+                                "Key": {
+                                    "description": "The key parameter.",
+                                    "type": "string"
+                                },
+                                "Value": {
+                                    "description": "The value parameter.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "array"
+                    },
+                    "CacheId": {
+                        "description": "The cache id.",
+                        "type": "string"
+                    },
+                    "Count": {
+                        "description": "Number of faces found.",
+                        "type": "integer"
+                    },
+                    "Faces": {
+                        "description": "The list of faces.",
+                        "items": {
+                            "description": "Coordinates to the found face.",
+                            "properties": {
+                                "Bottom": {
+                                    "description": "The bottom coordinate.",
+                                    "type": "integer"
+                                },
+                                "Left": {
+                                    "description": "The left coordinate.",
+                                    "type": "integer"
+                                },
+                                "Right": {
+                                    "description": "The right coordinate.",
+                                    "type": "integer"
+                                },
+                                "Top": {
+                                    "description": "The top coordinate.",
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "type": "array"
+                    },
+                    "Result": {
+                        "description": "True if result was found.",
+                        "type": "boolean"
+                    },
+                    "Status": {
+                        "description": "Status properties.",
+                        "properties": {
+                            "Code": {
+                                "description": "Status code.",
+                                "type": "integer"
+                            },
+                            "Description": {
+                                "description": "Status description.",
+                                "type": "string"
+                            },
+                            "Exception": {
+                                "description": "Exception status.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "TrackingId": {
+                        "description": "The tracking id.",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Find Faces [File]",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/FindFaces",
+            "description": "Returns the list of faces found.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "CacheImage",
+                    "type": "STRING",
+                    "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/FindFaces\"\nquerystring = {\"file\": \"\", \"CacheImage\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/FindFaces\"\nquerystring = {\"file\": \"\", \"CacheImage\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Evaluate [URL]",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/Evaluate",
+            "description": "Returns probabilities of the image containing racy or adult content.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "CacheImage",
+                    "type": "BOOLEAN",
+                    "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/Evaluate\"\nquerystring = {\"CacheImage\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/Evaluate\"\nquerystring = {\"CacheImage\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Evaluate response object.",
+                "properties": {
+                    "AdultClassificationScore": {
+                        "description": "The adult classification score.",
+                        "type": "number"
+                    },
+                    "AdvancedInfo": {
+                        "description": "The advanced info.",
+                        "items": {
+                            "description": "The key value pair object properties.",
+                            "properties": {
+                                "Key": {
+                                    "description": "The key parameter.",
+                                    "type": "string"
+                                },
+                                "Value": {
+                                    "description": "The value parameter.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "array"
+                    },
+                    "CacheID": {
+                        "description": "The cache id.",
+                        "type": "string"
+                    },
+                    "IsImageAdultClassified": {
+                        "description": "Indicates if an image is classified as adult.",
+                        "type": "boolean"
+                    },
+                    "IsImageRacyClassified": {
+                        "description": "Indicates if the image is classified as racy.",
+                        "type": "boolean"
+                    },
+                    "RacyClassificationScore": {
+                        "description": "The racy classification score.",
+                        "type": "number"
+                    },
+                    "Result": {
+                        "description": "Evaluate result.",
+                        "type": "boolean"
+                    },
+                    "Status": {
+                        "description": "Status properties.",
+                        "properties": {
+                            "Code": {
+                                "description": "Status code.",
+                                "type": "integer"
+                            },
+                            "Description": {
+                                "description": "Status description.",
+                                "type": "string"
+                            },
+                            "Exception": {
+                                "description": "Exception status.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "TrackingId": {
+                        "description": "The tracking id.",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "Evaluate [File]",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/Evaluate",
+            "description": "Returns probabilities of the image containing racy or adult content.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/Evaluate\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessImage/Evaluate\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "OCR [URL]",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/contentmoderator/moderate/v1.0/ProcessImage/OCR",
+            "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "language",
+                    "type": "STRING",
+                    "description": "Language of the terms.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "CacheImage",
+                    "type": "BOOLEAN",
+                    "description": "Whether to retain the submitted image for future use; defaults to false if omitted.",
+                    "default": ""
+                },
+                {
+                    "name": "enhanced",
+                    "type": "BOOLEAN",
+                    "description": "When set to True, the image goes through additional processing to come with additional candidates.\n\nimage/tiff is not supported when enhanced is set to true\n\nNote: This impacts the response time.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/contentmoderator/moderate/v1.0/ProcessImage/OCR\"\nquerystring = {\"language\": \"\", \"CacheImage\": \"\", \"enhanced\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/contentmoderator/moderate/v1.0/ProcessImage/OCR\"\nquerystring = {\"language\": \"\", \"CacheImage\": \"\", \"enhanced\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Contains the text found in image for the language specified.",
+                "properties": {
+                    "CacheId": {
+                        "description": "The cache id.",
+                        "type": "string"
+                    },
+                    "Candidates": {
+                        "description": "The list of candidate text.",
+                        "items": {
+                            "description": "OCR candidate text.",
+                            "properties": {
+                                "Confidence": {
+                                    "description": "The confidence level.",
+                                    "type": "number"
+                                },
+                                "Text": {
+                                    "description": "The text found.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "array"
+                    },
+                    "Language": {
+                        "description": "The ISO 639-3 code.",
+                        "type": "string"
+                    },
+                    "Metadata": {
+                        "description": "Array of KeyValue.",
+                        "items": {
+                            "description": "The key value pair object properties.",
+                            "properties": {
+                                "Key": {
+                                    "description": "The key parameter.",
+                                    "type": "string"
+                                },
+                                "Value": {
+                                    "description": "The value parameter.",
+                                    "type": "string"
+                                }
+                            }
+                        },
+                        "type": "array"
+                    },
+                    "Status": {
+                        "description": "Status properties.",
+                        "properties": {
+                            "Code": {
+                                "description": "Status code.",
+                                "type": "integer"
+                            },
+                            "Description": {
+                                "description": "Status description.",
+                                "type": "string"
+                            },
+                            "Exception": {
+                                "description": "Exception status.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "Text": {
+                        "description": "The found text.",
+                        "type": "string"
+                    },
+                    "TrackingId": {
+                        "description": "The tracking id.",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        {
+            "name": "OCR [File]",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/contentmoderator/moderate/v1.0/ProcessImage/OCR",
+            "description": "Returns any text found in the image for the language specified. If no language is specified in input then the detection defaults to English.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/contentmoderator/moderate/v1.0/ProcessImage/OCR\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/contentmoderator/moderate/v1.0/ProcessImage/OCR\"\nquerystring = {\"file\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "Detect Language",
+            "url": "https://microsoft-content-moderator2.p.rapidapi.com/ProcessText/DetectLanguage",
+            "description": "This operation will detect the language of given input content. Returns the <a href=\"http://www-01.sil.org/iso639-3/codes.asp\">ISO 639-3 code</a> for the predominant language comprising the submitted text. Over 110 languages supported.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessText/DetectLanguage\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://microsoft-content-moderator2.p.rapidapi.com/ProcessText/DetectLanguage\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"microsoft-content-moderator2.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "$schema": "http://json-schema.org/draft-04/schema#",
+                "description": "Detect language result.",
+                "properties": {
+                    "DetectedLanguage": {
+                        "description": "The detected language.",
+                        "type": "string"
+                    },
+                    "Status": {
+                        "description": "Status properties.",
+                        "properties": {
+                            "Code": {
+                                "description": "Status code.",
+                                "type": "integer"
+                            },
+                            "Description": {
+                                "description": "Status description.",
+                                "type": "string"
+                            },
+                            "Exception": {
+                                "description": "Exception status.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "TrackingId": {
+                        "description": "The tracking id.",
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    ]
+}

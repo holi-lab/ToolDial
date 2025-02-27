@@ -1,0 +1,1615 @@
+{
+    "product_id": "api_0bedfaa7-0a6c-4d13-9ee2-a3396e1cdc22",
+    "tool_description": "TollGuru Toll API service \u2022\tcalculates tolls before and after the trip (by sending GPS tracks) \u2022\tcalculates other costs for route (such as fuel expenses and for trucks labor expenses, other costs)\u2022\tprovides the cheapest, the fastest and other compromise routes between the origin, destination and waypoints",
+    "home_url": "https://rapidapi.com/tollguru-tollguru-default/api/tollguru-toll-rest1/",
+    "name": "Tollguru Toll REST",
+    "title": "Tollguru Toll REST",
+    "pricing": "FREE",
+    "tool_name": "Tollguru Toll REST",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 544,
+        "avgSuccessRate": 0,
+        "popularityScore": 0,
+        "__typename": "Score"
+    },
+    "host": "tollguru-toll-rest1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/route",
+            "url": "https://tollguru-toll-rest1.p.rapidapi.com/route",
+            "description": "<p>The response endpoint retrieves all tolls on the single route requested. You will not receive tolls for alternate routes possible between the origin and destination.</p> <p>Route polylines are map independent and you can send us polylines from any mapping provider like: Google, Bing, MapBox, Apple Map, HERE, TomTom, Waze, ESRI, MapQuest, JawgMaps, Trimble, PTV, MapmyIndia, Yandex, Michelin, Baidu, Gaode or your custom source.</p> <p>For more details, visit <a href='https://medium.com/tollguru/know-toll-any-route-tollguru-map-independent-toll-algorithm-product-release-d99a7e1bacfa' target='_blank'>TollGurus' map independent algorithm</a> and how we deal with <a href='https://medium.com/tollguru/debugging-route-polyline-errors-tollguru-polyline-to-toll-api-8f7c4f1fd317' target='_blank'>edge cases and common pitfalls</a></p>",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/route\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/route\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "route": {
+                        "description": "Route information including tolls",
+                        "properties": {
+                            "costs": {
+                                "description": "<p>Costs object summarizes the toll cost and the fuel cost for the route.The fuel costs calculated from fuel efficiency (city fuel effiency and highway fuel efficiency) and the speeds on each leg of the route.</p><p>The tolls are added for all the tolls on the route for each payment type. If a payment type cannot be using on all the toll points on the route, the toll cost is returned as false. Else, the sum of tolls for the payment type is returned.</p><p>The tolls are returned for the following payment types:</p><ul> <li>Cash</li><li>Transponder</li><li>License Plate</li><li>Credit card</li><li>Prepaid pass</li></ul>",
+                                "properties": {
+                                    "cash": {
+                                        "type": "number"
+                                    },
+                                    "creditCard": {
+                                        "type": "number"
+                                    },
+                                    "fuel": {
+                                        "type": "number"
+                                    },
+                                    "licensePlate": {
+                                        "type": "number"
+                                    },
+                                    "otherCost": {
+                                        "type": "number"
+                                    },
+                                    "prepaidCard": {
+                                        "type": "number"
+                                    },
+                                    "tag": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "hasTolls": {
+                                "type": "boolean"
+                            },
+                            "tolls": {
+                                "items": {
+                                    "description": "Tolls object contains tolls for all the toll locations on the route. For each toll location",
+                                    "properties": {
+                                        "cashCost": {
+                                            "description": "Cash toll cost",
+                                            "type": "number"
+                                        },
+                                        "creditCardCost": {
+                                            "description": "Credit card toll cost",
+                                            "type": "number"
+                                        },
+                                        "currency": {
+                                            "description": "Currency",
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "description": "Tollguru toll ID. Useful for error checking",
+                                            "type": "number"
+                                        },
+                                        "lat": {
+                                            "description": "Approximate latitude of the toll location",
+                                            "type": "number"
+                                        },
+                                        "licensePlateCost": {
+                                            "description": "License plate (video) toll cost. For example, <a href=\"https://tollguru.com/toll-info/california/pay-by-plate-payment\" target=\"_blank\">Pay by Plate</a> in California, <a href=\"https://tollguru.com/toll-info/texas/pay-by-mail\" target=\"_blank\">ZipCash and Pay by Mail</a> in Texas, <a href=\"https://tollguru.com/toll-info/florida/video-payment\" target=\"_blank\">Pay by Plate</a> in Florida, <a href=\"https://tollguru.com/toll-info/colorado/video-payment\" target=\"_blank\">License Plate Toll</a> in Colorado, Camera Charges on ETR-407, etc.",
+                                            "type": "number"
+                                        },
+                                        "licensePlatePrimary": {
+                                            "description": "Name of the primary license plate toll (video toll) collection system. Typically license Plate tolls are not discounted.",
+                                            "type": "string"
+                                        },
+                                        "licensePlateSecondary": {
+                                            "description": "Name of the secondary license plate toll (video toll) collection system",
+                                            "type": "string"
+                                        },
+                                        "lng": {
+                                            "description": "Approximate longitude of the toll location",
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "description": "Name of the toll location",
+                                            "type": "string"
+                                        },
+                                        "prepaidCardCost": {
+                                            "description": "Prepaid card such as Nexpress, Nexus Card, etc. toll cost",
+                                            "type": "number"
+                                        },
+                                        "road": {
+                                            "description": "Name of the toll road",
+                                            "type": "string"
+                                        },
+                                        "state": {
+                                            "description": "State, province of the toll location",
+                                            "type": "string"
+                                        },
+                                        "tagCost": {
+                                            "description": "Transponder toll cost <br>For example, <a href=\"https://tollguru.com/toll-info/new-york/what-is-e-zpass\" target=\"_blank\">E-ZPass</a>, <a href=\"https://tollguru.com/toll-info/texas/what-is-txtag-tolltag-eztag\" target=\"_blank\">TxTag</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/florida/what-is-sunpass\" target=\"_blank\">SunPass</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/colorado/what-is-expresstoll-go-pass\" target=\"_blank\">ExpressToll</a>, etc.",
+                                            "type": "number"
+                                        },
+                                        "tagPrimary": {
+                                            "description": "A primary transponder that can be used on the facility. Typically primary transponders have discounts for each usage or based on volume.",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "tagSecondary": {
+                                            "description": "All other transponders that can be used on the facility. Secondary transponders may not count towards discounts",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": {
+                                            "description": "Toll type: <br><code>barrier</code> (for example <a href=\"https://tollguru.com/toll-info/texas/texas-toll-roads-bridges-express-lanes\" target=\"_blank\"> toll roads in Texas </a>), <br><code>ticketSystem</code> - ticket system (for example <a href=\"https://tollguru.com/toll-info/oklahoma/oklahoma-turnpikes\" target=\"_blank\"> toll roads in Oklahoma</a>), <br><code>distBased</code> \u2013 distance based (for example <a href=\"https://tollguru.com/toll-info/ontario/ontario-407-ETR-toll-highway-bridges-tunnels\" target=\"_blank\"> ETR 407 in Ontario, Canada</a>).",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "summary": {
+                        "properties": {
+                            "departure_time": {
+                                "type": "number"
+                            },
+                            "rates": {
+                                "description": "Rates object that specifies conversion factors between currencies with US Dollar as base. It is useful when you are looking for tolls between countries. Say you are looking for tolls between Toronto, Canada, and Monterrey, Mexico. Some of the tolls are in Canadian dollars, some in USD and others in Mexican Pesos. The total costs are specified in one currency using the conversion factors. The conversion factors are based on dynamic exchange rates.",
+                                "type": "object"
+                            },
+                            "status": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/gmaps",
+            "url": "https://tollguru-toll-rest1.p.rapidapi.com/gmaps",
+            "description": "HTTP Request for cars, SUVs, pick-ups, motorcycles",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/gmaps\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/gmaps\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "routes": {
+                        "description": "Route information including distance, time, tol",
+                        "items": {
+                            "properties": {
+                                "costs": {
+                                    "description": "<p>Costs object summarizes the toll cost and the fuel cost for the route.The fuel costs calculated from fuel efficiency (city fuel effiency and highway fuel efficiency) and the speeds on each leg of the route.</p><p>The tolls are added for all the tolls on the route for each payment type. If a payment type cannot be using on all the toll points on the route, the toll cost is returned as false. Else, the sum of tolls for the payment type is returned.</p><p>The tolls are returned for the following payment types:</p><ul> <li>Cash</li><li>Transponder</li><li>License Plate</li><li>Credit card</li><li>Prepaid pass</li></ul>",
+                                    "properties": {
+                                        "cash": {
+                                            "type": "number"
+                                        },
+                                        "creditCard": {
+                                            "type": "number"
+                                        },
+                                        "fuel": {
+                                            "type": "number"
+                                        },
+                                        "licensePlate": {
+                                            "type": "number"
+                                        },
+                                        "otherCost": {
+                                            "type": "number"
+                                        },
+                                        "prepaidCard": {
+                                            "type": "number"
+                                        },
+                                        "tag": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "directions": {
+                                    "items": {
+                                        "properties": {
+                                            "distance": {
+                                                "type": "number"
+                                            },
+                                            "duration": {
+                                                "type": "number"
+                                            },
+                                            "html_instructions": {
+                                                "type": "string"
+                                            },
+                                            "maneuver": {
+                                                "type": "string"
+                                            },
+                                            "note": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "position": {
+                                                "properties": {
+                                                    "latitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "herePath": {
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "type": "array"
+                                },
+                                "hos": {
+                                    "properties": {
+                                        "break_points": {
+                                            "items": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "data": {
+                                            "items": {
+                                                "properties": {
+                                                    "distance": {
+                                                        "properties": {
+                                                            "metric": {
+                                                                "type": "number"
+                                                            },
+                                                            "text": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "duration": {
+                                                        "properties": {
+                                                            "text": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "instruction": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "stops": {
+                                            "items": {
+                                                "properties": {
+                                                    "additionalServices": {
+                                                        "type": "string"
+                                                    },
+                                                    "amenities": {
+                                                        "type": "string"
+                                                    },
+                                                    "businessesName": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "contactName": {
+                                                        "type": "string"
+                                                    },
+                                                    "fax": {
+                                                        "type": "string"
+                                                    },
+                                                    "fuelLanes": {
+                                                        "type": "number"
+                                                    },
+                                                    "highway": {
+                                                        "type": "string"
+                                                    },
+                                                    "latitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "parkingSpots": {
+                                                        "type": "string"
+                                                    },
+                                                    "paymentMethods": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone1": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone2": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone3": {
+                                                        "type": "string"
+                                                    },
+                                                    "postalCode": {
+                                                        "type": "string"
+                                                    },
+                                                    "restIndex": {
+                                                        "type": "string"
+                                                    },
+                                                    "showers": {
+                                                        "type": "number"
+                                                    },
+                                                    "state": {
+                                                        "type": "string"
+                                                    },
+                                                    "stopId": {
+                                                        "type": "number"
+                                                    },
+                                                    "streetAddress": {
+                                                        "type": "string"
+                                                    },
+                                                    "truckServiceBays": {
+                                                        "type": "number"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "webAddress": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "summary": {
+                                            "properties": {
+                                                "total_break_duration": {
+                                                    "properties": {
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "total_distance": {
+                                                    "properties": {
+                                                        "metric": {
+                                                            "type": "number"
+                                                        },
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "total_drive_duration": {
+                                                    "properties": {
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "total_duration": {
+                                                    "properties": {
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "summary": {
+                                    "description": "summary including distance, time (duration), name, whether the route has tolls (hasTolls), diffs object that shows the difference between the cost between the cheapest route and current route and difference in duration between the current route and the fastest route",
+                                    "properties": {
+                                        "diffs": {
+                                            "properties": {
+                                                "cheapest": {
+                                                    "type": "number"
+                                                },
+                                                "fastest": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "distance": {
+                                            "properties": {
+                                                "metric": {
+                                                    "type": "number"
+                                                },
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "duration": {
+                                            "properties": {
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "hasTolls": {
+                                            "type": "boolean"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "note": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "tolls": {
+                                    "items": {
+                                        "description": "Tolls object contains tolls for all the toll locations on the route. For each toll location",
+                                        "properties": {
+                                            "cashCost": {
+                                                "description": "Cash toll cost",
+                                                "type": "number"
+                                            },
+                                            "creditCardCost": {
+                                                "description": "Credit card toll cost",
+                                                "type": "number"
+                                            },
+                                            "currency": {
+                                                "description": "Currency",
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "description": "Tollguru toll ID. Useful for error checking",
+                                                "type": "number"
+                                            },
+                                            "lat": {
+                                                "description": "Approximate latitude of the toll location",
+                                                "type": "number"
+                                            },
+                                            "licensePlateCost": {
+                                                "description": "License plate (video) toll cost. For example, <a href=\"https://tollguru.com/toll-info/california/pay-by-plate-payment\" target=\"_blank\">Pay by Plate</a> in California, <a href=\"https://tollguru.com/toll-info/texas/pay-by-mail\" target=\"_blank\">ZipCash and Pay by Mail</a> in Texas, <a href=\"https://tollguru.com/toll-info/florida/video-payment\" target=\"_blank\">Pay by Plate</a> in Florida, <a href=\"https://tollguru.com/toll-info/colorado/video-payment\" target=\"_blank\">License Plate Toll</a> in Colorado, Camera Charges on ETR-407, etc.",
+                                                "type": "number"
+                                            },
+                                            "licensePlatePrimary": {
+                                                "description": "Name of the primary license plate toll (video toll) collection system. Typically license Plate tolls are not discounted.",
+                                                "type": "string"
+                                            },
+                                            "licensePlateSecondary": {
+                                                "description": "Name of the secondary license plate toll (video toll) collection system",
+                                                "type": "string"
+                                            },
+                                            "lng": {
+                                                "description": "Approximate longitude of the toll location",
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "description": "Name of the toll location",
+                                                "type": "string"
+                                            },
+                                            "prepaidCardCost": {
+                                                "description": "Prepaid card such as Nexpress, Nexus Card, etc. toll cost",
+                                                "type": "number"
+                                            },
+                                            "road": {
+                                                "description": "Name of the toll road",
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "description": "State, province of the toll location",
+                                                "type": "string"
+                                            },
+                                            "tagCost": {
+                                                "description": "Transponder toll cost <br>For example, <a href=\"https://tollguru.com/toll-info/new-york/what-is-e-zpass\" target=\"_blank\">E-ZPass</a>, <a href=\"https://tollguru.com/toll-info/texas/what-is-txtag-tolltag-eztag\" target=\"_blank\">TxTag</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/florida/what-is-sunpass\" target=\"_blank\">SunPass</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/colorado/what-is-expresstoll-go-pass\" target=\"_blank\">ExpressToll</a>, etc.",
+                                                "type": "number"
+                                            },
+                                            "tagPrimary": {
+                                                "description": "A primary transponder that can be used on the facility. Typically primary transponders have discounts for each usage or based on volume.",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "tagSecondary": {
+                                                "description": "All other transponders that can be used on the facility. Secondary transponders may not count towards discounts",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": {
+                                                "description": "Toll type: <br><code>barrier</code> (for example <a href=\"https://tollguru.com/toll-info/texas/texas-toll-roads-bridges-express-lanes\" target=\"_blank\"> toll roads in Texas </a>), <br><code>ticketSystem</code> - ticket system (for example <a href=\"https://tollguru.com/toll-info/oklahoma/oklahoma-turnpikes\" target=\"_blank\"> toll roads in Oklahoma</a>), <br><code>distBased</code> \u2013 distance based (for example <a href=\"https://tollguru.com/toll-info/ontario/ontario-407-ETR-toll-highway-bridges-tunnels\" target=\"_blank\"> ETR 407 in Ontario, Canada</a>).",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "properties": {
+                            "departure_time": {
+                                "type": "number"
+                            },
+                            "fuelEfficiency": {
+                                "allOf": [
+                                    {
+                                        "description": "If you want an accurate estimate of fuel expenses, you will need to specify parameters specific to fuel price and fuel efficiency as fuelEfficiency object.",
+                                        "properties": {
+                                            "city": {
+                                                "default": 23.4,
+                                                "type": "number"
+                                            },
+                                            "hwy": {
+                                                "default": 29.25,
+                                                "type": "number"
+                                            },
+                                            "units": {
+                                                "default": "mpg",
+                                                "enum": [
+                                                    "mpg",
+                                                    "kmpl",
+                                                    "l100"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ],
+                                "description": "City fuel efficiency and highway fuel efficiency from request or the default values. Returns fuel efficiency units"
+                            },
+                            "fuelPrice": {
+                                "description": "Fuel price from request or the default fuel price (including currency)",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "rates": {
+                                "description": "Rates object that specifies conversion factors between currencies with US Dollar as base. It is useful when you are looking for tolls between countries. Say you are looking for tolls between Toronto, Canada, and Monterrey, Mexico. Some of the tolls are in Canadian dollars, some in USD and others in Mexican Pesos. The total costs are specified in one currency using the conversion factors. The conversion factors are based on dynamic exchange rates.",
+                                "type": "object"
+                            },
+                            "route": {
+                                "items": {
+                                    "properties": {
+                                        "location": {
+                                            "properties": {
+                                                "lat": {
+                                                    "type": "number"
+                                                },
+                                                "lng": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "share": {
+                                "type": "object"
+                            },
+                            "vehicleType": {
+                                "allOf": [
+                                    {
+                                        "enum": [
+                                            "2AxlesAuto",
+                                            "3AxlesAuto",
+                                            "4AxlesAuto",
+                                            "2AxlesDualTire",
+                                            "3AxlesDualTire",
+                                            "4AxlesDualTire",
+                                            "2AxlesTruck",
+                                            "3AxlesTruck",
+                                            "4AxlesTruck",
+                                            "5AxlesTruck",
+                                            "6AxlesTruck",
+                                            "7AxlesTruck",
+                                            "8AxlesTruck",
+                                            "9AxlesTruck",
+                                            "2AxlesBus",
+                                            "3AxlesBus",
+                                            "2AxlesMotorcycle",
+                                            "3AxlesMotorcycle",
+                                            "2AxlesRv",
+                                            "3AxlesRv",
+                                            "4AxlesRv"
+                                        ],
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/here",
+            "url": "https://tollguru-toll-rest1.p.rapidapi.com/here",
+            "description": "<p>HTTP Request for trucks, buses, RVs, cars, SUV, pick-ups, motorcycles</p><p>For trucks you should specify truck weight, wherever possible. Some bridges and tunnels restrict trucks based on weight. If you are transporting HAZMAT material, please specify material type. If you do not specify HAZMAT restrictions and weight restrictions, none will be applied.</p>",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/here\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/here\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "routes": {
+                        "description": "Route information including distance, time, tol",
+                        "items": {
+                            "properties": {
+                                "costs": {
+                                    "description": "<p>Costs object summarizes the toll cost and the fuel cost for the route.The fuel costs calculated from fuel efficiency (city fuel effiency and highway fuel efficiency) and the speeds on each leg of the route.</p><p>The tolls are added for all the tolls on the route for each payment type. If a payment type cannot be using on all the toll points on the route, the toll cost is returned as false. Else, the sum of tolls for the payment type is returned.</p><p>The tolls are returned for the following payment types:</p><ul> <li>Cash</li><li>Transponder</li><li>License Plate</li><li>Credit card</li><li>Prepaid pass</li></ul>",
+                                    "properties": {
+                                        "cash": {
+                                            "type": "number"
+                                        },
+                                        "creditCard": {
+                                            "type": "number"
+                                        },
+                                        "fuel": {
+                                            "type": "number"
+                                        },
+                                        "licensePlate": {
+                                            "type": "number"
+                                        },
+                                        "otherCost": {
+                                            "type": "number"
+                                        },
+                                        "prepaidCard": {
+                                            "type": "number"
+                                        },
+                                        "tag": {
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "directions": {
+                                    "items": {
+                                        "properties": {
+                                            "distance": {
+                                                "type": "number"
+                                            },
+                                            "duration": {
+                                                "type": "number"
+                                            },
+                                            "html_instructions": {
+                                                "type": "string"
+                                            },
+                                            "maneuver": {
+                                                "type": "string"
+                                            },
+                                            "note": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "position": {
+                                                "properties": {
+                                                    "latitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "herePath": {
+                                    "items": {
+                                        "type": "number"
+                                    },
+                                    "type": "array"
+                                },
+                                "hos": {
+                                    "properties": {
+                                        "break_points": {
+                                            "items": {
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "data": {
+                                            "items": {
+                                                "properties": {
+                                                    "distance": {
+                                                        "properties": {
+                                                            "metric": {
+                                                                "type": "number"
+                                                            },
+                                                            "text": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "duration": {
+                                                        "properties": {
+                                                            "text": {
+                                                                "type": "string"
+                                                            },
+                                                            "value": {
+                                                                "type": "number"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "instruction": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "stops": {
+                                            "items": {
+                                                "properties": {
+                                                    "additionalServices": {
+                                                        "type": "string"
+                                                    },
+                                                    "amenities": {
+                                                        "type": "string"
+                                                    },
+                                                    "businessesName": {
+                                                        "type": "string"
+                                                    },
+                                                    "city": {
+                                                        "type": "string"
+                                                    },
+                                                    "contactName": {
+                                                        "type": "string"
+                                                    },
+                                                    "fax": {
+                                                        "type": "string"
+                                                    },
+                                                    "fuelLanes": {
+                                                        "type": "number"
+                                                    },
+                                                    "highway": {
+                                                        "type": "string"
+                                                    },
+                                                    "latitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "longitude": {
+                                                        "type": "number"
+                                                    },
+                                                    "parkingSpots": {
+                                                        "type": "string"
+                                                    },
+                                                    "paymentMethods": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone1": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone2": {
+                                                        "type": "string"
+                                                    },
+                                                    "phone3": {
+                                                        "type": "string"
+                                                    },
+                                                    "postalCode": {
+                                                        "type": "string"
+                                                    },
+                                                    "restIndex": {
+                                                        "type": "string"
+                                                    },
+                                                    "showers": {
+                                                        "type": "number"
+                                                    },
+                                                    "state": {
+                                                        "type": "string"
+                                                    },
+                                                    "stopId": {
+                                                        "type": "number"
+                                                    },
+                                                    "streetAddress": {
+                                                        "type": "string"
+                                                    },
+                                                    "truckServiceBays": {
+                                                        "type": "number"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "webAddress": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "summary": {
+                                            "properties": {
+                                                "total_break_duration": {
+                                                    "properties": {
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "total_distance": {
+                                                    "properties": {
+                                                        "metric": {
+                                                            "type": "number"
+                                                        },
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "total_drive_duration": {
+                                                    "properties": {
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "total_duration": {
+                                                    "properties": {
+                                                        "text": {
+                                                            "type": "string"
+                                                        },
+                                                        "value": {
+                                                            "type": "number"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "summary": {
+                                    "description": "summary including distance, time (duration), name, whether the route has tolls (hasTolls), diffs object that shows the difference between the cost between the cheapest route and current route and difference in duration between the current route and the fastest route",
+                                    "properties": {
+                                        "diffs": {
+                                            "properties": {
+                                                "cheapest": {
+                                                    "type": "number"
+                                                },
+                                                "fastest": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "distance": {
+                                            "properties": {
+                                                "metric": {
+                                                    "type": "number"
+                                                },
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "duration": {
+                                            "properties": {
+                                                "text": {
+                                                    "type": "string"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "hasTolls": {
+                                            "type": "boolean"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "note": {
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "url": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "territoryMileage": {
+                                    "items": {
+                                        "properties": {
+                                            "distance": {
+                                                "properties": {
+                                                    "metric": {
+                                                        "type": "number"
+                                                    },
+                                                    "text": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "territory": {
+                                                "properties": {
+                                                    "code": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "trafficTime": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "tolls": {
+                                    "items": {
+                                        "description": "Tolls object contains tolls for all the toll locations on the route. For each toll location",
+                                        "properties": {
+                                            "cashCost": {
+                                                "description": "Cash toll cost",
+                                                "type": "number"
+                                            },
+                                            "creditCardCost": {
+                                                "description": "Credit card toll cost",
+                                                "type": "number"
+                                            },
+                                            "currency": {
+                                                "description": "Currency",
+                                                "type": "string"
+                                            },
+                                            "id": {
+                                                "description": "Tollguru toll ID. Useful for error checking",
+                                                "type": "number"
+                                            },
+                                            "lat": {
+                                                "description": "Approximate latitude of the toll location",
+                                                "type": "number"
+                                            },
+                                            "licensePlateCost": {
+                                                "description": "License plate (video) toll cost. For example, <a href=\"https://tollguru.com/toll-info/california/pay-by-plate-payment\" target=\"_blank\">Pay by Plate</a> in California, <a href=\"https://tollguru.com/toll-info/texas/pay-by-mail\" target=\"_blank\">ZipCash and Pay by Mail</a> in Texas, <a href=\"https://tollguru.com/toll-info/florida/video-payment\" target=\"_blank\">Pay by Plate</a> in Florida, <a href=\"https://tollguru.com/toll-info/colorado/video-payment\" target=\"_blank\">License Plate Toll</a> in Colorado, Camera Charges on ETR-407, etc.",
+                                                "type": "number"
+                                            },
+                                            "licensePlatePrimary": {
+                                                "description": "Name of the primary license plate toll (video toll) collection system. Typically license Plate tolls are not discounted.",
+                                                "type": "string"
+                                            },
+                                            "licensePlateSecondary": {
+                                                "description": "Name of the secondary license plate toll (video toll) collection system",
+                                                "type": "string"
+                                            },
+                                            "lng": {
+                                                "description": "Approximate longitude of the toll location",
+                                                "type": "number"
+                                            },
+                                            "name": {
+                                                "description": "Name of the toll location",
+                                                "type": "string"
+                                            },
+                                            "prepaidCardCost": {
+                                                "description": "Prepaid card such as Nexpress, Nexus Card, etc. toll cost",
+                                                "type": "number"
+                                            },
+                                            "road": {
+                                                "description": "Name of the toll road",
+                                                "type": "string"
+                                            },
+                                            "state": {
+                                                "description": "State, province of the toll location",
+                                                "type": "string"
+                                            },
+                                            "tagCost": {
+                                                "description": "Transponder toll cost <br>For example, <a href=\"https://tollguru.com/toll-info/new-york/what-is-e-zpass\" target=\"_blank\">E-ZPass</a>, <a href=\"https://tollguru.com/toll-info/texas/what-is-txtag-tolltag-eztag\" target=\"_blank\">TxTag</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/florida/what-is-sunpass\" target=\"_blank\">SunPass</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/colorado/what-is-expresstoll-go-pass\" target=\"_blank\">ExpressToll</a>, etc.",
+                                                "type": "number"
+                                            },
+                                            "tagPrimary": {
+                                                "description": "A primary transponder that can be used on the facility. Typically primary transponders have discounts for each usage or based on volume.",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "tagSecondary": {
+                                                "description": "All other transponders that can be used on the facility. Secondary transponders may not count towards discounts",
+                                                "items": {
+                                                    "type": "string"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": {
+                                                "description": "Toll type: <br><code>barrier</code> (for example <a href=\"https://tollguru.com/toll-info/texas/texas-toll-roads-bridges-express-lanes\" target=\"_blank\"> toll roads in Texas </a>), <br><code>ticketSystem</code> - ticket system (for example <a href=\"https://tollguru.com/toll-info/oklahoma/oklahoma-turnpikes\" target=\"_blank\"> toll roads in Oklahoma</a>), <br><code>distBased</code> \u2013 distance based (for example <a href=\"https://tollguru.com/toll-info/ontario/ontario-407-ETR-toll-highway-bridges-tunnels\" target=\"_blank\"> ETR 407 in Ontario, Canada</a>).",
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "properties": {
+                            "departure_time": {
+                                "type": "number"
+                            },
+                            "fuelEfficiency": {
+                                "allOf": [
+                                    {
+                                        "description": "If you want an accurate estimate of fuel expenses, you will need to specify parameters specific to fuel price and fuel efficiency as fuelEfficiency object.",
+                                        "properties": {
+                                            "city": {
+                                                "default": 23.4,
+                                                "type": "number"
+                                            },
+                                            "hwy": {
+                                                "default": 29.25,
+                                                "type": "number"
+                                            },
+                                            "units": {
+                                                "default": "mpg",
+                                                "enum": [
+                                                    "mpg",
+                                                    "kmpl",
+                                                    "l100"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ],
+                                "description": "City fuel efficiency and highway fuel efficiency from request or the default values. Returns fuel efficiency units"
+                            },
+                            "fuelPrice": {
+                                "description": "Fuel price from request or the default fuel price (including currency)",
+                                "properties": {
+                                    "currency": {
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "rates": {
+                                "description": "Rates object that specifies conversion factors between currencies with US Dollar as base. It is useful when you are looking for tolls between countries. Say you are looking for tolls between Toronto, Canada, and Monterrey, Mexico. Some of the tolls are in Canadian dollars, some in USD and others in Mexican Pesos. The total costs are specified in one currency using the conversion factors. The conversion factors are based on dynamic exchange rates.",
+                                "type": "object"
+                            },
+                            "route": {
+                                "items": {
+                                    "properties": {
+                                        "location": {
+                                            "properties": {
+                                                "lat": {
+                                                    "type": "number"
+                                                },
+                                                "lng": {
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "share": {
+                                "type": "object"
+                            },
+                            "vehicleType": {
+                                "allOf": [
+                                    {
+                                        "enum": [
+                                            "2AxlesAuto",
+                                            "3AxlesAuto",
+                                            "4AxlesAuto",
+                                            "2AxlesDualTire",
+                                            "3AxlesDualTire",
+                                            "4AxlesDualTire",
+                                            "2AxlesTruck",
+                                            "3AxlesTruck",
+                                            "4AxlesTruck",
+                                            "5AxlesTruck",
+                                            "6AxlesTruck",
+                                            "7AxlesTruck",
+                                            "8AxlesTruck",
+                                            "9AxlesTruck",
+                                            "2AxlesBus",
+                                            "3AxlesBus",
+                                            "2AxlesMotorcycle",
+                                            "3AxlesMotorcycle",
+                                            "2AxlesRv",
+                                            "3AxlesRv",
+                                            "4AxlesRv"
+                                        ],
+                                        "type": "string"
+                                    }
+                                ]
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/route/download",
+            "url": "https://tollguru-toll-rest1.p.rapidapi.com/route/download",
+            "description": "The results will be available for download for upto 30 days by calling the API.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/route/download\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/route/download\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "route": {
+                        "properties": {
+                            "costs": {
+                                "description": "<p>Costs object summarizes the toll cost and the fuel cost for the route.The fuel costs calculated from fuel efficiency (city fuel effiency and highway fuel efficiency) and the speeds on each leg of the route.</p><p>The tolls are added for all the tolls on the route for each payment type. If a payment type cannot be using on all the toll points on the route, the toll cost is returned as false. Else, the sum of tolls for the payment type is returned.</p><p>The tolls are returned for the following payment types:</p><ul> <li>Cash</li><li>Transponder</li><li>License Plate</li><li>Credit card</li><li>Prepaid pass</li></ul>",
+                                "properties": {
+                                    "cash": {
+                                        "type": "number"
+                                    },
+                                    "creditCard": {
+                                        "type": "number"
+                                    },
+                                    "fuel": {
+                                        "type": "number"
+                                    },
+                                    "licensePlate": {
+                                        "type": "number"
+                                    },
+                                    "otherCost": {
+                                        "type": "number"
+                                    },
+                                    "prepaidCard": {
+                                        "type": "number"
+                                    },
+                                    "tag": {
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "hasTolls": {
+                                "type": "boolean"
+                            },
+                            "tolls": {
+                                "items": {
+                                    "description": "Tolls object contains tolls for all the toll locations on the route. For each toll location",
+                                    "properties": {
+                                        "cashCost": {
+                                            "description": "Cash toll cost",
+                                            "type": "number"
+                                        },
+                                        "creditCardCost": {
+                                            "description": "Credit card toll cost",
+                                            "type": "number"
+                                        },
+                                        "currency": {
+                                            "description": "Currency",
+                                            "type": "string"
+                                        },
+                                        "id": {
+                                            "description": "Tollguru toll ID. Useful for error checking",
+                                            "type": "number"
+                                        },
+                                        "lat": {
+                                            "description": "Approximate latitude of the toll location",
+                                            "type": "number"
+                                        },
+                                        "licensePlateCost": {
+                                            "description": "License plate (video) toll cost. For example, <a href=\"https://tollguru.com/toll-info/california/pay-by-plate-payment\" target=\"_blank\">Pay by Plate</a> in California, <a href=\"https://tollguru.com/toll-info/texas/pay-by-mail\" target=\"_blank\">ZipCash and Pay by Mail</a> in Texas, <a href=\"https://tollguru.com/toll-info/florida/video-payment\" target=\"_blank\">Pay by Plate</a> in Florida, <a href=\"https://tollguru.com/toll-info/colorado/video-payment\" target=\"_blank\">License Plate Toll</a> in Colorado, Camera Charges on ETR-407, etc.",
+                                            "type": "number"
+                                        },
+                                        "licensePlatePrimary": {
+                                            "description": "Name of the primary license plate toll (video toll) collection system. Typically license Plate tolls are not discounted.",
+                                            "type": "string"
+                                        },
+                                        "licensePlateSecondary": {
+                                            "description": "Name of the secondary license plate toll (video toll) collection system",
+                                            "type": "string"
+                                        },
+                                        "lng": {
+                                            "description": "Approximate longitude of the toll location",
+                                            "type": "number"
+                                        },
+                                        "name": {
+                                            "description": "Name of the toll location",
+                                            "type": "string"
+                                        },
+                                        "prepaidCardCost": {
+                                            "description": "Prepaid card such as Nexpress, Nexus Card, etc. toll cost",
+                                            "type": "number"
+                                        },
+                                        "road": {
+                                            "description": "Name of the toll road",
+                                            "type": "string"
+                                        },
+                                        "state": {
+                                            "description": "State, province of the toll location",
+                                            "type": "string"
+                                        },
+                                        "tagCost": {
+                                            "description": "Transponder toll cost <br>For example, <a href=\"https://tollguru.com/toll-info/new-york/what-is-e-zpass\" target=\"_blank\">E-ZPass</a>, <a href=\"https://tollguru.com/toll-info/texas/what-is-txtag-tolltag-eztag\" target=\"_blank\">TxTag</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/florida/what-is-sunpass\" target=\"_blank\">SunPass</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/colorado/what-is-expresstoll-go-pass\" target=\"_blank\">ExpressToll</a>, etc.",
+                                            "type": "number"
+                                        },
+                                        "tagPrimary": {
+                                            "description": "A primary transponder that can be used on the facility. Typically primary transponders have discounts for each usage or based on volume.",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "tagSecondary": {
+                                            "description": "All other transponders that can be used on the facility. Secondary transponders may not count towards discounts",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": {
+                                            "description": "Toll type: <br><code>barrier</code> (for example <a href=\"https://tollguru.com/toll-info/texas/texas-toll-roads-bridges-express-lanes\" target=\"_blank\"> toll roads in Texas </a>), <br><code>ticketSystem</code> - ticket system (for example <a href=\"https://tollguru.com/toll-info/oklahoma/oklahoma-turnpikes\" target=\"_blank\"> toll roads in Oklahoma</a>), <br><code>distBased</code> \u2013 distance based (for example <a href=\"https://tollguru.com/toll-info/ontario/ontario-407-ETR-toll-highway-bridges-tunnels\" target=\"_blank\"> ETR 407 in Ontario, Canada</a>).",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "summary": {
+                        "properties": {
+                            "departure_time": {
+                                "type": "number"
+                            },
+                            "rates": {
+                                "description": "Rates object that specifies conversion factors between currencies with US Dollar as base. It is useful when you are looking for tolls between countries. Say you are looking for tolls between Toronto, Canada, and Monterrey, Mexico. Some of the tolls are in Canadian dollars, some in USD and others in Mexican Pesos. The total costs are specified in one currency using the conversion factors. The conversion factors are based on dynamic exchange rates.",
+                                "type": "object"
+                            },
+                            "status": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/route/upload",
+            "url": "https://tollguru-toll-rest1.p.rapidapi.com/route/upload",
+            "description": "<p>This API can be used in synchronous and asynchronous modes. The default mode of operation is synchronous mode where the API response with toll information is returned immediately.</p><p>Asynchronous mode is used in the following cases: </p><ul> <li>Bulk upload of multiple GPS tracks files</li><li>Uploading large GPS tracks files</li></ul><p>In asynchronous mode, the response is returned immediately with a <code>requestId</code> and <code>requestedTimestamp</code>. The results will be available for download for upto 30 days by calling the <code>route/download</code> API. Asynchronous mode can used by specifying the url parameter <code>isAsync=true</code>.</p><p>GPS traces can be passed in the following format </p><ul><li>Upload CSV file</li><li>Upload kml file</li><li>Upload gpx file</li><li>Upload nmea file</li></ul><p>The first line in the CSV needs to contain the attribute names. The subsequent lines needs to contain the data in temporal order. The following parameters are available:</p><table><thead><tr><th>Parameter</th><th>Description</th></tr></thead><tbody><tr><td><strong>latitude</strong></td><td>Latitude coordinate in WGS84 degree (mandatory)</td></tr><tr><td><strong>longitude</strong></td><td>Longitude coordinate in WGS84 degree (mandatory)</td></tr><tr><td><strong>timestamp</strong></td><td>indicates the time and date, for example&nbsp;&nbsp;2018-05-21T17:05:06Z (mandatory since tolls may change based on time)</td></tr><tr><td><strong>speed_mps</strong></td><td>speed in meters per second (optional)</td></tr><tr><td><strong>speed_mph</strong></td><td>speed in miles per hour (optional)</td></tr><tr><td><strong>speed_kmh</strong></td><td>speed in kilometers per hour (optional)</td></tr><tr><td><strong>heading</strong></td><td>heading in degrees clockwise from North (optional)</td></tr></tbody></table><p>You can download sample file from <a href=\"https://tollguru-cdn.s3.us-east-2.amazonaws.com/trip_route.csv\" target=\"_blank\">here</a></p><p>Or use the CSV format file as shown in the table below:</p><table> <tr> <th>latitude</th> <th>longitude</th> <th>timestamp</th> </tr><tr> <td style=\"text-align: center;\">38.90479</td><td style=\"text-align: center;\">-77.02607</td><td style=\"text-align: center;\">2019-12-16T15:45:23Z</td></tr><tr> <td style=\"text-align: center;\">38.90479</td><td style=\"text-align: center;\">-77.02606</td><td style=\"text-align: center;\">2019-12-16T15:47:24Z</td></tr><tr> <td style=\"text-align: center;\">38.9048</td><td style=\"text-align: center;\">-77.02608</td><td style=\"text-align: center;\">2019-12-16T15:49:25Z</td></tr><tr> <td style=\"text-align: center;\">38.9044</td><td style=\"text-align: center;\">-77.02604</td><td style=\"text-align: center;\">2019-12-16T15:50:42Z</td></tr><tr> <td style=\"text-align: center;\">38.90424</td><td style=\"text-align: center;\">-77.02646</td><td style=\"text-align: center;\">2019-12-16T15:50:49Z</td></tr><tr> <td style=\"text-align: center;\">38.90422</td><td style=\"text-align: center;\">-77.02686</td><td style=\"text-align: center;\">2019-12-16T15:50:55Z</td></tr></table><p>Take care of the following things:</p><p><ul><li>GPX: Each trace point can have the following information:</li><li>Coordinates, for example &lt;trkpt lat=\"38.90479\" lon=\"-77.02607\"&gt; (always present), WGS84 degree</li><li>A timestamp, for example &lt;time&gt;2019-12-16T15:45:23Z&lt;/<wbr>time&gt; (optional), time zone UTC</li><li>Elevation, for example &lt;ele&gt;102.5999&lt;/ele&gt; (optional), meter above the WGS84 ellipsoid</li><li>HDOP, for example &lt;hdop&gt;15.0&lt;/hdop&gt; (optional)</li><li>Speed, for example &lt;extensions&gt;&lt;speed&gt;21.9432334&lt;<wbr>/speed&gt;&lt;/extensions&gt; (optional), meter per second</li><li>NMEA: The information from the $GPRMC records is used. If an NMEA trace does not contain $GPRMC records, then the $GPGGA records are used.</li><li>KML: Either &lt;Placemarks with &lt;Points&gt; or &lt;Placemarks&gt; with &lt;LineStrings&gt; can be submitted. Note: Folders with multiple traces are not supported.</li><li>KML files may not work if user is looking for timebased tolls<font color=\"#888888\"><br></font></li></ul></p>",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "vehicleType",
+                    "type": "STRING",
+                    "description": "",
+                    "default": "2AxlesAuto"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "isAsync",
+                    "type": "BOOLEAN",
+                    "description": "The API will function in asynchronous mode is set to true",
+                    "default": false
+                },
+                {
+                    "name": "height",
+                    "type": "STRING",
+                    "description": "Specify the vehicle height to get accurate tolls for toll roads where tolls depend on axles and vehicle height",
+                    "default": ""
+                },
+                {
+                    "name": "vehicleName",
+                    "type": "STRING",
+                    "description": "Specify name for your vehicle to identify the response json for particular vehicle",
+                    "default": ""
+                },
+                {
+                    "name": "weight",
+                    "type": "STRING",
+                    "description": "Specify the vehicle weight to get accurate tolls for toll roads where tolls depend on axles and vehicle weight",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/route/upload\"\nquerystring = {\"isAsync\": false, \"height\": \"\", \"vehicleName\": \"\", \"weight\": \"\", \"vehicleType\": \"2AxlesAuto\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://tollguru-toll-rest1.p.rapidapi.com/route/upload\"\nquerystring = {\"isAsync\": false, \"height\": \"\", \"vehicleName\": \"\", \"weight\": \"\", \"vehicleType\": \"2AxlesAuto\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"tollguru-toll-rest1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "oneOf": [
+                    {
+                        "properties": {
+                            "route": {
+                                "properties": {
+                                    "costs": {
+                                        "description": "<p>Costs object summarizes the toll cost and the fuel cost for the route.The fuel costs calculated from fuel efficiency (city fuel effiency and highway fuel efficiency) and the speeds on each leg of the route.</p><p>The tolls are added for all the tolls on the route for each payment type. If a payment type cannot be using on all the toll points on the route, the toll cost is returned as false. Else, the sum of tolls for the payment type is returned.</p><p>The tolls are returned for the following payment types:</p><ul> <li>Cash</li><li>Transponder</li><li>License Plate</li><li>Credit card</li><li>Prepaid pass</li></ul>",
+                                        "properties": {
+                                            "cash": {
+                                                "type": "number"
+                                            },
+                                            "creditCard": {
+                                                "type": "number"
+                                            },
+                                            "fuel": {
+                                                "type": "number"
+                                            },
+                                            "licensePlate": {
+                                                "type": "number"
+                                            },
+                                            "otherCost": {
+                                                "type": "number"
+                                            },
+                                            "prepaidCard": {
+                                                "type": "number"
+                                            },
+                                            "tag": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "hasTolls": {
+                                        "type": "boolean"
+                                    },
+                                    "tolls": {
+                                        "items": {
+                                            "description": "Tolls object contains tolls for all the toll locations on the route. For each toll location",
+                                            "properties": {
+                                                "cashCost": {
+                                                    "description": "Cash toll cost",
+                                                    "type": "number"
+                                                },
+                                                "creditCardCost": {
+                                                    "description": "Credit card toll cost",
+                                                    "type": "number"
+                                                },
+                                                "currency": {
+                                                    "description": "Currency",
+                                                    "type": "string"
+                                                },
+                                                "id": {
+                                                    "description": "Tollguru toll ID. Useful for error checking",
+                                                    "type": "number"
+                                                },
+                                                "lat": {
+                                                    "description": "Approximate latitude of the toll location",
+                                                    "type": "number"
+                                                },
+                                                "licensePlateCost": {
+                                                    "description": "License plate (video) toll cost. For example, <a href=\"https://tollguru.com/toll-info/california/pay-by-plate-payment\" target=\"_blank\">Pay by Plate</a> in California, <a href=\"https://tollguru.com/toll-info/texas/pay-by-mail\" target=\"_blank\">ZipCash and Pay by Mail</a> in Texas, <a href=\"https://tollguru.com/toll-info/florida/video-payment\" target=\"_blank\">Pay by Plate</a> in Florida, <a href=\"https://tollguru.com/toll-info/colorado/video-payment\" target=\"_blank\">License Plate Toll</a> in Colorado, Camera Charges on ETR-407, etc.",
+                                                    "type": "number"
+                                                },
+                                                "licensePlatePrimary": {
+                                                    "description": "Name of the primary license plate toll (video toll) collection system. Typically license Plate tolls are not discounted.",
+                                                    "type": "string"
+                                                },
+                                                "licensePlateSecondary": {
+                                                    "description": "Name of the secondary license plate toll (video toll) collection system",
+                                                    "type": "string"
+                                                },
+                                                "lng": {
+                                                    "description": "Approximate longitude of the toll location",
+                                                    "type": "number"
+                                                },
+                                                "name": {
+                                                    "description": "Name of the toll location",
+                                                    "type": "string"
+                                                },
+                                                "prepaidCardCost": {
+                                                    "description": "Prepaid card such as Nexpress, Nexus Card, etc. toll cost",
+                                                    "type": "number"
+                                                },
+                                                "road": {
+                                                    "description": "Name of the toll road",
+                                                    "type": "string"
+                                                },
+                                                "state": {
+                                                    "description": "State, province of the toll location",
+                                                    "type": "string"
+                                                },
+                                                "tagCost": {
+                                                    "description": "Transponder toll cost <br>For example, <a href=\"https://tollguru.com/toll-info/new-york/what-is-e-zpass\" target=\"_blank\">E-ZPass</a>, <a href=\"https://tollguru.com/toll-info/texas/what-is-txtag-tolltag-eztag\" target=\"_blank\">TxTag</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/florida/what-is-sunpass\" target=\"_blank\">SunPass</a>, <a href=\"https://tollguru.com/toll-info/california/what-is-fastrak\" target=\"_blank\">FasTrak</a>, <a href=\"https://tollguru.com/toll-info/colorado/what-is-expresstoll-go-pass\" target=\"_blank\">ExpressToll</a>, etc.",
+                                                    "type": "number"
+                                                },
+                                                "tagPrimary": {
+                                                    "description": "A primary transponder that can be used on the facility. Typically primary transponders have discounts for each usage or based on volume.",
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "tagSecondary": {
+                                                    "description": "All other transponders that can be used on the facility. Secondary transponders may not count towards discounts",
+                                                    "items": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": {
+                                                    "description": "Toll type: <br><code>barrier</code> (for example <a href=\"https://tollguru.com/toll-info/texas/texas-toll-roads-bridges-express-lanes\" target=\"_blank\"> toll roads in Texas </a>), <br><code>ticketSystem</code> - ticket system (for example <a href=\"https://tollguru.com/toll-info/oklahoma/oklahoma-turnpikes\" target=\"_blank\"> toll roads in Oklahoma</a>), <br><code>distBased</code> \u2013 distance based (for example <a href=\"https://tollguru.com/toll-info/ontario/ontario-407-ETR-toll-highway-bridges-tunnels\" target=\"_blank\"> ETR 407 in Ontario, Canada</a>).",
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "status": {
+                                "type": "string"
+                            },
+                            "summary": {
+                                "properties": {
+                                    "departure_time": {
+                                        "type": "number"
+                                    },
+                                    "rates": {
+                                        "description": "Rates object that specifies conversion factors between currencies with US Dollar as base. It is useful when you are looking for tolls between countries. Say you are looking for tolls between Toronto, Canada, and Monterrey, Mexico. Some of the tolls are in Canadian dollars, some in USD and others in Mexican Pesos. The total costs are specified in one currency using the conversion factors. The conversion factors are based on dynamic exchange rates.",
+                                        "type": "object"
+                                    },
+                                    "status": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "properties": {
+                            "requestId": {
+                                "type": "string"
+                            },
+                            "requestedTimestamp": {
+                                "type": "string"
+                            },
+                            "status": {
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ]
+            }
+        }
+    ]
+}

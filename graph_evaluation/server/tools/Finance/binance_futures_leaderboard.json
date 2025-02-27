@@ -1,0 +1,1005 @@
+{
+    "product_id": "api_d07b3d50-e254-41fa-9717-800b50db170c",
+    "tool_description": "Binance Futures Leaderboard API is an API for querying the leaderboard of the Binance Futures Exchange.\n\nAny questions or issues please contact me on Telegram:  [@DevNullZer0](https://t.me/devnullzer0) or via [devnullzer0@proton.me](mailto:devnullzer0@proton.me)",
+    "home_url": "https://rapidapi.com/DevNullZero/api/binance-futures-leaderboard1/",
+    "name": "Binance Futures Leaderboard",
+    "title": "Binance Futures Leaderboard",
+    "pricing": "FREEMIUM",
+    "tool_name": "Binance Futures Leaderboard",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 942,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.9,
+        "__typename": "Score"
+    },
+    "host": "binance-futures-leaderboard1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "get_other_performance",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPerformance",
+            "description": "Get the trader performance",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "encryptedUid",
+                    "type": "STRING",
+                    "description": "The encrypted UID of the trader",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "tradeType",
+                    "type": "ENUM",
+                    "description": "The trade type to search. PERPETUAL is USD\u24c8-M and DELIVERY is COIN-M",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPerformance\"\nquerystring = {\"encryptedUid\": \"\", \"tradeType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPerformance\"\nquerystring = {\"encryptedUid\": \"\", \"tradeType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "encryptedUid"
+                        ],
+                        "msg": "string does not match regex \"^[0-9A-F]{32}$\"",
+                        "type": "value_error.str.regex",
+                        "ctx": {
+                            "pattern": "^[0-9A-F]{32}$"
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "tradeType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'PERPETUAL', 'DELIVERY'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "PERPETUAL",
+                                "DELIVERY"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GetOtherPerformanceResponse",
+                "required": [
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {
+                            "title": "GetOtherPerformanceModel",
+                            "type": "object",
+                            "properties": {
+                                "periodType": {
+                                    "title": "PeriodType1",
+                                    "enum": [
+                                        "DAILY",
+                                        "WEEKLY",
+                                        "LAST_SEVEN_DAYS",
+                                        "MONTHLY",
+                                        "LAST_THIRTY_DAYS",
+                                        "YEARLY",
+                                        "LAST_TWELVE_MONTHS",
+                                        "ALL"
+                                    ],
+                                    "type": "string",
+                                    "description": "An enumeration."
+                                },
+                                "statisticsType": {
+                                    "title": "StatisticsType",
+                                    "enum": [
+                                        "ROI",
+                                        "PNL"
+                                    ],
+                                    "type": "string",
+                                    "description": "An enumeration."
+                                },
+                                "value": {
+                                    "title": "Value",
+                                    "type": "number"
+                                },
+                                "rank": {
+                                    "title": "Rank",
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "search_nickname",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v1/searchNickname",
+            "description": "Get the trader by nickname",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "nickname",
+                    "type": "STRING",
+                    "description": "The trader nickname to search",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/searchNickname\"\nquerystring = {\"nickname\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/searchNickname\"\nquerystring = {\"nickname\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": null,
+                "data": [],
+                "success": true
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "get_trader_positions",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v2/getTraderPositions",
+            "description": "Get trader open positions",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "encryptedUid",
+                    "type": "STRING",
+                    "description": "The encrypted UID of the trader",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "tradeType",
+                    "type": "ENUM",
+                    "description": "The trade type to search. PERPETUALis USD\u24c8-M and DELIVERY is COIN-M",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/getTraderPositions\"\nquerystring = {\"encryptedUid\": \"\", \"tradeType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/getTraderPositions\"\nquerystring = {\"encryptedUid\": \"\", \"tradeType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "encryptedUid",
+                            0
+                        ],
+                        "msg": "string does not match regex \"^[0-9A-F]{32}$\"",
+                        "type": "value_error.str.regex",
+                        "ctx": {
+                            "pattern": "^[0-9A-F]{32}$"
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "tradeType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'ALL', 'PERPETUAL', 'DELIVERY'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "ALL",
+                                "PERPETUAL",
+                                "DELIVERY"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GetTraderPositionsResponse",
+                "required": [
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {
+                            "title": "GetTraderPositionsModel",
+                            "type": "object",
+                            "properties": {
+                                "encryptedUid": {
+                                    "title": "Encrypteduid",
+                                    "type": "string"
+                                },
+                                "positions": {
+                                    "title": "PositionsDictModel",
+                                    "type": "object",
+                                    "properties": {
+                                        "perpetual": {
+                                            "title": "Perpetual",
+                                            "type": "array",
+                                            "items": {
+                                                "title": "PositionsModel",
+                                                "type": "object",
+                                                "properties": {
+                                                    "symbol": {
+                                                        "title": "Symbol",
+                                                        "type": "string"
+                                                    },
+                                                    "entryPrice": {
+                                                        "title": "Entryprice",
+                                                        "type": "number"
+                                                    },
+                                                    "markPrice": {
+                                                        "title": "Markprice",
+                                                        "type": "number"
+                                                    },
+                                                    "pnl": {
+                                                        "title": "Pnl",
+                                                        "type": "number"
+                                                    },
+                                                    "roe": {
+                                                        "title": "Roe",
+                                                        "type": "number"
+                                                    },
+                                                    "amount": {
+                                                        "title": "Amount",
+                                                        "type": "number"
+                                                    },
+                                                    "updateTimeStamp": {
+                                                        "title": "Updatetimestamp",
+                                                        "type": "integer"
+                                                    },
+                                                    "tradeBefore": {
+                                                        "title": "Tradebefore",
+                                                        "type": "boolean"
+                                                    },
+                                                    "long": {
+                                                        "title": "Long",
+                                                        "type": "boolean"
+                                                    },
+                                                    "short": {
+                                                        "title": "Short",
+                                                        "type": "boolean"
+                                                    },
+                                                    "leverage": {
+                                                        "title": "Leverage",
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "delivery": {
+                                            "title": "Delivery",
+                                            "type": "array",
+                                            "items": {
+                                                "title": "PositionsModel",
+                                                "type": "object",
+                                                "properties": {
+                                                    "symbol": {
+                                                        "title": "Symbol",
+                                                        "type": "string"
+                                                    },
+                                                    "entryPrice": {
+                                                        "title": "Entryprice",
+                                                        "type": "number"
+                                                    },
+                                                    "markPrice": {
+                                                        "title": "Markprice",
+                                                        "type": "number"
+                                                    },
+                                                    "pnl": {
+                                                        "title": "Pnl",
+                                                        "type": "number"
+                                                    },
+                                                    "roe": {
+                                                        "title": "Roe",
+                                                        "type": "number"
+                                                    },
+                                                    "amount": {
+                                                        "title": "Amount",
+                                                        "type": "number"
+                                                    },
+                                                    "updateTimeStamp": {
+                                                        "title": "Updatetimestamp",
+                                                        "type": "integer"
+                                                    },
+                                                    "tradeBefore": {
+                                                        "title": "Tradebefore",
+                                                        "type": "boolean"
+                                                    },
+                                                    "long": {
+                                                        "title": "Long",
+                                                        "type": "boolean"
+                                                    },
+                                                    "short": {
+                                                        "title": "Short",
+                                                        "type": "boolean"
+                                                    },
+                                                    "leverage": {
+                                                        "title": "Leverage",
+                                                        "type": "integer"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "get_other_leaderboard_base_info",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherLeaderboardBaseInfo",
+            "description": "Get the trader information",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "encryptedUid",
+                    "type": "STRING",
+                    "description": "The encrypted UID of the trader",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherLeaderboardBaseInfo\"\nquerystring = {\"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherLeaderboardBaseInfo\"\nquerystring = {\"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "encryptedUid"
+                        ],
+                        "msg": "string does not match regex \"^[0-9A-F]{32}$\"",
+                        "type": "value_error.str.regex",
+                        "ctx": {
+                            "pattern": "^[0-9A-F]{32}$"
+                        }
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GetOtherLeaderboardBaseInfoResponse",
+                "required": [
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "GetOtherLeaderboardBaseInfoModel",
+                        "type": "object",
+                        "properties": {
+                            "nickName": {
+                                "title": "Nickname",
+                                "type": "string"
+                            },
+                            "userPhotoUrl": {
+                                "title": "Userphotourl",
+                                "type": "string"
+                            },
+                            "positionShared": {
+                                "title": "Positionshared",
+                                "type": "boolean"
+                            },
+                            "deliveryPositionShared": {
+                                "title": "Deliverypositionshared",
+                                "type": "boolean"
+                            },
+                            "followingCount": {
+                                "title": "Followingcount",
+                                "type": "integer"
+                            },
+                            "followerCount": {
+                                "title": "Followercount",
+                                "type": "integer"
+                            },
+                            "twitterUrl": {
+                                "title": "Twitterurl",
+                                "type": "string"
+                            },
+                            "introduction": {
+                                "title": "Introduction",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "get_trader_info",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v2/getTraderInfo",
+            "description": "Get trader information",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "encryptedUid",
+                    "type": "STRING",
+                    "description": "The encrypted UID of the trader",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/getTraderInfo\"\nquerystring = {\"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/getTraderInfo\"\nquerystring = {\"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "encryptedUid"
+                        ],
+                        "msg": "string does not match regex \"^[0-9A-F]{32}$\"",
+                        "type": "value_error.str.regex",
+                        "ctx": {
+                            "pattern": "^[0-9A-F]{32}$"
+                        }
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "get_other_trade_record",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherTradeRecord",
+            "description": "Get the other trade record",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "encryptedUid",
+                    "type": "STRING",
+                    "description": "The encrypted UID of the trader",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "tradeRecordType",
+                    "type": "ENUM",
+                    "description": "The trader's trade record type",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherTradeRecord\"\nquerystring = {\"tradeRecordType\": \"\", \"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherTradeRecord\"\nquerystring = {\"tradeRecordType\": \"\", \"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "encryptedUid"
+                        ],
+                        "msg": "string does not match regex \"^[0-9A-F]{32}$\"",
+                        "type": "value_error.str.regex",
+                        "ctx": {
+                            "pattern": "^[0-9A-F]{32}$"
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "tradeRecordType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'PERPETUAL', 'DELIVERY', 'BATTLE'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "PERPETUAL",
+                                "DELIVERY",
+                                "BATTLE"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "search_trader",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v2/searchTrader",
+            "description": "Search for traders by nickname",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "nickname",
+                    "type": "STRING",
+                    "description": "The trader nickname to search",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/searchTrader\"\nquerystring = {\"nickname\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/searchTrader\"\nquerystring = {\"nickname\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "message": null,
+                "data": [],
+                "success": true
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "SearchTraderResponse",
+                "required": [
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {
+                            "title": "SearchTraderModel",
+                            "type": "object",
+                            "properties": {
+                                "encryptedUid": {
+                                    "title": "Encrypteduid",
+                                    "type": "string"
+                                },
+                                "nickName": {
+                                    "title": "Nickname",
+                                    "type": "string"
+                                },
+                                "positionShared": {
+                                    "title": "Positionshared",
+                                    "type": "boolean"
+                                },
+                                "deliveryPositionShared": {
+                                    "title": "Deliverypositionshared",
+                                    "type": "boolean"
+                                },
+                                "followerCount": {
+                                    "title": "Followercount",
+                                    "type": "integer"
+                                },
+                                "twitterUrl": {
+                                    "title": "Twitterurl",
+                                    "type": "string"
+                                },
+                                "leaderboardUrl": {
+                                    "title": "Leaderboardurl",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "get_leaderboard_rank",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getLeaderboardRank",
+            "description": "Get the leaderboard rank",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "statisticsType",
+                    "type": "ENUM",
+                    "description": "The statistics type to search",
+                    "default": ""
+                },
+                {
+                    "name": "isShared",
+                    "type": "BOOLEAN",
+                    "description": "Include shared positions",
+                    "default": "true"
+                },
+                {
+                    "name": "tradeType",
+                    "type": "ENUM",
+                    "description": "The trade type to search. PERPETUAL is USD\u24c8-M and DELIVERY is COIN-M",
+                    "default": ""
+                },
+                {
+                    "name": "periodType",
+                    "type": "ENUM",
+                    "description": "The period type to search",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getLeaderboardRank\"\nquerystring = {\"statisticsType\": \"\", \"isShared\": \"true\", \"tradeType\": \"\", \"periodType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getLeaderboardRank\"\nquerystring = {\"statisticsType\": \"\", \"isShared\": \"true\", \"tradeType\": \"\", \"periodType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "periodType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'DAILY', 'WEEKLY', 'MONTHLY', 'ALL'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "DAILY",
+                                "WEEKLY",
+                                "MONTHLY",
+                                "ALL"
+                            ]
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "statisticsType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'ROI', 'PNL'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "ROI",
+                                "PNL"
+                            ]
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "tradeType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'PERPETUAL', 'DELIVERY'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "PERPETUAL",
+                                "DELIVERY"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "get_other_position",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPosition",
+            "description": "Get trader open positions",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "encryptedUid",
+                    "type": "STRING",
+                    "description": "The encrypted UID of the trader",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "tradeType",
+                    "type": "ENUM",
+                    "description": "The trade type to search. PERPETUAL is USD\u24c8-M and DELIVERY is COIN-M",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPosition\"\nquerystring = {\"tradeType\": \"\", \"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v1/getOtherPosition\"\nquerystring = {\"tradeType\": \"\", \"encryptedUid\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "encryptedUid"
+                        ],
+                        "msg": "string does not match regex \"^[0-9A-F]{32}$\"",
+                        "type": "value_error.str.regex",
+                        "ctx": {
+                            "pattern": "^[0-9A-F]{32}$"
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "tradeType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'PERPETUAL', 'DELIVERY'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "PERPETUAL",
+                                "DELIVERY"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "GetOtherPositionResponse",
+                "required": [
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "GetOtherPositionModel",
+                        "type": "object",
+                        "properties": {
+                            "otherPositionRetList": {
+                                "title": "Otherpositionretlist",
+                                "type": "array",
+                                "items": {
+                                    "title": "PositionsModel",
+                                    "type": "object",
+                                    "properties": {
+                                        "symbol": {
+                                            "title": "Symbol",
+                                            "type": "string"
+                                        },
+                                        "entryPrice": {
+                                            "title": "Entryprice",
+                                            "type": "number"
+                                        },
+                                        "markPrice": {
+                                            "title": "Markprice",
+                                            "type": "number"
+                                        },
+                                        "pnl": {
+                                            "title": "Pnl",
+                                            "type": "number"
+                                        },
+                                        "roe": {
+                                            "title": "Roe",
+                                            "type": "number"
+                                        },
+                                        "updateTime": {
+                                            "title": "Updatetime",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "amount": {
+                                            "title": "Amount",
+                                            "type": "number"
+                                        },
+                                        "updateTimeStamp": {
+                                            "title": "Updatetimestamp",
+                                            "type": "integer"
+                                        },
+                                        "yellow": {
+                                            "title": "Yellow",
+                                            "type": "boolean"
+                                        },
+                                        "tradeBefore": {
+                                            "title": "Tradebefore",
+                                            "type": "boolean"
+                                        },
+                                        "leverage": {
+                                            "title": "Leverage",
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            },
+                            "updateTime": {
+                                "title": "Updatetime",
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            },
+                            "updateTimeStamp": {
+                                "title": "Updatetimestamp",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "type": "boolean"
+                    }
+                }
+            }
+        },
+        {
+            "name": "search_leaderboard",
+            "url": "https://binance-futures-leaderboard1.p.rapidapi.com/v2/searchLeaderboard",
+            "description": "Get the list of traders on the leaderboard",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "isTrader",
+                    "type": "BOOLEAN",
+                    "description": "Include only copytraders",
+                    "default": "false"
+                },
+                {
+                    "name": "statisticsType",
+                    "type": "ENUM",
+                    "description": "The statistics type to search",
+                    "default": ""
+                },
+                {
+                    "name": "periodType",
+                    "type": "ENUM",
+                    "description": "The period type to search",
+                    "default": ""
+                },
+                {
+                    "name": "isShared",
+                    "type": "BOOLEAN",
+                    "description": "Include shared positions",
+                    "default": "true"
+                },
+                {
+                    "name": "tradeType",
+                    "type": "ENUM",
+                    "description": "The trade type to search. PERPETUAL is USD\u24c8-M and DELIVERY is COIN-M",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/searchLeaderboard\"\nquerystring = {\"isTrader\": \"false\", \"statisticsType\": \"\", \"periodType\": \"\", \"isShared\": \"true\", \"tradeType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://binance-futures-leaderboard1.p.rapidapi.com/v2/searchLeaderboard\"\nquerystring = {\"isTrader\": \"false\", \"statisticsType\": \"\", \"periodType\": \"\", \"isShared\": \"true\", \"tradeType\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"binance-futures-leaderboard1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "periodType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'DAILY', 'WEEKLY', 'MONTHLY', 'ALL'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "DAILY",
+                                "WEEKLY",
+                                "MONTHLY",
+                                "ALL"
+                            ]
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "statisticsType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'ROI', 'PNL'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "ROI",
+                                "PNL"
+                            ]
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "tradeType"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'PERPETUAL', 'DELIVERY'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "PERPETUAL",
+                                "DELIVERY"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "title": "SearchLeaderboardResponse",
+                "required": [
+                    "success"
+                ],
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "title": "Message",
+                        "type": "string"
+                    },
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {
+                            "title": "TraderDataModel",
+                            "required": [
+                                "positionShared",
+                                "leaderboardUrl"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "encryptedUid": {
+                                    "title": "Encrypteduid",
+                                    "type": "string"
+                                },
+                                "nickName": {
+                                    "title": "Nickname",
+                                    "type": "string"
+                                },
+                                "userPhotoUrl": {
+                                    "title": "Userphotourl",
+                                    "type": "string"
+                                },
+                                "rank": {
+                                    "title": "Rank",
+                                    "type": "integer"
+                                },
+                                "value": {
+                                    "title": "Value",
+                                    "type": "number"
+                                },
+                                "positionShared": {
+                                    "title": "Positionshared",
+                                    "type": "boolean"
+                                },
+                                "twitterUrl": {
+                                    "title": "Twitterurl",
+                                    "type": "string"
+                                },
+                                "updateTime": {
+                                    "title": "Updatetime",
+                                    "type": "number"
+                                },
+                                "followerCount": {
+                                    "title": "Followercount",
+                                    "type": "integer"
+                                },
+                                "leaderboardUrl": {
+                                    "title": "Leaderboardurl",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "success": {
+                        "title": "Success",
+                        "type": "boolean"
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "binance_futures_leaderboard"
+}

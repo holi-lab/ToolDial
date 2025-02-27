@@ -1,0 +1,268 @@
+{
+    "tool_name": "Parking places",
+    "tool_description": "Analize image to get info about parking places using machine learning!",
+    "title": "Parking places",
+    "pricing": "FREEMIUM",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 241,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "home_url": "https://rapidapi.com/rekinm-lnlYQT00U1z/api/parking-places/",
+    "host": "parking-places.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Detect by upload file (form data)",
+            "url": "https://parking-places.p.rapidapi.com/detectfile",
+            "description": "Method returns busy/free parking places and some additional info.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "confth",
+                    "type": "NUMBER",
+                    "description": "Confidence threshold to filter objects. Default is 0.4",
+                    "default": "0.4"
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "Model name or empty (will be used default model)",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/detectfile\"\nquerystring = {\"file\": file, \"confth\": confth}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "pplaces": [
+                    {
+                        "isFree": false,
+                        "box": [],
+                        "confidence": 0
+                    }
+                ],
+                "state": {},
+                "info": {}
+            },
+            "headers": {},
+            "schema": {
+                "title": "Detect method responce",
+                "type": "object",
+                "properties": {
+                    "pplaces": {
+                        "title": "Pplaces",
+                        "type": "array",
+                        "items": {
+                            "title": "Pplace",
+                            "type": "object",
+                            "properties": {
+                                "isFree": {
+                                    "title": "Isfree",
+                                    "type": "boolean",
+                                    "description": "Parking place is Busy/False or Free/True",
+                                    "default": false
+                                },
+                                "box": {
+                                    "title": "Box",
+                                    "type": "array",
+                                    "items": {},
+                                    "description": "Box coordinates: (x1,y1,x2,y2)",
+                                    "default": [
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ]
+                                },
+                                "confidence": {
+                                    "title": "Confidence",
+                                    "type": "number",
+                                    "description": "Confidence percentage",
+                                    "default": 0
+                                }
+                            }
+                        },
+                        "default": []
+                    },
+                    "state": {
+                        "title": "State",
+                        "type": "object",
+                        "default": {}
+                    },
+                    "info": {
+                        "title": "Info",
+                        "type": "object",
+                        "default": {}
+                    }
+                }
+            }
+        },
+        {
+            "name": "Get availiable models list",
+            "url": "https://parking-places.p.rapidapi.com/models",
+            "description": "Method returns availiable models, which can be used for image processing.\nEvery model name can be passed to 'model' parameter.",
+            "method": "GET",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/models\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {},
+            "headers": {},
+            "schema": {}
+        },
+        {
+            "name": "Detect by base64 encoded file (string)",
+            "url": "https://parking-places.p.rapidapi.com/detect",
+            "description": "Method returns busy/free parking places and some additional info.\nimageb64 - base64 encoded image. Valid values are: \n\n    1. plain base64 text, like `/9j/4AAQSkZJRgABAQ...`\n\n    2. data-uri with base64 text, like `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ...`\n\n    3. `bytes to string` like `b'/9j/4AAQSkZJRgABAQ...`",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "Model name or empty (will be used default model)",
+                    "default": ""
+                },
+                {
+                    "name": "confth",
+                    "type": "NUMBER",
+                    "description": "Confidence threshold to filter objects. Default is 0.4",
+                    "default": "0.4"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/detect\"\nquerystring = {\"confth\": confth}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n}\n\nresponse = requests.post(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode": 200,
+            "body": {
+                "pplaces": [
+                    {
+                        "isFree": false,
+                        "box": [],
+                        "confidence": 0
+                    }
+                ],
+                "state": {},
+                "info": {}
+            },
+            "headers": {},
+            "schema": {
+                "title": "Detect method responce",
+                "type": "object",
+                "properties": {
+                    "pplaces": {
+                        "title": "Pplaces",
+                        "type": "array",
+                        "items": {
+                            "title": "Pplace",
+                            "type": "object",
+                            "properties": {
+                                "isFree": {
+                                    "title": "Isfree",
+                                    "type": "boolean",
+                                    "description": "Parking place is Busy/False or Free/True",
+                                    "default": false
+                                },
+                                "box": {
+                                    "title": "Box",
+                                    "type": "array",
+                                    "items": {},
+                                    "description": "Box coordinates: (x1,y1,x2,y2)",
+                                    "default": [
+                                        0,
+                                        0,
+                                        0,
+                                        0
+                                    ]
+                                },
+                                "confidence": {
+                                    "title": "Confidence",
+                                    "type": "number",
+                                    "description": "Confidence percentage",
+                                    "default": 0
+                                }
+                            }
+                        },
+                        "default": []
+                    },
+                    "state": {
+                        "title": "State",
+                        "type": "object",
+                        "default": {}
+                    },
+                    "info": {
+                        "title": "Info",
+                        "type": "object",
+                        "default": {}
+                    }
+                }
+            }
+        },
+        {
+            "name": "Detect by upload file (form data)",
+            "url": "https://parking-places.p.rapidapi.com/detectfile",
+            "description": "Method returns busy/free parking places and some additional info.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "file",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "confth",
+                    "type": "NUMBER",
+                    "description": "Confidence threshold to filter objects. Default is 0.4",
+                    "default": "0.4"
+                },
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "Model name or empty (will be used default model)",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/detectfile\"\nquerystring = {\"file\": \"\", \"confth\": \"0.4\", \"model\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/detectfile\"\nquerystring = {\"file\": \"\", \"confth\": \"0.4\", \"model\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "Detect by base64 encoded file (string)",
+            "url": "https://parking-places.p.rapidapi.com/detect",
+            "description": "Method returns busy/free parking places and some additional info.\nimageb64 - base64 encoded image. Valid values are: \n\n    1. plain base64 text, like `/9j/4AAQSkZJRgABAQ...`\n\n    2. data-uri with base64 text, like `data:image/jpeg;base64,/9j/4AAQSkZJRgABAQ...`\n\n    3. `bytes to string` like `b'/9j/4AAQSkZJRgABAQ...`",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "model",
+                    "type": "STRING",
+                    "description": "Model name or empty (will be used default model)",
+                    "default": ""
+                },
+                {
+                    "name": "confth",
+                    "type": "NUMBER",
+                    "description": "Confidence threshold to filter objects. Default is 0.4",
+                    "default": "0.4"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/detect\"\nquerystring = {\"model\": \"\", \"confth\": \"0.4\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://parking-places.p.rapidapi.com/detect\"\nquerystring = {\"model\": \"\", \"confth\": \"0.4\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"parking-places.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

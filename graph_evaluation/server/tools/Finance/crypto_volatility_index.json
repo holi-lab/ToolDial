@@ -1,0 +1,110 @@
+{
+    "tool_name":"Crypto Volatility Index",
+    "tool_description":"Bitcoin and Ethereum expected 30-day implied volatility, derived from option prices.",
+    "title":"Crypto Volatility Index",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":71,
+        "avgLatency":2935,
+        "avgSuccessRate":71,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/asergeevich/api/crypto-volatility-index/",
+    "host":"crypto-volatility-index.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Tick",
+            "url":"https://crypto-volatility-index.p.rapidapi.com/tick/{currency}/{datetime}",
+            "description":"Find index value at a certain point in time. Returns the closest value prior to specified datetime.\n\nIf no datetime is specified, returns the latest available index value.\n\nIn case if the request is prior to the first publication date, returns the oldest index value.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"currency",
+                    "type":"string",
+                    "description":"",
+                    "default":"BTC"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"datetime",
+                    "type":"string",
+                    "description":"",
+                    "default":"2021-10-01-10-31-45"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://crypto-volatility-index.p.rapidapi.com/tick/{currency}/{datetime}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"crypto-volatility-index.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Daily Snapshot",
+            "url":"https://crypto-volatility-index.p.rapidapi.com/history_EOD/{currency}/{snaptime}",
+            "description":"Daily index snapshots at a custom time, full history. \nDefault is midnight UTC.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"currency",
+                    "type":"string",
+                    "description":"",
+                    "default":"ETH"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"snaptime",
+                    "type":"string",
+                    "description":"",
+                    "default":"17-00-00"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://crypto-volatility-index.p.rapidapi.com/history_EOD/{currency}/{snaptime}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"crypto-volatility-index.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Period",
+            "url":"https://crypto-volatility-index.p.rapidapi.com/history/{currency}/{frequency}/{datetime_start}/{datetime_end}",
+            "description":"Get index values with specified frequency, for a specified period. \n\nAvailable frequencies and period limits: \nday - snapped at midnight UTC, unlimited\nhour - 30 days\nminute - 24 hours\ntick (default) - 10 hours (every 15 seconds) \n\nIf no time is specified, returns maximum period for this frequency, looking backwards from now.\nIf only starting time is specified, returns the maximal allowed period for this frequency starting at that time.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"currency",
+                    "type":"string",
+                    "description":"",
+                    "default":"BTC"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"frequency",
+                    "type":"string",
+                    "description":"",
+                    "default":"minute"
+                },
+                {
+                    "name":"datetime_end",
+                    "type":"string",
+                    "description":"",
+                    "default":"2021-10-05-05-10-00"
+                },
+                {
+                    "name":"datetime_start",
+                    "type":"string",
+                    "description":"",
+                    "default":"2021-10-05-05-00-00"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://crypto-volatility-index.p.rapidapi.com/history/{currency}/{frequency}/{datetime_start}/{datetime_end}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"crypto-volatility-index.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

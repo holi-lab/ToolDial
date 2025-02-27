@@ -1,0 +1,415 @@
+{
+    "tool_name":"Print your own labels and stickers",
+    "tool_description":"Help your customers print their own labels and stickers, from your own website and under your own branding.",
+    "title":"Print your own labels and stickers",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":90,
+        "avgLatency":986,
+        "avgSuccessRate":66,
+        "popularityScore":9.1,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/ecardify-ecardify-default/api/print-your-own-labels-and-stickers/",
+    "host":"print-your-own-labels-and-stickers.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Label templates",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels/{format}",
+            "description":"List of label templates filtered by one or more of the following parameters:\npaper format\ntemplate brand\nexact label size\napproximate label size\nlabel shape",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"format",
+                    "type":"string",
+                    "description":"Its value can be either \n**Letter**\nor \n**A4** \nThey represent the two world standard printer paper sizes, respectively 8.5 inch by 11 inch and 210 mm by 297 mm.",
+                    "default":"letter"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"Label manufacturer's name.\nThis is the current list of possible values. We will continue adding new brands.\nAvery\nHerma\nOnlinelabels\nUline\nMegastar\nSheetlabels",
+                    "default":"avery"
+                },
+                {
+                    "name":"height",
+                    "type":"STRING",
+                    "description":"Label height.",
+                    "default":""
+                },
+                {
+                    "name":"code",
+                    "type":"STRING",
+                    "description":"It is a string that represents **average** label sizes, in the format [width]x[height].\nFor example:\n**2.5x4**\nor \n**70x40**\n\nBeing average sizes, means that they represent all sizes that are close to them. \nE.g. **3x2** would represent any other close sizes like **3.062x1.837**.\n\nThis concept is useful, when you are going to suggest to your users, which templates do offer label sizes that are equal of close to the label size they need to print on.\n",
+                    "default":"2x2"
+                },
+                {
+                    "name":"width",
+                    "type":"STRING",
+                    "description":"Label width",
+                    "default":""
+                },
+                {
+                    "name":"shape",
+                    "type":"STRING",
+                    "description":"Label shape.\nValid values are:\nsquare\nrectangle\ncircle\noval",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels/{format}\"\nquerystring = {\"brand\": brand, \"code\": code}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Print on dynamically generated label templates",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels",
+            "description":"Generates the PDF file which contains the printout of labels.\n\nThe label template will be generated on the fly, based on the label layout dimensions that you will supply on every request.\nThe content printed on each label, is the image whose URL is supplied by **labelContent** query parameter.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"rightMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the right edge of the paper to the right edge of the last column of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"8"
+                },
+                {
+                    "name":"labelHeight",
+                    "type":"NUMBER",
+                    "description":"The height of the label.\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.\n",
+                    "default":"33"
+                },
+                {
+                    "name":"number",
+                    "type":"NUMBER",
+                    "description":"The total number of labels.",
+                    "default":"40"
+                },
+                {
+                    "name":"bottomMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the bottom edge of the paper to the bottom edge of the last row of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"9.5"
+                },
+                {
+                    "name":"topMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the top edge of the paper to the top edge of the first row of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"9.5"
+                },
+                {
+                    "name":"templateCode",
+                    "type":"STRING",
+                    "description":"It is the paper format upon which the system will generate the label layout template.\nValid values are **A4** and **Letter** ",
+                    "default":"A4"
+                },
+                {
+                    "name":"leftMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the left edge of the paper to the left edge of the first column of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"8"
+                },
+                {
+                    "name":"labelWidth",
+                    "type":"NUMBER",
+                    "description":"The width of the label.\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"33"
+                },
+                {
+                    "name":"labelContent",
+                    "type":"STRING",
+                    "description":"The Url of the image that you are going to print on labels.",
+                    "default":"https://ecardify.io/images/iam/video-audio-reviews.jpg"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"heightRatio",
+                    "type":"NUMBER",
+                    "description":"The percentage of label height that will be occupied by the printed image. E.g. value **80** means that there will be a 10% blank space on top, and another 10% at the bottom of each label.\n\nDefault value is **80**.\nMinimum acceptable value is **40**, and the maximum is **95**.",
+                    "default":""
+                },
+                {
+                    "name":"marker",
+                    "type":"NUMBER",
+                    "description":"Markers help making sure that printing is perfectly centered on each label.\nBy default no marker will be printed.\n\nPossible values are:\n**0** - no markers\n**1**-  Dots\n**2**- Ccrosses\n**3**- Lines",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels\"\nquerystring = {\"rightMargin\": rightmargin, \"labelHeight\": labelheight, \"number\": number, \"bottomMargin\": bottommargin, \"topMargin\": topmargin, \"templateCode\": templatecode, \"leftMargin\": leftmargin, \"labelWidth\": labelwidth, \"labelContent\": labelcontent}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Print on dynamically generated label templates",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels",
+            "description":"Generates the PDF file which contains the printout of labels.\n\nThe label template will be generated on the fly, based on the label layout dimensions that you will supply on every request.\nThe content printed on each label, is the image whose URL is supplied by **labelContent** query parameter.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"rightMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the right edge of the paper to the right edge of the last column of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"8"
+                },
+                {
+                    "name":"labelHeight",
+                    "type":"NUMBER",
+                    "description":"The height of the label.\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.\n",
+                    "default":"33"
+                },
+                {
+                    "name":"number",
+                    "type":"NUMBER",
+                    "description":"The total number of labels.",
+                    "default":"40"
+                },
+                {
+                    "name":"bottomMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the bottom edge of the paper to the bottom edge of the last row of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"9.5"
+                },
+                {
+                    "name":"topMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the top edge of the paper to the top edge of the first row of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"9.5"
+                },
+                {
+                    "name":"templateCode",
+                    "type":"STRING",
+                    "description":"It is the paper format upon which the system will generate the label layout template.\nValid values are **A4** and **Letter** ",
+                    "default":"A4"
+                },
+                {
+                    "name":"leftMargin",
+                    "type":"NUMBER",
+                    "description":"The distance from the left edge of the paper to the left edge of the first column of labels.\n\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"8"
+                },
+                {
+                    "name":"labelWidth",
+                    "type":"NUMBER",
+                    "description":"The width of the label.\nWhen the template code is **Letter**,  its value will count in inches.\nWhen the template code is **A4**,  its value will count in millimeters.",
+                    "default":"33"
+                },
+                {
+                    "name":"labelContent",
+                    "type":"STRING",
+                    "description":"The Url of the image that you are going to print on labels.",
+                    "default":"https://ecardify.io/images/iam/video-audio-reviews.jpg"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"heightRatio",
+                    "type":"NUMBER",
+                    "description":"The percentage of label height that will be occupied by the printed image. E.g. value **80** means that there will be a 10% blank space on top, and another 10% at the bottom of each label.\n\nDefault value is **80**.\nMinimum acceptable value is **40**, and the maximum is **95**.",
+                    "default":""
+                },
+                {
+                    "name":"marker",
+                    "type":"NUMBER",
+                    "description":"Markers help making sure that printing is perfectly centered on each label.\nBy default no marker will be printed.\n\nPossible values are:\n**0** - no markers\n**1**-  Dots\n**2**- Ccrosses\n**3**- Lines",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels\"\nquerystring = {\"rightMargin\": rightmargin, \"labelHeight\": labelheight, \"number\": number, \"bottomMargin\": bottommargin, \"topMargin\": topmargin, \"templateCode\": templatecode, \"leftMargin\": leftmargin, \"labelWidth\": labelwidth, \"labelContent\": labelcontent}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":" ",
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Print on label templates or plain paper",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels",
+            "description":"Generates the PDF file which contains the printout of labels.\n\nLabel layout conforms the label template and three print setup query parameters.\nThe content printed on each label, is the image whose URL is supplied by **labelContent** query parameter.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"templateCode",
+                    "type":"STRING",
+                    "description":"Label sheet manufactures, assign a unique code to each of their blank label templates. ",
+                    "default":"OL900"
+                },
+                {
+                    "name":"labelContent",
+                    "type":"STRING",
+                    "description":"The Url of the image that you are going to print on labels.",
+                    "default":"https://ecardify.io/images/iam/video-audio-reviews.jpg"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"verticalOffset",
+                    "type":"NUMBER",
+                    "description":"Some printers can feed the paper a bit in advance or delay. As a result, the printout is a bit off by 1 or 2 millimeters in the vertical direction, and the content of the labels is not centered.\nThis parameter helps you fix this problem and come out with a perfectly centered printout.\nE.g. if the printout is positioned about 2mm lower than where it should, set this value to 2 and try again.\nIf the printout is positioned higher, set a negative value.\nPlay with this value until your printout is perfectly centered on all labels.\n\nThe default values is zero.\nAcceptable values are: -3, -2, -1, 0, 1, 2 and 3.\n",
+                    "default":""
+                },
+                {
+                    "name":"marker",
+                    "type":"NUMBER",
+                    "description":"Markers help making sure that printing is perfectly centered on each label.\nBy default no marker will be printed.\n\nPossible values are:\n**0** - no markers\n**1**-  Dots\n**2**- Ccrosses\n**3**- Lines",
+                    "default":""
+                },
+                {
+                    "name":"heightRatio",
+                    "type":"NUMBER",
+                    "description":"The percentage of label height that will be occupied by the printed image. E.g. value **80** means that there will be a 10% blank space on top, and another 10% at the bottom of each label.\n\nDefault value is **80**.\nMinimum acceptable value is **40**, and the maximum is **95**.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels\"\nquerystring = {\"templateCode\": templatecode, \"labelContent\": labelcontent}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Print on label templates or plain paper",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels",
+            "description":"Generates the PDF file which contains the printout of labels.\n\nLabel layout conforms the label template and three print setup query parameters.\nThe content printed on each label, is the image whose URL is supplied by **labelContent** query parameter.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"templateCode",
+                    "type":"STRING",
+                    "description":"Label sheet manufactures, assign a unique code to each of their blank label templates. ",
+                    "default":"OL900"
+                },
+                {
+                    "name":"labelContent",
+                    "type":"STRING",
+                    "description":"The Url of the image that you are going to print on labels.",
+                    "default":"https://ecardify.io/images/iam/video-audio-reviews.jpg"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"verticalOffset",
+                    "type":"NUMBER",
+                    "description":"Some printers can feed the paper a bit in advance or delay. As a result, the printout is a bit off by 1 or 2 millimeters in the vertical direction, and the content of the labels is not centered.\nThis parameter helps you fix this problem and come out with a perfectly centered printout.\nE.g. if the printout is positioned about 2mm lower than where it should, set this value to 2 and try again.\nIf the printout is positioned higher, set a negative value.\nPlay with this value until your printout is perfectly centered on all labels.\n\nThe default values is zero.\nAcceptable values are: -3, -2, -1, 0, 1, 2 and 3.\n",
+                    "default":""
+                },
+                {
+                    "name":"marker",
+                    "type":"NUMBER",
+                    "description":"Markers help making sure that printing is perfectly centered on each label.\nBy default no marker will be printed.\n\nPossible values are:\n**0** - no markers\n**1**-  Dots\n**2**- Ccrosses\n**3**- Lines",
+                    "default":""
+                },
+                {
+                    "name":"heightRatio",
+                    "type":"NUMBER",
+                    "description":"The percentage of label height that will be occupied by the printed image. E.g. value **80** means that there will be a 10% blank space on top, and another 10% at the bottom of each label.\n\nDefault value is **80**.\nMinimum acceptable value is **40**, and the maximum is **95**.",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labels\"\nquerystring = {\"templateCode\": templatecode, \"labelContent\": labelcontent}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":" ",
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Label shapes",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labelShapes/{format}",
+            "description":"List of available label shapes.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"format",
+                    "type":"string",
+                    "description":"Its value can be either \n**Letter**\nor \n**A4** \nThey represent the two world standard printer paper sizes, respectively 8.5 inch by 11 inch and 210 mm by 297 mm.",
+                    "default":"a4"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"Label manufacturer's name.\nThis is the current list of possible values. We will continue adding new brands.\nAvery\nHerma\nOnlinelabels\nUline\nMegastar\nSheetlabels",
+                    "default":"Megastar"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labelShapes/{format}\"\nquerystring = {\"brand\": brand}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Label sizes",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labelSizes/{format}",
+            "description":"Returns a list of label sizes in the format [width]x[height].\n\nThese sizes are rounded, meaning that they can represent a few other sizes that are close to them. For example size 4\"x3\", will represent 3.75\"x3\",  4\"x3.25\" and so on.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"format",
+                    "type":"string",
+                    "description":"Its value can be either \n**Letter**\nor \n**A4** \nThey represent the two world standard printer paper sizes, respectively 8.5 inch by 11 inch and 210 mm by 297 mm.",
+                    "default":"letter"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"shape",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"square"
+                },
+                {
+                    "name":"brand",
+                    "type":"STRING",
+                    "description":"Label manufacturer's name.\nThis is the current list of possible values. We will continue adding new brands.\nAvery\nHerma\nOnlinelabels\nUline\nMegastar\nSheetlabels",
+                    "default":"avery"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labelSizes/{format}\"\nquerystring = {\"shape\": shape, \"brand\": brand}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{}
+        },
+        {
+            "name":"Label template brands",
+            "url":"https://print-your-own-labels-and-stickers.p.rapidapi.com/labelBrands/{format}",
+            "description":"Returns the list of blank label sheet brands that Ecardify supports to date. If your preferred brand is missing, please let us know.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"format",
+                    "type":"string",
+                    "description":"Its value can be either \n**Letter**\nor \n**A4** \nThey represent the two world standard printer paper sizes, respectively 8.5 inch by 11 inch and 210 mm by 297 mm.",
+                    "default":"a4"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://print-your-own-labels-and-stickers.p.rapidapi.com/labelBrands/{format}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"print-your-own-labels-and-stickers.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

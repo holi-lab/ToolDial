@@ -1,0 +1,103 @@
+{
+    "tool_name":"Youtube transcriptor",
+    "tool_description":"Transcript Youtube Posdcasts &amp; videos.",
+    "title":"Youtube transcriptor",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":992,
+        "avgSuccessRate":88,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/benrhzala90/api/youtube-transcriptor/",
+    "host":"youtube-transcriptor.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"transcript",
+            "url":"https://youtube-transcriptor.p.rapidapi.com/transcript",
+            "description":"Transcript videos",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"video_id",
+                    "type":"STRING",
+                    "description":"Example : youtube.com/watch?v=`0-fD8SDEvrR`",
+                    "default":"8aGhZQkoFbQ"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"lang",
+                    "type":"STRING",
+                    "description":"**auto detect** language if none was passed.",
+                    "default":"en"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://youtube-transcriptor.p.rapidapi.com/transcript\"\nquerystring = {\"video_id\": video_id, \"lang\": lang}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"youtube-transcriptor.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "title":{
+                            "type":"string"
+                        },
+                        "description":{
+                            "type":"string"
+                        },
+                        "availableLangs":{
+                            "type":"array",
+                            "items":{
+                                "type":"string"
+                            }
+                        },
+                        "lengthInSeconds":{
+                            "type":"string"
+                        },
+                        "thumbnails":{
+                            "type":"array",
+                            "items":{
+                                "type":"object",
+                                "properties":{
+                                    "url":{
+                                        "type":"string"
+                                    },
+                                    "width":{
+                                        "type":"integer"
+                                    },
+                                    "height":{
+                                        "type":"integer"
+                                    }
+                                }
+                            }
+                        },
+                        "transcription":{
+                            "type":"array",
+                            "items":{
+                                "type":"object",
+                                "properties":{
+                                    "subtitle":{
+                                        "type":"string"
+                                    },
+                                    "start":{
+                                        "type":"number"
+                                    },
+                                    "dur":{
+                                        "type":"number"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

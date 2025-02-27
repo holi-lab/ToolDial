@@ -1,0 +1,218 @@
+{
+    "tool_name":"stocks_archive",
+    "tool_description":"Archive data of some blue chip's tickers\n\n\n",
+    "title":"stocks_archive",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":195,
+        "avgSuccessRate":68,
+        "popularityScore":9.1,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/ryabinin.v.v/api/stocks_archive/",
+    "host":"stocks_archive.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"ping",
+            "url":"https://stocks_archive.p.rapidapi.com/ping",
+            "description":"Check that server is still alive",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://stocks_archive.p.rapidapi.com/ping\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stocks_archive.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "datetime":"2006-04-12T11:30:00.000Z",
+                "version":"1.2.3-2345",
+                "uptime":"54323.543"
+            },
+            "headers":{},
+            "schema":{
+                "required":[
+                    "datetime"
+                ],
+                "type":"object",
+                "properties":{
+                    "datetime":{
+                        "description":"Server time",
+                        "type":"string",
+                        "format":"date-time"
+                    },
+                    "version":{
+                        "description":"Server version",
+                        "type":"string"
+                    },
+                    "uptime":{
+                        "description":"Server uptime in seconds",
+                        "type":"number",
+                        "format":"float",
+                        "minimum":-3.402823669209385e+38,
+                        "maximum":3.402823669209385e+38
+                    }
+                }
+            }
+        },
+        {
+            "name":"tickerData",
+            "url":"https://stocks_archive.p.rapidapi.com/ticker/archive/{tickername}/{period}/{startdate}/{enddate}",
+            "description":"Returns a list of ticker records",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"period",
+                    "type":"STRING",
+                    "description":"Ticker period",
+                    "default":"1h"
+                },
+                {
+                    "name":"startDate",
+                    "type":"STRING",
+                    "description":"Start date",
+                    "default":"2010-04-12T14:30"
+                },
+                {
+                    "name":"tickerName",
+                    "type":"STRING",
+                    "description":"Ticker name",
+                    "default":"gold"
+                },
+                {
+                    "name":"endDate",
+                    "type":"STRING",
+                    "description":"End date",
+                    "default":"2010-04-20T12:30"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://stocks_archive.p.rapidapi.com/ticker/archive/{tickername}/{period}/{startdate}/{enddate}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stocks_archive.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "records":[
+                    {
+                        "closeDateTime":"2006-04-12T11:30:00.000Z",
+                        "open":105.5,
+                        "close":109.3,
+                        "high":111.1,
+                        "low":102.7,
+                        "volume":12345
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{
+                "description":"List of ticker records",
+                "type":"object",
+                "properties":{
+                    "records":{
+                        "type":"array",
+                        "items":{
+                            "required":[
+                                "closeDateTime",
+                                "open",
+                                "close",
+                                "high",
+                                "low",
+                                "volume"
+                            ],
+                            "description":"One ticker record",
+                            "type":"object",
+                            "properties":{
+                                "closeDateTime":{
+                                    "description":"Close date-time in local for stock-exchange format",
+                                    "type":"string",
+                                    "format":"date-time"
+                                },
+                                "open":{
+                                    "description":"Open price",
+                                    "type":"number",
+                                    "format":"float",
+                                    "minimum":-3.402823669209385e+38,
+                                    "maximum":3.402823669209385e+38
+                                },
+                                "close":{
+                                    "description":"Close price",
+                                    "type":"number",
+                                    "format":"float",
+                                    "minimum":-3.402823669209385e+38,
+                                    "maximum":3.402823669209385e+38
+                                },
+                                "high":{
+                                    "description":"Highest price",
+                                    "type":"number",
+                                    "format":"float",
+                                    "minimum":-3.402823669209385e+38,
+                                    "maximum":3.402823669209385e+38
+                                },
+                                "low":{
+                                    "description":"Lowest price",
+                                    "type":"number",
+                                    "format":"float",
+                                    "minimum":-3.402823669209385e+38,
+                                    "maximum":3.402823669209385e+38
+                                },
+                                "volume":{
+                                    "description":"Volume for period",
+                                    "type":"integer",
+                                    "format":"int32",
+                                    "minimum":-2147483648,
+                                    "maximum":2147483647
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"tickersList",
+            "url":"https://stocks_archive.p.rapidapi.com/ticker/list",
+            "description":"Returns a list of available tickers",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://stocks_archive.p.rapidapi.com/ticker/list\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"stocks_archive.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "tickers":[
+                    {
+                        "name":"gazprom-cs",
+                        "description":"Gazprom, common shares, MICEX",
+                        "marketName":"BATS"
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{
+                "description":"List of available tickers",
+                "type":"object",
+                "properties":{
+                    "tickers":{
+                        "type":"array",
+                        "items":{
+                            "required":[
+                                "name",
+                                "description"
+                            ],
+                            "type":"object",
+                            "properties":{
+                                "name":{
+                                    "description":"Short (machine) name",
+                                    "type":"string"
+                                },
+                                "description":{
+                                    "description":"Long (Human) name",
+                                    "type":"string"
+                                },
+                                "marketName":{
+                                    "description":"Market name",
+                                    "type":"string"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

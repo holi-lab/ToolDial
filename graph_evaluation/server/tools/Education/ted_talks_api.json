@@ -1,0 +1,226 @@
+{
+    "tool_name":"TED Talks API",
+    "tool_description":"Get TED talks based on multiple different parameters and filtering options, from the speaker, topic, talk duration, and more.",
+    "title":"TED Talks API",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":323,
+        "avgSuccessRate":100,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/yuval1929-qpPKYzSQjm6/api/ted-talks-api/",
+    "host":"ted-talks-api.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"getSubtitleLanguages",
+            "url":"https://ted-talks-api.p.rapidapi.com/subtitle_languages",
+            "description":"Get all the TED talks subtitle languages",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ted-talks-api.p.rapidapi.com/subtitle_languages\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ted-talks-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"getTalks",
+            "url":"https://ted-talks-api.p.rapidapi.com/talks",
+            "description":"Get info about specific talks based on the provided parameters",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[
+                {
+                    "name":"id",
+                    "type":"NUMBER",
+                    "description":"ID of a desired specific talk",
+                    "default":""
+                },
+                {
+                    "name":"audio_lang",
+                    "type":"STRING",
+                    "description":"Return talks which their audio language is the provided language, the provided value should be the language slug according to the /audio_languages endpoint",
+                    "default":"en"
+                },
+                {
+                    "name":"speaker",
+                    "type":"STRING",
+                    "description":"Return talks which at least on of their speakers is the provided speaker, the provided value should be the speaker slug according to the /speakers endpoint",
+                    "default":"yuval_noah_harari"
+                },
+                {
+                    "name":"publish_date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"Return talks which were published on TED.com only on the exact provided date",
+                    "default":""
+                },
+                {
+                    "name":"topic",
+                    "type":"STRING",
+                    "description":"Return talks which at least on of their topics is the provided topics, the provided value should be the speaker slug according to the /topics endpoint",
+                    "default":"politics"
+                },
+                {
+                    "name":"subtitle_lang",
+                    "type":"STRING",
+                    "description":"Return talks which have subtitles in the provided language, the provided value should be the language slug according to the /subtitle_languages endpoint",
+                    "default":"he"
+                },
+                {
+                    "name":"max_duration",
+                    "type":"NUMBER",
+                    "description":"Return talks which their duration in seconds is at most the provided value",
+                    "default":""
+                },
+                {
+                    "name":"to_publish_date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"Return talks which were published on TED.com only before the provided date",
+                    "default":""
+                },
+                {
+                    "name":"from_publish_date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"Return talks which were published on TED.com only after the provided date",
+                    "default":""
+                },
+                {
+                    "name":"min_duration",
+                    "type":"NUMBER",
+                    "description":"Return talks which their duration in seconds is at least the provided value",
+                    "default":"300"
+                },
+                {
+                    "name":"record_date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"Return talks which were recorded only in the exact provided date",
+                    "default":""
+                },
+                {
+                    "name":"to_record_date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"Return talks which were recorded only before the provided date",
+                    "default":""
+                },
+                {
+                    "name":"from_record_date",
+                    "type":"DATE (YYYY-MM-DD)",
+                    "description":"Return talks which were recorded only after the provided date",
+                    "default":"2017-01-01"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ted-talks-api.p.rapidapi.com/talks\"\nquerystring = {\"audio_lang\": audio_lang, \"speaker\": speaker, \"topic\": topic, \"subtitle_lang\": subtitle_lang, \"min_duration\": min_duration, \"from_record_date\": from_record_date}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ted-talks-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "get":"talks",
+                "parameters":[
+                    {
+                        "name":"speaker",
+                        "value":"yuval_noah_harari"
+                    },
+                    {
+                        "name":"min_duration",
+                        "value":"300"
+                    },
+                    {
+                        "name":"subtitle_lang",
+                        "value":"he"
+                    },
+                    {
+                        "name":"audio_lang",
+                        "value":"en"
+                    },
+                    {
+                        "name":"from_record_date",
+                        "value":"2017-01-01"
+                    },
+                    {
+                        "name":"topic",
+                        "value":"politics"
+                    }
+                ],
+                "errors":[],
+                "result":{
+                    "num_results":2,
+                    "results":[
+                        {
+                            "id":2695,
+                            "url":"https://www.ted.com/talks/yuval_noah_harari_nationalism_vs_globalism_the_new_political_divide",
+                            "title":"Nationalism vs. globalism: the new political divide",
+                            "description":"How do we make sense of today's political divisions? In a wide-ranging conversation full of insight, historian Yuval Harari places our current turmoil in a broader context, against the ongoing disruption of our technology, climate, media -- even our notion of what humanity is for. This is the first of a series of TED Dialogues, seeking a thoughtful response to escalating political divisiveness. Make time (just over an hour) for this fascinating discussion between Harari and TED curator Chris Anderson.",
+                            "audio_language":"en",
+                            "event":"TED Dialogues",
+                            "publish_date":"2017-02-20T15:35:24Z",
+                            "record_date":"2017-02-15T00:00:00Z",
+                            "duration_in_seconds":3599,
+                            "thumbnail_url":"https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/30874dcf-4e45-4fdc-8d60-2a2d312249df/YuvalNoahHarari_2017S-embed.jpg?quality=89&w=600",
+                            "mp4_url":"https://py.tedcdn.com/consus/projects/00/27/89/002/products/2017s-yuval-noah-harari-002-fallback-db1d3447a57947a1e2e97358b28b125c-1200k.mp4",
+                            "embed_url":"https://embed.ted.com/talks/yuval_noah_harari_nationalism_vs_globalism_the_new_political_divide"
+                        },
+                        {
+                            "id":16159,
+                            "url":"https://www.ted.com/talks/yuval_noah_harari_why_fascism_is_so_tempting_and_how_your_data_could_power_it",
+                            "title":"Why fascism is so tempting -- and how your data could power it",
+                            "description":"In a profound talk about technology and power, author and historian Yuval Noah Harari explains the important difference between fascism and nationalism -- and what the consolidation of our data means for the future of democracy. Appearing as a hologram live from Tel Aviv, Harari warns that the greatest danger that now faces liberal democracy is that the revolution in information technology will make dictatorships more efficient and capable of control. \"The enemies of liberal democracy hack our feelings of fear and hate and vanity, and then use these feelings to polarize and destroy,\" Harari says. \"It is the responsibility of all of us to get to know our weaknesses and make sure they don't become weapons.\" (Followed by a brief conversation with TED curator Chris Anderson)",
+                            "audio_language":"en",
+                            "event":"TED2018",
+                            "publish_date":"2018-05-18T14:56:29Z",
+                            "record_date":"2018-04-10T00:00:00Z",
+                            "duration_in_seconds":1092,
+                            "thumbnail_url":"https://pi.tedcdn.com/r/talkstar-photos.s3.amazonaws.com/uploads/141d2db8-d548-4d4f-8be9-5183b7189215/YuvalNoahHarari_2018-embed.jpg?quality=89&w=600",
+                            "mp4_url":"https://py.tedcdn.com/consus/projects/00/34/00/012/products/2018-yuval-noah-harari-012-fallback-56d899da39b2804f98c68c6fededdc21-1200k.mp4",
+                            "embed_url":"https://embed.ted.com/talks/yuval_noah_harari_why_fascism_is_so_tempting_and_how_your_data_could_power_it"
+                        }
+                    ]
+                }
+            },
+            "headers":{
+                "content-type":"application/json",
+                "date":"Mon, 28 Nov 2022 13:50:23 GMT"
+            },
+            "schema":{}
+        },
+        {
+            "name":"getTopics",
+            "url":"https://ted-talks-api.p.rapidapi.com/topics",
+            "description":"Get all the TED talks topics",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ted-talks-api.p.rapidapi.com/topics\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ted-talks-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"getSpeakers",
+            "url":"https://ted-talks-api.p.rapidapi.com/speakers",
+            "description":"Get all the TED talks speakers",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ted-talks-api.p.rapidapi.com/speakers\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ted-talks-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"getAudioLanguages",
+            "url":"https://ted-talks-api.p.rapidapi.com/audio_languages",
+            "description":"Get all the TED talks audio languages",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ted-talks-api.p.rapidapi.com/audio_languages\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ted-talks-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

@@ -1,0 +1,37 @@
+{
+    "tool_name":"Validect - Email Verification",
+    "tool_description":"Email address validation API",
+    "title":"Validect - Email Verification",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1374,
+        "avgSuccessRate":100,
+        "popularityScore":9.7,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/srgl/api/validect-email-verification/",
+    "host":"validect-email-verification-v1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"/v1/verify",
+            "url":"https://validect-email-verification-v1.p.rapidapi.com/v1/verify",
+            "description":"#### Verify email address\n*We do bill only valid or invalid verification statuses.*\nPass the email as a GET parameter. Response properties description:\n```json\n{\n\"status\": \"valid\", // verification status of the email\n\"reason\": \"accepted_email\", // the reason of the status\n\"email\": \"example@gmail.com\",  // normalized email address\n\"user\": \"example\",  // The part before at-sign\n\"domain\": \"gmail.com\", // The part after at-sign\n\"public\": true, // Is address belongs to a publicly accessible email provider\n\"disposable\": false,  // Is address belongs to a disposable email service\n\"role\": false // Is address role based (e.g. abuse, admin, no-reply etc.)\n}\n```\nPossible verification statuses:\n-  `valid` - email address has been accepted by the mail server (safe to send)\n- `invalid` - email address is invalid, various reasons possible, see below (do not send)\n- `accept_all` - mail server accepts any email address (not recommended to send)\n- `unknown` - unable to verify email address (not recommended to send)\n\nPossible status reasons:\n- `accepted_email` - email address has been accepted by the mail server\n- `rejected_email` - email address has been rejected by the mail server\n- `invalid_syntax` - syntax of the email address is invalid according to RFC\n- `invalid_domain` - domain name of the email address does not exist\n- `no_mx_record` - mx record for the domain does not exist\n- `invalid_mx_record` - mx record of the domain is invalid\n- `dns_error` - error occurred while performing dns resolving of the domain\n- `smtp_error` - error occurred while performing smtp validation",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"email",
+                    "type":"STRING",
+                    "description":"Email address to validate",
+                    "default":"example@gmail.com"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://validect-email-verification-v1.p.rapidapi.com/v1/verify\"\nquerystring = {\"email\": email}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"validect-email-verification-v1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{}
+        }
+    ]
+}

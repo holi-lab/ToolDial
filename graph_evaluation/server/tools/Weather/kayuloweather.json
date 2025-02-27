@@ -1,0 +1,1817 @@
+{
+    "tool_name":"KayuloWeather",
+    "tool_description":"[DISCOUNT] Weather forecasts to the minute, weather alerts, historical data and astronomy data.",
+    "title":"KayuloWeather",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":991,
+        "avgSuccessRate":90,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/kayuloapi-kayuloapi-default/api/kayuloweather/",
+    "host":"kayuloweather.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Weather Alert",
+            "url":"https://kayuloweather.p.rapidapi.com/weatherAlert/{language}/{id}",
+            "description":"Receive an active weather alert.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"The IETF BCP 47 language tag to use for localizing responses.",
+                    "default":"en"
+                },
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"The unique identifier for the weather alert.",
+                    "default":"5c7a120c-473f-57be-af23-5c847c847a00"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://kayuloweather.p.rapidapi.com/weatherAlert/{language}/{id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"kayuloweather.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "messages":[
+                    {
+                        "language":"",
+                        "text":""
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{
+                "description":"The weather alert information.",
+                "type":"object",
+                "required":[
+                    "area",
+                    "messages"
+                ],
+                "properties":{
+                    "area":{
+                        "description":"An object defining a geographic region."
+                    },
+                    "messages":{
+                        "type":"array",
+                        "items":{
+                            "description":"The official text describing a severe weather event from the agency.",
+                            "type":"object",
+                            "required":[
+                                "language",
+                                "text"
+                            ],
+                            "properties":{
+                                "language":{
+                                    "type":"string",
+                                    "description":"The ISO language code that the text is in."
+                                },
+                                "text":{
+                                    "type":"string",
+                                    "description":"The severe weather event text."
+                                }
+                            }
+                        },
+                        "description":"An array of official text messages describing a severe weather event from the agency."
+                    }
+                }
+            }
+        },
+        {
+            "name":"Weather",
+            "url":"https://kayuloweather.p.rapidapi.com/weather/{language}/{latitude}/{longitude}",
+            "description":"Obtain weather data for the specified location.\n\nThe `dataSets` query parameter is used to obtain different data, like forecasts and current weather. Thus not all query parameters are needed for every data set. See the description of the query parameters to identify, which parameter is needed for which data set.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"timezone",
+                    "type":"STRING",
+                    "description":"The name of the timezone to use for rolling up weather forecasts into daily forecasts.",
+                    "default":"America/New_York"
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"The longitude of the desired location.",
+                    "default":-74.0060152
+                },
+                {
+                    "name":"language",
+                    "type":"STRING",
+                    "description":"The IETF BCP 47 language tag to use for localizing responses.",
+                    "default":"en"
+                },
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"The latitude of the desired location.",
+                    "default":40.7127281
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"dataSets",
+                    "type":"STRING",
+                    "description":"A comma-delimited list of data sets to include in the response.",
+                    "default":"currentWeather,forecastDaily,forecastHourly,forecastNextHour"
+                },
+                {
+                    "name":"currentAsOf",
+                    "type":"STRING",
+                    "description":"The time to obtain current conditions. Defaults to now. (This parameter is relevant for current weather only and cannot be used in combination with other data sets.)\nExample: 2022-12-01T10:00:00Z",
+                    "default":""
+                },
+                {
+                    "name":"hourlyStart",
+                    "type":"STRING",
+                    "description":"The time to start the hourly forecast. If this parameter is absent, hourly forecasts start on the current hour. (This parameter is relevant for hourly forecasts only and cannot be used in combination with other data sets.)\nExample: 2022-12-01T10:00:00Z",
+                    "default":""
+                },
+                {
+                    "name":"hourlyEnd",
+                    "type":"STRING",
+                    "description":"The time to end the hourly forecast. If this parameter is absent, hourly forecasts run 24 hours or the length of the daily forecast, whichever is longer. (This parameter is relevant for hourly forecasts only and cannot be used in combination with other data sets.)\nExample: 2022-12-01T10:00:00Z",
+                    "default":""
+                },
+                {
+                    "name":"countryCode",
+                    "type":"STRING",
+                    "description":"The ISO Alpha-2 country code for the requested location. This parameter is necessary for weather alerts.",
+                    "default":"US"
+                },
+                {
+                    "name":"dailyEnd",
+                    "type":"STRING",
+                    "description":"The time to end the daily forecast. If this parameter is absent, daily forecasts run for 10 days. (This parameter is relevant for daily forecasts onlyand cannot be used in combination with other data sets.)\nExample: 2022-12-01T10:00:00Z",
+                    "default":""
+                },
+                {
+                    "name":"dailyStart",
+                    "type":"STRING",
+                    "description":"The time to start the daily forecast. If this parameter is absent, daily forecasts start on the current day. (This parameter is relevant for daily forecasts only and cannot be used in combination with other data sets.)\nExample: 2022-12-01T10:00:00Z",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://kayuloweather.p.rapidapi.com/weather/{language}/{latitude}/{longitude}\"\nquerystring = {\"dataSets\": datasets, \"timezone\": timezone, \"countryCode\": countrycode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"kayuloweather.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "currentWeather":{
+                    "name":"CurrentWeather",
+                    "metadata":{
+                        "attributionURL":"",
+                        "expireTime":"",
+                        "latitude":0,
+                        "longitude":0,
+                        "providerLogo":"",
+                        "providerName":"",
+                        "readTime":"",
+                        "reportedTime":"",
+                        "temporarilyUnavailable":true,
+                        "units":"m",
+                        "version":""
+                    },
+                    "asOf":"",
+                    "cloudCover":0,
+                    "conditionCode":"Blizzard",
+                    "daylight":true,
+                    "humidity":0,
+                    "precipitationIntensity":0,
+                    "pressure":0,
+                    "pressureTrend":"rising",
+                    "temperature":0,
+                    "temperatureApparent":0,
+                    "temperatureDewPoint":0,
+                    "uvIndex":0,
+                    "visibility":0,
+                    "windDirection":0,
+                    "windGust":0,
+                    "windSpeed":0
+                },
+                "forecastDaily":{
+                    "name":"DailyForecast",
+                    "metadata":{
+                        "attributionURL":"",
+                        "expireTime":"",
+                        "latitude":0,
+                        "longitude":0,
+                        "providerLogo":"",
+                        "providerName":"",
+                        "readTime":"",
+                        "reportedTime":"",
+                        "temporarilyUnavailable":true,
+                        "units":"m",
+                        "version":""
+                    },
+                    "days":[
+                        {
+                            "conditionCode":"Blizzard",
+                            "daytimeForecast":{
+                                "cloudCover":0,
+                                "conditionCode":"Blizzard",
+                                "forecastEnd":"",
+                                "forecastStart":"",
+                                "humidity":0,
+                                "precipitationAmount":0,
+                                "precipitationChance":0,
+                                "precipitationType":"clear",
+                                "snowfallAmount":0,
+                                "windDirection":0,
+                                "windSpeed":0
+                            },
+                            "forecastEnd":"",
+                            "forecastStart":"",
+                            "maxUvIndex":0,
+                            "moonPhase":"new",
+                            "moonrise":"",
+                            "moonset":"",
+                            "overnightForecast":{
+                                "cloudCover":0,
+                                "conditionCode":"Blizzard",
+                                "forecastEnd":"",
+                                "forecastStart":"",
+                                "humidity":0,
+                                "precipitationAmount":0,
+                                "precipitationChance":0,
+                                "precipitationType":"clear",
+                                "snowfallAmount":0,
+                                "windDirection":0,
+                                "windSpeed":0
+                            },
+                            "precipitationAmount":0,
+                            "precipitationChance":0,
+                            "precipitationType":"clear",
+                            "snowfallAmount":0,
+                            "solarMidnight":"",
+                            "solarNoon":"",
+                            "sunrise":"",
+                            "sunriseAstronomical":"",
+                            "sunriseCivil":"",
+                            "sunriseNautical":"",
+                            "sunset":"",
+                            "sunsetAstronomical":"",
+                            "sunsetCivil":"",
+                            "sunsetNautical":"",
+                            "temperatureMax":0,
+                            "temperatureMin":0
+                        }
+                    ]
+                },
+                "forecastHourly":{
+                    "name":"HourlyForecast",
+                    "metadata":{
+                        "attributionURL":"",
+                        "expireTime":"",
+                        "latitude":0,
+                        "longitude":0,
+                        "providerLogo":"",
+                        "providerName":"",
+                        "readTime":"",
+                        "reportedTime":"",
+                        "temporarilyUnavailable":true,
+                        "units":"m",
+                        "version":""
+                    },
+                    "hours":[
+                        {
+                            "cloudCover":0,
+                            "conditionCode":"Blizzard",
+                            "daylight":true,
+                            "forecastStart":"",
+                            "humidity":0,
+                            "precipitationChance":0,
+                            "precipitationType":"clear",
+                            "pressure":0,
+                            "pressureTrend":"rising",
+                            "snowfallIntensity":0,
+                            "temperature":0,
+                            "temperatureApparent":0,
+                            "temperatureDewPoint":0,
+                            "uvIndex":0,
+                            "visibility":0,
+                            "windDirection":0,
+                            "windGust":0,
+                            "windSpeed":0,
+                            "precipitationAmount":0
+                        }
+                    ]
+                },
+                "forecastNextHour":{
+                    "name":"NextHourForecast",
+                    "metadata":{
+                        "attributionURL":"",
+                        "expireTime":"",
+                        "latitude":0,
+                        "longitude":0,
+                        "providerLogo":"",
+                        "providerName":"",
+                        "readTime":"",
+                        "reportedTime":"",
+                        "temporarilyUnavailable":true,
+                        "units":"m",
+                        "version":""
+                    },
+                    "forecastEnd":"",
+                    "forecastStart":"",
+                    "minutes":[
+                        {
+                            "precipitationChance":0,
+                            "precipitationIntensity":0,
+                            "startTime":""
+                        }
+                    ],
+                    "summary":[
+                        {
+                            "condition":"clear",
+                            "endTime":"",
+                            "precipitationChance":0,
+                            "precipitationIntensity":0,
+                            "startTime":""
+                        }
+                    ]
+                },
+                "weatherAlerts":{
+                    "name":"WeatherAlerts",
+                    "metadata":{
+                        "attributionURL":"",
+                        "expireTime":"",
+                        "latitude":0,
+                        "longitude":0,
+                        "providerLogo":"",
+                        "providerName":"",
+                        "readTime":"",
+                        "reportedTime":"",
+                        "temporarilyUnavailable":true,
+                        "units":"m",
+                        "version":""
+                    },
+                    "alerts":[
+                        {
+                            "areaId":"",
+                            "areaName":"",
+                            "certainty":"observed",
+                            "countryCode":"",
+                            "description":"",
+                            "detailsUrl":"",
+                            "effectiveTime":"",
+                            "eventEndTime":"",
+                            "eventOnsetTime":"",
+                            "expireTime":"",
+                            "id":"",
+                            "issuedTime":"",
+                            "responses":[
+                                "shelter"
+                            ],
+                            "severity":"extreme",
+                            "source":"",
+                            "urgency":"immediate"
+                        }
+                    ]
+                }
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "currentWeather":{
+                        "description":"The current weather conditions for the specified location.",
+                        "type":"object",
+                        "required":[
+                            "asOf",
+                            "conditionCode",
+                            "humidity",
+                            "precipitationIntensity",
+                            "pressure",
+                            "pressureTrend",
+                            "temperature",
+                            "temperatureApparent",
+                            "temperatureDewPoint",
+                            "uvIndex",
+                            "visibility",
+                            "windSpeed"
+                        ],
+                        "properties":{
+                            "name":{
+                                "type":"string"
+                            },
+                            "metadata":{
+                                "type":"object",
+                                "required":[
+                                    "expireTime",
+                                    "latitude",
+                                    "longitude",
+                                    "readTime",
+                                    "version"
+                                ],
+                                "properties":{
+                                    "attributionURL":{
+                                        "type":"string",
+                                        "description":"The URL of the legal attribution for the data source."
+                                    },
+                                    "expireTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time when the weather data is no longer valid."
+                                    },
+                                    "latitude":{
+                                        "description":"A numeric value indicating the latitude of the coordinate between -90 and 90.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-90,
+                                        "maximum":90
+                                    },
+                                    "longitude":{
+                                        "description":"A numeric value indicating the longitude of the coordinate between -180 and 180.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-180,
+                                        "maximum":180
+                                    },
+                                    "providerLogo":{
+                                        "type":"string",
+                                        "description":"The URL of a logo for the data provider."
+                                    },
+                                    "providerName":{
+                                        "type":"string",
+                                        "description":"The name of the data provider."
+                                    },
+                                    "readTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the weather data was procured."
+                                    },
+                                    "reportedTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the provider reported the weather data."
+                                    },
+                                    "temporarilyUnavailable":{
+                                        "type":"boolean",
+                                        "description":"The weather data is temporarily unavailable from the provide"
+                                    },
+                                    "units":{
+                                        "description":"The system of units that the weather data is reported in. This is fixed and set to metric.",
+                                        "type":"string",
+                                        "enum":[
+                                            "m"
+                                        ]
+                                    },
+                                    "version":{
+                                        "type":"string",
+                                        "description":"The data format version."
+                                    }
+                                }
+                            },
+                            "asOf":{
+                                "type":"string",
+                                "format":"date-string",
+                                "description":"The date and time of the weather data."
+                            },
+                            "cloudCover":{
+                                "type":"number",
+                                "format":"double",
+                                "minimum":0,
+                                "maximum":1,
+                                "description":"The percentage of the sky covered with clouds during the period, from 0 to 1."
+                            },
+                            "conditionCode":{
+                                "description":"An enumeration value indicating the condition at the time.",
+                                "type":"string",
+                                "enum":[
+                                    "Blizzard",
+                                    "BlowingDust",
+                                    "BlowingSnow",
+                                    "Breezy",
+                                    "Clear",
+                                    "Cloudy",
+                                    "Drizzle",
+                                    "Flurries",
+                                    "Foggy",
+                                    "FreezingDrizzle",
+                                    "FreezingRain",
+                                    "Frigid",
+                                    "Hail",
+                                    "Haze",
+                                    "HeavyRain",
+                                    "HeavySnow",
+                                    "Hot",
+                                    "Hurricane",
+                                    "IsolatedThunderstorms",
+                                    "MostlyClear",
+                                    "MostlyCloudy",
+                                    "PartlyCloudy",
+                                    "Rain",
+                                    "ScatteredThunderstorms",
+                                    "Sleet",
+                                    "Smoky",
+                                    "Snow",
+                                    "StrongStorms",
+                                    "SunFlurries",
+                                    "SunShowers",
+                                    "Thunderstorms",
+                                    "TropicalStorm",
+                                    "Windy",
+                                    "WintryMix"
+                                ]
+                            },
+                            "daylight":{
+                                "type":"boolean",
+                                "description":"A Boolean value indicating whether there is daylight."
+                            },
+                            "humidity":{
+                                "type":"number",
+                                "format":"double",
+                                "minimum":0,
+                                "maximum":1,
+                                "description":"The relative humidity, from 0 to 1."
+                            },
+                            "precipitationIntensity":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The precipitation intensity, in millimeters per hour.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "pressure":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The sea level air pressure, in millibars.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "pressureTrend":{
+                                "description":"The direction of change of the sea-level air pressure.",
+                                "type":"string",
+                                "enum":[
+                                    "rising",
+                                    "falling",
+                                    "steady"
+                                ]
+                            },
+                            "temperature":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The current temperature, in degrees Celsius.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "temperatureApparent":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The feels-like temperature when factoring wind and humidity, in degrees Celsius.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "temperatureDewPoint":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The temperature at which relative humidity is 100%, in Celsius.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "uvIndex":{
+                                "type":"integer",
+                                "minimum":0,
+                                "description":"The level of ultraviolet radiation."
+                            },
+                            "visibility":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The distance at which terrain is visible, in meters.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "windDirection":{
+                                "type":"integer",
+                                "description":"The direction of the wind, in degrees."
+                            },
+                            "windGust":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The maximum wind gust speed, in kilometers per hour.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            },
+                            "windSpeed":{
+                                "type":"number",
+                                "format":"double",
+                                "description":"The wind speed, in kilometers per hour.",
+                                "minimum":-1.7976931348623157e+308,
+                                "maximum":1.7976931348623157e+308
+                            }
+                        }
+                    },
+                    "forecastDaily":{
+                        "description":"The daily forecast information.",
+                        "type":"object",
+                        "required":[
+                            "days"
+                        ],
+                        "properties":{
+                            "name":{
+                                "type":"string"
+                            },
+                            "metadata":{
+                                "type":"object",
+                                "required":[
+                                    "expireTime",
+                                    "latitude",
+                                    "longitude",
+                                    "readTime",
+                                    "version"
+                                ],
+                                "properties":{
+                                    "attributionURL":{
+                                        "type":"string",
+                                        "description":"The URL of the legal attribution for the data source."
+                                    },
+                                    "expireTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time when the weather data is no longer valid."
+                                    },
+                                    "latitude":{
+                                        "description":"A numeric value indicating the latitude of the coordinate between -90 and 90.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-90,
+                                        "maximum":90
+                                    },
+                                    "longitude":{
+                                        "description":"A numeric value indicating the longitude of the coordinate between -180 and 180.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-180,
+                                        "maximum":180
+                                    },
+                                    "providerLogo":{
+                                        "type":"string",
+                                        "description":"The URL of a logo for the data provider."
+                                    },
+                                    "providerName":{
+                                        "type":"string",
+                                        "description":"The name of the data provider."
+                                    },
+                                    "readTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the weather data was procured."
+                                    },
+                                    "reportedTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the provider reported the weather data."
+                                    },
+                                    "temporarilyUnavailable":{
+                                        "type":"boolean",
+                                        "description":"The weather data is temporarily unavailable from the provide"
+                                    },
+                                    "units":{
+                                        "description":"The system of units that the weather data is reported in. This is fixed and set to metric.",
+                                        "type":"string",
+                                        "enum":[
+                                            "m"
+                                        ]
+                                    },
+                                    "version":{
+                                        "type":"string",
+                                        "description":"The data format version."
+                                    }
+                                }
+                            },
+                            "days":{
+                                "type":"array",
+                                "items":{
+                                    "description":"The historical or forecasted weather conditions for a specified day.",
+                                    "type":"object",
+                                    "required":[
+                                        "conditionCode",
+                                        "forecastEnd",
+                                        "forecastStart",
+                                        "maxUvIndex",
+                                        "moonPhase",
+                                        "precipitationAmount",
+                                        "precipitationChance",
+                                        "precipitationType",
+                                        "snowfallAmount",
+                                        "temperatureMax",
+                                        "temperatureMin"
+                                    ],
+                                    "properties":{
+                                        "conditionCode":{
+                                            "description":"An enumeration value indicating the condition at the time.",
+                                            "type":"string",
+                                            "enum":[
+                                                "Blizzard",
+                                                "BlowingDust",
+                                                "BlowingSnow",
+                                                "Breezy",
+                                                "Clear",
+                                                "Cloudy",
+                                                "Drizzle",
+                                                "Flurries",
+                                                "Foggy",
+                                                "FreezingDrizzle",
+                                                "FreezingRain",
+                                                "Frigid",
+                                                "Hail",
+                                                "Haze",
+                                                "HeavyRain",
+                                                "HeavySnow",
+                                                "Hot",
+                                                "Hurricane",
+                                                "IsolatedThunderstorms",
+                                                "MostlyClear",
+                                                "MostlyCloudy",
+                                                "PartlyCloudy",
+                                                "Rain",
+                                                "ScatteredThunderstorms",
+                                                "Sleet",
+                                                "Smoky",
+                                                "Snow",
+                                                "StrongStorms",
+                                                "SunFlurries",
+                                                "SunShowers",
+                                                "Thunderstorms",
+                                                "TropicalStorm",
+                                                "Windy",
+                                                "WintryMix"
+                                            ]
+                                        },
+                                        "daytimeForecast":{
+                                            "description":"A summary forecast for a daytime or overnight period.",
+                                            "type":"object",
+                                            "required":[
+                                                "cloudCover",
+                                                "conditionCode",
+                                                "forecastEnd",
+                                                "forecastStart",
+                                                "humidity",
+                                                "precipitationAmount",
+                                                "precipitationChance",
+                                                "precipitationType",
+                                                "snowfallAmount",
+                                                "windSpeed"
+                                            ],
+                                            "properties":{
+                                                "cloudCover":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "minimum":0,
+                                                    "maximum":1,
+                                                    "description":"The percentage of the sky covered with clouds during the period, from 0 to 1."
+                                                },
+                                                "conditionCode":{
+                                                    "description":"An enumeration value indicating the condition at the time.",
+                                                    "type":"string",
+                                                    "enum":[
+                                                        "Blizzard",
+                                                        "BlowingDust",
+                                                        "BlowingSnow",
+                                                        "Breezy",
+                                                        "Clear",
+                                                        "Cloudy",
+                                                        "Drizzle",
+                                                        "Flurries",
+                                                        "Foggy",
+                                                        "FreezingDrizzle",
+                                                        "FreezingRain",
+                                                        "Frigid",
+                                                        "Hail",
+                                                        "Haze",
+                                                        "HeavyRain",
+                                                        "HeavySnow",
+                                                        "Hot",
+                                                        "Hurricane",
+                                                        "IsolatedThunderstorms",
+                                                        "MostlyClear",
+                                                        "MostlyCloudy",
+                                                        "PartlyCloudy",
+                                                        "Rain",
+                                                        "ScatteredThunderstorms",
+                                                        "Sleet",
+                                                        "Smoky",
+                                                        "Snow",
+                                                        "StrongStorms",
+                                                        "SunFlurries",
+                                                        "SunShowers",
+                                                        "Thunderstorms",
+                                                        "TropicalStorm",
+                                                        "Windy",
+                                                        "WintryMix"
+                                                    ]
+                                                },
+                                                "forecastEnd":{
+                                                    "type":"string",
+                                                    "format":"date-time",
+                                                    "description":"The ending date and time of the forecast."
+                                                },
+                                                "forecastStart":{
+                                                    "type":"string",
+                                                    "format":"date-time",
+                                                    "description":"The starting date and time of the forecast."
+                                                },
+                                                "humidity":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The relative humidity during the period, from 0 to 1.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "precipitationAmount":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The amount of precipitation forecasted to occur during the period, in millimeters.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "precipitationChance":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The chance of precipitation forecasted to occur during the period.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "precipitationType":{
+                                                    "description":"The type of precipitation forecasted to occur for a forecast period.\n\n* `clear`: No precipitation is occurring.\n* `precipitation`: An unknown type of precipitation is occuring.\n* `rain`: Rain or freezing rain is falling.\n* `snow`: Snow is falling.\n* `sleet`: Sleet or ice pellets are falling.\n* `hail`: Hail is falling.\n* `mixed`: Winter weather (wintery mix or wintery showers) is falling.",
+                                                    "type":"string",
+                                                    "enum":[
+                                                        "clear",
+                                                        "precipitation",
+                                                        "rain",
+                                                        "snow",
+                                                        "sleet",
+                                                        "hail",
+                                                        "mixed"
+                                                    ]
+                                                },
+                                                "snowfallAmount":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The depth of snow as ice crystals forecasted to occur during the period, in millimeters.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "windDirection":{
+                                                    "type":"integer",
+                                                    "description":"The direction the wind is forecasted to come from during the period, in degrees."
+                                                },
+                                                "windSpeed":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The average speed the wind is forecasted to be during the period, in kilometers per hour.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                }
+                                            }
+                                        },
+                                        "forecastEnd":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The ending date and time of the day."
+                                        },
+                                        "forecastStart":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The starting date and time of the day."
+                                        },
+                                        "maxUvIndex":{
+                                            "type":"integer",
+                                            "minimum":0,
+                                            "description":"The maximum ultraviolet index value during the day."
+                                        },
+                                        "moonPhase":{
+                                            "description":"The shape of the moon as seen by an observer on the ground at a given time.\n* `new`: The moon isn't visible.\n* `waxingCrescent`: A crescent-shaped sliver of the moon is visible, and increasing in size.\n* `firstQuarter`: Approximately half of the moon is visible, and increasing in size.\n* `full`: The entire disc of the moon is visible.\n* `waxingGibbous`: More than half of the moon is visible, and increasing in size.\n* `waningGibbous`: More than half of the moon is visible, and decreasing in size.\n* `thirdQuarter`: Approximately half of the moon is visible, and decreasing in size.\n* `waningCrescent`: A crescent-shaped sliver of the moon is visible, and decreasing in size.",
+                                            "type":"string",
+                                            "enum":[
+                                                "new",
+                                                "waxingCrescent",
+                                                "firstQuarter",
+                                                "waxingGibbous",
+                                                "full",
+                                                "waningGibbous",
+                                                "thirdQuarter",
+                                                "waningCrescent"
+                                            ]
+                                        },
+                                        "moonrise":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time of moonrise on the specified day."
+                                        },
+                                        "moonset":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time of moonset on the specified day."
+                                        },
+                                        "overnightForecast":{
+                                            "description":"A summary forecast for a daytime or overnight period.",
+                                            "type":"object",
+                                            "required":[
+                                                "cloudCover",
+                                                "conditionCode",
+                                                "forecastEnd",
+                                                "forecastStart",
+                                                "humidity",
+                                                "precipitationAmount",
+                                                "precipitationChance",
+                                                "precipitationType",
+                                                "snowfallAmount",
+                                                "windSpeed"
+                                            ],
+                                            "properties":{
+                                                "cloudCover":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "minimum":0,
+                                                    "maximum":1,
+                                                    "description":"The percentage of the sky covered with clouds during the period, from 0 to 1."
+                                                },
+                                                "conditionCode":{
+                                                    "description":"An enumeration value indicating the condition at the time.",
+                                                    "type":"string",
+                                                    "enum":[
+                                                        "Blizzard",
+                                                        "BlowingDust",
+                                                        "BlowingSnow",
+                                                        "Breezy",
+                                                        "Clear",
+                                                        "Cloudy",
+                                                        "Drizzle",
+                                                        "Flurries",
+                                                        "Foggy",
+                                                        "FreezingDrizzle",
+                                                        "FreezingRain",
+                                                        "Frigid",
+                                                        "Hail",
+                                                        "Haze",
+                                                        "HeavyRain",
+                                                        "HeavySnow",
+                                                        "Hot",
+                                                        "Hurricane",
+                                                        "IsolatedThunderstorms",
+                                                        "MostlyClear",
+                                                        "MostlyCloudy",
+                                                        "PartlyCloudy",
+                                                        "Rain",
+                                                        "ScatteredThunderstorms",
+                                                        "Sleet",
+                                                        "Smoky",
+                                                        "Snow",
+                                                        "StrongStorms",
+                                                        "SunFlurries",
+                                                        "SunShowers",
+                                                        "Thunderstorms",
+                                                        "TropicalStorm",
+                                                        "Windy",
+                                                        "WintryMix"
+                                                    ]
+                                                },
+                                                "forecastEnd":{
+                                                    "type":"string",
+                                                    "format":"date-time",
+                                                    "description":"The ending date and time of the forecast."
+                                                },
+                                                "forecastStart":{
+                                                    "type":"string",
+                                                    "format":"date-time",
+                                                    "description":"The starting date and time of the forecast."
+                                                },
+                                                "humidity":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The relative humidity during the period, from 0 to 1.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "precipitationAmount":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The amount of precipitation forecasted to occur during the period, in millimeters.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "precipitationChance":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The chance of precipitation forecasted to occur during the period.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "precipitationType":{
+                                                    "description":"The type of precipitation forecasted to occur for a forecast period.\n\n* `clear`: No precipitation is occurring.\n* `precipitation`: An unknown type of precipitation is occuring.\n* `rain`: Rain or freezing rain is falling.\n* `snow`: Snow is falling.\n* `sleet`: Sleet or ice pellets are falling.\n* `hail`: Hail is falling.\n* `mixed`: Winter weather (wintery mix or wintery showers) is falling.",
+                                                    "type":"string",
+                                                    "enum":[
+                                                        "clear",
+                                                        "precipitation",
+                                                        "rain",
+                                                        "snow",
+                                                        "sleet",
+                                                        "hail",
+                                                        "mixed"
+                                                    ]
+                                                },
+                                                "snowfallAmount":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The depth of snow as ice crystals forecasted to occur during the period, in millimeters.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                },
+                                                "windDirection":{
+                                                    "type":"integer",
+                                                    "description":"The direction the wind is forecasted to come from during the period, in degrees."
+                                                },
+                                                "windSpeed":{
+                                                    "type":"number",
+                                                    "format":"double",
+                                                    "description":"The average speed the wind is forecasted to be during the period, in kilometers per hour.",
+                                                    "minimum":-1.7976931348623157e+308,
+                                                    "maximum":1.7976931348623157e+308
+                                                }
+                                            }
+                                        },
+                                        "precipitationAmount":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The amount of precipitation forecasted to occur during the day, in millimeters.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "precipitationChance":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The chance of precipitation forecasted to occur during the day.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "precipitationType":{
+                                            "description":"The type of precipitation forecasted to occur for a forecast period.\n\n* `clear`: No precipitation is occurring.\n* `precipitation`: An unknown type of precipitation is occuring.\n* `rain`: Rain or freezing rain is falling.\n* `snow`: Snow is falling.\n* `sleet`: Sleet or ice pellets are falling.\n* `hail`: Hail is falling.\n* `mixed`: Winter weather (wintery mix or wintery showers) is falling.",
+                                            "type":"string",
+                                            "enum":[
+                                                "clear",
+                                                "precipitation",
+                                                "rain",
+                                                "snow",
+                                                "sleet",
+                                                "hail",
+                                                "mixed"
+                                            ]
+                                        },
+                                        "snowfallAmount":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The depth of snow as ice crystals forecasted to occur during the day, in millimeters.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "solarMidnight":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is lowest in the sky."
+                                        },
+                                        "solarNoon":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is highest in the sky."
+                                        },
+                                        "sunrise":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the top edge of the sun reaches the horizon in the morning."
+                                        },
+                                        "sunriseAstronomical":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is 18 degrees below the horizon in the morning."
+                                        },
+                                        "sunriseCivil":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is 6 degrees below the horizon in the morning."
+                                        },
+                                        "sunriseNautical":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is 12 degrees below the horizon in the morning."
+                                        },
+                                        "sunset":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the top edge of the sun reaches the horizon in the evening."
+                                        },
+                                        "sunsetAstronomical":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is 18 degrees below the horizon in the evening."
+                                        },
+                                        "sunsetCivil":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is 6 degrees below the horizon in the evening."
+                                        },
+                                        "sunsetNautical":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the sun is 12 degrees below the horizon in the evening."
+                                        },
+                                        "temperatureMax":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The maximum temperature forecasted to occur during the day, in degrees Celsius.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "temperatureMin":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The minimum temperature forecasted to occur during the day, in degrees Celsius.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "forecastHourly":{
+                        "description":"A collection of hour forecasts for a specified range of hours.",
+                        "type":"object",
+                        "required":[
+                            "hours"
+                        ],
+                        "properties":{
+                            "name":{
+                                "type":"string"
+                            },
+                            "metadata":{
+                                "type":"object",
+                                "required":[
+                                    "expireTime",
+                                    "latitude",
+                                    "longitude",
+                                    "readTime",
+                                    "version"
+                                ],
+                                "properties":{
+                                    "attributionURL":{
+                                        "type":"string",
+                                        "description":"The URL of the legal attribution for the data source."
+                                    },
+                                    "expireTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time when the weather data is no longer valid."
+                                    },
+                                    "latitude":{
+                                        "description":"A numeric value indicating the latitude of the coordinate between -90 and 90.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-90,
+                                        "maximum":90
+                                    },
+                                    "longitude":{
+                                        "description":"A numeric value indicating the longitude of the coordinate between -180 and 180.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-180,
+                                        "maximum":180
+                                    },
+                                    "providerLogo":{
+                                        "type":"string",
+                                        "description":"The URL of a logo for the data provider."
+                                    },
+                                    "providerName":{
+                                        "type":"string",
+                                        "description":"The name of the data provider."
+                                    },
+                                    "readTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the weather data was procured."
+                                    },
+                                    "reportedTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the provider reported the weather data."
+                                    },
+                                    "temporarilyUnavailable":{
+                                        "type":"boolean",
+                                        "description":"The weather data is temporarily unavailable from the provide"
+                                    },
+                                    "units":{
+                                        "description":"The system of units that the weather data is reported in. This is fixed and set to metric.",
+                                        "type":"string",
+                                        "enum":[
+                                            "m"
+                                        ]
+                                    },
+                                    "version":{
+                                        "type":"string",
+                                        "description":"The data format version."
+                                    }
+                                }
+                            },
+                            "hours":{
+                                "type":"array",
+                                "items":{
+                                    "description":"The historical or forecasted weather conditions for a specified hour.",
+                                    "type":"object",
+                                    "required":[
+                                        "cloudCover",
+                                        "conditionCode",
+                                        "forecastStart",
+                                        "humidity",
+                                        "precipitationChance",
+                                        "precipitationType",
+                                        "pressure",
+                                        "pressureTrend",
+                                        "temperature",
+                                        "temperatureApparent",
+                                        "uvIndex",
+                                        "visibility",
+                                        "windSpeed"
+                                    ],
+                                    "properties":{
+                                        "cloudCover":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The percentage of the sky covered with clouds during the period, from 0 to 1.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "conditionCode":{
+                                            "description":"An enumeration value indicating the condition at the time.",
+                                            "type":"string",
+                                            "enum":[
+                                                "Blizzard",
+                                                "BlowingDust",
+                                                "BlowingSnow",
+                                                "Breezy",
+                                                "Clear",
+                                                "Cloudy",
+                                                "Drizzle",
+                                                "Flurries",
+                                                "Foggy",
+                                                "FreezingDrizzle",
+                                                "FreezingRain",
+                                                "Frigid",
+                                                "Hail",
+                                                "Haze",
+                                                "HeavyRain",
+                                                "HeavySnow",
+                                                "Hot",
+                                                "Hurricane",
+                                                "IsolatedThunderstorms",
+                                                "MostlyClear",
+                                                "MostlyCloudy",
+                                                "PartlyCloudy",
+                                                "Rain",
+                                                "ScatteredThunderstorms",
+                                                "Sleet",
+                                                "Smoky",
+                                                "Snow",
+                                                "StrongStorms",
+                                                "SunFlurries",
+                                                "SunShowers",
+                                                "Thunderstorms",
+                                                "TropicalStorm",
+                                                "Windy",
+                                                "WintryMix"
+                                            ]
+                                        },
+                                        "daylight":{
+                                            "type":"boolean",
+                                            "description":"Indicates whether the hour starts during the day or night."
+                                        },
+                                        "forecastStart":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The starting date and time of the forecast."
+                                        },
+                                        "humidity":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The relative humidity at the start of the hour, from 0 to 1.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "precipitationChance":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The chance of precipitation forecasted to occur during the hour, from 0 to 1.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "precipitationType":{
+                                            "description":"The type of precipitation forecasted to occur for a forecast period.\n\n* `clear`: No precipitation is occurring.\n* `precipitation`: An unknown type of precipitation is occuring.\n* `rain`: Rain or freezing rain is falling.\n* `snow`: Snow is falling.\n* `sleet`: Sleet or ice pellets are falling.\n* `hail`: Hail is falling.\n* `mixed`: Winter weather (wintery mix or wintery showers) is falling.",
+                                            "type":"string",
+                                            "enum":[
+                                                "clear",
+                                                "precipitation",
+                                                "rain",
+                                                "snow",
+                                                "sleet",
+                                                "hail",
+                                                "mixed"
+                                            ]
+                                        },
+                                        "pressure":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The sea-level air pressure, in millibars.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "pressureTrend":{
+                                            "description":"The direction of change of the sea-level air pressure.",
+                                            "type":"string",
+                                            "enum":[
+                                                "rising",
+                                                "falling",
+                                                "steady"
+                                            ]
+                                        },
+                                        "snowfallIntensity":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The rate at which snow crystals are falling, in millimeters per hour.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "temperature":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The temperature at the start of the hour, in degrees Celsius.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "temperatureApparent":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The feels-like temperature when considering wind and humidity, at the start of the hour, in degrees Celsius.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "temperatureDewPoint":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The temperature at which relative humidity is 100% at the top of the hour, in degrees Celsius.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "uvIndex":{
+                                            "type":"integer",
+                                            "description":"The level of ultraviolet radiation at the start of the hour."
+                                        },
+                                        "visibility":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The distance at which terrain is visible at the start of the hour, in meters.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "windDirection":{
+                                            "type":"integer",
+                                            "description":"The direction of the wind at the start of the hour, in degrees."
+                                        },
+                                        "windGust":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The maximum wind gust speed during the hour, in kilometers per hour.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "windSpeed":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The wind speed at the start of the hour, in kilometers per hour.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "precipitationAmount":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The amount of precipitation forecasted to occur during period, in millimeters.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "forecastNextHour":{
+                        "description":"The next hour forecast information.",
+                        "type":"object",
+                        "required":[
+                            "minutes",
+                            "summary"
+                        ],
+                        "properties":{
+                            "name":{
+                                "type":"string"
+                            },
+                            "metadata":{
+                                "type":"object",
+                                "required":[
+                                    "expireTime",
+                                    "latitude",
+                                    "longitude",
+                                    "readTime",
+                                    "version"
+                                ],
+                                "properties":{
+                                    "attributionURL":{
+                                        "type":"string",
+                                        "description":"The URL of the legal attribution for the data source."
+                                    },
+                                    "expireTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time when the weather data is no longer valid."
+                                    },
+                                    "latitude":{
+                                        "description":"A numeric value indicating the latitude of the coordinate between -90 and 90.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-90,
+                                        "maximum":90
+                                    },
+                                    "longitude":{
+                                        "description":"A numeric value indicating the longitude of the coordinate between -180 and 180.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-180,
+                                        "maximum":180
+                                    },
+                                    "providerLogo":{
+                                        "type":"string",
+                                        "description":"The URL of a logo for the data provider."
+                                    },
+                                    "providerName":{
+                                        "type":"string",
+                                        "description":"The name of the data provider."
+                                    },
+                                    "readTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the weather data was procured."
+                                    },
+                                    "reportedTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the provider reported the weather data."
+                                    },
+                                    "temporarilyUnavailable":{
+                                        "type":"boolean",
+                                        "description":"The weather data is temporarily unavailable from the provide"
+                                    },
+                                    "units":{
+                                        "description":"The system of units that the weather data is reported in. This is fixed and set to metric.",
+                                        "type":"string",
+                                        "enum":[
+                                            "m"
+                                        ]
+                                    },
+                                    "version":{
+                                        "type":"string",
+                                        "description":"The data format version."
+                                    }
+                                }
+                            },
+                            "forecastEnd":{
+                                "type":"string",
+                                "format":"date-time",
+                                "description":"The time the forecast ends."
+                            },
+                            "forecastStart":{
+                                "type":"string",
+                                "format":"date-time",
+                                "description":"The time the forecast starts."
+                            },
+                            "minutes":{
+                                "type":"array",
+                                "items":{
+                                    "description":"The precipitation forecast for a specified minute.",
+                                    "type":"object",
+                                    "required":[
+                                        "precipitationChance",
+                                        "precipitationIntensity",
+                                        "startTime"
+                                    ],
+                                    "properties":{
+                                        "precipitationChance":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The probability of precipitation during this minute.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "precipitationIntensity":{
+                                            "type":"number",
+                                            "format":"double",
+                                            "description":"The precipitation intensity in millimeters per hour.",
+                                            "minimum":-1.7976931348623157e+308,
+                                            "maximum":1.7976931348623157e+308
+                                        },
+                                        "startTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The start time of the minute."
+                                        }
+                                    }
+                                }
+                            },
+                            "summary":{
+                                "type":"array",
+                                "items":{
+                                    "description":"The summary for a specified period in the minute forecast.",
+                                    "type":"object",
+                                    "required":[
+                                        "condition",
+                                        "precipitationChance",
+                                        "precipitationIntensity",
+                                        "startTime"
+                                    ],
+                                    "properties":{
+                                        "condition":{
+                                            "description":"The type of precipitation forecasted to occur for a forecast period.\n\n* `clear`: No precipitation is occurring.\n* `precipitation`: An unknown type of precipitation is occuring.\n* `rain`: Rain or freezing rain is falling.\n* `snow`: Snow is falling.\n* `sleet`: Sleet or ice pellets are falling.\n* `hail`: Hail is falling.\n* `mixed`: Winter weather (wintery mix or wintery showers) is falling.",
+                                            "type":"string",
+                                            "enum":[
+                                                "clear",
+                                                "precipitation",
+                                                "rain",
+                                                "snow",
+                                                "sleet",
+                                                "hail",
+                                                "mixed"
+                                            ]
+                                        },
+                                        "endTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The end time of the forecast."
+                                        },
+                                        "precipitationChance":{
+                                            "type":"number",
+                                            "description":"The probability of precipitation during this period."
+                                        },
+                                        "precipitationIntensity":{
+                                            "type":"number",
+                                            "description":"The precipitation intensity in millimeters per hour."
+                                        },
+                                        "startTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The start time of the forecast."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "weatherAlerts":{
+                        "description":"A collecton of weather alerts.",
+                        "type":"object",
+                        "required":[
+                            "alerts"
+                        ],
+                        "properties":{
+                            "name":{
+                                "type":"string"
+                            },
+                            "metadata":{
+                                "type":"object",
+                                "required":[
+                                    "expireTime",
+                                    "latitude",
+                                    "longitude",
+                                    "readTime",
+                                    "version"
+                                ],
+                                "properties":{
+                                    "attributionURL":{
+                                        "type":"string",
+                                        "description":"The URL of the legal attribution for the data source."
+                                    },
+                                    "expireTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time when the weather data is no longer valid."
+                                    },
+                                    "latitude":{
+                                        "description":"A numeric value indicating the latitude of the coordinate between -90 and 90.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-90,
+                                        "maximum":90
+                                    },
+                                    "longitude":{
+                                        "description":"A numeric value indicating the longitude of the coordinate between -180 and 180.",
+                                        "type":"number",
+                                        "format":"double",
+                                        "minimum":-180,
+                                        "maximum":180
+                                    },
+                                    "providerLogo":{
+                                        "type":"string",
+                                        "description":"The URL of a logo for the data provider."
+                                    },
+                                    "providerName":{
+                                        "type":"string",
+                                        "description":"The name of the data provider."
+                                    },
+                                    "readTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the weather data was procured."
+                                    },
+                                    "reportedTime":{
+                                        "type":"string",
+                                        "format":"date-time",
+                                        "description":"The time the provider reported the weather data."
+                                    },
+                                    "temporarilyUnavailable":{
+                                        "type":"boolean",
+                                        "description":"The weather data is temporarily unavailable from the provide"
+                                    },
+                                    "units":{
+                                        "description":"The system of units that the weather data is reported in. This is fixed and set to metric.",
+                                        "type":"string",
+                                        "enum":[
+                                            "m"
+                                        ]
+                                    },
+                                    "version":{
+                                        "type":"string",
+                                        "description":"The data format version."
+                                    }
+                                }
+                            },
+                            "alerts":{
+                                "type":"array",
+                                "items":{
+                                    "description":"Detailed information about the weather alert.",
+                                    "type":"object",
+                                    "properties":{
+                                        "areaId":{
+                                            "type":"string",
+                                            "description":"An official designation of the affected area."
+                                        },
+                                        "areaName":{
+                                            "type":"string",
+                                            "description":"A human-readable name of the affected area."
+                                        },
+                                        "certainty":{
+                                            "description":"How likely the event is to occur.\n\n* `observed`: The event has already occurred or is ongoing.\n* `likely`: The event is likely to occur (greater than 50% probability).\n* `possible`: The event is unlikley to occur (less than 50% probability).\n* `unlikely`: The event is not expected to occur (approximately 0% probability).\n* `unknown`: It is unknown if the event will occur.",
+                                            "type":"string",
+                                            "enum":[
+                                                "observed",
+                                                "likely",
+                                                "possible",
+                                                "unlikely"
+                                            ]
+                                        },
+                                        "countryCode":{
+                                            "type":"string",
+                                            "description":"The ISO code of the reporting country."
+                                        },
+                                        "description":{
+                                            "type":"string",
+                                            "description":"A human-readable description of the event."
+                                        },
+                                        "detailsUrl":{
+                                            "type":"string",
+                                            "description":"The URL to a page containing detailed information about the event."
+                                        },
+                                        "effectiveTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time the event went into effect."
+                                        },
+                                        "eventEndTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the underlying weather event is projected to end."
+                                        },
+                                        "eventOnsetTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the underlying weather event is projected to start."
+                                        },
+                                        "expireTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time when the event expires."
+                                        },
+                                        "id":{
+                                            "type":"string",
+                                            "format":"uuid",
+                                            "description":"A unique identifier of the event."
+                                        },
+                                        "issuedTime":{
+                                            "type":"string",
+                                            "format":"date-time",
+                                            "description":"The time that event was issued by the reporting agency."
+                                        },
+                                        "responses":{
+                                            "type":"array",
+                                            "items":{
+                                                "description":"The recommended action from a reporting agency.\n\n* `shelter`: Take shelter in place.\n* `evacuate`: Relocate.\n* `prepare`: Make preparations.\n* `execute`: Execute a pre-planned activity.\n* `avoid`: Avoid the event.\n* `monitor`: Monitor the situation.\n* `assess`: Assess the situation.\n* `allClear`: The event no longer poses a threat.\n* `none`: No action recommended.",
+                                                "type":"string",
+                                                "enum":[
+                                                    "shelter",
+                                                    "evacuate",
+                                                    "prepare",
+                                                    "execute",
+                                                    "avoid",
+                                                    "monitor",
+                                                    "assess",
+                                                    "allClear",
+                                                    "none"
+                                                ]
+                                            },
+                                            "description":"An array of recommended actions from the reporting agency."
+                                        },
+                                        "severity":{
+                                            "description":"The level of danger to life and property.\n\n* `extreme`: Extraordinary threat.\n* `severe`: Significant threat.\n* `moderate`: Possible threat.\n* `minor`: Minimal or no known threat.\n* `unknown`: Unknown threat.",
+                                            "type":"string",
+                                            "enum":[
+                                                "extreme",
+                                                "severe",
+                                                "moderate",
+                                                "minor",
+                                                "unknown"
+                                            ]
+                                        },
+                                        "source":{
+                                            "type":"string",
+                                            "description":"The name of the reporting agency."
+                                        },
+                                        "urgency":{
+                                            "description":"An indication of urgency of action from the reporting agency.\n\n* `immediate`: Take responsive action immediately.\n* `expected`: Take responsive action in the next hour.\n* `future`: Take responsive action in the near future.\n* `past`: Responsive action is no longer required.\n* `unknown`: The urgency is unknown.",
+                                            "type":"string",
+                                            "enum":[
+                                                "immediate",
+                                                "expected",
+                                                "future",
+                                                "past",
+                                                "unknown"
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Availability",
+            "url":"https://kayuloweather.p.rapidapi.com/availability/{latitude}/{longitude}",
+            "description":"Determine the data sets available for the specified location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"The latitude of the desired location.",
+                    "default":40.7127281
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"The longitude of the desired location.",
+                    "default":-74.0060152
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://kayuloweather.p.rapidapi.com/availability/{latitude}/{longitude}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"kayuloweather.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":[
+                "currentWeather",
+                "forecastDaily",
+                "forecastHourly"
+            ],
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"string",
+                    "enum":[
+                        "currentWeather",
+                        "forecastDaily",
+                        "forecastHourly",
+                        "forecastNextHour",
+                        "weatherAlerts"
+                    ],
+                    "description":"* `currentWeather`: The current weather for the requested location. Also works for past days, see `currentAsOf` query parameter.\n* `forecastDaily`: The daily forecast for the requested location. Also works for past days, see `dailyStart` and `dailyEnd` query parameters.\n* `forecastHourly`: The hourly forecast for the requested location. Also works for past days, see `hourlyStart` and `hourlyEnd` query parameters.\n* `forecastNextHour`: The next hour forecast for the requested location.\n* `weatherAlerts`: Weather alerts for the requested location."
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,545 @@
+{
+    "tool_name":"UAE Real Estate",
+    "tool_description":"Comprehensive historical real estate data for the UAE, supporting applications and services like real estate platforms, investment tools, and trend analysis systems.",
+    "title":"UAE Real Estate",
+    "pricing":"PAID",
+    "score":null,
+    "home_url":"https://rapidapi.com/dotlas-dotlas-default/api/uae-real-estate/",
+    "host":"uae-real-estate.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"get_property_evaluation_districts_rent_compare_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/districts/rent/compare",
+            "description":"**About**:\n\nReturns a comparative evaluation of the new listing with the average\nhistorical price and size in sqft of the district, within the constraints of a combination of location, property type,\nand amenities. Useful for determining if the listing is overpriced or underpriced.\nUses the latitude and longitude to determine the district.\n\nFor example, the evaluation for a 1 bedroom apartment in a district will\nbe different from that of a 4 bedroom Villa in the same district.\n\n**Parameters**:\n\n| parameter | description | limits |\n| --- | --- | --- |\n| **latitude, longitude** | The coordinate points in [WGS 84 Projection (EPSG / SRID 4326)](https://en.wikipedia.org/wiki/World_Geodetic_System) | Currently Restricted to UAE |\n| **property_type** | The type of property | One of the property types from `catalogue/property_types` |\n| **property_sub_type** | The subtype of the property | One of the property subtypes from `catalogue/property_sub_types` |\n| **bedrooms** | The number of bedrooms in the property | |\n| **price** | The price of the property in `AED` as an annualized rent value | |\n| **size** | The size (area) of the property in `sqft` | |\n\n**Response Variables**:\n\n| variable | description |\n| --- | --- |\n| **city** | The city in which the district exists |\n| **district** | The district for which the evaluation is returned |\n| **property_type** | The property type (ex. `Residential`) for which the evaluation is returned |\n| **property_sub_type** | The property subtype (ex. `Apartment`) for which the evaluation is returned |\n| **bedroom_count** | The number of bedrooms for which the evaluation is returned |\n| **listing_price** | The price of the input property in `AED` as an annualized rent value |\n| **listing_size** | The size (area) of the input property in `sqft` |\n| **average_rent** | The average historical rent (in annual `AED`) of the district for the given combination of location, property type and amenities |\n| **average_size** | The average historical size (in `sqft`) of the district for the for the given combination of location, property type and amenities |\n| **rent_comparison** | The percent difference between the listing price and the average historical rent of the district |\n| **size_comparison** | The percent difference between the listing size and the average historical size of the district |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"property_type",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"price",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"property_sub_type",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"size",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/districts/rent/compare\"\nquerystring = {\"property_type\": property_type, \"price\": price, \"longitude\": longitude, \"property_sub_type\": property_sub_type, \"latitude\": latitude, \"bedrooms\": bedrooms, \"size\": size}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "city":"Dubai",
+                "district":"Palm Jumeirah",
+                "property_type":"Residential",
+                "property_sub_type":"Apartment",
+                "bedroom_count":2,
+                "listing_price":55000,
+                "listing_size":750,
+                "average_rent":62000,
+                "rent_comparison":-0.11,
+                "average_size":800,
+                "size_comparison":-0.06
+            },
+            "headers":{},
+            "schema":{
+                "title":"PropertyEvaluation",
+                "required":[
+                    "city",
+                    "district",
+                    "property_type",
+                    "property_sub_type",
+                    "bedroom_count",
+                    "listing_price",
+                    "listing_size",
+                    "average_rent",
+                    "rent_comparison",
+                    "average_size",
+                    "size_comparison"
+                ],
+                "type":"object",
+                "properties":{
+                    "city":{
+                        "title":"City",
+                        "type":"string"
+                    },
+                    "district":{
+                        "title":"District",
+                        "type":"string"
+                    },
+                    "property_type":{
+                        "title":"Property Type",
+                        "type":"string"
+                    },
+                    "property_sub_type":{
+                        "title":"Property Sub Type",
+                        "type":"string"
+                    },
+                    "bedroom_count":{
+                        "title":"Bedroom Count",
+                        "type":"integer"
+                    },
+                    "listing_price":{
+                        "title":"Listing Price",
+                        "type":"integer"
+                    },
+                    "listing_size":{
+                        "title":"Listing Size",
+                        "type":"integer"
+                    },
+                    "average_rent":{
+                        "title":"Average Rent",
+                        "type":"integer"
+                    },
+                    "rent_comparison":{
+                        "title":"Rent Comparison",
+                        "type":"number"
+                    },
+                    "average_size":{
+                        "title":"Average Size",
+                        "type":"integer"
+                    },
+                    "size_comparison":{
+                        "title":"Size Comparison",
+                        "type":"number"
+                    }
+                },
+                "description":"A class to represent the property evaluation of a district,\nbased on the type and amenities of the property, and based on\na comparative ratio of the listing price and size to the average\nrent and size of the district.\n\nArgs:\n    BasePropertyType (BaseModel): Extends `BasePropertyType` which extends `BaseDistrict`."
+            }
+        },
+        {
+            "name":"get_rental_prices_districts_rent_history_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/districts/rent/history",
+            "description":"**About**:\n\nReturns the historical rental prices for a combination of location, property type,\nand amenities within a district.\nUses the latitude and longitude to determine the district.\n\nFor example, the historical pricing for a 1 bedroom apartment in a district will\nbe different from that of a 4 bedroom Villa in the same district.\n\n**Parameters**:\n\n| parameter | description | limits |\n| --- | --- | --- |\n| **latitude, longitude** | The coordinate points in [WGS 84 Projection (EPSG / SRID 4326)](https://en.wikipedia.org/wiki/World_Geodetic_System) | Currently Restricted to UAE |\n| **property_type** | The type of property | One of the property types from `catalogue/property_types` |\n| **property_sub_type** | The subtype of the property | One of the property subtypes from `catalogue/property_sub_types` |\n| **bedrooms** | The number of bedrooms in the property | |\n\n**Response Variables**:\n\n| variable | description |\n| --- | --- |\n| **city** | The city in which the district exists |\n| **district** | The district for which the history is returned |\n| **property_type** | The property type (ex. `Residential`) for which the history is returned |\n| **property_sub_type** | The property subtype (ex. `Apartment`) for which the history is returned |\n| **bedroom_count** | The number of bedrooms for which the history is returned |\n| **history** | A list of historical rental prices for the given combination of location, property type, and amenities. Rolling monthly-year window from previous month. |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"bedrooms",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"property_sub_type",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"property_type",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/districts/rent/history\"\nquerystring = {\"bedrooms\": bedrooms, \"latitude\": latitude, \"property_sub_type\": property_sub_type, \"longitude\": longitude, \"property_type\": property_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "city":"Dubai",
+                "district":"Palm Jumeirah",
+                "property_type":"Residential",
+                "property_sub_type":"Apartment",
+                "bedroom_count":2,
+                "history":[
+                    {
+                        "date":"2023-01-01",
+                        "month":1,
+                        "year":2023,
+                        "price":{}
+                    }
+                ]
+            },
+            "headers":{},
+            "schema":{
+                "title":"DistrictRentHistoryResponse",
+                "required":[
+                    "city",
+                    "district",
+                    "property_type",
+                    "property_sub_type",
+                    "bedroom_count",
+                    "history"
+                ],
+                "type":"object",
+                "properties":{
+                    "city":{
+                        "title":"City",
+                        "type":"string"
+                    },
+                    "district":{
+                        "title":"District",
+                        "type":"string"
+                    },
+                    "property_type":{
+                        "title":"Property Type",
+                        "type":"string"
+                    },
+                    "property_sub_type":{
+                        "title":"Property Sub Type",
+                        "type":"string"
+                    },
+                    "bedroom_count":{
+                        "title":"Bedroom Count",
+                        "type":"integer"
+                    },
+                    "history":{
+                        "title":"History",
+                        "type":"array",
+                        "items":{
+                            "title":"SingleMonthData",
+                            "required":[
+                                "date",
+                                "month",
+                                "year",
+                                "price"
+                            ],
+                            "type":"object",
+                            "properties":{
+                                "date":{
+                                    "title":"Date",
+                                    "type":"string"
+                                },
+                                "month":{
+                                    "title":"Month",
+                                    "type":"integer"
+                                },
+                                "year":{
+                                    "title":"Year",
+                                    "type":"integer"
+                                },
+                                "price":{
+                                    "title":"Price",
+                                    "anyOf":[
+                                        {
+                                            "type":"number"
+                                        },
+                                        {
+                                            "type":"integer"
+                                        }
+                                    ]
+                                }
+                            },
+                            "description":"A class to represent the rent history of a district,\nfor a single month.\n\nArgs:\n    BaseModel: Extends the pydantic BaseModel."
+                        }
+                    }
+                },
+                "description":"A class to represent the rent history of a district,\nbased on the type and amenities of the property.\n\nArgs:\n    BasePropertyType (BaseModel): Extends BasePropertyType which extends BaseDistrict."
+            }
+        },
+        {
+            "name":"get_description_districts_describe_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/districts/describe",
+            "description":"**About**:\n\nReturns a description of the district. Provides a high-level overview of the district.\n\n**Parameters**:\n\n| parameter | description | limits |\n| --- | --- | --- |\n| **city** | The city in which the district exists | One of the cities from `catalogue/cities` |\n| **district** | The district for which the description is to be returned | One of the districts from `catalogue/districts` |\n\n\n**Response Variables**:\n\n| variable | description |\n| --- | --- |\n| **district** | The district for which the description is returned |\n| **city** | The city in which the district exists |\n| **description** | A small paragraph description of the district |\n| **last_updated_at** | The timestamp at which the description was last updated |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"district",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/districts/describe\"\nquerystring = {\"district\": district, \"city\": city}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "city":"Dubai",
+                "district":"Palm Jumeirah",
+                "description":"\nPalm Jumeirah is one of the most sought-after areas in Dubai, United Arab Emirates. \nLocated on the coast of the Arabian Gulf, this exclusive area is home to some of the most luxurious properties in the city. \nWith its stunning beaches, world-class restaurants, and vibrant nightlife, Palm Jumeirah is the perfect place to call home. \nFrom the iconic Palm Jumeirah Monorail to the luxurious shopping malls, there is something for everyone in this vibrant area. \nWhether you are looking for a place to relax and unwind or a place to explore and experience the best of Dubai, \nPalm Jumeirah is the perfect destination.\n",
+                "last_updated":"2023-05-01"
+            },
+            "headers":{},
+            "schema":{
+                "title":"DescriptionResponse",
+                "required":[
+                    "city",
+                    "district",
+                    "description",
+                    "last_updated"
+                ],
+                "type":"object",
+                "properties":{
+                    "city":{
+                        "title":"City",
+                        "type":"string"
+                    },
+                    "district":{
+                        "title":"District",
+                        "type":"string"
+                    },
+                    "description":{
+                        "title":"Description",
+                        "type":"string"
+                    },
+                    "last_updated":{
+                        "title":"Last Updated",
+                        "type":"string"
+                    }
+                },
+                "description":"A class to represent the description of a district.\n\nArgs:\n    BaseDistrict (BaseModel): Inherits from BaseDistrict."
+            }
+        },
+        {
+            "name":"locate_district_districts_locate_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/districts/locate",
+            "description":"**About**:\n\nReturns the district in which the given location exists.\n\n**Parameters**:\n\n| parameter | description | limits |\n| --- | --- | --- |\n| **latitude, longitude** | The coordinate points in [WGS 84 Projection (EPSG / SRID 4326)](https://en.wikipedia.org/wiki/World_Geodetic_System) | Currently Restricted to UAE |\n\n**Response Variables**:\n\n| variable | description |\n| --- | --- |\n| **district** | The district in which the location exists |\n| **city** | The city in which the district exists |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"latitude",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                },
+                {
+                    "name":"longitude",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/districts/locate\"\nquerystring = {\"latitude\": latitude, \"longitude\": longitude}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "city":"Dubai",
+                "district":"Palm Jumeirah"
+            },
+            "headers":{},
+            "schema":{
+                "title":"BaseDistrict",
+                "required":[
+                    "city",
+                    "district"
+                ],
+                "type":"object",
+                "properties":{
+                    "city":{
+                        "title":"City",
+                        "type":"string"
+                    },
+                    "district":{
+                        "title":"District",
+                        "type":"string"
+                    }
+                },
+                "description":"A class to represent city and district.\nInherited by multiple models.\n\nArgs:\n    BaseModel: Extends the pydantic BaseModel."
+            }
+        },
+        {
+            "name":"home__get",
+            "url":"https://uae-real-estate.p.rapidapi.com/",
+            "description":"A home endpoint that returns the API home page JSON.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{},
+            "headers":{},
+            "schema":{
+                "type":"string"
+            }
+        },
+        {
+            "name":"get_districts_catalogue_districts_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/catalogue/districts",
+            "description":"**About**:\n\nReturns a list of all supported districts in a city.\n\n**Parameters**:\n| parameter | description | limits |\n| --- | --- | --- |\n| **city** | The city for which the districts are to be returned | One of the cities from `catalogue/cities` |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/catalogue/districts\"\nquerystring = {\"city\": city}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "city":"Dubai",
+                "districts":[]
+            },
+            "headers":{},
+            "schema":{
+                "title":"BaseCatalogueDistrict",
+                "required":[
+                    "city",
+                    "districts"
+                ],
+                "type":"object",
+                "properties":{
+                    "city":{
+                        "title":"City",
+                        "type":"string"
+                    },
+                    "districts":{
+                        "title":"Districts",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    }
+                },
+                "description":"A class to represent a district in the catalogue.\n\nArgs:\n    BaseModel: Extends the pydantic BaseModel."
+            }
+        },
+        {
+            "name":"get_property_types_catalogue_property_types_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/catalogue/property_types",
+            "description":"**About**:\n\nReturns a list of all supported property types.\nA property type is a broad classification of a property. For example, `Residential`, `Commercial`, etc.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/catalogue/property_types\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "property_types":[]
+            },
+            "headers":{},
+            "schema":{
+                "title":"BaseCataloguePropertyType",
+                "required":[
+                    "property_types"
+                ],
+                "type":"object",
+                "properties":{
+                    "property_types":{
+                        "title":"Property Types",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    }
+                },
+                "description":"A class to represent a property type in the catalogue.\n\nArgs:\n    BaseModel: Extends the pydantic BaseModel."
+            }
+        },
+        {
+            "name":"get_cities_catalogue_cities_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/catalogue/cities",
+            "description":"**About**:\n\nReturns a list of all supported cities.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/catalogue/cities\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "cities":[]
+            },
+            "headers":{},
+            "schema":{
+                "title":"BaseCatalogueCity",
+                "required":[
+                    "cities"
+                ],
+                "type":"object",
+                "properties":{
+                    "cities":{
+                        "title":"Cities",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    }
+                },
+                "description":"A class to represent a city in the catalogue.\n\nArgs:\n    BaseModel: Extends the pydantic BaseModel."
+            }
+        },
+        {
+            "name":"get_property_sub_types_catalogue_property_sub_types_get",
+            "url":"https://uae-real-estate.p.rapidapi.com/catalogue/property_sub_types",
+            "description":"**About**:\n\nReturns a list of all supported property sub types.\nA property sub type is a more specific classification of a property. For example, `Apartment`, `Villa`, etc.\n\n**Parameters**:\n| parameter | description | limits |\n| --- | --- | --- |\n| **property_type** | The property type for which the property sub types are to be returned | One of the property types from `catalogue/property_types` |",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"property_type",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://uae-real-estate.p.rapidapi.com/catalogue/property_sub_types\"\nquerystring = {\"property_type\": property_type}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"uae-real-estate.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "property_type":"Residential",
+                "property_sub_types":[]
+            },
+            "headers":{},
+            "schema":{
+                "title":"BaseCataloguePropertySubType",
+                "required":[
+                    "property_type",
+                    "property_sub_types"
+                ],
+                "type":"object",
+                "properties":{
+                    "property_type":{
+                        "title":"Property Type",
+                        "type":"string"
+                    },
+                    "property_sub_types":{
+                        "title":"Property Sub Types",
+                        "type":"array",
+                        "items":{
+                            "type":"string"
+                        }
+                    }
+                },
+                "description":"A class to represent a property sub type in the catalogue.\n\nArgs:\n    BaseModel: Extends the pydantic BaseModel."
+            }
+        }
+    ]
+}

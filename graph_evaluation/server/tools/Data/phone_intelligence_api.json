@@ -1,0 +1,189 @@
+{
+    "tool_name":"Phone Intelligence API",
+    "tool_description":"Trestle's Phone Validation API, formerly known as Phone Intelligence API, validates the phone number and provides phone metadata, such as carrier name, line type (landline, mobile, non-fixed VoIP, etc.), is the phone prepaid, etc, and includes a phone activity score to help identify disconnected phones. Typical use cases for this API include lead validation, lead contactability, and lead prioritization.\n",
+    "title":"Phone Intelligence API",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":351,
+        "avgSuccessRate":100,
+        "popularityScore":9.4,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/trestle-solutions-inc-trestle-solutions-inc-default/api/phone-intelligence-api/",
+    "host":"phone-intelligence-api.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"getPhoneIntel",
+            "url":"https://phone-intelligence-api.p.rapidapi.com/3.0/phone_intel",
+            "description":"Trestle Phone Validation API validates the phone number and provides phone metadata such as carrier name, line type (landline, mobile, non-fixed voip, etc.), is the phone prepaid, etc. Typical use cases where the API is used include lead quality assessment and thus lead prioritization, as well as to weed out potential fraud, including bots using non-fixed voip or burner phones.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"phone",
+                    "type":"STRING",
+                    "description":"The phone number in E.164 or local format. The default country calling code is +1 (USA).",
+                    "default":"2069735100"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country_hint",
+                    "type":"STRING",
+                    "description":"The ISO-3166 alpha-2 country code of the phone number. See: [ISO-3166](https://www.nationsonline.org/oneworld/country_code_list.htm)\ntest",
+                    "default":"US"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://phone-intelligence-api.p.rapidapi.com/3.0/phone_intel\"\nquerystring = {\"phone\": phone, \"country_hint\": country_hint}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"phone-intelligence-api.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "id":"Phone.3dbb6fef-a2df-4b08-cfe3-bc7128b6f5b4",
+                "phone_number":"2069735100",
+                "is_valid":true,
+                "country_calling_code":"1",
+                "country_code":"US",
+                "country_name":"United States",
+                "line_type":"Landline",
+                "carrier":"Ekata Telco",
+                "is_prepaid":true,
+                "error":{
+                    "name":"PartialError",
+                    "message":"Could not retrieve entire response"
+                },
+                "warnings":[
+                    "Invalid input"
+                ]
+            },
+            "headers":{},
+            "schema":{
+                "required":[
+                    "carrier",
+                    "country_calling_code",
+                    "country_code",
+                    "country_name",
+                    "error",
+                    "id",
+                    "is_prepaid",
+                    "is_valid",
+                    "line_type",
+                    "phone_number",
+                    "warnings"
+                ],
+                "type":"object",
+                "properties":{
+                    "id":{
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The persistent ID of the phone number.",
+                        "format":"Phone.<uuid>"
+                    },
+                    "phone_number":{
+                        "pattern":"^\\+?[\\d-]*(x\\d*)?",
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The phone number in E.164 or local format. The default country calling code is +1 (USA)."
+                    },
+                    "is_valid":{
+                        "type":[
+                            "boolean",
+                            "null"
+                        ],
+                        "description":"True if the phone number is valid."
+                    },
+                    "country_calling_code":{
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The country code of the phone number.",
+                        "format":"E.164"
+                    },
+                    "country_code":{
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The ISO-3166 alpha-2 country code of the phone number. See: [ISO-3166](https://www.nationsonline.org/oneworld/country_code_list.htm)",
+                        "format":"ISO-3166-2"
+                    },
+                    "country_name":{
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The country name of the location associated with the phone number."
+                    },
+                    "line_type":{
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The line type of the phone number.\n\n* `Landline` - Traditional wired phone line.\n* `Mobile` - Wireless phone line.\n* `FixedVOIP` - VOIP number connected to a physical address, such as Vonix or Comcast.\n* `NonFixedVOIP` - VOIP number unconnected to a fixed physical address, such as Google Voice or Skype.\n* `Premium` - Caller pays a premium for the call–e.g. 976 area code.\n* `TollFree` - Callee pays for call.\n* `Voicemail` - Voicemail-only service.\n* `Other` - Line type is unclear or does not match current categories.",
+                        "enum":[
+                            "Landline",
+                            "Premium",
+                            "NonFixedVOIP",
+                            "Mobile",
+                            "FixedVOIP",
+                            "TollFree",
+                            "Other",
+                            "Voicemail",
+                            null
+                        ]
+                    },
+                    "carrier":{
+                        "type":[
+                            "string",
+                            "null"
+                        ],
+                        "description":"The company that provides voice and/or data services for the phone number. Carriers are returned at the MVNO level."
+                    },
+                    "is_prepaid":{
+                        "type":[
+                            "boolean",
+                            "null"
+                        ],
+                        "description":"True if the phone is associated with a prepaid account."
+                    },
+                    "error":{
+                        "required":[
+                            "message",
+                            "name"
+                        ],
+                        "type":"object",
+                        "properties":{
+                            "name":{
+                                "type":"string",
+                                "description":"Incomplete response due to external timeouts.",
+                                "enum":[
+                                    "PartialError"
+                                ]
+                            },
+                            "message":{
+                                "type":"string",
+                                "enum":[
+                                    "Could not retrieve entire response"
+                                ]
+                            }
+                        }
+                    },
+                    "warnings":{
+                        "type":"array",
+                        "description":"An array containing warning messages.",
+                        "items":{
+                            "type":"string",
+                            "enum":[
+                                "Invalid input",
+                                "Missing input"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,90 @@
+{
+    "product_id": "api_4738a1f3-e7f5-42e7-88b8-5cb09747d855",
+    "tool_description": "The color of the reference picture can be transferred to the original image, and the color transfer of high-definition images can be supported, which can ensure that the color of the portrait part does not change.",
+    "home_url": "https://rapidapi.com/ailabapi-ailabapi-default/api/hd-colour-migration/",
+    "name": "HD Colour migration",
+    "title": "HD Colour migration",
+    "pricing": "FREEMIUM",
+    "tool_name": "HD Colour migration",
+    "score": null,
+    "host": "hd-colour-migration.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "HD Colour migration",
+            "url": "https://hd-colour-migration.p.rapidapi.com/image/enhance/hd_colour_migration",
+            "description": "This interface will monitor whether the processing is completed within a certain period of time, and if the processing is completed the real processing result will be returned directly; conversely, the user needs to use the request_id returned by this interface to call the [Query Asynchronous Task Results](https://rapidapi.com/ailabapi-ailabapi-default/api/hd-colour-migration/) interface to get the real result.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "image",
+                    "type": "BINARY",
+                    "description": "- Image formats: `PNG`, `JPG`, `JPEG`.\n- Image size: no more than 3 MB.\n- Image resolution: greater than 64x64 pixels and less than 10000x10000 pixels.\n- All images must be RGB 3-channel.",
+                    "default": ""
+                },
+                {
+                    "name": "degree",
+                    "type": "STRING",
+                    "description": "Degree of extension. \n-Range\uff1a0~1.",
+                    "default": "0.4"
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "mode",
+                    "type": "ENUM",
+                    "description": "Color extension mode.   \nDefault: `AUTO`.   \n- `AUTO`: Automatic color extension. \n- `TEMPLATE`: Color palette extension. \n- `REF_PIC`: Reference picture extension color.",
+                    "default": ""
+                },
+                {
+                    "name": "color_count",
+                    "type": "ENUM",
+                    "description": "Automatic color extension. Expand the number of shades.  \nDefault\uff1a`1`.\nThis parameter is valid when `mode`: `AUTO`.",
+                    "default": ""
+                },
+                {
+                    "name": "color_template",
+                    "type": "STRING",
+                    "description": "Color palette extension. Top main color list, color value definition ARGB. When there are multiple colors, use `,` to separate. Length: [1, 7]. When `mode`: `TEMPLATE`, this parameter is required and valid.",
+                    "default": ""
+                },
+                {
+                    "name": "ref",
+                    "type": "BINARY",
+                    "description": "Refer to the picture for color extension. When `mode`: `REF_PIC`, this parameter is required and valid.\n- Image formats: `PNG`, `JPG`, `JPEG`.\n- Image size: no more than 3 MB.\n- Image resolution: greater than 64x64 pixels and less than 10000x10000 pixels.\n- All images must be RGB 3-channel.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://hd-colour-migration.p.rapidapi.com/image/enhance/hd_colour_migration\"\nquerystring = {\"image\": \"\", \"mode\": \"\", \"color_count\": \"\", \"degree\": \"0.4\", \"color_template\": \"\", \"ref\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hd-colour-migration.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://hd-colour-migration.p.rapidapi.com/image/enhance/hd_colour_migration\"\nquerystring = {\"image\": \"\", \"mode\": \"\", \"color_count\": \"\", \"degree\": \"0.4\", \"color_template\": \"\", \"ref\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"hd-colour-migration.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "request_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Request ID."
+                },
+                "log_id": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Log ID."
+                },
+                "error_code": {
+                    "type": "integer",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_code_str": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Code."
+                },
+                "error_msg": {
+                    "type": "string",
+                    "required": false,
+                    "description": "Error Message."
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,149 @@
+{
+    "product_id": "api_1c039e4b-837f-4011-a5e8-a61ae94f5fb0",
+    "tool_description": "Filter inputted text content for profanity, offensive and obscenity word base on an internal profanity list. It can also recognize character alternates or special characters often used in place of standard alphabetic characters.",
+    "home_url": "https://rapidapi.com/bw-api-bw-api-default/api/profanity-filter/",
+    "name": "Profanity Filter",
+    "title": "Profanity Filter",
+    "pricing": "FREEMIUM",
+    "tool_name": "Profanity Filter",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 1482,
+        "avgSuccessRate": 93,
+        "popularityScore": 7.6,
+        "__typename": "Score"
+    },
+    "host": "profanity-filter.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Read Text",
+            "url": "https://profanity-filter.p.rapidapi.com/api/v1/filter",
+            "description": "Allows you to detect and filter out profanity / offensive form a given text. It is only available for English words. You can also censor out words in text content.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "check_word",
+                    "type": "STRING",
+                    "description": "Use this parameter to filter text for profanity / offensive word. MAX_LENGTH = `[ 2 .. 700 ] characters`",
+                    "default": "This example text contains no profanity / offensive word."
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "add",
+                    "type": "STRING",
+                    "description": "You can use the optional `add` parameter with a comma separated list of words to be added to the selected `range` profanity list. Accepts `[ 2 .. 250 ] characters` in length).\nThe `add` parameter is case-insensitive, so the case of you entry is not important.",
+                    "default": ""
+                },
+                {
+                    "name": "range",
+                    "type": "ENUM",
+                    "description": "You can use the optional `range` parameter to set the level of filtering range. Default: '`low`'\n`'low'` :  mild database\n`'mid'` : includes all database words in `'low'` database but does not include all `'high'` database of words\n`'high'`: strict large database words which also includes `'low'` and `'mid'` database",
+                    "default": ""
+                },
+                {
+                    "name": "r",
+                    "type": "STRING",
+                    "description": "Censor replacement string - You can use the optional `r` parameter to get output of censor words in `word_filtered` response data. Must be a valid punctuation. MAX_LENGTH `<= 1 character`",
+                    "default": "*"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://profanity-filter.p.rapidapi.com/api/v1/filter\"\nquerystring = {\"add\": \"\", \"range\": \"\", \"r\": \"*\", \"check_word\": \"This example text contains no profanity / offensive word.\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"profanity-filter.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://profanity-filter.p.rapidapi.com/api/v1/filter\"\nquerystring = {\"add\": \"\", \"range\": \"\", \"r\": \"*\", \"check_word\": \"This example text contains no profanity / offensive word.\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"profanity-filter.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "detail": [
+                    {
+                        "loc": [
+                            "query",
+                            "range"
+                        ],
+                        "msg": "value is not a valid enumeration member; permitted: 'low', 'mid', 'high'",
+                        "type": "type_error.enum",
+                        "ctx": {
+                            "enum_values": [
+                                "low",
+                                "mid",
+                                "high"
+                            ]
+                        }
+                    },
+                    {
+                        "loc": [
+                            "query",
+                            "add"
+                        ],
+                        "msg": "ensure this value has at least 2 characters",
+                        "type": "value_error.any_str.min_length",
+                        "ctx": {
+                            "limit_value": 2
+                        }
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "total_words_checked": {
+                        "type": "integer"
+                    },
+                    "checked_word": {
+                        "type": "string"
+                    },
+                    "contains_offensive_word": {
+                        "type": "boolean"
+                    },
+                    "censor_replacement_string": {
+                        "type": "string"
+                    },
+                    "filtering_range": {
+                        "type": "string"
+                    },
+                    "profanities": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "total_using_low": {
+                        "type": "integer"
+                    },
+                    "total_using_mid": {
+                        "type": "integer"
+                    },
+                    "total_using_high": {
+                        "type": "integer"
+                    },
+                    "word_filtered": {
+                        "type": "string"
+                    },
+                    "possible_profanities_not_in_low": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "possible_profanities_not_in_mid": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "total_not_in_low": {
+                        "type": "integer"
+                    },
+                    "total_not_in_mid": {
+                        "type": "integer"
+                    },
+                    "possible_offensive": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "standardized_name": "profanity_filter"
+}

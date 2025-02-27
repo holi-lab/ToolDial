@@ -1,0 +1,47 @@
+{
+    "tool_name":"Moderately",
+    "tool_description":"Detect nudity, inappropriate, unwanted, or offensive content in images.",
+    "title":"Moderately",
+    "pricing":"FREEMIUM",
+    "score":null,
+    "home_url":"https://rapidapi.com/tumsgis/api/moderately/",
+    "host":"moderately.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Image",
+            "url":"https://moderately.p.rapidapi.com/image",
+            "description":"Send in an image URL and get a list of inappropriate, unwanted, or offensive labels detected for the uploaded image.\nIf no inappropriate content is detected in the image, the response is an empty list.\nWorks for images up of size up to 5MB\n\nProperties scanned for:\n- Explicit Nudity\n- Suggestive (i.e. partial nudity)\n- Violence\n- Visually Disturbing\n- Rude Gestures\n- Drugs\n- Tobacco\n- Alcohol\n- Gambling\n- Hate Symbols",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"url",
+                    "type":"STRING",
+                    "description":"URL of the image to get moderation lables for. Supported formats: JPEG and PNG",
+                    "default":"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Cat_November_2010-1a.jpg/1200px-Cat_November_2010-1a.jpg"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://moderately.p.rapidapi.com/image\"\nquerystring = {\"url\": url}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"moderately.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"array",
+                "items":{
+                    "type":"object",
+                    "properties":{
+                        "confidence":{
+                            "type":"number"
+                        },
+                        "name":{
+                            "type":"string"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

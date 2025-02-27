@@ -1,0 +1,82 @@
+{
+    "tool_name":"eGFR Calculator (Glomerular filtration rate calculator) ",
+    "tool_description":"This API helps calculate eGFR (Estimated Glomerular Filtration Rate) for assessing renal function, utilizing the 2021 CKD-EPI formula. To use, you'll need to input the patient's creatinine level, age, and gender. The creatinine value can be entered in either mg/dL or μmol/L.",
+    "title":"eGFR Calculator (Glomerular filtration rate calculator) ",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":0,
+        "avgLatency":95,
+        "avgSuccessRate":0,
+        "popularityScore":0,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/omlakhanilogin/api/egfr-calculator-glomerular-filtration-rate-calculator/",
+    "host":"egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"eGFR Calculation for Creatinine value in μmol/L",
+            "url":"https://egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com/egfr2",
+            "description":"API documentation for eGFR2 (for Creatinine value in μmol/L)\n\n\n\n\nIntroduction\n\n\nThis API provides a way to calculate the Estimated Glomerular Filtration Rate (eGFR) for assessing renal function using the 2021 CKD-EPI formula. The eGFR is a measure of the kidney's ability to filter waste from the blood, and is an important indicator of renal health.\nEndpoint\n\nThe API endpoint for the eGFR calculation is:\n\n\nhttps://api.algomed.in/egfr2\n\n\nInput\n\nThe API requires the following input parameters to be passed in the request body as a JSON object:\n* creatinine (float): The patient's creatinine level, in μmol/L. \n* age (integer): The patient's age, in years.\n* Female (boolean): Is the patient a female, True or false.\n\n\nInput example:\n\nHere is an example for an input request \n\nhttps://api.algomed.in/egfr1?creat=100.0&female=true&age=50\n\nHere the creatinine  is 100.0 μmol/L, The gender is female (Female = true) and age of the patient is 50 years. \n\ncurl -X 'GET' \\\n  'https://api.algomed.in/egfr1?creat=1.2&female=true&age=50' \\\n  -H 'accept: application/json'\n\n\nOutput\nThe API returns a JSON object with the following structure:\n\n{\n  \"egfr\": 59, ==>  The calculated eGFR value\n  \"units\": \"mL/min/1.73m2\",  ==> The units for the same\n  \"CKD category\": \"G3a\", ==> CKD category based on current guidelines \n  \"details\": \"This falls in category of mildly to moderately decreased eGFR\" ==> Information about the CKD category\n}\n\n\n\nExample\nHere is an example of a request to the API endpoint:\n\nGET https://api.algomed.in/egfr1?creat=100.0&female=true&age=50\n\nAnd the corresponding response from the API:\n\n{\n  \"egfr\": 59,\n  \"units\": \"mL/min/1.73m2\",\n  \"CKD category\": \"G3a\",\n  \"details\": \"This falls in category of mildly to moderately decreased eGFR\"\n}\n\n\nError Codes\nIn case of any errors, the API returns a JSON object with the following structure:\n* error: A string indicating the error that occurred.\n* message: A detailed error message.\nNotes\n* The creatinine value must be entered in μmol/L.\n* The API only accepts requests with the 'application/json' content type.\n* The API returns a 500 Internal Server Error response in case of any internal errors.\nDisclaimer\nThis API is provided for informational purposes only and is not intended to be used for medical advice, diagnosis, or treatment. The results of the eGFR calculation should always be interpreted in the context of a comprehensive medical evaluation by a qualified healthcare professional.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"female",
+                    "type":"BOOLEAN",
+                    "description":"",
+                    "default":"true"
+                },
+                {
+                    "name":"creatmicromol",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"100.0"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"age",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"50"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com/egfr2\"\nquerystring = {\"age\": age, \"female\": female, \"creatmicromol\": creatmicromol}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"eGFR Calculation for Creatinine value in mg/dl",
+            "url":"https://egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com/egfr1",
+            "description":"API documentation for eGFR1 (for Creatinine value in mg/dl)\n\n\nAPI Documentation: eGFR Calculator API\n\nIntroduction\n\n\nThis API provides a way to calculate the Estimated Glomerular Filtration Rate (eGFR) for assessing renal function using the 2021 CKD-EPI formula. The eGFR is a measure of the kidney's ability to filter waste from the blood, and is an important indicator of renal health.\nEndpoint\n\nThe API endpoint for the eGFR calculation is:\n\n\nhttps://api.algomed.in/egfr1\n\n\nInput\n\nThe API requires the following input parameters to be passed in the request body as a JSON object:\n* creatinine (float): The patient's creatinine level, in mg/dL. \n* age (integer): The patient's age, in years.\n* Female (boolean): Is the patient a female, True or false.\n\n\nInput example:\n\nHere is an example for an input request \n\nhttps://api.algomed.in/egfr1?creat=1.2&female=true&age=50\n\nHere the creatinine  is 1.2 mg/dl, The gender is female (Female = true) and age of the patient is 50 years. \n\ncurl -X 'GET' \\\n  'https://api.algomed.in/egfr1?creat=1.2&female=true&age=50' \\\n  -H 'accept: application/json'\n\n\nOutput\nThe API returns a JSON object with the following structure:\n\n{\n  \"egfr\": 55, ==>  The calculated eGFR value\n  \"units\": \"mL/min/1.73m2\",  ==> The units for the same\n  \"CKD category\": \"G3a\", ==> CKD category based on current guidelines \n  \"details\": \"This falls in category of mildly to moderately decreased eGFR\" ==> Information about the CKD category\n}\n\n\n\nExample\nHere is an example of a request to the API endpoint:\n\nGET https://api.algomed.in/egfr1?creat=1.2&female=true&age=50\n\nAnd the corresponding response from the API:\n\n{\n  \"egfr\": 55,\n  \"units\": \"mL/min/1.73m2\",\n  \"CKD category\": \"G3a\",\n  \"details\": \"This falls in category of mildly to moderately decreased eGFR\"\n}\n\n\nError Codes\nIn case of any errors, the API returns a JSON object with the following structure:\n* error: A string indicating the error that occurred.\n* message: A detailed error message.\nNotes\n* The creatinine value must be entered in mg/dL.\n* The API only accepts requests with the 'application/json' content type.\n* The API returns a 500 Internal Server Error response in case of any internal errors.\nDisclaimer\nThis API is provided for informational purposes only and is not intended to be used for medical advice, diagnosis, or treatment. The results of the eGFR calculation should always be interpreted in the context of a comprehensive medical evaluation by a qualified healthcare professional.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"age",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"50"
+                },
+                {
+                    "name":"creat",
+                    "type":"NUMBER",
+                    "description":"",
+                    "default":"1.2"
+                },
+                {
+                    "name":"female",
+                    "type":"BOOLEAN",
+                    "description":"",
+                    "default":"true"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com/egfr1\"\nquerystring = {\"age\": age, \"creat\": creat, \"female\": female}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"egfr-calculator-glomerular-filtration-rate-calculator.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

@@ -1,0 +1,389 @@
+{
+    "tool_name":"Ultimate Tennis",
+    "tool_description":" Welcome to the Ultimate Tennis API!  It provides all the information you need about the tennis world, including all the details related to players and tournaments(live scores, matches, statistics), from both the ATP and tha WTA circuits, both singles and doubles . We also provide live bettings odds for every match in every tennis category. You can easily build your tennis related portal or enhance your Ml/AI projects.   ",
+    "title":"Ultimate Tennis",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":734,
+        "avgSuccessRate":100,
+        "popularityScore":9.9,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/cantagalloedoardo/api/ultimate-tennis1/",
+    "host":"ultimate-tennis1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Official ATP Players Rankings",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/rankings/atp/{category}/{n_players}/{timestamp}",
+            "description":"This endpoint allows you to retrieve the rankings(**singles**+ **doubles**) of the current tennis season. You can arbitrarily decide the number of players displayed (nplayers) and the time window to refer to (timestamp).\n\nFor example, if nplayers = 10,  category= \"singles\" and timestamp = 2022-04-11 you will receive the top 10 singles standings at the corresponding timestamp (**IMPORTANT**: The timestamp must be in the following format **YYYY-MM-DD** and the date **must fall on Monday** since the rankings are updated at the start of every week)",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"timestamp",
+                    "type":"string",
+                    "description":"Time window\n\n**IMPORTANT**: The timestamp must be in the following format **YYYY-MM-DD** and the date **must fall on Monday** since the rankings are updated at the start of every week",
+                    "default":"current"
+                },
+                {
+                    "name":"n_players",
+                    "type":"string",
+                    "description":"",
+                    "default":"50"
+                },
+                {
+                    "name":"category",
+                    "type":"string",
+                    "description":"singles or doubles",
+                    "default":"singles"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/rankings/atp/{category}/{n_players}/{timestamp}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Live Players Rankings",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/live_leaderboard/{n_player}",
+            "description":"With this endpoint, you can retrieve info about the live tennis rankings for a given number of players, with position/points/info about the last match played in the current active tournament. Please note that in the ATP circuit the official leaderboard is updated every Monday.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"n_player",
+                    "type":"string",
+                    "description":"Max: 500.  Please provide just an Integer",
+                    "default":"50"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/live_leaderboard/{n_player}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"ATP Player Stats by ID",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/player_stats/atp/{player_id}/{year}/{surface}",
+            "description":"Via this endpoint you can retrieve official updated statistics for a given ATPplayer. Values are updated after every played match. ID can be retrieved from the Official ATP Players Rankings endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"string",
+                    "description":"Specify a year",
+                    "default":"2023"
+                },
+                {
+                    "name":"surface",
+                    "type":"string",
+                    "description":"Valid options are: clay, grass, hard, all.",
+                    "default":"all"
+                },
+                {
+                    "name":"player_id",
+                    "type":"string",
+                    "description":"ID can be retrieved from the Official ATP Players Rankings endpoint.",
+                    "default":"su87"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/player_stats/atp/{player_id}/{year}/{surface}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Player Info By ID",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/wta/player_info/{player_id}",
+            "description":"This endpoint provides YTD and Career details for a selected player. You can obtain the Player ID from the WTA Rankings endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"player_id",
+                    "type":"string",
+                    "description":"Player ID",
+                    "default":"317306"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/wta/player_info/{player_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Player Stats by ID and Year",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/player_stats/wta/{player_id}/{year}",
+            "description":"Via this endpoint you can retrieve official updated statistics for a given WTA player. Values are updated after every played match. ID can be retrieved from the Official WTA Players Rankings endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"player_id",
+                    "type":"string",
+                    "description":"ID can be retrieved from the Official WTA Players Rankings endpoint.",
+                    "default":"326408"
+                },
+                {
+                    "name":"year",
+                    "type":"string",
+                    "description":"Just pass the year (e.g. 2022, 2021 ecc..)",
+                    "default":"2022"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/player_stats/wta/{player_id}/{year}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Official WTA Players Rankings",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/rankings/wta/{category}/{n_players}/{timestamp}",
+            "description":"This endpoint allows you to retrieve the rankings(**singles**+ **doubles**) of the current tennis season. You can arbitrarily decide the number of players displayed (nplayers) and the time window to refer to (timestamp).\n\nFor example, if nplayers = 10,  category= \"singles\" and timestamp = 2022-04-11 you will receive the top 10 singles standings at the corresponding timestamp (**IMPORTANT**: The timestamp must be in the following format **YYYY-MM-DD** )",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"n_players",
+                    "type":"string",
+                    "description":"",
+                    "default":"50"
+                },
+                {
+                    "name":"timestamp",
+                    "type":"string",
+                    "description":"Time window\n\n**IMPORTANT**: The timestamp must be in the following format **YYYY-MM-DD** ",
+                    "default":"current"
+                },
+                {
+                    "name":"category",
+                    "type":"string",
+                    "description":"",
+                    "default":"singles"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/rankings/wta/{category}/{n_players}/{timestamp}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Tournament Results by ID and Year WTA",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/tournament_results/wta/{tournament_id}/{year}",
+            "description":"Via this endpoint, you can retrieve all the matches played in the selected tournament, in a given year. The results are added instantly for every match that ends. You can Retrieve the list of the IDs from the tournament list WTA endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"Year to be selected. Please note that not all the tournaments have been played every year.",
+                    "default":"2022"
+                },
+                {
+                    "name":"tournament_id",
+                    "type":"string",
+                    "description":"You can Retrieve the list of the IDs from the tournament list WTA endpoint.",
+                    "default":"709"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/tournament_results/wta/{tournament_id}/{year}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Tournament List WTA",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/tournament_list/wta/{year}",
+            "description":"Via this endpoint, you can retrieve the list of all tournaments to be played in a selected year (from *1960* to *2022*).  We return some basic info about every row such as tournament venue, surface, prizemoney, etc. Results by Id and Year** endpoint",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"string",
+                    "description":"year must fall between 1960 and 2022",
+                    "default":"2022"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/tournament_list/wta/{year}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Tournament List",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/tournament_list/atp/{year}/{category}",
+            "description":"Via this endpoint, you can retrieve the list of all tournaments to be played in a selected year.  We return some basic info about every row such as tournament venue, surface, winners, etc. If you want to have all the details regarding the matches played in a single tournament you can use the **Tournament Results by Id and Year** endpoint",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"category",
+                    "type":"string",
+                    "description":"Options:\n\n- **atpgs**: Atp tournaments + grand Slams\n\n- **atp**: Atp circuit\n\n- **gs**: grand slams\n\n- **1000**: Masters 1000\n\n- **ch**: Challenger Circuit",
+                    "default":"atpgs"
+                },
+                {
+                    "name":"year",
+                    "type":"string",
+                    "description":"",
+                    "default":"2022"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/tournament_list/atp/{year}/{category}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Live Matches Stats",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/match_details/{match_id}",
+            "description":"You can retrieve all te details related to a single match such as Aces, Break points, First Serve %, first serve returns, second serves, ecc..",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"match_id",
+                    "type":"string",
+                    "description":"Id identying the single match. It can be retrieved from the Live Scores with Live Betting Odds endpoint.",
+                    "default":"10319698"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"10319698",
+                    "type":"STRING",
+                    "description":"",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/match_details/{match_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Live Scores with Live Betting Odds",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/live_scores",
+            "description":"This endpoint provides info about all the live matches from ATP + WTA. It includes live and prematch odds.",
+            "method":"GET",
+            "required_parameters":[],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/live_scores\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Global Players Statistics",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/global_players_stats/{category}/{season}/{surface}",
+            "description":"This endpoint allows you to retrieve global statistics about tennis players. You can customize the statistic (aces, breakpoints converted, 1st serve points won...), the season (all, 2022, 2021...), or the surface(clay, hard, grass).\nYou can find the list of available options under every parameter.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"season",
+                    "type":"string",
+                    "description":"Select season to select. Just pass the year:\nall- all time rankings\n\nThe first year supported is 1991.",
+                    "default":"all"
+                },
+                {
+                    "name":"category",
+                    "type":"string",
+                    "description":"Available options are: **aces**, **1stserve**, **returngameswon**, **breakpointsconverted**, **returnpointswon2ndserve**, **returnpointswon2ndserve**, **returnpointswon1stserve**, **1stservepointswon**, **2ndservepointswon**, **servicegameswon**, **breakpointsaved**\n",
+                    "default":"aces"
+                },
+                {
+                    "name":"surface",
+                    "type":"string",
+                    "description":"**clay**, **grass**or **hard**. Otherwise, just leave **all**to select all surfaces.",
+                    "default":"all"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/global_players_stats/{category}/{season}/{surface}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Tournament Results by ID and Year",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/tournament_results/{tournament_id}/{year}",
+            "description":"Via this endpoint, you can retrieve all the matches played in the selected tournament, in a given year. The results are added instantly for every match that ends. You can Retrieve the list of the IDs from the tournament_list endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"year",
+                    "type":"NUMBER",
+                    "description":"Year to be selected. Please note that not all the tournaments have been played every year.",
+                    "default":"2022"
+                },
+                {
+                    "name":"tournament_id",
+                    "type":"NUMBER",
+                    "description":"You can Retrieve the list of the IDs from the tournament_list endpoint.",
+                    "default":"416"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/tournament_results/{tournament_id}/{year}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Player Ranking History by ID",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/ranking_history/{player_id}",
+            "description":"You can access all the history of the rankings for a selected player. ID **must** be provided, you can retrieve a player ID from the Players Rankings endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"player_id",
+                    "type":"string",
+                    "description":"Id of the player. A list of the IDs can be retrieved from the Players Rankings endpoint.",
+                    "default":"m0ej"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/ranking_history/{player_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Player Details by ID",
+            "url":"https://ultimate-tennis1.p.rapidapi.com/player_info/{player_id}",
+            "description":"This endpoint allows you to retrieve specific details about a single player. ID **must** be provided, you can retrieve a player ID from the Players Rankings endpoint.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"player_id",
+                    "type":"string",
+                    "description":"Id of the player. A list of the IDs can be retrieved from the Players Rankings endpoint.",
+                    "default":"m0ej"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://ultimate-tennis1.p.rapidapi.com/player_info/{player_id}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"ultimate-tennis1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

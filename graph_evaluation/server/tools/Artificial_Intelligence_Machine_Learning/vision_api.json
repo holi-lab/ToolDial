@@ -1,0 +1,2276 @@
+{
+    "product_id": "api_19902e8f-ddd2-4e9e-9b55-4b31d209abe3",
+    "tool_description": "The Wizart Vision API offers powerful photo analysis capabilities for home interiors, providing comprehensive data for windows, doors, walls, ceiling, floor, and more. Access detailed information on individual surfaces or obtain a holistic overview of the entire interior in one request.",
+    "home_url": "https://rapidapi.com/wizart-ai-wizart-ai-default/api/vision-api/",
+    "name": "Vision API",
+    "title": "Vision API",
+    "pricing": "FREEMIUM",
+    "tool_name": "Vision API",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 2044,
+        "avgSuccessRate": 99,
+        "popularityScore": 9.4,
+        "__typename": "Score"
+    },
+    "host": "vision-api.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "/segmentation/floor",
+            "url": "https://vision-api.p.rapidapi.com/segmentation/floor",
+            "description": "Get a binary floor mask represented as an image encoded as a base64 string in the normal case. Or vectorized_mask as a list of (x, y) points if vectorized is set to true in the query options. These points describe a polygon around a binary mask from a regular query. Convenient if the server response size is painful for you.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                },
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/floor\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/floor\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "mask": {
+                        "format": "base64",
+                        "type": "string"
+                    },
+                    "vectorized_mask": {
+                        "properties": {
+                            "contours": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            },
+                            "hierarchy": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/analysis",
+            "url": "https://vision-api.p.rapidapi.com/analysis",
+            "description": "Get analysis data that contains all the information that was extracted for the uploaded photo. Includes virtual camera settings and photo quality data.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/analysis\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/analysis\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "camera": {
+                        "properties": {
+                            "fov": {
+                                "default": 65.3,
+                                "type": "number"
+                            },
+                            "height": {
+                                "default": 1.53,
+                                "type": "number"
+                            },
+                            "pitch": {
+                                "default": -0.11,
+                                "type": "number"
+                            },
+                            "roll": {
+                                "default": 0.03,
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "image_info": {
+                        "properties": {
+                            "bad_target_confidence": {
+                                "default": 0.98,
+                                "type": "number"
+                            },
+                            "blurry_confidence": {
+                                "default": 0.63,
+                                "type": "number"
+                            },
+                            "dark_confidence": {
+                                "default": 0.92,
+                                "type": "number"
+                            },
+                            "noisy_confidence": {
+                                "default": 0.78,
+                                "type": "number"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "interior_type": {
+                        "default": "living room",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/segmentation/windows",
+            "url": "https://vision-api.p.rapidapi.com/segmentation/windows",
+            "description": "Get a binary windows mask represented as an image encoded as a base64 string in the normal case. Or vectorized_mask as a list of (x, y) points if vectorized is set to true in the query options. These points describe a polygon around a binary mask from a regular query. Convenient if the server response size is painful for you.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                },
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/windows\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/windows\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "mask": {
+                        "format": "base64",
+                        "type": "string"
+                    },
+                    "vectorized_mask": {
+                        "properties": {
+                            "contours": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            },
+                            "hierarchy": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/segmentation/walls",
+            "url": "https://vision-api.p.rapidapi.com/segmentation/walls",
+            "description": "Get a binary walls mask represented as an image encoded as a base64 string in the normal case. Or vectorized_mask as a list of (x, y) points if vectorized is set to true in the query options. These points describe a polygon around a binary mask from a regular query. Convenient if the server response size is painful for you.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                },
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/walls\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/walls\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "mask": {
+                        "format": "base64",
+                        "type": "string"
+                    },
+                    "vectorized_mask": {
+                        "properties": {
+                            "contours": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            },
+                            "hierarchy": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/analysis/image-info",
+            "url": "https://vision-api.p.rapidapi.com/analysis/image-info",
+            "description": "Get data about the quality characteristics of the uploaded photo. The data contains information about blur, noise, darkness, and whether the photo is an interior. The closer the value is to one, the more likely it is to belong to the specified category.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/analysis/image-info\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/analysis/image-info\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "bad_target_confidence": {
+                        "default": 0.98,
+                        "type": "number"
+                    },
+                    "blurry_confidence": {
+                        "default": 0.63,
+                        "type": "number"
+                    },
+                    "dark_confidence": {
+                        "default": 0.92,
+                        "type": "number"
+                    },
+                    "noisy_confidence": {
+                        "default": 0.78,
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/segmentation/ceiling",
+            "url": "https://vision-api.p.rapidapi.com/segmentation/ceiling",
+            "description": "Get a binary ceiling mask represented as an image encoded as a base64 string in the normal case. Or vectorized_mask as a list of (x, y) points if vectorized is set to true in the query options. These points describe a polygon around a binary mask from a regular query. Convenient if the server response size is painful for you.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                },
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/ceiling\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation/ceiling\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "mask": {
+                        "format": "base64",
+                        "type": "string"
+                    },
+                    "vectorized_mask": {
+                        "properties": {
+                            "contours": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            },
+                            "hierarchy": {
+                                "items": {
+                                    "items": {
+                                        "items": {
+                                            "description": "**Omitted**"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "type": "array"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/analysis/camera",
+            "url": "https://vision-api.p.rapidapi.com/analysis/camera",
+            "description": "Get a set of camera parameters that correspond to the moment of shooting for the uploaded image. Fov, pitch and roll parameters are represented in radians, height in meters.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/analysis/camera\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/analysis/camera\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "fov": {
+                        "default": 65.3,
+                        "type": "number"
+                    },
+                    "height": {
+                        "default": 1.53,
+                        "type": "number"
+                    },
+                    "pitch": {
+                        "default": -0.11,
+                        "type": "number"
+                    },
+                    "roll": {
+                        "default": 0.03,
+                        "type": "number"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/segmentation",
+            "url": "https://vision-api.p.rapidapi.com/segmentation",
+            "description": "Get a semantic segmentation as an image in RGB format where all colors corresponds to some entities detected on uploaded image. Check this table to determine color/entity bindings.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/segmentation\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "mask": {
+                        "format": "base64",
+                        "type": "string"
+                    },
+                    "vectorized_masks": {
+                        "properties": {
+                            "ceiling": {
+                                "properties": {
+                                    "contours": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "hierarchy": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "floor": {
+                                "properties": {
+                                    "contours": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "hierarchy": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "walls": {
+                                "properties": {
+                                    "contours": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "hierarchy": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/interior/walls",
+            "url": "https://vision-api.p.rapidapi.com/interior/walls",
+            "description": "Get the full set of computer vision artifacts. Includes semantic segmentation, object detection, 3D reconstruction, and camera data for the walls from the uploaded photo.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/walls\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/walls\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "analysis": {
+                        "properties": {
+                            "camera": {
+                                "properties": {
+                                    "fov": {
+                                        "default": 65.3,
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "default": 1.53,
+                                        "type": "number"
+                                    },
+                                    "pitch": {
+                                        "default": -0.11,
+                                        "type": "number"
+                                    },
+                                    "roll": {
+                                        "default": 0.03,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "image_info": {
+                                "properties": {
+                                    "bad_target_confidence": {
+                                        "default": 0.98,
+                                        "type": "number"
+                                    },
+                                    "blurry_confidence": {
+                                        "default": 0.63,
+                                        "type": "number"
+                                    },
+                                    "dark_confidence": {
+                                        "default": 0.92,
+                                        "type": "number"
+                                    },
+                                    "noisy_confidence": {
+                                        "default": 0.78,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "interior_type": {
+                                "default": "living room",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "detection": {
+                        "properties": {
+                            "walls": {
+                                "items": {
+                                    "properties": {
+                                        "cx": {
+                                            "default": 23.78,
+                                            "type": "number"
+                                        },
+                                        "cy": {
+                                            "default": 35.2,
+                                            "type": "number"
+                                        },
+                                        "points": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "default": 0.22,
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "default": 0.23,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "wall_id": {
+                                            "default": 1,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "reconstruction": {
+                        "properties": {
+                            "walls": {
+                                "items": {
+                                    "properties": {
+                                        "area": {
+                                            "default": 12,
+                                            "type": "number"
+                                        },
+                                        "height": {
+                                            "default": 3,
+                                            "type": "number"
+                                        },
+                                        "points": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "default": -2.78,
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "default": -3.234432,
+                                                        "type": "number"
+                                                    },
+                                                    "z": {
+                                                        "default": 1.46,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "wall_id": {
+                                            "default": 0,
+                                            "type": "integer"
+                                        },
+                                        "wall_normal": {
+                                            "properties": {
+                                                "x": {
+                                                    "default": -2.78,
+                                                    "type": "number"
+                                                },
+                                                "y": {
+                                                    "default": -3.234432,
+                                                    "type": "number"
+                                                },
+                                                "z": {
+                                                    "default": 1.46,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "width": {
+                                            "default": 4,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "segmentation": {
+                        "properties": {
+                            "mask": {
+                                "format": "base64",
+                                "type": "string"
+                            },
+                            "vectorized_mask": {
+                                "properties": {
+                                    "contours": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "hierarchy": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/detection/floor",
+            "url": "https://vision-api.p.rapidapi.com/detection/floor",
+            "description": "Get a dataset in the form of x, y coordinates describing the plane of the floor in the uploaded photo. The x, y values are presented as a percentage of the photo size with the origin in the upper left corner. To get the value in px, you need to convert as x * image_width for x axis and y * image_height for y axis.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/floor\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/floor\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "points": {
+                        "items": {
+                            "properties": {
+                                "x": {
+                                    "default": 0.22,
+                                    "type": "number"
+                                },
+                                "y": {
+                                    "default": 0.23,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/interior",
+            "url": "https://vision-api.p.rapidapi.com/interior",
+            "description": "Get the full set of computer vision artifacts. Includes semantic segmentation, object detection, 3D reconstruction, and camera data for all recognizable objects from the uploaded photo.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                },
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "analysis": {
+                        "properties": {
+                            "camera": {
+                                "properties": {
+                                    "fov": {
+                                        "default": 65.3,
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "default": 1.53,
+                                        "type": "number"
+                                    },
+                                    "pitch": {
+                                        "default": -0.11,
+                                        "type": "number"
+                                    },
+                                    "roll": {
+                                        "default": 0.03,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "image_info": {
+                                "properties": {
+                                    "bad_target_confidence": {
+                                        "default": 0.98,
+                                        "type": "number"
+                                    },
+                                    "blurry_confidence": {
+                                        "default": 0.63,
+                                        "type": "number"
+                                    },
+                                    "dark_confidence": {
+                                        "default": 0.92,
+                                        "type": "number"
+                                    },
+                                    "noisy_confidence": {
+                                        "default": 0.78,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "interior_type": {
+                                "default": "living room",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "detection": {
+                        "properties": {
+                            "ceiling": {
+                                "properties": {
+                                    "points": {
+                                        "items": {
+                                            "properties": {
+                                                "x": {
+                                                    "default": 0.22,
+                                                    "type": "number"
+                                                },
+                                                "y": {
+                                                    "default": 0.23,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "floor": {
+                                "properties": {
+                                    "points": {
+                                        "items": {
+                                            "properties": {
+                                                "x": {
+                                                    "default": 0.22,
+                                                    "type": "number"
+                                                },
+                                                "y": {
+                                                    "default": 0.23,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "walls": {
+                                "items": {
+                                    "properties": {
+                                        "cx": {
+                                            "default": 23.78,
+                                            "type": "number"
+                                        },
+                                        "cy": {
+                                            "default": 35.2,
+                                            "type": "number"
+                                        },
+                                        "points": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "default": 0.22,
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "default": 0.23,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "wall_id": {
+                                            "default": 1,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "windows": {
+                                "items": {
+                                    "properties": {
+                                        "points": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "default": 0.22,
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "default": 0.23,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "reconstruction": {
+                        "properties": {
+                            "ceiling": {
+                                "properties": {
+                                    "area": {
+                                        "default": 8,
+                                        "type": "number"
+                                    },
+                                    "points": {
+                                        "items": {
+                                            "properties": {
+                                                "x": {
+                                                    "default": -2.78,
+                                                    "type": "number"
+                                                },
+                                                "y": {
+                                                    "default": -3.234432,
+                                                    "type": "number"
+                                                },
+                                                "z": {
+                                                    "default": 1.46,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "floor": {
+                                "properties": {
+                                    "area": {
+                                        "default": 8,
+                                        "type": "number"
+                                    },
+                                    "points": {
+                                        "items": {
+                                            "properties": {
+                                                "x": {
+                                                    "default": -2.78,
+                                                    "type": "number"
+                                                },
+                                                "y": {
+                                                    "default": -3.234432,
+                                                    "type": "number"
+                                                },
+                                                "z": {
+                                                    "default": 1.46,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "walls": {
+                                "items": {
+                                    "properties": {
+                                        "area": {
+                                            "default": 12,
+                                            "type": "number"
+                                        },
+                                        "height": {
+                                            "default": 3,
+                                            "type": "number"
+                                        },
+                                        "points": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "default": -2.78,
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "default": -3.234432,
+                                                        "type": "number"
+                                                    },
+                                                    "z": {
+                                                        "default": 1.46,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "wall_id": {
+                                            "default": 0,
+                                            "type": "integer"
+                                        },
+                                        "wall_normal": {
+                                            "properties": {
+                                                "x": {
+                                                    "default": -2.78,
+                                                    "type": "number"
+                                                },
+                                                "y": {
+                                                    "default": -3.234432,
+                                                    "type": "number"
+                                                },
+                                                "z": {
+                                                    "default": 1.46,
+                                                    "type": "number"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "width": {
+                                            "default": 4,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "segmentation": {
+                        "properties": {
+                            "mask": {
+                                "format": "base64",
+                                "type": "string"
+                            },
+                            "vectorized_masks": {
+                                "properties": {
+                                    "ceiling": {
+                                        "properties": {
+                                            "contours": {
+                                                "items": {
+                                                    "items": {
+                                                        "items": {
+                                                            "description": "**Omitted**"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "hierarchy": {
+                                                "items": {
+                                                    "items": {
+                                                        "items": {
+                                                            "description": "**Omitted**"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "floor": {
+                                        "properties": {
+                                            "contours": {
+                                                "items": {
+                                                    "items": {
+                                                        "items": {
+                                                            "description": "**Omitted**"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "hierarchy": {
+                                                "items": {
+                                                    "items": {
+                                                        "items": {
+                                                            "description": "**Omitted**"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "walls": {
+                                        "properties": {
+                                            "contours": {
+                                                "items": {
+                                                    "items": {
+                                                        "items": {
+                                                            "description": "**Omitted**"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "hierarchy": {
+                                                "items": {
+                                                    "items": {
+                                                        "items": {
+                                                            "description": "**Omitted**"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "type": "array"
+                                                },
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/detection/walls",
+            "url": "https://vision-api.p.rapidapi.com/detection/walls",
+            "description": "Get a set of wall objects. The points parameter of the wall object is a list of x, y coordinates describing the plane of the wall. The x, y values are presented as a percentage of the photo size with the origin in the upper left corner. To get the value in pixels you need to convert as x * image_width for the x axis and y * image_height for the y axis. Parameters cx, cy are used to describe the center of the detected wall.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/walls\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/walls\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "walls": {
+                        "items": {
+                            "properties": {
+                                "cx": {
+                                    "default": 23.78,
+                                    "type": "number"
+                                },
+                                "cy": {
+                                    "default": 35.2,
+                                    "type": "number"
+                                },
+                                "points": {
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "default": 0.22,
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "default": 0.23,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "wall_id": {
+                                    "default": 1,
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/interior/windows",
+            "url": "https://vision-api.p.rapidapi.com/interior/windows",
+            "description": "Get the full set of computer vision artifacts. Includes semantic segmentation, object detection, 3D reconstruction, and camera data for the windows from the uploaded photo.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/windows\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/windows\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "analysis": {
+                        "properties": {
+                            "camera": {
+                                "properties": {
+                                    "fov": {
+                                        "default": 65.3,
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "default": 1.53,
+                                        "type": "number"
+                                    },
+                                    "pitch": {
+                                        "default": -0.11,
+                                        "type": "number"
+                                    },
+                                    "roll": {
+                                        "default": 0.03,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "image_info": {
+                                "properties": {
+                                    "bad_target_confidence": {
+                                        "default": 0.98,
+                                        "type": "number"
+                                    },
+                                    "blurry_confidence": {
+                                        "default": 0.63,
+                                        "type": "number"
+                                    },
+                                    "dark_confidence": {
+                                        "default": 0.92,
+                                        "type": "number"
+                                    },
+                                    "noisy_confidence": {
+                                        "default": 0.78,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "interior_type": {
+                                "default": "living room",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "detection": {
+                        "properties": {
+                            "windows": {
+                                "items": {
+                                    "properties": {
+                                        "points": {
+                                            "items": {
+                                                "properties": {
+                                                    "x": {
+                                                        "default": 0.22,
+                                                        "type": "number"
+                                                    },
+                                                    "y": {
+                                                        "default": 0.23,
+                                                        "type": "number"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "segmentation": {
+                        "format": "base64",
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/detection/windows",
+            "url": "https://vision-api.p.rapidapi.com/detection/windows",
+            "description": "Get a set of wall objects. The points parameter of the wall object is a list of x, y coordinates describing the plane of the wall. The x, y values are presented as a percentage of the photo size with the origin in the upper left corner. To get the value in pixels you need to convert as x * image_width for the x axis and y * image_height for the y axis. Parameters cx, cy are used to describe the center of the detected wall.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/windows\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/windows\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "windows": {
+                        "items": {
+                            "properties": {
+                                "points": {
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "default": 0.22,
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "default": 0.23,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/detection/ceiling",
+            "url": "https://vision-api.p.rapidapi.com/detection/ceiling",
+            "description": "Get a dataset in the form of x, y coordinates describing the plane of the ceiling in the uploaded photo. The x, y values are presented as a percentage of the photo size with the origin in the upper left corner. To get the value in px, you need to convert as x * image_width for x axis and y * image_height for y axis.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/ceiling\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection/ceiling\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "points": {
+                        "items": {
+                            "properties": {
+                                "x": {
+                                    "default": 0.22,
+                                    "type": "number"
+                                },
+                                "y": {
+                                    "default": 0.23,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/detection",
+            "url": "https://vision-api.p.rapidapi.com/detection",
+            "description": "Get a set of detected interior surfaces such as floor, ceiling, walls. The response is presented in the right-handed coordinate system.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/detection\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "ceiling": {
+                        "properties": {
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": 0.22,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": 0.23,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "floor": {
+                        "properties": {
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": 0.22,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": 0.23,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "walls": {
+                        "items": {
+                            "properties": {
+                                "cx": {
+                                    "default": 23.78,
+                                    "type": "number"
+                                },
+                                "cy": {
+                                    "default": 35.2,
+                                    "type": "number"
+                                },
+                                "points": {
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "default": 0.22,
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "default": 0.23,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "wall_id": {
+                                    "default": 1,
+                                    "type": "integer"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    },
+                    "windows": {
+                        "items": {
+                            "properties": {
+                                "points": {
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "default": 0.22,
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "default": 0.23,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/interior/floor",
+            "url": "https://vision-api.p.rapidapi.com/interior/floor",
+            "description": "Get the full set of computer vision artifacts. Includes semantic segmentation, object detection, 3D reconstruction, and camera data for the floor from the uploaded photo.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                },
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/floor\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/floor\"\nquerystring = {\"vectorized\": false, \"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "analysis": {
+                        "properties": {
+                            "camera": {
+                                "properties": {
+                                    "fov": {
+                                        "default": 65.3,
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "default": 1.53,
+                                        "type": "number"
+                                    },
+                                    "pitch": {
+                                        "default": -0.11,
+                                        "type": "number"
+                                    },
+                                    "roll": {
+                                        "default": 0.03,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "image_info": {
+                                "properties": {
+                                    "bad_target_confidence": {
+                                        "default": 0.98,
+                                        "type": "number"
+                                    },
+                                    "blurry_confidence": {
+                                        "default": 0.63,
+                                        "type": "number"
+                                    },
+                                    "dark_confidence": {
+                                        "default": 0.92,
+                                        "type": "number"
+                                    },
+                                    "noisy_confidence": {
+                                        "default": 0.78,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "interior_type": {
+                                "default": "living room",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "detection": {
+                        "properties": {
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": 0.22,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": 0.23,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "reconstruction": {
+                        "properties": {
+                            "area": {
+                                "default": 8,
+                                "type": "number"
+                            },
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": -2.78,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": -3.234432,
+                                            "type": "number"
+                                        },
+                                        "z": {
+                                            "default": 1.46,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "segmentation": {
+                        "properties": {
+                            "mask": {
+                                "format": "base64",
+                                "type": "string"
+                            },
+                            "vectorized_mask": {
+                                "properties": {
+                                    "contours": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "hierarchy": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/interior/ceiling",
+            "url": "https://vision-api.p.rapidapi.com/interior/ceiling",
+            "description": "Get the full set of computer vision artifacts. Includes semantic segmentation, object detection, 3D reconstruction, and camera data for the ceiling from the uploaded photo.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                },
+                {
+                    "name": "vectorized",
+                    "type": "BOOLEAN",
+                    "description": "",
+                    "default": false
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/ceiling\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/interior/ceiling\"\nquerystring = {\"room_image\": \"\", \"vectorized\": false}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "analysis": {
+                        "properties": {
+                            "camera": {
+                                "properties": {
+                                    "fov": {
+                                        "default": 65.3,
+                                        "type": "number"
+                                    },
+                                    "height": {
+                                        "default": 1.53,
+                                        "type": "number"
+                                    },
+                                    "pitch": {
+                                        "default": -0.11,
+                                        "type": "number"
+                                    },
+                                    "roll": {
+                                        "default": 0.03,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "image_info": {
+                                "properties": {
+                                    "bad_target_confidence": {
+                                        "default": 0.98,
+                                        "type": "number"
+                                    },
+                                    "blurry_confidence": {
+                                        "default": 0.63,
+                                        "type": "number"
+                                    },
+                                    "dark_confidence": {
+                                        "default": 0.92,
+                                        "type": "number"
+                                    },
+                                    "noisy_confidence": {
+                                        "default": 0.78,
+                                        "type": "number"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "interior_type": {
+                                "default": "living room",
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "detection": {
+                        "properties": {
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": 0.22,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": 0.23,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "reconstruction": {
+                        "properties": {
+                            "area": {
+                                "default": 8,
+                                "type": "number"
+                            },
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": -2.78,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": -3.234432,
+                                            "type": "number"
+                                        },
+                                        "z": {
+                                            "default": 1.46,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "segmentation": {
+                        "properties": {
+                            "mask": {
+                                "format": "base64",
+                                "type": "string"
+                            },
+                            "vectorized_mask": {
+                                "properties": {
+                                    "contours": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "hierarchy": {
+                                        "items": {
+                                            "items": {
+                                                "items": {
+                                                    "description": "**Omitted**"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/reconstruction/ceiling",
+            "url": "https://vision-api.p.rapidapi.com/reconstruction/ceiling",
+            "description": "Obtain a 3D reconstruction of the ceiling surface. The data includes an area property calculated in square meters and a list of 3D coordinates that characterize the surface of the ceiling.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction/ceiling\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction/ceiling\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "area": {
+                        "default": 8,
+                        "type": "number"
+                    },
+                    "points": {
+                        "items": {
+                            "properties": {
+                                "x": {
+                                    "default": -2.78,
+                                    "type": "number"
+                                },
+                                "y": {
+                                    "default": -3.234432,
+                                    "type": "number"
+                                },
+                                "z": {
+                                    "default": 1.46,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/reconstruction/walls",
+            "url": "https://vision-api.p.rapidapi.com/reconstruction/walls",
+            "description": "Get a 3D reconstruction of the wall as a set of wall objects. The wall object includes width and height properties calculated in a meters. The wall normal vector, taking into account the origin of the coordinate system at the camera position. The 3d points list belonging to the wall, where the x, y, z coordinates are in meters.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction/walls\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction/walls\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "walls": {
+                        "items": {
+                            "properties": {
+                                "area": {
+                                    "default": 12,
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "default": 3,
+                                    "type": "number"
+                                },
+                                "points": {
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "default": -2.78,
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "default": -3.234432,
+                                                "type": "number"
+                                            },
+                                            "z": {
+                                                "default": 1.46,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "wall_id": {
+                                    "default": 0,
+                                    "type": "integer"
+                                },
+                                "wall_normal": {
+                                    "properties": {
+                                        "x": {
+                                            "default": -2.78,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": -3.234432,
+                                            "type": "number"
+                                        },
+                                        "z": {
+                                            "default": 1.46,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "width": {
+                                    "default": 4,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/reconstruction",
+            "url": "https://vision-api.p.rapidapi.com/reconstruction",
+            "description": "Obtain a 3D reconstruction of all detected surfaces from uploaded photo. The response is presented in the right-handed coordinate system.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "ceiling": {
+                        "properties": {
+                            "area": {
+                                "default": 8,
+                                "type": "number"
+                            },
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": -2.78,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": -3.234432,
+                                            "type": "number"
+                                        },
+                                        "z": {
+                                            "default": 1.46,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "floor": {
+                        "properties": {
+                            "area": {
+                                "default": 8,
+                                "type": "number"
+                            },
+                            "points": {
+                                "items": {
+                                    "properties": {
+                                        "x": {
+                                            "default": -2.78,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": -3.234432,
+                                            "type": "number"
+                                        },
+                                        "z": {
+                                            "default": 1.46,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "walls": {
+                        "items": {
+                            "properties": {
+                                "area": {
+                                    "default": 12,
+                                    "type": "number"
+                                },
+                                "height": {
+                                    "default": 3,
+                                    "type": "number"
+                                },
+                                "points": {
+                                    "items": {
+                                        "properties": {
+                                            "x": {
+                                                "default": -2.78,
+                                                "type": "number"
+                                            },
+                                            "y": {
+                                                "default": -3.234432,
+                                                "type": "number"
+                                            },
+                                            "z": {
+                                                "default": 1.46,
+                                                "type": "number"
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "wall_id": {
+                                    "default": 0,
+                                    "type": "integer"
+                                },
+                                "wall_normal": {
+                                    "properties": {
+                                        "x": {
+                                            "default": -2.78,
+                                            "type": "number"
+                                        },
+                                        "y": {
+                                            "default": -3.234432,
+                                            "type": "number"
+                                        },
+                                        "z": {
+                                            "default": 1.46,
+                                            "type": "number"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "width": {
+                                    "default": 4,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        {
+            "name": "/reconstruction/floor",
+            "url": "https://vision-api.p.rapidapi.com/reconstruction/floor",
+            "description": "Obtain a 3D reconstruction of the floor surface. The data includes an area property calculated in square meters and a list of 3D coordinates that characterize the surface of the floor.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [
+                {
+                    "name": "room_image",
+                    "type": "BINARY",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction/floor\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://vision-api.p.rapidapi.com/reconstruction/floor\"\nquerystring = {\"room_image\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"vision-api.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "properties": {
+                    "area": {
+                        "default": 8,
+                        "type": "number"
+                    },
+                    "points": {
+                        "items": {
+                            "properties": {
+                                "x": {
+                                    "default": -2.78,
+                                    "type": "number"
+                                },
+                                "y": {
+                                    "default": -3.234432,
+                                    "type": "number"
+                                },
+                                "z": {
+                                    "default": 1.46,
+                                    "type": "number"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ]
+}

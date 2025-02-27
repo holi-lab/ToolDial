@@ -1,0 +1,225 @@
+{
+    "tool_name":"Cameroon",
+    "tool_description":"The Cameroon API provides endpoints to lookup locations, find facilities and perform geospatial operations such as distance calculation and directions between two locations in Cameroon.",
+    "title":"Cameroon",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":74,
+        "avgLatency":1750,
+        "avgSuccessRate":73,
+        "popularityScore":9.3,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/dakidarts-dakidarts-default/api/cameroon1/",
+    "host":"cameroon1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Measure Distance Reverse",
+            "url":"https://cameroon1.p.rapidapi.com/reverse_distance",
+            "description":"This endpoint calculates the distance between two addresses in Cameroon.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"stop_address",
+                    "type":"STRING",
+                    "description":"The destination address for which the distance needs to be calculated",
+                    "default":"Bonamoussadi, Douala"
+                },
+                {
+                    "name":"start_address",
+                    "type":"STRING",
+                    "description":"The starting address for which the distance needs to be calculated.",
+                    "default":"Molyko, Buea"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"unit",
+                    "type":"STRING",
+                    "description":"Unit of distance measurement, valid options are **km** (default), **mi**, **ft**, and **yd**.\n",
+                    "default":"km"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://cameroon1.p.rapidapi.com/reverse_distance\"\nquerystring = {\"unit\": unit, \"stop_address\": stop_address, \"start_address\": start_address}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cameroon1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Measure Distance",
+            "url":"https://cameroon1.p.rapidapi.com/distance",
+            "description":"This endpoint calculates the distance between two locations based on their latitude and longitude coordinates, while allowing the user to specify the unit of measurement.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lon2",
+                    "type":"NUMBER",
+                    "description":"Longitude of the second location (required)",
+                    "default":"11.50293"
+                },
+                {
+                    "name":"lat2",
+                    "type":"NUMBER",
+                    "description":"Latitude of the second location (required)",
+                    "default":"3.84803"
+                },
+                {
+                    "name":"lat1",
+                    "type":"NUMBER",
+                    "description":"Latitude of the first location (required)",
+                    "default":"4.05048"
+                },
+                {
+                    "name":"lon1",
+                    "type":"NUMBER",
+                    "description":"Longitude of the first location (required)",
+                    "default":"9.70428"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"unit",
+                    "type":"STRING",
+                    "description":"Unit of distance measurement, valid options are **km** (default), **mi**, **ft**, and **yd**.\n",
+                    "default":"km"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://cameroon1.p.rapidapi.com/distance\"\nquerystring = {\"lon2\": lon2, \"unit\": unit, \"lat2\": lat2, \"lat1\": lat1, \"lon1\": lon1}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cameroon1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Reverse Geocode",
+            "url":"https://cameroon1.p.rapidapi.com/georev",
+            "description":"This endpoint allows you to perform reverse geocoding in Cameroon by providing query parameters for latitude and longitude. It returns the name of the city where the location is located.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"lat",
+                    "type":"STRING",
+                    "description":"The latitude of the location.",
+                    "default":"4.1591154"
+                },
+                {
+                    "name":"lon",
+                    "type":"STRING",
+                    "description":"The longitude of the location.",
+                    "default":"9.2805172"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://cameroon1.p.rapidapi.com/georev\"\nquerystring = {\"lat\": lat, \"lon\": lon}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cameroon1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Facilities Lookup",
+            "url":"https://cameroon1.p.rapidapi.com/facility",
+            "description":"This endpoint allows you to get facilities in Cameroon like hospital, bank, college, etc. by providing optional query parameters for facility type, region and city. It returns a list of facilities that match the query parameters.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"type",
+                    "type":"STRING",
+                    "description":"The type of amenity facility to search for (default: **hospital**)\nOptions:\n**aerodrome, bar, cafe, fast_food, pub, restaurant, college, driving_school, school, university, bank, atm, pharmacy,** etc..        \n\n[More options->](https://wiki.openstreetmap.org/wiki/Map_features#Amenity)",
+                    "default":"hospital"
+                },
+                {
+                    "name":"region",
+                    "type":"STRING",
+                    "description":"The region where the facility is located",
+                    "default":"littoral"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"city",
+                    "type":"STRING",
+                    "description":"The city where the facility is located",
+                    "default":"douala"
+                },
+                {
+                    "name":"limit",
+                    "type":"NUMBER",
+                    "description":"The number of facilities to query.",
+                    "default":"10"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://cameroon1.p.rapidapi.com/facility\"\nquerystring = {\"type\": type, \"city\": city, \"limit\": limit, \"region\": region}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cameroon1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Geocode",
+            "url":"https://cameroon1.p.rapidapi.com/geofy",
+            "description":"This endpoint allows you to lookup locations in Cameroon by providing an address query parameter. It returns the latitude, longitude and city name of the location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"address",
+                    "type":"STRING",
+                    "description":"Name of address",
+                    "default":"Molyko Buea"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://cameroon1.p.rapidapi.com/geofy\"\nquerystring = {\"address\": address}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cameroon1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Directions Between 2 Locations",
+            "url":"https://cameroon1.p.rapidapi.com/directions",
+            "description":"This endpoint returns information about the route between two locations in terms of distance, duration, and steps.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"end_lat",
+                    "type":"NUMBER",
+                    "description":"Latitude of the ending point (required)",
+                    "default":"3.87598"
+                },
+                {
+                    "name":"end_lon",
+                    "type":"NUMBER",
+                    "description":"Longitude of the ending point (required)",
+                    "default":"11.51148"
+                },
+                {
+                    "name":"start_lat",
+                    "type":"NUMBER",
+                    "description":"Latitude of the starting point (required)",
+                    "default":"4.03966"
+                },
+                {
+                    "name":"start_lon",
+                    "type":"NUMBER",
+                    "description":"Longitude of the starting point (required)",
+                    "default":"9.69295"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"distance_unit",
+                    "type":"STRING",
+                    "description":"Unit of distance measurement, valid options are **km** (default), and **mi**.",
+                    "default":"km"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://cameroon1.p.rapidapi.com/directions\"\nquerystring = {\"distance_unit\": distance_unit, \"end_lat\": end_lat, \"end_lon\": end_lon, \"start_lat\": start_lat, \"start_lon\": start_lon}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"cameroon1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}

@@ -1,0 +1,580 @@
+{
+    "product_id": "41",
+    "tool_description": "Access local businesses data from the Yelp database.",
+    "home_url": "https://rapidapi.com/serg.osipchuk/api/YelpAPI/",
+    "name": "YelpAPI",
+    "title": "YelpAPI",
+    "pricing": "FREE",
+    "tool_name": "YelpAPI",
+    "score": {
+        "avgServiceLevel": 0,
+        "avgLatency": 127268,
+        "avgSuccessRate": 0,
+        "popularityScore": 4.1,
+        "__typename": "Score"
+    },
+    "host": "YelpAPIserg-osipchukV1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "getAutocomplete",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getAutocomplete",
+            "description": "This endpoint returns autocomplete suggestions for search keywords, businesses and categories, based on the input text.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "text",
+                    "type": "STRING",
+                    "description": "Text to return autocomplete suggestions for.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "coordinate",
+                    "type": "MAP",
+                    "description": "Required if location is not provided. coordinate of the location you want to search near by coma separated.",
+                    "default": ""
+                },
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the locale to return the autocomplete suggestions in.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getAutocomplete\"\nquerystring = {\"coordinate\": \"\", \"locale\": \"\", \"text\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getAutocomplete\"\nquerystring = {\"coordinate\": \"\", \"locale\": \"\", \"text\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getBusinessReviews",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessReviews",
+            "description": "This endpoint returns the up to three reviews of a business.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "bussinessId",
+                    "type": "STRING",
+                    "description": "The business ID.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the interface locale; this determines the language of reviews to return.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessReviews\"\nquerystring = {\"locale\": \"\", \"bussinessId\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessReviews\"\nquerystring = {\"locale\": \"\", \"bussinessId\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getBusinesses",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinesses",
+            "description": "This endpoint returns up to 1000 businesses based on the provided search criteria. It has some basic information about the business.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the locale to return the business information in.",
+                    "default": ""
+                },
+                {
+                    "name": "openAt",
+                    "type": "DATEPICKER",
+                    "description": "An integer represending the Unix time in the same timezone of the search location. If specified, it will return business open at the given time. Notice that open_at and open_now cannot be used together.",
+                    "default": ""
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "Required if either coordinate is not provided. Specifies the combination of \"address, neighborhood, city, state or zip, optional country\" to be used when searching for businesses.",
+                    "default": ""
+                },
+                {
+                    "name": "price",
+                    "type": "SELECT",
+                    "description": "Pricing levels to filter the search result with: 1 = $, 2 = $$, 3 = $$$, 4 = $$$$. The price filter can be a list of comma delimited pricing levels. For example, \"1, 2, 3\" will filter the results to show the ones that are $, $$, or $$$.",
+                    "default": ""
+                },
+                {
+                    "name": "term",
+                    "type": "STRING",
+                    "description": "Search term (e.g. \"food\", \"restaurants\"). If term isn\u2019t included we search everything. The term keyword also accepts business names such as \"Starbucks\".",
+                    "default": ""
+                },
+                {
+                    "name": "coordinate",
+                    "type": "MAP",
+                    "description": "Required if location is not provided. coordinate of the location you want to search near by coma separated.",
+                    "default": ""
+                },
+                {
+                    "name": "categories",
+                    "type": "STRING",
+                    "description": "Categories to filter the search results with. See the list of supported categories. The category filter can be a list of comma delimited categories. For example, \"bars,french\" will filter by Bars and French. The category identifier should be used (for example \"discgolf\", not \"Disc Golf\").",
+                    "default": ""
+                },
+                {
+                    "name": "sortBy",
+                    "type": "STRING",
+                    "description": "Sort the results by one of the these modes: best_match, rating, review_count or distance. By default it's best_match. The rating sort is not strictly sorted by the rating value, but by an adjusted rating value that takes into account the number of ratings, similar to a bayesian average. This is so a business with 1 rating of 5 stars doesn\u2019t immediately jump to the top.",
+                    "default": ""
+                },
+                {
+                    "name": "radius",
+                    "type": "NUMBER",
+                    "description": "Search radius in meters. If the value is too large, a AREA_TOO_LARGE error may be returned. The max value is 40000 meters (25 miles).",
+                    "default": ""
+                },
+                {
+                    "name": "term",
+                    "type": "STRING",
+                    "description": "Search term (e.g. \"food\", \"restaurants\"). If term isn\u2019t included we search everything. The term keyword also accepts business names such as \"Starbucks\".",
+                    "default": ""
+                },
+                {
+                    "name": "openNow",
+                    "type": "SELECT",
+                    "description": "Default to false. When set to true, only return the businesses open now. Notice that open_at and open_now cannot be used together.",
+                    "default": ""
+                },
+                {
+                    "name": "openAt",
+                    "type": "DATEPICKER",
+                    "description": "An integer represending the Unix time in the same timezone of the search location. If specified, it will return business open at the given time. Notice that open_at and open_now cannot be used together.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Number of business results to return. By default, it will return 20. Maximum is 50.",
+                    "default": ""
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Offset the list of returned business results by this amount.",
+                    "default": ""
+                },
+                {
+                    "name": "openNow",
+                    "type": "SELECT",
+                    "description": "Default to false. When set to true, only return the businesses open now. Notice that open_at and open_now cannot be used together.",
+                    "default": ""
+                },
+                {
+                    "name": "attributes",
+                    "type": "LIST",
+                    "description": "Additional filters to restrict search results. Possible values are: hot_and_new, request_a_quote, waitlist_reservation, cashback, deals, gender_neutral_restrooms",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinesses\"\nquerystring = {\"locale\": \"\", \"openAt\": \"\", \"location\": \"\", \"price\": \"\", \"term\": \"\", \"coordinate\": \"\", \"categories\": \"\", \"sortBy\": \"\", \"radius\": \"\", \"openNow\": \"\", \"limit\": \"\", \"offset\": \"\", \"accessToken\": \"\", \"attributes\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinesses\"\nquerystring = {\"locale\": \"\", \"openAt\": \"\", \"location\": \"\", \"price\": \"\", \"term\": \"\", \"coordinate\": \"\", \"categories\": \"\", \"sortBy\": \"\", \"radius\": \"\", \"openNow\": \"\", \"limit\": \"\", \"offset\": \"\", \"accessToken\": \"\", \"attributes\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getBusinessesByPhoneNumber",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessesByPhoneNumber",
+            "description": "This endpoint returns a list of businesses based on the provided phone number. It is possible for more than one businesses having the same phone number (for example, chain stores with the same +1 800 phone number).",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "phone",
+                    "type": "STRING",
+                    "description": "Phone number of the business you want to search for. It must start with + and include the country code, like +14159083801.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessesByPhoneNumber\"\nquerystring = {\"phone\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessesByPhoneNumber\"\nquerystring = {\"phone\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getBusinessesByTransaction",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessesByTransaction",
+            "description": "This endpoint returns a list of businesses which support certain transactions.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "transactionType",
+                    "type": "STRING",
+                    "description": "Valid values for transaction_type are: delivery.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "coordinate",
+                    "type": "MAP",
+                    "description": "Required if location is not provided. coordinate of the location you want to search near by coma separated.",
+                    "default": ""
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "Required when coordinate aren't provided. Address of the location you want to deliver to.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessesByTransaction\"\nquerystring = {\"transactionType\": \"\", \"coordinate\": \"\", \"location\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getBusinessesByTransaction\"\nquerystring = {\"transactionType\": \"\", \"coordinate\": \"\", \"location\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getFeaturedEvent",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getFeaturedEvent",
+            "description": "This endpoint returns the featured event for a given location. Featured events are chosen by Yelp's community managers.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the locale to return the autocomplete suggestions in.",
+                    "default": ""
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "Specifies the combination of `address, neighborhood, city, state or zip, optional country` to be used when searching for events.",
+                    "default": ""
+                },
+                {
+                    "name": "coordinates",
+                    "type": "MAP",
+                    "description": "The location you want to search nearby. ",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getFeaturedEvent\"\nquerystring = {\"accessToken\": \"\", \"locale\": \"\", \"location\": \"\", \"coordinates\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getFeaturedEvent\"\nquerystring = {\"accessToken\": \"\", \"locale\": \"\", \"location\": \"\", \"coordinates\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getSingleBusiness",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getSingleBusiness",
+            "description": "This endpoint returns the detail information of a business.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "bussinessId",
+                    "type": "STRING",
+                    "description": "The business ID.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the locale to return the autocomplete suggestions in.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getSingleBusiness\"\nquerystring = {\"bussinessId\": \"\", \"locale\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getSingleBusiness\"\nquerystring = {\"bussinessId\": \"\", \"locale\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "getSingleEvent",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/getSingleEvent",
+            "description": "This endpoint returns the detailed information of a Yelp event.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "eventId",
+                    "type": "STRING",
+                    "description": "The event ID.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the locale to return the autocomplete suggestions in.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getSingleEvent\"\nquerystring = {\"eventId\": \"\", \"locale\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/getSingleEvent\"\nquerystring = {\"eventId\": \"\", \"locale\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "matchedBusinesses",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/matchedBusinesses",
+            "description": "These endpoints let you match business data from other sources against businesses on Yelp, based on minimal provided information.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "name",
+                    "type": "STRING",
+                    "description": "The name of the business. Maximum length is 64; only digits, letters, spaces, and !#$%&+,\u00ad./:?@'are allowed.",
+                    "default": ""
+                },
+                {
+                    "name": "type",
+                    "type": "SELECT",
+                    "description": "Must be best or lookup",
+                    "default": ""
+                },
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "description": "The city of the business. Maximum length is 64; only digits, letters, spaces, and \u00ad\u2019.() are allowed.",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "The ISO 3166-2 (with a few exceptions) state code of this business. Maximum length is 3.",
+                    "default": ""
+                },
+                {
+                    "name": "country",
+                    "type": "STRING",
+                    "description": "The ISO 3166-1 alpha-2 country code of this business. Maximum length is 2.",
+                    "default": ""
+                },
+                {
+                    "name": "city",
+                    "type": "STRING",
+                    "description": "The city of the business. Maximum length is 64; only digits, letters, spaces, and \u00ad\u2019.() are allowed.",
+                    "default": ""
+                },
+                {
+                    "name": "state",
+                    "type": "STRING",
+                    "description": "The ISO 3166-2 (with a few exceptions) state code of this business. Maximum length is 3.",
+                    "default": ""
+                },
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "address1",
+                    "type": "STRING",
+                    "description": "The first line of the business\u2019s address. Maximum length is 64; only digits, letters, spaces, and \u00ad\u2019/#&,.: are allowed.",
+                    "default": ""
+                },
+                {
+                    "name": "address2",
+                    "type": "STRING",
+                    "description": "The second line of the business\u2019s address. Maximum length is 64; only digits, letters, spaces, and \u00ad\u2019/#&,.: are allowed.",
+                    "default": ""
+                },
+                {
+                    "name": "address3",
+                    "type": "STRING",
+                    "description": "The third line of the business\u2019s address. Maximum length is 64; only digits, letters, spaces, and \u00ad\u2019/#&,.: are allowed.",
+                    "default": ""
+                },
+                {
+                    "name": "coordinates",
+                    "type": "MAP",
+                    "description": "The location you want to search nearby. ",
+                    "default": ""
+                },
+                {
+                    "name": "phone",
+                    "type": "STRING",
+                    "description": "The phone number of the business which can be submitted as (a) locally \u00adformatted with digits only (e.g., 016703080) or (b) internationally\u00ad formatted with a leading + sign and digits only after (+35316703080). Maximum length is 32.",
+                    "default": ""
+                },
+                {
+                    "name": "postalCode",
+                    "type": "STRING",
+                    "description": "The postal code of the business. Maximum length is 12.",
+                    "default": ""
+                },
+                {
+                    "name": "yelpBusinessId",
+                    "type": "STRING",
+                    "description": "Unique Yelp identifier of the business if available. Used as a hint when finding a matching business.",
+                    "default": ""
+                },
+                {
+                    "name": "coordinates",
+                    "type": "MAP",
+                    "description": "The location you want to search nearby. ",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/matchedBusinesses\"\nquerystring = {\"name\": \"\", \"type\": \"\", \"address1\": \"\", \"address2\": \"\", \"address3\": \"\", \"city\": \"\", \"state\": \"\", \"country\": \"\", \"coordinates\": \"\", \"phone\": \"\", \"postalCode\": \"\", \"yelpBusinessId\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/matchedBusinesses\"\nquerystring = {\"name\": \"\", \"type\": \"\", \"address1\": \"\", \"address2\": \"\", \"address3\": \"\", \"city\": \"\", \"state\": \"\", \"country\": \"\", \"coordinates\": \"\", \"phone\": \"\", \"postalCode\": \"\", \"yelpBusinessId\": \"\", \"accessToken\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        },
+        {
+            "name": "searchEvent",
+            "url": "https://YelpAPIserg-osipchukV1.p.rapidapi.com/searchEvent",
+            "description": "This endpoint returns events based on the provided search criteria.",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "accessToken",
+                    "type": "STRING",
+                    "description": "Your private API key.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "locale",
+                    "type": "STRING",
+                    "description": "Specify the locale to return the autocomplete suggestions in.",
+                    "default": ""
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "Offset the list of returned business results by this amount.",
+                    "default": ""
+                },
+                {
+                    "name": "limit",
+                    "type": "NUMBER",
+                    "description": "Number of business results to return. By default, it will return 20. Maximum is 50.",
+                    "default": ""
+                },
+                {
+                    "name": "sortBy",
+                    "type": "SELECT",
+                    "description": "Sort by either descending or ascending order. By default, it returns results in descending order. Possible values are: desc, asc",
+                    "default": ""
+                },
+                {
+                    "name": "sortOn",
+                    "type": "SELECT",
+                    "description": "Sort on popularity or time start. By default, sorts on popularity. Possible values are: popularity, time_start",
+                    "default": ""
+                },
+                {
+                    "name": "startDate",
+                    "type": "DATEPICKER",
+                    "description": "Will return events that only begin at or after the specified time.",
+                    "default": ""
+                },
+                {
+                    "name": "endDate",
+                    "type": "DATEPICKER",
+                    "description": "Will return events that only end at or before the specified time.",
+                    "default": ""
+                },
+                {
+                    "name": "isFree",
+                    "type": "SELECT",
+                    "description": "Filter whether the events are free to attend. By default no filter is applied so both free and paid events will be returned.",
+                    "default": ""
+                },
+                {
+                    "name": "location",
+                    "type": "STRING",
+                    "description": "Specifies the combination of `address, neighborhood, city, state or zip, optional country` to be used when searching for events.",
+                    "default": ""
+                },
+                {
+                    "name": "coordinates",
+                    "type": "MAP",
+                    "description": "The location you want to search nearby. ",
+                    "default": ""
+                },
+                {
+                    "name": "radius",
+                    "type": "NUMBER",
+                    "description": "Search radius in meters.",
+                    "default": ""
+                },
+                {
+                    "name": "startDate",
+                    "type": "DATEPICKER",
+                    "description": "Will return events that only begin at or after the specified time.",
+                    "default": ""
+                },
+                {
+                    "name": "coordinates",
+                    "type": "MAP",
+                    "description": "The location you want to search nearby. ",
+                    "default": ""
+                },
+                {
+                    "name": "excludedEvents",
+                    "type": "LIST",
+                    "description": "List of event ids. Events associated with these event ids in this list will not show up in the response.",
+                    "default": ""
+                },
+                {
+                    "name": "categories",
+                    "type": "LIST",
+                    "description": "The category filter can be a list of comma delimited categories to get OR'd results that include the categories provided. ",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/searchEvent\"\nquerystring = {\"locale\": \"\", \"offset\": \"\", \"limit\": \"\", \"sortBy\": \"\", \"sortOn\": \"\", \"startDate\": \"\", \"endDate\": \"\", \"isFree\": \"\", \"location\": \"\", \"coordinates\": \"\", \"radius\": \"\", \"accessToken\": \"\", \"excludedEvents\": \"\", \"categories\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://YelpAPIserg-osipchukV1.p.rapidapi.com/searchEvent\"\nquerystring = {\"locale\": \"\", \"offset\": \"\", \"limit\": \"\", \"sortBy\": \"\", \"sortOn\": \"\", \"startDate\": \"\", \"endDate\": \"\", \"isFree\": \"\", \"location\": \"\", \"coordinates\": \"\", \"radius\": \"\", \"accessToken\": \"\", \"excludedEvents\": \"\", \"categories\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"YelpAPIserg-osipchukV1.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": ""
+        }
+    ]
+}

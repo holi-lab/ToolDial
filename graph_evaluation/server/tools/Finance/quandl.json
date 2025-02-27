@@ -1,0 +1,410 @@
+{
+    "tool_name":"Quandl",
+    "tool_description":"The premier source for financial, economic, and alternative datasets, serving investment professionals. Quandl’s platform is used by over 400,000 people, including analysts from the world’s top hedge funds, asset managers and investment banks, see https://docs.quandl.com/docs/in-depth-usage",
+    "title":"Quandl",
+    "pricing":"FREE",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1267,
+        "avgSuccessRate":44,
+        "popularityScore":9.5,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/brianiswu/api/quandl1/",
+    "host":"quandl1.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get time-series data and metadata",
+            "url":"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}.{return_format}",
+            "description":"This call returns data and metadata for a given time-series.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"database_code",
+                    "type":"STRING",
+                    "description":"The code for the database this time-series belongs to",
+                    "default":"WIKI"
+                },
+                {
+                    "name":"return_format",
+                    "type":"STRING",
+                    "description":"json, xml or csv",
+                    "default":"json"
+                },
+                {
+                    "name":"dataset_code",
+                    "type":"STRING",
+                    "description":"The code for this time-series",
+                    "default":"FB"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}.{return_format}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"quandl1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get filtered time-series data",
+            "url":"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}.{return_format}",
+            "description":"You can slice, transform and otherwise customize your time-series dataset prior to download by appending various optional parameters to your query.  Get monthly % changes in Facebook's closing price for the year 2014:",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"dataset_code",
+                    "type":"STRING",
+                    "description":"The code for this time-series",
+                    "default":"FB"
+                },
+                {
+                    "name":"return_format",
+                    "type":"STRING",
+                    "description":"json, xml or csv",
+                    "default":"json"
+                },
+                {
+                    "name":"database_code",
+                    "type":"STRING",
+                    "description":"The code for the database this time-series belongs to",
+                    "default":"WIKI"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"column_index",
+                    "type":"STRING",
+                    "description":"Request a specific column. Column 0 is the date column and is always returned. Data begins at column 1.",
+                    "default":"4"
+                },
+                {
+                    "name":"end_date",
+                    "type":"STRING",
+                    "description":"Retrieve data rows up to and including the specified end date.",
+                    "default":"2014-12-31"
+                },
+                {
+                    "name":"limit",
+                    "type":"STRING",
+                    "description":"Use limit=n to get the first n rows of the dataset. Use limit=1 to get just the latest row.",
+                    "default":""
+                },
+                {
+                    "name":"start_date",
+                    "type":"STRING",
+                    "description":"Retrieve data rows on and after the specified start date.",
+                    "default":"2014-01-01"
+                },
+                {
+                    "name":"collapse",
+                    "type":"STRING",
+                    "description":"Change the sampling frequency of the returned data. Default is none; i.e., data is returned in its original granularity.",
+                    "default":"monthly"
+                },
+                {
+                    "name":"order",
+                    "type":"STRING",
+                    "description":"Return data in ascending or descending order of date. Default is desc.",
+                    "default":"desc"
+                },
+                {
+                    "name":"transform",
+                    "type":"STRING",
+                    "description":"Perform elementary calculations on the data prior to downloading. Default is none. Calculation options are described below.",
+                    "default":"rdiff"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}.{return_format}\"\nquerystring = {\"column_index\": column_index, \"end_date\": end_date, \"start_date\": start_date, \"collapse\": collapse, \"order\": order, \"transform\": transform}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"quandl1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "dataset":{
+                    "id":9775687,
+                    "dataset_code":"FB",
+                    "database_code":"WIKI",
+                    "name":"Facebook Inc. (FB) Prices, Dividends, Splits and Trading Volume",
+                    "description":"End of day open, high, low, close and volume, dividends and splits, and split/dividend adjusted open, high, low close and volume for Facebook, Inc. (FB). Ex-Dividend is non-zero on ex-dividend dates. Split Ratio is 1 on non-split dates. Adjusted prices are calculated per CRSP (www.crsp.com/products/documentation/crsp-calculations)\n\nThis data is in the public domain. You may copy, distribute, disseminate or include the data in other products for commercial and/or noncommercial purposes.\n\nThis data is part of Quandl's Wiki initiative to get financial data permanently into the public domain. Quandl relies on users like you to flag errors and provide data where data is wrong or missing. Get involved: connect@quandl.com\n",
+                    "refreshed_at":"2018-03-27T21:46:11.036Z",
+                    "newest_available_date":"2018-03-27",
+                    "oldest_available_date":"2012-05-18",
+                    "column_names":[
+                        "Date",
+                        "Close"
+                    ],
+                    "frequency":"daily",
+                    "type":"Time Series",
+                    "premium":false,
+                    "limit":null,
+                    "transform":"rdiff",
+                    "column_index":4,
+                    "start_date":"2014-01-01",
+                    "end_date":"2014-12-31",
+                    "data":[
+                        [
+                            "2014-12-31",
+                            0.004118404118404
+                        ],
+                        [
+                            "2014-11-30",
+                            0.036138151753567
+                        ],
+                        [
+                            "2014-10-31",
+                            -0.05123987854251
+                        ],
+                        [
+                            "2014-09-30",
+                            0.056402031542368
+                        ],
+                        [
+                            "2014-08-31",
+                            0.029869236063317
+                        ],
+                        [
+                            "2014-07-31",
+                            0.07965522365879
+                        ],
+                        [
+                            "2014-06-30",
+                            0.06303317535545
+                        ],
+                        [
+                            "2014-05-31",
+                            0.058882569421211
+                        ],
+                        [
+                            "2014-04-30",
+                            -0.0076361221779549
+                        ],
+                        [
+                            "2014-03-31",
+                            -0.12007011393514
+                        ],
+                        [
+                            "2014-02-28",
+                            0.094134569282404
+                        ]
+                    ],
+                    "collapse":"monthly",
+                    "order":"desc",
+                    "database_id":4922
+                }
+            },
+            "headers":{
+                "allow":"GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH",
+                "cache-control":"max-age=0, private, must-revalidate",
+                "cf-ray":"50569a881d469f5e-IAD",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Tue, 13 Aug 2019 00:34:29 GMT",
+                "etag":"W/\"fa12b58e77b1d97a51eebdca9f5fdd47\"",
+                "expect-ct":"max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+                "server":"RapidAPI-1.0.28",
+                "set-cookie":[
+                    "__cfduid=dd61e94b32b0dee775f240065ccf8e1fe1565656469; expires=Wed, 12-Aug-20 00:34:29 GMT; path=/; domain=.quandl.com; HttpOnly"
+                ],
+                "vary":"Origin",
+                "x-content-type-options":"nosniff",
+                "x-frame-options":"SAMEORIGIN",
+                "x-rack-cors":"miss; no-origin",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.0.28",
+                "x-ratelimit-limit":"50000",
+                "x-ratelimit-remaining":"49983",
+                "x-request-id":"9b43ddeb-736d-487d-9e79-5ea3e9e1980c",
+                "x-runtime":"0.082787",
+                "x-xss-protection":"1; mode=block",
+                "content-length":"1621",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name":"Get metadata for a time-series database",
+            "url":"https://quandl1.p.rapidapi.com/databases/{database_code}.{return_format}",
+            "description":"You can retrieve metadata for a specified time-series database",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"database_code",
+                    "type":"STRING",
+                    "description":"The code for the database this time-series belongs to",
+                    "default":"WIKI"
+                },
+                {
+                    "name":"return_format",
+                    "type":"STRING",
+                    "description":"json, xml or csv",
+                    "default":"json"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://quandl1.p.rapidapi.com/databases/{database_code}.{return_format}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"quandl1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get time-series data",
+            "url":"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}/data.{return_format}",
+            "description":"This call returns data from a specified time-series.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"return_format",
+                    "type":"STRING",
+                    "description":"How you want the data returned (json, xml, or csv)",
+                    "default":"json"
+                },
+                {
+                    "name":"dataset_code",
+                    "type":"STRING",
+                    "description":"The code for this time-series",
+                    "default":"FB"
+                },
+                {
+                    "name":"database_code",
+                    "type":"STRING",
+                    "description":"The code for the database this time-series belongs to",
+                    "default":"WIKI"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}/data.{return_format}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"quandl1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"Get time-series metadata",
+            "url":"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}/metadata.{return_format}",
+            "description":"This call returns metadata for a specified time-series.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"return_format",
+                    "type":"STRING",
+                    "description":"json, xml or csv",
+                    "default":"json"
+                },
+                {
+                    "name":"database_code",
+                    "type":"STRING",
+                    "description":"The code for the database this time-series belongs to",
+                    "default":"WIKI"
+                },
+                {
+                    "name":"dataset_code",
+                    "type":"STRING",
+                    "description":"The code for this time-series",
+                    "default":"FB"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://quandl1.p.rapidapi.com/datasets/{database_code}/{dataset_code}/metadata.{return_format}\"\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"quandl1.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "dataset":{
+                    "id":9775687,
+                    "dataset_code":"FB",
+                    "database_code":"WIKI",
+                    "name":"Facebook Inc. (FB) Prices, Dividends, Splits and Trading Volume",
+                    "description":"End of day open, high, low, close and volume, dividends and splits, and split/dividend adjusted open, high, low close and volume for Facebook, Inc. (FB). Ex-Dividend is non-zero on ex-dividend dates. Split Ratio is 1 on non-split dates. Adjusted prices are calculated per CRSP (www.crsp.com/products/documentation/crsp-calculations)\n\nThis data is in the public domain. You may copy, distribute, disseminate or include the data in other products for commercial and/or noncommercial purposes.\n\nThis data is part of Quandl's Wiki initiative to get financial data permanently into the public domain. Quandl relies on users like you to flag errors and provide data where data is wrong or missing. Get involved: connect@quandl.com\n",
+                    "refreshed_at":"2018-03-27T21:46:11.036Z",
+                    "newest_available_date":"2018-03-27",
+                    "oldest_available_date":"2012-05-18",
+                    "column_names":[
+                        "Date",
+                        "Open",
+                        "High",
+                        "Low",
+                        "Close",
+                        "Volume",
+                        "Ex-Dividend",
+                        "Split Ratio",
+                        "Adj. Open",
+                        "Adj. High",
+                        "Adj. Low",
+                        "Adj. Close",
+                        "Adj. Volume"
+                    ],
+                    "frequency":"daily",
+                    "type":"Time Series",
+                    "premium":false,
+                    "database_id":4922
+                }
+            },
+            "headers":{
+                "allow":"GET, HEAD, POST, PUT, DELETE, OPTIONS, PATCH",
+                "cache-control":"max-age=0, private, must-revalidate",
+                "cf-ray":"50569f75a8b7e0f6-IAD",
+                "content-type":"application/json; charset=utf-8",
+                "date":"Tue, 13 Aug 2019 00:37:51 GMT",
+                "etag":"W/\"0286e07f0ff0cebc0447d0eff93fbbf3\"",
+                "expect-ct":"max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\"",
+                "server":"RapidAPI-1.0.28",
+                "set-cookie":[
+                    "__cfduid=d8ac077c0d5055d96a1dc84bafd2c8de31565656671; expires=Wed, 12-Aug-20 00:37:51 GMT; path=/; domain=.quandl.com; HttpOnly"
+                ],
+                "vary":"Origin",
+                "x-content-type-options":"nosniff",
+                "x-frame-options":"SAMEORIGIN",
+                "x-rack-cors":"miss; no-origin",
+                "x-rapidapi-region":"AWS - us-east-1",
+                "x-rapidapi-version":"1.0.28",
+                "x-ratelimit-limit":"50000",
+                "x-ratelimit-remaining":"49980",
+                "x-request-id":"56c9ebb2-a376-4d13-823a-688e0b747a3e",
+                "x-runtime":"0.068701",
+                "x-xss-protection":"1; mode=block",
+                "content-length":"1232",
+                "connection":"Close"
+            },
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "get":{
+                        "type":"string"
+                    },
+                    "parameters":{
+                        "type":"array"
+                    },
+                    "errors":{
+                        "type":"array"
+                    },
+                    "results":{
+                        "type":"integer"
+                    },
+                    "response":{
+                        "type":"array",
+                        "items":{
+                            "type":"object"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

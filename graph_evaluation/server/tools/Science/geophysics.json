@@ -1,0 +1,741 @@
+{
+    "product_id": "api_31adbc7a-8a2f-42b0-8351-51ef0e1b693d",
+    "tool_description": "Units and currency rate conversion, calculation automation, and ISO 3166-1, ISO 3166-2 and ISO 4217 APIs",
+    "home_url": "https://rapidapi.com/fmeurou/api/geophysics/",
+    "name": "Geophysics",
+    "title": "Geophysics",
+    "pricing": "FREEMIUM",
+    "tool_name": "Geophysics",
+    "score": null,
+    "host": "geophysics.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "units_formulas_validate_create",
+            "url": "https://geophysics.p.rapidapi.com/units/{unit_system}/formulas/validate/",
+            "description": "Validate a formula with parameters\n:param request: HTTP request\n:param unit_system: Unit system to use for validation",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "unit_system",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{unit_system}/formulas/validate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{unit_system}/formulas/validate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "required": [
+                    "code",
+                    "multiplicity"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "title": "code of the dimension",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "multiplicity": {
+                        "title": "multiplicy of the dimension",
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "calculations_formulas_calculate_create",
+            "url": "https://geophysics.p.rapidapi.com/calculations/{unit_system}/formulas/calculate/",
+            "description": "Converts a list of amounts with currency\nand date to a reference currency\n:param request: HTTP request",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "unit_system",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/calculations/{unit_system}/formulas/calculate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/calculations/{unit_system}/formulas/calculate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "required": [
+                    "id",
+                    "detail",
+                    "status",
+                    "errors"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "ID of the batch",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "detail": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "expression",
+                                "operands",
+                                "magnitude",
+                                "uncertainty",
+                                "unit"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "expression": {
+                                    "title": "Expression to evaluate",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "operands": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "name",
+                                            "value",
+                                            "unit"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "title": "Name of the operand in the expression",
+                                                "description": "{a} in an expression should have an operand named 'a'",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "value": {
+                                                "title": "Value of the operand as a float",
+                                                "type": "number"
+                                            },
+                                            "unit": {
+                                                "title": "Units of the operand as a string",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "uncertainty": {
+                                                "title": "Uncertainty value, either absolute, or percentage.",
+                                                "description": "Uncertainty for value, if float, it is absolute (10), else, it must contain % (12%)",
+                                                "type": "string",
+                                                "minLength": 1
+                                            }
+                                        }
+                                    }
+                                },
+                                "magnitude": {
+                                    "title": "Magnitude of result",
+                                    "type": "number"
+                                },
+                                "uncertainty": {
+                                    "title": "Uncertainty of result",
+                                    "type": "number"
+                                },
+                                "unit": {
+                                    "title": "Units of result",
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "title": "Status of the calculation",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "expression",
+                                "operands",
+                                "calc_date",
+                                "error"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "expression": {
+                                    "title": "Expression to evaluate",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "operands": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "name",
+                                            "value",
+                                            "unit"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "title": "Name of the operand in the expression",
+                                                "description": "{a} in an expression should have an operand named 'a'",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "value": {
+                                                "title": "Value of the operand as a float",
+                                                "type": "number"
+                                            },
+                                            "unit": {
+                                                "title": "Units of the operand as a string",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "uncertainty": {
+                                                "title": "Uncertainty value, either absolute, or percentage.",
+                                                "description": "Uncertainty for value, if float, it is absolute (10), else, it must contain % (12%)",
+                                                "type": "string",
+                                                "minLength": 1
+                                            }
+                                        }
+                                    }
+                                },
+                                "calc_date": {
+                                    "title": "Date of calculation",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "error": {
+                                    "title": "Error during calculation",
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "units_units_custom_create",
+            "url": "https://geophysics.p.rapidapi.com/units/{system_name}/units/custom/",
+            "description": "Create CustomUnit",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "system_name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{system_name}/units/custom/\"\nquerystring = {\"system_name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{system_name}/units/custom/\"\nquerystring = {\"system_name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "rates_create_bulk",
+            "url": "https://geophysics.p.rapidapi.com/rates/bulk/",
+            "description": "Create rates for user on a range of dates",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/rates/bulk/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/rates/bulk/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "units_custom_create",
+            "url": "https://geophysics.p.rapidapi.com/units/{system_name}/custom/",
+            "description": "Create CustomUnit",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "system_name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{system_name}/custom/\"\nquerystring = {\"system_name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{system_name}/custom/\"\nquerystring = {\"system_name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "units_formulas_calculate_create",
+            "url": "https://geophysics.p.rapidapi.com/units/{unit_system}/formulas/calculate/",
+            "description": "Converts a list of amounts with currency\nand date to a reference currency\n:param request: HTTP request",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "unit_system",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{unit_system}/formulas/calculate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{unit_system}/formulas/calculate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "required": [
+                    "id",
+                    "detail",
+                    "status",
+                    "errors"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "ID of the batch",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "detail": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "expression",
+                                "operands",
+                                "magnitude",
+                                "uncertainty",
+                                "unit"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "expression": {
+                                    "title": "Expression to evaluate",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "operands": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "name",
+                                            "value",
+                                            "unit"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "title": "Name of the operand in the expression",
+                                                "description": "{a} in an expression should have an operand named 'a'",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "value": {
+                                                "title": "Value of the operand as a float",
+                                                "type": "number"
+                                            },
+                                            "unit": {
+                                                "title": "Units of the operand as a string",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "uncertainty": {
+                                                "title": "Uncertainty value, either absolute, or percentage.",
+                                                "description": "Uncertainty for value, if float, it is absolute (10), else, it must contain % (12%)",
+                                                "type": "string",
+                                                "minLength": 1
+                                            }
+                                        }
+                                    }
+                                },
+                                "magnitude": {
+                                    "title": "Magnitude of result",
+                                    "type": "number"
+                                },
+                                "uncertainty": {
+                                    "title": "Uncertainty of result",
+                                    "type": "number"
+                                },
+                                "unit": {
+                                    "title": "Units of result",
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "title": "Status of the calculation",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "expression",
+                                "operands",
+                                "calc_date",
+                                "error"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "expression": {
+                                    "title": "Expression to evaluate",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "operands": {
+                                    "type": "array",
+                                    "items": {
+                                        "required": [
+                                            "name",
+                                            "value",
+                                            "unit"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                            "name": {
+                                                "title": "Name of the operand in the expression",
+                                                "description": "{a} in an expression should have an operand named 'a'",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "value": {
+                                                "title": "Value of the operand as a float",
+                                                "type": "number"
+                                            },
+                                            "unit": {
+                                                "title": "Units of the operand as a string",
+                                                "type": "string",
+                                                "minLength": 1
+                                            },
+                                            "uncertainty": {
+                                                "title": "Uncertainty value, either absolute, or percentage.",
+                                                "description": "Uncertainty for value, if float, it is absolute (10), else, it must contain % (12%)",
+                                                "type": "string",
+                                                "minLength": 1
+                                            }
+                                        }
+                                    }
+                                },
+                                "calc_date": {
+                                    "title": "Date of calculation",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "error": {
+                                    "title": "Error during calculation",
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "units_convert_create",
+            "url": "https://geophysics.p.rapidapi.com/units/convert/",
+            "description": "Converts a list of amounts with currency\nand date to a reference currency\n:param request: HTTP request",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/convert/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/convert/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "required": [
+                    "id",
+                    "target",
+                    "detail",
+                    "sum",
+                    "status",
+                    "errors"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "ID of the batch",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "target": {
+                        "title": "Target conversion",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "detail": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "unit",
+                                "original_value",
+                                "date",
+                                "conversion_rate",
+                                "converted_value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "unit": {
+                                    "title": "Unit of conversion",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "original_value": {
+                                    "title": "Original value to convert",
+                                    "type": "number"
+                                },
+                                "date": {
+                                    "title": "Date of conversion",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "conversion_rate": {
+                                    "title": "Conversion rate",
+                                    "type": "number"
+                                },
+                                "converted_value": {
+                                    "title": "Resulting value",
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "sum": {
+                        "title": "Sum of conversions",
+                        "type": "number"
+                    },
+                    "status": {
+                        "title": "Status of the conversion",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "unit",
+                                "original_value",
+                                "date",
+                                "error"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "unit": {
+                                    "title": "Unit of conversion",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "original_value": {
+                                    "title": "Original value",
+                                    "type": "number"
+                                },
+                                "date": {
+                                    "title": "Date of conversion",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "error": {
+                                    "title": "Error during conversion",
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "units_dimensions_custom_create",
+            "url": "https://geophysics.p.rapidapi.com/units/{system_name}/dimensions/custom/",
+            "description": "Create CustomDimension",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "system_name",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{system_name}/dimensions/custom/\"\nquerystring = {\"system_name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/units/{system_name}/dimensions/custom/\"\nquerystring = {\"system_name\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        },
+        {
+            "name": "rates_convert_create",
+            "url": "https://geophysics.p.rapidapi.com/rates/convert/",
+            "description": "Converts a list of amounts with currency\nand date to a reference currency\n:param request: HTTP request",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/rates/convert/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/rates/convert/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "required": [
+                    "id",
+                    "target",
+                    "detail",
+                    "sum",
+                    "status",
+                    "errors"
+                ],
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "ID of the batch",
+                        "type": "string",
+                        "format": "uuid"
+                    },
+                    "target": {
+                        "title": "Target conversion",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "detail": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "unit",
+                                "original_value",
+                                "date",
+                                "conversion_rate",
+                                "converted_value"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "unit": {
+                                    "title": "Unit of conversion",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "original_value": {
+                                    "title": "Original value to convert",
+                                    "type": "number"
+                                },
+                                "date": {
+                                    "title": "Date of conversion",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "conversion_rate": {
+                                    "title": "Conversion rate",
+                                    "type": "number"
+                                },
+                                "converted_value": {
+                                    "title": "Resulting value",
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "sum": {
+                        "title": "Sum of conversions",
+                        "type": "number"
+                    },
+                    "status": {
+                        "title": "Status of the conversion",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "required": [
+                                "unit",
+                                "original_value",
+                                "date",
+                                "error"
+                            ],
+                            "type": "object",
+                            "properties": {
+                                "unit": {
+                                    "title": "Unit of conversion",
+                                    "type": "string",
+                                    "minLength": 1
+                                },
+                                "original_value": {
+                                    "title": "Original value",
+                                    "type": "number"
+                                },
+                                "date": {
+                                    "title": "Date of conversion",
+                                    "type": "string",
+                                    "format": "date"
+                                },
+                                "error": {
+                                    "title": "Error during conversion",
+                                    "type": "string",
+                                    "minLength": 1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        {
+            "name": "calculations_formulas_validate_create",
+            "url": "https://geophysics.p.rapidapi.com/calculations/{unit_system}/formulas/validate/",
+            "description": "Validate a formula with parameters\n:param request: HTTP request\n:param unit_system: Unit system to use for validation",
+            "method": "POST",
+            "required_parameters": [
+                {
+                    "name": "unit_system",
+                    "type": "STRING",
+                    "description": "",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/calculations/{unit_system}/formulas/validate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/calculations/{unit_system}/formulas/validate/\"\nquerystring = {\"unit_system\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "required": [
+                    "code",
+                    "multiplicity"
+                ],
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "title": "code of the dimension",
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "multiplicity": {
+                        "title": "multiplicy of the dimension",
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        {
+            "name": "rates_create",
+            "url": "https://geophysics.p.rapidapi.com/rates/",
+            "description": "Create a new rate",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/rates/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://geophysics.p.rapidapi.com/rates/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"geophysics.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 1,
+            "schema": ""
+        }
+    ]
+}

@@ -1,0 +1,400 @@
+{
+    "product_id": "api_3f76a568-658f-4a6d-ba73-9cbe6d9d6f4d",
+    "tool_description": "An AI service from Microsoft Azure that helps users complete queries faster by adding intelligent type-ahead capabilities.",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-autosuggest1/",
+    "name": "Bing Autosuggest",
+    "title": "Bing Autosuggest",
+    "pricing": "FREEMIUM",
+    "tool_name": "Bing Autosuggest",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 177,
+        "avgSuccessRate": 88,
+        "popularityScore": 8,
+        "__typename": "Score"
+    },
+    "host": "bing-autosuggest1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Suggestions",
+            "url": "https://bing-autosuggest1.p.rapidapi.com/suggestions",
+            "description": "This operation provides suggestions for a given query or partial query.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "The user's search term.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "safeSearch",
+                    "type": "STRING",
+                    "description": "Filter suggestions for adult content. The following are the possible filter values. Off: Return suggestions with adult text, images, or videos. Moderate: Return suggestion with adult text but not adult images or videos. Strict: Do not return news articles with adult text, images, or videos. If the request comes from a market that Bing's adult policy requires that safeSearch is set to Strict, Bing ignores the safeSearch value and uses Strict. If you use the site: query operator, there is the chance that the response may contain adult content regardless of what the safeSearch query parameter is set to. Use site: only if you are aware of the content on the site and your scenario supports the possibility of adult content.",
+                    "default": ""
+                },
+                {
+                    "name": "cc",
+                    "type": "STRING",
+                    "description": "A 2-character country code of the country where the results come from. This API supports only the United States market. If you specify this query parameter, it must be set to us. If you set this parameter, you must also specify the Accept-Language header. Bing uses the first supported language it finds from the languages list, and combine that language with the country code that you specify to determine the market to return results for. If the languages list does not include a supported language, Bing finds the closest language and market that supports the request, or it may use an aggregated or default market for the results instead of a specified one. You should use this query parameter and the Accept-Language query parameter only if you specify multiple languages; otherwise, you should use the mkt and setLang query parameters. This parameter and the mkt query parameter are mutually exclusive\u2014do not specify both.",
+                    "default": ""
+                },
+                {
+                    "name": "ResponseFormat",
+                    "type": "ARRAY",
+                    "description": "The media type to use for the response. The following are the possible case-insensitive values: JSON, JSONLD. The default is JSON. If you specify JSONLD, the response body includes JSON-LD objects that contain the search results.",
+                    "default": ""
+                },
+                {
+                    "name": "setLang",
+                    "type": "STRING",
+                    "description": "The language to use for user interface strings. Specify the language using the ISO 639-1 2-letter language code. For example, the language code for English is EN. The default is EN (English). Although optional, you should always specify the language. Typically, you set setLang to the same language specified by mkt unless the user wants the user interface strings displayed in a different language. This parameter and the Accept-Language header are mutually exclusive; do not specify both. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Also, any links to Bing.com properties in the response objects apply the specified language.",
+                    "default": ""
+                },
+                {
+                    "name": "mkt",
+                    "type": "STRING",
+                    "description": "The market where the results come from. You are strongly encouraged to always specify the market, if known. Specifying the market helps Bing route the request and return an appropriate and optimal response. This parameter and the cc query parameter are mutually exclusive\u2014do not specify both.",
+                    "default": ""
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://bing-autosuggest1.p.rapidapi.com/suggestions\"\nquerystring = {\"safeSearch\": \"\", \"cc\": \"\", \"q\": \"\", \"ResponseFormat\": \"\", \"setLang\": \"\", \"mkt\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-autosuggest1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bing-autosuggest1.p.rapidapi.com/suggestions\"\nquerystring = {\"safeSearch\": \"\", \"cc\": \"\", \"q\": \"\", \"ResponseFormat\": \"\", \"setLang\": \"\", \"mkt\": \"\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-autosuggest1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": {
+                "_type": "ErrorResponse",
+                "errors": [
+                    {
+                        "code": "InvalidRequest",
+                        "subCode": "ParameterInvalidValue",
+                        "message": "Parameter has invalid value.",
+                        "moreDetails": "Supported values for 'responseformat' are: Json, JsonLd, Html",
+                        "parameter": "responseformat",
+                        "value": ""
+                    },
+                    {
+                        "code": "InvalidRequest",
+                        "subCode": "ParameterInvalidValue",
+                        "message": "Parameter has invalid value.",
+                        "moreDetails": "Invalid value entered for SafeSearch parameter.",
+                        "parameter": "SafeSearch"
+                    }
+                ]
+            },
+            "statuscode": 200,
+            "schema": {
+                "allOf": [
+                    {
+                        "allOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "allOf": [
+                                            {
+                                                "allOf": [
+                                                    {
+                                                        "description": "Response base",
+                                                        "discriminator": {
+                                                            "propertyName": "_type"
+                                                        },
+                                                        "properties": {
+                                                            "_type": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "_type"
+                                                        ],
+                                                        "type": "object"
+                                                    }
+                                                ],
+                                                "description": "Defines the identity of a resource.",
+                                                "properties": {
+                                                    "id": {
+                                                        "description": "A String identifier.",
+                                                        "readOnly": true,
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            }
+                                        ],
+                                        "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
+                                        "properties": {
+                                            "adaptiveCard": {
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "immediateAction": {
+                                                "readOnly": true,
+                                                "type": "array"
+                                            },
+                                            "potentialAction": {
+                                                "items": {
+                                                    "allOf": [
+                                                        {
+                                                            "allOf": [
+                                                                {
+                                                                    "allOf": [
+                                                                        null
+                                                                    ],
+                                                                    "description": "Defines a thing.",
+                                                                    "properties": {
+                                                                        "url": {
+                                                                            "description": "The URL to get more information about the thing represented by this object.",
+                                                                            "readOnly": true,
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            ],
+                                                            "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+                                                            "properties": {
+                                                                "about": {
+                                                                    "description": "For internal use only.",
+                                                                    "readOnly": true,
+                                                                    "type": "array"
+                                                                },
+                                                                "commentCount": {
+                                                                    "format": "int32",
+                                                                    "readOnly": true,
+                                                                    "type": "integer"
+                                                                },
+                                                                "copyrightYear": {
+                                                                    "format": "int32",
+                                                                    "readOnly": true,
+                                                                    "type": "integer"
+                                                                },
+                                                                "disclaimer": {
+                                                                    "readOnly": true,
+                                                                    "type": "string"
+                                                                },
+                                                                "discussionUrl": {
+                                                                    "readOnly": true,
+                                                                    "type": "string"
+                                                                },
+                                                                "genre": {
+                                                                    "items": {
+                                                                        "type": "string"
+                                                                    },
+                                                                    "readOnly": true,
+                                                                    "type": "array"
+                                                                },
+                                                                "headLine": {
+                                                                    "readOnly": true,
+                                                                    "type": "string"
+                                                                },
+                                                                "isAccessibleForFree": {
+                                                                    "readOnly": true,
+                                                                    "type": "boolean"
+                                                                },
+                                                                "isFamilyFriendly": {
+                                                                    "readOnly": true,
+                                                                    "type": "boolean"
+                                                                },
+                                                                "mentions": {
+                                                                    "description": "For internal use only.",
+                                                                    "readOnly": true,
+                                                                    "type": "array"
+                                                                },
+                                                                "provider": {
+                                                                    "description": "The source of the creative work.",
+                                                                    "readOnly": true,
+                                                                    "type": "array"
+                                                                },
+                                                                "text": {
+                                                                    "description": "Text content of this creative work",
+                                                                    "readOnly": true,
+                                                                    "type": "string"
+                                                                },
+                                                                "thumbnailUrl": {
+                                                                    "description": "The URL to a thumbnail of the item.",
+                                                                    "readOnly": true,
+                                                                    "type": "string"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        }
+                                                    ],
+                                                    "properties": {
+                                                        "displayName": {
+                                                            "readOnly": true,
+                                                            "type": "string"
+                                                        },
+                                                        "isTopAction": {
+                                                            "readOnly": true,
+                                                            "type": "boolean"
+                                                        },
+                                                        "result": {
+                                                            "readOnly": true,
+                                                            "type": "array"
+                                                        },
+                                                        "serviceUrl": {
+                                                            "readOnly": true,
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "readOnly": true,
+                                                "type": "array"
+                                            },
+                                            "preferredClickthroughUrl": {
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "readLink": {
+                                                "description": "The URL that returns this resource.",
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "webSearchUrl": {
+                                                "description": "The URL To Bing's search result for this item.",
+                                                "readOnly": true,
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ],
+                                "description": "Defines an answer.",
+                                "properties": {},
+                                "type": "object"
+                            }
+                        ],
+                        "description": "Defines a search result answer.",
+                        "properties": {
+                            "queryContext": {
+                                "description": "Defines the query context that Bing used for the request.",
+                                "discriminator": {
+                                    "propertyName": "_type"
+                                },
+                                "properties": {
+                                    "_type": {
+                                        "type": "string"
+                                    },
+                                    "adultIntent": {
+                                        "description": "A Boolean value that indicates whether the specified query has adult intent. The value is true if the query has adult intent; otherwise, false.",
+                                        "readOnly": true,
+                                        "type": "boolean"
+                                    },
+                                    "alterationOverrideQuery": {
+                                        "description": "The query string to use to force Bing to use the original string. For example, if the query string is \"saling downwind\", the override query string will be \"+saling downwind\". Remember to encode the query string which results in \"%2Bsaling+downwind\". This field is included only if the original query string contains a spelling mistake.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    },
+                                    "alteredQuery": {
+                                        "description": "The query string used by Bing to perform the query. Bing uses the altered query string if the original query string contained spelling mistakes. For example, if the query string is \"saling downwind\", the altered query string will be \"sailing downwind\". This field is included only if the original query string contains a spelling mistake.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    },
+                                    "askUserForLocation": {
+                                        "description": "A Boolean value that indicates whether Bing requires the user's location to provide accurate results. If you specified the user's location by using the X-MSEdge-ClientIP and X-Search-Location headers, you can ignore this field. For location aware queries, such as \"today's weather\" or \"restaurants near me\" that need the user's location to provide accurate results, this field is set to true. For location aware queries that include the location (for example, \"Seattle weather\"), this field is set to false. This field is also set to false for queries that are not location aware, such as \"best sellers\".",
+                                        "readOnly": true,
+                                        "type": "boolean"
+                                    },
+                                    "isTransactional": {
+                                        "readOnly": true,
+                                        "type": "boolean"
+                                    },
+                                    "originalQuery": {
+                                        "description": "The query string as specified in the request.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "originalQuery",
+                                    "_type"
+                                ],
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ],
+                "properties": {
+                    "suggestionGroups": {
+                        "items": {
+                            "discriminator": {
+                                "propertyName": "_type"
+                            },
+                            "properties": {
+                                "_type": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "default": "Unknown",
+                                    "enum": [
+                                        "Unknown",
+                                        "Web",
+                                        "StoreApps",
+                                        "SearchHistory",
+                                        "PersonalSearchDocuments",
+                                        "PersonalSearchTags",
+                                        "Custom"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "ScenarioType"
+                                    }
+                                },
+                                "searchSuggestions": {
+                                    "items": {
+                                        "allOf": [
+                                            null
+                                        ],
+                                        "properties": {
+                                            "displayText": {
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "query": {
+                                                "readOnly": true,
+                                                "type": "string"
+                                            },
+                                            "searchKind": {
+                                                "default": "WebSearch",
+                                                "enum": [
+                                                    "WebSearch",
+                                                    "HistorySearch",
+                                                    "DocumentSearch",
+                                                    "TagSearch",
+                                                    "LocationSearch",
+                                                    "CustomSearch"
+                                                ],
+                                                "readOnly": true,
+                                                "type": "string",
+                                                "x-ms-enum": {
+                                                    "modelAsString": true,
+                                                    "name": "SearchKind"
+                                                }
+                                            }
+                                        },
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "name",
+                                "searchSuggestions",
+                                "_type"
+                            ],
+                            "type": "object",
+                            "x-ms-discriminator-value": "Suggestions/SuggestionGroup"
+                        },
+                        "type": "array"
+                    }
+                },
+                "required": [
+                    "suggestionGroups"
+                ],
+                "type": "object"
+            }
+        }
+    ],
+    "standardized_name": "bing_autosuggest"
+}

@@ -1,0 +1,518 @@
+{
+    "tool_name":"G Search",
+    "tool_description":"Web search API using best search engine",
+    "title":"G Search",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":99,
+        "avgLatency":1486,
+        "avgSuccessRate":99,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/datascraper/api/g-search/",
+    "host":"g-search.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"/location",
+            "url":"https://g-search.p.rapidapi.com/location",
+            "description":"The Location API lets you search for supported Google search locations. You can pass the `location_name` returned by the Location API as the `location_name` parameter and set the `location_parameters_auto` value to true in a Search API query to retrieve search results localized to that location.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"location_name",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"London"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"country_code",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"GB"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://g-search.p.rapidapi.com/location\"\nquerystring = {\"location_name\": location_name, \"country_code\": country_code}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"g-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "status":200,
+                "data":{
+                    "locations":[
+                        {
+                            "location_name":"London,England,United Kingdom",
+                            "location_type":"City",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"London TV Region,England,United Kingdom",
+                            "location_type":"TV Region",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"City of London,England,United Kingdom",
+                            "location_type":"County",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"Greater London,England,United Kingdom",
+                            "location_type":"County",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"London Colney,England,United Kingdom",
+                            "location_type":"City",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"London Luton Airport,England,United Kingdom",
+                            "location_type":"Airport",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"London Southend Airport,England,United Kingdom",
+                            "location_type":"Airport",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"London Borough of Lambeth,England,United Kingdom",
+                            "location_type":"Municipality",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        },
+                        {
+                            "location_name":"London Stansted Airport,England,United Kingdom",
+                            "location_type":"Airport",
+                            "country_code":"GB",
+                            "country_name":"United Kingdom"
+                        }
+                    ]
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cf-ray":"751cb539ab136bb7-SIN",
+                "content-length":"1288",
+                "content-type":"application/json;charset=UTF-8",
+                "date":"Wed, 28 Sep 2022 13:08:28 GMT",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=sw%2Bo6Cqvb6ZILKFi6NassriAYvVaxHGgV%2B7LAdZugLDpkOGEmRAuuIQpBzEVnzOp%2FLZMuQeVEQJ%2FTMqbCTp5paWgkBoNkLLM7r7aAcQyROEdLcvCvWe9VkSJpI1A5tqj9FS94ykbGpPa6kfPGJriH6ES0X3kpnUMio8%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-trial-number":"0"
+            },
+            "schema":{}
+        },
+        {
+            "name":"/search",
+            "url":"https://g-search.p.rapidapi.com/search",
+            "description":"Get Real-time Search Result Page",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"q",
+                    "type":"STRING",
+                    "description":"The parameter defines the query you want to search. You can use anything that you would use in a regular Google search. (e.g., `inurl:`, `site:`,` intitle:`, etc.) . You can also pass the absolute google search URL (**URL encoded**) here. For example, if you want to scrape the 2nd page of the SERP, you can pass the URL from the navigation field in the result response. If the absolute URL is passed here then others parameters will be ignored.",
+                    "default":"bitcoin"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"google_domain",
+                    "type":"STRING",
+                    "description":"The parameter defines the Google domain to use. It defaults to google.com",
+                    "default":""
+                },
+                {
+                    "name":"cr",
+                    "type":"STRING",
+                    "description":"The `cr` parameter instructs Google to limit the results to websites in the specified country.",
+                    "default":""
+                },
+                {
+                    "name":"tbs",
+                    "type":"STRING",
+                    "description":"(to be searched) the parameter defines advanced search parameters that aren't possible in the regular query field. (e.g., advanced search for patents, dates, news, videos, images, apps, or text contents).",
+                    "default":""
+                },
+                {
+                    "name":"nfpr",
+                    "type":"STRING",
+                    "description":"The parameter defines the exclusion of results from an auto-corrected query that is spelled wrong. It can be set to 1 to exclude these results, or 0 to include them (default).",
+                    "default":""
+                },
+                {
+                    "name":"gl",
+                    "type":"STRING",
+                    "description":"The `gl` parameter determines the Google country to use for the query.",
+                    "default":""
+                },
+                {
+                    "name":"safe",
+                    "type":"STRING",
+                    "description":"The parameter defines the level of filtering for adult content. It can be set to active, or off (default).",
+                    "default":""
+                },
+                {
+                    "name":"filter",
+                    "type":"STRING",
+                    "description":"The parameter defines if the filters for 'Similar Results' and 'Omitted Results' are on or off. It can be set to 1 (default) to enable these filters, or 0 to disable these filters.",
+                    "default":""
+                },
+                {
+                    "name":"location_parameters_auto",
+                    "type":"STRING",
+                    "description":"If the `location_name` parameter is set to a location from the Location Endpoint, and `location_parameters_auto` is set to true (default) then the `google_domain`, `gl` and hl parameters are automatically updated to the domain, country, and language that match the location. Valid values are true (default) to enable this behavior or false to disable it.",
+                    "default":"true"
+                },
+                {
+                    "name":"location_name",
+                    "type":"STRING",
+                    "description":"Specifies the geographic location where the query is executed. You can enter `location_name` with free text or use the result from the `/location` endpoint for a more valid value. When you select a `location_name` and assign `true` to the `location_parameters_auto` parameter, then the values in google_domain, `gl` and `hl` are automatically updated to the domain, country, and language matching the default location (note that this behavior can be disabled via location_parameters_auto).",
+                    "default":"London,Ontario,Canada"
+                },
+                {
+                    "name":"num",
+                    "type":"STRING",
+                    "description":"The parameter defines the maximum number of results to return. (e.g., 10 (default) returns 10 results, 40 returns 40 results, and 100 returns 100 results).",
+                    "default":""
+                },
+                {
+                    "name":"hl",
+                    "type":"STRING",
+                    "description":"The `hl` parameter determines the Google UI (display) language to return results.",
+                    "default":""
+                },
+                {
+                    "name":"lr",
+                    "type":"STRING",
+                    "description":"The `lr` parameter limits the results to websites containing the specified language.",
+                    "default":""
+                },
+                {
+                    "name":"start",
+                    "type":"STRING",
+                    "description":"`start` parameter defines the resulting offset. It skips the given number of results. It's used for pagination. (e.g., 0 (default) is the first page of results, 10 is the 2nd page of results, 20 is the 3rd page of results, etc.).",
+                    "default":""
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://g-search.p.rapidapi.com/search\"\nquerystring = {\"location_parameters_auto\": location_parameters_auto, \"location_name\": location_name, \"q\": q}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"g-search.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "status":200,
+                "data":{
+                    "result_stat":"About 691,000,000 results (0.79 seconds)",
+                    "organic_results":[
+                        {
+                            "title":"Bitcoin - Open source P2P money",
+                            "url":"https://bitcoin.org/",
+                            "desc":"Bitcoin is an innovative payment network and a new kind of money. Find all you need to know and get started with Bitcoin on bitcoin .org. ‎ FAQ · ‎ Introduction · ‎ Resources · ‎ Innovation"
+                        },
+                        {
+                            "title":"Bitcoin.com | Buy BTC, ETH & BCH | Wallet, news, markets ...",
+                            "url":"https://www.bitcoin.com/",
+                            "desc":"Your gateway to Bitcoin & beyond. The tools and information you need to buy, sell, trade, invest, and spend cryptocurrencies. Get started."
+                        },
+                        {
+                            "title":"Bitcoin Price | BTC Price Index and Live Chart — CoinDesk 20",
+                            "url":"https://www.coindesk.com/price/bitcoin/",
+                            "desc":"Bitcoin USD price, real-time (live) charts, news and videos. Learn about BTC value, bitcoin cryptocurrency, crypto trading, and more."
+                        },
+                        {
+                            "title":"Bitcoin - Wikipedia",
+                            "url":"https://en.wikipedia.org/wiki/Bitcoin",
+                            "desc":"Bitcoin (abbreviation: BTC; sign: ₿) is a decentralized digital currency that can be transferred on the peer-to-peer bitcoin network. Ledger start: 3 January 2009 (13 years ago) Initial release: 0.1.0 / 9 January 2009 (13 years ... Supply limit: ₿21,000,000 Original author(s): Satoshi Nakamoto"
+                        },
+                        {
+                            "title":"Coinbase - Buy and Sell Bitcoin, Ethereum, and more with trust",
+                            "url":"https://www.coinbase.com/",
+                            "desc":"Explore crypto like Bitcoin , Ethereum, and Dogecoin. Simply and securely buy, sell, and manage hundreds of cryptocurrencies. See more assets. Top Gainers."
+                        },
+                        {
+                            "title":"Bitcoin USD (BTC-USD) Price, Value, News & History",
+                            "url":"https://finance.yahoo.com/quote/BTC-USD/",
+                            "desc":"Find the latest Bitcoin USD (BTC-USD) price quote, history, news and other vital information to help you with your cryptocurrency trading and investing."
+                        },
+                        {
+                            "title":"Bitcoin price today, BTC to USD live, marketcap and chart",
+                            "url":"https://coinmarketcap.com/currencies/bitcoin/",
+                            "desc":"Bitcoin Price (BTC) · Bitcoin is a decentralized cryptocurrency originally described in a 2008 · Bitcoin is a peer-to-peer online currency, meaning that all · On ..."
+                        }
+                    ],
+                    "related_questions":[
+                        {
+                            "question":"How much is $1 Bitcoin in US dollars?",
+                            "answer_text":"19,070.4 USD",
+                            "answer_html":"<div class=\"wDYxhc NFQFxe viOShc LKPcQc\" data-md=\"25\" style=\"clear:none\"><div class=\"HwtpBd gsrt PZPZlf kTOYnf\" aria-level=\"3\" role=\"heading\" data-hveid=\"CD4QAA\" data-ved=\"2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0QtwcoAHoECD4QAA\"><div class=\"Z0LcW AZCkJd d2J77b t2b5Cf\" data-tts=\"answers\" data-tts-text=\"19,070.4 USD\"><div class=\"IZ6rdc\">19,070.4 USD</div></div><div class=\"yxAsKe\"></div></div></div>"
+                        },
+                        {
+                            "question":"How long does it take to mine 1 Bitcoin?",
+                            "answer_text":"about 10 minutes",
+                            "answer_html":"<div class=\"wDYxhc NFQFxe viOShc LKPcQc\" data-md=\"25\" style=\"clear:none\"><div class=\"HwtpBd gsrt PZPZlf kTOYnf\" aria-level=\"3\" role=\"heading\" data-hveid=\"CFIQAA\" data-ved=\"2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0QtwcoAHoECFIQAA\"><div class=\"Z0LcW AZCkJd d2J77b t2b5Cf\" data-tts=\"answers\" data-tts-text=\"about 10 minutes\"><div class=\"IZ6rdc\">about 10 minutes</div></div><div class=\"yxAsKe\"></div></div></div>"
+                        },
+                        {
+                            "question":"How do beginners buy bitcoins?",
+                            "answer_text":"How to Invest in Bitcoin in 5 Steps Join a Bitcoin Exchange. Get a Bitcoin Wallet. Connect Your Wallet to a Bank Account. Place Your Bitcoin Order. Manage Your Bitcoin Investments.",
+                            "answer_html":"<div class=\"wDYxhc\" data-md=\"83\"><div class=\"di3YZe\"><div class=\"co8aDb\" aria-level=\"3\" role=\"heading\"><b>How to Invest in Bitcoin in 5 Steps</b></div><div class=\"RqBzHd\"><ol class=\"X5LH0c\"><li class=\"TrT0Xe\">Join a Bitcoin Exchange.</li><li class=\"TrT0Xe\">Get a Bitcoin Wallet.</li><li class=\"TrT0Xe\">Connect Your Wallet to a Bank Account.</li><li class=\"TrT0Xe\">Place Your Bitcoin Order.</li><li class=\"TrT0Xe\">Manage Your Bitcoin Investments.</li></ol><div class=\"u9iNfb\"></div></div></div></div>",
+                            "source":"https://www.fortunebuilders.com/how-to-invest-in-bitcoin/"
+                        },
+                        {
+                            "question":"How does Bitcoin make money?",
+                            "answer_text":"How Does Bitcoin Make Money? The Bitcoin network of miners make money from Bitcoin by successfully validating blocks and being rewarded . Bitcoins are exchangeable for fiat currency via cryptocurrency exchanges and can be used to make purchases from merchants and retailers that accept them.",
+                            "answer_html":"<div class=\"wDYxhc\" data-md=\"61\" style=\"clear:none\"><div class=\"LGOjhe\" data-attrid=\"wa:/description\" aria-level=\"3\" role=\"heading\" data-hveid=\"CEgQAA\"><span class=\"ILfuVd\" lang=\"en\"><span class=\"hgKElc\">How Does Bitcoin Make Money? <b>The Bitcoin network of miners make money from Bitcoin by successfully validating blocks and being rewarded</b>. Bitcoins are exchangeable for fiat currency via cryptocurrency exchanges and can be used to make purchases from merchants and retailers that accept them.</span></span></div></div>",
+                            "source":"https://www.investopedia.com/terms/b/bitcoin.asp"
+                        }
+                    ],
+                    "image_results":[],
+                    "image_filters":[],
+                    "video_results":[
+                        {
+                            "title":"Crypto Firms' Executives Quit; Bitcoin Breaks $19000 Level",
+                            "url":"https://www.youtube.com/watch?v=UYo6CFUhYGg",
+                            "image":"https://i.ytimg.com/vi/UYo6CFUhYGg/mqdefault.jpg?sqp=-oaymwEECHwQRg&rs=AMzJL3kgXTwB1-dGiZxZKEvKSXHbwbBWpw"
+                        }
+                    ],
+                    "inline_products":[],
+                    "inline_cards":[],
+                    "inline_twitter":[
+                        {
+                            "url":"https://twitter.com/Bitcoin/status/1574983604798570496?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet"
+                        },
+                        {
+                            "url":"https://twitter.com/Bitcoin/status/1574621666839171072?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet"
+                        },
+                        {
+                            "url":"https://twitter.com/Bitcoin/status/1574737932006477824?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet"
+                        },
+                        {
+                            "tweet":"Poof.",
+                            "url":"https://twitter.com/Bitcoin/status/1574217083142885376?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Etweet"
+                        }
+                    ],
+                    "knowledge_graph":{
+                        "description":"Bitcoin is a decentralized digital currency that can be transferred on the peer-to-peer bitcoin network. Bitcoin transactions are verified by network nodes through cryptography and recorded in a public distributed ledger called a blockchain.",
+                        "informations":[
+                            {
+                                "attribute":"ss:/webfacts:code",
+                                "value":{
+                                    "title":"Code",
+                                    "desc":"BTC, XBT"
+                                }
+                            },
+                            {
+                                "attribute":"ss:/webfacts:exchang_rate",
+                                "value":{
+                                    "title":"Exchange rate",
+                                    "desc":"Floating"
+                                }
+                            },
+                            {
+                                "attribute":"ss:/webfacts:white_paper",
+                                "value":{
+                                    "title":"White paper",
+                                    "desc":"\" Bitcoin: A Peer-to-Peer Electronic Cash System \""
+                                }
+                            },
+                            {
+                                "attribute":"ss:/webfacts:block_reward",
+                                "value":{
+                                    "title":"Block reward",
+                                    "desc":"₿6.25"
+                                }
+                            },
+                            {
+                                "attribute":"ss:/webfacts:circul_suppli",
+                                "value":{
+                                    "title":"Circulating supply",
+                                    "desc":"₿18,925,000"
+                                }
+                            },
+                            {
+                                "attribute":"ss:/webfacts:hash_function",
+                                "value":{
+                                    "title":"Hash function",
+                                    "desc":"SHA-256 (two rounds)"
+                                }
+                            },
+                            {
+                                "attribute":"hw:/collection/currencies:symbol",
+                                "value":{
+                                    "title":"Symbols",
+                                    "desc":"BTC, ฿, ₿"
+                                }
+                            },
+                            {
+                                "attribute":"kc:/common:downwards",
+                                "value":"Bitcoin Foundation Bitcoin Association Bitcoin Association for BSV BitGive Foundation"
+                            },
+                            {
+                                "attribute":"kc:/common:downwards",
+                                "value":"Michael J. Saylor Roger Ver Jack Dorsey Sam Bankman‑Fried"
+                            }
+                        ],
+                        "answer_panel":[]
+                    },
+                    "section_with_header":{
+                        "section_list":[]
+                    },
+                    "navigation":{
+                        "current_page":"1",
+                        "other_pages":[
+                            {
+                                "page":"2",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=10&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhA6"
+                            },
+                            {
+                                "page":"3",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=20&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhA8"
+                            },
+                            {
+                                "page":"4",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=30&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhA-"
+                            },
+                            {
+                                "page":"5",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=40&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhBA"
+                            },
+                            {
+                                "page":"6",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=50&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhBC"
+                            },
+                            {
+                                "page":"7",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=60&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhBE"
+                            },
+                            {
+                                "page":"8",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=70&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhBG"
+                            },
+                            {
+                                "page":"9",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=80&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhBI"
+                            },
+                            {
+                                "page":"10",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=90&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8tMDegQIAhBK"
+                            },
+                            {
+                                "page":"Next",
+                                "url":"https://www.google.com/search?q=bitcoin&gl=US&hl=en&ei=wUY0Y8SwJLi-xc8P_6GsaA&start=10&sa=N&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q8NMDegQIAhBM"
+                            }
+                        ]
+                    },
+                    "top_section":{
+                        "featured_snippet":{},
+                        "answer_box":{
+                            "title":"Currency Converter",
+                            "exchange_rate_value":"19063.100000000002",
+                            "exchange_rate":"0x Aion Ardor Ark Augur Bancor Basic Attention Token Binance Coin BitShares Bitcoin Bitcoin Cash Bitgem Bytecoin Bytom Cardano ChainLink Dash Decred DigiByte DigitalNote DigixDAO Dogecoin EOS ETC Enigma Ether Factom FunFair GameCredits Gas Gnosis Golem Groestlcoin Hshare ICON KingN Coin Komodo Lisk Litecoin MANA MaidSafeCoin MonaCoin Monero NEM NEO Nano Neblio Nexus Nxt OmiseGO Ontology PIVX Populous Power Ledger QASH Qtum Quantstamp Raiden Network Token ReddCoin Request Network SALT Santiment Network Token Siacoin Status Steem Stellar Stratis Substratum Syscoin TRON TenX Tether Time New Bank Verge Veritaseum Voyager Tokens Waltonchain Wanchain Waves XRP ZClassic Zilliqa aelf iCoin BTC"
+                        }
+                    },
+                    "query":{
+                        "auto_correction":{},
+                        "related_search":[
+                            {
+                                "query":"Dogecoin",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Dogecoin&stick=H4sIAAAAAAAAAOOQUeLSz9U3qMqtyLYsMRJMLqosKMlXSC4tKkrNS85MLY5iT8osSc7PzDvFiKTwFCOvfrq-oWF6mlFKcnlSFlSyxNTEJMcEJpkSX15SlmyaDeOnGRsWGGVYVpxi5AAptswrTDvFyA1iGhobFJoYJsEU5malWRoWmCcjNGZVpmXk5SH4ecbmJRnZvxgFndHdu4iVwyU_PRXk4ltskgymH1uZvp2o3LJ_bnvKzTzO53uWf_QOTGy5BgDC5FRH-AAAAA&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Qs9oBKAB6BAhLEAI"
+                            },
+                            {
+                                "query":"Cardano",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Cardano&stick=H4sIAAAAAAAAAOOQUeLVT9c3NExPM0pJLk_KMhJMLqosKMlXSC4tKkrNS85MLY5iT8osSc7PzDvFyKWfq29QlVuRbVlyihFVI1SyxNTEJMcEJpkSX15SlmyaDeOnGRsWGGVYVpxi5AAptswrTDvFyA1iGhobFJoYJsEU5malWRoWmCcjNGZVpmXk5SH4ecbmJRnZvxgFndHdu4iV3TmxKCUxL_8WmySD6cdWpm8nKrfsn9uecjOP8_me5R-9AxNbrgEAR1fjkvoAAAA&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Qs9oBKAF6BAhLEAM"
+                            },
+                            {
+                                "query":"Litecoin",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Litecoin&stick=H4sIAAAAAAAAAOOQUeLSz9U3KDE1MckxMRJMLqosKMlXSC4tKkrNS85MLY5iT8osSc7PzDvFCFZYlVuRbVlyipFXP13f0DA9zSgluTwpCyoJMQUmmRJfXlKWbJoN46cZGxYYZVhWnGLkACm2zCtMO8XIDWIaGhsUmhgmwRTmZqVZGhaYJyM0ZlWmZeTlIfh5xuYlGdm_GAWd0d27iJXDJ7MkFeTiW2ySDKYfW5m-najcsn9ue8rNPM7ne5Z_9A5MbLkGAJuMMJL4AAAA&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Qs9oBKAJ6BAhLEAQ"
+                            },
+                            {
+                                "query":"Bitcoin Cash",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+Cash&stick=H4sIAAAAAAAAAOOQUeLVT9c3NEyJLy8pSzbNNhJMLqosKMlXSC4tKkrNS85MLY5iT8osSc7PzDvFyKWfq29QlVuRbVlyihGiMT3NKCW5PCkLKlliamKSYwKThJkK46cZGxYYZVhWnGLkACm2zCtMO8XIDWIaGhsUmhgmwRTmZqVZGhaYJyM0ZlWmZeTlIfh5xuYlGdm_GAWd0d27iJXHCeJgBefE4oxbbJIMph9bmb6dqNyyf257ys08zud7ln_0DkxsuQYAL4t3G_8AAAA&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Qs9oBKAN6BAhLEAU"
+                            },
+                            {
+                                "query":"Tether",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Tether&stick=H4sIAAAAAAAAAOOQUeLVT9c3NEwzNiwwyrCsMBJMLqosKMlXSC4tKkrNS85MLY5iT8osSc7PzDvFyKWfq29QlVuRbVlyihGiMT3NKCW5PCkLKlliamKSYwKTTIkvLylLNs2G8WG2nGLkACm2zCtMO8XIDWIaGhsUmhgmwRTmZqVZGhaYJyM0ZlWmZeTlIfh5xuYlGdm_GAWd0d27iJUtJLUkI7XoFpskg-nHVqZvJyq37J_bnnIzj_P5nuUfvQMTW64BAH1NppD5AAAA&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Qs9oBKAR6BAhLEAY"
+                            },
+                            {
+                                "query":"United States Dollar",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=U.S.+Dollar&stick=H4sIAAAAAAAAAOOQUeLQz9U3sMwrTDMSTC6qLCjJV0guLSpKzUvOTC2OYk_KLEnOz8w7xcgFUlaVW5FtWXKKkVc_Xd_QMD3NKCW5PCkLKlliamKSYwKTTIkvLylLNs2G8dOMDQuMMiwrTjHCLTzFyA1iGhobFJoYJsEU5malWRoWmCcjNGZVpmXk5SH4ecbmJRnZvxgFndHdu4iVO1QvWE_BJT8nJ7HoFpskg-nHVqZvJyq37J_bnnIzj_P5nuUfvQMTW64BAHIB3gz5AAAA&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Qs9oBKAV6BAhLEAc"
+                            },
+                            {
+                                "query":"bitcoin price",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+price&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhqEAE"
+                            },
+                            {
+                                "query":"bitcoin usd",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+USD&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhoEAE"
+                            },
+                            {
+                                "query":"bitcoin news",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+news&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhnEAE"
+                            },
+                            {
+                                "query":"bitcoin mining",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+mining&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhkEAE"
+                            },
+                            {
+                                "query":"bitcoin account",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+account&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhjEAE"
+                            },
+                            {
+                                "query":"how to buy bitcoin",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=How+to+buy+Bitcoin&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhiEAE"
+                            },
+                            {
+                                "query":"bitcoin chart",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+chart&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhgEAE"
+                            },
+                            {
+                                "query":"bitcoin - wikipedia",
+                                "url":"https://www.google.com/search?gl=US&hl=en&q=Bitcoin+-+Wikipedia&sa=X&ved=2ahUKEwiElZ7lxrf6AhU4X_EDHf8QCw0Q1QJ6BAhtEAE"
+                            }
+                        ]
+                    },
+                    "local_results":{
+                        "map":{},
+                        "places":[],
+                        "hotels":[]
+                    },
+                    "ads":{
+                        "top_text_ads":[],
+                        "bottom_text_ads":[],
+                        "product_ads":[],
+                        "sidebar_product_ads":[]
+                    },
+                    "search_parameters":{
+                        "gl":"US",
+                        "hl":"en"
+                    }
+                }
+            },
+            "headers":{
+                "access-control-allow-credentials":"true",
+                "access-control-allow-origin":"*",
+                "alt-svc":"h3=\":443\"; ma=86400, h3-29=\":443\"; ma=86400",
+                "cf-ray":"751cb1ce9bb589bf-SIN",
+                "content-length":"13672",
+                "content-type":"application/json;charset=UTF-8",
+                "date":"Wed, 28 Sep 2022 13:06:22 GMT",
+                "nel":"{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}",
+                "report-to":"{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=fSW6ZvnMI%2FukToAl1RzcTJJsDPbJcKUhpUtc4J%2BfKbYfv9OtnX7xX6cDgnCxkkzZznsZL%2BDnu9WnRaV2iTOkWC3XlDXDKU40jfiY%2B1bOKt7tf3BisoDU1FXXC7ccTqvUQSjN2SAMAiG2ilZHNmov8hZ3jgCKxX5tPR8%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}",
+                "server":"RapidAPI-1.2.8",
+                "x-rapidapi-region":"AWS - ap-southeast-1",
+                "x-rapidapi-version":"1.2.8",
+                "x-trial-number":"None"
+            },
+            "schema":{}
+        }
+    ]
+}

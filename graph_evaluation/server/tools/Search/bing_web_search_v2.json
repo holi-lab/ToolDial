@@ -1,0 +1,721 @@
+{
+    "product_id": "api_0ca4c0d4-ef2a-47f1-8c9d-ffce8bcf31f6",
+    "tool_description": "An AI service from Microsoft Azure that enables safe, ad-free, location-aware search for your users, surfacing relevant information from web results, images, local businesses, news, videos, and visuals.",
+    "home_url": "https://rapidapi.com/microsoft-azure-org-microsoft-cognitive-services/api/bing-web-search1/",
+    "name": "Bing Web Search_v2",
+    "title": "Bing Web Search",
+    "pricing": "FREEMIUM",
+    "tool_name": "Bing Web Search_v2",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 321,
+        "avgSuccessRate": 100,
+        "popularityScore": 9.7,
+        "__typename": "Score"
+    },
+    "host": "bing-web-search1.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "Web Search",
+            "url": "https://bing-web-search1.p.rapidapi.com/search",
+            "description": "The Bing Web Search API enables you to integrate Bing's search capabilities in your applications. By sending search queries with the API, you can get relevant webpages, images, videos, news and more.",
+            "method": "GET",
+            "required_parameters": [
+                {
+                    "name": "q",
+                    "type": "STRING",
+                    "description": "The user's search query term. The term may not be empty. The term may contain Bing Advanced Operators. For example, to limit results to a specific domain, use the site: operator.",
+                    "default": ""
+                }
+            ],
+            "optional_parameters": [
+                {
+                    "name": "responseFilter",
+                    "type": "ARRAY",
+                    "description": "A comma-delimited list of answers to include in the response. If you do not specify this parameter, the response includes all search answers for which there's relevant data. Possible filter values are Computation, Images, News, RelatedSearches, SpellSuggestions, TimeZone, Videos, Webpages. Although you may use this filter to get a single answer, you should instead use the answer-specific endpoint in order to get richer results. For example, to receive only images, send the request to one of the Image Search API endpoints. The RelatedSearches and SpellSuggestions answers do not support a separate endpoint like the Image Search API does (only the Web Search API returns them). To include answers that would otherwise be excluded because of ranking, see the promote query parameter.",
+                    "default": ""
+                },
+                {
+                    "name": "cc",
+                    "type": "STRING",
+                    "description": "A 2-character country code of the country where the results come from. This API supports only the United States market. If you specify this query parameter, it must be set to us. If you set this parameter, you must also specify the Accept-Language header. Bing uses the first supported language it finds from the languages list, and combine that language with the country code that you specify to determine the market to return results for. If the languages list does not include a supported language, Bing finds the closest language and market that supports the request, or it may use an aggregated or default market for the results instead of a specified one. You should use this query parameter and the Accept-Language query parameter only if you specify multiple languages; otherwise, you should use the mkt and setLang query parameters. This parameter and the mkt query parameter are mutually exclusive\u2014do not specify both.",
+                    "default": ""
+                },
+                {
+                    "name": "mkt",
+                    "type": "STRING",
+                    "description": "The market where the results come from. Typically, mkt is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form <language code>-<country code>. For example, en-US. The string is case insensitive. If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market Codes, Bing uses a best fit market code based on an internal mapping that is subject to change. This parameter and the cc query parameter are mutually exclusive\u2014do not specify both.",
+                    "default": "en-us"
+                },
+                {
+                    "name": "promote",
+                    "type": "ARRAY",
+                    "description": "A comma-delimited list of answers that you want the response to include regardless of their ranking. For example, if you set answerCount) to two (2) so Bing returns the top two ranked answers, but you also want the response to include news, you'd set promote to news. If the top ranked answers are webpages, images, videos, and relatedSearches, the response includes webpages and images because news is not a ranked answer. But if you set promote to video, Bing would promote the video answer into the response and return webpages, images, and videos. The answers that you want to promote do not count against the answerCount limit. For example, if the ranked answers are news, images, and videos, and you set answerCount to 1 and promote to news, the response contains news and images. Or, if the ranked answers are videos, images, and news, the response contains videos and news. Possible values are Computation, Images, News, RelatedSearches, SpellSuggestions, TimeZone, Videos, Webpages. Use only if you specify answerCount.",
+                    "default": ""
+                },
+                {
+                    "name": "textDecorations",
+                    "type": "BOOLEAN",
+                    "description": "A Boolean value that determines whether display strings should contain decoration markers such as hit highlighting characters. If true, the strings may include markers. The default is false. To specify whether to use Unicode characters or HTML tags as the markers, see the textFormat query parameter.",
+                    "default": ""
+                },
+                {
+                    "name": "setLang",
+                    "type": "STRING",
+                    "description": "The language to use for user interface strings. Specify the language using the ISO 639-1 2-letter language code. For example, the language code for English is EN. The default is EN (English). Although optional, you should always specify the language. Typically, you set setLang to the same language specified by mkt unless the user wants the user interface strings displayed in a different language. This parameter and the Accept-Language header are mutually exclusive; do not specify both. A user interface string is a string that's used as a label in a user interface. There are few user interface strings in the JSON response objects. Also, any links to Bing.com properties in the response objects apply the specified language.",
+                    "default": ""
+                },
+                {
+                    "name": "count",
+                    "type": "NUMBER",
+                    "description": "The number of search results to return in the response. The default is 10 and the maximum value is 50. The actual number delivered may be less than requested.Use this parameter along with the offset parameter to page results.For example, if your user interface displays 10 search results per page, set count to 10 and offset to 0 to get the first page of results. For each subsequent page, increment offset by 10 (for example, 0, 10, 20). It is possible for multiple pages to include some overlap in results.",
+                    "default": ""
+                },
+                {
+                    "name": "safeSearch",
+                    "type": "STRING",
+                    "description": "A filter used to filter adult content. Off: Return webpages with adult text, images, or videos. Moderate: Return webpages with adult text, but not adult images or videos. Strict: Do not return webpages with adult text, images, or videos. The default is Moderate. If the request comes from a market that Bing's adult policy requires that safeSearch is set to Strict, Bing ignores the safeSearch value and uses Strict. If you use the site: query operator, there is the chance that the response may contain adult content regardless of what the safeSearch query parameter is set to. Use site: only if you are aware of the content on the site and your scenario supports the possibility of adult content.",
+                    "default": "Off"
+                },
+                {
+                    "name": "textFormat",
+                    "type": "STRING",
+                    "description": "The type of markers to use for text decorations (see the textDecorations query parameter). Possible values are Raw\u2014Use Unicode characters to mark content that needs special formatting. The Unicode characters are in the range E000 through E019. For example, Bing uses E000 and E001 to mark the beginning and end of query terms for hit highlighting. HTML\u2014Use HTML tags to mark content that needs special formatting. For example, use <b> tags to highlight query terms in display strings. The default is Raw. For display strings that contain escapable HTML characters such as <, >, and &, if textFormat is set to HTML, Bing escapes the characters as appropriate (for example, < is escaped to &lt;).",
+                    "default": "Raw"
+                },
+                {
+                    "name": "offset",
+                    "type": "NUMBER",
+                    "description": "The zero-based offset that indicates the number of search results to skip before returning results. The default is 0. The offset should be less than (totalEstimatedMatches - count). Use this parameter along with the count parameter to page results. For example, if your user interface displays 10 search results per page, set count to 10 and offset to 0 to get the first page of results. For each subsequent page, increment offset by 10 (for example, 0, 10, 20). it is possible for multiple pages to include some overlap in results.",
+                    "default": ""
+                },
+                {
+                    "name": "answerCount",
+                    "type": "NUMBER",
+                    "description": "The number of answers that you want the response to include. The answers that Bing returns are based on ranking. For example, if Bing returns webpages, images, videos, and relatedSearches for a request and you set this parameter to two (2), the response includes webpages and images.If you included the responseFilter query parameter in the same request and set it to webpages and news, the response would include only webpages.",
+                    "default": ""
+                },
+                {
+                    "name": "freshness",
+                    "type": "STRING",
+                    "description": "Filter search results by the following age values: Day\u2014Return webpages that Bing discovered within the last 24 hours. Week\u2014Return webpages that Bing discovered within the last 7 days. Month\u2014Return webpages that discovered within the last 30 days. This filter applies only to webpage results and not to the other results such as news and images.",
+                    "default": "Day"
+                }
+            ],
+            "code": "import requests\n\nurl = \"https://bing-web-search1.p.rapidapi.com/search\"\nquerystring = {\"responseFilter\": \"\", \"cc\": \"\", \"mkt\": \"en-us\", \"promote\": \"\", \"textDecorations\": \"\", \"setLang\": \"\", \"count\": \"\", \"safeSearch\": \"Off\", \"textFormat\": \"Raw\", \"offset\": \"\", \"q\": \"\", \"answerCount\": \"\", \"freshness\": \"Day\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-web-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://bing-web-search1.p.rapidapi.com/search\"\nquerystring = {\"responseFilter\": \"\", \"cc\": \"\", \"mkt\": \"en-us\", \"promote\": \"\", \"textDecorations\": \"\", \"setLang\": \"\", \"count\": \"\", \"safeSearch\": \"Off\", \"textFormat\": \"Raw\", \"offset\": \"\", \"q\": \"\", \"answerCount\": \"\", \"freshness\": \"Day\"}\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"bing-web-search1.p.rapidapi.com\"\n        }\n\nresponse = requests.get(url, headers=headers, params=querystring)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "allOf": [
+                    {
+                        "allOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "discriminator": {
+                                            "propertyName": "_type"
+                                        },
+                                        "properties": {
+                                            "_type": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "required": [
+                                            "_type"
+                                        ],
+                                        "type": "object"
+                                    }
+                                ],
+                                "description": "Defines the identity of a resource.",
+                                "properties": {
+                                    "id": {
+                                        "description": "A String identifier.",
+                                        "readOnly": true,
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        ],
+                        "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
+                        "properties": {
+                            "webSearchUrl": {
+                                "description": "The URL To Bing's search result for this item.",
+                                "readOnly": true,
+                                "type": "string"
+                            }
+                        },
+                        "type": "object"
+                    }
+                ],
+                "description": "Defines the top-level object that the response includes when the request succeeds.",
+                "properties": {
+                    "computation": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines an expression and its answer",
+                        "properties": {
+                            "expression": {
+                                "description": "The math or conversion expression. If the query contains a request to convert units of measure (for example, meters to feet), this field contains the from units and value contains the to units. If the query contains a mathematical expression such as 2+2, this field contains the expression and value contains the answer. Note that mathematical expressions may be normalized. For example, if the query was sqrt(4^2+8^2), the normalized expression may be sqrt((4^2)+(8^2)). If the user's query is a math question and the textDecorations query parameter is set to true, the expression string may include formatting markers. For example, if the user's query is log(2), the normalized expression includes the subscript markers. For more information, see Hit Highlighting.",
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "The expression's answer.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "expression",
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "images": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines an image answer",
+                        "properties": {
+                            "nextOffset": {
+                                "format": "int32",
+                                "readOnly": true,
+                                "type": "integer"
+                            },
+                            "queryExpansions": {
+                                "readOnly": true,
+                                "type": "array"
+                            },
+                            "relatedSearches": {
+                                "readOnly": true,
+                                "type": "array"
+                            },
+                            "similarTerms": {
+                                "readOnly": true,
+                                "type": "array"
+                            },
+                            "value": {
+                                "description": "A list of image objects that are relevant to the query. If there are no results, the List is empty.",
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "news": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines a news answer.",
+                        "properties": {
+                            "location": {
+                                "readOnly": true,
+                                "type": "string"
+                            },
+                            "value": {
+                                "description": "An array of NewsArticle objects that contain information about news articles that are relevant to the query. If there are no results to return for the request, the array is empty.",
+                                "items": {
+                                    "allOf": [
+                                        {
+                                            "allOf": [
+                                                null
+                                            ],
+                                            "properties": {
+                                                "wordCount": {
+                                                    "description": "The number of words in the text of the Article.",
+                                                    "format": "int32",
+                                                    "readOnly": true,
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    ],
+                                    "description": "Defines a news article.",
+                                    "properties": {},
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "queryContext": {
+                        "description": "Defines the query context that Bing used for the request.",
+                        "properties": {
+                            "adultIntent": {
+                                "description": "A Boolean value that indicates whether the specified query has adult intent. The value is true if the query has adult intent; otherwise, false.",
+                                "readOnly": true,
+                                "type": "boolean"
+                            },
+                            "alterationOverrideQuery": {
+                                "description": "The query string to use to force Bing to use the original string. For example, if the query string is \"saling downwind\", the override query string will be \"+saling downwind\". Remember to encode the query string which results in \"%2Bsaling+downwind\". This field is included only if the original query string contains a spelling mistake.",
+                                "readOnly": true,
+                                "type": "string"
+                            },
+                            "alteredQuery": {
+                                "description": "The query string used by Bing to perform the query. Bing uses the altered query string if the original query string contained spelling mistakes. For example, if the query string is \"saling downwind\", the altered query string will be \"sailing downwind\". This field is included only if the original query string contains a spelling mistake.",
+                                "readOnly": true,
+                                "type": "string"
+                            },
+                            "askUserForLocation": {
+                                "description": "A Boolean value that indicates whether Bing requires the user's location to provide accurate results. If you specified the user's location by using the X-MSEdge-ClientIP and X-Search-Location headers, you can ignore this field. For location aware queries, such as \"today's weather\" or \"restaurants near me\" that need the user's location to provide accurate results, this field is set to true. For location aware queries that include the location (for example, \"Seattle weather\"), this field is set to false. This field is also set to false for queries that are not location aware, such as \"best sellers\".",
+                                "readOnly": true,
+                                "type": "boolean"
+                            },
+                            "isTransactional": {
+                                "readOnly": true,
+                                "type": "boolean"
+                            },
+                            "originalQuery": {
+                                "description": "The query string as specified in the request.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "originalQuery"
+                        ],
+                        "type": "object"
+                    },
+                    "rankingResponse": {
+                        "description": "Defines where on the search results page content should be placed and in what order.",
+                        "properties": {
+                            "pole": {
+                                "description": "Defines a search results group, such as mainline.",
+                                "properties": {
+                                    "items": {
+                                        "description": "A list of search result items to display in the group.",
+                                        "items": {
+                                            "description": "Defines a search result item to display",
+                                            "properties": {
+                                                "answerType": {
+                                                    "default": "WebPages",
+                                                    "description": "The answer that contains the item to display. Use the type to find the answer in the SearchResponse object. The type is the name of a SearchResponse field.",
+                                                    "enum": [
+                                                        "WebPages",
+                                                        "Images",
+                                                        "SpellSuggestions",
+                                                        "News",
+                                                        "RelatedSearches",
+                                                        "Videos",
+                                                        "Computation",
+                                                        "TimeZone"
+                                                    ],
+                                                    "type": "string",
+                                                    "x-ms-enum": {
+                                                        "modelAsString": true,
+                                                        "name": "AnswerType"
+                                                    }
+                                                },
+                                                "htmlIndex": {
+                                                    "format": "int32",
+                                                    "readOnly": true,
+                                                    "type": "integer"
+                                                },
+                                                "resultIndex": {
+                                                    "description": "A zero-based index of the item in the answer.If the item does not include this field, display all items in the answer. For example, display all news articles in the News answer.",
+                                                    "format": "int32",
+                                                    "readOnly": true,
+                                                    "type": "integer"
+                                                },
+                                                "screenshotIndex": {
+                                                    "format": "int32",
+                                                    "readOnly": true,
+                                                    "type": "integer"
+                                                },
+                                                "textualIndex": {
+                                                    "format": "int32",
+                                                    "readOnly": true,
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "answerType"
+                                            ],
+                                            "type": "object",
+                                            "x-ms-discriminator-value": "Ranking/RankingItem"
+                                        },
+                                        "type": "array"
+                                    }
+                                },
+                                "required": [
+                                    "items"
+                                ],
+                                "type": "object",
+                                "x-ms-discriminator-value": "Ranking/RankingGroup"
+                            }
+                        },
+                        "type": "object",
+                        "x-ms-discriminator-value": "Ranking/RankingResponse"
+                    },
+                    "relatedSearches": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines a list of related queries made by others.",
+                        "properties": {
+                            "value": {
+                                "description": "A list of related queries that were made by others.",
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "type": "object",
+                        "x-ms-discriminator-value": "RelatedSearches/RelatedSearchAnswer"
+                    },
+                    "spellSuggestions": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines a suggested query string that likely represents the user's intent. The search results include this response if Bing determines that the user may have intended to search for something different. For example, if the user searches for alon brown, Bing may determine that the user likely intended to search for Alton Brown instead (based on past searches by others of Alon Brown).",
+                        "properties": {
+                            "value": {
+                                "description": "A list of suggested query strings that may represent the user's intention. The list contains only one Query object.",
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "timeZone": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines the data and time of one or more geographic locations.",
+                        "properties": {
+                            "otherCityTimes": {
+                                "description": "A list of dates and times of nearby time zones.",
+                                "readOnly": true,
+                                "type": "array"
+                            },
+                            "primaryCityTime": {
+                                "description": "Defines a date and time for a geographical location.",
+                                "properties": {
+                                    "location": {
+                                        "description": "The name of the geographical location.For example, County; City; City, State; City, State, Country; or Time Zone.",
+                                        "type": "string"
+                                    },
+                                    "time": {
+                                        "description": "The data and time specified in the form, YYYY-MM-DDThh;mm:ss.ssssssZ.",
+                                        "type": "string"
+                                    },
+                                    "utcOffset": {
+                                        "description": "The offset from UTC. For example, UTC-7.",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "location",
+                                    "time",
+                                    "utcOffset"
+                                ],
+                                "type": "object",
+                                "x-ms-discriminator-value": "TimeZone/TimeZoneInformation"
+                            }
+                        },
+                        "required": [
+                            "primaryCityTime"
+                        ],
+                        "type": "object"
+                    },
+                    "videos": {
+                        "allOf": [
+                            null
+                        ],
+                        "description": "Defines a video answer.",
+                        "properties": {
+                            "nextOffset": {
+                                "format": "int32",
+                                "readOnly": true,
+                                "type": "integer"
+                            },
+                            "queryExpansions": {
+                                "readOnly": true,
+                                "type": "array"
+                            },
+                            "relatedSearches": {
+                                "readOnly": true,
+                                "type": "array"
+                            },
+                            "value": {
+                                "description": "A list of video objects that are relevant to the query.",
+                                "items": {
+                                    "allOf": [
+                                        null
+                                    ],
+                                    "description": "Defines a video object that is relevant to the query.",
+                                    "properties": {
+                                        "allowHttpsEmbed": {
+                                            "readOnly": true,
+                                            "type": "boolean"
+                                        },
+                                        "allowMobileEmbed": {
+                                            "readOnly": true,
+                                            "type": "boolean"
+                                        },
+                                        "embedHtml": {
+                                            "readOnly": true,
+                                            "type": "string"
+                                        },
+                                        "isSuperfresh": {
+                                            "readOnly": true,
+                                            "type": "boolean"
+                                        },
+                                        "motionThumbnailId": {
+                                            "readOnly": true,
+                                            "type": "string"
+                                        },
+                                        "motionThumbnailUrl": {
+                                            "readOnly": true,
+                                            "type": "string"
+                                        },
+                                        "videoId": {
+                                            "readOnly": true,
+                                            "type": "string"
+                                        },
+                                        "viewCount": {
+                                            "format": "int32",
+                                            "readOnly": true,
+                                            "type": "integer"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "type": "object"
+                    },
+                    "webPages": {
+                        "allOf": [
+                            {
+                                "allOf": [
+                                    {
+                                        "allOf": [
+                                            null
+                                        ],
+                                        "properties": {
+                                            "followUpQueries": {
+                                                "items": {
+                                                    "description": "Defines a search query.",
+                                                    "properties": {
+                                                        "displayText": {
+                                                            "description": "The display version of the query term. This version of the query term may contain special characters that highlight the search term found in the query string. The string contains the highlighting characters only if the query enabled hit highlighting",
+                                                            "readOnly": true,
+                                                            "type": "string"
+                                                        },
+                                                        "searchLink": {
+                                                            "readOnly": true,
+                                                            "type": "string"
+                                                        },
+                                                        "text": {
+                                                            "description": "The query string. Use this string as the query term in a new search request.",
+                                                            "type": "string"
+                                                        },
+                                                        "thumbnail": {
+                                                            "allOf": [
+                                                                {
+                                                                    "allOf": [
+                                                                        {
+                                                                            "allOf": [
+                                                                                {
+                                                                                    "allOf": [
+                                                                                        null
+                                                                                    ],
+                                                                                    "properties": {
+                                                                                        "bingId": {
+                                                                                            "description": "An ID that uniquely identifies this item.",
+                                                                                            "readOnly": true,
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "description": {
+                                                                                            "description": "A short description of the item.",
+                                                                                            "readOnly": true,
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "name": {
+                                                                                            "description": "The name of the thing represented by this object.",
+                                                                                            "readOnly": true,
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "url": {
+                                                                                            "description": "The URL to get more information about the thing represented by this object.",
+                                                                                            "readOnly": true,
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                }
+                                                                            ],
+                                                                            "properties": {
+                                                                                "provider": {
+                                                                                    "description": "The source of the creative work.",
+                                                                                    "readOnly": true,
+                                                                                    "type": "array"
+                                                                                },
+                                                                                "text": {
+                                                                                    "readOnly": true,
+                                                                                    "type": "string"
+                                                                                },
+                                                                                "thumbnailUrl": {
+                                                                                    "description": "The URL to a thumbnail of the item.",
+                                                                                    "readOnly": true,
+                                                                                    "type": "string"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        }
+                                                                    ],
+                                                                    "properties": {
+                                                                        "contentUrl": {
+                                                                            "description": "Original URL to retrieve the source (file) for the media object (e.g the source URL for the image).",
+                                                                            "readOnly": true,
+                                                                            "type": "string"
+                                                                        },
+                                                                        "height": {
+                                                                            "description": "The height of the source media object, in pixels.",
+                                                                            "format": "int32",
+                                                                            "readOnly": true,
+                                                                            "type": "integer"
+                                                                        },
+                                                                        "hostPageUrl": {
+                                                                            "description": "URL of the page that hosts the media object.",
+                                                                            "readOnly": true,
+                                                                            "type": "string"
+                                                                        },
+                                                                        "width": {
+                                                                            "description": "The width of the source media object, in pixels.",
+                                                                            "format": "int32",
+                                                                            "readOnly": true,
+                                                                            "type": "integer"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            ],
+                                                            "description": "Defines an image",
+                                                            "properties": {},
+                                                            "type": "object"
+                                                        },
+                                                        "webSearchUrl": {
+                                                            "description": "The URL that takes the user to the Bing search results page for the query.Only related search results include this field.",
+                                                            "readOnly": true,
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "text"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "readOnly": true,
+                                                "type": "array"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                ],
+                                "properties": {
+                                    "isFamilyFriendly": {
+                                        "readOnly": true,
+                                        "type": "boolean"
+                                    },
+                                    "totalEstimatedMatches": {
+                                        "description": "The estimated number of webpages that are relevant to the query. Use this number along with the count and offset query parameters to page the results.",
+                                        "format": "int64",
+                                        "readOnly": true,
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        ],
+                        "description": "Defines a list of relevant webpage links.",
+                        "properties": {
+                            "someResultsRemoved": {
+                                "description": "A Boolean value that indicates whether the response excluded some results from the answer. If Bing excluded some results, the value is true.",
+                                "readOnly": true,
+                                "type": "boolean"
+                            },
+                            "value": {
+                                "description": "A list of webpages that are relevant to the query.",
+                                "items": {
+                                    "allOf": [
+                                        null
+                                    ],
+                                    "description": "Defines a webpage that is relevant to the query.",
+                                    "properties": {
+                                        "dateLastCrawled": {
+                                            "description": "The last time that Bing crawled the webpage. The date is in the form, YYYY-MM-DDTHH:MM:SS. For example, 2015-04-13T05:23:39.",
+                                            "readOnly": true,
+                                            "type": "string"
+                                        },
+                                        "deepLinks": {
+                                            "description": "A list of links to related content that Bing found in the website that contains this webpage. The Webpage object in this context includes only the name, url, urlPingSuffix, and snippet fields.",
+                                            "readOnly": true,
+                                            "type": "array"
+                                        },
+                                        "displayUrl": {
+                                            "description": "The display URL of the webpage. The URL is meant for display purposes only and is not well formed.",
+                                            "readOnly": true,
+                                            "type": "string"
+                                        },
+                                        "searchTags": {
+                                            "description": "A list of search tags that the webpage owner specified on the webpage. The API returns only indexed search tags. The name field of the MetaTag object contains the indexed search tag. Search tags begin with search.* (for example, search.assetId). The content field contains the tag's value.",
+                                            "items": {
+                                                "description": "Defines a webpage's metadata.",
+                                                "properties": {
+                                                    "content": {
+                                                        "description": "The name of the metadata.",
+                                                        "readOnly": true,
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "description": "The metadata.",
+                                                        "readOnly": true,
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object",
+                                                "x-ms-discriminator-value": "Web/MetaTag"
+                                            },
+                                            "readOnly": true,
+                                            "type": "array"
+                                        },
+                                        "snippet": {
+                                            "description": "A snippet of text from the webpage that describes its contents.",
+                                            "readOnly": true,
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": [
+                            "value"
+                        ],
+                        "type": "object",
+                        "x-ms-discriminator-value": "Web/WebAnswer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    ],
+    "standardized_name": "bing_web_search_v2"
+}

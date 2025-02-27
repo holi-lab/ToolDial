@@ -1,0 +1,475 @@
+{
+    "product_id": "api_3b423d84-4b96-41a4-9971-8049cc83895a",
+    "tool_description": "Pre-estimate flight time for 500+ business aviation aircraft types just within a few seconds. The result of the calculation will include flight time, wind impact, fuel consumption and airways route. Fast and accurate flight estimation will significantly reduce time for your quotation delivery and not only, make your price offer even more accurate and competitive on the market, as well as will serve your sales as a great daily support. ",
+    "home_url": "https://rapidapi.com/aviapages/api/aviapages-flight-time-calculator/",
+    "name": "Aviapages Flight Time Calculator",
+    "title": "Aviapages Flight Time Calculator",
+    "pricing": "FREEMIUM",
+    "tool_name": "Aviapages Flight Time Calculator",
+    "score": {
+        "avgServiceLevel": 100,
+        "avgLatency": 460,
+        "avgSuccessRate": 65,
+        "popularityScore": 9.2,
+        "__typename": "Score"
+    },
+    "host": "aviapages-flight-time-calculator.p.rapidapi.com",
+    "api_list": [
+        {
+            "name": "flight_calculator_run",
+            "url": "https://aviapages-flight-time-calculator.p.rapidapi.com/flight_calculator/",
+            "description": "Endpoint to retrieve flight time, flight route & fuel usage.",
+            "method": "POST",
+            "required_parameters": [],
+            "optional_parameters": [],
+            "code": "import requests\n\nurl = \"https://aviapages-flight-time-calculator.p.rapidapi.com/flight_calculator/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aviapages-flight-time-calculator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "convert_code": "import requests\n\nurl = \"https://aviapages-flight-time-calculator.p.rapidapi.com/flight_calculator/\"\n\nheaders = {\n            \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n            \"X-RapidAPI-Host\": \"aviapages-flight-time-calculator.p.rapidapi.com\"\n        }\n\nresponse = requests.post(url, headers=headers)\nprint(response.json())\n",
+            "test_endpoint": "",
+            "statuscode": 200,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "aircraft": {
+                        "type": "string",
+                        "description": "Aircraft profile name."
+                    },
+                    "airport": {
+                        "type": "object",
+                        "properties": {
+                            "departure": {
+                                "type": "string",
+                                "description": "Departure airport ICAO code."
+                            },
+                            "arrival": {
+                                "type": "string",
+                                "description": "Arrival airport ICAO code."
+                            },
+                            "techstops": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "List of ICAO codes of recommended airports for techstop. Is displayed when \"advise_techstop\" is\n         set to true and non-stop flight is not possible."
+                            }
+                        },
+                        "required": [
+                            "arrival",
+                            "departure",
+                            "techstops"
+                        ]
+                    },
+                    "distance": {
+                        "type": "object",
+                        "properties": {
+                            "great_circle": {
+                                "type": "number",
+                                "format": "double",
+                                "description": "distance via great_circle (shortest distance) in kilometers.",
+                                "minimum": -1.7976931348623157e+308,
+                                "maximum": 1.7976931348623157e+308
+                            },
+                            "airway": {
+                                "type": "number",
+                                "format": "double",
+                                "description": "distance via airways in kilometers.",
+                                "minimum": -1.7976931348623157e+308,
+                                "maximum": 1.7976931348623157e+308
+                            }
+                        },
+                        "required": [
+                            "airway",
+                            "great_circle"
+                        ]
+                    },
+                    "route": {
+                        "type": "object",
+                        "properties": {
+                            "ifr": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string"
+                                },
+                                "description": "Sequence of airway points codes and airway names. Starts and end with departure and\n         arrival airport ICAO codes respectively."
+                            },
+                            "great_circle": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "lo": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "maximum": 180,
+                                            "minimum": -180
+                                        },
+                                        "la": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "maximum": 90,
+                                            "minimum": -90
+                                        }
+                                    },
+                                    "required": [
+                                        "la",
+                                        "lo"
+                                    ]
+                                },
+                                "description": "Array of coordinates of great circle route."
+                            },
+                            "airway": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "lo": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "maximum": 180,
+                                            "minimum": -180
+                                        },
+                                        "la": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "maximum": 90,
+                                            "minimum": -90
+                                        }
+                                    },
+                                    "required": [
+                                        "la",
+                                        "lo"
+                                    ]
+                                },
+                                "description": "Array of coordinates of airway route."
+                            }
+                        },
+                        "required": [
+                            "airway",
+                            "great_circle",
+                            "ifr"
+                        ]
+                    },
+                    "time": {
+                        "type": "object",
+                        "properties": {
+                            "departure_local": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Local time at departure airport in format \"YYYY-MM-DDThh:mm\"."
+                            },
+                            "airway": {
+                                "type": "integer",
+                                "description": "Flight time via airways using aircraft performance model in minutes."
+                            },
+                            "arrival_local_airway": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Local time at arrival airport for calculation via airways using aircraft\n         performance model in format \"YYYY-MM-DDThh:mm\"."
+                            },
+                            "airway_weather_impacted": {
+                                "type": "integer",
+                                "description": "Flight time via airways using aircraft performance model with wind impact in minutes."
+                            },
+                            "arrival_local_airway_weather_impacted": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Local time at arrival airport for calculation via airways using aircraft performance model with\n         wind impact in format \"YYYY-MM-DDThh:mm\"."
+                            },
+                            "great_circle": {
+                                "type": "integer",
+                                "description": "Flight time via great circle using aircraft performance model in minutes."
+                            },
+                            "arrival_local_great_circle": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Local time at arrival airport for calculation via great circle using aircraft performance model\n         in format \"YYYY-MM-DDThh:mm\"."
+                            },
+                            "average_speed": {
+                                "type": "integer",
+                                "description": "Flight time via great circle using aircraft's average speed constant (simplified) in minutes."
+                            },
+                            "arrival_local_average_speed": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Local time at arrival airport for calculation via great circle using aircraft's average speed\n         constant in format \"YYYY-MM-DDThh:mm\"."
+                            }
+                        },
+                        "required": [
+                            "airway",
+                            "airway_weather_impacted",
+                            "arrival_local_airway",
+                            "arrival_local_airway_weather_impacted",
+                            "arrival_local_average_speed",
+                            "arrival_local_great_circle",
+                            "average_speed",
+                            "departure_local",
+                            "great_circle"
+                        ]
+                    },
+                    "fuel": {
+                        "type": "object",
+                        "properties": {
+                            "airway": {
+                                "type": "integer",
+                                "description": "Total amount of used fuel consumption via airways using aircraft performance model in kilograms."
+                            },
+                            "airway_weather_impacted": {
+                                "type": "integer",
+                                "description": "Total amount of used fuel via airways using aircraft performance model with wind impact in\n         kilograms."
+                            },
+                            "great_circle": {
+                                "type": "integer",
+                                "description": "Total amount of used fuel via great circle using aircraft performance model with wind impact in\n         kilograms."
+                            },
+                            "great_circle_detailed": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "weight": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Weight of aircraft by the end of current operation, kg",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "distance": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Distance flown, km",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "duration": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Operation duration, min",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "fuel_used": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Fuel burned, kg",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "final_altitude": {
+                                            "type": "integer",
+                                            "description": "Altitude by the end of current operation, m"
+                                        },
+                                        "operation": {
+                                            "type": "string",
+                                            "description": "Type of the operation",
+                                            "maxLength": 100
+                                        }
+                                    },
+                                    "required": [
+                                        "distance",
+                                        "duration",
+                                        "final_altitude",
+                                        "fuel_used",
+                                        "operation",
+                                        "weight"
+                                    ]
+                                },
+                                "description": "Breakdown of fuel consumption via great circle using aircraft performance model."
+                            },
+                            "airway_detailed": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "weight": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Weight of aircraft by the end of current operation, kg",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "distance": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Distance flown, km",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "duration": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Operation duration, min",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "fuel_used": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Fuel burned, kg",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "final_altitude": {
+                                            "type": "integer",
+                                            "description": "Altitude by the end of current operation, m"
+                                        },
+                                        "operation": {
+                                            "type": "string",
+                                            "description": "Type of the operation",
+                                            "maxLength": 100
+                                        }
+                                    },
+                                    "required": [
+                                        "distance",
+                                        "duration",
+                                        "final_altitude",
+                                        "fuel_used",
+                                        "operation",
+                                        "weight"
+                                    ]
+                                },
+                                "description": "Breakdown of fuel consumption via airways using aircraft performance model."
+                            },
+                            "airway_weather_impacted_detailed": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "weight": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Weight of aircraft by the end of current operation, kg",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "distance": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Distance flown, km",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "duration": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Operation duration, min",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "fuel_used": {
+                                            "type": "number",
+                                            "format": "double",
+                                            "description": "Fuel burned, kg",
+                                            "minimum": -1.7976931348623157e+308,
+                                            "maximum": 1.7976931348623157e+308
+                                        },
+                                        "final_altitude": {
+                                            "type": "integer",
+                                            "description": "Altitude by the end of current operation, m"
+                                        },
+                                        "operation": {
+                                            "type": "string",
+                                            "description": "Type of the operation",
+                                            "maxLength": 100
+                                        }
+                                    },
+                                    "required": [
+                                        "distance",
+                                        "duration",
+                                        "final_altitude",
+                                        "fuel_used",
+                                        "operation",
+                                        "weight"
+                                    ]
+                                },
+                                "description": "Breakdown of fuel consumption via airways using aircraft performance model with\n         historical average wind."
+                            },
+                            "airway_block": {
+                                "type": "integer",
+                                "description": "Total fuel required for the flight via airways including all reserved and extra fuel"
+                            },
+                            "airway_weather_impacted_block": {
+                                "type": "integer",
+                                "description": "Total fuel required for the flight via airways with historical average wind including all\n         reserved and extra fuel"
+                            },
+                            "great_circle_block": {
+                                "type": "integer",
+                                "description": "Total fuel required for the flight via great_circle including all reserved and extra fuel"
+                            }
+                        },
+                        "required": [
+                            "airway",
+                            "airway_block",
+                            "airway_detailed",
+                            "airway_weather_impacted",
+                            "airway_weather_impacted_block",
+                            "airway_weather_impacted_detailed",
+                            "great_circle",
+                            "great_circle_block",
+                            "great_circle_detailed"
+                        ]
+                    },
+                    "great_circle_carbon_emissions": {
+                        "type": "integer",
+                        "description": "Carbon dioxide emissions via great circle using aircraft performance model in kilograms."
+                    },
+                    "airway_carbon_emissions": {
+                        "type": "integer",
+                        "description": "Carbon dioxide emissions via airways using aircraft performance model in kilograms."
+                    },
+                    "airway_carbon_emissions_weather_impacted": {
+                        "type": "integer",
+                        "description": "Carbon dioxide emissions via airways using aircraft performance model with\nhistorical average wind in kilograms."
+                    },
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Error code."
+                                },
+                                "code": {
+                                    "type": "integer",
+                                    "description": "Error description."
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        },
+                        "description": "Sequence of error codes and messages caught during calculation."
+                    },
+                    "warnings": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Warning code."
+                                },
+                                "code": {
+                                    "type": "integer",
+                                    "description": "Warning description."
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "message"
+                            ]
+                        },
+                        "description": "Sequence of warning codes and messages caught during calculation."
+                    }
+                },
+                "required": [
+                    "aircraft",
+                    "airport",
+                    "airway_carbon_emissions",
+                    "airway_carbon_emissions_weather_impacted",
+                    "great_circle_carbon_emissions"
+                ]
+            }
+        }
+    ]
+}

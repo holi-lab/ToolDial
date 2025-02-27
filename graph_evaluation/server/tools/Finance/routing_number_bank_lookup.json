@@ -1,0 +1,98 @@
+{
+    "tool_name":"Routing Number Bank Lookup",
+    "tool_description":"Lookup a bank's information based on a routing number input. Choose either ACH or wire transfer bank information. Supports XML and JSON responses.",
+    "title":"Routing Number Bank Lookup",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":99,
+        "avgLatency":87,
+        "avgSuccessRate":99,
+        "popularityScore":9.8,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/mikescogan-xbWFolmaQx/api/routing-number-bank-lookup/",
+    "host":"routing-number-bank-lookup.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"Get Bank Info",
+            "url":"https://routing-number-bank-lookup.p.rapidapi.com/api/v1/{routingnumber}",
+            "description":"This endpoint returns information about a bank by passing in the routing number.\n\nQuery Params:\n- **format:** defines the response type, currently XML and JSON are supported. Default value is JSON. Possible values: \"xml\", \"json\"\n- **paymentType:** choose to retrieve either the ACH or Wire Transfer information from the bank. Default value is ACH. Possible values: \"ach\", \"wire\"\n\n####Example:\nGET https://routing-number-bank-lookup.p.rapidapi.com/api/v1/121000248?paymentType=wire&format=json returns the wire transfer information for the bank corresponding to routing number 121000248 in json format.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"routingNumber",
+                    "type":"string",
+                    "description":"The routing number that you want to lookup",
+                    "default":"121000248"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"format",
+                    "type":"STRING",
+                    "description":"Defines the format of the response. Default value is json. Possible inputs are 'xml' and 'json'",
+                    "default":"json"
+                },
+                {
+                    "name":"paymentType",
+                    "type":"STRING",
+                    "description":"Choose to retrieve either the ACH or Wire Transfer information from the bank. Default value is ACH. Possible values: 'ach' and 'wire'",
+                    "default":"ach"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://routing-number-bank-lookup.p.rapidapi.com/api/v1/{routingnumber}\"\nquerystring = {\"format\": format, \"paymentType\": paymenttype}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"routing-number-bank-lookup.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":200,
+            "body":{
+                "key1":"value",
+                "key2":"value"
+            },
+            "headers":{},
+            "schema":{
+                "type":"object",
+                "properties":{
+                    "status":{
+                        "type":"string"
+                    },
+                    "data":{
+                        "type":"object",
+                        "properties":{
+                            "routingNumber":{
+                                "type":"string"
+                            },
+                            "paymentType":{
+                                "type":"string"
+                            },
+                            "name":{
+                                "type":"string"
+                            },
+                            "addressFull":{
+                                "type":"string"
+                            },
+                            "street":{
+                                "type":"string"
+                            },
+                            "city":{
+                                "type":"string"
+                            },
+                            "state":{
+                                "type":"string"
+                            },
+                            "zip":{
+                                "type":"string"
+                            },
+                            "phone":{
+                                "type":"string"
+                            },
+                            "active":{
+                                "type":"string"
+                            },
+                            "lastUpdated":{
+                                "type":"string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,130 @@
+{
+    "tool_name":"Real Estate Records",
+    "tool_description":"Real estate transaction records for New York City and whole New Jersey. Public records have been collected from various sites, standardized using Here.com API, with geolocation information for your consumption. ",
+    "title":"Real Estate Records",
+    "pricing":"FREEMIUM",
+    "score":{
+        "avgServiceLevel":100,
+        "avgLatency":1163,
+        "avgSuccessRate":100,
+        "popularityScore":9.2,
+        "__typename":"Score"
+    },
+    "home_url":"https://rapidapi.com/richliao/api/real-estate-records/",
+    "host":"real-estate-records.p.rapidapi.com",
+    "api_list":[
+        {
+            "name":"transactions",
+            "url":"https://real-estate-records.p.rapidapi.com/search/zipcode",
+            "description":"Show transactions given a zipcode. The API returns 50 records each time in descending order by date and supports pagination. This API requires a subscription cost.\n\nThe returned data shows the summary of information. To get further detail (such as the unit of a building that posts the most recent transaction, use summary API.\n\nSample data of the API when query zipcode 10019 is:\n \"data\": [\n    {\n      \"_id\": {\n        \"STREET_NUMBER\": \"310\",\n        \"STREET\": \"W 56th St\",\n        \"PROPERTY_TYPE\": \"SINGLE RESIDENTIAL COOP UNIT\",\n        \"ZIPCODE\": \"10019\",\n        \"STATE\": \"NY\"\n      },\n      \"lastSalesDate\": \"2021-07-21T00:00:00.000Z\",\n      \"lastSalesAmount\": 514000,\n      \"maxSalesAmount\": 1359000,\n      \"TotalRecords\": 74\n    },",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"zipcode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"10019"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"page",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"1"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-estate-records.p.rapidapi.com/search/zipcode\"\nquerystring = {\"page\": page, \"zipcode\": zipcode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-estate-records.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"detail",
+            "url":"https://real-estate-records.p.rapidapi.com/search/detail",
+            "description":"Return all detailed historical transactions of a given address. To call this API, it requires to call summary API first using address information. Then use the Id value returned from the summary API and call this API with the same Id. This API requires a subscription cost.",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"id",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"6144a05f3afc5ca06e88a2ab"
+                }
+            ],
+            "optional_parameters":[],
+            "code":"import requests\n\nurl = \"https://real-estate-records.p.rapidapi.com/search/detail\"\nquerystring = {\"id\": id}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-estate-records.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"summary",
+            "url":"https://real-estate-records.p.rapidapi.com/search/summary",
+            "description":"Get a summary of property records by units given an address (if it's a multi-unit building). Street number, name and zipcode are needed to match records. The street names are normalized using Here.com conventions. This API requires a subscription cost. \n\nThis API provides details a level further than the \"address\" endpoint. For instance,  for 220 Central Park S, New York, NY 10019 it returns\n  \"data\": [\n    {\n      \"_id\": {\n        \"id\": \"6144a17b3afc5ca06ea0dd95\",\n        \"Loc\": {\n          \"coordinates\": [\n            -73.9802,\n            40.76719\n          ],\n          \"type\": \"Point\"\n        },\n        \"STREET_NUMBER\": \"220\",\n        \"STREET\": \"Central Park S\",\n        \"UNIT\": \"67\",\n        \"PROPERTY_TYPE\": \"SINGLE RESIDENTIAL CONDO UNIT\",\n        \"ZIPCODE\": \"10019\",\n        \"STATE\": \"NY\"\n      },\n      \"lastSalesDate\": \"2021-05-24T00:00:00.000Z\",\n      \"lastSalesAmount\": 59500000,\n      \"maxSalesAmount\": 59500000,\n      \"SQFT\": 0,\n      \"TotalRecords\": 1\n    },\n\nThe API is available for public records for New York City 5 boroughs, all New Jersey Counties and DC. \nSources of information are:\nNJ: http://tax1.co.monmouth.nj.us/cgi-bin/prc6.cgi?&ms_user=monm&passwd=&srch_type=0&adv=0&out_type=0&district=0200\nNYC Acris: https://a836-acris.nyc.gov/DS/DocumentSearch/Index",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"number",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"220"
+                },
+                {
+                    "name":"street",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Central Park S"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"zipcode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"10019"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-estate-records.p.rapidapi.com/search/summary\"\nquerystring = {\"number\": number, \"street\": street, \"zipcode\": zipcode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-estate-records.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        },
+        {
+            "name":"address",
+            "url":"https://real-estate-records.p.rapidapi.com/search/address",
+            "description":"Get a high level of summary of property records given an address. Street number, name and zipcode are needed to match records. The street names are normalized using Here.com conventions. **This API is free to use.**\n\nIf it's an apartment building, it will return total records available for every property type. For instance,  for 220 Central Park S, New York, NY 10019,  it returns:\n  \"data\": [\n    {\n      \"_id\": {\n        \"STREET_NUMBER\": \"220\",\n        \"STREET\": \"Central Park S\",\n        \"PROPERTY_TYPE\": \"SINGLE RESIDENTIAL CONDO UNIT\",\n        \"ZIPCODE\": \"10019\",\n        \"STATE\": \"NY\"\n      },\n      \"Location\": {\n        \"coordinates\": [\n          -73.9802,\n          40.76719\n        ],\n        \"type\": \"Point\"\n      },\n      \"lastSalesDate\": \"2021-05-24T00:00:00.000Z\",\n      \"lastSalesAmount\": 59500000,\n      \"maxSalesAmount\": 239958219.15,\n      \"TotalRecords\": 100\n    },\n\nThe API is available for public records for New York City 5 boroughs, all New Jersey Counties and DC. \nSources of information are:\nNJ: http://tax1.co.monmouth.nj.us/cgi-bin/prc6.cgi?&ms_user=monm&passwd=&srch_type=0&adv=0&out_type=0&district=0200\nNYC Acris: https://a836-acris.nyc.gov/DS/DocumentSearch/Index",
+            "method":"GET",
+            "required_parameters":[
+                {
+                    "name":"street",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"Central Park S"
+                },
+                {
+                    "name":"number",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"220"
+                }
+            ],
+            "optional_parameters":[
+                {
+                    "name":"zipcode",
+                    "type":"STRING",
+                    "description":"",
+                    "default":"10019"
+                }
+            ],
+            "code":"import requests\n\nurl = \"https://real-estate-records.p.rapidapi.com/search/address\"\nquerystring = {\"street\": street, \"number\": number, \"zipcode\": zipcode}\n\nheaders = {\n    \"X-RapidAPI-Key\": \"SIGN-UP-FOR-KEY\",\n    \"X-RapidAPI-Host\": \"real-estate-records.p.rapidapi.com\"\n}\n\nresponse = requests.get(url, headers=headers, params=querystring)\n\nprint(response.json())\n",
+            "statuscode":111,
+            "body":"",
+            "headers":"",
+            "schema":""
+        }
+    ]
+}
