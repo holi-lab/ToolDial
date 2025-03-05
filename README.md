@@ -421,3 +421,16 @@ Inside the `dst_result` and `action_prediction_result` folders, there is a `gpt_
 
 By filling in each `yml` file appropriately and running the error analysis code, you can view the experimental results and error analysis outcomes.
 
+# Citation
+```
+@misc{shim2025tooldialmultiturndialoguegeneration,
+      title={ToolDial: Multi-turn Dialogue Generation Method for Tool-Augmented Language Models}, 
+      author={Jeonghoon Shim and Gyuhyeon Seo and Cheongsu Lim and Yohan Jo},
+      year={2025},
+      eprint={2503.00564},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2503.00564}, 
+}
+```
+
