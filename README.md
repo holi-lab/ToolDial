@@ -263,7 +263,7 @@ Before executing run_train.sh, I will review the arguments for each evaluation t
 
 3. Check the arguments of "dst_train.yaml"
 - `train_file`, `test_file`: The dataset to be used for the experiments is currently set to use the data we have released.
-- `model_id`: The name of the open-source model to be used. It should be entered in the format `{repo}/{model_name}` as provided by HuggingFace.
+- `model_id`: The name of the open-source model to be used. It should be entered in the format `{repo}/{model_name}` as provided by HuggingFace (e.g., meta-llama/Meta-Llama-3-8B-Instruct).
 - `is_van`: `True` or `False`. If `True`, training is skipped, and inference is performed directly using the model specified in `model_id`.
 - `is_give_label`: `True` or `False`. If `True`, the experiment is conducted in the "With GT" setting; if False, it is conducted in the "W/O GT" setting.
 4. Run `./run_train.sh`. We encourage you to use tmux with
