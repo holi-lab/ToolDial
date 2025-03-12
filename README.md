@@ -129,7 +129,7 @@ The `pair_list.json` file contains valid edges created through **Graph Construct
 
 We also release `pair_list_original.json` includes the edges we used when creating the previously distributed dialogue data.
 
-Currently, in the third line of `pair_split.py`, the script is set to load the `pair_list_original.json` file. If you want to create dialogue data using the edges you created, replace `pair_list_original.json` with `pair_list.json` in `pair_split.py` and then execute the code.
+- Currently, in the third line of `pair_split.py`, the script is set to load the `pair_list_original.json` file. If you want to create dialogue data using the edges you created, replace `pair_list_original.json` with `pair_list.json` in `pair_split.py` and then execute the code.
 
 The code for Dialogue Data generation also can executed using parallel processing through tmux.
 
