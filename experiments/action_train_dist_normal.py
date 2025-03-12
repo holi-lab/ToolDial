@@ -42,7 +42,7 @@ def normalize_action(text):
     normalized_text = re.sub(r'[^a-z]', '', lower_text)
     return normalized_text.replace("action","").replace("api","")
     
-def action_preprocess(text,is_thought,is_normal): ## 경우의 수 네 가지
+def action_preprocess(text,is_thought,is_normal):
     text = text.lower()
     if not is_normal:
         if is_thought:
@@ -102,7 +102,7 @@ def action_infer_single_code(input_text, model, rank, tokenizer_inf):
     
     output = model.module.generate(**input_encoding)
     output = tokenizer_inf.decode(output[0])
-    output = output.split(split_text)[1].strip().replace("</s>", "") ## strip은 (스페이스, 탭, 개행 문자 등)를 제거함
+    output = output.split(split_text)[1].strip().replace("</s>", "")
     return output
 
 def action_infer_single(input_text, model, rank, tokenizer_inf):
@@ -490,5 +490,4 @@ def main():
 
 if __name__ == "__main__":
     check_gpu_availibility()
-    set_seed()
     main()

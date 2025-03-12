@@ -26,18 +26,16 @@ def relation(subgraph):
     input_param = edge['target_attribute']['name']
     return f"The output component {output_comp} of API {source} can be used as input parameter {input_param} of API {target}"
 
-## Metric
-
 def normalize_param(text):
     cleaned_text = re.sub(r'[^a-zA-Z0-9]', '', text)
     return cleaned_text.lower()
 
-def longest_common_substring(str1, str2): ## LCS를 찾기 전에 lower 해주고, 특수 문자를 제거해줌
+def longest_common_substring(str1, str2):
     m = len(str1)
     n = len(str2)
     dp = [[0] * (n + 1) for _ in range(m + 1)]
     longest = 0
-    lcs_end = 0  # LCS가 끝나는 위치
+    lcs_end = 0
     
     for i in range(1, m + 1):
         for j in range(1, n + 1):
@@ -51,7 +49,7 @@ def longest_common_substring(str1, str2): ## LCS를 찾기 전에 lower 해주�
     lcs = str1[lcs_end - longest: lcs_end]
     return lcs
 
-def similarity_score(str1, str2): ## LCS를 찾기 전에 lower 해주고, 특수 문자를 제거해줌
+def similarity_score(str1, str2):
     str1 = normalize_param(str1.lower())
     str2 = normalize_param(str2.lower())
     lcs = longest_common_substring(str1, str2)
@@ -98,8 +96,6 @@ def Dial(prompt,model_name="gpt-4o"):
                     openai_api_key="TYPE YOUR API KEY ")
     generated = llm([HumanMessage(content=prompt)]).content
     return generated
-
-#### mock data function
 
 def is_all_different(data_list):
     data1,data2 = data_list[0],data_list[0]

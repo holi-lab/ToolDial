@@ -99,13 +99,11 @@ def overall_form(dialogue_idx,full_dialogue,tokenizer_inf,is_val=False):
 
 from transformers import StoppingCriteria, StoppingCriteriaList
 
-# 특정 토큰 ID가 나왔을 때 중지하는 커스텀 StoppingCriteria
 class StopOnToken(StoppingCriteria):
     def __init__(self, stop_token_id):
         self.stop_token_id = stop_token_id
 
     def __call__(self, input_ids, scores, **kwargs):
-        # 가장 최근에 생성된 토큰이 stop_token_id와 같은지 확인
         return input_ids[0, -1] == self.stop_token_id
 
 def overall_generate(current_dial,model,rank,tokenizer):
@@ -116,7 +114,7 @@ def overall_generate(current_dial,model,rank,tokenizer):
     # print(current_dial)
     # print("---------------")
 
-    initial_prompt = deepcopy(current_dial['input'][0]) ## batch를 하나씩 할 거니까
+    initial_prompt = deepcopy(current_dial['input'][0])
     initial_obs = deepcopy(current_dial['obs'][0]) 
     input_prompt = current_dial['input'][0]
     input_obs = current_dial['obs'][0]
@@ -299,12 +297,8 @@ def validate(rank,
     total_samples = len(val_dataset)
     samples_per_gpu = total_samples // world_size
     remainder = total_samples % world_size
-
-    # 각 GPU에 할당할 데이터의 시작 및 끝 인덱스 계산
     start_index = rank * samples_per_gpu + min(rank, remainder)
     end_index = start_index + samples_per_gpu + (1 if rank < remainder else 0)
-
-    # 각 GPU에 할당된 데이터 부분을 Subset으로 만듭니다.
     val_subset = Subset(val_dataset, list(range(start_index, end_index)))
     val_loader = DataLoader(val_subset, batch_size=1, collate_fn=overall_collate_fn)
 

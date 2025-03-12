@@ -24,7 +24,7 @@ def post_process(text):
 def count_line(text):
     return len((text).split("\n"))
 
-def replace_dialogue_history(replacing_text,replaced_text): ## acc 할 때 쓰는 거
+def replace_dialogue_history(replacing_text,replaced_text):
     text_line = count_line(replacing_text)
     replaced_text_list = replaced_text.split("\n")
     replaced_text_list[:text_line] = replacing_text.split("\n")

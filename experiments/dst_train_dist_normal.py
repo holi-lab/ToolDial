@@ -62,7 +62,7 @@ def dst_infer_single_code(input_text, model, rank, tokenizer_inf):
     
     output = model.module.generate(**input_encoding)
     output = tokenizer_inf.decode(output[0])
-    output = output.split(split_text)[1].strip().replace("</s>", "") ## strip은 (스페이스, 탭, 개행 문자 등)를 제거함
+    output = output.split(split_text)[1].strip().replace("</s>", "")
     return output
 
 def dst_infer_single(input_text, model, rank, tokenizer_inf):
@@ -255,7 +255,7 @@ def validate(rank,
 
     with torch.no_grad():
         for batch in tqdm(val_loader,dynamic_ncols=False, ascii=True):
-            label = batch['output'][0]  # batch_size=1이므로 첫 번째 항목만 가져옴
+            label = batch['output'][0]
             y_hat = infer_function(batch['input'][0], model, rank, tokenizer_inf)
 
             predict = extract_and_convert_dict(y_hat)

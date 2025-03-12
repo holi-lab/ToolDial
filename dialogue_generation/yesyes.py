@@ -4,10 +4,10 @@ import pandas as pd
 from typing import List, Tuple
 from tqdm import tqdm
 from copy import deepcopy
-
+import sys
 import warnings
 warnings.filterwarnings("ignore")
-
+import traceback
 from langchain.callbacks import get_openai_callback
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import (
@@ -18,257 +18,9 @@ import yaml
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import normalize
 import faiss
-
-with open("config.yml") as f:
-    config = yaml.load(f,Loader=yaml.SafeLoader)
-    
-openai_key = config['api_key']
-device = config['device']
-is_sampling = config['is_sampling']
-
-def relation(subgraph):
-    edge = subgraph['edge'][0]
-    source,target = edge['source'],edge['target']
-    output_comp = edge['source_attribute']['name']
-    input_param = edge['target_attribute']['name']
-    return f"The output component {output_comp} of API {source} can be used as input parameter {input_param} of API {target}"
-
-## Metric
-
-def normalize_param(text):
-    cleaned_text = re.sub(r'[^a-zA-Z0-9]', '', text)
-    return cleaned_text.lower()
-
-def longest_common_substring(str1, str2): ## LCS를 찾기 전에 lower 해주고, 특수 문자를 제거해줌
-    m = len(str1)
-    n = len(str2)
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    longest = 0
-    lcs_end = 0  # LCS가 끝나는 위치
-    
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            if str1[i - 1] == str2[j - 1]:
-                dp[i][j] = dp[i - 1][j - 1] + 1
-                if dp[i][j] > longest:
-                    longest = dp[i][j]
-                    lcs_end = i
-            else:
-                dp[i][j] = 0
-    lcs = str1[lcs_end - longest: lcs_end]
-    return lcs
-
-def similarity_score(str1, str2): ## LCS를 찾기 전에 lower 해주고, 특수 문자를 제거해줌
-    str1 = normalize_param(str1.lower())
-    str2 = normalize_param(str2.lower())
-    lcs = longest_common_substring(str1, str2)
-    lcs_length = len(lcs)
-    similarity = (2 * lcs_length) / (len(str1) + len(str2)+0.01)
-    return similarity
-
-def longest_common_subsequence(str1, str2):
-    m = len(str1)
-    n = len(str2)
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    for i in range(m + 1):
-        for j in range(n + 1):
-            if i == 0 or j == 0:
-                dp[i][j] = 0
-            elif str1[i - 1] == str2[j - 1]:
-                dp[i][j] = dp[i - 1][j - 1] + 1
-            else:
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-
-    return dp[m][n]
-
-def similarity_object(str1, str2):
-    str1 = normalize_param(str1)
-    str2 = normalize_param(str2)
-    lcs_len = longest_common_subsequence(str1, str2)
-    avg_len = (len(str1) + len(str2)) / 2
-    similarity = lcs_len / avg_len
-    return similarity
-
-def cosine_similarity(vec1, vec2):
-    dot_product = np.dot(vec1, vec2)
-    norm_vec1 = np.linalg.norm(vec1)
-    norm_vec2 = np.linalg.norm(vec2)
-    return dot_product / (norm_vec1 * norm_vec2)
-
-def dict_sort(current_dict):
-    return dict(sorted(current_dict.items(), key=lambda item: item[1], reverse=True))
-
-import sys
-pair_num = int(sys.argv[1])
-
-def Dial(prompt,model_name="gpt-4o"):
-    llm = ChatOpenAI(model_name=model_name,
-                    temperature=0,
-                    max_tokens=4096,
-                    openai_api_key=openai_key)
-    generated = llm([HumanMessage(content=prompt)]).content
-    return generated
-
-#### mock data function
-
-def is_all_different(data_list):
-    data1,data2 = data_list[0],data_list[0]
-    cnt=0
-    for param_type in ['required_parameters',"optional_parameters"]:
-        for d1,d2 in zip(data1[param_type],data2[param_type]):
-            if data1[param_type][d1]==data2[param_type][d2]:
-                cnt+=1
-    if cnt==0:
-        return True
-    
-def graph_aug(subgraph):
-    dep_idx = subgraph[0][0]
-    des_idx = subgraph[0][1]
-    current_edge = all_edge_list_graph[dep_idx][des_idx][0]
-    chain_output,chain_param = current_edge[1][0],current_edge[3][0]
-    return {"subgraph":subgraph,"chain_output":chain_output,"chain_param":chain_param,}
-
-def freeformat(subgraph):
-    return_format = {"nodes":[],
-                    "edge":{"source":"",
-                     "target":"",
-                     "source_attribute":{"name":"","type":"","object_ad":"","object_long":""},
-                     "target_attribute":{"name":"","type":"","object_ad":"","object_long":""}}
-                    }
-    node1,node2 = subgraph['subgraph'][0][0],subgraph['subgraph'][0][1]
-    return_format['nodes']+=[normal_idx2igraph[node1],normal_idx2igraph[node2]]
-    current_edge = all_edge_list_graph[node1][node2][0]
-    return_format['edge']['source'] = normal_idx2igraph[node1]
-    return_format['edge']['target'] = normal_idx2igraph[node2]
-    return_format['edge']['source_attribute']['name'] = current_edge[1][0]
-    return_format['edge']['source_attribute']['object_ad'] = current_edge[1][1]
-    return_format['edge']['source_attribute']['object_long'] = current_edge[1][2]
-    return_format['edge']['target_attribute']['name'] = current_edge[3][0]
-    return_format['edge']['target_attribute']['object_ad'] = current_edge[3][1]
-    return_format['edge']['target_attribute']['object_long'] = current_edge[3][2]
-    return_format['edge'] = [return_format['edge']]
-    return_format['type'] = "seq"
-    for key in subgraph.keys():
-        if key in ["subgraph","desc_unreal","desc_chain_output","desc_chain_param"]:
-            continue
-        return_format[key] = subgraph[key]
-        return_format[key] = subgraph[key]
-    return_format['source_req'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['source']]['required_parameters']]
-    return_format['source_opt'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['source']]['optional_parameters']]
-    return_format['target_req'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['target']]['required_parameters']]
-    return_format['target_opt'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['target']]['optional_parameters']]
-    return return_format        
-
-model = SentenceTransformer('all-mpnet-base-v2',device=device)
-
-
-with open("../after_coor_before_emb.json",'r') as f:
-    api_list = json.load(f)
-api_list_dict = {api['full_name']:api for api in api_list}
-
-with open("pair_list/aug_desc.json","r") as f:
-    aug_desc_list = json.load(f)
-    
-for api in api_list_dict:
-    if api in aug_desc_list:
-        api_list_dict[api]['description'] = aug_desc_list[api]
-    
-with open(f"pair_list/all_edge_list_graph.json",'r') as f:
-    all_edge_list_graph = json.load(f)
-    
-with open(f"pair_list/normal_graph2idx.json",'r') as f:
-    normal_graph2idx = json.load(f)
-    
-with open(f"pair_list/normal_idx2igraph.json",'r') as f:
-    normal_idx2igraph = json.load(f)
-
-normal_idx2igraph = {int(key):normal_idx2igraph[key] for key in normal_idx2igraph}
-normal_graph = np.load(f"pair_list/normal_graph.npy")
-
-def count_leaf_keys(json_data, parent_key='', key_count=None):
-    if key_count is None:
-        key_count = {}
-    if isinstance(json_data, dict):
-        for key, value in json_data.items():
-            full_key = f"{parent_key}|{key}" if parent_key else key
-            if (isinstance(value, dict) or isinstance(value, list)) and "coordi" not in key:
-                count_leaf_keys(value, full_key, key_count)
-            else:
-                key_count[full_key] = key_count.get(full_key, 0) + 1
-    elif isinstance(json_data, list):
-        for item in json_data:
-            count_leaf_keys(item, parent_key, key_count)
-    return key_count
-
-def extract_leaf(output_components):
-    leaf_list = set()
-    for output in output_components:
-        leaf_list.add(output['name'])
-    return leaf_list
-
-for idx,api in enumerate(api_list):
-    key_counts = count_leaf_keys(api['output']['response'])
-    leaf_list = extract_leaf(api['output_components'])
-
-    multi_key = set()
-    for key in key_counts:
-        if key_counts[key]>1:
-            multi_key.add(key)
-    if len(multi_key)>0:
-        api['is_list'] = multi_key
-    else:
-        api['is_list'] = set()
-api_list_dict = {api['full_name']:api for api in api_list}
-
-sports_dict= {}
-for api in normal_graph2idx:
-    if "Sports" in api:
-        sports_dict[api]=normal_graph[normal_graph2idx[api],:].sum()+normal_graph[:,normal_graph2idx[api]].sum()
-        
-sports_dict = dict(sorted(sports_dict.items(), key=lambda item: item[1],reverse=True))
-
-top=40
-ben_sports_name=[]
-for idx,api in enumerate(sports_dict):
-    if idx==top:
-        break
-    ben_sports_name.append(normal_graph2idx[api])
-    
-for idx,api in enumerate(normal_graph2idx):
-    if "esport" in api.lower():
-        ben_sports_name.append(normal_graph2idx[api])
-        
-import sys
-pair_num = int(sys.argv[1])
-
-with open(f"pair_list/sep_pair_{pair_num}.json",'r') as f:
-    pair_list = json.load(f)
-
-print(f"Before sports remove:{len(pair_list)}")
-pair_list = [pair for pair in pair_list if pair[0][0] not in ben_sports_name and pair[0][1] not in ben_sports_name]
-print(f"After sports remove:{len(pair_list)}")
-
-
-def is_error_in(pair):
-    pair = pair[0]
-    for node in pair:
-        node_name = normal_idx2igraph[node]
-        output_comps = api_list_dict[node_name]['output_components']
-        for output in output_comps:
-            if "error" in output['name'].lower() or "message" in output['name'].lower():
-                return True
-    return False
-pair_list = [pair for pair in pair_list if not is_error_in(pair)]
-
 from mockdata import mock_data_generator
 from custom_retriever import Retriever
 from query_generation_src import clear_add_query_generator,clear_query_generator,vague_sugg_query_generator,vague_query_generator,situation_generator, vague_sugg_query_generator_trg,clear_query_generator_trg
-
-retriever = Retriever(device)
-model_ret = SentenceTransformer("ToolBench/ToolBench_IR_bert_based_uncased",device = device)
-
-###########################
-
 from scenario_prompt import backward_common_instruction,backward_prompt,aug_ment
 
 req_prompt = "As a required parameter, the system asks {input_param} from the user."
@@ -350,8 +102,168 @@ system_action_list_backward = {
     }
 }
 
-def is_ben(keyword,debug=None): ## ben keyword이면 False를 반환함
-    ben_keyword = ["id","coordinate","code","index","identifier"] ## key를 제거함
+def relation(subgraph):
+    edge = subgraph['edge'][0]
+    source,target = edge['source'],edge['target']
+    output_comp = edge['source_attribute']['name']
+    input_param = edge['target_attribute']['name']
+    return f"The output component {output_comp} of API {source} can be used as input parameter {input_param} of API {target}"
+
+def normalize_param(text):
+    cleaned_text = re.sub(r'[^a-zA-Z0-9]', '', text)
+    return cleaned_text.lower()
+
+def longest_common_substring(str1, str2):
+    m = len(str1)
+    n = len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    longest = 0
+    lcs_end = 0
+    
+    for i in range(1, m + 1):
+        for j in range(1, n + 1):
+            if str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+                if dp[i][j] > longest:
+                    longest = dp[i][j]
+                    lcs_end = i
+            else:
+                dp[i][j] = 0
+    lcs = str1[lcs_end - longest: lcs_end]
+    return lcs
+
+def similarity_score(str1, str2):
+    str1 = normalize_param(str1.lower())
+    str2 = normalize_param(str2.lower())
+    lcs = longest_common_substring(str1, str2)
+    lcs_length = len(lcs)
+    similarity = (2 * lcs_length) / (len(str1) + len(str2)+0.01)
+    return similarity
+
+def longest_common_subsequence(str1, str2):
+    m = len(str1)
+    n = len(str2)
+    dp = [[0] * (n + 1) for _ in range(m + 1)]
+    for i in range(m + 1):
+        for j in range(n + 1):
+            if i == 0 or j == 0:
+                dp[i][j] = 0
+            elif str1[i - 1] == str2[j - 1]:
+                dp[i][j] = dp[i - 1][j - 1] + 1
+            else:
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+
+    return dp[m][n]
+
+def similarity_object(str1, str2):
+    str1 = normalize_param(str1)
+    str2 = normalize_param(str2)
+    lcs_len = longest_common_subsequence(str1, str2)
+    avg_len = (len(str1) + len(str2)) / 2
+    similarity = lcs_len / avg_len
+    return similarity
+
+def cosine_similarity(vec1, vec2):
+    dot_product = np.dot(vec1, vec2)
+    norm_vec1 = np.linalg.norm(vec1)
+    norm_vec2 = np.linalg.norm(vec2)
+    return dot_product / (norm_vec1 * norm_vec2)
+
+def dict_sort(current_dict):
+    return dict(sorted(current_dict.items(), key=lambda item: item[1], reverse=True))
+
+def Dial(prompt,model_name="gpt-4o"):
+    llm = ChatOpenAI(model_name=model_name,
+                    temperature=0,
+                    max_tokens=4096,
+                    openai_api_key=openai_key)
+    generated = llm([HumanMessage(content=prompt)]).content
+    return generated
+
+def is_all_different(data_list):
+    data1,data2 = data_list[0],data_list[0]
+    cnt=0
+    for param_type in ['required_parameters',"optional_parameters"]:
+        for d1,d2 in zip(data1[param_type],data2[param_type]):
+            if data1[param_type][d1]==data2[param_type][d2]:
+                cnt+=1
+    if cnt==0:
+        return True
+    
+def graph_aug(subgraph):
+    dep_idx = subgraph[0][0]
+    des_idx = subgraph[0][1]
+    current_edge = all_edge_list_graph[dep_idx][des_idx][0]
+    chain_output,chain_param = current_edge[1][0],current_edge[3][0]
+    return {"subgraph":subgraph,"chain_output":chain_output,"chain_param":chain_param,}
+
+def freeformat(subgraph):
+    return_format = {"nodes":[],
+                    "edge":{"source":"",
+                     "target":"",
+                     "source_attribute":{"name":"","type":"","object_ad":"","object_long":""},
+                     "target_attribute":{"name":"","type":"","object_ad":"","object_long":""}}
+                    }
+    node1,node2 = subgraph['subgraph'][0][0],subgraph['subgraph'][0][1]
+    return_format['nodes']+=[normal_idx2igraph[node1],normal_idx2igraph[node2]]
+    current_edge = all_edge_list_graph[node1][node2][0]
+    return_format['edge']['source'] = normal_idx2igraph[node1]
+    return_format['edge']['target'] = normal_idx2igraph[node2]
+    return_format['edge']['source_attribute']['name'] = current_edge[1][0]
+    return_format['edge']['source_attribute']['object_ad'] = current_edge[1][1]
+    return_format['edge']['source_attribute']['object_long'] = current_edge[1][2]
+    return_format['edge']['target_attribute']['name'] = current_edge[3][0]
+    return_format['edge']['target_attribute']['object_ad'] = current_edge[3][1]
+    return_format['edge']['target_attribute']['object_long'] = current_edge[3][2]
+    return_format['edge'] = [return_format['edge']]
+    return_format['type'] = "seq"
+    for key in subgraph.keys():
+        if key in ["subgraph","desc_unreal","desc_chain_output","desc_chain_param"]:
+            continue
+        return_format[key] = subgraph[key]
+        return_format[key] = subgraph[key]
+    return_format['source_req'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['source']]['required_parameters']]
+    return_format['source_opt'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['source']]['optional_parameters']]
+    return_format['target_req'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['target']]['required_parameters']]
+    return_format['target_opt'] = [{"name":comp['name'],"description":comp['object_ad']} for comp in api_list_dict[return_format['edge'][0]['target']]['optional_parameters']]
+    return return_format        
+
+
+
+def count_leaf_keys(json_data, parent_key='', key_count=None):
+    if key_count is None:
+        key_count = {}
+    if isinstance(json_data, dict):
+        for key, value in json_data.items():
+            full_key = f"{parent_key}|{key}" if parent_key else key
+            if (isinstance(value, dict) or isinstance(value, list)) and "coordi" not in key:
+                count_leaf_keys(value, full_key, key_count)
+            else:
+                key_count[full_key] = key_count.get(full_key, 0) + 1
+    elif isinstance(json_data, list):
+        for item in json_data:
+            count_leaf_keys(item, parent_key, key_count)
+    return key_count
+
+def extract_leaf(output_components):
+    leaf_list = set()
+    for output in output_components:
+        leaf_list.add(output['name'])
+    return leaf_list
+
+
+def is_error_in(pair):
+    pair = pair[0]
+    for node in pair:
+        node_name = normal_idx2igraph[node]
+        output_comps = api_list_dict[node_name]['output_components']
+        for output in output_comps:
+            if "error" in output['name'].lower() or "message" in output['name'].lower():
+                return True
+    return False
+
+def is_ben(keyword,debug=None): 
+    ben_keyword = ["id","coordinate","code","index","identifier"]
     for word in keyword.split():
         for ben in ben_keyword:
             if similarity_score(word,ben)>0.43 or word[-len(ben):].lower() == ben.lower():
@@ -389,7 +301,6 @@ def list_with_value(param_list,values):
     return "("+string[:-1] +")"
 
 
-############list 중복 관련######################
 def json_search(json_data, hr):
     keys = hr.split('|')
 
@@ -429,7 +340,6 @@ class PairClass:
         self.prompt = backward_prompt
         self.mockdata_list_prompt= "Although the mock data for API {api} is given only one, this {api} is supposed to return multi datas. Generate at least 4 data when generating the api_response"
         self.prompt_list = []
-        # self.retriever = Retriever()
         self.retriever = retriever
         self.query_cache = {}
         
@@ -491,7 +401,7 @@ class YesYes(PairClass):
         self.coor = []
         self.random_idx = False
         self.subgraph_list = subgraph_list
-        self.action_seq_o = [ ## target 바로 됨
+        self.action_seq_o = [ 
             ("inform_intent_clear","retriever_call","request","inform","call","response","user_bye","system_bye"), #
             ("inform_intent_clear_add","retriever_call","request","inform","call","response","user_bye","system_bye"), #
             ("inform_intent_vague","retriever_call","clarify","inform_intent_clear","retriever_call","request","inform","call","response","user_bye","system_bye"), #
@@ -499,7 +409,7 @@ class YesYes(PairClass):
             ("inform_intent_vague","retriever_call","suggest","negate","response_fail"), #
             ("inform_intent_vague","retriever_call","clarify","inform_intent_clear_add","retriever_call","request","inform","call","response","user_bye","system_bye") ## add에서 한 개만 말해줌 
         ]
-        self.action_seq_x = [ ## source를 한 번 거쳐야 함
+        self.action_seq_x = [
             ("inform_intent_clear","retriever_call","request","fail_inform","retriever_call","request","inform","call","call","response","user_bye","system_bye"), ## chain 빼고는 말해줌 #
             ("inform_intent_clear","retriever_call","request","fail_inform","retriever_call","request","inform","call","request","inform","call","response","user_bye","system_bye"), ## chain을 모른다고만 함 #
             ("inform_intent_vague","retriever_call","clarify","inform_intent_clear","retriever_call","request","fail_inform","retriever_call","request","inform","call","request","inform","call","response","user_bye","system_bye"), ## chain을 모른다고만 함 #
@@ -508,7 +418,7 @@ class YesYes(PairClass):
             ("inform_intent_vague","retriever_call","suggest","affirm","request","fail_inform","retriever_call","request","inform","call","call","response","user_bye","system_bye"), ## chain 빼고는 말해줌
             ("inform_intent_vague","retriever_call","suggest","negate","response_fail")
         ]
-        self.action_seq_x_multi = [ ## source 가 list 반환
+        self.action_seq_x_multi = [ 
             ("inform_intent_clear","retriever_call","request","fail_inform","retriever_call","request","inform","call","request","inform","call","response","user_bye","system_bye"), ## chain 빼고는 말해줌 #
             ("inform_intent_vague","retriever_call","clarify","inform_intent_clear","retriever_call","request","fail_inform","retriever_call","request","inform","call","request","inform","call","response","user_bye","system_bye"), ## chain 빼고는 말해줌 #
             ("inform_intent_vague","retriever_call","suggest","affirm","request","fail_inform","retriever_call","request","inform","call","request","inform","call","response","user_bye","system_bye"), ## chain 빼고는 말해줌 #
@@ -553,13 +463,13 @@ class YesYes(PairClass):
         chain_output,chain_param = current_edge[1][0],current_edge[3][0]
         return {"subgraph":subgraph,"chain_output":chain_output,"chain_param":chain_param,}
     
-    def yes_yes_mid_o(self): ## mid 가 아는 거
+    def yes_yes_mid_o(self):
         for subgraph in tqdm(self.subgraph_list):
             source,target,source_params,target_params,edge=self.node_param_extraction(subgraph)
             if len(source_params) == 0 or len(target_params) <=1:
                 continue
             edge_param = edge[3][1]
-            if not is_ben(edge_param): ## edge가 ben일 때
+            if not is_ben(edge_param): 
                 continue
             self.yes_yes_mid_o_list.append(subgraph)
         print(f"Length of yesyes mid o:{len(self.yes_yes_mid_o_list)}")
@@ -576,12 +486,12 @@ class YesYes(PairClass):
                     self.coor.append((output,chain,sim))
         return False
             
-    def yes_yes_mid_x(self): ## mid 가 모르는 거
+    def yes_yes_mid_x(self):
         for subgraph in tqdm(self.subgraph_list):
             source,target,source_params,target_params,edge=self.node_param_extraction(subgraph)
             if len(source_params) == 0 or len(target_params) <= 1:
                 continue
-            edge_output = {"name":edge[1][0],"object_ad":edge[1][1],"object_long":edge[1][2]} ## 0이 맞음
+            edge_output = {"name":edge[1][0],"object_ad":edge[1][1],"object_long":edge[1][2]}
             edge_param = {"name":edge[3][0],"object_ad":edge[3][1],"object_long":edge[3][2]}
             is_same,know_stack = False,0
             for param in source_params:
@@ -590,7 +500,7 @@ class YesYes(PairClass):
                 if self.is_same(param,edge_param) or self.is_same(param,edge_output):
                     is_same=True
                     continue
-                if is_ben(param['object_ad']): ## 아는 거일 때
+                if is_ben(param['object_ad']):
                     know_stack+=1
             if is_same:
                 continue
@@ -600,15 +510,15 @@ class YesYes(PairClass):
                     self.yes_yes_mid_x_list.append(subgraph)
         print(f"Length of yesyes mid x:{len(self.yes_yes_mid_x_list)}")
                 
-    def yes_yes_mid_x_multi(self): ## mid를 모르는 거고 source가 list를 반환
+    def yes_yes_mid_x_multi(self):
         for subgraph in tqdm(self.subgraph_list):
             source,target,source_params,target_params,edge=self.node_param_extraction(subgraph)
             if len(source_params) == 0 or len(target_params) <= 1:
                 continue     
-            edge_output = {"name":edge[1][0],"object_ad":edge[1][1],"object_long":edge[1][2]} ## 0이 맞음
+            edge_output = {"name":edge[1][0],"object_ad":edge[1][1],"object_long":edge[1][2]}
             edge_param = {"name":edge[3][0],"object_ad":edge[3][1],"object_long":edge[3][2]}
             is_same,know_stack = False,0
-            for param in source_params: ## source의 input이 chain input이랑 겹치는 걸 제거함(근데 embedding기반도 넣어야 하지 않나?)
+            for param in source_params:
                 # if similarity_object(param['object_ad'],edge_param_ad)>0.83 or similarity_object(param['object_ad'],edge_output_ad)>0.83:
                 #     is_same = True
                 if self.is_same(param,edge_param) or self.is_same(param,edge_output):
@@ -618,8 +528,7 @@ class YesYes(PairClass):
                     know_stack+=1
             if is_same:
                 continue
-            if not is_ben(edge_param['object_ad']): ## ben이면 False를 반환함
-                # if edge_output['name'] in api_list_dict[source]['is_list']:
+            if not is_ben(edge_param['object_ad']): 
                 if self.is_output_in(edge_output['name'],api_list_dict[source]['is_list']):
                     self.yes_yes_mid_x_multi_list.append(subgraph)
         print(f"Length of yesyes mid x multi:{len(self.yes_yes_mid_x_multi_list)}")
@@ -687,13 +596,10 @@ class YesYes(PairClass):
         random.seed(1)
         for action_seq_type,scen_type in zip(action_seq_type_list,scen_type_list):
             for action_seq in action_seq_type:
-                # candidate = [subgraph for subgraph in self.freeform if subgraph['action'] == action_seq and subgraph['subgraph']['scenario'] == scen_type]
-                # total_list+=random.sample(candidate,4)
                 candidate = [subgraph for subgraph in self.freeform if subgraph['action'] == action_seq and subgraph['subgraph']['scenario'] == scen_type]
                 if len(candidate)<1:
                     continue
                 total_list+=random.sample(candidate,1)
-                # total_list+=random.sample(candidate,int(len(candidate)*0.05))
         print("Done!")
         return total_list
                 
@@ -706,7 +612,7 @@ class YesYes(PairClass):
             out_break = False
             source,target = subgraph['subgraph']['nodes'][0],subgraph['subgraph']['nodes'][1]
             
-            if target == "Mapping|boundaries_io|Query by Radius(in miles) .for Zipcode boundaries": ## 이건 showCircle 때문임!
+            if target == "Mapping|boundaries_io|Query by Radius(in miles) .for Zipcode boundaries":
                 continue
             
             situation = situation_generator([(normal_graph2idx[source],normal_graph2idx[target])])
@@ -722,14 +628,11 @@ class YesYes(PairClass):
                 mock_data = mock_data_generator(subgraph['subgraph'],subgraph['action'])
             except:
                 continue
-            # print("--------Mockdata")
-            # print(mock_data)
             original_subgraph = deepcopy(subgraph)
             for src_opt in src_opt_list:
                 for trg_opt in trg_opt_list:
                     subgraph = deepcopy(original_subgraph)
                     scenario = self.scenario_generation(subgraph['subgraph'],subgraph['action'],mock_data,src_opt,trg_opt,situation)
-                    # scenario = self.scenario_generation(subgraph['subgraph'],subgraph['action'],mock_data,src_opt,trg_opt)
                     if scenario == False:
                         out_break = True
                         break
@@ -739,7 +642,6 @@ class YesYes(PairClass):
                         if "System turn\n" in turn:
                             scenario[turn_idx]+=f"\nDialogue state: {dst[dst_idx]}"
                             dst_idx+=1
-                    # print(f"Cnt of system turn:{dst_idx}, Cnt of dst:{len(dst)}")
                     scenario = "\n\n".join(scenario)
                     ret = self.ret_status(scenario)
                     scen = {"scenario":scenario,"dst":dst,"ret":ret,"action_seq":subgraph['action'],"subgraph":subgraph['subgraph'],"mock_data":mock_data}
@@ -814,10 +716,8 @@ class YesYes(PairClass):
                                         tmp_dst['api_status']['input_parameter'][param] = current_data['data_1'][param]
                             tmp_dst['api_status']['input_parameter'][subgraph['chain_param']] = ""
                     
-                    ## inform intent add 일 경우
                     if 'inform_intent_clear_add' in action_seq and stage == "target":
                         tmp_dst['api_status']['input_parameter'][subgraph['chain_param']] = current_data['data_1'][subgraph['chain_param']]
-                    ## end ##
                                 
                     dst.append(tmp_dst)
                 if action == "call":
@@ -875,7 +775,6 @@ class YesYes(PairClass):
         return dst
             
     def scenario_generation(self,subgraph,action_seq,mock_data,src_opt,trg_opt,situation):
-    # def scenario_generation(self,subgraph,action_seq,mock_data,src_opt,trg_opt):        
         prompt=[]
         stage,source,target = "target",subgraph['edge'][0]['source'],subgraph['edge'][0]['target']
         current_api,current_data = target, self.mockdata2value(deepcopy(mock_data['target']))
@@ -886,7 +785,6 @@ class YesYes(PairClass):
         call_stack = 0
         for idx,action in enumerate(action_seq):
             if action in user_action_list_backward:
-                # if "fail_inform" in action_seq:
                 if action == "inform_intent_clear":
                     if f"{source}{target}{action}" in self.query_cache:
                         query = self.query_cache[f"{source}{target}{action}"]
@@ -961,18 +859,14 @@ class YesYes(PairClass):
                         
                         tmp_situation+=f" User answers only with the values in here:{new_answer_values}(Answer only the value asked by the system)"
                 if action == "fail_inform":
-                    if action_seq.count("request")==3 and "multi" not in subgraph['scenario']: ## list가 아니고 뒤늦게 target param 물어볼 때
+                    if action_seq.count("request")==3 and "multi" not in subgraph['scenario']:
                         tmp_situation = user_action_list_backward[action]['template'].format(api=current_api,input_param = subgraph['chain_param'])
-                    else: ## 여기선 chain param 제외하곤 정보를 다 준거임
+                    else:
                         param_list = deepcopy(subgraph[stage+"_req"])
                         param_name = [param for param in param_list if param['name'] != subgraph['chain_param']]
                         if trg_opt:
                             param_name+=[trg_opt]
                         values = self.mockdata2value(deepcopy(mock_data['target']))['data_1']
-                        # print("-------------Debug")
-                        # print(param_name)
-                        # print(values)
-                        # print("-------------Debug")
                         tmp_situation = user_action_list_backward[action]['template_tmp'].format(input_param = list_with_value(param_name,values),chain_param = subgraph['chain_param'])
                     stage,current_api,current_data = "source",source,self.mockdata2value(deepcopy(mock_data['source']))
                     current_ret = {'retriever_call': 'true', 'retrieved_api': [(source,f"Output to procure input parameter {subgraph['chain_param']} of {target}: {self.p2h(subgraph['chain_output'])}")]}
@@ -989,8 +883,8 @@ class YesYes(PairClass):
             else:
                 if action == "request":
                     request_idx = self.find_all_indexes(action_seq,"request")
-                    if action_seq[idx-1]=="call": ## call 다음에 request가 나오는 경우는 yesyes에서 세 가지임
-                        if "multi" in subgraph['scenario'] and stage == "target" and idx == request_idx[2]:## list 일 때 request 해오는 경우
+                    if action_seq[idx-1]=="call":
+                        if "multi" in subgraph['scenario'] and stage == "target" and idx == request_idx[2]:
                             is_list=True
                             output_list = [output.strip("|") for output in api_list_dict[source]['is_list']]
                             for idx,output in enumerate(output_list):
@@ -1001,26 +895,20 @@ class YesYes(PairClass):
                             output_list = set(output_list) - set([chain_output])
                             output_list = [output for output in output_list if output != "status" or output != "message"]
                             
-                            # print("----------------------")
-                            # print("Source:",source)
-                            # print("Chain:",subgraph['chain_output'].strip("|"))
-                            # print("output list:",output_list)
-                            # print("----------------------")
-                            
                             try:
                                 output_list = list(set(output_list) - overlap_value_cnt(source,mock_data['source'][0]))
                             except:
                                 print(mock_data)
                                 return False
                             if len(output_list)<1:
-                                print("Is this really happens?")
-                                return False ## 여기까지 하면 끝!
+                                print("AA")
+                                return False
                             
                             other = random.sample(output_list,1)[0]
                             other = self.p2h(other)
                             tmp_situation = system_action_list_backward[action]['template_list'].format(
                                 api_t=target,api_s=source,output_comp=self.p2h(subgraph['chain_output']),input_param=subgraph['chain_param'],other_output = other)
-                        else: # list가 아닌경우, 이는 target을 실행을 위한 input을 user에게 더 물어야 하는 상황임
+                        else:
                             if idx == request_idx[2]:
                                 stage,current_api,current_data = "target",target,self.mockdata2value(deepcopy(mock_data['target']))
                                 param_list = deepcopy(subgraph[stage+"_req"])
@@ -1029,7 +917,7 @@ class YesYes(PairClass):
                                     param_name+=[trg_opt]
                                 tmp_situation = system_action_list_backward[action]["template_tmp"].format(chain_param = subgraph['chain_param'],input_param=[list2string(param_name)])
                         
-                    elif action_seq[idx-2] == "fail_inform": ## source 실행을 위한 request를 할 때
+                    elif action_seq[idx-2] == "fail_inform":
                         tmp_situation = system_action_list_backward[action]['template_chain'].format(api_s=source,
                                                                                                      api_t=target,
                                                                                                      chain_param=subgraph['chain_param'],
@@ -1043,7 +931,7 @@ class YesYes(PairClass):
                                 if opt['name'] == src_opt['name']:
                                     ask_opt.append(opt)
                             tmp_situation+=opt_prompt.format(input_param = list2string(ask_opt))
-                    elif "inform_intent_clear_add" in action_seq: ## 이건 add로 조달 받고 또 물어볼 때
+                    elif "inform_intent_clear_add" in action_seq:
                         value = current_data['data_1'][subgraph['chain_param']]
                         tmp_situation = system_action_list_backward[action]['template_add'].format(chain_param = subgraph['chain_param'],value=value)
                         req_list_copy = deepcopy(subgraph[stage+"_req"])
@@ -1054,7 +942,7 @@ class YesYes(PairClass):
                             opt_list_copy = deepcopy(subgraph[stage+"_opt"])
                             opt_list = [param for param in opt_list_copy if param['name'] == trg_opt['name']]
                             tmp_situation+=opt_prompt.format(input_param = list2string(opt_list))
-                    else: ## 이건 걍 target 실행을 위해 먼 처음에 하는 거        
+                    else:
                         tmp_situation = system_action_list_backward[action]['template'].format(api=current_api)
                         tmp_situation = ret_prompt.format(api=current_api) + tmp_situation
                         req_list,opt_list = deepcopy(subgraph[stage+'_req']),deepcopy(subgraph[stage+"_opt"])
@@ -1067,14 +955,14 @@ class YesYes(PairClass):
                                     ask_opt.append(opt)
                             tmp_situation+=opt_prompt.format(input_param = list2string(ask_opt))
                 elif action == "call":
-                    if action_seq[idx-1] == "inform_intent_clear_add": ## add되서 바로 call할 때
+                    if action_seq[idx-1] == "inform_intent_clear_add":
                         value = current_data['data_1'][subgraph['chain_param']]
                         tmp_situation = system_action_list_backward[action]['template_add'].format(api=current_api,input_param = subgraph['chain_param'],value=value)
                     else:
                         tmp_situation = system_action_list_backward[action]['template'].format(api=current_api)
                         if stage == "source":
                             tmp_situation+=" Input parameter source: From the user's utterence of previous turn."
-                        elif "fail_inform" in action_seq: ## source를 갖다오는 경우에만 이렇게 해야 함
+                        elif "fail_inform" in action_seq:
                             tmp_situation+=f"Input parameter source: From previous API call results({subgraph['chain_param']})."
                             req_list_copy = deepcopy(subgraph[stage+"_req"])
                             req_list = [param for param in req_list_copy if param['name'] != subgraph['chain_param']]
@@ -1123,9 +1011,84 @@ class YesYes(PairClass):
                 prompt.append(tmp_prompt)
         return prompt
 
-import traceback
-
 try:
+    with open("config.yml") as f:
+        config = yaml.load(f,Loader=yaml.SafeLoader)
+        
+    openai_key = config['api_key']
+    device = config['device']
+    is_sampling = config['is_sampling']
+    
+    pair_num = int(sys.argv[1])
+    model = SentenceTransformer('all-mpnet-base-v2',device=device)
+
+    with open("../after_coor_before_emb.json",'r') as f:
+        api_list = json.load(f)
+    api_list_dict = {api['full_name']:api for api in api_list}
+
+    with open("pair_list/aug_desc.json","r") as f:
+        aug_desc_list = json.load(f)
+        
+    for api in api_list_dict:
+        if api in aug_desc_list:
+            api_list_dict[api]['description'] = aug_desc_list[api]
+        
+    with open(f"pair_list/all_edge_list_graph.json",'r') as f:
+        all_edge_list_graph = json.load(f)
+        
+    with open(f"pair_list/normal_graph2idx.json",'r') as f:
+        normal_graph2idx = json.load(f)
+        
+    with open(f"pair_list/normal_idx2igraph.json",'r') as f:
+        normal_idx2igraph = json.load(f)
+
+    normal_idx2igraph = {int(key):normal_idx2igraph[key] for key in normal_idx2igraph}
+    normal_graph = np.load(f"pair_list/normal_graph.npy")
+    
+    for idx,api in enumerate(api_list):
+        key_counts = count_leaf_keys(api['output']['response'])
+        leaf_list = extract_leaf(api['output_components'])
+
+        multi_key = set()
+        for key in key_counts:
+            if key_counts[key]>1:
+                multi_key.add(key)
+        if len(multi_key)>0:
+            api['is_list'] = multi_key
+        else:
+            api['is_list'] = set()
+    api_list_dict = {api['full_name']:api for api in api_list}
+
+    sports_dict= {}
+    for api in normal_graph2idx:
+        if "Sports" in api:
+            sports_dict[api]=normal_graph[normal_graph2idx[api],:].sum()+normal_graph[:,normal_graph2idx[api]].sum()
+            
+    sports_dict = dict(sorted(sports_dict.items(), key=lambda item: item[1],reverse=True))
+
+    top=40
+    ben_sports_name=[]
+    for idx,api in enumerate(sports_dict):
+        if idx==top:
+            break
+        ben_sports_name.append(normal_graph2idx[api])
+        
+    for idx,api in enumerate(normal_graph2idx):
+        if "esport" in api.lower():
+            ben_sports_name.append(normal_graph2idx[api])
+
+    with open(f"pair_list/sep_pair_{pair_num}.json",'r') as f:
+        pair_list = json.load(f)
+
+    print(f"Before sports remove:{len(pair_list)}")
+    pair_list = [pair for pair in pair_list if pair[0][0] not in ben_sports_name and pair[0][1] not in ben_sports_name]
+    print(f"After sports remove:{len(pair_list)}")
+    
+    pair_list = [pair for pair in pair_list if not is_error_in(pair)]
+    retriever = Retriever(device)
+    model_ret = SentenceTransformer("ToolBench/ToolBench_IR_bert_based_uncased",device = device)
+    
+    
     with get_openai_callback() as cb:
         yesyes = YesYes(pair_list,"A")
     print(cb)

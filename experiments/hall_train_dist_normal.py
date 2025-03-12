@@ -130,7 +130,7 @@ def dst_infer_single_code(input_text, model, rank, tokenizer_inf):
     # print("---------")
     # print(output)
     # print("---------")
-    output = output.split(split_text)[1].strip().replace("</s>", "") ## strip은 (스페이스, 탭, 개행 문자 등)를 제거함
+    output = output.split(split_text)[1].strip().replace("</s>", "")
     return output
 
 def dst_infer_single(input_text, model, rank, tokenizer_inf):
@@ -240,11 +240,8 @@ def validate(rank,
     samples_per_gpu = total_samples // world_size
     remainder = total_samples % world_size
 
-    # 각 GPU에 할당할 데이터의 시작 및 끝 인덱스 계산
     start_index = rank * samples_per_gpu + min(rank, remainder)
     end_index = start_index + samples_per_gpu + (1 if rank < remainder else 0)
-
-    # 각 GPU에 할당된 데이터 부분을 Subset으로 만듭니다.
     val_subset = Subset(val_dataset, list(range(start_index, end_index)))
     val_loader = DataLoader(val_subset, batch_size=1, collate_fn=dst_collate_fn)
 
