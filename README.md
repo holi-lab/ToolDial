@@ -201,19 +201,17 @@ https://drive.google.com/drive/folders/1txuVDgUQw1rDA1ChoUGC4-FuYAOxD0S9?hl=ko
 
 Download all 9 json files in `dataset` into `dialogue_data`.
 
-`train.json`, `val.json`, `test.json` is the base file.
+- Base File: `train.json`, `val.json`, `test.json`
 
-`train_dialogue.json`, `val_dialogue.json`, `test_dialogue.json` is the dialogue which is used to evaluate "DST", "Action Prediction", "Faithfulness".
+- File for "DST", "Action Prediction", "Faithfulness": `train_dialogue.json`, `val_dialogue.json`, `test_dialogue.json`
 
-`train_dialogue_overall_obs.json`, `val_dialogue_overall_obs.json`, `test_dialogue_overall_obs.json` is the dialogue which is used to evaluate "Overall Performance".
+- File for "Overall Performance": `train_dialogue_overall_obs.json`, `val_dialogue_overall_obs.json`, `test_dialogue_overall_obs.json`
 
 We also provide two conversion code.
 
-`dialogue_preprocess.py` is used to generate `train_dialogue.json`, `val_dialogue.json`, `test_dialogue.json`
+- `dialogue_preprocess.py`: Input: Base file. Output: `train_dialogue.json`, `val_dialogue.json`, `test_dialogue.json`
 
-and
-
-`dialogue_generation_overall.py` is used to generate `train_dialogue_overall_obs.json`, `val_dialogue_overall_obs.json`, `test_dialogue_overall_obs.json`
+- `dialogue_generation_overall.py`: Input: Base file. Output: `train_dialogue_overall_obs.json`, `val_dialogue_overall_obs.json`, `test_dialogue_overall_obs.json`
 
 All experiments were conducted using testset.
 
