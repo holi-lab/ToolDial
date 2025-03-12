@@ -19,7 +19,7 @@ pip install -r requirements.txt
 
 In this stage, we will construct API Graph.
 
-We provide our **ToolDial dataset** through our Google Drive:
+To construct the graph, we need the embedding matrix and its quite large so we provide it through our Google Drive:
 https://drive.google.com/drive/folders/1txuVDgUQw1rDA1ChoUGC4-FuYAOxD0S9?hl=ko
 
 **1. Download all three files in `graph_construction` and place it in the base directory (ToolDial folder).**
