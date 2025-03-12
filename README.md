@@ -252,7 +252,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python {experiment_script}.py
 
 Fill `CUDA_VISIBLE_DEVICES` and `experiment_script` and run `run_train.sh`.
 
-Before executing run_train.sh, I will review the arguments for each evaluation task code.
+Before executing `run_train.sh`, I will review the arguments for each evaluation task code.
 
 <br>
 
