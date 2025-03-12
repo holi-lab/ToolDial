@@ -213,7 +213,7 @@ We also provide two conversion code.
 
 - `dialogue_generation_overall.py`: Input: Base file. Output: `train_dialogue_overall_obs.json`, `val_dialogue_overall_obs.json`, `test_dialogue_overall_obs.json`
 
-All experiments were conducted using testset.
+All experiments were conducted using **testset**.
 
 <br><br>
 
