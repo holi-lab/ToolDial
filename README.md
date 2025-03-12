@@ -112,7 +112,7 @@ cd ../dialogue_generation
 ```
 
 
-If you have completed up to step 2, the `data_generation/pair_list` should contain the following 8 files:
+If you have completed up to step 2, the Folder `data_generation/pair_list` should contain the following 8 files:
 
 ```
 aug_desc.json
