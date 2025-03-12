@@ -252,16 +252,16 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python {experiment_script}.py
 
 Fill `CUDA_VISIBLE_DEVICES` and `experiment_script` and run `run_train.sh`.
 
-Before executing `run_train.sh`, I will review the arguments for each evaluation task code.
+Before executing `run_train.sh`, see the description about the arguments for each evaluation task code.
 
 <br>
 
 2-1. Dialogue State Tracking (DST)
 
 1. Select the GPU and fill CUDA_VISIBLE_DEVICES
-2. Fill the experiment_script with "dst_train_dist_normal"
+2. Fill the experiment_script with `dst_train_dist_normal`
 
-3. Check the arguments of "dst_train.yaml"
+3. Check the arguments of `dst_train.yaml`
 - `train_file`, `test_file`: The dataset to be used for the experiments is currently set to use the data we have released.
 - `model_id`: The name of the open-source model to be used. It should be entered in the format `{repo}/{model_name}` as provided by HuggingFace (e.g., meta-llama/Meta-Llama-3-8B-Instruct).
 - `is_van`: `True` or `False`. If `True`, training is skipped, and inference is performed directly using the model specified in `model_id`.
@@ -297,9 +297,9 @@ This will provide the experimental results and error analysis based on the argum
 2-2. Action Prediction
 
 1. Select the GPU and fill CUDA_VISIBLE_DEVICES
-2. Fill the experiment_script with "action_train_dist_normal"
+2. Fill the experiment_script with `action_train_dist_normal`
 
-3. Check the arguments of "action_train.yaml"
+3. Check the arguments of `action_train.yaml`
 - `train_file`, `test_file`: The dataset to be used for the experiments is currently set to use the data we have released.
 - `model_id`: The name of the open-source model to be used. It should be entered in the format `{repo}/{model_name}` as provided by HuggingFace.
 - `is_van`: `True` or `False`. If `True`, training is skipped, and inference is performed directly using the model specified in `model_id`.
@@ -335,9 +335,9 @@ This will provide the experimental results and error analysis based on the argum
 2-3. Faithfulness
 
 1. Select the GPU and fill CUDA_VISIBLE_DEVICES
-2. Fill the experiment_script with "hall_train_dist_normal"
+2. Fill the experiment_script with `hall_train_dist_normal`
 
-3. Check the arguments of "hall_train.yaml"
+3. Check the arguments of `hall_train.yaml`
 - `train_file`, `test_file`: The dataset to be used for the experiments is currently set to use the data we have released.
 - `model_id`: The name of the open-source model to be used. It should be entered in the format `{repo}/{model_name}` as provided by HuggingFace.
 - `api_key`:  Your openai API key
@@ -375,7 +375,7 @@ This will provide the experimental resultsbased on the arguments set in `hall_re
 1. Select the GPU and fill CUDA_VISIBLE_DEVICES
 2. Fill the experiment_script with "overall_train_dist_normal"
 
-3. Check the arguments of "overall_train.yaml"
+3. Check the arguments of `overall_train.yaml`
 - `train_file`, `test_file`: The dataset to be used for the experiments is currently set to use the data we have released.
 - `model_id`: The name of the open-source model to be used. It should be entered in the format `{repo}/{model_name}` as provided by HuggingFace.
 - `is_van`: `True` or `False`. If `True`, training is skipped, and inference is performed directly using the model specified in `model_id`.
