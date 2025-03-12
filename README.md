@@ -411,13 +411,13 @@ This will provide the experimental resultsbased on the arguments set in `overall
 
 2-5. GPT baslines inference results
 
-We also release the inference results used to present the GPT baseline experiment results in our paper.
+- We also release the inference results used to present the GPT baseline experiment results in our paper.
 
-We also provide error analysis code for DST and Action Prediction.
+- We also provide error analysis code for DST and Action Prediction.
 
-Inside the `dst_result` and `action_prediction_result` folders, there is a `gpt_baselines` folder containing the inference results and error analysis code.
+- Inside the `dst_result` and `action_prediction_result` folders, there is a `gpt_baselines` folder containing the inference results and error analysis code.
 
-By filling in each `yml` file appropriately and running the error analysis code, you can view the experimental results and error analysis outcomes.
+- By filling in each `yml` file appropriately and running the error analysis code, you can view the experimental results and error analysis outcomes.
 
 # Citation
 ```
