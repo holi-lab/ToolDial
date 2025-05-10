@@ -188,7 +188,7 @@ And here is the format for what you should return:
 - Action: <System's action. You generate here, refering the dialogue history and the observation above. Choose one from <Action list>>
 - Observation: <This will be provided externally.>
 ...
-- Dialogue state: <First dialogue state after the user's last utterance. You generate here>
+- Dialogue state: <Second dialogue state after the user's last utterance. You generate here>
 - Message: <System's message>
 
 Output Format Rules:
