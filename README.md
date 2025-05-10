@@ -3,6 +3,7 @@
 **[News]**
 
 - We have released the fine-tuned "td-llama-general" for versatile purposes.
+- https://huggingface.co/HOLILAB/td-llama-general
 
 
 ToolDial is a method that generates multi-turn dialogue data between a user and a tool-augmented language model based on GPT, utilizing an API graph.
