@@ -3,6 +3,7 @@
 ## [News]
 
 - **[2025.05.01]** We have released the fine-tuned "td-llama-general" for versatile purposes. See [HuggingFace Link](https://huggingface.co/HOLILAB/td-llama-general).
+- **[2025.05.01]** We have released the fine-tuned "td-llama-op" for Overall Performance task. The **overall performance** reported in the paper is based on the results of this model.
 
 ## TL;DR
 ToolDial is a method that generates multi-turn dialogue data between a user and a tool-augmented language model based on GPT, utilizing an API graph.
