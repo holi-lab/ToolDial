@@ -385,10 +385,11 @@ def train(rank, world_size, device="cuda"):
     
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
-    tokenizer.add_special_tokens({"pad_token": "<pad>","unk_token":"<unk>"})
+    # tokenizer.add_special_tokens({"pad_token": "<pad>","unk_token":"<unk>"})
+    tokenizer.pad_token_id = tokenizer.eos_token_id
 
     tokenizer_inf = AutoTokenizer.from_pretrained(model_id,padding_side='left')
-    tokenizer_inf.add_special_tokens({"pad_token": "<pad>","unk_token":"<unk>"})
+    # tokenizer_inf.add_special_tokens({"pad_token": "<pad>","unk_token":"<unk>"})
     ##
     tokenizer_inf.pad_token_id = tokenizer_inf.eos_token_id
     ##
@@ -505,4 +506,5 @@ def main():
 
 if __name__ == "__main__":
     check_gpu_availibility()
+    set_seed(2)
     main()
