@@ -1,9 +1,8 @@
 # [ICLR2025] ToolDial: Multi-turn Dialogue Generation Method for Tool-Augmented Language Models
 
-**[News]**
+## [News]
 
-- We have released the fine-tuned "td-llama-general" for versatile purposes.
-- https://huggingface.co/HOLILAB/td-llama-general
+- **[2025.05.01]** We have released the fine-tuned "td-llama-general" for versatile purposes (https://huggingface.co/HOLILAB/td-llama-general).
 
 
 ToolDial is a method that generates multi-turn dialogue data between a user and a tool-augmented language model based on GPT, utilizing an API graph.
