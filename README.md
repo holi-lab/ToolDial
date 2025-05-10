@@ -1,6 +1,6 @@
 # [ICLR2025] ToolDial: Multi-turn Dialogue Generation Method for Tool-Augmented Language Models
 
-[News]
+**[News]**
 We have released the fine-tuned "td-llama-general" for versatile purposes.
 
 
