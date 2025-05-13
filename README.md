@@ -4,7 +4,7 @@
 
 - **[2025.05.01]** 🤗 We have released the fine-tuned "td-llama-general". This model can be used for a wide range of tasks related to tool agents. **We encourage you to use it for various purposes.** See [HuggingFace Link](https://huggingface.co/HOLILAB/td-llama-general).
 
-- **[2025.05.01]** 🤗 We have released the fine-tuned "td-llama-op" for Overall Performance task. The **overall performance** reported in the paper is based on the results of this model. We encourage using this model solely for reproducing the overall performance results. See [HuggingFace Link](https://huggingface.co/HOLILAB/td-llama-op)
+- **[2025.05.01]** 🤗 We have released the fine-tuned "td-llama-op" for Overall Performance task. The **overall performance** reported in the paper is based on the results of this model. We encourage using this model solely for reproducing the overall performance results. See [HuggingFace Link](https://huggingface.co/HOLILAB/td-llama-op). We have write the instruction to use it in [this section](#### [Additional]).
 
 ## TL;DR
 ToolDial is a method that generates multi-turn dialogue data between a user and a tool-augmented language model based on GPT, utilizing an API graph.
@@ -419,7 +419,9 @@ This will provide the experimental resultsbased on the arguments set in `overall
 
 <br>
 
-[Additional] We have released the overall performance model we used. Please to run the `overall_infer.py`  with yaml setting:
+#### [Additional]
+
+We have released the overall performance model we used. Please to run the `overall_infer.py`  with yaml setting:
 
 ```
 train_file: ../dialogue_data/train_dialogue_overall_obs.json
