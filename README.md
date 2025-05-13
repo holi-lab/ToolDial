@@ -419,6 +419,27 @@ This will provide the experimental resultsbased on the arguments set in `overall
 
 <br>
 
+[Additional] We have released the overall performance model we used. Please to run the `overall_infer.py`  with yaml setting:
+
+```
+train_file: ../dialogue_data/train_dialogue_overall_obs.json
+test_file: ../dialogue_data/test_dialogue_overall_obs.json
+model_id: "HOLILAB/td-llama-op"
+is_van: True
+```
+
+and `run_train.sh` as below:
+```
+#!/bin/bash
+
+# # Set the MASTER_ADDR and MASTER_PORT environment variables
+export MASTER_ADDR=localhost
+export MASTER_PORT=29500  # You can change the port number if needed
+
+# Run the Python training script
+CUDA_VISIBLE_DEVICES=0,1,2,3 python overall_infer.py ## You can change the CUDA_VISIBLE_DEVICES
+```
+
 
 2-5. GPT baslines inference results
 
