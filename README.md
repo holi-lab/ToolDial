@@ -455,14 +455,11 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 python overall_infer.py ## You can change the CUDA_
 
 # Citation
 ```
-@misc{shim2025tooldialmultiturndialoguegeneration,
-      title={ToolDial: Multi-turn Dialogue Generation Method for Tool-Augmented Language Models}, 
-      author={Jeonghoon Shim and Gyuhyeon Seo and Cheongsu Lim and Yohan Jo},
-      year={2025},
-      eprint={2503.00564},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2503.00564}, 
+@article{shim2025tooldial,
+  title={Tooldial: Multi-turn dialogue generation method for tool-augmented language models},
+  author={Shim, Jeonghoon and Seo, Gyuhyeon and Lim, Cheongsu and Jo, Yohan},
+  journal={arXiv preprint arXiv:2503.00564},
+  year={2025}
 }
 ```
 
